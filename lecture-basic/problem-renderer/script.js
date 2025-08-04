@@ -1,13 +1,21 @@
 // Local Files Base URL (for localhost server)
 const BASE_URL = 'problem-xmls/';
 
+// URL 매개변수에서 config 파일명 가져오기
+function getConfigFileName() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const configParam = urlParams.get('config');
+    return configParam ? `${configParam}.xml` : 'config.xml';
+}
+
 // 1. 데이터 로딩 함수들
 function loadConfig() {
     console.log('🔄 Config 로딩 시작...');
     return new Promise((resolve, reject) => {
         try {
-            const configUrl = BASE_URL + 'config.xml';
-            console.log('📥 config.xml XMLHttpRequest 시도...', configUrl);
+            const configFileName = getConfigFileName();
+            const configUrl = BASE_URL + configFileName;
+            console.log(`📥 ${configFileName} XMLHttpRequest 시도...`, configUrl);
             const xhr = new XMLHttpRequest();
             xhr.open('GET', configUrl, true);
             
@@ -43,6 +51,12 @@ function loadConfig() {
                             const title = titleElement ? titleElement.textContent : 'No Title';
                             console.log('📝 추출된 Title:', title);
                             
+                            // 설정 정보 추출
+                            const settingsElement = xmlDoc.querySelector('settings');
+                            const showSolutions = settingsElement ? 
+                                settingsElement.querySelector('showSolutions')?.textContent === 'true' : true;
+                            console.log('⚙️ 해설 표시 설정:', showSolutions);
+                            
                             const sectionElements = xmlDoc.querySelectorAll('section');
                             console.log('📂 Section 요소들:', sectionElements.length, '개');
                             
@@ -56,7 +70,7 @@ function loadConfig() {
                                 return sectionData;
                             });
                             
-                            const result = { title, sections };
+                            const result = { title, sections, showSolutions };
                             console.log('✅ Config 로딩 완료:', result);
                             resolve(result);
                         } catch (parseError) {
@@ -190,10 +204,9 @@ function selectRandomProblems(problems, count) {
 }
 
 // 3. HTML 렌더링 함수들
-function renderProblem(problem, number) {
+function renderProblem(problem, number, showSolutions = true) {
     let html = `<div class="problem">`;
-    html += `<div class="problem-number">${number}. </div>`;
-    html += `<div class="problem-description">${problem.description}</div>`;
+    html += `<div class="problem-header"><span class="problem-number">${number}. </span>${problem.description}</div>`;
     
     if (problem.code) {
         html += `<div class="code-block">${problem.code}</div>`;
@@ -211,7 +224,7 @@ function renderProblem(problem, number) {
         html += `<div class="hint">${problem.hint}</div>`;
     }
     
-    if (problem.solution) {
+    if (problem.solution && showSolutions) {
         html += `<div class="solution">${problem.solution}</div>`;
     }
     
@@ -219,10 +232,10 @@ function renderProblem(problem, number) {
     return html;
 }
 
-function renderSection(title, problems, startNumber) {
+function renderSection(title, problems, startNumber, showSolutions = true) {
     let html = `<h2>${title}</h2>`;
     problems.forEach((problem, index) => {
-        html += renderProblem(problem, startNumber + index);
+        html += renderProblem(problem, startNumber + index, showSolutions);
     });
     return html;
 }
@@ -240,7 +253,7 @@ function renderDocument(config, allProblems) {
         const sectionProblems = allProblems[section.file] || [];
         const selectedProblems = selectRandomProblems(sectionProblems, section.count);
         
-        html += renderSection(section.title, selectedProblems, problemNumber);
+        html += renderSection(section.title, selectedProblems, problemNumber, config.showSolutions);
         problemNumber += selectedProblems.length;
     });
     

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  문제 데이터 템플릿
+  
+  사용법:
+  1. 이 파일을 복사하여 새로운 문제 파일 생성 (예: problems-chapter8.xml)
+  2. 예시 문제들을 삭제하고 실제 문제로 교체
+  3. config 파일에서 해당 파일을 참조
+  
+  필드 설명:
+  - description: 문제 설명 (필수)
+  - code: 코드 박스 내용 (옵셔널, CDATA 사용 권장)
+  - input: 입력 예시 (옵셔널, CDATA 사용 권장)
+  - output: 출력 예시 (옵셔널, CDATA 사용 권장)
+  - hint: 힌트 (옵셔널, XML 특수문자 주의)
+  - solution: 해설 코드 (옵셔널, CDATA 사용 권장)
+  
+  주의사항:
+  - 모든 필드는 옵셔널이지만 description은 필수
+  - 코드, 입력/출력 예시는 CDATA로 감싸는 것을 권장
+  - XML 특수문자 (<, >, &)는 &lt;, &gt;, &amp;로 이스케이프하거나 CDATA 사용
+-->
+<problems>
+  <!-- 예시 문제 1: 기본 구조 -->
+  <problem>
+    <description>여기에 문제 설명을 작성하세요.</description>
+    <code><![CDATA[# 여기에 코드 박스 내용 (옵셔널)
+# 코드가 없다면 이 전체 태그를 삭제하거나 비워두세요
+print("예시 코드")]]></code>
+    <input><![CDATA[여기에 입력 예시 (옵셔널)
+여러 줄도 가능합니다]]></input>
+    <output><![CDATA[여기에 출력 예시 (옵셔널)
+예상 결과를 보여주세요]]></output>
+    <hint>여기에 힌트를 작성하세요 (옵셔널)</hint>
+    <solution><![CDATA[# 여기에 해설 코드 (옵셔널)
+# 주석으로 설명을 포함하세요
+print("정답 코드")
+# 추가 설명]]></solution>
+  </problem>
+
+  <!-- 예시 문제 2: 최소 구조 (문제 설명만) -->
+  <problem>
+    <description>간단한 문제는 설명만으로도 충분합니다.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <hint></hint>
+    <solution></solution>
+  </problem>
+
+  <!-- 예시 문제 3: 코드 없는 문제 -->
+  <problem>
+    <description>다음 중 올바른 Python 문법은?</description>
+    <input></input>
+    <output><![CDATA[정답: B]]></output>
+    <hint>Python의 들여쓰기 규칙을 생각해보세요.</hint>
+    <solution><![CDATA[# 정답 설명
+# Python에서는 들여쓰기가 중요합니다
+# 4칸 스페이스 또는 탭을 일관되게 사용해야 합니다]]></solution>
+  </problem>
+
+  <!-- 예시 문제 4: 입출력이 있는 프로그래밍 문제 -->
+  <problem>
+    <description>사용자로부터 두 숫자를 입력받아 더한 결과를 출력하는 프로그램을 작성하세요.</description>
+    <code></code>
+    <input><![CDATA[5
+3]]></input>
+    <output><![CDATA[8]]></output>
+    <hint>input() 함수와 int() 함수를 사용하세요.</hint>
+    <solution><![CDATA[# 두 숫자 입력받아 더하기
+a = int(input())
+b = int(input())
+result = a + b
+print(result)]]></solution>
+  </problem>
+
+  <!-- 
+    새 문제 추가 시 위의 예시들을 참고하여 작성하세요.
+    예시 문제들은 실제 사용 시 삭제하고 실제 문제로 교체하세요.
+  -->
+</problems>

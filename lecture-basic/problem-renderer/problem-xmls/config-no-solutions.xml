@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <exercise>
-  <title>Exercise 7. Dictionary and While</title>
+  <title>Exercise 7. Dictionary and While (문제만)</title>
   <settings>
-    <showSolutions>true</showSolutions>
+    <showSolutions>false</showSolutions>
   </settings>
   <sections>
     <section title="Section 7.1 - 기초 연습" file="problems-basic.xml" count="3"/>

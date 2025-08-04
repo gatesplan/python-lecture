@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  연습문제 설정 템플릿
+  
+  사용법:
+  1. 이 파일을 복사하여 새로운 config 파일 생성 (예: config-chapter8.xml)
+  2. 제목, 섹션, 문제 파일, 개수 등을 수정
+  3. URL에서 ?config=config-chapter8 로 접근
+  
+  설정 옵션:
+  - showSolutions: true(해설 표시) / false(해설 숨김)
+  - section의 count: 각 섹션에서 랜덤 추출할 문제 개수
+-->
+<exercise>
+  <title>Exercise [번호]. [주제명]</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- true: 해설 표시, false: 해설 숨김 -->
+  </settings>
+  <sections>
+    <!-- 
+      각 섹션 설정:
+      - title: 섹션 제목
+      - file: 문제가 들어있는 XML 파일명
+      - count: 해당 파일에서 랜덤 추출할 문제 개수
+    -->
+    <section title="Section [번호] - [섹션명]" file="problems-[파일명].xml" count="3"/>
+    <section title="Section [번호] - [섹션명]" file="problems-[파일명].xml" count="2"/>
+    
+    <!-- 필요한 만큼 섹션 추가 가능 -->
+  </sections>
+</exercise>

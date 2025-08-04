@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercise>
+  <title>Exercise 7. Dictionary and While (기초만)</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <section title="Section 7.1 - 기초 연습" file="problems-basic.xml" count="5"/>
+  </sections>
+</exercise>
