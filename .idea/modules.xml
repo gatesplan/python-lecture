@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/PythonLecture.iml" filepath="$PROJECT_DIR$/.idea/PythonLecture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/python-lecture.iml" filepath="$PROJECT_DIR$/.idea/python-lecture.iml" />
     </modules>
   </component>
 </project>
