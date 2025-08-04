@@ -20,7 +20,7 @@ print(student['name'])]]></solution>
 3
 4
 5]]></output>
-    <hint>while 조건문에서 i <= 5를 사용하고, 반복마다 i를 1씩 증가시키세요.</hint>
+    <hint>while 조건문에서 i &lt;= 5를 사용하고, 반복마다 i를 1씩 증가시키세요.</hint>
     <solution><![CDATA[# while 반복문을 사용하여 1부터 5까지 출력
 i = 1
 while i <= 5:

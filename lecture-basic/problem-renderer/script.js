@@ -1,5 +1,5 @@
-// GitHub Raw Files Base URL
-const BASE_URL = 'https://raw.githubusercontent.com/gatesplan/python-lecture/master/lecture-basic/problem-renderer/problem-xmls/';
+// Local Files Base URL (for localhost server)
+const BASE_URL = 'problem-xmls/';
 
 // 1. 데이터 로딩 함수들
 function loadConfig() {
