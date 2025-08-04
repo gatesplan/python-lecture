@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 기본 좌표 언패킹 -->
+  <problem>
+    <description>좌표 tuple (3, 7)을 x, y 변수에 언패킹하고 각각 출력하세요.</description>
+    <code><![CDATA[point = (3, 7)
+# 여기에 언패킹 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[x: 3
+y: 7]]></output>
+    <hint>x, y = point 형태로 언패킹할 수 있습니다.</hint>
+    <solution><![CDATA[point = (3, 7)
+x, y = point
+print(f"x: {x}")
+print(f"y: {y}")]]></solution>
+  </problem>
+
+  <!-- 문제 2: 학생 정보 언패킹 -->
+  <problem>
+    <description>학생 정보 tuple ('박영희', 19, 'A+')을 name, age, grade 변수에 언패킹하고 출력하세요.</description>
+    <code><![CDATA[student = ('박영희', 19, 'A+')
+# 여기에 언패킹 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[이름: 박영희
+나이: 19
+성적: A+]]></output>
+    <hint>name, age, grade = student 형태로 언패킹하세요.</hint>
+    <solution><![CDATA[student = ('박영희', 19, 'A+')
+name, age, grade = student
+print(f"이름: {name}")
+print(f"나이: {age}")
+print(f"성적: {grade}")]]></solution>
+  </problem>
+
+  <!-- 문제 3: RGB 색상 언패킹 -->
+  <problem>
+    <description>RGB 색상 tuple (0, 128, 255)를 red, green, blue 변수에 언패킹하고 출력하세요.</description>
+    <code><![CDATA[color = (0, 128, 255)
+# 여기에 언패킹 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[빨강: 0
+초록: 128
+파랑: 255]]></output>
+    <hint>red, green, blue = color 형태로 언패킹하세요.</hint>
+    <solution><![CDATA[color = (0, 128, 255)
+red, green, blue = color
+print(f"빨강: {red}")
+print(f"초록: {green}")
+print(f"파랑: {blue}")]]></solution>
+  </problem>
+
+  <!-- 문제 4: 날짜 정보 언패킹 -->
+  <problem>
+    <description>날짜 tuple (2024, 12, 25)를 year, month, day 변수에 언패킹하고 "2024년 12월 25일" 형태로 출력하세요.</description>
+    <code><![CDATA[date = (2024, 12, 25)
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[2024년 12월 25일]]></output>
+    <hint>언패킹 후 f-string으로 출력하세요.</hint>
+    <solution><![CDATA[date = (2024, 12, 25)
+year, month, day = date
+print(f"{year}년 {month}월 {day}일")]]></solution>
+  </problem>
+
+  <!-- 문제 5: 함수 반환값 언패킹 -->
+  <problem>
+    <description>다음 함수가 반환하는 tuple을 언패킹해서 각각 출력하세요.</description>
+    <code><![CDATA[def get_user_info():
+    return "김민수", 25, "서울"
+
+# 여기에 언패킹 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[이름: 김민수
+나이: 25
+도시: 서울]]></output>
+    <hint>함수 호출 결과를 바로 언패킹할 수 있습니다.</hint>
+    <solution><![CDATA[def get_user_info():
+    return "김민수", 25, "서울"
+
+name, age, city = get_user_info()
+print(f"이름: {name}")
+print(f"나이: {age}")
+print(f"도시: {city}")]]></solution>
+  </problem>
+
+  <!-- 문제 6: * 사용한 언패킹 -->
+  <problem>
+    <description>tuple (1, 2, 3, 4, 5)에서 첫 번째와 두 번째 값은 각각 변수에, 나머지는 리스트로 받아보세요.</description>
+    <code><![CDATA[numbers = (1, 2, 3, 4, 5)
+# 여기에 언패킹 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[첫 번째: 1
+두 번째: 2
+나머지: [3, 4, 5]]]></output>
+    <hint>first, second, *rest = numbers 형태로 사용하세요.</hint>
+    <solution><![CDATA[numbers = (1, 2, 3, 4, 5)
+first, second, *rest = numbers
+print(f"첫 번째: {first}")
+print(f"두 번째: {second}")
+print(f"나머지: {rest}")]]></solution>
+  </problem>
+
+  <!-- 문제 7: 캐릭터 스탯 언패킹 -->
+  <problem>
+    <description>게임 캐릭터 스탯 tuple (150, 80, 35)을 hp, mp, attack 변수에 언패킹하고 상태를 출력하세요.</description>
+    <code><![CDATA[character = (150, 80, 35)
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[체력: 150, 마나: 80, 공격력: 35]]></output>
+    <hint>언패킹 후 한 줄로 출력하세요.</hint>
+    <solution><![CDATA[character = (150, 80, 35)
+hp, mp, attack = character
+print(f"체력: {hp}, 마나: {mp}, 공격력: {attack}")]]></solution>
+  </problem>
+
+  <!-- 문제 8: 좌표 교환 -->
+  <problem>
+    <description>두 점의 좌표 (10, 20)과 (30, 40)을 서로 교환해보세요.</description>
+    <code><![CDATA[point1 = (10, 20)
+point2 = (30, 40)
+# 여기에 교환 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[교환 전: (10, 20), (30, 40)
+교환 후: (30, 40), (10, 20)]]></output>
+    <hint>tuple 언패킹을 이용하면 쉽게 값을 교환할 수 있습니다.</hint>
+    <solution><![CDATA[point1 = (10, 20)
+point2 = (30, 40)
+print(f"교환 전: {point1}, {point2}")
+
+# tuple 언패킹으로 교환
+point1, point2 = point2, point1
+print(f"교환 후: {point1}, {point2}")]]></solution>
+  </problem>
+
+  <!-- 문제 9: 첫 번째와 마지막 요소 -->
+  <problem>
+    <description>tuple (5, 10, 15, 20, 25)에서 첫 번째와 마지막 요소만 가져와서 출력하세요.</description>
+    <code><![CDATA[data = (5, 10, 15, 20, 25)
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[첫 번째: 5
+마지막: 25]]></output>
+    <hint>first, *_, last = data 형태를 사용하면 중간 요소들을 무시할 수 있습니다.</hint>
+    <solution><![CDATA[data = (5, 10, 15, 20, 25)
+first, *_, last = data
+print(f"첫 번째: {first}")
+print(f"마지막: {last}")]]></solution>
+  </problem>
+
+  <!-- 문제 10: 중첩 tuple 언패킹 -->
+  <problem>
+    <description>학생 정보와 성적이 담긴 tuple (('이철수', 22), ('수학', 95))을 각각 언패킹해서 출력하세요.</description>
+    <code><![CDATA[student_data = (('이철수', 22), ('수학', 95))
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[학생: 이철수 (22세)
+과목: 수학, 점수: 95점]]></output>
+    <hint>먼저 큰 tuple을 언패킹하고, 각각을 다시 언패킹하세요.</hint>
+    <solution><![CDATA[student_data = (('이철수', 22), ('수학', 95))
+student_info, grade_info = student_data
+name, age = student_info
+subject, score = grade_info
+
+print(f"학생: {name} ({age}세)")
+print(f"과목: {subject}, 점수: {score}점")]]></solution>
+  </problem>
+</problems>
