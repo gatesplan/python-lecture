@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description>다음 딕셔너리에서 'name' 키의 값을 출력하는 프로그램을 작성하세요.</description>
+    <code><![CDATA[student = {'name': '홍길동', 'age': 20, 'grade': 'A'}]]></code>
+    <input></input>
+    <output><![CDATA[홍길동]]></output>
+    <hint>딕셔너리의 키를 사용하여 값에 접근할 수 있습니다.</hint>
+    <solution><![CDATA[# 딕셔너리의 키를 사용하여 값에 접근
+student = {'name': '홍길동', 'age': 20, 'grade': 'A'}
+print(student['name'])]]></solution>
+  </problem>
+  
+  <problem>
+    <description>1부터 5까지의 숫자를 출력하는 while 반복문을 작성하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[1
+2
+3
+4
+5]]></output>
+    <hint>while 조건문에서 i <= 5를 사용하고, 반복마다 i를 1씩 증가시키세요.</hint>
+    <solution><![CDATA[# while 반복문을 사용하여 1부터 5까지 출력
+i = 1
+while i <= 5:
+    print(i)
+    i += 1]]></solution>
+  </problem>
+  
+  <problem>
+    <description>빈 딕셔너리를 만들고, 'apple': 1000, 'banana': 1500을 추가한 후 전체 딕셔너리를 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[{'apple': 1000, 'banana': 1500}]]></output>
+    <hint>딕셔너리[키] = 값 형태로 새로운 항목을 추가할 수 있습니다.</hint>
+    <solution><![CDATA[# 빈 딕셔너리 생성 후 항목 추가
+fruits = {}
+fruits['apple'] = 1000
+fruits['banana'] = 1500
+print(fruits)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>사용자가 입력한 숫자의 팩토리얼을 계산하는 프로그램을 while문으로 작성하세요.</description>
+    <code><![CDATA[n = int(input('숫자를 입력하세요: '))]]></code>
+    <input><![CDATA[숫자를 입력하세요: 5]]></input>
+    <output><![CDATA[120]]></output>
+    <hint>팩토리얼은 1부터 n까지의 모든 수를 곱한 값입니다.</hint>
+    <solution><![CDATA[# while문을 사용한 팩토리얼 계산
+n = int(input('숫자를 입력하세요: '))
+result = 1
+i = 1
+while i <= n:
+    result *= i
+    i += 1
+print(result)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>딕셔너리의 모든 키와 값을 반복문으로 출력하는 프로그램을 작성하세요.</description>
+    <code><![CDATA[scores = {'수학': 90, '영어': 85, '국어': 88}]]></code>
+    <input></input>
+    <output><![CDATA[수학: 90
+영어: 85
+국어: 88]]></output>
+    <hint>딕셔너리.items()를 사용하면 키와 값을 동시에 가져올 수 있습니다.</hint>
+    <solution><![CDATA[# 딕셔너리의 키와 값을 반복문으로 출력
+scores = {'수학': 90, '영어': 85, '국어': 88}
+for subject, score in scores.items():
+    print(f'{subject}: {score}')]]></solution>
+  </problem>
+</problems>

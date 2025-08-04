@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description>학생들의 성적 정보가 담긴 딕셔너리 리스트에서 평균 점수가 80점 이상인 학생의 이름만 출력하는 프로그램을 작성하세요.</description>
+    <code><![CDATA[students = [
+    {'name': '김철수', 'scores': [85, 90, 78]},
+    {'name': '이영희', 'scores': [92, 88, 95]},
+    {'name': '박민수', 'scores': [70, 75, 68]}
+]]]></code>
+    <input></input>
+    <output><![CDATA[김철수
+이영희]]></output>
+    <hint>각 학생의 점수 리스트에서 평균을 계산하고 80 이상인지 확인하세요.</hint>
+    <solution><![CDATA[# 평균 점수가 80점 이상인 학생 찾기
+students = [
+    {'name': '김철수', 'scores': [85, 90, 78]},
+    {'name': '이영희', 'scores': [92, 88, 95]},
+    {'name': '박민수', 'scores': [70, 75, 68]}
+]
+
+for student in students:
+    # 평균 계산
+    average = sum(student['scores']) / len(student['scores'])
+    if average >= 80:
+        print(student['name'])]]></solution>
+  </problem>
+  
+  <problem>
+    <description>사용자가 'quit'을 입력할 때까지 계속해서 단어를 입력받아 딕셔너리에 저장하고, 각 단어의 입력 횟수를 세는 프로그램을 작성하세요.</description>
+    <code></code>
+    <input><![CDATA[apple
+banana
+apple
+cherry
+apple
+quit]]></input>
+    <output><![CDATA[{'apple': 3, 'banana': 1, 'cherry': 1}]]></output>
+    <hint>while True를 사용하고, 딕셔너리에 키가 있는지 확인하여 횟수를 증가시키거나 새로 추가하세요.</hint>
+    <solution><![CDATA[# 단어 입력 횟수 카운터
+word_count = {}
+while True:
+    word = input('단어를 입력하세요 (quit로 종료): ')
+    if word == 'quit':
+        break
+    
+    # 딕셔너리에 단어가 있으면 횟수 증가, 없으면 1로 설정
+    if word in word_count:
+        word_count[word] += 1
+    else:
+        word_count[word] = 1
+
+print(word_count)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>중첩된 딕셔너리에서 특정 조건을 만족하는 데이터를 찾아 출력하는 프로그램을 작성하세요. 각 도시별 인구가 100만 이상인 도시의 이름과 인구를 출력하세요.</description>
+    <code><![CDATA[cities = {
+    '서울': {'population': 9500000, 'area': 605},
+    '부산': {'population': 3400000, 'area': 770},
+    '대구': {'population': 2400000, 'area': 884},
+    '울산': {'population': 1100000, 'area': 1057},
+    '광주': {'population': 1400000, 'area': 501}
+}]]></code>
+    <input></input>
+    <output><![CDATA[서울: 9500000
+부산: 3400000
+대구: 2400000
+울산: 1100000
+광주: 1400000]]></output>
+    <hint>중첩된 딕셔너리에서 cities[도시]['population']으로 인구 정보에 접근할 수 있습니다.</hint>
+    <solution><![CDATA[# 인구 100만 이상 도시 찾기
+cities = {
+    '서울': {'population': 9500000, 'area': 605},
+    '부산': {'population': 3400000, 'area': 770},
+    '대구': {'population': 2400000, 'area': 884},
+    '울산': {'population': 1100000, 'area': 1057},
+    '광주': {'population': 1400000, 'area': 501}
+}
+
+for city, info in cities.items():
+    if info['population'] >= 1000000:  # 100만 이상
+        print(f'{city}: {info["population"]}')]]></solution>
+  </problem>
+  
+  <problem>
+    <description>피보나치 수열의 첫 10개 항을 딕셔너리에 저장하고 출력하는 프로그램을 while문으로 작성하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[{1: 1, 2: 1, 3: 2, 4: 3, 5: 5, 6: 8, 7: 13, 8: 21, 9: 34, 10: 55}]]></output>
+    <hint>피보나치 수열은 첫 두 항이 1이고, 그 다음 항부터는 앞의 두 항의 합입니다.</hint>
+    <solution><![CDATA[# while문으로 피보나치 수열 딕셔너리 생성
+fibonacci = {}
+a, b = 1, 1
+i = 1
+
+while i <= 10:
+    fibonacci[i] = a
+    a, b = b, a + b  # 다음 피보나치 수 계산
+    i += 1
+
+print(fibonacci)]]></solution>
+  </problem>
+</problems>
