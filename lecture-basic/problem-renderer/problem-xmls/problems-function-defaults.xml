@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description>이름과 호칭을 매개변수로 받는 함수를 작성하세요. 호칭의 기본값은 "님"입니다. 함수명은 'greet_with_title'이고 다양한 방식으로 호출해보세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[안녕하세요, 김철수님!
+안녕하세요, 이영희선생님!]]></output>
+    <hint>매개변수에 기본값을 지정할 때는 매개변수=기본값 형태로 작성하세요.</hint>
+    <solution><![CDATA[# 기본값이 있는 매개변수
+def greet_with_title(name, title="님"):
+    return f"안녕하세요, {name}{title}!"
+
+# 기본값 사용
+print(greet_with_title("김철수"))
+# 기본값 대신 다른 값 사용
+print(greet_with_title("이영희", "선생님"))]]></solution>
+  </problem>
+  
+  <problem>
+    <description>사용자 프로필을 생성하는 함수를 작성하세요. 이름은 필수이고, 나이(기본값: 0), 도시(기본값: "미정"), 직업(기본값: "무직")은 선택사항입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[이름: 홍길동, 나이: 30, 도시: 서울, 직업: 개발자]]></output>
+    <hint>기본값이 있는 매개변수는 기본값이 없는 매개변수 뒤에 와야 합니다.</hint>
+    <solution><![CDATA[# 여러 기본값 매개변수
+def create_profile(name, age=0, city="미정", job="무직"):
+    return f"이름: {name}, 나이: {age}, 도시: {city}, 직업: {job}"
+
+result = create_profile("홍길동", age=30, city="서울", job="개발자")
+print(result)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>원의 넓이를 계산하는 함수를 작성하세요. 반지름은 필수이고, 파이 값의 기본값은 3.14입니다. 함수명은 'calculate_circle_area'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[78.5]]></output>
+    <hint>원의 넓이 = 파이 * 반지름 * 반지름 공식을 사용하세요.</hint>
+    <solution><![CDATA[# 파이 값에 기본값이 있는 함수
+def calculate_circle_area(radius, pi=3.14):
+    return pi * radius * radius
+
+area = calculate_circle_area(5)
+print(area)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>메시지를 출력하는 함수를 작성하세요. 메시지는 필수이고, 반복횟수(기본값: 1), 접두사(기본값: "")는 선택사항입니다. 함수명은 'print_message'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[알림: 안녕하세요
+알림: 안녕하세요
+알림: 안녕하세요]]></output>
+    <hint>for문을 사용해서 메시지를 반복 출력하세요.</hint>
+    <solution><![CDATA[# 메시지 출력 함수
+def print_message(message, count=1, prefix=""):
+    for i in range(count):
+        print(f"{prefix}{message}")
+
+print_message("안녕하세요", count=3, prefix="알림: ")]]></solution>
+  </problem>
+  
+  <problem>
+    <description>학생의 성적을 평가하는 함수를 작성하세요. 점수는 필수이고, 과목명(기본값: "시험"), 만점(기본값: 100)은 선택사항입니다. 함수명은 'evaluate_score'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[수학 성적: 85/100 (85.0%)]]></output>
+    <hint>백분율은 (점수/만점)*100으로 계산하세요.</hint>
+    <solution><![CDATA[# 성적 평가 함수
+def evaluate_score(score, subject="시험", max_score=100):
+    percentage = (score / max_score) * 100
+    return f"{subject} 성적: {score}/{max_score} ({percentage}%)"
+
+result = evaluate_score(85, subject="수학")
+print(result)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>리스트에 아이템을 추가하는 함수를 올바르게 작성하세요. 기본값으로 빈 리스트를 사용할 때의 올바른 방법을 보여주세요. 함수명은 'add_item'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[['사과']
+['바나나']]]></output>
+    <hint>mutable 객체를 기본값으로 사용할 때는 None을 사용하고 함수 내에서 처리하세요.</hint>
+    <solution><![CDATA[# 올바른 mutable 기본값 처리
+def add_item(item, items=None):
+    if items is None:
+        items = []
+    items.append(item)
+    return items
+
+# 각각 독립적인 리스트 생성됨
+list1 = add_item("사과")
+list2 = add_item("바나나")
+print(list1)
+print(list2)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>할인된 가격을 계산하는 함수를 작성하세요. 원가는 필수이고, 할인율(기본값: 0.1, 즉 10%), 화폐단위(기본값: "원")는 선택사항입니다. 함수명은 'calculate_discount'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[할인 후 가격: 4500원]]></output>
+    <hint>할인된 가격 = 원가 * (1 - 할인율) 공식을 사용하세요.</hint>
+    <solution><![CDATA[# 할인 계산 함수
+def calculate_discount(price, discount=0.1, currency="원"):
+    discounted_price = int(price * (1 - discount))
+    return f"할인 후 가격: {discounted_price}{currency}"
+
+result = calculate_discount(5000)
+print(result)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>로그 메시지를 출력하는 함수를 작성하세요. 메시지는 필수이고, 레벨(기본값: "INFO"), 시간(기본값: "12:00")은 선택사항입니다. 함수명은 'log'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[[14:30] ERROR: 오류가 발생했습니다]]></output>
+    <hint>f-string을 사용해서 로그 형식을 만드세요.</hint>
+    <solution><![CDATA[# 로그 출력 함수
+def log(message, level="INFO", time="12:00"):
+    return f"[{time}] {level}: {message}"
+
+result = log("오류가 발생했습니다", level="ERROR", time="14:30")
+print(result)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>문자열을 포매팅하는 함수를 작성하세요. 텍스트는 필수이고, 패딩문자(기본값: " "), 총길이(기본값: 20)는 선택사항입니다. 함수명은 'format_text'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[===Hello===]]></output>
+    <hint>.center() 메서드를 사용해서 텍스트를 가운데 정렬하세요.</hint>
+    <solution><![CDATA[# 텍스트 포매팅 함수
+def format_text(text, padding=" ", width=20):
+    return text.center(width, padding)
+
+result = format_text("Hello", padding="=", width=11)
+print(result)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>파일 경로를 생성하는 함수를 작성하세요. 파일명은 필수이고, 확장자(기본값: ".txt"), 폴더(기본값: "documents")는 선택사항입니다. 함수명은 'create_filepath'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[photos/image.jpg]]></output>
+    <hint>문자열 연결을 사용해서 경로를 만드세요.</hint>
+    <solution><![CDATA[# 파일 경로 생성 함수
+def create_filepath(filename, extension=".txt", folder="documents"):
+    return f"{folder}/{filename}{extension}"
+
+path = create_filepath("image", extension=".jpg", folder="photos")
+print(path)]]></solution>
+  </problem>
+</problems>

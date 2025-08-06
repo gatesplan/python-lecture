@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description>1부터 10까지의 숫자 리스트를 리스트 컴프리헨션으로 만드세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]]]></output>
+    <hint>range(1, 11)과 리스트 컴프리헨션 기본 문법 [x for x in iterable]을 사용하세요.</hint>
+    <solution><![CDATA[# 리스트 컴프리헨션으로 1부터 10까지
+numbers = [x for x in range(1, 11)]
+print(numbers)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>주어진 문자열 리스트의 모든 문자열을 대문자로 변환한 새 리스트를 만드세요.</description>
+    <code><![CDATA[fruits = ['apple', 'banana', 'cherry', 'date']]]></code>
+    <input></input>
+    <output><![CDATA[['APPLE', 'BANANA', 'CHERRY', 'DATE']]]></output>
+    <hint>[표현식 for 항목 in 리스트] 형태에서 표현식에 .upper() 메서드를 사용하세요.</hint>
+    <solution><![CDATA[# 문자열 리스트를 대문자로 변환
+fruits = ['apple', 'banana', 'cherry', 'date']
+upper_fruits = [fruit.upper() for fruit in fruits]
+print(upper_fruits)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>1부터 5까지 숫자들의 제곱값 리스트를 리스트 컴프리헨션으로 만드세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[[1, 4, 9, 16, 25]]]></output>
+    <hint>x ** 2를 사용해서 제곱값을 구하고, range(1, 6)을 사용하세요.</hint>
+    <solution><![CDATA[# 1부터 5까지 제곱값 리스트
+squares = [x ** 2 for x in range(1, 6)]
+print(squares)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>"python" 문자열의 각 문자를 리스트로 만드세요.</description>
+    <code><![CDATA[word = "python"]]></code>
+    <input></input>
+    <output><![CDATA[['p', 'y', 't', 'h', 'o', 'n']]]></output>
+    <hint>문자열도 반복 가능한 객체이므로 [char for char in word] 형태로 사용할 수 있습니다.</hint>
+    <solution><![CDATA[# 문자열을 문자 리스트로 변환
+word = "python"
+char_list = [char for char in word]
+print(char_list)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>주어진 숫자 리스트의 각 숫자에 10을 더한 새 리스트를 만드세요.</description>
+    <code><![CDATA[numbers = [1, 3, 5, 7, 9]]]></code>
+    <input></input>
+    <output><![CDATA[[11, 13, 15, 17, 19]]]></output>
+    <hint>각 숫자에 10을 더하려면 표현식 부분에 num + 10을 사용하세요.</hint>
+    <solution><![CDATA[# 각 숫자에 10을 더한 리스트
+numbers = [1, 3, 5, 7, 9]
+plus_ten = [num + 10 for num in numbers]
+print(plus_ten)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>주어진 문자열 리스트에서 각 문자열의 길이를 구한 리스트를 만드세요.</description>
+    <code><![CDATA[words = ['cat', 'elephant', 'dog', 'butterfly']]]></code>
+    <input></input>
+    <output><![CDATA[[3, 8, 3, 9]]]></output>
+    <hint>len() 함수를 표현식 부분에 사용하세요: [len(word) for word in words]</hint>
+    <solution><![CDATA[# 각 문자열의 길이를 구한 리스트
+words = ['cat', 'elephant', 'dog', 'butterfly']
+lengths = [len(word) for word in words]
+print(lengths)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>0부터 9까지의 숫자를 문자열로 변환한 리스트를 만드세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']]]></output>
+    <hint>str() 함수를 사용해서 숫자를 문자열로 변환하고, range(10)을 사용하세요.</hint>
+    <solution><![CDATA[# 0부터 9까지를 문자열로 변환
+str_numbers = [str(num) for num in range(10)]
+print(str_numbers)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>주어진 단어 리스트에서 각 단어의 첫 글자만 모은 리스트를 만드세요.</description>
+    <code><![CDATA[words = ['apple', 'banana', 'cherry', 'date', 'elderberry']]]></code>
+    <input></input>
+    <output><![CDATA[['a', 'b', 'c', 'd', 'e']]]></output>
+    <hint>문자열의 첫 글자는 word[0]으로 접근할 수 있습니다.</hint>
+    <solution><![CDATA[# 각 단어의 첫 글자만 모은 리스트
+words = ['apple', 'banana', 'cherry', 'date', 'elderberry']
+first_letters = [word[0] for word in words]
+print(first_letters)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>주어진 숫자 리스트의 각 숫자를 절댓값으로 변환한 리스트를 만드세요.</description>
+    <code><![CDATA[numbers = [-5, 3, -2, 8, -1, 4]]]></code>
+    <input></input>
+    <output><![CDATA[[5, 3, 2, 8, 1, 4]]]></output>
+    <hint>abs() 함수를 사용해서 절댓값을 구하세요.</hint>
+    <solution><![CDATA[# 각 숫자의 절댓값 리스트
+numbers = [-5, 3, -2, 8, -1, 4]
+abs_numbers = [abs(num) for num in numbers]
+print(abs_numbers)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>주어진 이름 리스트의 각 이름에 '님'을 붙인 새 리스트를 만드세요.</description>
+    <code><![CDATA[names = ['김철수', '이영희', '박민수', '최유진']]]></code>
+    <input></input>
+    <output><![CDATA[['김철수님', '이영희님', '박민수님', '최유진님']]]></output>
+    <hint>문자열 연결을 위해 name + '님' 형태로 사용하세요.</hint>
+    <solution><![CDATA[# 각 이름에 '님'을 붙인 리스트
+names = ['김철수', '이영희', '박민수', '최유진']
+polite_names = [name + '님' for name in names]
+print(polite_names)]]></solution>
+  </problem>
+</problems>

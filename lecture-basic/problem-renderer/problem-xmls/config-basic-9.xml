@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Python Basic Lecture 9 - 리스트 컴프리헨션 연습문제
+  
+  사용법:
+  1. problem-renderer 폴더에서 start.bat 실행
+  2. URL에서 ?config=config-basic-9 로 접근
+  
+  섹션 구성:
+  - 9.1: 기본 리스트 컴프리헨션 (10문제 중 5문제 랜덤)
+  - 9.2: for문을 리스트 컴프리헨션으로 변환 (10문제 중 5문제 랜덤)  
+  - 9.3: 조건부 리스트 컴프리헨션 (10문제 중 5문제 랜덤)
+  - 9.4: if-else 포함 리스트 컴프리헨션 (10문제 중 5문제 랜덤)
+-->
+<exercise>
+  <title>Exercise 9. 리스트 컴프리헨션 (List Comprehension)</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- true: 해설 표시, false: 해설 숨김 -->
+  </settings>
+  <sections>
+    <section title="Section 9.1 - 기본 리스트 컴프리헨션" file="problems-listcomp-basic.xml" count="5"/>
+    <section title="Section 9.2 - for문을 리스트 컴프리헨션으로 변환" file="problems-convert-for-listcomp-basic.xml" count="5"/>
+    <section title="Section 9.3 - 조건부 리스트 컴프리헨션" file="problems-listcomp-if.xml" count="5"/>
+    <section title="Section 9.4 - if-else 포함 리스트 컴프리헨션" file="problems-listcomp-ifelse.xml" count="5"/>
+  </sections>
+</exercise>
