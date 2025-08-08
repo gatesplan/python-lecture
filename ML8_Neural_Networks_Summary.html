@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML 8. 뉴럴네트워크 - 정리 노트</title>
+    <style>
+        /* 기존 스타일 기반으로 수정 */
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            line-height: 1.6;
+            color: #000;
+            background: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* 제목 스타일 */
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 0 40px 0;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            color: #34495e;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+            color: #2c3e50;
+        }
+
+        /* 섹션 스타일 */
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .subsection {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 5px;
+            border-left: 3px solid #17a2b8;
+        }
+
+        /* 코드 블록 스타일 */
+        .code-block {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+
+        .code-title {
+            background: #34495e;
+            color: white;
+            padding: 8px 15px;
+            margin: 15px 0 0 0;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .code-block-with-title {
+            margin-top: 0;
+            border-radius: 0 0 5px 5px;
+        }
+
+        /* 수식 스타일 */
+        .formula {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* 설명 박스 */
+        .explanation {
+            background: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        .explanation::before {
+            content: "💡 ";
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        /* 키워드 박스 */
+        .keywords {
+            background: #f0f8ff;
+            border: 2px solid #87ceeb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .keywords h3 {
+            margin-top: 0;
+            color: #1e90ff;
+        }
+
+        .keyword-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .keyword-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .keyword-list li:last-child {
+            border-bottom: none;
+        }
+
+        .keyword-code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 13px;
+        }
+
+        /* 프린트 최적화 */
+        @media print {
+            body {
+                font-size: 12px;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+            
+            .code-block {
+                page-break-inside: avoid;
+            }
+            
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ML 8. 뉴럴네트워크 (Neural Networks)</h1>
+
+        <div class="keywords">
+            <h3>주요 키워드</h3>
+            <ul class="keyword-list">
+                <li>1. MLP 분류기 <span class="keyword-code">sklearn.neural_network.MLPClassifier</span></li>
+                <li>2. PyTorch Tensor <span class="keyword-code">torch.Tensor</span></li>
+                <li>3. 신경망 모듈 <span class="keyword-code">torch.nn.Module</span></li>
+                <li>4. 선형 레이어 <span class="keyword-code">torch.nn.Linear</span></li>
+                <li>5. 활성함수 <span class="keyword-code">ReLU, Sigmoid, Tanh</span></li>
+                <li>6. DataLoader <span class="keyword-code">torch.utils.data.DataLoader</span></li>
+                <li>7. reshape 연산 <span class="keyword-code">Tensor.reshape()</span></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>1. 간단한 뉴럴네트워크 구현 (sklearn)</h2>
+            <div class="subsection">
+                <div class="explanation">
+                scikit-learn의 MLPClassifier를 사용한 빠른 뉴럴네트워크 구현 방법
+                </div>
+                
+                <div class="code-title">MLPClassifier 기본 사용법</div>
+                <div class="code-block code-block-with-title">from sklearn.neural_network import MLPClassifier
+
+# 11 -> 30 -> 30 -> 30 -> 1 구조의 네트워크
+clf = MLPClassifier(
+    hidden_layer_sizes=(30, 30, 30),  # 은닉층 구조
+    max_iter=300,                      # 최대 반복 횟수
+    activation='tanh',                 # 활성함수
+    solver='adam',                     # 최적화 알고리즘
+)
+
+clf.fit(xs_train, ys_train)
+y_pred = clf.predict(xs_test)
+
+# 정확도 평가
+from sklearn.metrics import accuracy_score
+accuracy = accuracy_score(ys_test, y_pred)
+print(f'Accuracy: {accuracy:.2f}')</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2. PyTorch Tensor 기초</h2>
+            <div class="subsection">
+                <div class="explanation">
+                Tensor는 PyTorch의 기본 데이터 구조로, 다차원 배열을 표현하고 GPU 연산을 지원하는 핵심 객체
+                </div>
+
+                <h3>2.1 Tensor 생성</h3>
+                <div class="code-title">다양한 Tensor 생성 방법</div>
+                <div class="code-block code-block-with-title">from torch import Tensor, ones, zeros, randn
+
+# 직접 생성
+t1 = Tensor([[1, 2],
+             [3, 4]])
+
+# 0으로 채워진 텐서
+zeros_tensor = zeros(2, 2)
+# 출력: [[0., 0.],
+#       [0., 0.]]
+
+# 1로 채워진 텐서
+ones_tensor = ones(4, 2, 6)  # 4x2x6 3차원 텐서
+
+# 랜덤값으로 채워진 텐서
+random_tensor = randn(3, 6)  # 표준정규분포
+
+# NumPy/Pandas 변환
+tensor_from_numpy = Tensor(xs_train.values)</div>
+            </div>
+
+            <div class="subsection">
+                <h3>2.2 Tensor 연산</h3>
+                <div class="code-title">기본 텐서 연산</div>
+                <div class="code-block code-block-with-title">t1 = Tensor([[1, 2],
+             [3, 4]])
+
+# 스칼라 연산
+t1 + 1  # 모든 원소에 1 더하기
+t1 * 2  # 모든 원소에 2 곱하기
+t1 / 2  # 모든 원소를 2로 나누기
+
+# 텐서 간 연산 (같은 크기)
+t2 = Tensor([[1, -1],
+             [2, -2]])
+t1 / t2  # element-wise 나눗셈
+
+# 행렬 곱셈
+result = t1.matmul(t2)</div>
+            </div>
+
+            <div class="subsection">
+                <h3>2.3 Tensor Reshape ⭐중요⭐</h3>
+                <div class="explanation">
+                reshape는 텐서의 차원을 재구성하는 가장 중요한 연산 중 하나. 딥러닝에서 데이터 형태 변환에 필수적
+                </div>
+
+                <div class="code-title">reshape 연산 활용</div>
+                <div class="code-block code-block-with-title">t = Tensor([[1, 2],
+            [3, 4],
+            [5, 6]])  # 3x2 텐서
+
+# 1차원으로 평탄화
+t.flatten()  # [1, 2, 3, 4, 5, 6]
+
+# 다양한 형태로 재구성
+t.reshape(2, 3)   # 2x3으로 변경
+t.reshape(6, 1)   # 6x1으로 변경
+t.reshape(1, -1)  # 1xN으로 변경 (-1은 자동 계산)
+
+# 고차원 텐서 재구성
+t = ones(3, 4, 5, 2, 3)  # 5차원 텐서
+t.reshape(10, -1).shape   # (10, 36)로 변경
+t.reshape(3, -1)          # 3행, 나머지는 자동 계산</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3. DataLoader를 통한 배치 처리</h2>
+            <div class="subsection">
+                <div class="explanation">
+                대량의 데이터를 효율적으로 처리하기 위한 배치 로딩 시스템
+                </div>
+
+                <div class="code-title">DataLoader 구성</div>
+                <div class="code-block code-block-with-title">from torch.utils.data import DataLoader, TensorDataset
+
+# 텐서로 변환
+xs_train_tensor = Tensor(xs_train.values)
+ys_train_tensor = Tensor(ys_train.values)
+
+# 데이터셋 생성
+train_dataset = TensorDataset(xs_train_tensor, ys_train_tensor)
+
+# DataLoader 생성
+train_loader = DataLoader(
+    train_dataset, 
+    batch_size=32,    # 배치 크기
+    shuffle=True      # 에폭마다 데이터 섞기
+)</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>4. PyTorch 신경망 구축</h2>
+            <div class="subsection">
+                <h3>4.1 네트워크 정의</h3>
+                <div class="explanation">
+                nn.Module을 상속받아 커스텀 신경망 모델을 정의하는 방법
+                </div>
+
+                <div class="code-title">기본 신경망 구조</div>
+                <div class="code-block code-block-with-title">from torch import nn
+
+class TitanicModel(nn.Module):
+    def __init__(self):
+        super(TitanicModel, self).__init__()
+        
+        # Sequential을 사용한 네트워크 정의
+        self.layer = nn.Sequential(
+            nn.Linear(11, 64),   # 입력층: 11 → 64
+            nn.ReLU(),           # 활성함수
+            nn.Linear(64, 32),   # 은닉층: 64 → 32
+            nn.ReLU(),           # 활성함수
+            nn.Linear(32, 1),    # 출력층: 32 → 1
+        )</div>
+
+                <div class="code-title">순전파(Forward) 구현</div>
+                <div class="code-block code-block-with-title">class CustomModel(nn.Module):
+    def __init__(self):
+        super(CustomModel, self).__init__()
+        self.lin1 = nn.Linear(4, 10)   # 첫 번째 레이어
+        self.lin2 = nn.Linear(10, 10)  # 두 번째 레이어
+        self.lin3 = nn.Linear(10, 1)   # 출력 레이어
+        self.activation1 = nn.ReLU()
+        self.activation2 = nn.Sigmoid()
+    
+    def forward(self, x):
+        x = self.lin1(x)
+        x = self.activation1(x)
+        x = self.lin2(x)
+        x = self.activation2(x)
+        return self.lin3(x)</div>
+            </div>
+
+            <div class="subsection">
+                <h3>4.2 활성함수 종류</h3>
+                <div class="explanation">
+                비선형성을 추가하여 신경망이 복잡한 패턴을 학습할 수 있게 하는 함수들
+                </div>
+
+                <div class="code-title">주요 활성함수</div>
+                <div class="code-block code-block-with-title"># 1. ReLU (Rectified Linear Unit)
+# f(x) = max(0, x)
+activation = nn.ReLU()
+
+# 2. Sigmoid
+# f(x) = 1 / (1 + exp(-x))
+activation = nn.Sigmoid()
+
+# 3. Tanh (Hyperbolic Tangent)
+# f(x) = (exp(x) - exp(-x)) / (exp(x) + exp(-x))
+activation = nn.Tanh()
+
+# 4. Leaky ReLU
+# f(x) = x if x > 0 else alpha * x
+activation = nn.LeakyReLU()
+
+# 5. SELU (Scaled Exponential Linear Unit)
+activation = nn.SELU()
+
+# 6. ELU (Exponential Linear Unit)
+activation = nn.ELU()
+
+# 7. GELU (Gaussian Error Linear Unit)
+activation = nn.GELU()</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>5. 실전 예제: 다양한 네트워크 구조</h2>
+            <div class="subsection">
+                <h3>5.1 간단한 분류 네트워크</h3>
+                <div class="code-title">3층 네트워크 (4→10→10→1)</div>
+                <div class="code-block code-block-with-title">class ModelAlpha(nn.Module):
+    def __init__(self):
+        super(ModelAlpha, self).__init__()
+        self.layer = nn.Sequential(
+            nn.Linear(4, 10),
+            nn.ReLU(),
+            nn.Linear(10, 10),
+            nn.ReLU(),
+            nn.Linear(10, 1)
+        )</div>
+
+                <h3>5.2 다중 클래스 분류 네트워크</h3>
+                <div class="code-title">4층 네트워크 (4→20→30→20→3)</div>
+                <div class="code-block code-block-with-title">class ModelBravo(nn.Module):
+    def __init__(self):
+        super(ModelBravo, self).__init__()
+        self.layer = nn.Sequential(
+            nn.Linear(4, 20),
+            nn.ReLU(),
+            nn.Linear(20, 30),
+            nn.ReLU(),
+            nn.Linear(30, 20),
+            nn.ReLU(),
+            nn.Linear(20, 3)
+        )</div>
+
+                <h3>5.3 깊은 네트워크 구성 팁</h3>
+                <div class="code-title">반복문을 활용한 깊은 네트워크</div>
+                <div class="code-block code-block-with-title">class DeepModel(nn.Module):
+    def __init__(self):
+        super(DeepModel, self).__init__()
+        layers = []
+        
+        # 입력층
+        layers.append(nn.Linear(10, 30))
+        layers.append(nn.ReLU())
+        
+        # 은닉층 50개 추가
+        for _ in range(49):
+            layers.append(nn.Linear(30, 30))
+            layers.append(nn.ReLU())
+        
+        # 출력층
+        layers.append(nn.Linear(30, 1))
+        
+        self.layer = nn.Sequential(*layers)  # 언패킹 사용</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>6. 타이타닉 생존 예측 전체 파이프라인</h2>
+            <div class="subsection">
+                <div class="code-title">전체 워크플로우</div>
+                <div class="code-block code-block-with-title"># 1. 데이터 로드 및 전처리
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+
+titanic = pd.read_csv('clean_titanic.csv', index_col=0)
+
+# 라벨 인코딩
+encoders = {}
+for col in titanic.columns:
+    encoders[col] = LabelEncoder()
+    titanic[col] = encoders[col].fit_transform(titanic[col])
+
+# 2. 데이터 분리
+xs, ys = titanic.drop(columns=['survived']), titanic['survived']
+from sklearn.model_selection import train_test_split
+xs_train, xs_test, ys_train, ys_test = train_test_split(xs, ys, test_size=0.2)
+
+# 3. Tensor 변환
+from torch import Tensor
+xs_train_tensor = Tensor(xs_train.values)
+ys_train_tensor = Tensor(ys_train.values)
+
+# 4. DataLoader 생성
+from torch.utils.data import DataLoader, TensorDataset
+train_dataset = TensorDataset(xs_train_tensor, ys_train_tensor)
+train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+
+# 5. 모델 정의 및 학습 (추후 진행)</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>7. 핵심 정리</h2>
+            <div class="subsection">
+                <h3>뉴럴네트워크의 구성 요소</h3>
+                <ul>
+                    <li><strong>Tensor:</strong> PyTorch의 기본 데이터 구조, GPU 연산 지원</li>
+                    <li><strong>Linear Layer:</strong> 선형 변환을 수행하는 기본 레이어</li>
+                    <li><strong>활성함수:</strong> 비선형성을 추가하여 표현력 향상</li>
+                    <li><strong>Sequential:</strong> 레이어를 순차적으로 연결하는 컨테이너</li>
+                </ul>
+
+                <h3>중요한 개념</h3>
+                <ul>
+                    <li><strong>reshape:</strong> 텐서의 차원을 재구성하는 핵심 연산</li>
+                    <li><strong>forward:</strong> 입력을 받아 출력을 계산하는 순전파 함수</li>
+                    <li><strong>batch_size:</strong> 한 번에 처리할 데이터 개수</li>
+                    <li><strong>DataLoader:</strong> 배치 단위로 데이터를 효율적으로 로드</li>
+                </ul>
+
+                <h3>실무 팁</h3>
+                <ul>
+                    <li>작은 네트워크부터 시작하여 점진적으로 복잡도 증가</li>
+                    <li>활성함수는 ReLU가 기본, 특수한 경우 다른 함수 사용</li>
+                    <li>reshape(-1)을 활용하여 자동으로 차원 계산</li>
+                    <li>Sequential을 사용하여 간단한 네트워크 구성</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
