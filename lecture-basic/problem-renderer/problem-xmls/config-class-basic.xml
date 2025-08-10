@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercise>
+  <title>Exercise N. 클래스 선언과 기본 사용법</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <section title="Section 1 - 클래스 기초 연습" file="problems-class-basic.xml" count="20"/>
+  </sections>
+</exercise>
