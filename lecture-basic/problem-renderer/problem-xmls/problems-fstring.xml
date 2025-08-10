@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  f-string 기초 문제
+  - f"문자열 {변수}" 기본 사용법
+  - 변수를 문자열에 삽입하여 출력
+  - 여러 변수를 하나의 f-string에 포함
+-->
+<problems>
+  <problem>
+    <description>변수 name="김철수"를 선언하고 f-string을 사용하여 "안녕 김철수!"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[안녕 김철수!]]></output>
+    <hint>f"안녕 {name}!" 형태로 사용하세요.</hint>
+    <solution><![CDATA[name = "김철수"
+print(f"안녕 {name}!")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 age=20을 선언하고 f-string을 사용하여 "나이 20살"이라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[나이 20살]]></output>
+    <hint>f"나이 {age}살" 형태로 사용하세요.</hint>
+    <solution><![CDATA[age = 20
+print(f"나이 {age}살")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 city="서울"을 선언하고 f-string을 사용하여 "서울 거주"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[서울 거주]]></output>
+    <hint>f"{city} 거주" 형태로 사용하세요.</hint>
+    <solution><![CDATA[city = "서울"
+print(f"{city} 거주")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 score=95를 선언하고 f-string을 사용하여 "점수: 95"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[점수: 95]]></output>
+    <hint>f"점수: {score}" 형태로 사용하세요.</hint>
+    <solution><![CDATA[score = 95
+print(f"점수: {score}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 name="이영희", age=25를 선언하고 f-string을 사용하여 "이영희 25살"이라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[이영희 25살]]></output>
+    <hint>f"{name} {age}살" 형태로 사용하세요.</hint>
+    <solution><![CDATA[name = "이영희"
+age = 25
+print(f"{name} {age}살")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 item="사과", price=1000을 선언하고 f-string을 사용하여 "사과 1000원"이라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[사과 1000원]]></output>
+    <hint>f"{item} {price}원" 형태로 사용하세요.</hint>
+    <solution><![CDATA[item = "사과"
+price = 1000
+print(f"{item} {price}원")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 x=10, y=20을 선언하고 f-string을 사용하여 "10+20"이라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[10+20]]></output>
+    <hint>f"{x}+{y}" 형태로 사용하세요.</hint>
+    <solution><![CDATA[x = 10
+y = 20
+print(f"{x}+{y}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 name="박민수", hobby="독서"를 선언하고 f-string을 사용하여 "박민수: 독서"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[박민수: 독서]]></output>
+    <hint>f"{name}: {hobby}" 형태로 사용하세요.</hint>
+    <solution><![CDATA[name = "박민수"
+hobby = "독서"
+print(f"{name}: {hobby}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 num=100을 선언하고 f-string을 사용하여 "숫자 100"이라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[숫자 100]]></output>
+    <hint>f"숫자 {num}" 형태로 사용하세요.</hint>
+    <solution><![CDATA[num = 100
+print(f"숫자 {num}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 team="축구", player=11을 선언하고 f-string을 사용하여 "축구 11명"이라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[축구 11명]]></output>
+    <hint>f"{team} {player}명" 형태로 사용하세요.</hint>
+    <solution><![CDATA[team = "축구"
+player = 11
+print(f"{team} {player}명")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 book="파이썬", page=300을 선언하고 f-string을 사용하여 "파이썬 책은 300페이지예요"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[파이썬 책은 300페이지예요]]></output>
+    <hint>f"{book} 책은 {page}페이지예요" 형태로 사용하세요.</hint>
+    <solution><![CDATA[book = "파이썬"
+page = 300
+print(f"{book} 책은 {page}페이지예요")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 weather="맑음"을 선언하고 f-string을 사용하여 "오늘 날씨는 맑음이네요"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[오늘 날씨는 맑음이네요]]></output>
+    <hint>f"오늘 날씨는 {weather}이네요" 형태로 사용하세요.</hint>
+    <solution><![CDATA[weather = "맑음"
+print(f"오늘 날씨는 {weather}이네요")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 name="최유진", subject="수학"을 선언하고 f-string을 사용하여 "최유진은 수학을 공부해요"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[최유진은 수학을 공부해요]]></output>
+    <hint>f"{name}은 {subject}을 공부해요" 형태로 사용하세요.</hint>
+    <solution><![CDATA[name = "최유진"
+subject = "수학"
+print(f"{name}은 {subject}을 공부해요")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 month=12, day=25를 선언하고 f-string을 사용하여 "12월 25일입니다"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[12월 25일입니다]]></output>
+    <hint>f"{month}월 {day}일입니다" 형태로 사용하세요.</hint>
+    <solution><![CDATA[month = 12
+day = 25
+print(f"{month}월 {day}일입니다")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 color="빨강"을 선언하고 f-string을 사용하여 "제가 좋아하는 색은 빨강색이에요"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[제가 좋아하는 색은 빨강색이에요]]></output>
+    <hint>f"제가 좋아하는 색은 {color}색이에요" 형태로 사용하세요.</hint>
+    <solution><![CDATA[color = "빨강"
+print(f"제가 좋아하는 색은 {color}색이에요")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 a=5, b=3을 선언하고 f-string을 사용하여 "5와 3"이라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[5와 3]]></output>
+    <hint>f"{a}와 {b}" 형태로 사용하세요.</hint>
+    <solution><![CDATA[a = 5
+b = 3
+print(f"{a}와 {b}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 car="자동차", speed=60을 선언하고 f-string을 사용하여 "자동차가 60km로 달려요"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[자동차가 60km로 달려요]]></output>
+    <hint>f"{car}가 {speed}km로 달려요" 형태로 사용하세요.</hint>
+    <solution><![CDATA[car = "자동차"
+speed = 60
+print(f"{car}가 {speed}km로 달려요")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 school="서울초등학교", grade=3을 선언하고 f-string을 사용하여 "서울초등학교 3학년"이라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[서울초등학교 3학년]]></output>
+    <hint>f"{school} {grade}학년" 형태로 사용하세요.</hint>
+    <solution><![CDATA[school = "서울초등학교"
+grade = 3
+print(f"{school} {grade}학년")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 food="피자", count=2를 선언하고 f-string을 사용하여 "피자 2개 주문했어요"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[피자 2개 주문했어요]]></output>
+    <hint>f"{food} {count}개 주문했어요" 형태로 사용하세요.</hint>
+    <solution><![CDATA[food = "피자"
+count = 2
+print(f"{food} {count}개 주문했어요")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 name="정태호", sport="농구", time=2를 선언하고 f-string을 사용하여 "정태호는 농구를 2시간 했어요"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[정태호는 농구를 2시간 했어요]]></output>
+    <hint>f"{name}는 {sport}를 {time}시간 했어요" 형태로 사용하세요.</hint>
+    <solution><![CDATA[name = "정태호"
+sport = "농구"
+time = 2
+print(f"{name}는 {sport}를 {time}시간 했어요")]]></solution>
+  </problem>
+</problems>

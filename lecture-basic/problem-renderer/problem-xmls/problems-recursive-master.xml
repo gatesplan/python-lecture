@@ -1,0 +1,1713 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  재귀함수 고급 연습 문제 - Master 레벨
+  
+  이 파일은 재귀함수를 완전히 마스터하고자 하는 고급 학습자를 위한 문제들입니다.
+  복잡한 이중 재귀, 백트래킹, 분할정복 등 고급 재귀 기법을 다룹니다.
+  
+  학습 목표:
+  - 복잡한 이중 재귀와 메모이제이션 이해
+  - 백트래킹과 상태 공간 탐색 마스터
+  - 분할정복 알고리즘의 재귀적 구현
+  - 실무에서 사용되는 고전 알고리즘 구현
+-->
+<problems>
+
+  <!-- =========================== Expert 승격 문제들 =========================== -->
+  
+  <!-- 1. 이항계수 C(n,k) -->
+  <problem>
+    <description><![CDATA[재귀함수를 사용하여 이항계수 C(n,k)를 계산하는 함수를 작성하세요.
+이항계수는 n개 중에서 k개를 선택하는 경우의 수입니다.
+점화식: C(n,k) = C(n-1,k-1) + C(n-1,k)
+기저 조건: C(n,0) = 1, C(n,n) = 1]]></description>
+    <code><![CDATA[def combination(n, k):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(combination(5, 2))  # 10이 나와야 합니다 (5C2)
+print(combination(6, 3))  # 20이 나와야 합니다 (6C3)
+print(combination(4, 0))  # 1이 나와야 합니다 (4C0)]]></code>
+    <input><![CDATA[n=5, k=2]]></input>
+    <output><![CDATA[10]]></output>
+    <hint><![CDATA[기저 조건: k==0 또는 k==n이면 1을 반환합니다. 재귀 호출: combination(n-1, k-1) + combination(n-1, k)를 반환합니다.]]></hint>
+    <solution><![CDATA[def combination(n, k):
+    # 기저 조건: nC0 = 1, nCn = 1
+    if k == 0 or k == n:
+        return 1
+    
+    # 재귀 호출: 파스칼의 삼각형 점화식
+    return combination(n - 1, k - 1) + combination(n - 1, k)
+
+# 동작 과정 예시 (C(5,2)):
+# combination(5,2) = combination(4,1) + combination(4,2)
+#                  = (combination(3,0) + combination(3,1)) + (combination(3,1) + combination(3,2))
+#                  = (1 + (combination(2,0) + combination(2,1))) + ((combination(2,0) + combination(2,1)) + (combination(2,1) + combination(2,2)))
+#                  = (1 + (1 + (combination(1,0) + combination(1,1)))) + ((1 + (combination(1,0) + combination(1,1))) + ((combination(1,0) + combination(1,1)) + 1))
+#                  = (1 + (1 + (1 + 1))) + ((1 + (1 + 1)) + ((1 + 1) + 1))
+#                  = (1 + 3) + (3 + 3) = 4 + 6 = 10
+
+# 참고: 이 구현은 중복 계산이 많아 비효율적입니다.
+# 실제로는 메모이제이션을 사용해야 합니다.
+def combination_memo(n, k, memo={}):
+    if (n, k) in memo:
+        return memo[(n, k)]
+    
+    if k == 0 or k == n:
+        return 1
+    
+    result = combination_memo(n-1, k-1, memo) + combination_memo(n-1, k, memo)
+    memo[(n, k)] = result
+    return result]]></solution>
+  </problem>
+
+  <!-- 2. 두 번째로 큰 값 찾기 -->
+  <problem>
+    <description><![CDATA[재귀함수를 사용하여 리스트에서 두 번째로 큰 값을 찾는 함수를 작성하세요.
+리스트에는 최소 2개 이상의 서로 다른 값이 있다고 가정합니다.
+예: [3, 7, 1, 9, 2]에서 두 번째로 큰 값은 7]]></description>
+    <code><![CDATA[def find_second_largest(arr):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(find_second_largest([3, 7, 1, 9, 2]))  # 7이 나와야 합니다
+print(find_second_largest([5, 1, 8, 3]))     # 5가 나와야 합니다]]></code>
+    <input><![CDATA[[3, 7, 1, 9, 2]]]></input>
+    <output><![CDATA[7]]></output>
+    <hint><![CDATA[재귀적으로 최댓값과 두 번째 최댓값을 동시에 추적해야 합니다. 튜플을 반환하여 (최댓값, 두번째최댓값) 상태를 관리하세요.]]></hint>
+    <solution><![CDATA[def find_second_largest(arr):
+    def helper(arr, index=0):
+        # 기저 조건: 첫 두 원소로 초기 최댓값, 두번째 최댓값 설정
+        if index == len(arr) - 2:
+            if arr[index] > arr[index + 1]:
+                return (arr[index], arr[index + 1])  # (최댓값, 두번째최댓값)
+            else:
+                return (arr[index + 1], arr[index])
+        
+        # 재귀 호출로 나머지 원소들의 최댓값, 두번째 최댓값 구하기
+        max_val, second_max = helper(arr, index + 1)
+        current = arr[index]
+        
+        # 현재 원소와 기존 최댓값, 두번째 최댓값 비교하여 업데이트
+        if current > max_val:
+            return (current, max_val)  # 현재가 최댓값, 기존 최댓값이 두번째
+        elif current > second_max:
+            return (max_val, current)  # 기존 최댓값 유지, 현재가 두번째
+        else:
+            return (max_val, second_max)  # 변화 없음
+    
+    # 두 번째 최댓값만 반환
+    return helper(arr)[1]
+
+# 더 간단한 구현 (분할정복 방식):
+def find_second_largest_v2(arr):
+    if len(arr) == 2:
+        return min(arr)
+    
+    mid = len(arr) // 2
+    left_max, left_second = find_top_two(arr[:mid])
+    right_max, right_second = find_top_two(arr[mid:])
+    
+    # 두 부분의 결과를 병합
+    all_candidates = [left_max, left_second, right_max, right_second]
+    all_candidates.sort(reverse=True)
+    return all_candidates[1]  # 두 번째로 큰 값
+
+def find_top_two(arr):
+    """배열에서 최댓값과 두 번째 최댓값 반환"""
+    if len(arr) == 1:
+        return (arr[0], float('-inf'))
+    elif len(arr) == 2:
+        return (max(arr), min(arr))
+    
+    mid = len(arr) // 2
+    left_max, left_second = find_top_two(arr[:mid])
+    right_max, right_second = find_top_two(arr[mid:])
+    
+    candidates = [left_max, left_second, right_max, right_second]
+    candidates = [x for x in candidates if x != float('-inf')]
+    candidates.sort(reverse=True)
+    
+    return (candidates[0], candidates[1])]]></solution>
+  </problem>
+
+  <!-- 3. 소수 판별 (최적화) -->
+  <problem>
+    <description><![CDATA[재귀함수를 사용하여 주어진 수가 소수인지 판별하는 효율적인 함수를 작성하세요.
+√n까지만 나누어 확인하여 시간 복잡도를 최적화하세요.
+예: 17은 소수, 15는 소수가 아님 (3×5)]]></description>
+    <code><![CDATA[def is_prime(n, divisor=2):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(is_prime(17))  # True가 나와야 합니다
+print(is_prime(15))  # False가 나와야 합니다
+print(is_prime(29))  # True가 나와야 합니다
+print(is_prime(1))   # False가 나와야 합니다]]></code>
+    <input><![CDATA[17]]></input>
+    <output><![CDATA[True]]></output>
+    <hint><![CDATA[기저 조건: n이 1 이하이면 False, divisor의 제곱이 n보다 크면 True, n이 divisor로 나누어지면 False입니다. 재귀 호출: divisor를 1씩 증가시키며 확인합니다.]]></hint>
+    <solution><![CDATA[def is_prime(n, divisor=2):
+    # 기저 조건들
+    if n <= 1:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:  # 짝수는 소수가 아님 (2 제외)
+        return False
+    
+    # √n까지만 확인하면 충분
+    if divisor * divisor > n:
+        return True
+    
+    # 현재 divisor로 나누어떨어지면 소수가 아님
+    if n % divisor == 0:
+        return False
+    
+    # 다음 홀수 divisor로 재귀 호출 (짝수는 이미 제외했으므로)
+    return is_prime(n, divisor + 1 if divisor == 2 else divisor + 2)
+
+# 동작 과정 예시 (is_prime(17)):
+# is_prime(17, 2): 17 % 2 != 0 → is_prime(17, 3)
+# is_prime(17, 3): 17 % 3 != 0 → is_prime(17, 5)  
+# is_prime(17, 5): 5² = 25 > 17 → True (소수)
+
+# 동작 과정 예시 (is_prime(15)):
+# is_prime(15, 2): 15 % 2 != 0 → is_prime(15, 3)
+# is_prime(15, 3): 15 % 3 == 0 → False (3으로 나누어짐)
+
+# 최적화 버전 (홀수만 확인):
+def is_prime_optimized(n, divisor=3):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    
+    if divisor * divisor > n:
+        return True
+    
+    if n % divisor == 0 or n % (divisor + 2) == 0:
+        return False
+    
+    return is_prime_optimized(n, divisor + 6)  # 6k±1 형태만 확인]]></solution>
+  </problem>
+
+  <!-- =========================== 고전 재귀 문제들 =========================== -->
+
+  <!-- 4. 하노이의 탑 -->
+  <problem>
+    <description><![CDATA[재귀함수를 사용하여 하노이의 탑 문제를 해결하는 함수를 작성하세요.
+n개의 원반을 source 기둥에서 destination 기둥으로 옮기는 과정을 출력하세요.
+규칙: 한 번에 하나씩, 작은 원반이 큰 원반 위에만 올 수 있음]]></description>
+    <code><![CDATA[def hanoi(n, source, destination, auxiliary):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print("하노이의 탑 (3개 원반):")
+hanoi(3, 'A', 'C', 'B')]]></code>
+    <input><![CDATA[n=3, source='A', destination='C', auxiliary='B']]></input>
+    <output><![CDATA[원반 1을 A에서 C로 이동
+원반 2을 A에서 B로 이동  
+원반 1을 C에서 B로 이동
+원반 3을 A에서 C로 이동
+원반 1을 B에서 A로 이동
+원반 2을 B에서 C로 이동
+원반 1을 A에서 C로 이동]]></output>
+    <hint><![CDATA[기저 조건: n==1이면 원반을 바로 이동합니다. 재귀 전략: 1) n-1개를 보조 기둥으로, 2) 가장 큰 원반을 목적지로, 3) n-1개를 목적지로 이동합니다.]]></hint>
+    <solution><![CDATA[def hanoi(n, source, destination, auxiliary):
+    # 기저 조건: 원반이 1개면 바로 이동
+    if n == 1:
+        print(f"원반 {n}을 {source}에서 {destination}로 이동")
+        return
+    
+    # 3단계 재귀 전략:
+    # 1. 위의 n-1개 원반을 보조 기둥으로 이동
+    hanoi(n - 1, source, auxiliary, destination)
+    
+    # 2. 가장 큰 원반을 목적지 기둥으로 이동
+    print(f"원반 {n}을 {source}에서 {destination}로 이동")
+    
+    # 3. 보조 기둥의 n-1개 원반을 목적지 기둥으로 이동
+    hanoi(n - 1, auxiliary, destination, source)
+
+# 이동 횟수를 계산하는 함수:
+def hanoi_count(n):
+    """n개 원반을 옮기는 데 필요한 최소 이동 횟수"""
+    if n == 1:
+        return 1
+    return 2 * hanoi_count(n - 1) + 1
+    # 또는 간단히: return 2**n - 1
+
+# 하노이의 탑 원리:
+# - n개 원반 문제 = (n-1)개 문제 두 번 + 큰 원반 이동 1번
+# - 시간 복잡도: O(2^n)
+# - 최소 이동 횟수: 2^n - 1
+
+print(f"3개 원반 최소 이동 횟수: {hanoi_count(3)}")  # 7번
+print(f"4개 원반 최소 이동 횟수: {hanoi_count(4)}")  # 15번]]></solution>
+  </problem>
+
+  <!-- 5. 문자열 순열 생성 -->
+  <problem>
+    <description><![CDATA[재귀함수와 백트래킹을 사용하여 주어진 문자열의 모든 순열을 생성하는 함수를 작성하세요.
+예: "ABC" → ["ABC", "ACB", "BAC", "BCA", "CAB", "CBA"]]]></description>
+    <code><![CDATA[def generate_permutations(s):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+result = generate_permutations("ABC")
+print(f"'ABC'의 모든 순열: {result}")
+print(f"총 {len(result)}개")]]></code>
+    <input><![CDATA["ABC"]]></input>
+    <output><![CDATA[["ABC", "ACB", "BAC", "BCA", "CAB", "CBA"]]]></output>
+    <hint><![CDATA[백트래킹을 사용하세요. 각 위치에서 사용 가능한 문자를 선택하고, 재귀 호출 후 선택을 취소(백트래킹)합니다.]]></hint>
+    <solution><![CDATA[def generate_permutations(s):
+    def backtrack(current_perm, remaining_chars, all_perms):
+        # 기저 조건: 남은 문자가 없으면 순열 완성
+        if not remaining_chars:
+            all_perms.append(current_perm)
+            return
+        
+        # 남은 각 문자에 대해 시도
+        for i, char in enumerate(remaining_chars):
+            # 현재 문자를 선택
+            new_perm = current_perm + char
+            new_remaining = remaining_chars[:i] + remaining_chars[i+1:]
+            
+            # 재귀 호출
+            backtrack(new_perm, new_remaining, all_perms)
+            # 백트래킹: 자동으로 이전 상태로 돌아감 (함수 종료 시)
+    
+    result = []
+    backtrack("", s, result)
+    return result
+
+# 더 파이썬스러운 구현:
+def generate_permutations_v2(s):
+    if len(s) <= 1:
+        return [s]
+    
+    result = []
+    for i, char in enumerate(s):
+        # 현재 문자를 제외한 나머지 문자들의 순열 생성
+        remaining = s[:i] + s[i+1:]
+        sub_perms = generate_permutations_v2(remaining)
+        
+        # 현재 문자를 각 순열의 앞에 붙이기
+        for perm in sub_perms:
+            result.append(char + perm)
+    
+    return result
+
+# 동작 과정 예시 ("ABC"):
+# generate_permutations("ABC"):
+#   i=0, char='A', remaining="BC"
+#     generate_permutations("BC") → ["BC", "CB"]
+#     결과: ["ABC", "ACB"]
+#   i=1, char='B', remaining="AC"  
+#     generate_permutations("AC") → ["AC", "CA"]
+#     결과: ["BAC", "BCA"]
+#   i=2, char='C', remaining="AB"
+#     generate_permutations("AB") → ["AB", "BA"]
+#     결과: ["CAB", "CBA"]
+# 최종: ["ABC", "ACB", "BAC", "BCA", "CAB", "CBA"]
+
+# 중복 문자가 있는 경우의 처리:
+def generate_unique_permutations(s):
+    """중복 문자가 있어도 유일한 순열만 생성"""
+    def backtrack(chars, current_perm, all_perms):
+        if not chars:
+            all_perms.append(current_perm)
+            return
+        
+        used_chars = set()
+        for i, char in enumerate(chars):
+            if char not in used_chars:  # 중복 방지
+                used_chars.add(char)
+                new_chars = chars[:i] + chars[i+1:]
+                backtrack(new_chars, current_perm + char, all_perms)
+    
+    result = []
+    backtrack(list(s), "", result)
+    return result]]></solution>
+  </problem>
+
+  <!-- 6. 부분집합 생성 -->
+  <problem>
+    <description><![CDATA[재귀함수를 사용하여 주어진 리스트의 모든 부분집합(파워셋)을 생성하는 함수를 작성하세요.
+예: [1, 2, 3] → [[], [1], [2], [3], [1,2], [1,3], [2,3], [1,2,3]]]]></description>
+    <code><![CDATA[def generate_subsets(nums):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+result = generate_subsets([1, 2, 3])
+print(f"[1,2,3]의 모든 부분집합: {result}")
+print(f"총 {len(result)}개")]]></code>
+    <input><![CDATA[[1, 2, 3]]]></input>
+    <output><![CDATA[[[], [1], [2], [3], [1,2], [1,3], [2,3], [1,2,3]]]></output>
+    <hint><![CDATA[각 원소에 대해 "포함" 또는 "포함하지 않음"의 두 가지 선택이 있습니다. 재귀적으로 각 선택에 대해 부분집합을 생성하세요.]]></hint>
+    <solution><![CDATA[def generate_subsets(nums):
+    def backtrack(index, current_subset, all_subsets):
+        # 기저 조건: 모든 원소를 고려했으면 현재 부분집합 추가
+        if index == len(nums):
+            all_subsets.append(current_subset[:])  # 복사본 추가
+            return
+        
+        # 현재 원소를 포함하지 않는 경우
+        backtrack(index + 1, current_subset, all_subsets)
+        
+        # 현재 원소를 포함하는 경우
+        current_subset.append(nums[index])
+        backtrack(index + 1, current_subset, all_subsets)
+        current_subset.pop()  # 백트래킹: 선택 취소
+    
+    result = []
+    backtrack(0, [], result)
+    return result
+
+# 더 직관적인 구현:
+def generate_subsets_v2(nums):
+    if not nums:
+        return [[]]  # 빈 집합의 부분집합은 빈 집합뿐
+    
+    # 첫 번째 원소를 제외한 나머지의 부분집합들
+    first = nums[0]
+    rest_subsets = generate_subsets_v2(nums[1:])
+    
+    # 기존 부분집합들 + 첫 번째 원소를 포함한 부분집합들
+    new_subsets = []
+    for subset in rest_subsets:
+        new_subsets.append(subset)           # 첫 번째 원소 미포함
+        new_subsets.append([first] + subset) # 첫 번째 원소 포함
+    
+    return new_subsets
+
+# 비트 마스킹을 이용한 구현:
+def generate_subsets_bitmask(nums):
+    """비트 마스킹을 활용한 부분집합 생성"""
+    n = len(nums)
+    result = []
+    
+    # 0부터 2^n-1까지의 모든 비트 패턴
+    for mask in range(1 << n):  # 2^n
+        subset = []
+        for i in range(n):
+            # i번째 비트가 설정되어 있으면 해당 원소 포함
+            if mask & (1 << i):
+                subset.append(nums[i])
+        result.append(subset)
+    
+    return result
+
+# 동작 과정 예시 ([1,2,3]):
+# generate_subsets([1,2,3]):
+#   첫 번째: 1, 나머지: [2,3]
+#   generate_subsets([2,3]) → [[], [2], [3], [2,3]]
+#   결과 구성:
+#     [] → []           (1 미포함)
+#     [] → [1]          (1 포함)
+#     [2] → [2]         (1 미포함) 
+#     [2] → [1,2]       (1 포함)
+#     [3] → [3]         (1 미포함)
+#     [3] → [1,3]       (1 포함)
+#     [2,3] → [2,3]     (1 미포함)
+#     [2,3] → [1,2,3]   (1 포함)
+# 최종: [[], [1], [2], [1,2], [3], [1,3], [2,3], [1,2,3]]
+
+print(f"부분집합 개수 공식: 2^n = 2^{len([1,2,3])} = {2**len([1,2,3])}")]]></solution>
+  </problem>
+
+  <!-- 7. N-Queen 문제 (4x4) -->
+  <problem>
+    <description><![CDATA[재귀함수와 백트래킹을 사용하여 4×4 체스판에 4개의 퀸을 서로 공격하지 않게 배치하는 모든 해를 찾는 함수를 작성하세요.
+퀸은 가로, 세로, 대각선으로 움직일 수 있습니다.]]></description>
+    <code><![CDATA[def solve_n_queens(n=4):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+solutions = solve_n_queens(4)
+print(f"4-Queen 문제의 해: {len(solutions)}개")
+for i, solution in enumerate(solutions):
+    print(f"해 {i+1}: {solution}")]]></code>
+    <input><![CDATA[4]]></input>
+    <output><![CDATA[2개의 해가 있음]]></output>
+    <hint><![CDATA[각 행에 퀸을 하나씩 배치하며, 열과 대각선 충돌을 확인하세요. 백트래킹으로 불가능한 경우 이전 선택을 되돌리세요.]]></hint>
+    <solution><![CDATA[def solve_n_queens(n=4):
+    def is_safe(board, row, col):
+        """현재 위치에 퀸을 놓을 수 있는지 확인"""
+        # 같은 열에 다른 퀸이 있는지 확인
+        for i in range(row):
+            if board[i] == col:
+                return False
+        
+        # 대각선 확인 (왼쪽 위 → 오른쪽 아래)
+        for i in range(row):
+            if abs(board[i] - col) == abs(i - row):
+                return False
+        
+        return True
+    
+    def backtrack(board, row, all_solutions):
+        # 기저 조건: 모든 행에 퀸을 배치했으면 해 발견
+        if row == n:
+            all_solutions.append(board[:])  # 복사본 저장
+            return
+        
+        # 현재 행의 각 열에 퀸을 놓아보기
+        for col in range(n):
+            if is_safe(board, row, col):
+                board[row] = col  # 퀸 배치
+                backtrack(board, row + 1, all_solutions)  # 다음 행으로
+                # 백트래킹: board[row] 값은 다음 반복에서 덮어씌워짐
+    
+    solutions = []
+    backtrack([-1] * n, 0, solutions)  # -1로 초기화된 보드
+    return solutions
+
+# 해를 시각적으로 출력하는 함수:
+def print_board(solution):
+    """N-Queen 해를 체스판 형태로 출력"""
+    n = len(solution)
+    for row in range(n):
+        line = ""
+        for col in range(n):
+            if solution[row] == col:
+                line += "Q "  # 퀸
+            else:
+                line += ". "  # 빈 칸
+        print(line)
+    print()
+
+# 4-Queen 문제의 해 출력:
+solutions = solve_n_queens(4)
+print(f"4×4 체스판의 N-Queen 해: {len(solutions)}개\n")
+
+for i, solution in enumerate(solutions):
+    print(f"해 {i+1}: 각 행의 퀸 위치 = {solution}")
+    print_board(solution)
+
+# N-Queen 문제의 특징:
+# - n=1: 1개 해
+# - n=2, n=3: 해가 없음
+# - n=4: 2개 해
+# - n=8: 92개 해
+# - 시간 복잡도: O(N!)
+
+# 더 효율적인 구현 (비트마스킹 사용):
+def solve_n_queens_optimized(n):
+    def backtrack_optimized(row, cols, diag1, diag2, board, solutions):
+        if row == n:
+            solutions.append([board[i] for i in range(n)])
+            return
+        
+        for col in range(n):
+            # 비트마스킹으로 충돌 확인
+            if (cols & (1 << col)) or (diag1 & (1 << (row + col))) or (diag2 & (1 << (row - col + n - 1))):
+                continue
+            
+            board[row] = col
+            backtrack_optimized(
+                row + 1,
+                cols | (1 << col),
+                diag1 | (1 << (row + col)),
+                diag2 | (1 << (row - col + n - 1)),
+                board,
+                solutions
+            )
+    
+    solutions = []
+    backtrack_optimized(0, 0, 0, 0, [-1] * n, solutions)
+    return solutions]]></solution>
+  </problem>
+
+  <!-- =========================== 분할정복 알고리즘 =========================== -->
+
+  <!-- 8. 퀵 정렬 -->
+  <problem>
+    <description><![CDATA[재귀함수와 분할정복을 사용하여 퀵 정렬 알고리즘을 구현하는 함수를 작성하세요.
+피벗을 기준으로 배열을 분할하고, 각 부분을 재귀적으로 정렬합니다.]]></description>
+    <code><![CDATA[def quick_sort(arr, low=0, high=None):
+    # 여기에 코드를 작성하세요
+    pass
+
+def partition(arr, low, high):
+    # 여기에 파티션 함수를 작성하세요
+    pass
+
+# 테스트
+test_arr = [64, 34, 25, 12, 22, 11, 90]
+print(f"정렬 전: {test_arr}")
+quick_sort(test_arr)
+print(f"정렬 후: {test_arr}")]]></code>
+    <input><![CDATA[[64, 34, 25, 12, 22, 11, 90]]]></input>
+    <output><![CDATA[[11, 12, 22, 25, 34, 64, 90]]]></output>
+    <hint><![CDATA[파티션 함수에서 피벗을 선택하고, 피벗보다 작은 원소들을 왼쪽으로, 큰 원소들을 오른쪽으로 이동시키세요. 그 후 피벗의 최종 위치를 반환하세요.]]></hint>
+    <solution><![CDATA[def quick_sort(arr, low=0, high=None):
+    if high is None:
+        high = len(arr) - 1
+    
+    # 기저 조건: 원소가 1개 이하면 정렬 완료
+    if low < high:
+        # 파티션 수행하여 피벗의 최종 위치 구하기
+        pivot_index = partition(arr, low, high)
+        
+        # 피벗 기준 왼쪽 부분 재귀 정렬
+        quick_sort(arr, low, pivot_index - 1)
+        
+        # 피벗 기준 오른쪽 부분 재귀 정렬
+        quick_sort(arr, pivot_index + 1, high)
+
+def partition(arr, low, high):
+    """Lomuto 파티션 방식"""
+    # 마지막 원소를 피벗으로 선택
+    pivot = arr[high]
+    
+    # 작은 원소들의 인덱스 추적
+    i = low - 1
+    
+    for j in range(low, high):
+        # 현재 원소가 피벗보다 작거나 같으면
+        if arr[j] <= pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]  # 교환
+    
+    # 피벗을 올바른 위치에 배치
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return i + 1  # 피벗의 최종 위치 반환
+
+# Hoare 파티션 방식 (더 효율적):
+def partition_hoare(arr, low, high):
+    """Hoare 파티션 방식"""
+    pivot = arr[low]  # 첫 번째 원소를 피벗으로
+    i = low - 1
+    j = high + 1
+    
+    while True:
+        # 왼쪽에서 피벗보다 큰 원소 찾기
+        i += 1
+        while arr[i] < pivot:
+            i += 1
+        
+        # 오른쪽에서 피벗보다 작은 원소 찾기
+        j -= 1
+        while arr[j] > pivot:
+            j -= 1
+        
+        # 포인터가 만나면 종료
+        if i >= j:
+            return j
+        
+        # 두 원소 교환
+        arr[i], arr[j] = arr[j], arr[i]
+
+# 동작 과정 예시 ([64, 34, 25, 12, 22, 11, 90]):
+# 1. partition(arr, 0, 6): pivot=90
+#    → [64, 34, 25, 12, 22, 11, 90] (90이 마지막에 위치)
+#    → pivot_index = 6
+# 2. quick_sort(arr, 0, 5): [64, 34, 25, 12, 22, 11]
+#    partition(arr, 0, 5): pivot=11
+#    → [11, 64, 34, 25, 12, 22] → pivot_index = 0
+# 3. quick_sort(arr, 1, 5): [64, 34, 25, 12, 22]
+#    ... 계속 분할하여 정렬
+
+# 성능 특성:
+# - 평균 시간 복잡도: O(n log n)
+# - 최악 시간 복잡도: O(n²) - 이미 정렬된 경우
+# - 공간 복잡도: O(log n) - 재귀 호출 스택
+# - 제자리 정렬(in-place sorting)
+
+# 개선된 퀵 정렬 (랜덤 피벗):
+import random
+
+def quick_sort_randomized(arr, low=0, high=None):
+    if high is None:
+        high = len(arr) - 1
+    
+    if low < high:
+        # 랜덤 피벗 선택으로 최악의 경우 방지
+        random_index = random.randint(low, high)
+        arr[random_index], arr[high] = arr[high], arr[random_index]
+        
+        pivot_index = partition(arr, low, high)
+        quick_sort_randomized(arr, low, pivot_index - 1)
+        quick_sort_randomized(arr, pivot_index + 1, high)
+
+# 3-way 퀵 정렬 (중복값이 많은 경우 최적화):
+def quick_sort_3way(arr, low=0, high=None):
+    if high is None:
+        high = len(arr) - 1
+    
+    if low >= high:
+        return
+    
+    lt, gt = partition_3way(arr, low, high)
+    quick_sort_3way(arr, low, lt - 1)    # 피벗보다 작은 부분
+    quick_sort_3way(arr, gt + 1, high)   # 피벗보다 큰 부분
+    # 피벗과 같은 부분(lt~gt)은 정렬 완료
+
+def partition_3way(arr, low, high):
+    """3-way 파티션: <pivot, =pivot, >pivot"""
+    pivot = arr[low]
+    lt = low      # arr[low..lt-1] < pivot
+    i = low + 1   # arr[lt..i-1] = pivot  
+    gt = high + 1 # arr[gt..high] > pivot
+    
+    while i < gt:
+        if arr[i] < pivot:
+            arr[lt], arr[i] = arr[i], arr[lt]
+            lt += 1
+            i += 1
+        elif arr[i] > pivot:
+            gt -= 1
+            arr[i], arr[gt] = arr[gt], arr[i]
+        else:
+            i += 1
+    
+    return lt, gt - 1]]></solution>
+  </problem>
+
+  <!-- 9. 병합 정렬 -->
+  <problem>
+    <description><![CDATA[재귀함수와 분할정복을 사용하여 병합 정렬 알고리즘을 구현하는 함수를 작성하세요.
+배열을 반으로 나누어 각각 정렬한 후, 정렬된 두 부분을 병합합니다.]]></description>
+    <code><![CDATA[def merge_sort(arr):
+    # 여기에 코드를 작성하세요
+    pass
+
+def merge(left, right):
+    # 여기에 병합 함수를 작성하세요
+    pass
+
+# 테스트
+test_arr = [64, 34, 25, 12, 22, 11, 90]
+print(f"정렬 전: {test_arr}")
+sorted_arr = merge_sort(test_arr)
+print(f"정렬 후: {sorted_arr}")]]></code>
+    <input><![CDATA[[64, 34, 25, 12, 22, 11, 90]]]></input>
+    <output><![CDATA[[11, 12, 22, 25, 34, 64, 90]]]></output>
+    <hint><![CDATA[분할: 배열을 중간점으로 두 부분으로 나누세요. 정복: 각 부분을 재귀적으로 정렬하세요. 결합: 정렬된 두 부분을 하나의 정렬된 배열로 병합하세요.]]></hint>
+    <solution><![CDATA[def merge_sort(arr):
+    # 기저 조건: 원소가 1개 이하면 이미 정렬됨
+    if len(arr) <= 1:
+        return arr
+    
+    # 분할: 배열을 중간점으로 두 부분으로 나누기
+    mid = len(arr) // 2
+    left = arr[:mid]
+    right = arr[mid:]
+    
+    # 정복: 각 부분을 재귀적으로 정렬
+    left_sorted = merge_sort(left)
+    right_sorted = merge_sort(right)
+    
+    # 결합: 정렬된 두 부분을 병합
+    return merge(left_sorted, right_sorted)
+
+def merge(left, right):
+    """두 개의 정렬된 배열을 하나의 정렬된 배열로 병합"""
+    result = []
+    i = j = 0
+    
+    # 두 배열의 원소들을 비교하여 작은 것부터 result에 추가
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    
+    # 남은 원소들 추가
+    result.extend(left[i:])
+    result.extend(right[j:])
+    
+    return result
+
+# 동작 과정 예시 ([64, 34, 25, 12, 22, 11, 90]):
+# 1. merge_sort([64, 34, 25, 12, 22, 11, 90])
+#    분할: left=[64, 34, 25], right=[12, 22, 11, 90]
+#
+# 2. merge_sort([64, 34, 25])
+#    분할: left=[64], right=[34, 25]
+#    merge_sort([34, 25]) → 분할: [34], [25] → 병합: [25, 34]
+#    병합: merge([64], [25, 34]) → [25, 34, 64]
+#
+# 3. merge_sort([12, 22, 11, 90])
+#    분할: left=[12, 22], right=[11, 90]  
+#    merge_sort([12, 22]) → [12, 22]
+#    merge_sort([11, 90]) → [11, 90]
+#    병합: merge([12, 22], [11, 90]) → [11, 12, 22, 90]
+#
+# 4. 최종 병합: merge([25, 34, 64], [11, 12, 22, 90])
+#    → [11, 12, 22, 25, 34, 64, 90]
+
+# 제자리 병합 정렬 (메모리 최적화):
+def merge_sort_inplace(arr, left=0, right=None):
+    """제자리 병합 정렬 (메모리 사용량 최적화)"""
+    if right is None:
+        right = len(arr) - 1
+    
+    if left < right:
+        mid = (left + right) // 2
+        
+        merge_sort_inplace(arr, left, mid)
+        merge_sort_inplace(arr, mid + 1, right)
+        merge_inplace(arr, left, mid, right)
+
+def merge_inplace(arr, left, mid, right):
+    """제자리에서 두 부분을 병합"""
+    # 임시 배열 생성
+    temp = arr[left:right+1]
+    
+    # 두 부분의 시작 인덱스
+    i = 0  # 왼쪽 부분
+    j = mid - left + 1  # 오른쪽 부분
+    k = left  # 원본 배열의 현재 위치
+    
+    # 병합 과정
+    while i <= mid - left and j <= right - left:
+        if temp[i] <= temp[j]:
+            arr[k] = temp[i]
+            i += 1
+        else:
+            arr[k] = temp[j]
+            j += 1
+        k += 1
+    
+    # 남은 원소들 복사
+    while i <= mid - left:
+        arr[k] = temp[i]
+        i += 1
+        k += 1
+    
+    while j <= right - left:
+        arr[k] = temp[j]
+        j += 1
+        k += 1
+
+# 성능 특성:
+# - 시간 복잡도: O(n log n) - 항상 일정 (최선/평균/최악)
+# - 공간 복잡도: O(n) - 임시 배열 필요
+# - 안정 정렬(stable sort) - 동일한 값의 상대적 순서 유지
+# - 외부 정렬에 적합 - 큰 데이터 처리에 유리
+
+# 병합 정렬의 장점:
+# 1. 예측 가능한 성능 (항상 O(n log n))
+# 2. 안정 정렬
+# 3. 큰 데이터셋에 적합
+# 4. 링크드 리스트에서 매우 효율적
+
+print("병합 정렬 vs 퀵 정렬:")
+print("병합 정렬: 항상 O(n log n), 안정 정렬, 추가 메모리 필요")
+print("퀵 정렬: 평균 O(n log n), 제자리 정렬, 최악 O(n²)")]]></solution>
+  </problem>
+
+  <!-- 10. 배열 최댓값 (분할정복) -->
+  <problem>
+    <description><![CDATA[재귀함수와 분할정복을 사용하여 배열에서 최댓값을 찾는 함수를 작성하세요.
+배열을 반으로 나누어 각 부분의 최댓값을 구한 후, 둘 중 더 큰 값을 반환합니다.]]></description>
+    <code><![CDATA[def find_max_divide_conquer(arr, low=0, high=None):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+test_arr = [3, 7, 1, 9, 2, 8, 5]
+print(f"배열: {test_arr}")
+max_value = find_max_divide_conquer(test_arr)
+print(f"최댓값: {max_value}")]]></code>
+    <input><![CDATA[[3, 7, 1, 9, 2, 8, 5]]]></input>
+    <output><![CDATA[9]]></output>
+    <hint><![CDATA[기저 조건: 원소가 1개면 그 원소를 반환하세요. 분할: 배열을 중간점으로 두 부분으로 나누세요. 정복: 각 부분의 최댓값을 재귀적으로 구하세요. 결합: 두 최댓값 중 더 큰 값을 반환하세요.]]></hint>
+    <solution><![CDATA[def find_max_divide_conquer(arr, low=0, high=None):
+    if high is None:
+        high = len(arr) - 1
+    
+    # 기저 조건: 원소가 1개면 그 원소가 최댓값
+    if low == high:
+        return arr[low]
+    
+    # 기저 조건: 원소가 2개면 둘 중 큰 값 반환
+    if high == low + 1:
+        return max(arr[low], arr[high])
+    
+    # 분할: 중간점을 기준으로 두 부분으로 나누기
+    mid = (low + high) // 2
+    
+    # 정복: 각 부분의 최댓값을 재귀적으로 구하기
+    left_max = find_max_divide_conquer(arr, low, mid)
+    right_max = find_max_divide_conquer(arr, mid + 1, high)
+    
+    # 결합: 두 최댓값 중 더 큰 값 반환
+    return max(left_max, right_max)
+
+# 동작 과정 예시 ([3, 7, 1, 9, 2, 8, 5]):
+# 1. find_max([3,7,1,9,2,8,5], 0, 6)
+#    mid = 3
+#    left_max = find_max([3,7,1,9], 0, 3) 
+#    right_max = find_max([2,8,5], 4, 6)
+#
+# 2. find_max([3,7,1,9], 0, 3)
+#    mid = 1  
+#    left_max = find_max([3,7], 0, 1) → max(3,7) = 7
+#    right_max = find_max([1,9], 2, 3) → max(1,9) = 9
+#    return max(7, 9) = 9
+#
+# 3. find_max([2,8,5], 4, 6)  
+#    mid = 5
+#    left_max = find_max([2,8], 4, 5) → max(2,8) = 8
+#    right_max = find_max([5], 6, 6) → 5
+#    return max(8, 5) = 8
+#
+# 4. 최종: max(9, 8) = 9
+
+# 최댓값과 최솟값을 동시에 찾는 함수:
+def find_min_max_divide_conquer(arr, low=0, high=None):
+    """분할정복으로 최댓값과 최솟값을 동시에 찾기"""
+    if high is None:
+        high = len(arr) - 1
+    
+    # 기저 조건: 원소가 1개
+    if low == high:
+        return (arr[low], arr[low])  # (min, max)
+    
+    # 기저 조건: 원소가 2개
+    if high == low + 1:
+        if arr[low] < arr[high]:
+            return (arr[low], arr[high])
+        else:
+            return (arr[high], arr[low])
+    
+    # 분할
+    mid = (low + high) // 2
+    
+    # 정복
+    left_min, left_max = find_min_max_divide_conquer(arr, low, mid)
+    right_min, right_max = find_min_max_divide_conquer(arr, mid + 1, high)
+    
+    # 결합
+    overall_min = min(left_min, right_min)
+    overall_max = max(left_max, right_max)
+    
+    return (overall_min, overall_max)
+
+# k번째로 큰 원소 찾기 (퀵셀렉트 알고리즘):
+def find_kth_largest(arr, k, low=0, high=None):
+    """k번째로 큰 원소를 찾는 분할정복 알고리즘"""
+    if high is None:
+        high = len(arr) - 1
+    
+    if low == high:
+        return arr[low]
+    
+    # 퀵 정렬의 파티션 사용
+    pivot_index = partition_for_kth(arr, low, high)
+    
+    # k번째 원소의 인덱스 (0-based)
+    target_index = len(arr) - k
+    
+    if pivot_index == target_index:
+        return arr[pivot_index]
+    elif pivot_index > target_index:
+        return find_kth_largest(arr, k, low, pivot_index - 1)
+    else:
+        return find_kth_largest(arr, k, pivot_index + 1, high)
+
+def partition_for_kth(arr, low, high):
+    """퀵셀렉트용 파티션 함수"""
+    pivot = arr[high]
+    i = low - 1
+    
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+    
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return i + 1
+
+# 성능 비교:
+# 1. 선형 탐색: O(n) - 단순하고 효율적
+# 2. 분할정복: O(n) - 이론적으로 흥미롭지만 오버헤드 있음
+# 3. 실제로는 분할정복이 최댓값 찾기에는 불필요하게 복잡함
+
+# 분할정복이 유용한 경우:
+# - 병렬 처리 가능한 환경
+# - 데이터가 여러 프로세서에 분산되어 있는 경우  
+# - 캐시 효율성을 높이고 싶은 경우
+
+print(f"배열 [{3, 7, 1, 9, 2, 8, 5}]의 최댓값: {find_max_divide_conquer([3, 7, 1, 9, 2, 8, 5])}")
+min_val, max_val = find_min_max_divide_conquer([3, 7, 1, 9, 2, 8, 5])
+print(f"최솟값: {min_val}, 최댓값: {max_val}")]]></solution>
+  </problem>
+
+  <!-- =========================== 백트래킹/탐색 =========================== -->
+
+  <!-- 11. 미로 탈출 -->
+  <problem>
+    <description><![CDATA[재귀함수와 백트래킹을 사용하여 2차원 미로에서 출발점에서 도착점까지의 경로를 찾는 함수를 작성하세요.
+0은 갈 수 있는 길, 1은 벽을 나타냅니다. 상하좌우로만 이동 가능합니다.]]></description>
+    <code><![CDATA[def solve_maze(maze, start, end):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+maze = [
+    [0, 1, 0, 0, 0],
+    [0, 1, 0, 1, 0], 
+    [0, 0, 0, 1, 0],
+    [1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 0]
+]
+start = (0, 0)
+end = (4, 4)
+
+path = solve_maze(maze, start, end)
+if path:
+    print(f"경로를 찾았습니다: {path}")
+else:
+    print("경로가 없습니다.")]]></code>
+    <input><![CDATA[maze with start=(0,0), end=(4,4)]]></input>
+    <output><![CDATA[경로가 있다면 좌표 리스트 반환]]></output>
+    <hint><![CDATA[백트래킹을 사용하세요. 현재 위치에서 상하좌우로 이동을 시도하고, 막다른 길이면 이전 위치로 돌아가세요. 방문한 곳은 표시하여 무한 루프를 방지하세요.]]></hint>
+    <solution><![CDATA[def solve_maze(maze, start, end):
+    def is_valid(x, y, visited):
+        """현재 위치가 유효한지 확인"""
+        rows, cols = len(maze), len(maze[0])
+        return (0 <= x < rows and 0 <= y < cols and 
+                maze[x][y] == 0 and not visited[x][y])
+    
+    def backtrack(x, y, visited, path):
+        # 기저 조건: 목적지에 도달
+        if (x, y) == end:
+            return True
+        
+        # 상하좌우 이동 방향
+        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  # 상, 하, 좌, 우
+        
+        for dx, dy in directions:
+            next_x, next_y = x + dx, y + dy
+            
+            if is_valid(next_x, next_y, visited):
+                # 다음 위치를 방문 표시
+                visited[next_x][next_y] = True
+                path.append((next_x, next_y))
+                
+                # 재귀 호출
+                if backtrack(next_x, next_y, visited, path):
+                    return True
+                
+                # 백트래킹: 방문 표시 제거 및 경로에서 제거
+                visited[next_x][next_y] = False
+                path.pop()
+        
+        return False
+    
+    # 초기화
+    rows, cols = len(maze), len(maze[0])
+    visited = [[False] * cols for _ in range(rows)]
+    path = [start]
+    
+    # 시작점을 방문 표시
+    visited[start[0]][start[1]] = True
+    
+    # 백트래킹 시작
+    if backtrack(start[0], start[1], visited, path):
+        return path
+    else:
+        return None
+
+# 모든 경로를 찾는 함수:
+def find_all_paths(maze, start, end):
+    """미로의 모든 경로를 찾는 함수"""
+    def backtrack_all(x, y, visited, current_path, all_paths):
+        # 기저 조건: 목적지에 도달
+        if (x, y) == end:
+            all_paths.append(current_path[:])  # 현재 경로의 복사본 저장
+            return
+        
+        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        
+        for dx, dy in directions:
+            next_x, next_y = x + dx, y + dy
+            
+            if is_valid_for_all(next_x, next_y, visited, maze):
+                visited[next_x][next_y] = True
+                current_path.append((next_x, next_y))
+                
+                backtrack_all(next_x, next_y, visited, current_path, all_paths)
+                
+                # 백트래킹
+                visited[next_x][next_y] = False
+                current_path.pop()
+    
+    def is_valid_for_all(x, y, visited, maze):
+        rows, cols = len(maze), len(maze[0])
+        return (0 <= x < rows and 0 <= y < cols and 
+                maze[x][y] == 0 and not visited[x][y])
+    
+    rows, cols = len(maze), len(maze[0])
+    visited = [[False] * cols for _ in range(rows)]
+    all_paths = []
+    
+    visited[start[0]][start[1]] = True
+    backtrack_all(start[0], start[1], visited, [start], all_paths)
+    
+    return all_paths
+
+# 경로 시각화 함수:
+def print_maze_with_path(maze, path):
+    """미로와 경로를 함께 출력"""
+    if not path:
+        print("경로가 없습니다.")
+        return
+    
+    # 경로를 집합으로 변환 (빠른 검색을 위해)
+    path_set = set(path)
+    
+    rows, cols = len(maze), len(maze[0])
+    for i in range(rows):
+        for j in range(cols):
+            if (i, j) in path_set:
+                if (i, j) == path[0]:
+                    print('S', end=' ')  # Start
+                elif (i, j) == path[-1]:
+                    print('E', end=' ')  # End
+                else:
+                    print('*', end=' ')  # Path
+            elif maze[i][j] == 1:
+                print('#', end=' ')  # Wall
+            else:
+                print('.', end=' ')  # Empty
+        print()
+
+# 최단 경로 찾기 (BFS 사용):
+from collections import deque
+
+def find_shortest_path(maze, start, end):
+    """BFS를 사용한 최단 경로 찾기"""
+    if maze[start[0]][start[1]] == 1 or maze[end[0]][end[1]] == 1:
+        return None
+    
+    rows, cols = len(maze), len(maze[0])
+    visited = [[False] * cols for _ in range(rows)]
+    parent = {}  # 경로 추적을 위한 부모 정보
+    
+    queue = deque([start])
+    visited[start[0]][start[1]] = True
+    parent[start] = None
+    
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    
+    while queue:
+        x, y = queue.popleft()
+        
+        if (x, y) == end:
+            # 경로 재구성
+            path = []
+            current = end
+            while current is not None:
+                path.append(current)
+                current = parent[current]
+            return path[::-1]  # 역순으로 반환
+        
+        for dx, dy in directions:
+            next_x, next_y = x + dx, y + dy
+            
+            if (0 <= next_x < rows and 0 <= next_y < cols and
+                maze[next_x][next_y] == 0 and not visited[next_x][next_y]):
+                
+                visited[next_x][next_y] = True
+                parent[(next_x, next_y)] = (x, y)
+                queue.append((next_x, next_y))
+    
+    return None
+
+# 테스트 실행:
+maze = [
+    [0, 1, 0, 0, 0],
+    [0, 1, 0, 1, 0], 
+    [0, 0, 0, 1, 0],
+    [1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 0]
+]
+
+print("미로:")
+for row in maze:
+    for cell in row:
+        print('#' if cell == 1 else '.', end=' ')
+    print()
+
+print("\n=== DFS 백트래킹 (첫 번째 경로) ===")
+path = solve_maze(maze, (0, 0), (4, 4))
+if path:
+    print(f"경로: {path}")
+    print("미로와 경로:")
+    print_maze_with_path(maze, path)
+else:
+    print("경로를 찾을 수 없습니다.")
+
+print("\n=== BFS (최단 경로) ===")
+shortest = find_shortest_path(maze, (0, 0), (4, 4))
+if shortest:
+    print(f"최단 경로: {shortest}")
+    print(f"최단 경로 길이: {len(shortest)}")]]></solution>
+  </problem>
+
+  <!-- 12. 조합 생성 -->
+  <problem>
+    <description><![CDATA[재귀함수와 백트래킹을 사용하여 n개 원소 중에서 r개를 선택하는 모든 조합을 생성하는 함수를 작성하세요.
+예: [1,2,3,4]에서 2개 선택 → [[1,2], [1,3], [1,4], [2,3], [2,4], [3,4]]]]></description>
+    <code><![CDATA[def generate_combinations(nums, r):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+result = generate_combinations([1, 2, 3, 4], 2)
+print(f"[1,2,3,4]에서 2개 선택하는 조합:")
+for combo in result:
+    print(combo)
+print(f"총 {len(result)}개")]]></code>
+    <input><![CDATA[nums=[1,2,3,4], r=2]]></input>
+    <output><![CDATA[[[1,2], [1,3], [1,4], [2,3], [2,4], [3,4]]]]></output>
+    <hint><![CDATA[백트래킹을 사용하세요. 각 위치에서 현재 원소를 선택하거나 선택하지 않는 두 가지 경우를 모두 고려하세요. 조합의 크기가 r에 도달하면 결과에 추가하세요.]]></hint>
+    <solution><![CDATA[def generate_combinations(nums, r):
+    def backtrack(start_index, current_combination, all_combinations):
+        # 기저 조건: 조합의 크기가 r에 도달
+        if len(current_combination) == r:
+            all_combinations.append(current_combination[:])  # 복사본 추가
+            return
+        
+        # 남은 원소 개수가 필요한 개수보다 적으면 조기 종료
+        remaining_needed = r - len(current_combination)
+        remaining_available = len(nums) - start_index
+        if remaining_available < remaining_needed:
+            return
+        
+        # start_index부터 끝까지 각 원소에 대해 시도
+        for i in range(start_index, len(nums)):
+            # 현재 원소를 조합에 추가
+            current_combination.append(nums[i])
+            
+            # 다음 원소부터 재귀 호출 (중복 방지를 위해 i+1부터 시작)
+            backtrack(i + 1, current_combination, all_combinations)
+            
+            # 백트래킹: 현재 원소를 조합에서 제거
+            current_combination.pop()
+    
+    result = []
+    backtrack(0, [], result)
+    return result
+
+# 또 다른 구현 방식 (인덱스 기반):
+def generate_combinations_v2(nums, r):
+    def backtrack_v2(index, current_combination, all_combinations):
+        # 기저 조건: 조합 완성
+        if len(current_combination) == r:
+            all_combinations.append(current_combination[:])
+            return
+        
+        # 기저 조건: 더 이상 원소가 없음
+        if index >= len(nums):
+            return
+        
+        # 현재 원소를 포함하는 경우
+        current_combination.append(nums[index])
+        backtrack_v2(index + 1, current_combination, all_combinations)
+        current_combination.pop()  # 백트래킹
+        
+        # 현재 원소를 포함하지 않는 경우
+        backtrack_v2(index + 1, current_combination, all_combinations)
+    
+    result = []
+    backtrack_v2(0, [], result)
+    return result
+
+# 비트 마스킹을 사용한 조합 생성:
+def generate_combinations_bitmask(nums, r):
+    """비트 마스킹을 사용한 조합 생성"""
+    n = len(nums)
+    result = []
+    
+    # 모든 가능한 비트 패턴을 확인
+    for mask in range(1 << n):  # 2^n개의 패턴
+        # 비트가 설정된 개수 확인
+        if bin(mask).count('1') == r:
+            combination = []
+            for i in range(n):
+                if mask & (1 << i):
+                    combination.append(nums[i])
+            result.append(combination)
+    
+    return result
+
+# 동작 과정 예시 ([1,2,3,4]에서 2개 선택):
+# backtrack(0, [], result):
+#   i=0, nums[0]=1: current=[1]
+#     backtrack(1, [1], result):
+#       i=1, nums[1]=2: current=[1,2], len=2 → result에 [1,2] 추가
+#       i=2, nums[2]=3: current=[1,3], len=2 → result에 [1,3] 추가  
+#       i=3, nums[3]=4: current=[1,4], len=2 → result에 [1,4] 추가
+#   i=1, nums[1]=2: current=[2]
+#     backtrack(2, [2], result):
+#       i=2, nums[2]=3: current=[2,3], len=2 → result에 [2,3] 추가
+#       i=3, nums[3]=4: current=[2,4], len=2 → result에 [2,4] 추가
+#   i=2, nums[2]=3: current=[3]
+#     backtrack(3, [3], result):
+#       i=3, nums[3]=4: current=[3,4], len=2 → result에 [3,4] 추가
+
+# 조합의 개수 계산 (수학적 검증):
+import math
+
+def combination_count(n, r):
+    """조합의 개수 계산: C(n,r) = n! / (r!(n-r)!)"""
+    return math.factorial(n) // (math.factorial(r) * math.factorial(n - r))
+
+# 중복 조합 (원소를 중복해서 선택 가능):
+def generate_combinations_with_repetition(nums, r):
+    """중복 조합 생성 (같은 원소를 여러 번 선택 가능)"""
+    def backtrack_rep(start_index, current_combination, all_combinations):
+        if len(current_combination) == r:
+            all_combinations.append(current_combination[:])
+            return
+        
+        for i in range(start_index, len(nums)):
+            current_combination.append(nums[i])
+            # 중복 허용이므로 i부터 시작 (i+1이 아님)
+            backtrack_rep(i, current_combination, all_combinations)
+            current_combination.pop()
+    
+    result = []
+    backtrack_rep(0, [], result)
+    return result
+
+# 성능 비교:
+print(f"4개 중 2개 선택하는 조합의 개수: {combination_count(4, 2)}")
+
+# 테스트 실행
+test_nums = [1, 2, 3, 4]
+test_r = 2
+
+print(f"\n=== 일반 조합 ({test_nums}에서 {test_r}개 선택) ===")
+combinations = generate_combinations(test_nums, test_r)
+for combo in combinations:
+    print(combo)
+
+print(f"\n=== 중복 조합 ({test_nums}에서 {test_r}개 선택, 중복 허용) ===")
+rep_combinations = generate_combinations_with_repetition(test_nums, test_r)
+for combo in rep_combinations:
+    print(combo)
+
+# 시간 복잡도: O(C(n,r) * r) - 조합의 개수 × 각 조합 생성 시간
+# 공간 복잡도: O(C(n,r) * r) - 모든 조합을 저장하는 공간]]></solution>
+  </problem>
+
+  <!-- =========================== 고급 수학 =========================== -->
+
+  <!-- 13. 카탈란 수 -->
+  <problem>
+    <description><![CDATA[재귀함수를 사용하여 n번째 카탈란 수를 계산하는 함수를 작성하세요.
+카탈란 수의 점화식: C(n) = Σ(i=0 to n-1) C(i) * C(n-1-i)
+기저 조건: C(0) = 1
+예: C(3) = C(0)*C(2) + C(1)*C(1) + C(2)*C(0) = 1*2 + 1*1 + 2*1 = 5]]></description>
+    <code><![CDATA[def catalan_number(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+for i in range(6):
+    print(f"C({i}) = {catalan_number(i)}")]]></code>
+    <input><![CDATA[n=3]]></input>
+    <output><![CDATA[5]]></output>
+    <hint><![CDATA[기저 조건: n==0이면 1을 반환합니다. 재귀 호출: i=0부터 n-1까지 catalan_number(i) * catalan_number(n-1-i)를 모두 더합니다.]]></hint>
+    <solution><![CDATA[def catalan_number(n):
+    # 기저 조건: C(0) = 1
+    if n <= 1:
+        return 1
+    
+    # 점화식: C(n) = Σ(i=0 to n-1) C(i) * C(n-1-i)
+    result = 0
+    for i in range(n):
+        result += catalan_number(i) * catalan_number(n - 1 - i)
+    
+    return result
+
+# 동작 과정 예시 (catalan_number(3)):
+# C(3) = C(0)*C(2) + C(1)*C(1) + C(2)*C(0)
+#      = 1*2 + 1*1 + 2*1
+#      = 2 + 1 + 2 = 5
+#
+# 여기서 C(2)를 계산하려면:
+# C(2) = C(0)*C(1) + C(1)*C(0) = 1*1 + 1*1 = 2
+
+# 메모이제이션을 사용한 효율적 구현:
+def catalan_number_memo(n, memo={}):
+    """메모이제이션을 사용한 카탈란 수 계산"""
+    if n in memo:
+        return memo[n]
+    
+    if n <= 1:
+        return 1
+    
+    result = 0
+    for i in range(n):
+        result += catalan_number_memo(i, memo) * catalan_number_memo(n - 1 - i, memo)
+    
+    memo[n] = result
+    return result
+
+# 이항계수를 사용한 공식: C(n) = C(2n, n) / (n + 1)
+def catalan_number_formula(n):
+    """이항계수를 이용한 카탈란 수 계산"""
+    if n <= 1:
+        return 1
+    
+    # C(n) = C(2n, n) / (n + 1)
+    # C(2n, n) = (2n)! / (n! * n!)
+    from math import factorial
+    return factorial(2 * n) // (factorial(n) * factorial(n) * (n + 1))
+
+# 더 효율적인 공식 구현:
+def catalan_number_efficient(n):
+    """효율적인 카탈란 수 계산 (오버플로우 방지)"""
+    if n <= 1:
+        return 1
+    
+    # C(n) = (2n)! / ((n+1)! * n!) = (2n * (2n-1) * ... * (n+2)) / (n!)
+    result = 1
+    for i in range(n):
+        result = result * (2 * n - i) // (i + 1)
+    
+    return result // (n + 1)
+
+# 카탈란 수의 실제 응용:
+
+# 1. 올바른 괄호 쌍의 개수
+def count_valid_parentheses(n):
+    """n개의 '('와 n개의 ')'로 만들 수 있는 올바른 괄호 쌍의 개수"""
+    return catalan_number_memo(n)
+
+# 2. 이진 트리의 개수  
+def count_binary_trees(n):
+    """n개 노드로 만들 수 있는 서로 다른 이진 탐색 트리의 개수"""
+    return catalan_number_memo(n)
+
+# 3. 다각형의 삼각분할
+def count_triangulations(n):
+    """n+2각형을 삼각형으로 분할하는 방법의 수"""
+    return catalan_number_memo(n)
+
+# 4. 산 경로 문제
+def count_mountain_paths(n):
+    """n×n 격자에서 대각선을 넘지 않고 (0,0)에서 (n,n)까지 가는 경로의 수"""
+    return catalan_number_memo(n)
+
+# 재귀적으로 올바른 괄호 문자열 생성:
+def generate_parentheses(n):
+    """n쌍의 올바른 괄호 문자열을 모두 생성"""
+    def backtrack(current, open_count, close_count, max_n, result):
+        # 기저 조건: n쌍 완성
+        if len(current) == 2 * max_n:
+            result.append(current)
+            return
+        
+        # '(' 추가 (열린 괄호가 n개 미만일 때)
+        if open_count < max_n:
+            backtrack(current + '(', open_count + 1, close_count, max_n, result)
+        
+        # ')' 추가 (닫힌 괄호가 열린 괄호보다 적을 때)
+        if close_count < open_count:
+            backtrack(current + ')', open_count, close_count + 1, max_n, result)
+    
+    result = []
+    backtrack('', 0, 0, n, result)
+    return result
+
+# 카탈란 수 수열: 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, ...
+print("카탈란 수 수열:")
+for i in range(10):
+    print(f"C({i}) = {catalan_number_memo(i)}")
+
+print(f"\n3쌍의 올바른 괄호 문자열 (총 {catalan_number_memo(3)}개):")
+parentheses = generate_parentheses(3)
+for p in parentheses:
+    print(p)
+
+# 성능 비교:
+import time
+
+def time_comparison(n):
+    print(f"\nn={n}일 때 성능 비교:")
+    
+    # 순수 재귀 (작은 n에서만 테스트)
+    if n <= 10:
+        start = time.time()
+        result1 = catalan_number(n)
+        end = time.time()
+        print(f"순수 재귀: {result1} (시간: {end-start:.6f}초)")
+    
+    # 메모이제이션
+    start = time.time()
+    result2 = catalan_number_memo(n)
+    end = time.time()
+    print(f"메모이제이션: {result2} (시간: {end-start:.6f}초)")
+    
+    # 공식 사용
+    start = time.time()
+    result3 = catalan_number_efficient(n)
+    end = time.time()
+    print(f"효율적 공식: {result3} (시간: {end-start:.6f}초)")
+
+# 시간 복잡도:
+# - 순수 재귀: O(4^n) - 매우 느림
+# - 메모이제이션: O(n²) - 각 C(i)를 한 번씩만 계산
+# - 공식 사용: O(n) - 가장 효율적
+
+time_comparison(5)
+time_comparison(15)]]></solution>
+  </problem>
+
+  <!-- 14. 파스칼 삼각형 -->
+  <problem>
+    <description><![CDATA[재귀함수를 사용하여 파스칼 삼각형의 n번째 행까지를 출력하는 함수를 작성하세요.
+파스칼 삼각형: 각 원소는 위의 두 원소의 합으로 이루어짐
+점화식: P(n,k) = P(n-1,k-1) + P(n-1,k)]]></description>
+    <code><![CDATA[def pascal_triangle(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+def pascal_element(row, col):
+    # 파스칼 삼각형의 특정 위치 값을 구하는 함수
+    pass
+
+# 테스트
+print("파스칼 삼각형 (5행까지):")
+pascal_triangle(5)]]></code>
+    <input><![CDATA[5]]></input>
+    <output><![CDATA[파스칼 삼각형이 출력됨]]></output>
+    <hint><![CDATA[pascal_element(row, col) 함수를 먼저 구현하세요. 기저 조건: col==0 또는 col==row이면 1을 반환합니다. 재귀 호출: pascal_element(row-1, col-1) + pascal_element(row-1, col)을 반환합니다.]]></hint>
+    <solution><![CDATA[def pascal_element(row, col):
+    """파스칼 삼각형의 (row, col) 위치 원소 값 계산"""
+    # 기저 조건: 양 끝은 항상 1
+    if col == 0 or col == row:
+        return 1
+    
+    # 재귀 호출: 파스칼 삼각형의 점화식
+    return pascal_element(row - 1, col - 1) + pascal_element(row - 1, col)
+
+def pascal_triangle(n):
+    """파스칼 삼각형의 n번째 행까지 출력"""
+    for row in range(n):
+        # 각 행의 앞쪽 공백 (중앙 정렬을 위해)
+        spaces = ' ' * (n - row - 1)
+        print(spaces, end='')
+        
+        # 각 행의 원소들 출력
+        for col in range(row + 1):
+            value = pascal_element(row, col)
+            print(f"{value:2}", end=' ')
+        print()  # 줄바꿈
+
+# 메모이제이션을 사용한 효율적 구현:
+def pascal_element_memo(row, col, memo={}):
+    """메모이제이션을 사용한 파스칼 삼각형 원소 계산"""
+    if (row, col) in memo:
+        return memo[(row, col)]
+    
+    if col == 0 or col == row:
+        return 1
+    
+    result = pascal_element_memo(row - 1, col - 1, memo) + pascal_element_memo(row - 1, col, memo)
+    memo[(row, col)] = result
+    return result
+
+def pascal_triangle_memo(n):
+    """메모이제이션을 사용한 파스칼 삼각형"""
+    memo = {}
+    for row in range(n):
+        spaces = ' ' * (n - row - 1)
+        print(spaces, end='')
+        
+        for col in range(row + 1):
+            value = pascal_element_memo(row, col, memo)
+            print(f"{value:2}", end=' ')
+        print()
+
+# 동적 프로그래밍을 사용한 구현:
+def pascal_triangle_dp(n):
+    """동적 프로그래밍을 사용한 파스칼 삼각형"""
+    # 2차원 배열로 삼각형 구성
+    triangle = []
+    
+    for row in range(n):
+        current_row = [1]  # 첫 번째 원소는 항상 1
+        
+        for col in range(1, row):
+            # 위의 두 원소의 합
+            value = triangle[row - 1][col - 1] + triangle[row - 1][col]
+            current_row.append(value)
+        
+        if row > 0:
+            current_row.append(1)  # 마지막 원소는 항상 1
+        
+        triangle.append(current_row)
+    
+    # 출력
+    for row in range(n):
+        spaces = ' ' * (n - row - 1)
+        print(spaces, end='')
+        
+        for value in triangle[row]:
+            print(f"{value:2}", end=' ')
+        print()
+    
+    return triangle
+
+# 각 행을 독립적으로 계산하는 방법:
+def pascal_row(n):
+    """파스칼 삼각형의 n번째 행만 계산"""
+    if n == 0:
+        return [1]
+    
+    prev_row = pascal_row(n - 1)
+    current_row = [1]  # 첫 번째 원소
+    
+    # 중간 원소들 계산
+    for i in range(len(prev_row) - 1):
+        current_row.append(prev_row[i] + prev_row[i + 1])
+    
+    current_row.append(1)  # 마지막 원소
+    return current_row
+
+def pascal_triangle_by_rows(n):
+    """각 행을 재귀적으로 계산하여 삼각형 구성"""
+    for row in range(n):
+        spaces = ' ' * (n - row - 1)
+        print(spaces, end='')
+        
+        row_values = pascal_row(row)
+        for value in row_values:
+            print(f"{value:2}", end=' ')
+        print()
+
+# 이항계수와의 관계:
+def pascal_as_binomial(row, col):
+    """파스칼 삼각형의 원소를 이항계수로 계산"""
+    from math import factorial
+    return factorial(row) // (factorial(col) * factorial(row - col))
+
+# 파스칼 삼각형의 흥미로운 성질들:
+
+def pascal_properties():
+    """파스칼 삼각형의 여러 성질들 확인"""
+    print("=== 파스칼 삼각형의 성질들 ===\n")
+    
+    # 1. 각 행의 합은 2^n
+    print("1. 각 행의 합:")
+    for row in range(6):
+        row_values = pascal_row(row)
+        row_sum = sum(row_values)
+        print(f"행 {row}: {row_values} → 합: {row_sum} = 2^{row}")
+    
+    # 2. 대각선의 합들
+    print("\n2. 대각선별 원소들:")
+    triangle = pascal_triangle_dp_return(6)
+    
+    # 왼쪽 대각선 (모두 1)
+    print("왼쪽 대각선:", [triangle[i][0] for i in range(6)])
+    
+    # 두 번째 대각선 (자연수)
+    print("두 번째 대각선:", [triangle[i][1] for i in range(1, 6)])
+    
+    # 세 번째 대각선 (삼각수)
+    print("세 번째 대각선:", [triangle[i][2] for i in range(2, 6)])
+    
+    # 3. 피보나치 수와의 관계 (대각선의 합)
+    print("\n3. 대각선 합과 피보나치 수:")
+    for n in range(6):
+        diagonal_sum = sum(triangle[i][n-i] for i in range(n+1) if n-i >= 0 and i < len(triangle))
+        fib_n = fibonacci(n) if n >= 0 else 0
+        print(f"n={n}: 대각선 합 = {diagonal_sum}")
+
+def pascal_triangle_dp_return(n):
+    """삼각형을 반환하는 DP 버전"""
+    triangle = []
+    for row in range(n):
+        current_row = [1]
+        for col in range(1, row):
+            value = triangle[row - 1][col - 1] + triangle[row - 1][col]
+            current_row.append(value)
+        if row > 0:
+            current_row.append(1)
+        triangle.append(current_row)
+    return triangle
+
+def fibonacci(n):
+    """피보나치 수 계산 (간단한 버전)"""
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# 성능 비교:
+import time
+
+def performance_comparison():
+    n = 10
+    print(f"\n=== {n}번째 행까지의 성능 비교 ===")
+    
+    # 순수 재귀
+    start = time.time()
+    print("순수 재귀 방식:")
+    for row in range(min(n, 8)):  # 너무 느려서 8까지만
+        row_values = [pascal_element(row, col) for col in range(row + 1)]
+        print(f"행 {row}: {row_values}")
+    end = time.time()
+    print(f"시간: {end - start:.4f}초")
+    
+    # 메모이제이션
+    start = time.time()
+    memo = {}
+    print("\n메모이제이션 방식:")
+    for row in range(n):
+        row_values = [pascal_element_memo(row, col, memo) for col in range(row + 1)]
+        print(f"행 {row}: {row_values}")
+    end = time.time()
+    print(f"시간: {end - start:.4f}초")
+    
+    # 동적 프로그래밍
+    start = time.time()
+    print("\n동적 프로그래밍 방식:")
+    triangle = pascal_triangle_dp_return(n)
+    for i, row in enumerate(triangle):
+        print(f"행 {i}: {row}")
+    end = time.time()
+    print(f"시간: {end - start:.4f}초")
+
+# 실행 예시:
+print("=== 기본 파스칼 삼각형 (재귀) ===")
+pascal_triangle(6)
+
+print("\n=== 파스칼 삼각형 (메모이제이션) ===")
+pascal_triangle_memo(6)
+
+print("\n=== 파스칼 삼각형 (동적 프로그래밍) ===")
+pascal_triangle_dp(6)
+
+# pascal_properties()
+# performance_comparison()
+
+# 시간 복잡도:
+# - 순수 재귀: O(2^n) - 지수적으로 느림
+# - 메모이제이션: O(n²) - 각 원소를 한 번씩만 계산
+# - 동적 프로그래밍: O(n²) - 가장 효율적이고 직관적]]></solution>
+  </problem>
+
+</problems>

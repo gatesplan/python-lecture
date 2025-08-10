@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  리스트 요소 제거 메서드 문제집
+  - remove(), pop(), clear() 메서드 활용
+  - 이전 학습 내용(print, f-string, 문자열 메서드) 자연스럽게 복습
+  - 반복문, 조건문 사용 금지
+-->
+<problems>
+  <problem>
+    <description>리스트 ["사과", "바나나", "오렌지"]에서 remove()로 "바나나"를 제거하고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[['사과', '오렌지']]]></output>
+    <hint>remove("바나나") 메서드 사용</hint>
+    <solution><![CDATA[fruits = ["사과", "바나나", "오렌지"]
+fruits.remove("바나나")
+print(fruits)]]></solution>
+  </problem>
+
+  <problem>
+    <description>숫자 리스트 [1, 2, 3, 4, 5]에서 pop()으로 마지막 요소를 제거하고 제거된 값을 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[제거된 값: 5]]></output>
+    <hint>pop() 메서드는 제거된 값을 반환</hint>
+    <solution><![CDATA[numbers = [1, 2, 3, 4, 5]
+removed = numbers.pop()
+print(f"제거된 값: {removed}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>색깔 리스트 ["빨강", "파랑", "노랑"]에서 pop(0)으로 첫 번째 요소를 제거하고 남은 색깔들을 하이픈으로 연결하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[파랑-노랑]]></output>
+    <hint>pop(0) 후 join("-") 사용</hint>
+    <solution><![CDATA[colors = ["빨강", "파랑", "노랑"]
+colors.pop(0)
+print("-".join(colors))]]></solution>
+  </problem>
+
+  <problem>
+    <description>동물 리스트 ["고양이", "강아지", "토끼"]를 clear()로 모두 제거하고 결과를 format()으로 "리스트: {}" 형태로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[리스트: []]]></output>
+    <hint>clear() 후 "리스트: {}".format() 사용</hint>
+    <solution><![CDATA[animals = ["고양이", "강아지", "토끼"]
+animals.clear()
+print("리스트: {}".format(animals))]]></solution>
+  </problem>
+
+  <problem>
+    <description>문자 리스트 ["A", "B", "C", "D"]에서 pop(1)로 1번 인덱스를 제거하고 남은 문자들을 소문자로 변환하여 점으로 연결하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[a.c.d]]></output>
+    <hint>pop(1) 후 각 요소를 lower()하여 join(".") 사용</hint>
+    <solution><![CDATA[letters = ["A", "B", "C", "D"]
+letters.pop(1)
+lower_letters = [letters[0].lower(), letters[1].lower(), letters[2].lower()]
+print(".".join(lower_letters))]]></solution>
+  </problem>
+
+  <problem>
+    <description>단어 리스트 ["hello", "WORLD", "python"]에서 remove()로 "WORLD"를 제거하고 남은 단어들을 대문자로 변환하여 공백으로 연결하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[HELLO PYTHON]]></output>
+    <hint>remove("WORLD") 후 각 요소를 upper()하여 join(" ") 사용</hint>
+    <solution><![CDATA[words = ["hello", "WORLD", "python"]
+words.remove("WORLD")
+upper_words = [words[0].upper(), words[1].upper()]
+print(" ".join(upper_words))]]></solution>
+  </problem>
+
+  <problem>
+    <description>점수 리스트 [85, 90, 78, 92]에서 pop()으로 마지막 점수를 제거하고 첫 번째와 마지막 점수의 합을 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[163]]></output>
+    <hint>pop() 후 [0] + [-1] 계산</hint>
+    <solution><![CDATA[scores = [85, 90, 78, 92]
+scores.pop()
+total = scores[0] + scores[-1]
+print(total)]]></solution>
+  </problem>
+
+  <problem>
+    <description>월 리스트 ["Jan", "Feb", "Mar", "Apr"]에서 pop(2)로 2번 인덱스를 제거하고 제거된 월을 소문자로 변환하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[mar]]></output>
+    <hint>removed = pop(2) 후 removed.lower() 출력</hint>
+    <solution><![CDATA[months = ["Jan", "Feb", "Mar", "Apr"]
+removed_month = months.pop(2)
+print(removed_month.lower())]]></solution>
+  </problem>
+
+  <problem>
+    <description>도시 리스트 ["Seoul", "Tokyo", "London"]에서 remove()로 "Tokyo"를 제거하고 남은 도시들의 길이를 sep=","로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[5,6]]></output>
+    <hint>remove("Tokyo") 후 len(cities[0]), len(cities[1])을 sep=","로 출력</hint>
+    <solution><![CDATA[cities = ["Seoul", "Tokyo", "London"]
+cities.remove("Tokyo")
+print(len(cities[0]), len(cities[1]), sep=",")]]></solution>
+  </problem>
+
+  <problem>
+    <description>과일 리스트 ["apple", "banana", "cherry", "date"]를 복사하여 원본에서 pop(1)로 1번 인덱스를 제거하고 복사본의 길이와 원본의 길이를 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[복사본: 4개, 원본: 3개]]></output>
+    <hint>copy() 후 pop(1) 적용하여 길이 비교</hint>
+    <solution><![CDATA[fruits = ["apple", "banana", "cherry", "date"]
+fruits_copy = fruits.copy()
+fruits.pop(1)
+print(f"복사본: {len(fruits_copy)}개, 원본: {len(fruits)}개")]]></solution>
+  </problem>
+
+  <problem>
+    <description>언어 리스트 ["Python", "Java", "C++"]에서 remove()로 "Java"를 제거하고 남은 언어들을 소문자로 변환한 후 첫 글자만 대문자로 만들어 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[['Python', 'C++']]]></output>
+    <hint>remove("Java") 후 각 요소에 capitalize() 적용</hint>
+    <solution><![CDATA[languages = ["Python", "Java", "C++"]
+languages.remove("Java")
+capitalized = [languages[0].lower().capitalize(), languages[1].lower().capitalize()]
+print(capitalized)]]></solution>
+  </problem>
+
+  <problem>
+    <description>문자열 "a,b,c,d"를 split(",")으로 리스트로 만든 후 pop()으로 마지막 요소를 제거하고 남은 요소들을 대문자로 변환하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[['A', 'B', 'C']]]></output>
+    <hint>"a,b,c,d".split(",") 후 pop() 적용, 각 요소 upper() 변환</hint>
+    <solution><![CDATA[letters = "a,b,c,d".split(",")
+letters.pop()
+upper_letters = [letters[0].upper(), letters[1].upper(), letters[2].upper()]
+print(upper_letters)]]></solution>
+  </problem>
+
+  <problem>
+    <description>숫자 문자열 리스트 ["10", "20", "30"]에서 pop(1)로 1번 인덱스를 제거하고 남은 숫자들을 정수로 변환하여 더한 결과를 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[40]]></output>
+    <hint>pop(1) 후 int() 함수로 변환하여 덧셈</hint>
+    <solution><![CDATA[numbers = ["10", "20", "30"]
+numbers.pop(1)
+total = int(numbers[0]) + int(numbers[1])
+print(total)]]></solution>
+  </problem>
+
+  <problem>
+    <description>이름 리스트 ["김철수", "이영희", "박민수"]를 clear()하고 "HELLO WORLD".lower().split()을 extend()하여 추가한 후 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[['hello', 'world']]]></output>
+    <hint>clear() 후 extend("HELLO WORLD".lower().split()) 사용</hint>
+    <solution><![CDATA[names = ["김철수", "이영희", "박민수"]
+names.clear()
+names.extend("HELLO WORLD".lower().split())
+print(names)]]></solution>
+  </problem>
+
+  <problem>
+    <description>과목 리스트 ["수학", "영어", "과학", "역사"]에서 remove()로 "과학"을 제거하고 남은 과목들 중 첫 번째와 마지막을 콜론으로 연결하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[수학:역사]]></output>
+    <hint>remove("과학") 후 [0] + ":" + [-1] 조합</hint>
+    <solution><![CDATA[subjects = ["수학", "영어", "과학", "역사"]
+subjects.remove("과학")
+print(subjects[0] + ":" + subjects[-1])]]></solution>
+  </problem>
+</problems>

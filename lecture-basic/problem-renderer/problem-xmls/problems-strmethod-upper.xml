@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  문자열 upper() 메서드 문제
+  - string.upper() 기본 사용법
+  - 소문자와 혼합 문자열을 대문자로 변환
+  - print, f-string, format, sep, end 등과 조합하여 복습
+-->
+<problems>
+  <problem>
+    <description>변수 text="hello"를 선언하고 upper() 메서드를 사용하여 대문자로 변환해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[HELLO]]></output>
+    <hint>text.upper()를 사용하세요.</hint>
+    <solution><![CDATA[text = "hello"
+print(text.upper())]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 name="kim"을 선언하고 upper() 메서드를 사용하여 "이름: KIM"이라고 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[이름: KIM]]></output>
+    <hint>f"이름: {name.upper()}" 형태로 사용하세요.</hint>
+    <solution><![CDATA[name = "kim"
+print(f"이름: {name.upper()}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 city="seoul"을 선언하고 upper() 메서드를 사용하여 "도시는 SEOUL입니다"라고 format으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[도시는 SEOUL입니다]]></output>
+    <hint>"도시는 {}입니다".format(city.upper()) 형태로 사용하세요.</hint>
+    <solution><![CDATA[city = "seoul"
+print("도시는 {}입니다".format(city.upper()))]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 word="python"을 선언하고 원본과 대문자 변환 결과를 하이픈(-)으로 구분하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[python-PYTHON]]></output>
+    <hint>print(word, word.upper(), sep='-')를 사용하세요.</hint>
+    <solution><![CDATA[word = "python"
+print(word, word.upper(), sep='-')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 animal="cat"을 선언하고 upper() 메서드를 사용하여 줄바꿈 없이 "CAT"을 출력한 후, 이어서 "동물"을 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[CAT동물]]></output>
+    <hint>첫 번째 print에서 end=''를 사용하세요.</hint>
+    <solution><![CDATA[animal = "cat"
+print(animal.upper(), end='')
+print("동물")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 color="red", size="big"을 선언하고 둘 다 upper() 메서드를 사용하여 "RED BIG"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[RED BIG]]></output>
+    <hint>print(color.upper(), size.upper())를 사용하세요.</hint>
+    <solution><![CDATA[color = "red"
+size = "big"
+print(color.upper(), size.upper())]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 fruit="apple"을 선언하고 "좋아하는 과일은 APPLE이에요!"라고 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[좋아하는 과일은 APPLE이에요!]]></output>
+    <hint>f"좋아하는 과일은 {fruit.upper()}이에요!" 형태로 사용하세요.</hint>
+    <solution><![CDATA[fruit = "apple"
+print(f"좋아하는 과일은 {fruit.upper()}이에요!")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 subject="math"를 선언하고 upper() 메서드를 사용하여 "MATH 공부"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[MATH 공부]]></output>
+    <hint>f"{subject.upper()} 공부" 또는 "{} 공부".format(subject.upper())를 사용하세요.</hint>
+    <solution><![CDATA[subject = "math"
+print(f"{subject.upper()} 공부")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 day="monday"를 선언하고 upper() 메서드와 콜론(:)을 사용하여 "요일: MONDAY"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[요일: MONDAY]]></output>
+    <hint>print("요일", day.upper(), sep=': ')를 사용하세요.</hint>
+    <solution><![CDATA[day = "monday"
+print("요일", day.upper(), sep=': ')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 game="soccer"를 선언하고 upper() 메서드를 사용하여 "SOCCER!"라고 출력한 후 느낌표(!)로 끝내세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[SOCCER!!]]></output>
+    <hint>print(game.upper(), end='!')와 print("!")를 사용하세요.</hint>
+    <solution><![CDATA[game = "soccer"
+print(game.upper(), end='!')
+print("!")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 country="korea"를 선언하고 "나라: KOREA"라고 format 메서드로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[나라: KOREA]]></output>
+    <hint>"나라: {}".format(country.upper())를 사용하세요.</hint>
+    <solution><![CDATA[country = "korea"
+print("나라: {}".format(country.upper()))]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 food="pizza", drink="coke"를 선언하고 둘 다 upper() 메서드를 사용하여 슬래시(/)로 구분해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[PIZZA/COKE]]></output>
+    <hint>print(food.upper(), drink.upper(), sep='/')를 사용하세요.</hint>
+    <solution><![CDATA[food = "pizza"
+drink = "coke"
+print(food.upper(), drink.upper(), sep='/')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 season="winter"를 선언하고 upper() 메서드를 사용하여 "계절은 WINTER예요"라고 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[계절은 WINTER예요]]></output>
+    <hint>f"계절은 {season.upper()}예요" 형태로 사용하세요.</hint>
+    <solution><![CDATA[season = "winter"
+print(f"계절은 {season.upper()}예요")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 hobby="reading"을 선언하고 upper() 메서드를 사용하여 "취미: READING"이라고 출력한 후 별표(*)로 끝내세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[취미: READING*]]></output>
+    <hint>print(f"취미: {hobby.upper()}", end='*')를 사용하세요.</hint>
+    <solution><![CDATA[hobby = "reading"
+print(f"취미: {hobby.upper()}", end='*')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 brand="samsung"을 선언하고 upper() 메서드를 사용하여 "브랜드는 SAMSUNG입니다"라고 format으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[브랜드는 SAMSUNG입니다]]></output>
+    <hint>"브랜드는 {}입니다".format(brand.upper())를 사용하세요.</hint>
+    <solution><![CDATA[brand = "samsung"
+print("브랜드는 {}입니다".format(brand.upper()))]]></solution>
+  </problem>
+</problems>

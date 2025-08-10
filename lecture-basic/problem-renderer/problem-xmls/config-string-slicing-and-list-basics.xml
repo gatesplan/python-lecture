@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercise>
+  <title>문자열 슬라이싱과 리스트 기초</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <!-- 문자열 슬라이싱 (13문제) -->
+    <section title="Section 1 - 기본 슬라이싱" file="problems-string-slicing.xml" count="8"/>
+    <section title="Section 2 - 스텝 슬라이싱" file="problems-string-stepslicing.xml" count="5"/>
+    
+    <!-- 리스트 선언과 출력 (8문제) -->
+    <section title="Section 3 - 리스트 선언과 출력" file="problems-list-declaration.xml" count="8"/>
+    
+    <!-- 문자열을 리스트로 변환 (7문제) -->
+    <section title="Section 4 - 문자열을 리스트로 변환" file="problems-list-makefromstring.xml" count="7"/>
+  </sections>
+</exercise>

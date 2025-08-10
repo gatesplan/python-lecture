@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercise>
+  <title>Exercise50 - print ~ basic list (해설 포함)</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <!-- Section 1: 기초 출력 (12문제) -->
+    <section title="Section 1 - 기초 출력" file="problems-print.xml" count="6"/>
+    <section title="Section 1.2 - sep 파라미터" file="problems-print-sep.xml" count="3"/>
+    <section title="Section 1.3 - end 파라미터" file="problems-print-end.xml" count="3"/>
+    
+    <!-- Section 2: 문자열 포맷팅 (8문제) -->
+    <section title="Section 2 - f-string" file="problems-fstring.xml" count="5"/>
+    <section title="Section 2.2 - format 메서드" file="problems-format.xml" count="3"/>
+    
+    <!-- Section 3: 문자열 메서드 (15문제) -->
+    <section title="Section 3.1 - 대문자 변환" file="problems-strmethod-upper.xml" count="3"/>
+    <section title="Section 3.2 - 소문자 변환" file="problems-strmethod-lower.xml" count="3"/>
+    <section title="Section 3.3 - 첫글자 대문자" file="problems-strmethod-capitalize.xml" count="2"/>
+    <section title="Section 3.4 - 공백 제거" file="problems-strmethod-strip.xml" count="4"/>
+    <section title="Section 3.5 - 문자열 치환" file="problems-strmethod-replace.xml" count="3"/>
+    
+    <!-- Section 4: 문자열 슬라이싱 (8문제) -->
+    <section title="Section 4.1 - 기본 슬라이싱" file="problems-string-slicing.xml" count="5"/>
+    <section title="Section 4.2 - 스텝 슬라이싱" file="problems-string-stepslicing.xml" count="3"/>
+    
+    <!-- Section 5: 리스트 기초 (7문제) -->
+    <section title="Section 5.1 - 리스트 선언" file="problems-list-declaration.xml" count="4"/>
+    <section title="Section 5.2 - 문자열을 리스트로" file="problems-list-makefromstring.xml" count="3"/>
+  </sections>
+</exercise>

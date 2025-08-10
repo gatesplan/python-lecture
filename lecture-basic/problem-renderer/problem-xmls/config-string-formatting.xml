@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercise>
+  <title>문자열 포맷팅 마스터</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <!-- f-string 문법 집중 (20문제 중 10문제) -->
+    <section title="Section 1 - f-string 문법" file="problems-fstring.xml" count="10"/>
+    
+    <!-- format() 메서드 집중 (20문제 중 10문제) -->
+    <section title="Section 2 - format() 메서드" file="problems-format.xml" count="10"/>
+  </sections>
+</exercise>

@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  재귀함수 중급 연습 문제 - Expert 레벨
+  
+  이 파일은 재귀함수 기초를 익힌 학습자를 위한 중급 문제들입니다.
+  Apprentice 레벨보다 복잡한 조건문, 이중 재귀, 분할정복 개념을 다룹니다.
+  
+  학습 목표:
+  - 조건부 재귀와 복합 기저 조건 처리
+  - 이중 재귀 호출 (피보나치 등) 이해
+  - 분할정복 사고방식 적용
+  - 복수 매개변수를 활용한 재귀 구현
+-->
+<problems>
+
+  <!-- =========================== Apprentice 변형 =========================== -->
+  
+  <!-- 1. 1부터 n까지 짝수의 합 -->
+  <problem>
+    <description>재귀함수를 사용하여 1부터 n까지의 수 중에서 짝수만 더한 값을 계산하는 함수를 작성하세요.
+예: n=6일 때 2+4+6 = 12</description>
+    <code><![CDATA[def sum_even(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(sum_even(6))   # 12가 나와야 합니다
+print(sum_even(10))  # 30이 나와야 합니다]]></code>
+    <input><![CDATA[6]]></input>
+    <output><![CDATA[12]]></output>
+    <hint>기저 조건: n이 0 이하이면 0을 반환합니다. 재귀 호출: n이 짝수이면 n을 더하고, 홀수이면 더하지 않은 채 sum_even(n-1)을 호출합니다.</hint>
+    <solution><![CDATA[def sum_even(n):
+    # 기저 조건: n이 0 이하이면 0 반환
+    if n <= 0:
+        return 0
+    
+    # n이 짝수인지 확인
+    if n % 2 == 0:
+        # 짝수이면 n을 더하고 재귀 호출
+        return n + sum_even(n - 1)
+    else:
+        # 홀수이면 더하지 않고 재귀 호출
+        return sum_even(n - 1)
+
+# 동작 과정 예시:
+# sum_even(6) = 6 + sum_even(5)      # 6은 짝수
+#             = 6 + sum_even(4)      # 5는 홀수, 건너뜀
+#             = 6 + 4 + sum_even(3)  # 4는 짝수
+#             = 6 + 4 + sum_even(2)  # 3은 홀수, 건너뜀
+#             = 6 + 4 + 2 + sum_even(1)  # 2는 짝수
+#             = 6 + 4 + 2 + sum_even(0)  # 1은 홀수, 건너뜀
+#             = 6 + 4 + 2 + 0
+#             = 12]]></solution>
+  </problem>
+
+  <!-- 2. 1부터 n까지 홀수의 합 -->
+  <problem>
+    <description>재귀함수를 사용하여 1부터 n까지의 수 중에서 홀수만 더한 값을 계산하는 함수를 작성하세요.
+예: n=6일 때 1+3+5 = 9</description>
+    <code><![CDATA[def sum_odd(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(sum_odd(6))   # 9가 나와야 합니다
+print(sum_odd(9))   # 25가 나와야 합니다]]></code>
+    <input><![CDATA[6]]></input>
+    <output><![CDATA[9]]></output>
+    <hint>기저 조건: n이 0 이하이면 0을 반환합니다. 재귀 호출: n이 홀수이면 n을 더하고, 짝수이면 더하지 않은 채 sum_odd(n-1)을 호출합니다.</hint>
+    <solution><![CDATA[def sum_odd(n):
+    # 기저 조건: n이 0 이하이면 0 반환
+    if n <= 0:
+        return 0
+    
+    # n이 홀수인지 확인
+    if n % 2 == 1:
+        # 홀수이면 n을 더하고 재귀 호출
+        return n + sum_odd(n - 1)
+    else:
+        # 짝수이면 더하지 않고 재귀 호출
+        return sum_odd(n - 1)
+
+# 동작 과정 예시:
+# sum_odd(6) = sum_odd(5)          # 6은 짝수, 건너뜀
+#            = 5 + sum_odd(4)      # 5는 홀수
+#            = 5 + sum_odd(3)      # 4는 짝수, 건너뜀
+#            = 5 + 3 + sum_odd(2)  # 3은 홀수
+#            = 5 + 3 + sum_odd(1)  # 2는 짝수, 건너뜀
+#            = 5 + 3 + 1 + sum_odd(0)  # 1은 홀수
+#            = 5 + 3 + 1 + 0
+#            = 9]]></solution>
+  </problem>
+
+  <!-- 3. 숫자 뒤집기 -->
+  <problem>
+    <description>재귀함수를 사용하여 주어진 양의 정수를 뒤집은 값을 반환하는 함수를 작성하세요.
+예: 1234 → 4321, 567 → 765</description>
+    <code><![CDATA[def reverse_number(n, reversed_n=0):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(reverse_number(1234))  # 4321이 나와야 합니다
+print(reverse_number(567))   # 765가 나와야 합니다]]></code>
+    <input><![CDATA[1234]]></input>
+    <output><![CDATA[4321]]></output>
+    <hint>보조 매개변수 reversed_n을 사용합니다. 기저 조건: n이 0이면 reversed_n을 반환합니다. 재귀 호출: reverse_number(n//10, reversed_n*10 + n%10)을 반환합니다.</hint>
+    <solution><![CDATA[def reverse_number(n, reversed_n=0):
+    # 기저 조건: n이 0이면 뒤집은 결과 반환
+    if n == 0:
+        return reversed_n
+    
+    # 재귀 호출: 마지막 자릿수를 reversed_n에 추가하고,
+    # n에서 마지막 자릿수를 제거
+    return reverse_number(n // 10, reversed_n * 10 + n % 10)
+
+# 동작 과정 예시:
+# reverse_number(1234, 0) = reverse_number(123, 4)
+#                         = reverse_number(12, 43)
+#                         = reverse_number(1, 432)
+#                         = reverse_number(0, 4321)
+#                         = 4321
+
+# 더 이해하기 쉬운 버전 (내부 함수 사용):
+def reverse_number_v2(n):
+    def helper(num, result):
+        if num == 0:
+            return result
+        return helper(num // 10, result * 10 + num % 10)
+    
+    return helper(n, 0)]]></solution>
+  </problem>
+
+  <!-- 4. 배열에서 특정 값 개수 -->
+  <problem>
+    <description>재귀함수를 사용하여 리스트에서 특정 값이 몇 개 있는지 세는 함수를 작성하세요.
+예: [1, 2, 1, 3, 1, 4]에서 1은 3개</description>
+    <code><![CDATA[def count_value(arr, target):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(count_value([1, 2, 1, 3, 1, 4], 1))  # 3이 나와야 합니다
+print(count_value([5, 5, 5, 2], 5))        # 3이 나와야 합니다]]></code>
+    <input><![CDATA[arr=[1, 2, 1, 3, 1, 4], target=1]]></input>
+    <output><![CDATA[3]]></output>
+    <hint>기저 조건: 리스트가 비어있으면 0을 반환합니다. 재귀 호출: 첫 번째 원소가 target과 같으면 1을 더하고, 그렇지 않으면 0을 더한 다음 count_value(arr[1:], target)을 호출합니다.</hint>
+    <solution><![CDATA[def count_value(arr, target):
+    # 기저 조건: 빈 리스트이면 0 반환
+    if not arr:
+        return 0
+    
+    # 첫 번째 원소가 찾는 값과 같은지 확인
+    if arr[0] == target:
+        # 같으면 1을 더하고 나머지 리스트 확인
+        return 1 + count_value(arr[1:], target)
+    else:
+        # 다르면 0을 더하고 나머지 리스트 확인
+        return 0 + count_value(arr[1:], target)
+
+# 더 간단한 버전:
+def count_value_simple(arr, target):
+    if not arr:
+        return 0
+    return (1 if arr[0] == target else 0) + count_value_simple(arr[1:], target)
+
+# 동작 과정 예시:
+# count_value([1,2,1,3,1,4], 1) = 1 + count_value([2,1,3,1,4], 1)  # 1==1
+#                                = 1 + 0 + count_value([1,3,1,4], 1)   # 2!=1
+#                                = 1 + 0 + 1 + count_value([3,1,4], 1)  # 1==1
+#                                = 1 + 0 + 1 + 0 + count_value([1,4], 1)    # 3!=1
+#                                = 1 + 0 + 1 + 0 + 1 + count_value([4], 1)  # 1==1
+#                                = 1 + 0 + 1 + 0 + 1 + 0 + count_value([], 1)   # 4!=1
+#                                = 1 + 0 + 1 + 0 + 1 + 0 + 0
+#                                = 3]]></solution>
+  </problem>
+
+  <!-- 5. 배열 최댓값 찾기 (분할정복) -->
+  <problem>
+    <description>재귀함수를 사용하여 리스트에서 가장 큰 값을 찾는 함수를 작성하세요. (분할정복 방식)
+빈 리스트가 입력되지 않는다고 가정합니다.</description>
+    <code><![CDATA[def find_max(arr):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(find_max([3, 7, 1, 9, 2]))  # 9가 나와야 합니다
+print(find_max([5]))              # 5가 나와야 합니다]]></code>
+    <input><![CDATA[[3, 7, 1, 9, 2]]]></input>
+    <output><![CDATA[9]]></output>
+    <hint>기저 조건: 리스트에 원소가 1개면 그 원소를 반환합니다. 재귀 호출: 첫 번째 원소와 나머지 원소들 중 최댓값을 비교하여 더 큰 값을 반환합니다.</hint>
+    <solution><![CDATA[def find_max(arr):
+    # 기저 조건: 리스트에 원소가 1개면 그 원소가 최댓값
+    if len(arr) == 1:
+        return arr[0]
+    
+    # 재귀 호출: 나머지 원소들 중 최댓값 찾기
+    max_of_rest = find_max(arr[1:])
+    
+    # 첫 번째 원소와 나머지 중 최댓값을 비교
+    return max(arr[0], max_of_rest)
+
+# 더 간단한 버전:
+def find_max_simple(arr):
+    if len(arr) == 1:
+        return arr[0]
+    return max(arr[0], find_max_simple(arr[1:]))
+
+# 동작 과정 예시:
+# find_max([3,7,1,9,2]) = max(3, find_max([7,1,9,2]))
+#                       = max(3, max(7, find_max([1,9,2])))
+#                       = max(3, max(7, max(1, find_max([9,2]))))
+#                       = max(3, max(7, max(1, max(9, find_max([2])))))
+#                       = max(3, max(7, max(1, max(9, 2))))
+#                       = max(3, max(7, max(1, 9)))
+#                       = max(3, max(7, 9))
+#                       = max(3, 9)
+#                       = 9]]></solution>
+  </problem>
+
+  <!-- 6. 배열 최솟값 찾기 (분할정복) -->
+  <problem>
+    <description>재귀함수를 사용하여 리스트에서 가장 작은 값을 찾는 함수를 작성하세요. (분할정복 방식)
+빈 리스트가 입력되지 않는다고 가정합니다.</description>
+    <code><![CDATA[def find_min(arr):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(find_min([3, 7, 1, 9, 2]))  # 1이 나와야 합니다
+print(find_min([5]))              # 5가 나와야 합니다]]></code>
+    <input><![CDATA[[3, 7, 1, 9, 2]]]></input>
+    <output><![CDATA[1]]></output>
+    <hint>기저 조건: 리스트에 원소가 1개면 그 원소를 반환합니다. 재귀 호출: 첫 번째 원소와 나머지 원소들 중 최솟값을 비교하여 더 작은 값을 반환합니다.</hint>
+    <solution><![CDATA[def find_min(arr):
+    # 기저 조건: 리스트에 원소가 1개면 그 원소가 최솟값
+    if len(arr) == 1:
+        return arr[0]
+    
+    # 재귀 호출: 나머지 원소들 중 최솟값 찾기
+    min_of_rest = find_min(arr[1:])
+    
+    # 첫 번째 원소와 나머지 중 최솟값을 비교
+    return min(arr[0], min_of_rest)
+
+# 더 간단한 버전:
+def find_min_simple(arr):
+    if len(arr) == 1:
+        return arr[0]
+    return min(arr[0], find_min_simple(arr[1:]))
+
+# 동작 과정 예시:
+# find_min([3,7,1,9,2]) = min(3, find_min([7,1,9,2]))
+#                       = min(3, min(7, find_min([1,9,2])))
+#                       = min(3, min(7, min(1, find_min([9,2]))))
+#                       = min(3, min(7, min(1, min(9, find_min([2])))))
+#                       = min(3, min(7, min(1, min(9, 2))))
+#                       = min(3, min(7, min(1, 2)))
+#                       = min(3, min(7, 1))
+#                       = min(3, 1)
+#                       = 1]]></solution>
+  </problem>
+
+  <!-- =========================== 이중 재귀 기초 =========================== -->
+
+  <!-- 7. 피보나치 수열 -->
+  <problem>
+    <description>재귀함수를 사용하여 피보나치 수열의 n번째 값을 계산하는 함수를 작성하세요.
+피보나치 수열: F(0)=0, F(1)=1, F(n)=F(n-1)+F(n-2) (n≥2)
+예: 0, 1, 1, 2, 3, 5, 8, 13, 21, ...</description>
+    <code><![CDATA[def fibonacci(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(fibonacci(0))   # 0이 나와야 합니다
+print(fibonacci(1))   # 1이 나와야 합니다
+print(fibonacci(6))   # 8이 나와야 합니다
+print(fibonacci(10))  # 55가 나와야 합니다]]></code>
+    <input><![CDATA[6]]></input>
+    <output><![CDATA[8]]></output>
+    <hint>기저 조건: n이 0이면 0, n이 1이면 1을 반환합니다. 재귀 호출: fibonacci(n-1) + fibonacci(n-2)를 반환합니다.</hint>
+    <solution><![CDATA[def fibonacci(n):
+    # 기저 조건: F(0) = 0, F(1) = 1
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    
+    # 재귀 호출: F(n) = F(n-1) + F(n-2)
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+# 동작 과정 예시 (fibonacci(5)):
+#                    fib(5)
+#                   /      \
+#               fib(4)    fib(3)
+#               /    \    /     \
+#           fib(3) fib(2) fib(2) fib(1)
+#           /  \   /  \   /  \     |
+#       fib(2) fib(1) fib(1) fib(0) fib(1) fib(0)  1
+#       /  \     |     |     |     |     |
+#   fib(1) fib(0) 1     1     0     1     0
+#     |     |
+#     1     0
+#
+# 결과: fib(5) = 5
+
+# 참고: 이 방법은 같은 값을 여러 번 계산하므로 비효율적입니다.
+# 실제로는 메모이제이션이나 동적 프로그래밍을 사용해야 합니다.]]></solution>
+  </problem>
+
+  <!-- 8. 간단한 조합 (경계값) -->
+  <problem>
+    <description>재귀함수를 사용하여 조합 nC0, nC1, nCn을 계산하는 함수를 작성하세요.
+조합의 기본 성질: nC0 = 1, nCn = 1, nC1 = n
+(일반적인 nCr은 Master 레벨에서 다룹니다)</description>
+    <code><![CDATA[def simple_combination(n, r):
+    # 여기에 코드를 작성하세요
+    # r이 0, 1, n인 경우만 처리합니다
+    pass
+
+# 테스트
+print(simple_combination(5, 0))  # 1이 나와야 합니다 (5C0)
+print(simple_combination(5, 1))  # 5가 나와야 합니다 (5C1)
+print(simple_combination(5, 5))  # 1이 나와야 합니다 (5C5)]]></code>
+    <input><![CDATA[n=5, r=1]]></input>
+    <output><![CDATA[5]]></output>
+    <hint>기저 조건들: r==0이면 1, r==n이면 1, r==1이면 n을 반환합니다. 다른 경우는 "지원하지 않음"을 출력하거나 -1을 반환합니다.</hint>
+    <solution><![CDATA[def simple_combination(n, r):
+    # 기저 조건들: 조합의 기본 성질 활용
+    if r == 0:          # nC0 = 1
+        return 1
+    elif r == n:        # nCn = 1  
+        return 1
+    elif r == 1:        # nC1 = n
+        return n
+    else:
+        # 이 문제에서는 다른 경우를 다루지 않음
+        return -1  # 또는 "지원하지 않는 조합"
+
+# 조합의 기본 성질 설명:
+# nC0: n개 중에서 0개를 선택하는 경우의 수 = 1가지 (아무것도 선택 안함)
+# nCn: n개 중에서 n개를 선택하는 경우의 수 = 1가지 (모두 선택)
+# nC1: n개 중에서 1개를 선택하는 경우의 수 = n가지 (각각 하나씩)
+
+# 일반적인 조합 공식 nCr = n!/(r!(n-r)!)은 팩토리얼을 사용하거나,
+# 재귀 공식 nCr = (n-1)C(r-1) + (n-1)Cr을 사용할 수 있지만
+# 이는 Master 레벨에서 다룹니다.
+
+print(f"5C0 = {simple_combination(5, 0)}")  # 1
+print(f"5C1 = {simple_combination(5, 1)}")  # 5  
+print(f"5C5 = {simple_combination(5, 5)}")  # 1]]></solution>
+  </problem>
+
+  <!-- =========================== 문자열 고급 처리 =========================== -->
+
+  <!-- 9. 문자열 뒤집기 -->
+  <problem>
+    <description>재귀함수를 사용하여 문자열을 뒤집는 함수를 작성하세요.
+예: "hello" → "olleh", "python" → "nohtyp"</description>
+    <code><![CDATA[def reverse_string(s):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(reverse_string("hello"))   # "olleh"가 나와야 합니다
+print(reverse_string("python"))  # "nohtyp"가 나와야 합니다
+print(reverse_string("a"))       # "a"가 나와야 합니다]]></code>
+    <input><![CDATA["hello"]]></input>
+    <output><![CDATA["olleh"]]></output>
+    <hint>기저 조건: 문자열 길이가 0 또는 1이면 그대로 반환합니다. 재귀 호출: s[1:]을 뒤집은 결과에 s[0]을 뒤에 붙입니다.</hint>
+    <solution><![CDATA[def reverse_string(s):
+    # 기저 조건: 빈 문자열이거나 한 글자이면 그대로 반환
+    if len(s) <= 1:
+        return s
+    
+    # 재귀 호출: 첫 글자를 제외한 나머지를 뒤집고, 첫 글자를 뒤에 붙임
+    return reverse_string(s[1:]) + s[0]
+
+# 동작 과정 예시:
+# reverse_string("hello") = reverse_string("ello") + "h"
+#                         = (reverse_string("llo") + "e") + "h"
+#                         = ((reverse_string("lo") + "l") + "e") + "h"
+#                         = (((reverse_string("o") + "l") + "l") + "e") + "h"
+#                         = ((("o" + "l") + "l") + "e") + "h"
+#                         = (("ol" + "l") + "e") + "h"
+#                         = ("oll" + "e") + "h"
+#                         = "olle" + "h"
+#                         = "olleh"
+
+# 시각적 이해:
+# "hello"에서
+# h + reverse("ello") → h + ("olle") → "olle" + h 순서가 아니라
+# reverse("ello") + h → "olle" + h → "olleh" 순서입니다]]></solution>
+  </problem>
+
+  <!-- 10. 회문(팰린드롬) 검사 -->
+  <problem>
+    <description>재귀함수를 사용하여 주어진 문자열이 회문(앞뒤가 같은 문자열)인지 확인하는 함수를 작성하세요.
+예: "racecar"는 회문, "hello"는 회문이 아님</description>
+    <code><![CDATA[def is_palindrome(s):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(is_palindrome("racecar"))  # True가 나와야 합니다
+print(is_palindrome("hello"))    # False가 나와야 합니다
+print(is_palindrome("a"))        # True가 나와야 합니다
+print(is_palindrome(""))         # True가 나와야 합니다]]></code>
+    <input><![CDATA["racecar"]]></input>
+    <output><![CDATA[True]]></output>
+    <hint>기저 조건: 문자열 길이가 0 또는 1이면 True를 반환합니다. 재귀 호출: 첫 글자와 마지막 글자가 같으면 가운데 부분을 재귀적으로 검사하고, 다르면 False를 반환합니다.</hint>
+    <solution><![CDATA[def is_palindrome(s):
+    # 기저 조건: 빈 문자열이거나 한 글자이면 회문
+    if len(s) <= 1:
+        return True
+    
+    # 첫 글자와 마지막 글자 비교
+    if s[0] != s[-1]:
+        return False
+    
+    # 첫 글자와 마지막 글자를 제거한 가운데 부분을 재귀적으로 검사
+    return is_palindrome(s[1:-1])
+
+# 동작 과정 예시:
+# is_palindrome("racecar") 
+# → s[0]='r', s[-1]='r' 같음 → is_palindrome("aceca")
+# → s[0]='a', s[-1]='a' 같음 → is_palindrome("cec")  
+# → s[0]='c', s[-1]='c' 같음 → is_palindrome("e")
+# → len("e") == 1 → True
+
+# is_palindrome("hello")
+# → s[0]='h', s[-1]='o' 다름 → False
+
+# 대소문자를 무시하고 싶다면:
+def is_palindrome_case_insensitive(s):
+    s = s.lower()  # 모두 소문자로 변환
+    if len(s) <= 1:
+        return True
+    if s[0] != s[-1]:
+        return False
+    return is_palindrome_case_insensitive(s[1:-1])]]></solution>
+  </problem>
+
+  <!-- 11. 특정 문자 모두 제거 -->
+  <problem>
+    <description>재귀함수를 사용하여 문자열에서 특정 문자를 모두 제거하는 함수를 작성하세요.
+예: "hello world"에서 'l'을 제거하면 "heo word"</description>
+    <code><![CDATA[def remove_char(s, char):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(remove_char("hello world", 'l'))  # "heo word"가 나와야 합니다
+print(remove_char("python", 'y'))       # "pthon"이 나와야 합니다
+print(remove_char("aaaaaa", 'a'))       # ""가 나와야 합니다]]></code>
+    <input><![CDATA[s="hello world", char='l']]></input>
+    <output><![CDATA["heo word"]]></output>
+    <hint>기저 조건: 빈 문자열이면 빈 문자열을 반환합니다. 재귀 호출: 첫 글자가 제거할 문자와 같으면 제외하고, 다르면 포함해서 나머지 부분을 재귀 처리합니다.</hint>
+    <solution><![CDATA[def remove_char(s, char):
+    # 기저 조건: 빈 문자열이면 빈 문자열 반환
+    if not s:
+        return ""
+    
+    # 첫 글자가 제거할 문자와 같은지 확인
+    if s[0] == char:
+        # 같으면 첫 글자를 제외하고 나머지 부분을 처리
+        return remove_char(s[1:], char)
+    else:
+        # 다르면 첫 글자를 포함해서 나머지 부분을 처리
+        return s[0] + remove_char(s[1:], char)
+
+# 동작 과정 예시:
+# remove_char("hello", 'l')
+# → s[0]='h' != 'l' → 'h' + remove_char("ello", 'l')
+# → s[0]='e' != 'l' → 'h' + 'e' + remove_char("llo", 'l')
+# → s[0]='l' == 'l' → 'h' + 'e' + remove_char("lo", 'l')
+# → s[0]='l' == 'l' → 'h' + 'e' + remove_char("o", 'l')
+# → s[0]='o' != 'l' → 'h' + 'e' + 'o' + remove_char("", 'l')
+# → s="" → 'h' + 'e' + 'o' + ""
+# → "heo"
+
+# 여러 문자를 한 번에 제거하고 싶다면:
+def remove_chars(s, chars_to_remove):
+    if not s:
+        return ""
+    if s[0] in chars_to_remove:
+        return remove_chars(s[1:], chars_to_remove)
+    else:
+        return s[0] + remove_chars(s[1:], chars_to_remove)]]></solution>
+  </problem>
+
+  <!-- 12. 대소문자 토글 -->
+  <problem>
+    <description>재귀함수를 사용하여 문자열의 각 문자를 대소문자 변환하는 함수를 작성하세요.
+대문자는 소문자로, 소문자는 대문자로 변환합니다.
+예: "Hello World" → "hELLO wORLD"</description>
+    <code><![CDATA[def toggle_case(s):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(toggle_case("Hello World"))  # "hELLO wORLD"가 나와야 합니다
+print(toggle_case("PyThOn"))       # "pYtHoN"이 나와야 합니다
+print(toggle_case("123abc"))       # "123ABC"가 나와야 합니다]]></code>
+    <input><![CDATA["Hello World"]]></input>
+    <output><![CDATA["hELLO wORLD"]]></output>
+    <hint>기저 조건: 빈 문자열이면 빈 문자열을 반환합니다. 재귀 호출: 첫 글자의 대소문자를 변환하고 나머지 부분을 재귀 처리한 결과와 합칩니다.</hint>
+    <solution><![CDATA[def toggle_case(s):
+    # 기저 조건: 빈 문자열이면 빈 문자열 반환
+    if not s:
+        return ""
+    
+    # 첫 글자의 대소문자 변환
+    first_char = s[0]
+    if first_char.islower():
+        toggled_first = first_char.upper()
+    elif first_char.isupper():
+        toggled_first = first_char.lower()
+    else:
+        # 알파벳이 아닌 경우 그대로
+        toggled_first = first_char
+    
+    # 변환된 첫 글자 + 나머지 부분을 재귀 처리
+    return toggled_first + toggle_case(s[1:])
+
+# 더 간단한 버전 (swapcase 메소드 활용):
+def toggle_case_simple(s):
+    if not s:
+        return ""
+    return s[0].swapcase() + toggle_case_simple(s[1:])
+
+# 동작 과정 예시:
+# toggle_case("Hello") 
+# → 'H'.lower() + toggle_case("ello")
+# → 'h' + ('E'.upper() + toggle_case("llo"))
+# → 'h' + 'E' + ('L'.lower() + toggle_case("lo"))
+# → 'h' + 'E' + 'L' + ('L'.lower() + toggle_case("o"))
+# → 'h' + 'E' + 'L' + 'L' + ('O'.upper() + toggle_case(""))
+# → 'h' + 'E' + 'L' + 'L' + 'O' + ""
+# → "hELLO"]]></solution>
+  </problem>
+
+  <!-- =========================== 수학 중급 =========================== -->
+
+  <!-- 13. 최대공약수 (GCD) -->
+  <problem>
+    <description>재귀함수를 사용하여 두 양의 정수의 최대공약수를 구하는 함수를 작성하세요. (유클리드 호제법)
+유클리드 호제법: gcd(a, b) = gcd(b, a mod b), gcd(a, 0) = a</description>
+    <code><![CDATA[def gcd(a, b):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(gcd(48, 18))   # 6이 나와야 합니다
+print(gcd(56, 42))   # 14가 나와야 합니다
+print(gcd(17, 13))   # 1이 나와야 합니다]]></code>
+    <input><![CDATA[a=48, b=18]]></input>
+    <output><![CDATA[6]]></output>
+    <hint>기저 조건: b가 0이면 a를 반환합니다. 재귀 호출: gcd(b, a % b)를 반환합니다.</hint>
+    <solution><![CDATA[def gcd(a, b):
+    # 기저 조건: b가 0이면 a가 최대공약수
+    if b == 0:
+        return a
+    
+    # 재귀 호출: 유클리드 호제법 적용
+    return gcd(b, a % b)
+
+# 동작 과정 예시:
+# gcd(48, 18) = gcd(18, 48 % 18) = gcd(18, 12)
+#             = gcd(12, 18 % 12) = gcd(12, 6)
+#             = gcd(6, 12 % 6)   = gcd(6, 0)
+#             = 6
+
+# 유클리드 호제법의 원리:
+# 두 수 a, b의 최대공약수는 
+# b와 a를 b로 나눈 나머지의 최대공약수와 같습니다.
+# 이 과정을 나머지가 0이 될 때까지 반복하면
+# 마지막에 남은 수가 최대공약수입니다.
+
+# 최소공배수도 구할 수 있습니다:
+def lcm(a, b):
+    return (a * b) // gcd(a, b)
+
+print(f"gcd(48, 18) = {gcd(48, 18)}")  # 6
+print(f"lcm(48, 18) = {lcm(48, 18)}")  # 144]]></solution>
+  </problem>
+
+  <!-- 14. 콜라츠 추측 (3n+1 문제) -->
+  <problem>
+    <description>재귀함수를 사용하여 콜라츠 추측 문제를 해결하세요.
+규칙: n이 짝수이면 2로 나누고, 홀수이면 3을 곱하고 1을 더합니다.
+1에 도달할 때까지 몇 번의 단계가 필요한지 계산하세요.</description>
+    <code><![CDATA[def collatz_steps(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(collatz_steps(1))   # 0이 나와야 합니다 (이미 1)
+print(collatz_steps(2))   # 1이 나와야 합니다 (2→1)
+print(collatz_steps(3))   # 7이 나와야 합니다 (3→10→5→16→8→4→2→1)]]></code>
+    <input><![CDATA[3]]></input>
+    <output><![CDATA[7]]></output>
+    <hint>기저 조건: n이 1이면 0을 반환합니다. 재귀 호출: n이 짝수이면 1 + collatz_steps(n//2), 홀수이면 1 + collatz_steps(3*n+1)을 반환합니다.</hint>
+    <solution><![CDATA[def collatz_steps(n):
+    # 기저 조건: n이 1이면 더 이상 단계가 필요 없음
+    if n == 1:
+        return 0
+    
+    # n이 짝수인 경우
+    if n % 2 == 0:
+        return 1 + collatz_steps(n // 2)
+    # n이 홀수인 경우
+    else:
+        return 1 + collatz_steps(3 * n + 1)
+
+# 과정을 보여주는 버전:
+def collatz_sequence(n):
+    """콜라츠 수열을 출력하면서 단계 수를 계산"""
+    def helper(num, steps):
+        print(num, end=" → " if num != 1 else "\n")
+        if num == 1:
+            return steps
+        
+        if num % 2 == 0:
+            return helper(num // 2, steps + 1)
+        else:
+            return helper(3 * num + 1, steps + 1)
+    
+    return helper(n, 0)
+
+# 동작 과정 예시:
+# collatz_steps(3) 
+# → n=3 (홀수) → 1 + collatz_steps(3*3+1) = 1 + collatz_steps(10)
+# → n=10 (짝수) → 1 + 1 + collatz_steps(10//2) = 2 + collatz_steps(5)
+# → n=5 (홀수) → 2 + 1 + collatz_steps(3*5+1) = 3 + collatz_steps(16)
+# → n=16 (짝수) → 3 + 1 + collatz_steps(16//2) = 4 + collatz_steps(8)
+# → n=8 (짝수) → 4 + 1 + collatz_steps(8//2) = 5 + collatz_steps(4)
+# → n=4 (짝수) → 5 + 1 + collatz_steps(4//2) = 6 + collatz_steps(2)
+# → n=2 (짝수) → 6 + 1 + collatz_steps(2//2) = 7 + collatz_steps(1)
+# → n=1 → 7 + 0 = 7
+
+# 테스트
+print("3의 콜라츠 수열:")
+print(f"단계 수: {collatz_sequence(3)}")]]></solution>
+  </problem>
+
+  <!-- =========================== 탐색 알고리즘 =========================== -->
+
+  <!-- 15. 이진 탐색 -->
+  <problem>
+    <description>재귀함수를 사용하여 정렬된 리스트에서 특정 값을 이진 탐색으로 찾는 함수를 작성하세요.
+값이 있으면 인덱스를, 없으면 -1을 반환합니다.</description>
+    <code><![CDATA[def binary_search(arr, target, left=0, right=None):
+    # right가 None이면 배열 끝으로 설정
+    if right is None:
+        right = len(arr) - 1
+    
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+arr = [1, 3, 5, 7, 9, 11, 13, 15]
+print(binary_search(arr, 7))   # 3이 나와야 합니다
+print(binary_search(arr, 4))   # -1이 나와야 합니다
+print(binary_search(arr, 15))  # 7이 나와야 합니다]]></code>
+    <input><![CDATA[arr=[1,3,5,7,9,11,13,15], target=7]]></input>
+    <output><![CDATA[3]]></output>
+    <hint>기저 조건: left > right이면 -1을 반환합니다. 중간값과 target을 비교해서 같으면 인덱스를, 작으면 오른쪽 절반을, 크면 왼쪽 절반을 재귀 탐색합니다.</hint>
+    <solution><![CDATA[def binary_search(arr, target, left=0, right=None):
+    # right가 None이면 배열 끝으로 설정
+    if right is None:
+        right = len(arr) - 1
+    
+    # 기저 조건: 탐색 범위가 유효하지 않으면 찾지 못함
+    if left > right:
+        return -1
+    
+    # 중간 인덱스 계산
+    mid = (left + right) // 2
+    
+    # 중간값과 target 비교
+    if arr[mid] == target:
+        # 찾았으면 인덱스 반환
+        return mid
+    elif arr[mid] < target:
+        # 중간값이 target보다 작으면 오른쪽 절반 탐색
+        return binary_search(arr, target, mid + 1, right)
+    else:
+        # 중간값이 target보다 크면 왼쪽 절반 탐색
+        return binary_search(arr, target, left, mid - 1)
+
+# 동작 과정 예시 (arr=[1,3,5,7,9,11,13,15], target=7):
+# binary_search(arr, 7, 0, 7)
+# → mid=3, arr[3]=7 == 7 → return 3
+
+# 동작 과정 예시 (arr=[1,3,5,7,9,11,13,15], target=4):
+# binary_search(arr, 4, 0, 7)
+# → mid=3, arr[3]=7 > 4 → binary_search(arr, 4, 0, 2)
+# → mid=1, arr[1]=3 < 4 → binary_search(arr, 4, 2, 2)
+# → mid=2, arr[2]=5 > 4 → binary_search(arr, 4, 2, 1)
+# → left=2 > right=1 → return -1
+
+# 시간 복잡도: O(log n)
+# 매번 탐색 범위를 절반으로 줄여나가기 때문]]></solution>
+  </problem>
+
+  <!-- 16. 배열에서 값의 인덱스 찾기 -->
+  <problem>
+    <description>재귀함수를 사용하여 리스트에서 특정 값이 처음 나타나는 인덱스를 찾는 함수를 작성하세요.
+값이 없으면 -1을 반환합니다. (선형 탐색의 재귀 구현)</description>
+    <code><![CDATA[def find_index(arr, target, index=0):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(find_index([1, 3, 5, 7, 3], 3))   # 1이 나와야 합니다 (첫 번째 3)
+print(find_index([1, 2, 3, 4], 5))      # -1이 나와야 합니다
+print(find_index([1, 2, 3, 4], 4))      # 3이 나와야 합니다]]></code>
+    <input><![CDATA[arr=[1,3,5,7,3], target=3]]></input>
+    <output><![CDATA[1]]></output>
+    <hint>기저 조건: index가 배열 크기 이상이면 -1을 반환합니다. arr[index]가 target과 같으면 index를 반환하고, 다르면 find_index(arr, target, index+1)을 호출합니다.</hint>
+    <solution><![CDATA[def find_index(arr, target, index=0):
+    # 기저 조건: 인덱스가 배열 범위를 벗어나면 찾지 못함
+    if index >= len(arr):
+        return -1
+    
+    # 현재 위치의 값이 target과 같은지 확인
+    if arr[index] == target:
+        return index
+    
+    # 다음 인덱스를 재귀적으로 탐색
+    return find_index(arr, target, index + 1)
+
+# 슬라이싱을 사용한 버전:
+def find_index_slice(arr, target):
+    # 빈 배열이면 찾지 못함
+    if not arr:
+        return -1
+    
+    # 첫 번째 원소가 target과 같으면 0 반환
+    if arr[0] == target:
+        return 0
+    
+    # 나머지 부분에서 재귀 탐색
+    rest_index = find_index_slice(arr[1:], target)
+    
+    # 나머지 부분에서 찾지 못했으면 -1
+    if rest_index == -1:
+        return -1
+    
+    # 나머지 부분에서 찾았으면 인덱스에 1을 더함
+    return rest_index + 1
+
+# 동작 과정 예시:
+# find_index([1,3,5,7,3], 3, 0)
+# → arr[0]=1 != 3 → find_index([1,3,5,7,3], 3, 1)
+# → arr[1]=3 == 3 → return 1
+
+# 마지막 등장 인덱스를 찾고 싶다면:
+def find_last_index(arr, target, index=None):
+    if index is None:
+        index = len(arr) - 1
+    
+    if index < 0:
+        return -1
+    
+    if arr[index] == target:
+        return index
+    
+    return find_last_index(arr, target, index - 1)]]></solution>
+  </problem>
+
+  <!-- 17. 조건 만족 원소 개수 -->
+  <problem>
+    <description>재귀함수를 사용하여 리스트에서 특정 조건을 만족하는 원소의 개수를 세는 함수를 작성하세요.
+예제에서는 짝수인 원소의 개수를 세는 함수를 작성합니다.</description>
+    <code><![CDATA[def count_even(arr):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(count_even([1, 2, 3, 4, 5, 6]))  # 3이 나와야 합니다 (2, 4, 6)
+print(count_even([1, 3, 5]))           # 0이 나와야 합니다
+print(count_even([2, 4, 6, 8]))        # 4가 나와야 합니다]]></code>
+    <input><![CDATA[[1, 2, 3, 4, 5, 6]]]></input>
+    <output><![CDATA[3]]></output>
+    <hint>기저 조건: 빈 리스트이면 0을 반환합니다. 재귀 호출: 첫 번째 원소가 짝수이면 1을 더하고, 아니면 0을 더한 다음 나머지 부분을 재귀 처리합니다.</hint>
+    <solution><![CDATA[def count_even(arr):
+    # 기저 조건: 빈 리스트이면 0 반환
+    if not arr:
+        return 0
+    
+    # 첫 번째 원소가 짝수인지 확인
+    if arr[0] % 2 == 0:
+        # 짝수이면 1을 더하고 나머지 부분 처리
+        return 1 + count_even(arr[1:])
+    else:
+        # 홀수이면 0을 더하고 나머지 부분 처리
+        return 0 + count_even(arr[1:])
+
+# 더 간단한 버전:
+def count_even_simple(arr):
+    if not arr:
+        return 0
+    return (1 if arr[0] % 2 == 0 else 0) + count_even_simple(arr[1:])
+
+# 일반적인 조건 함수를 받는 버전:
+def count_condition(arr, condition_func):
+    """주어진 조건 함수를 만족하는 원소의 개수를 센다"""
+    if not arr:
+        return 0
+    return (1 if condition_func(arr[0]) else 0) + count_condition(arr[1:], condition_func)
+
+# 사용 예시:
+def is_even(x):
+    return x % 2 == 0
+
+def is_positive(x):
+    return x > 0
+
+def is_greater_than_5(x):
+    return x > 5
+
+# 테스트
+arr = [1, 2, 3, 4, 5, 6, -1, -2]
+print(f"짝수 개수: {count_condition(arr, is_even)}")              # 4개
+print(f"양수 개수: {count_condition(arr, is_positive)}")          # 6개  
+print(f"5보다 큰 수 개수: {count_condition(arr, is_greater_than_5)}")  # 1개]]></solution>
+  </problem>
+
+</problems>

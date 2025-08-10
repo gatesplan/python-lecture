@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  문자열 capitalize() 메서드 문제
+  - string.capitalize() 기본 사용법
+  - 첫 글자만 대문자로 변환하고 나머지는 소문자로 변환
+  - print, f-string, format, sep, end 등과 조합하여 복습
+-->
+<problems>
+  <problem>
+    <description>변수 text="hello"를 선언하고 capitalize() 메서드를 사용하여 첫 글자만 대문자로 변환해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[Hello]]></output>
+    <hint>text.capitalize()를 사용하세요.</hint>
+    <solution><![CDATA[text = "hello"
+print(text.capitalize())]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 name="kim"을 선언하고 capitalize() 메서드를 사용하여 "이름: Kim"이라고 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[이름: Kim]]></output>
+    <hint>f"이름: {name.capitalize()}" 형태로 사용하세요.</hint>
+    <solution><![CDATA[name = "kim"
+print(f"이름: {name.capitalize()}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 city="seoul"을 선언하고 capitalize() 메서드를 사용하여 "도시는 Seoul입니다"라고 format으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[도시는 Seoul입니다]]></output>
+    <hint>"도시는 {}입니다".format(city.capitalize()) 형태로 사용하세요.</hint>
+    <solution><![CDATA[city = "seoul"
+print("도시는 {}입니다".format(city.capitalize()))]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 word="PYTHON"을 선언하고 원본과 capitalize() 변환 결과를 하이픈(-)으로 구분하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[PYTHON-Python]]></output>
+    <hint>print(word, word.capitalize(), sep='-')를 사용하세요.</hint>
+    <solution><![CDATA[word = "PYTHON"
+print(word, word.capitalize(), sep='-')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 animal="cat"을 선언하고 capitalize() 메서드를 사용하여 줄바꿈 없이 "Cat"을 출력한 후, 이어서 "동물"을 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[Cat동물]]></output>
+    <hint>첫 번째 print에서 end=''를 사용하세요.</hint>
+    <solution><![CDATA[animal = "cat"
+print(animal.capitalize(), end='')
+print("동물")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 color="red", size="big"를 선언하고 둘 다 capitalize() 메서드를 사용하여 "Red Big"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[Red Big]]></output>
+    <hint>print(color.capitalize(), size.capitalize())를 사용하세요.</hint>
+    <solution><![CDATA[color = "red"
+size = "big"
+print(color.capitalize(), size.capitalize())]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 fruit="apple"을 선언하고 "좋아하는 과일은 Apple이에요!"라고 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[좋아하는 과일은 Apple이에요!]]></output>
+    <hint>f"좋아하는 과일은 {fruit.capitalize()}이에요!" 형태로 사용하세요.</hint>
+    <solution><![CDATA[fruit = "apple"
+print(f"좋아하는 과일은 {fruit.capitalize()}이에요!")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 subject="math"를 선언하고 capitalize() 메서드를 사용하여 "Math 공부"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[Math 공부]]></output>
+    <hint>f"{subject.capitalize()} 공부" 또는 "{} 공부".format(subject.capitalize())를 사용하세요.</hint>
+    <solution><![CDATA[subject = "math"
+print(f"{subject.capitalize()} 공부")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 day="monday"를 선언하고 capitalize() 메서드와 콜론(:)을 사용하여 "요일: Monday"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[요일: Monday]]></output>
+    <hint>print("요일", day.capitalize(), sep=': ')를 사용하세요.</hint>
+    <solution><![CDATA[day = "monday"
+print("요일", day.capitalize(), sep=': ')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 game="soccer"를 선언하고 capitalize() 메서드를 사용하여 "Soccer!"라고 출력한 후 느낌표(!)로 끝내세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[Soccer!!]]></output>
+    <hint>print(game.capitalize(), end='!')와 print("!")를 사용하세요.</hint>
+    <solution><![CDATA[game = "soccer"
+print(game.capitalize(), end='!')
+print("!")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 country="korea"를 선언하고 "나라: Korea"라고 format 메서드로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[나라: Korea]]></output>
+    <hint>"나라: {}".format(country.capitalize())를 사용하세요.</hint>
+    <solution><![CDATA[country = "korea"
+print("나라: {}".format(country.capitalize()))]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 food="pizza", drink="coke"를 선언하고 둘 다 capitalize() 메서드를 사용하여 슬래시(/)로 구분해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[Pizza/Coke]]></output>
+    <hint>print(food.capitalize(), drink.capitalize(), sep='/')를 사용하세요.</hint>
+    <solution><![CDATA[food = "pizza"
+drink = "coke"
+print(food.capitalize(), drink.capitalize(), sep='/')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 season="winter"를 선언하고 capitalize() 메서드를 사용하여 "계절은 Winter예요"라고 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[계절은 Winter예요]]></output>
+    <hint>f"계절은 {season.capitalize()}예요" 형태로 사용하세요.</hint>
+    <solution><![CDATA[season = "winter"
+print(f"계절은 {season.capitalize()}예요")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 hobby="reading"을 선언하고 capitalize() 메서드를 사용하여 "취미: Reading"이라고 출력한 후 별표(*)로 끝내세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[취미: Reading*]]></output>
+    <hint>print(f"취미: {hobby.capitalize()}", end='*')를 사용하세요.</hint>
+    <solution><![CDATA[hobby = "reading"
+print(f"취미: {hobby.capitalize()}", end='*')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 brand="samsung"을 선언하고 capitalize() 메서드를 사용하여 "브랜드는 Samsung입니다"라고 format으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[브랜드는 Samsung입니다]]></output>
+    <hint>"브랜드는 {}입니다".format(brand.capitalize())를 사용하세요.</hint>
+    <solution><![CDATA[brand = "samsung"
+print("브랜드는 {}입니다".format(brand.capitalize()))]]></solution>
+  </problem>
+</problems>
