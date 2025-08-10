@@ -7,6 +7,12 @@
 - `lecture-basic/Python Basic Lecture 3 - List and its builtin.ipynb`
 - `lecture-basic/Python Basic Lecture 4 - IO.ipynb`
 - `lecture-basic/Python Basic Lecture 5 - Conditional Statements.ipynb`
+- `lecture-basic/Python Basic Lecture 7 - Tuple.ipynb`
+- `lecture-basic/Python Basic Lecture 8 - While.ipynb`
+- `lecture-basic/Python Basic Lecture 9 - List Comprehension.ipynb`
+- `lecture-basic/Python Basic Lecture 10 - Functions.ipynb`
+- `lecture-basic/Python Basic Lecture 11 - Function Design and Implementation.ipynb`
+- `lecture-basic/Python Basic Lecture N - Class Declaration.ipynb`
 
 ### 머신러닝 강의 / Machine Learning Lectures
 - `lecture-ml/ML 1. 선형회귀.ipynb`
@@ -14,6 +20,14 @@
 - `lecture-ml/ML 3. 다양한 함수로의 회귀식 만들기.ipynb`
 - `lecture-ml/ML 4. 서포트 벡터 머신_ SVM.ipynb`
 - `lecture-ml/ML 5. 전처리와 KNN.ipynb`
+- `lecture-ml/ML 6. 의사결정트리, 랜덤포레스트와 앙상블 기법.ipynb`
+- `lecture-ml/ML 7. 비지도학습 - KMean, DBSCAN.ipynb`
+- `lecture-ml/ML 8. 뉴럴네트워크.ipynb`
+
+### 연습문제 시스템 / Exercise System
+- `lecture-basic/problem-renderer/` - Python 기초 연습문제 렌더링 시스템
+- 웹 브라우저에서 `index.html`을 열고 `?config=파일명` 파라미터로 다양한 연습문제 세트 접근 가능
+- 클래스, 함수, 리스트, 문자열 등 주제별 연습문제 제공
 
 ## 사용 안내 / Usage Guidelines
 
