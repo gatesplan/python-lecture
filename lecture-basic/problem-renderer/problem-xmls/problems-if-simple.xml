@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Python Basic Lecture 5 - 2. if문 연습문제
+  
+  복습 키워드 결합:
+  - print() 출력함수 및 키워드 파라메터
+  - f-string 문법
+  - 문자열 빌트인 함수들
+  - list 자료형 및 빌트인 함수들
+  - *list 언패킹
+  - input() 입력 함수
+  - type() 자료형 확인
+  - 자료형 변환 (캐스팅)
+  
+  새로운 내용: if문 (단순 조건문만, else나 elif 사용 금지)
+-->
+<problems>
+  <!-- 문제 1: 기본 if문 + print() -->
+  <problem>
+    <description><![CDATA[숫자 5가 3보다 크면 "5는 3보다 큽니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[5는 3보다 큽니다]]></output>
+    <hint><![CDATA[if 조건: 형태로 작성하고, print() 함수를 사용하세요.]]></hint>
+    <solution><![CDATA[if 5 > 3:
+    print("5는 3보다 큽니다")]]></solution>
+  </problem>
+
+  <!-- 문제 2: if문 + f-string -->
+  <problem>
+    <description><![CDATA[변수 age = 20이 18 이상이면 f-string을 사용하여 "나이 20은 성인입니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[나이 20은 성인입니다]]></output>
+    <hint><![CDATA[f-string 문법 f"..."을 사용하여 변수 값을 포함시키세요.]]></hint>
+    <solution><![CDATA[age = 20
+if age >= 18:
+    print(f"나이 {age}은 성인입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 3: if문 + input() + int() -->
+  <problem>
+    <description><![CDATA[사용자로부터 숫자를 입력받아 10보다 크면 "입력한 숫자가 10보다 큽니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[15]]></input>
+    <output><![CDATA[입력한 숫자가 10보다 큽니다]]></output>
+    <hint><![CDATA[input()으로 입력받고 int()로 변환한 후 조건을 확인하세요.]]></hint>
+    <solution><![CDATA[num = int(input())
+if num > 10:
+    print("입력한 숫자가 10보다 큽니다")]]></solution>
+  </problem>
+
+  <!-- 문제 4: if문 + 문자열 비교 -->
+  <problem>
+    <description><![CDATA[문자열 "apple"이 "banana"보다 사전순으로 앞에 오면 "apple이 먼저입니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[apple이 먼저입니다]]></output>
+    <hint><![CDATA[문자열도 < 연산자로 비교할 수 있습니다.]]></hint>
+    <solution><![CDATA[if "apple" < "banana":
+    print("apple이 먼저입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 5: if문 + 문자열 빌트인 + input() -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자열을 입력받아 대문자로 변환한 결과가 "PYTHON"이면 "정답입니다!"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[python]]></input>
+    <output><![CDATA[정답입니다!]]></output>
+    <hint><![CDATA[.upper() 메서드를 사용하여 대문자로 변환하세요.]]></hint>
+    <solution><![CDATA[text = input()
+if text.upper() == "PYTHON":
+    print("정답입니다!")]]></solution>
+  </problem>
+
+  <!-- 문제 6: if문 + list + len() -->
+  <problem>
+    <description><![CDATA[리스트 [1, 2, 3, 4, 5]의 길이가 5이면 "리스트 길이가 5입니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[리스트 길이가 5입니다]]></output>
+    <hint><![CDATA[len() 함수를 사용하여 리스트의 길이를 구하세요.]]></hint>
+    <solution><![CDATA[my_list = [1, 2, 3, 4, 5]
+if len(my_list) == 5:
+    print("리스트 길이가 5입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 7: if문 + 리스트 인덱싱 -->
+  <problem>
+    <description><![CDATA[리스트 fruits = ["사과", "바나나", "오렌지"]에서 첫 번째 요소가 "사과"이면 "첫 과일은 사과입니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[첫 과일은 사과입니다]]></output>
+    <hint><![CDATA[리스트[0]으로 첫 번째 요소에 접근할 수 있습니다.]]></hint>
+    <solution><![CDATA[fruits = ["사과", "바나나", "오렌지"]
+if fruits[0] == "사과":
+    print("첫 과일은 사과입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 8: if문 + 문자열 슬라이싱 -->
+  <problem>
+    <description><![CDATA[문자열 "Hello"의 첫 두 글자가 "He"이면 "He로 시작합니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[He로 시작합니다]]></output>
+    <hint><![CDATA[문자열 슬라이싱 [0:2]를 사용하세요.]]></hint>
+    <solution><![CDATA[text = "Hello"
+if text[0:2] == "He":
+    print("He로 시작합니다")]]></solution>
+  </problem>
+
+  <!-- 문제 9: if문 + input() + str.strip() -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자열을 입력받아 양쪽 공백을 제거한 결과가 "Python"이면 "올바른 입력입니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[  Python  ]]></input>
+    <output><![CDATA[올바른 입력입니다]]></output>
+    <hint><![CDATA[.strip() 메서드를 사용하여 양쪽 공백을 제거하세요.]]></hint>
+    <solution><![CDATA[text = input()
+if text.strip() == "Python":
+    print("올바른 입력입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 10: if문 + type() 확인 -->
+  <problem>
+    <description><![CDATA[변수 x = 42의 타입이 int이면 "정수형입니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[정수형입니다]]></output>
+    <hint><![CDATA[type() 함수를 사용하여 자료형을 확인하세요.]]></hint>
+    <solution><![CDATA[x = 42
+if type(x) == int:
+    print("정수형입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 11: if문 + float() + 소수점 -->
+  <problem>
+    <description><![CDATA[사용자로부터 숫자를 입력받아 실수로 변환한 값이 3.14보다 크면 "3.14보다 큽니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[3.5]]></input>
+    <output><![CDATA[3.14보다 큽니다]]></output>
+    <hint><![CDATA[float() 함수를 사용하여 실수로 변환하세요.]]></hint>
+    <solution><![CDATA[num = float(input())
+if num > 3.14:
+    print("3.14보다 큽니다")]]></solution>
+  </problem>
+
+  <!-- 문제 12: if문 + 리스트 in 연산자 -->
+  <problem>
+    <description><![CDATA[숫자 7이 리스트 [1, 3, 5, 7, 9]에 포함되어 있으면 "7이 포함되어 있습니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[7이 포함되어 있습니다]]></output>
+    <hint><![CDATA[in 연산자를 사용하여 리스트에 요소가 있는지 확인하세요.]]></hint>
+    <solution><![CDATA[numbers = [1, 3, 5, 7, 9]
+if 7 in numbers:
+    print("7이 포함되어 있습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 13: if문 + 문자열 replace() -->
+  <problem>
+    <description><![CDATA[문자열 "Hello World"에서 "World"를 "Python"으로 교체한 결과가 "Hello Python"이면 "교체 성공"을 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[교체 성공]]></output>
+    <hint><![CDATA[.replace() 메서드를 사용하여 문자열을 교체하세요.]]></hint>
+    <solution><![CDATA[text = "Hello World"
+if text.replace("World", "Python") == "Hello Python":
+    print("교체 성공")]]></solution>
+  </problem>
+
+  <!-- 문제 14: if문 + 언패킹 + input().split() -->
+  <problem>
+    <description><![CDATA[사용자로부터 "이름 나이" 형태로 입력받아 나이가 20 이상이면 "성인입니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[김철수 25]]></input>
+    <output><![CDATA[성인입니다]]></output>
+    <hint><![CDATA[input().split()로 분리한 후 언패킹을 사용하고, int()로 나이를 변환하세요.]]></hint>
+    <solution><![CDATA[name, age = input().split()
+age = int(age)
+if age >= 20:
+    print("성인입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 15: if문 + 리스트 append() -->
+  <problem>
+    <description><![CDATA[빈 리스트를 만들고 숫자 10을 추가한 후, 리스트의 첫 번째 요소가 10이면 "추가 완료"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[추가 완료]]></output>
+    <hint><![CDATA[.append() 메서드를 사용하여 요소를 추가하세요.]]></hint>
+    <solution><![CDATA[my_list = []
+my_list.append(10)
+if my_list[0] == 10:
+    print("추가 완료")]]></solution>
+  </problem>
+
+  <!-- 문제 16: if문 + print() sep 파라메터 -->
+  <problem>
+    <description><![CDATA[변수 total = 6이 10보다 작으면 print() 함수의 sep 파라메터를 사용하여 "1-2-3"을 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[1-2-3]]></output>
+    <hint><![CDATA[변수가 조건을 만족하는지 확인하고, print(1, 2, 3, sep="-")을 사용하세요.]]></hint>
+    <solution><![CDATA[total = 6
+if total < 10:
+    print(1, 2, 3, sep="-")]]></solution>
+  </problem>
+
+  <!-- 문제 17: if문 + 문자열 count() -->
+  <problem>
+    <description><![CDATA[문자열 "programming"에서 문자 'r'의 개수가 2개이면 "r이 2개 있습니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[r이 2개 있습니다]]></output>
+    <hint><![CDATA[.count() 메서드를 사용하여 특정 문자의 개수를 세세요.]]></hint>
+    <solution><![CDATA[text = "programming"
+if text.count('r') == 2:
+    print("r이 2개 있습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 18: if문 + 리스트 슬라이싱 -->
+  <problem>
+    <description><![CDATA[리스트 [10, 20, 30, 40, 50]의 처음 3개 요소의 합이 60이면 "처음 3개의 합이 60입니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[처음 3개의 합이 60입니다]]></output>
+    <hint><![CDATA[리스트 슬라이싱 [:3]과 sum() 함수를 사용하세요.]]></hint>
+    <solution><![CDATA[numbers = [10, 20, 30, 40, 50]
+if sum(numbers[:3]) == 60:
+    print("처음 3개의 합이 60입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 19: if문 + 문자열 capitalize() -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자열을 입력받아 첫 글자만 대문자로 변환한 결과가 "Hello"이면 "올바른 형태입니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[hello]]></input>
+    <output><![CDATA[올바른 형태입니다]]></output>
+    <hint><![CDATA[.capitalize() 메서드를 사용하여 첫 글자만 대문자로 만드세요.]]></hint>
+    <solution><![CDATA[text = input()
+if text.capitalize() == "Hello":
+    print("올바른 형태입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 20: if문 + 리스트 extend() -->
+  <problem>
+    <description><![CDATA[리스트 list1 = [1, 2]에 리스트 [3, 4]를 확장한 후, 길이가 4이면 "확장 완료"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[확장 완료]]></output>
+    <hint><![CDATA[.extend() 메서드를 사용하여 리스트를 확장하세요.]]></hint>
+    <solution><![CDATA[list1 = [1, 2]
+list1.extend([3, 4])
+if len(list1) == 4:
+    print("확장 완료")]]></solution>
+  </problem>
+
+  <!-- 문제 21: if문 + input() + str.isdigit() -->
+  <problem>
+    <description><![CDATA[사용자로부터 입력받은 문자열이 모두 숫자로만 이루어져 있으면 "숫자입니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[12345]]></input>
+    <output><![CDATA[숫자입니다]]></output>
+    <hint><![CDATA[.isdigit() 메서드를 사용하여 문자열이 숫자인지 확인하세요.]]></hint>
+    <solution><![CDATA[text = input()
+if text.isdigit():
+    print("숫자입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 22: if문 + f-string + 리스트 -->
+  <problem>
+    <description><![CDATA[리스트 fruits = ["사과", "바나나"]의 길이가 2이면 f-string을 사용하여 "과일이 2개 있습니다: 사과, 바나나"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[과일이 2개 있습니다: 사과, 바나나]]></output>
+    <hint><![CDATA[f-string과 언패킹 *fruits를 함께 사용하세요.]]></hint>
+    <solution><![CDATA[fruits = ["사과", "바나나"]
+if len(fruits) == 2:
+    print(f"과일이 {len(fruits)}개 있습니다: {fruits[0]}, {fruits[1]}")]]></solution>
+  </problem>
+
+  <!-- 문제 23: if문 + 리스트 insert() -->
+  <problem>
+    <description><![CDATA[리스트 [1, 3]의 인덱스 1 위치에 숫자 2를 삽입한 후, 리스트가 [1, 2, 3]이 되면 "삽입 성공"을 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[삽입 성공]]></output>
+    <hint><![CDATA[.insert() 메서드를 사용하여 특정 위치에 요소를 삽입하세요.]]></hint>
+    <solution><![CDATA[my_list = [1, 3]
+my_list.insert(1, 2)
+if my_list == [1, 2, 3]:
+    print("삽입 성공")]]></solution>
+  </problem>
+
+  <!-- 문제 24: if문 + print() end 파라메터 -->
+  <problem>
+    <description><![CDATA[숫자 1이 10보다 작으면 print() 함수의 end 파라메터를 사용하여 "1은 작습니다."를 출력하되 줄바꿈 대신 공백으로 끝나도록 하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[1은 작습니다. ]]></output>
+    <hint><![CDATA[print() 함수의 end=" " 파라메터를 사용하세요.]]></hint>
+    <solution><![CDATA[if 1 < 10:
+    print("1은 작습니다.", end=" ")]]></solution>
+  </problem>
+
+  <!-- 문제 25: if문 + 문자열 lower() + in -->
+  <problem>
+    <description><![CDATA[문자열 "PYTHON Programming"을 소문자로 변환했을 때 "python"이 포함되어 있으면 "python이 포함됨"을 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[python이 포함됨]]></output>
+    <hint><![CDATA[.lower() 메서드와 in 연산자를 함께 사용하세요.]]></hint>
+    <solution><![CDATA[text = "PYTHON Programming"
+if "python" in text.lower():
+    print("python이 포함됨")]]></solution>
+  </problem>
+
+  <!-- 문제 26: if문 + 리스트 index() -->
+  <problem>
+    <description><![CDATA[리스트 ["a", "b", "c", "d"]에서 "c"의 인덱스가 2이면 "c는 3번째 위치에 있습니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[c는 3번째 위치에 있습니다]]></output>
+    <hint><![CDATA[.index() 메서드를 사용하여 요소의 인덱스를 찾으세요.]]></hint>
+    <solution><![CDATA[letters = ["a", "b", "c", "d"]
+if letters.index("c") == 2:
+    print("c는 3번째 위치에 있습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 27: if문 + list() 변환 -->
+  <problem>
+    <description><![CDATA[문자열 "abc"를 리스트로 변환한 결과가 ['a', 'b', 'c']이면 "변환 성공"을 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[변환 성공]]></output>
+    <hint><![CDATA[list() 함수를 사용하여 문자열을 리스트로 변환하세요.]]></hint>
+    <solution><![CDATA[text = "abc"
+if list(text) == ['a', 'b', 'c']:
+    print("변환 성공")]]></solution>
+  </problem>
+
+  <!-- 문제 28: if문 + 복합 조건 + input() -->
+  <problem>
+    <description><![CDATA[사용자로부터 두 숫자를 입력받아 첫 번째 숫자가 두 번째 숫자보다 크면 f-string을 사용하여 "첫 번째가 더 큽니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[10 5]]></input>
+    <output><![CDATA[첫 번째가 더 큽니다]]></output>
+    <hint><![CDATA[input().split()으로 두 값을 분리하고 int()로 변환하세요.]]></hint>
+    <solution><![CDATA[num1, num2 = input().split()
+num1, num2 = int(num1), int(num2)
+if num1 > num2:
+    print("첫 번째가 더 큽니다")]]></solution>
+  </problem>
+
+  <!-- 문제 29: if문 + 문자열 rstrip() -->
+  <problem>
+    <description><![CDATA[문자열 "Hello   "에서 오른쪽 공백을 제거한 결과가 "Hello"이면 "오른쪽 공백 제거 완료"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[오른쪽 공백 제거 완료]]></output>
+    <hint><![CDATA[.rstrip() 메서드를 사용하여 오른쪽 공백을 제거하세요.]]></hint>
+    <solution><![CDATA[text = "Hello   "
+if text.rstrip() == "Hello":
+    print("오른쪽 공백 제거 완료")]]></solution>
+  </problem>
+
+  <!-- 문제 30: if문 종합 문제 -->
+  <problem>
+    <description><![CDATA[사용자로부터 "과목:점수" 형태로 입력받아 점수가 80 이상이면 f-string을 사용하여 "과목명은 우수합니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[수학:85]]></input>
+    <output><![CDATA[수학은 우수합니다]]></output>
+    <hint><![CDATA[split(":")으로 분리하고 두 번째 값을 int()로 변환하세요.]]></hint>
+    <solution><![CDATA[subject, score = input().split(":")
+score = int(score)
+if score >= 80:
+    print(f"{subject}은 우수합니다")]]></solution>
+  </problem>
+</problems>

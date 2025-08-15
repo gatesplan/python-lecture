@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Python Basic Lecture 5 - 3. if-else문 연습문제
+  
+  복습 키워드 결합:
+  - print() 출력함수 및 키워드 파라메터
+  - f-string 문법
+  - 문자열 빌트인 함수들
+  - list 자료형 및 빌트인 함수들
+  - *list 언패킹
+  - input() 입력 함수
+  - type() 자료형 확인
+  - 자료형 변환 (캐스팅)
+  
+  새로운 내용: if-else문 (조건이 참일 때와 거짓일 때 각각 다른 코드 실행)
+  추가 소개: 문자열 확인용 메서드들 (isdigit, isalpha, isalnum, isnumeric 등)
+-->
+<problems>
+  <!-- 문제 1: 기본 if-else문 -->
+  <problem>
+    <description><![CDATA[숫자 7이 10보다 크면 "큽니다"를, 그렇지 않으면 "작거나 같습니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[작거나 같습니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[if 7 > 10:
+    print("큽니다")
+else:
+    print("작거나 같습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 2: if-else + input() + int() -->
+  <problem>
+    <description><![CDATA[사용자로부터 나이를 입력받아 18 이상이면 "성인입니다", 그렇지 않으면 "미성년자입니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[15]]></input>
+    <output><![CDATA[미성년자입니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[age = int(input())
+if age >= 18:
+    print("성인입니다")
+else:
+    print("미성년자입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 3: if-else + 홀짝 판별 -->
+  <problem>
+    <description><![CDATA[사용자로부터 숫자를 입력받아 짝수이면 "짝수입니다", 홀수이면 "홀수입니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[13]]></input>
+    <output><![CDATA[13은 홀수입니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[num = int(input())
+if num % 2 == 0:
+    print(f"{num}은 짝수입니다")
+else:
+    print(f"{num}은 홀수입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 4: if-else + 문자열 비교 -->
+  <problem>
+    <description><![CDATA[변수 password = "1234"와 사용자 입력을 비교하여 같으면 "로그인 성공", 다르면 "비밀번호가 틀렸습니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[5678]]></input>
+    <output><![CDATA[비밀번호가 틀렸습니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[password = "1234"
+user_input = input()
+if user_input == password:
+    print("로그인 성공")
+else:
+    print("비밀번호가 틀렸습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 5: if-else + str.isdigit() -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자열을 입력받아 모든 문자가 숫자이면 "숫자입니다", 그렇지 않으면 "숫자가 아닙니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[abc123]]></input>
+    <output><![CDATA[숫자가 아닙니다]]></output>
+    <hint><![CDATA[.isdigit() 메서드는 문자열이 모두 숫자(0-9)로만 이루어져 있는지 확인합니다.]]></hint>
+    <solution><![CDATA[text = input()
+if text.isdigit():
+    print("숫자입니다")
+else:
+    print("숫자가 아닙니다")]]></solution>
+  </problem>
+
+  <!-- 문제 6: if-else + str.isalpha() -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자열을 입력받아 모든 문자가 알파벳이면 "알파벳입니다", 그렇지 않으면 "알파벳이 아닙니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[Hello]]></input>
+    <output><![CDATA[알파벳입니다]]></output>
+    <hint><![CDATA[.isalpha() 메서드는 문자열이 모두 알파벳 문자(a-z, A-Z)로만 이루어져 있는지 확인합니다.]]></hint>
+    <solution><![CDATA[text = input()
+if text.isalpha():
+    print("알파벳입니다")
+else:
+    print("알파벳이 아닙니다")]]></solution>
+  </problem>
+
+  <!-- 문제 7: if-else + str.isalnum() -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자열을 입력받아 알파벳과 숫자로만 이루어져 있으면 "유효한 형식입니다", 그렇지 않으면 "특수문자가 포함되어 있습니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[Hello123]]></input>
+    <output><![CDATA[유효한 형식입니다]]></output>
+    <hint><![CDATA[.isalnum() 메서드는 문자열이 알파벳과 숫자로만 이루어져 있는지 확인합니다 (공백이나 특수문자 없음).]]></hint>
+    <solution><![CDATA[text = input()
+if text.isalnum():
+    print("유효한 형식입니다")
+else:
+    print("특수문자가 포함되어 있습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 8: if-else + 리스트 길이 -->
+  <problem>
+    <description><![CDATA[리스트 fruits = ["사과", "바나나", "오렌지"]의 길이가 3보다 크면 "많은 과일이 있습니다", 그렇지 않으면 "적은 과일이 있습니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[적은 과일이 있습니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[fruits = ["사과", "바나나", "오렌지"]
+if len(fruits) > 3:
+    print("많은 과일이 있습니다")
+else:
+    print("적은 과일이 있습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 9: if-else + in 연산자 -->
+  <problem>
+    <description><![CDATA[사용자로부터 과일 이름을 입력받아 ["사과", "바나나", "오렌지"] 목록에 있으면 "있는 과일입니다", 없으면 "없는 과일입니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[포도]]></input>
+    <output><![CDATA[없는 과일입니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[fruits = ["사과", "바나나", "오렌지"]
+fruit = input()
+if fruit in fruits:
+    print("있는 과일입니다")
+else:
+    print("없는 과일입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 10: if-else + str.startswith() -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자열을 입력받아 "Hello"로 시작하면 "인사말입니다", 그렇지 않으면 "인사말이 아닙니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[Hello World]]></input>
+    <output><![CDATA[인사말입니다]]></output>
+    <hint><![CDATA[.startswith() 메서드는 문자열이 특정 문자열로 시작하는지 확인합니다.]]></hint>
+    <solution><![CDATA[text = input()
+if text.startswith("Hello"):
+    print("인사말입니다")
+else:
+    print("인사말이 아닙니다")]]></solution>
+  </problem>
+
+  <!-- 문제 11: if-else + str.endswith() -->
+  <problem>
+    <description><![CDATA[사용자로부터 파일명을 입력받아 ".txt"로 끝나면 "텍스트 파일입니다", 그렇지 않으면 "다른 형식 파일입니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[document.pdf]]></input>
+    <output><![CDATA[다른 형식 파일입니다]]></output>
+    <hint><![CDATA[.endswith() 메서드는 문자열이 특정 문자열로 끝나는지 확인합니다.]]></hint>
+    <solution><![CDATA[filename = input()
+if filename.endswith(".txt"):
+    print("텍스트 파일입니다")
+else:
+    print("다른 형식 파일입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 12: if-else + str.islower() -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자열을 입력받아 모든 문자가 소문자이면 "소문자입니다", 그렇지 않으면 "소문자가 아닙니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[Hello]]></input>
+    <output><![CDATA[소문자가 아닙니다]]></output>
+    <hint><![CDATA[.islower() 메서드는 문자열의 모든 알파벳이 소문자인지 확인합니다.]]></hint>
+    <solution><![CDATA[text = input()
+if text.islower():
+    print("소문자입니다")
+else:
+    print("소문자가 아닙니다")]]></solution>
+  </problem>
+
+  <!-- 문제 13: if-else + str.isupper() -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자열을 입력받아 모든 문자가 대문자이면 "대문자입니다", 그렇지 않으면 "대문자가 아닙니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[PYTHON]]></input>
+    <output><![CDATA[대문자입니다]]></output>
+    <hint><![CDATA[.isupper() 메서드는 문자열의 모든 알파벳이 대문자인지 확인합니다.]]></hint>
+    <solution><![CDATA[text = input()
+if text.isupper():
+    print("대문자입니다")
+else:
+    print("대문자가 아닙니다")]]></solution>
+  </problem>
+
+  <!-- 문제 14: if-else + 리스트 슬라이싱 -->
+  <problem>
+    <description><![CDATA[리스트 numbers = [1, 2, 3, 4, 5]에서 처음 두 개의 합이 3이면 "합이 3입니다", 그렇지 않으면 "합이 3이 아닙니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[합이 3입니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[numbers = [1, 2, 3, 4, 5]
+if sum(numbers[:2]) == 3:
+    print("합이 3입니다")
+else:
+    print("합이 3이 아닙니다")]]></solution>
+  </problem>
+
+  <!-- 문제 15: if-else + str.isspace() -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자열을 입력받아 모든 문자가 공백문자이면 "공백입니다", 그렇지 않으면 "내용이 있습니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[   ]]></input>
+    <output><![CDATA[공백입니다]]></output>
+    <hint><![CDATA[.isspace() 메서드는 문자열이 모두 공백문자(스페이스, 탭, 줄바꿈 등)로만 이루어져 있는지 확인합니다.]]></hint>
+    <solution><![CDATA[text = input()
+if text.isspace():
+    print("공백입니다")
+else:
+    print("내용이 있습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 16: if-else + 문자열 길이 -->
+  <problem>
+    <description><![CDATA[사용자로부터 비밀번호를 입력받아 길이가 8자 이상이면 "안전한 비밀번호입니다", 그렇지 않으면 "비밀번호가 너무 짧습니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[123]]></input>
+    <output><![CDATA[비밀번호가 너무 짧습니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[password = input()
+if len(password) >= 8:
+    print("안전한 비밀번호입니다")
+else:
+    print("비밀번호가 너무 짧습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 17: if-else + 문자열 in 연산자 -->
+  <problem>
+    <description><![CDATA[문자열 "Python is great"에 "Java"가 포함되어 있으면 "Java가 포함됨", 그렇지 않으면 "Java가 없음"을 출력하는 코드를 유용합니다.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[Java가 없음]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[text = "Python is great"
+if "Java" in text:
+    print("Java가 포함됨")
+else:
+    print("Java가 없음")]]></solution>
+  </problem>
+
+  <!-- 문제 18: if-else + type() 확인 -->
+  <problem>
+    <description><![CDATA[변수 x = 3.14의 타입이 float이면 "실수형입니다", 그렇지 않으면 "다른 타입입니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[실수형입니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[x = 3.14
+if type(x) == float:
+    print("실수형입니다")
+else:
+    print("다른 타입입니다")]]></solution>
+  </problem>
+
+  <!-- 문제 19: if-else + 리스트 count() -->
+  <problem>
+    <description><![CDATA[리스트 [1, 2, 2, 3, 2]에서 숫자 2의 개수가 3개이면 "2가 3개입니다", 그렇지 않으면 "2가 3개가 아닙니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[2가 3개입니다]]></output>
+    <hint><![CDATA[리스트의 .count() 메서드를 사용하여 특정 값의 개수를 세세요.]]></hint>
+    <solution><![CDATA[numbers = [1, 2, 2, 3, 2]
+if numbers.count(2) == 3:
+    print("2가 3개입니다")
+else:
+    print("2가 3개가 아닙니다")]]></solution>
+  </problem>
+
+  <!-- 문제 20: if-else + 문자열 strip() -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자열을 입력받아 양쪽 공백을 제거한 결과가 빈 문자열이면 "빈 문자열입니다", 그렇지 않으면 "내용이 있습니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[   hello   ]]></input>
+    <output><![CDATA[내용이 있습니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[text = input()
+if text.strip() == "":
+    print("빈 문자열입니다")
+else:
+    print("내용이 있습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 21: if-else + f-string + 계산 -->
+  <problem>
+    <description><![CDATA[사용자로부터 두 숫자를 입력받아 첫 번째가 더 크면 f-string을 사용하여 "첫 번째 숫자가 더 큽니다", 그렇지 않으면 "두 번째 숫자가 크거나 같습니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[5 8]]></input>
+    <output><![CDATA[두 번째 숫자가 크거나 같습니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[num1, num2 = input().split()
+num1, num2 = int(num1), int(num2)
+if num1 > num2:
+    print("첫 번째 숫자가 더 큽니다")
+else:
+    print("두 번째 숫자가 크거나 같습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 22: if-else + str.istitle() -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자열을 입력받아 제목 형식(각 단어의 첫 글자가 대문자)이면 "제목 형식입니다", 그렇지 않으면 "제목 형식이 아닙니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[Hello World]]></input>
+    <output><![CDATA[제목 형식입니다]]></output>
+    <hint><![CDATA[.istitle() 메서드는 문자열이 제목 형식(각 단어의 첫 글자만 대문자)인지 확인합니다.]]></hint>
+    <solution><![CDATA[text = input()
+if text.istitle():
+    print("제목 형식입니다")
+else:
+    print("제목 형식이 아닙니다")]]></solution>
+  </problem>
+
+  <!-- 문제 23: if-else + 리스트 인덱스 접근 -->
+  <problem>
+    <description><![CDATA[리스트 colors = ["빨강", "파랑", "노랑"]에서 두 번째 요소가 "파랑"이면 "파랑이 맞습니다", 그렇지 않으면 "파랑이 아닙니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[파랑이 맞습니다]]></output>
+    <hint><![CDATA[리스트의 인덱스는 0부터 시작하므로 두 번째 요소는 [1]입니다.]]></hint>
+    <solution><![CDATA[colors = ["빨강", "파랑", "노랑"]
+if colors[1] == "파랑":
+    print("파랑이 맞습니다")
+else:
+    print("파랑이 아닙니다")]]></solution>
+  </problem>
+
+  <!-- 문제 24: if-else + 문자열 replace() -->
+  <problem>
+    <description><![CDATA[문자열 "I love Java"에서 "Java"를 "Python"으로 교체한 결과가 "I love Python"이면 "교체 성공", 그렇지 않으면 "교체 실패"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[교체 성공]]></output>
+    <hint><![CDATA[.replace() 메서드를 사용하여 문자열을 교체하세요.]]></hint>
+    <solution><![CDATA[text = "I love Java"
+if text.replace("Java", "Python") == "I love Python":
+    print("교체 성공")
+else:
+    print("교체 실패")]]></solution>
+  </problem>
+
+  <!-- 문제 25: if-else + print() end 파라메터 -->
+  <problem>
+    <description><![CDATA[숫자 5가 0보다 크면 print()의 end 파라메터를 사용하여 "양수 "를 출력하고, 그렇지 않으면 "0 이하 "를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[양수 ]]></output>
+    <hint><![CDATA[print() 함수의 end=" " 파라메터를 사용하여 줄바꿈 대신 공백으로 끝내세요.]]></hint>
+    <solution><![CDATA[if 5 > 0:
+    print("양수", end=" ")
+else:
+    print("0 이하", end=" ")]]></solution>
+  </problem>
+
+  <!-- 문제 26: if-else + 문자열 find() -->
+  <problem>
+    <description><![CDATA[문자열 "Python Programming"에서 "gram"의 위치가 10 이상이면 "뒤쪽에 있습니다", 그렇지 않으면 "앞쪽에 있습니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[뒤쪽에 있습니다]]></output>
+    <hint><![CDATA[.find() 메서드는 문자열에서 특정 부분 문자열의 위치(인덱스)를 반환합니다. 찾지 못하면 -1을 반환합니다.]]></hint>
+    <solution><![CDATA[text = "Python Programming"
+if text.find("gram") >= 10:
+    print("뒤쪽에 있습니다")
+else:
+    print("앞쪽에 있습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 27: if-else + list() 변환 -->
+  <problem>
+    <description><![CDATA[문자열 "hello"를 리스트로 변환한 길이가 5이면 "길이가 5입니다", 그렇지 않으면 "길이가 5가 아닙니다"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[길이가 5입니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[text = "hello"
+if len(list(text)) == 5:
+    print("길이가 5입니다")
+else:
+    print("길이가 5가 아닙니다")]]></solution>
+  </problem>
+
+  <!-- 문제 28: if-else + 언패킹 -->
+  <problem>
+    <description><![CDATA[사용자로부터 "이름,나이" 형태로 입력받아 나이가 30 미만이면 "젊습니다", 그렇지 않으면 "성숙합니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[김철수,35]]></input>
+    <output><![CDATA[성숙합니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[name, age = input().split(",")
+age = int(age)
+if age < 30:
+    print("젊습니다")
+else:
+    print("성숙합니다")]]></solution>
+  </problem>
+
+  <!-- 문제 29: if-else + str.swapcase() -->
+  <problem>
+    <description><![CDATA[문자열 "Hello"의 대소문자를 바꾼 결과가 "hELLO"이면 "변환 성공", 그렇지 않으면 "변환 실패"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[변환 성공]]></output>
+    <hint><![CDATA[.swapcase() 메서드는 대문자를 소문자로, 소문자를 대문자로 바꿉니다.]]></hint>
+    <solution><![CDATA[text = "Hello"
+if text.swapcase() == "hELLO":
+    print("변환 성공")
+else:
+    print("변환 실패")]]></solution>
+  </problem>
+
+  <!-- 문제 30: if-else 종합 문제 -->
+  <problem>
+    <description><![CDATA[사용자로부터 단어를 입력받아 길이가 5글자 이상이면 f-string을 사용하여 "단어의 길이는 N글자입니다", 그렇지 않으면 "짧은 단어입니다"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[Python]]></input>
+    <output><![CDATA[단어의 길이는 6글자입니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[word = input()
+if len(word) >= 5:
+    print(f"단어의 길이는 {len(word)}글자입니다")
+else:
+    print("짧은 단어입니다")]]></solution>
+  </problem>
+</problems>
