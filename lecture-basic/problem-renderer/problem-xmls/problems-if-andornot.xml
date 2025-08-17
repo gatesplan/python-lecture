@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  논리 연산자(and, or, not) 응용 문제 10개
+  조건 필터링 순서와 교묘한 논리 조합 학습
+  복습 키워드들의 다양한 조합 활용
+-->
+<problems>
+  <!-- 문제 1: 특별한 문자열 조건 -->
+  <problem>
+    <description>문자열을 입력받아서 다음 조건을 모두 만족하면 "특별한 문자열"을, 아니면 "일반 문자열"을 출력하세요. (조건: 길이가 5자 이상이고, 'a'를 포함하고, 숫자를 포함하지 않음)</description>
+    <code></code>
+    <input><![CDATA[hello abc]]></input>
+    <output><![CDATA[특별한 문자열]]></output>
+    <hint>and, not, in, len(), .isdigit()</hint>
+    <solution><![CDATA[text = input()
+has_digit = False
+for char in text:
+    if char.isdigit():
+        has_digit = True
+        break
+
+if len(text) >= 5 and 'a' in text and not has_digit:
+    print("특별한 문자열")
+else:
+    print("일반 문자열")]]></solution>
+  </problem>
+
+  <!-- 문제 2: 까다로운 나이 조건 -->
+  <problem>
+    <description>나이를 입력받아서 다음 조건 중 하나라도 만족하면 "특별 대상", 아니면 "일반 대상"을 출력하세요. (조건: 18세 미만이거나, 65세 이상이거나, 나이가 홀수이면서 30대)</description>
+    <code></code>
+    <input><![CDATA[35]]></input>
+    <output><![CDATA[특별 대상]]></output>
+    <hint>or, and, %</hint>
+    <solution><![CDATA[age = int(input())
+if age < 18 or age >= 65 or (age % 2 == 1 and 30 <= age <= 39):
+    print("특별 대상")
+else:
+    print("일반 대상")]]></solution>
+  </problem>
+
+  <!-- 문제 3: 문자열 역설 조건 -->
+  <problem>
+    <description>문자열을 입력받아서 다음 조건을 만족하면 "역설 문자열"을, 아니면 "정상 문자열"을 출력하세요. (조건: 알파벳이 아니지만 대문자도 아니고 소문자도 아님)</description>
+    <code></code>
+    <input><![CDATA[123!@#]]></input>
+    <output><![CDATA[역설 문자열]]></output>
+    <hint>not, and, .isalpha(), .isupper(), .islower()</hint>
+    <solution><![CDATA[text = input()
+if not text.isalpha() and not text.isupper() and not text.islower():
+    print("역설 문자열")
+else:
+    print("정상 문자열")]]></solution>
+  </problem>
+
+  <!-- 문제 4: 복잡한 점수 조건 -->
+  <problem>
+    <description>세 과목의 점수를 입력받아서 다음 조건을 만족하면 "합격", 아니면 "불합격"을 출력하세요. (조건: 평균이 70점 이상이고, 모든 과목이 50점 이상이며, 적어도 한 과목은 80점 이상)</description>
+    <code></code>
+    <input><![CDATA[75
+65
+85]]></input>
+    <output><![CDATA[합격]]></output>
+    <hint>and, or</hint>
+    <solution><![CDATA[score1 = int(input())
+score2 = int(input())
+score3 = int(input())
+average = (score1 + score2 + score3) / 3
+
+if average >= 70 and score1 >= 50 and score2 >= 50 and score3 >= 50 and (score1 >= 80 or score2 >= 80 or score3 >= 80):
+    print("합격")
+else:
+    print("불합격")]]></solution>
+  </problem>
+
+  <!-- 문제 5: 문자열 길이와 내용의 모순 -->
+  <problem>
+    <description>문자열을 입력받아서 다음 조건을 만족하면 "모순 문자열"을, 아니면 "일치 문자열"을 출력하세요. (조건: 길이가 3자 이하이지만 "long"이라는 단어를 포함하거나, 길이가 10자 이상이지만 "short"라는 단어를 포함)</description>
+    <code></code>
+    <input><![CDATA[very long string contains short]]></input>
+    <output><![CDATA[모순 문자열]]></output>
+    <hint>or, and, len(), in</hint>
+    <solution><![CDATA[text = input()
+if (len(text) <= 3 and "long" in text) or (len(text) >= 10 and "short" in text):
+    print("모순 문자열")
+else:
+    print("일치 문자열")]]></solution>
+  </problem>
+
+  <!-- 문제 6: 숫자의 특별한 성질 -->
+  <problem>
+    <description>숫자를 입력받아서 다음 조건을 만족하면 "특별한 수", 아니면 "보통 수"를 출력하세요. (조건: 2의 배수가 아니고 3의 배수가 아니지만, 5의 배수이거나 7의 배수)</description>
+    <code></code>
+    <input><![CDATA[25]]></input>
+    <output><![CDATA[특별한 수]]></output>
+    <hint>not, and, or, %</hint>
+    <solution><![CDATA[num = int(input())
+if num % 2 != 0 and num % 3 != 0 and (num % 5 == 0 or num % 7 == 0):
+    print("특별한 수")
+else:
+    print("보통 수")]]></solution>
+  </problem>
+
+  <!-- 문제 7: 리스트 조건의 트릭 -->
+  <problem>
+    <description>공백으로 구분된 단어들을 입력받아서 다음 조건을 만족하면 "트릭 리스트", 아니면 "정상 리스트"를 출력하세요. (조건: 단어 개수가 홀수이고, 첫 번째 단어가 마지막 단어와 같지 않으며, 모든 단어가 알파벳으로만 구성됨)</description>
+    <code></code>
+    <input><![CDATA[apple banana cherry]]></input>
+    <output><![CDATA[트릭 리스트]]></output>
+    <hint>and, not, %, .split(), .isalpha()</hint>
+    <solution><![CDATA[words = input().split()
+all_alpha = True
+for word in words:
+    if not word.isalpha():
+        all_alpha = False
+        break
+
+if len(words) % 2 == 1 and words[0] != words[-1] and all_alpha:
+    print("트릭 리스트")
+else:
+    print("정상 리스트")]]></solution>
+  </problem>
+
+  <!-- 문제 8: 문자열 시작과 끝의 함정 -->
+  <problem>
+    <description>문자열을 입력받아서 다음 조건을 만족하면 "함정 문자열", 아니면 "안전 문자열"을 출력하세요. (조건: 'a'로 시작하지 않지만 'a'가 포함되거나, 'z'로 끝나지 않지만 'z'가 포함됨)</description>
+    <code></code>
+    <input><![CDATA[banana]]></input>
+    <output><![CDATA[함정 문자열]]></output>
+    <hint>not, and, or, in, .startswith(), .endswith()</hint>
+    <solution><![CDATA[text = input()
+if (not text.startswith('a') and 'a' in text) or (not text.endswith('z') and 'z' in text):
+    print("함정 문자열")
+else:
+    print("안전 문자열")]]></solution>
+  </problem>
+
+  <!-- 문제 9: 온도와 계절의 이상 -->
+  <problem>
+    <description>온도와 월을 입력받아서 다음 조건을 만족하면 "이상 기후", 아니면 "정상 기후"를 출력하세요. (조건: 겨울(12,1,2월)인데 25도 이상이거나, 여름(6,7,8월)인데 15도 이하이거나, 봄가을(3,4,5,9,10,11월)인데 30도 이상 또는 5도 이하)</description>
+    <code></code>
+    <input><![CDATA[30
+12]]></input>
+    <output><![CDATA[이상 기후]]></output>
+    <hint>or, and, in</hint>
+    <solution><![CDATA[temp = int(input())
+month = int(input())
+winter = [12, 1, 2]
+summer = [6, 7, 8]
+spring_fall = [3, 4, 5, 9, 10, 11]
+
+if (month in winter and temp >= 25) or (month in summer and temp <= 15) or (month in spring_fall and (temp >= 30 or temp <= 5)):
+    print("이상 기후")
+else:
+    print("정상 기후")]]></solution>
+  </problem>
+
+  <!-- 문제 10: 종합 필터링 도전 -->
+  <problem>
+    <description>사용자 이름과 나이를 입력받아서 다음 조건을 모두 만족하면 "VIP 회원", 하나라도 만족하면 "일반 회원", 모두 불만족하면 "비회원"을 출력하세요. (VIP 조건: 이름이 4자 이상이고 알파벳으로만 구성되며 나이가 20세 이상 65세 미만 / 일반 조건: 이름에 모음(a,e,i,o,u)이 포함되거나 나이가 짝수)</description>
+    <code></code>
+    <input><![CDATA[John
+25]]></input>
+    <output><![CDATA[VIP 회원]]></output>
+    <hint>and, or, len(), .isalpha(), in, %</hint>
+    <solution><![CDATA[name = input()
+age = int(input())
+vowels = ['a', 'e', 'i', 'o', 'u']
+has_vowel = False
+for char in name.lower():
+    if char in vowels:
+        has_vowel = True
+        break
+
+# VIP 조건
+if len(name) >= 4 and name.isalpha() and 20 <= age < 65:
+    print("VIP 회원")
+# 일반 조건
+elif has_vowel or age % 2 == 0:
+    print("일반 회원")
+else:
+    print("비회원")]]></solution>
+  </problem>
+</problems>

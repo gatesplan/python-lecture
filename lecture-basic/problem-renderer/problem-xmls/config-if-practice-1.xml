@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  if문 종합 연습문제 1
+  
+  구성:
+  - Section 1: 기본 if문 (3문제)
+  - Section 2: if-else문 (3문제)  
+  - Section 3: if-elif-else문 (3문제)
+  - Section 4: 논리연산자 활용 (3문제)
+  - Section 5: 중첩 if문 (3문제)
+  
+  총 15문제로 구성된 if문 종합 연습
+-->
+<exercise>
+  <title>Exercise 5. if문 종합 연습 1</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- true: 해설 표시, false: 해설 숨김 -->
+  </settings>
+  <sections>
+    <section title="Section 1 - 기본 if문" file="problems-if-basic.xml" count="3"/>
+    <section title="Section 2 - if-else문" file="problems-if-ifelse.xml" count="3"/>
+    <section title="Section 3 - if-elif-else문" file="problems-if-ifelifelse.xml" count="3"/>
+    <section title="Section 4 - 논리연산자 활용" file="problems-if-andornot.xml" count="3"/>
+    <section title="Section 5 - 중첩 if문" file="problems-if-nested.xml" count="3"/>
+  </sections>
+</exercise>

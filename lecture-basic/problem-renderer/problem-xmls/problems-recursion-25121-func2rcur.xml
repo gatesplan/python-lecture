@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  제어문을 재귀함수로 변환 연습 - 2025.1.21 생성
+  
+  이 파일은 제어문(for, while, if)으로 구현된 코드를 재귀함수로 
+  변환하는 연습 문제들을 포함합니다.
+  
+  학습 목표:
+  - 반복문의 동작 원리를 재귀함수로 이해하기
+  - 재귀함수의 기저 조건과 재귀 호출 설계
+  - 반복적 사고를 재귀적 사고로 전환하기
+-->
+<problems>
+
+  <!-- 1. n개 문자 출력 -->
+  <problem>
+    <description><![CDATA[다음 제어문으로 구현된 함수를 재귀함수로 변환하세요.]]></description>
+    <code><![CDATA[# 제어문 구현
+def print_char_n_times_iterative(char, n):
+    for i in range(n):
+        print(char, end='')
+
+# 재귀함수로 변환하여 구현하세요
+def print_char_n_times(char, n):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print_char_n_times('*', 5)  # ***** 가 출력되어야 합니다]]></code>
+    <input><![CDATA[char='*', n=5]]></input>
+    <output><![CDATA[*****]]></output>
+    <solution><![CDATA[def print_char_n_times(char, n):
+    if n <= 0:
+        return
+    print(char, end='')
+    print_char_n_times(char, n - 1)]]></solution>
+  </problem>
+
+  <!-- 2. 1부터 n까지 한 줄씩 출력 -->
+  <problem>
+    <description><![CDATA[다음 제어문으로 구현된 함수를 재귀함수로 변환하세요.]]></description>
+    <code><![CDATA[# 제어문 구현
+def print_1_to_n_iterative(n):
+    for i in range(1, n + 1):
+        print(i)
+
+# 재귀함수로 변환하여 구현하세요
+def print_1_to_n(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print_1_to_n(5)]]></code>
+    <input><![CDATA[5]]></input>
+    <output><![CDATA[1
+2
+3
+4
+5]]></output>
+    <solution><![CDATA[def print_1_to_n(n):
+    if n <= 0:
+        return
+    print_1_to_n(n - 1)
+    print(n)]]></solution>
+  </problem>
+
+  <!-- 3. 별 삼각형 -->
+  <problem>
+    <description><![CDATA[다음 제어문으로 구현된 함수를 재귀함수로 변환하세요.]]></description>
+    <code><![CDATA[# 제어문 구현
+def star_triangle_iterative(n):
+    for i in range(1, n + 1):
+        print('*' * i)
+
+# 재귀함수로 변환하여 구현하세요
+def star_triangle(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+star_triangle(5)]]></code>
+    <input><![CDATA[5]]></input>
+    <output><![CDATA[*
+**
+***
+****
+*****]]></output>
+    <solution><![CDATA[def star_triangle(n, current=1):
+    if current > n:
+        return
+    print('*' * current)
+    star_triangle(n, current + 1)]]></solution>
+  </problem>
+
+  <!-- 4. 역별 삼각형 -->
+  <problem>
+    <description><![CDATA[다음 제어문으로 구현된 함수를 재귀함수로 변환하세요.]]></description>
+    <code><![CDATA[# 제어문 구현
+def reverse_star_triangle_iterative(n):
+    for i in range(n, 0, -1):
+        print('*' * i)
+
+# 재귀함수로 변환하여 구현하세요
+def reverse_star_triangle(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+reverse_star_triangle(5)]]></code>
+    <input><![CDATA[5]]></input>
+    <output><![CDATA[*****
+****
+***
+**
+*]]></output>
+    <solution><![CDATA[def reverse_star_triangle(n):
+    if n <= 0:
+        return
+    print('*' * n)
+    reverse_star_triangle(n - 1)]]></solution>
+  </problem>
+
+  <!-- 5. 숫자 삼각형 -->
+  <problem>
+    <description><![CDATA[다음 제어문으로 구현된 함수를 재귀함수로 변환하세요.]]></description>
+    <code><![CDATA[# 제어문 구현
+def number_triangle_iterative(n):
+    for i in range(1, n + 1):
+        print(str(i) * i)
+
+# 재귀함수로 변환하여 구현하세요
+def number_triangle(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+number_triangle(5)]]></code>
+    <input><![CDATA[5]]></input>
+    <output><![CDATA[1
+22
+333
+4444
+55555]]></output>
+    <solution><![CDATA[def number_triangle(n):
+    if n <= 0:
+        return
+    number_triangle(n - 1)
+    print(str(n) * n)]]></solution>
+  </problem>
+
+  <!-- 6. 팩토리얼 -->
+  <problem>
+    <description><![CDATA[다음 제어문으로 구현된 함수를 재귀함수로 변환하세요.]]></description>
+    <code><![CDATA[# 제어문 구현
+def factorial_iterative(n):
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+    return result
+
+# 재귀함수로 변환하여 구현하세요
+def factorial(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(f"factorial(5) = {factorial(5)}")  # 120이 나와야 합니다
+print(f"factorial(0) = {factorial(0)}")  # 1이 나와야 합니다]]></code>
+    <input><![CDATA[5]]></input>
+    <output><![CDATA[120]]></output>
+    <solution><![CDATA[def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)]]></solution>
+  </problem>
+
+  <!-- 7. 리스트 합계 -->
+  <problem>
+    <description><![CDATA[다음 제어문으로 구현된 함수를 재귀함수로 변환하세요.]]></description>
+    <code><![CDATA[# 제어문 구현
+def sum_list_iterative(numbers):
+    total = 0
+    for num in numbers:
+        total += num
+    return total
+
+# 재귀함수로 변환하여 구현하세요
+def sum_list(numbers):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(f"sum_list([1, 2, 3, 4, 5]) = {sum_list([1, 2, 3, 4, 5])}")  # 15가 나와야 합니다
+print(f"sum_list([]) = {sum_list([])}")  # 0이 나와야 합니다]]></code>
+    <input><![CDATA[[1, 2, 3, 4, 5]]]></input>
+    <output><![CDATA[15]]></output>
+    <solution><![CDATA[def sum_list(numbers):
+    if not numbers:
+        return 0
+    return numbers[0] + sum_list(numbers[1:])]]></solution>
+  </problem>
+
+  <!-- 8. 최대공약수 (유클리드 호제법) -->
+  <problem>
+    <description><![CDATA[다음 제어문으로 구현된 함수를 재귀함수로 변환하세요.]]></description>
+    <code><![CDATA[# 제어문 구현
+def gcd_iterative(a, b):
+    while b != 0:
+        temp = b
+        b = a % b
+        a = temp
+    return a
+
+# 재귀함수로 변환하여 구현하세요
+def gcd(a, b):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(f"gcd(48, 18) = {gcd(48, 18)}")   # 6이 나와야 합니다
+print(f"gcd(56, 42) = {gcd(56, 42)}")   # 14가 나와야 합니다]]></code>
+    <input><![CDATA[a=48, b=18]]></input>
+    <output><![CDATA[6]]></output>
+    <solution><![CDATA[def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a % b)]]></solution>
+  </problem>
+
+  <!-- 9. 10진수를 2진수로 변환 -->
+  <problem>
+    <description><![CDATA[다음 제어문으로 구현된 함수를 재귀함수로 변환하세요.]]></description>
+    <code><![CDATA[# 제어문 구현
+def decimal_to_binary_iterative(n):
+    if n == 0:
+        return "0"
+    
+    result = ""
+    while n > 0:
+        result = str(n % 2) + result
+        n = n // 2
+    return result
+
+# 재귀함수로 변환하여 구현하세요
+def decimal_to_binary(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(f"decimal_to_binary(10) = {decimal_to_binary(10)}")  # 1010이 나와야 합니다
+print(f"decimal_to_binary(7) = {decimal_to_binary(7)}")    # 111이 나와야 합니다]]></code>
+    <input><![CDATA[10]]></input>
+    <output><![CDATA[1010]]></output>
+    <solution><![CDATA[def decimal_to_binary(n):
+    if n == 0:
+        return "0"
+    if n == 1:
+        return "1"
+    return decimal_to_binary(n // 2) + str(n % 2)]]></solution>
+  </problem>
+
+  <!-- 10. 거듭제곱 -->
+  <problem>
+    <description><![CDATA[다음 제어문으로 구현된 함수를 재귀함수로 변환하세요.]]></description>
+    <code><![CDATA[# 제어문 구현
+def power_iterative(base, exponent):
+    result = 1
+    for i in range(exponent):
+        result *= base
+    return result
+
+# 재귀함수로 변환하여 구현하세요
+def power(base, exponent):
+    # 여기에 코드를 작성하세요
+    pass
+
+# 테스트
+print(f"power(2, 5) = {power(2, 5)}")   # 32가 나와야 합니다
+print(f"power(3, 4) = {power(3, 4)}")   # 81이 나와야 합니다
+print(f"power(5, 0) = {power(5, 0)}")   # 1이 나와야 합니다]]></code>
+    <input><![CDATA[base=2, exponent=5]]></input>
+    <output><![CDATA[32]]></output>
+    <solution><![CDATA[def power(base, exponent):
+    if exponent == 0:
+        return 1
+    return base * power(base, exponent - 1)]]></solution>
+  </problem>
+
+</problems>

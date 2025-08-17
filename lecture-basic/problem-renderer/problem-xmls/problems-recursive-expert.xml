@@ -28,7 +28,7 @@ print(sum_even(6))   # 12가 나와야 합니다
 print(sum_even(10))  # 30이 나와야 합니다]]></code>
     <input><![CDATA[6]]></input>
     <output><![CDATA[12]]></output>
-    <hint>기저 조건: n이 0 이하이면 0을 반환합니다. 재귀 호출: n이 짝수이면 n을 더하고, 홀수이면 더하지 않은 채 sum_even(n-1)을 호출합니다.</hint>
+    <hint><![CDATA[기저 조건: n이 0 이하이면 0을 반환합니다. 재귀 호출: n이 짝수이면 n을 더하고, 홀수이면 더하지 않은 채 sum_even(n-1)을 호출합니다.]]></hint>
     <solution><![CDATA[def sum_even(n):
     # 기저 조건: n이 0 이하이면 0 반환
     if n <= 0:
@@ -66,7 +66,7 @@ print(sum_odd(6))   # 9가 나와야 합니다
 print(sum_odd(9))   # 25가 나와야 합니다]]></code>
     <input><![CDATA[6]]></input>
     <output><![CDATA[9]]></output>
-    <hint>기저 조건: n이 0 이하이면 0을 반환합니다. 재귀 호출: n이 홀수이면 n을 더하고, 짝수이면 더하지 않은 채 sum_odd(n-1)을 호출합니다.</hint>
+    <hint><![CDATA[기저 조건: n이 0 이하이면 0을 반환합니다. 재귀 호출: n이 홀수이면 n을 더하고, 짝수이면 더하지 않은 채 sum_odd(n-1)을 호출합니다.]]></hint>
     <solution><![CDATA[def sum_odd(n):
     # 기저 조건: n이 0 이하이면 0 반환
     if n <= 0:
@@ -104,7 +104,7 @@ print(reverse_number(1234))  # 4321이 나와야 합니다
 print(reverse_number(567))   # 765가 나와야 합니다]]></code>
     <input><![CDATA[1234]]></input>
     <output><![CDATA[4321]]></output>
-    <hint>보조 매개변수 reversed_n을 사용합니다. 기저 조건: n이 0이면 reversed_n을 반환합니다. 재귀 호출: reverse_number(n//10, reversed_n*10 + n%10)을 반환합니다.</hint>
+    <hint><![CDATA[보조 매개변수 reversed_n을 사용합니다. 기저 조건: n이 0이면 reversed_n을 반환합니다. 재귀 호출: reverse_number(n//10, reversed_n*10 + n%10)을 반환합니다.]]></hint>
     <solution><![CDATA[def reverse_number(n, reversed_n=0):
     # 기저 조건: n이 0이면 뒤집은 결과 반환
     if n == 0:
@@ -144,7 +144,7 @@ print(count_value([1, 2, 1, 3, 1, 4], 1))  # 3이 나와야 합니다
 print(count_value([5, 5, 5, 2], 5))        # 3이 나와야 합니다]]></code>
     <input><![CDATA[arr=[1, 2, 1, 3, 1, 4], target=1]]></input>
     <output><![CDATA[3]]></output>
-    <hint>기저 조건: 리스트가 비어있으면 0을 반환합니다. 재귀 호출: 첫 번째 원소가 target과 같으면 1을 더하고, 그렇지 않으면 0을 더한 다음 count_value(arr[1:], target)을 호출합니다.</hint>
+    <hint><![CDATA[기저 조건: 리스트가 비어있으면 0을 반환합니다. 재귀 호출: 첫 번째 원소가 target과 같으면 1을 더하고, 그렇지 않으면 0을 더한 다음 count_value(arr[1:], target)을 호출합니다.]]></hint>
     <solution><![CDATA[def count_value(arr, target):
     # 기저 조건: 빈 리스트이면 0 반환
     if not arr:
@@ -188,7 +188,7 @@ print(find_max([3, 7, 1, 9, 2]))  # 9가 나와야 합니다
 print(find_max([5]))              # 5가 나와야 합니다]]></code>
     <input><![CDATA[[3, 7, 1, 9, 2]]]></input>
     <output><![CDATA[9]]></output>
-    <hint>기저 조건: 리스트에 원소가 1개면 그 원소를 반환합니다. 재귀 호출: 첫 번째 원소와 나머지 원소들 중 최댓값을 비교하여 더 큰 값을 반환합니다.</hint>
+    <hint><![CDATA[기저 조건: 리스트에 원소가 1개면 그 원소를 반환합니다. 재귀 호출: 첫 번째 원소와 나머지 원소들 중 최댓값을 비교하여 더 큰 값을 반환합니다.]]></hint>
     <solution><![CDATA[def find_max(arr):
     # 기저 조건: 리스트에 원소가 1개면 그 원소가 최댓값
     if len(arr) == 1:
@@ -231,7 +231,7 @@ print(find_min([3, 7, 1, 9, 2]))  # 1이 나와야 합니다
 print(find_min([5]))              # 5가 나와야 합니다]]></code>
     <input><![CDATA[[3, 7, 1, 9, 2]]]></input>
     <output><![CDATA[1]]></output>
-    <hint>기저 조건: 리스트에 원소가 1개면 그 원소를 반환합니다. 재귀 호출: 첫 번째 원소와 나머지 원소들 중 최솟값을 비교하여 더 작은 값을 반환합니다.</hint>
+    <hint><![CDATA[기저 조건: 리스트에 원소가 1개면 그 원소를 반환합니다. 재귀 호출: 첫 번째 원소와 나머지 원소들 중 최솟값을 비교하여 더 작은 값을 반환합니다.]]></hint>
     <solution><![CDATA[def find_min(arr):
     # 기저 조건: 리스트에 원소가 1개면 그 원소가 최솟값
     if len(arr) == 1:
@@ -279,7 +279,7 @@ print(fibonacci(6))   # 8이 나와야 합니다
 print(fibonacci(10))  # 55가 나와야 합니다]]></code>
     <input><![CDATA[6]]></input>
     <output><![CDATA[8]]></output>
-    <hint>기저 조건: n이 0이면 0, n이 1이면 1을 반환합니다. 재귀 호출: fibonacci(n-1) + fibonacci(n-2)를 반환합니다.</hint>
+    <hint><![CDATA[기저 조건: n이 0이면 0, n이 1이면 1을 반환합니다. 재귀 호출: fibonacci(n-1) + fibonacci(n-2)를 반환합니다.]]></hint>
     <solution><![CDATA[def fibonacci(n):
     # 기저 조건: F(0) = 0, F(1) = 1
     if n == 0:
@@ -325,7 +325,7 @@ print(simple_combination(5, 1))  # 5가 나와야 합니다 (5C1)
 print(simple_combination(5, 5))  # 1이 나와야 합니다 (5C5)]]></code>
     <input><![CDATA[n=5, r=1]]></input>
     <output><![CDATA[5]]></output>
-    <hint>기저 조건들: r==0이면 1, r==n이면 1, r==1이면 n을 반환합니다. 다른 경우는 "지원하지 않음"을 출력하거나 -1을 반환합니다.</hint>
+    <hint><![CDATA[기저 조건들: r==0이면 1, r==n이면 1, r==1이면 n을 반환합니다. 다른 경우는 "지원하지 않음"을 출력하거나 -1을 반환합니다.]]></hint>
     <solution><![CDATA[def simple_combination(n, r):
     # 기저 조건들: 조합의 기본 성질 활용
     if r == 0:          # nC0 = 1
@@ -368,7 +368,7 @@ print(reverse_string("python"))  # "nohtyp"가 나와야 합니다
 print(reverse_string("a"))       # "a"가 나와야 합니다]]></code>
     <input><![CDATA["hello"]]></input>
     <output><![CDATA["olleh"]]></output>
-    <hint>기저 조건: 문자열 길이가 0 또는 1이면 그대로 반환합니다. 재귀 호출: s[1:]을 뒤집은 결과에 s[0]을 뒤에 붙입니다.</hint>
+    <hint><![CDATA[기저 조건: 문자열 길이가 0 또는 1이면 그대로 반환합니다. 재귀 호출: s[1:]을 뒤집은 결과에 s[0]을 뒤에 붙입니다.]]></hint>
     <solution><![CDATA[def reverse_string(s):
     # 기저 조건: 빈 문자열이거나 한 글자이면 그대로 반환
     if len(s) <= 1:
@@ -409,7 +409,7 @@ print(is_palindrome("a"))        # True가 나와야 합니다
 print(is_palindrome(""))         # True가 나와야 합니다]]></code>
     <input><![CDATA["racecar"]]></input>
     <output><![CDATA[True]]></output>
-    <hint>기저 조건: 문자열 길이가 0 또는 1이면 True를 반환합니다. 재귀 호출: 첫 글자와 마지막 글자가 같으면 가운데 부분을 재귀적으로 검사하고, 다르면 False를 반환합니다.</hint>
+    <hint><![CDATA[기저 조건: 문자열 길이가 0 또는 1이면 True를 반환합니다. 재귀 호출: 첫 글자와 마지막 글자가 같으면 가운데 부분을 재귀적으로 검사하고, 다르면 False를 반환합니다.]]></hint>
     <solution><![CDATA[def is_palindrome(s):
     # 기저 조건: 빈 문자열이거나 한 글자이면 회문
     if len(s) <= 1:
@@ -456,7 +456,7 @@ print(remove_char("python", 'y'))       # "pthon"이 나와야 합니다
 print(remove_char("aaaaaa", 'a'))       # ""가 나와야 합니다]]></code>
     <input><![CDATA[s="hello world", char='l']]></input>
     <output><![CDATA["heo word"]]></output>
-    <hint>기저 조건: 빈 문자열이면 빈 문자열을 반환합니다. 재귀 호출: 첫 글자가 제거할 문자와 같으면 제외하고, 다르면 포함해서 나머지 부분을 재귀 처리합니다.</hint>
+    <hint><![CDATA[기저 조건: 빈 문자열이면 빈 문자열을 반환합니다. 재귀 호출: 첫 글자가 제거할 문자와 같으면 제외하고, 다르면 포함해서 나머지 부분을 재귀 처리합니다.]]></hint>
     <solution><![CDATA[def remove_char(s, char):
     # 기저 조건: 빈 문자열이면 빈 문자열 반환
     if not s:
@@ -505,7 +505,7 @@ print(toggle_case("PyThOn"))       # "pYtHoN"이 나와야 합니다
 print(toggle_case("123abc"))       # "123ABC"가 나와야 합니다]]></code>
     <input><![CDATA["Hello World"]]></input>
     <output><![CDATA["hELLO wORLD"]]></output>
-    <hint>기저 조건: 빈 문자열이면 빈 문자열을 반환합니다. 재귀 호출: 첫 글자의 대소문자를 변환하고 나머지 부분을 재귀 처리한 결과와 합칩니다.</hint>
+    <hint><![CDATA[기저 조건: 빈 문자열이면 빈 문자열을 반환합니다. 재귀 호출: 첫 글자의 대소문자를 변환하고 나머지 부분을 재귀 처리한 결과와 합칩니다.]]></hint>
     <solution><![CDATA[def toggle_case(s):
     # 기저 조건: 빈 문자열이면 빈 문자열 반환
     if not s:
@@ -557,7 +557,7 @@ print(gcd(56, 42))   # 14가 나와야 합니다
 print(gcd(17, 13))   # 1이 나와야 합니다]]></code>
     <input><![CDATA[a=48, b=18]]></input>
     <output><![CDATA[6]]></output>
-    <hint>기저 조건: b가 0이면 a를 반환합니다. 재귀 호출: gcd(b, a % b)를 반환합니다.</hint>
+    <hint><![CDATA[기저 조건: b가 0이면 a를 반환합니다. 재귀 호출: gcd(b, a % b)를 반환합니다.]]></hint>
     <solution><![CDATA[def gcd(a, b):
     # 기저 조건: b가 0이면 a가 최대공약수
     if b == 0:
@@ -601,7 +601,7 @@ print(collatz_steps(2))   # 1이 나와야 합니다 (2→1)
 print(collatz_steps(3))   # 7이 나와야 합니다 (3→10→5→16→8→4→2→1)]]></code>
     <input><![CDATA[3]]></input>
     <output><![CDATA[7]]></output>
-    <hint>기저 조건: n이 1이면 0을 반환합니다. 재귀 호출: n이 짝수이면 1 + collatz_steps(n//2), 홀수이면 1 + collatz_steps(3*n+1)을 반환합니다.</hint>
+    <hint><![CDATA[기저 조건: n이 1이면 0을 반환합니다. 재귀 호출: n이 짝수이면 1 + collatz_steps(n//2), 홀수이면 1 + collatz_steps(3*n+1)을 반환합니다.]]></hint>
     <solution><![CDATA[def collatz_steps(n):
     # 기저 조건: n이 1이면 더 이상 단계가 필요 없음
     if n == 1:
@@ -666,7 +666,7 @@ print(binary_search(arr, 4))   # -1이 나와야 합니다
 print(binary_search(arr, 15))  # 7이 나와야 합니다]]></code>
     <input><![CDATA[arr=[1,3,5,7,9,11,13,15], target=7]]></input>
     <output><![CDATA[3]]></output>
-    <hint>기저 조건: left > right이면 -1을 반환합니다. 중간값과 target을 비교해서 같으면 인덱스를, 작으면 오른쪽 절반을, 크면 왼쪽 절반을 재귀 탐색합니다.</hint>
+    <hint><![CDATA[기저 조건: left > right이면 -1을 반환합니다. 중간값과 target을 비교해서 같으면 인덱스를, 작으면 오른쪽 절반을, 크면 왼쪽 절반을 재귀 탐색합니다.]]></hint>
     <solution><![CDATA[def binary_search(arr, target, left=0, right=None):
     # right가 None이면 배열 끝으로 설정
     if right is None:
@@ -719,7 +719,7 @@ print(find_index([1, 2, 3, 4], 5))      # -1이 나와야 합니다
 print(find_index([1, 2, 3, 4], 4))      # 3이 나와야 합니다]]></code>
     <input><![CDATA[arr=[1,3,5,7,3], target=3]]></input>
     <output><![CDATA[1]]></output>
-    <hint>기저 조건: index가 배열 크기 이상이면 -1을 반환합니다. arr[index]가 target과 같으면 index를 반환하고, 다르면 find_index(arr, target, index+1)을 호출합니다.</hint>
+    <hint><![CDATA[기저 조건: index가 배열 크기 이상이면 -1을 반환합니다. arr[index]가 target과 같으면 index를 반환하고, 다르면 find_index(arr, target, index+1)을 호출합니다.]]></hint>
     <solution><![CDATA[def find_index(arr, target, index=0):
     # 기저 조건: 인덱스가 배열 범위를 벗어나면 찾지 못함
     if index >= len(arr):
@@ -785,7 +785,7 @@ print(count_even([1, 3, 5]))           # 0이 나와야 합니다
 print(count_even([2, 4, 6, 8]))        # 4가 나와야 합니다]]></code>
     <input><![CDATA[[1, 2, 3, 4, 5, 6]]]></input>
     <output><![CDATA[3]]></output>
-    <hint>기저 조건: 빈 리스트이면 0을 반환합니다. 재귀 호출: 첫 번째 원소가 짝수이면 1을 더하고, 아니면 0을 더한 다음 나머지 부분을 재귀 처리합니다.</hint>
+    <hint><![CDATA[기저 조건: 빈 리스트이면 0을 반환합니다. 재귀 호출: 첫 번째 원소가 짝수이면 1을 더하고, 아니면 0을 더한 다음 나머지 부분을 재귀 처리합니다.]]></hint>
     <solution><![CDATA[def count_even(arr):
     # 기저 조건: 빈 리스트이면 0 반환
     if not arr:
