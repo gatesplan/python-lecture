@@ -15,23 +15,18 @@
   <!-- 1. n개 문자 출력 -->
   <problem>
     <description><![CDATA[다음 재귀함수를 제어문만 사용하여 하나의 함수로 구현하세요.]]></description>
-    <code><![CDATA[# 재귀함수 구현
-def print_char_n_times_recursive(char, n):
+    <code><![CDATA[def apple_recursive(char, n):
     if n <= 0:
         return
     print(char, end='')
-    print_char_n_times_recursive(char, n - 1)
+    apple_recursive(char, n - 1)
 
-# 제어문으로 변환하여 구현하세요
-def print_char_n_times(char, n):
+def apple(char, n):
     # 여기에 코드를 작성하세요
-    pass
-
-# 테스트
-print_char_n_times('*', 5)  # ***** 가 출력되어야 합니다]]></code>
+    pass]]></code>
     <input><![CDATA[char='*', n=5]]></input>
     <output><![CDATA[*****]]></output>
-    <solution><![CDATA[def print_char_n_times(char, n):
+    <solution><![CDATA[def apple(char, n):
     for i in range(n):
         print(char, end='')]]></solution>
   </problem>
@@ -39,27 +34,22 @@ print_char_n_times('*', 5)  # ***** 가 출력되어야 합니다]]></code>
   <!-- 2. 1부터 n까지 한 줄씩 출력 -->
   <problem>
     <description><![CDATA[다음 재귀함수를 제어문만 사용하여 하나의 함수로 구현하세요.]]></description>
-    <code><![CDATA[# 재귀함수 구현
-def print_1_to_n_recursive(n):
+    <code><![CDATA[def banana_recursive(n):
     if n <= 0:
         return
-    print_1_to_n_recursive(n - 1)
+    banana_recursive(n - 1)
     print(n)
 
-# 제어문으로 변환하여 구현하세요
-def print_1_to_n(n):
+def banana(n):
     # 여기에 코드를 작성하세요
-    pass
-
-# 테스트
-print_1_to_n(5)]]></code>
+    pass]]></code>
     <input><![CDATA[5]]></input>
     <output><![CDATA[1
 2
 3
 4
 5]]></output>
-    <solution><![CDATA[def print_1_to_n(n):
+    <solution><![CDATA[def banana(n):
     for i in range(1, n + 1):
         print(i)]]></solution>
   </problem>
@@ -67,27 +57,22 @@ print_1_to_n(5)]]></code>
   <!-- 3. 별 삼각형 -->
   <problem>
     <description><![CDATA[다음 재귀함수를 제어문만 사용하여 하나의 함수로 구현하세요.]]></description>
-    <code><![CDATA[# 재귀함수 구현
-def star_triangle_recursive(n, current=1):
+    <code><![CDATA[def cherry_recursive(n, current=1):
     if current > n:
         return
     print('*' * current)
-    star_triangle_recursive(n, current + 1)
+    cherry_recursive(n, current + 1)
 
-# 제어문으로 변환하여 구현하세요
-def star_triangle(n):
+def cherry(n):
     # 여기에 코드를 작성하세요
-    pass
-
-# 테스트
-star_triangle(5)]]></code>
+    pass]]></code>
     <input><![CDATA[5]]></input>
     <output><![CDATA[*
 **
 ***
 ****
 *****]]></output>
-    <solution><![CDATA[def star_triangle(n):
+    <solution><![CDATA[def cherry(n):
     for i in range(1, n + 1):
         print('*' * i)]]></solution>
   </problem>
@@ -95,27 +80,22 @@ star_triangle(5)]]></code>
   <!-- 4. 역별 삼각형 -->
   <problem>
     <description><![CDATA[다음 재귀함수를 제어문만 사용하여 하나의 함수로 구현하세요.]]></description>
-    <code><![CDATA[# 재귀함수 구현
-def reverse_star_triangle_recursive(n):
+    <code><![CDATA[def durian_recursive(n):
     if n <= 0:
         return
     print('*' * n)
-    reverse_star_triangle_recursive(n - 1)
+    durian_recursive(n - 1)
 
-# 제어문으로 변환하여 구현하세요
-def reverse_star_triangle(n):
+def durian(n):
     # 여기에 코드를 작성하세요
-    pass
-
-# 테스트
-reverse_star_triangle(5)]]></code>
+    pass]]></code>
     <input><![CDATA[5]]></input>
     <output><![CDATA[*****
 ****
 ***
 **
 *]]></output>
-    <solution><![CDATA[def reverse_star_triangle(n):
+    <solution><![CDATA[def durian(n):
     for i in range(n, 0, -1):
         print('*' * i)]]></solution>
   </problem>
@@ -123,27 +103,22 @@ reverse_star_triangle(5)]]></code>
   <!-- 5. 숫자 삼각형 -->
   <problem>
     <description><![CDATA[다음 재귀함수를 제어문만 사용하여 하나의 함수로 구현하세요.]]></description>
-    <code><![CDATA[# 재귀함수 구현
-def number_triangle_recursive(n):
+    <code><![CDATA[def elderberry_recursive(n):
     if n <= 0:
         return
-    number_triangle_recursive(n - 1)
+    elderberry_recursive(n - 1)
     print(str(n) * n)
 
-# 제어문으로 변환하여 구현하세요
-def number_triangle(n):
+def elderberry(n):
     # 여기에 코드를 작성하세요
-    pass
-
-# 테스트
-number_triangle(5)]]></code>
+    pass]]></code>
     <input><![CDATA[5]]></input>
     <output><![CDATA[1
 22
 333
 4444
 55555]]></output>
-    <solution><![CDATA[def number_triangle(n):
+    <solution><![CDATA[def elderberry(n):
     for i in range(1, n + 1):
         print(str(i) * i)]]></solution>
   </problem>
@@ -151,27 +126,22 @@ number_triangle(5)]]></code>
   <!-- 6. 숫자 역삼각형 -->
   <problem>
     <description><![CDATA[다음 재귀함수를 제어문만 사용하여 하나의 함수로 구현하세요.]]></description>
-    <code><![CDATA[# 재귀함수 구현
-def reverse_number_triangle_recursive(n):
+    <code><![CDATA[def fig_recursive(n):
     if n <= 0:
         return
     print(str(n) * n)
-    reverse_number_triangle_recursive(n - 1)
+    fig_recursive(n - 1)
 
-# 제어문으로 변환하여 구현하세요
-def reverse_number_triangle(n):
+def fig(n):
     # 여기에 코드를 작성하세요
-    pass
-
-# 테스트
-reverse_number_triangle(5)]]></code>
+    pass]]></code>
     <input><![CDATA[5]]></input>
     <output><![CDATA[55555
 4444
 333
 22
 1]]></output>
-    <solution><![CDATA[def reverse_number_triangle(n):
+    <solution><![CDATA[def fig(n):
     for i in range(n, 0, -1):
         print(str(i) * i)]]></solution>
   </problem>
@@ -179,23 +149,17 @@ reverse_number_triangle(5)]]></code>
   <!-- 7. 최대공약수 (유클리드 호제법) -->
   <problem>
     <description><![CDATA[다음 재귀함수를 제어문만 사용하여 하나의 함수로 구현하세요.]]></description>
-    <code><![CDATA[# 재귀함수 구현
-def gcd_recursive(a, b):
+    <code><![CDATA[def grape_recursive(a, b):
     if b == 0:
         return a
-    return gcd_recursive(b, a % b)
+    return grape_recursive(b, a % b)
 
-# 제어문으로 변환하여 구현하세요
-def gcd(a, b):
+def grape(a, b):
     # 여기에 코드를 작성하세요
-    pass
-
-# 테스트
-print(f"gcd(48, 18) = {gcd(48, 18)}")   # 6이 나와야 합니다
-print(f"gcd(56, 42) = {gcd(56, 42)}")   # 14가 나와야 합니다]]></code>
+    pass]]></code>
     <input><![CDATA[a=48, b=18]]></input>
     <output><![CDATA[6]]></output>
-    <solution><![CDATA[def gcd(a, b):
+    <solution><![CDATA[def grape(a, b):
     while b != 0:
         temp = b
         b = a % b
@@ -206,27 +170,20 @@ print(f"gcd(56, 42) = {gcd(56, 42)}")   # 14가 나와야 합니다]]></code>
   <!-- 8. 최소공배수 -->
   <problem>
     <description><![CDATA[다음 재귀함수를 제어문만 사용하여 하나의 함수로 구현하세요.]]></description>
-    <code><![CDATA[# 재귀함수 구현 (gcd 함수 포함)
-def gcd_recursive(a, b):
+    <code><![CDATA[def honeydew_recursive(a, b):
     if b == 0:
         return a
-    return gcd_recursive(b, a % b)
+    return honeydew_recursive(b, a % b)
 
-def lcm_recursive(a, b):
-    return (a * b) // gcd_recursive(a, b)
+def honeydew_lcm_recursive(a, b):
+    return (a * b) // honeydew_recursive(a, b)
 
-# 제어문으로 변환하여 구현하세요
-def lcm(a, b):
+def honeydew(a, b):
     # 여기에 코드를 작성하세요
-    pass
-
-# 테스트
-print(f"lcm(12, 18) = {lcm(12, 18)}")   # 36이 나와야 합니다
-print(f"lcm(15, 25) = {lcm(15, 25)}")   # 75가 나와야 합니다]]></code>
+    pass]]></code>
     <input><![CDATA[a=12, b=18]]></input>
     <output><![CDATA[36]]></output>
-    <solution><![CDATA[def lcm(a, b):
-    # gcd 계산을 위한 임시 변수
+    <solution><![CDATA[def honeydew(a, b):
     temp_a, temp_b = a, b
     while temp_b != 0:
         temp_a, temp_b = temp_b, temp_a % temp_b
@@ -238,31 +195,25 @@ print(f"lcm(15, 25) = {lcm(15, 25)}")   # 75가 나와야 합니다]]></code>
   <!-- 9. 10진수를 2진수로 변환 -->
   <problem>
     <description><![CDATA[다음 재귀함수를 제어문만 사용하여 하나의 함수로 구현하세요.]]></description>
-    <code><![CDATA[# 재귀함수 구현
-def decimal_to_binary_recursive(n):
+    <code><![CDATA[def kiwi_recursive(n):
     if n == 0:
         return "0"
     if n == 1:
         return "1"
-    return decimal_to_binary_recursive(n // 2) + str(n % 2)
+    return kiwi_recursive(n // 2) + str(n % 2)
 
-# 제어문으로 변환하여 구현하세요
-def decimal_to_binary(n):
+def kiwi(n):
     # 여기에 코드를 작성하세요
-    pass
-
-# 테스트
-print(f"decimal_to_binary(10) = {decimal_to_binary(10)}")  # "1010"
-print(f"decimal_to_binary(7) = {decimal_to_binary(7)}")    # "111"]]></code>
+    pass]]></code>
     <input><![CDATA[10]]></input>
     <output><![CDATA[1010]]></output>
-    <solution><![CDATA[def decimal_to_binary(n):
+    <solution><![CDATA[def kiwi(n):
     if n == 0:
         return "0"
     
     result = ""
     while n > 0:
-        result = str(n % 2) + result  # 앞에 추가
+        result = str(n % 2) + result
         n = n // 2
     return result]]></solution>
   </problem>
@@ -270,8 +221,7 @@ print(f"decimal_to_binary(7) = {decimal_to_binary(7)}")    # "111"]]></code>
   <!-- 10. 10진수를 n진수로 변환 -->
   <problem>
     <description><![CDATA[다음 재귀함수를 제어문만 사용하여 하나의 함수로 구현하세요.]]></description>
-    <code><![CDATA[# 재귀함수 구현
-def decimal_to_base_recursive(n, base):
+    <code><![CDATA[def lemon_recursive(n, base):
     if n == 0:
         return "0"
     if n < base:
@@ -286,19 +236,14 @@ def decimal_to_base_recursive(n, base):
     else:
         remainder_char = chr(ord('A') + remainder - 10)
     
-    return decimal_to_base_recursive(n // base, base) + remainder_char
+    return lemon_recursive(n // base, base) + remainder_char
 
-# 제어문으로 변환하여 구현하세요
-def decimal_to_base(n, base):
+def lemon(n, base):
     # 여기에 코드를 작성하세요
-    pass
-
-# 테스트
-print(f"decimal_to_base(255, 16) = {decimal_to_base(255, 16)}")  # "FF"
-print(f"decimal_to_base(100, 8) = {decimal_to_base(100, 8)}")   # "144"]]></code>
+    pass]]></code>
     <input><![CDATA[n=255, base=16]]></input>
     <output><![CDATA[FF]]></output>
-    <solution><![CDATA[def decimal_to_base(n, base):
+    <solution><![CDATA[def lemon(n, base):
     if n == 0:
         return "0"
     
