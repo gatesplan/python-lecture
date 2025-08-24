@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  이 파일은 전역변수의 기본 사용법을 반복 학습하기 위한 문제들을 포함합니다.
+  각 문제는 global 키워드 사용법부터 실용적인 패턴까지 다양한 상황에서
+  전역변수를 올바르게 사용하는 방법을 연습할 수 있도록 구성되어 있습니다.
+  
+  학습 목표:
+  - global 키워드의 올바른 사용법 익히기
+  - 전역변수를 활용한 카운터, 누적, 상태관리 패턴 학습
+  - 전역 리스트와 딕셔너리 활용법 익히기
+  - 간단한 프로그램에서의 전역변수 실용 사례 체험
+-->
+<problems>
+
+  <!-- 1. 기본 global 사용 -->
+  <problem>
+    <description><![CDATA[전역변수 counter를 1씩 증가시키는 함수를 작성하세요.
+global 키워드를 사용하여 전역변수를 수정해야 합니다.]]></description>
+    <code><![CDATA[counter = 0
+
+def increase():
+    pass]]></code>
+    <input><![CDATA[counter = 0]]></input>
+    <output><![CDATA[초기값: 0
+증가 후: 1
+다시 증가 후: 2]]></output>
+    <hint><![CDATA[global 키워드를 사용하여 전역변수 counter를 함수 내에서 수정할 수 있습니다.]]></hint>
+    <solution><![CDATA[def increase():
+    global counter
+    counter += 1]]></solution>
+  </problem>
+
+  <!-- 2. 함수 호출 횟수 세기 -->
+  <problem>
+    <description><![CDATA[함수가 호출될 때마다 호출 횟수를 기록하는 함수를 작성하세요.
+전역변수 call_count를 사용하여 호출 횟수를 추적합니다.]]></description>
+    <code><![CDATA[call_count = 0
+
+def track_calls():
+    pass
+    print(f"함수가 {call_count}번 호출되었습니다")]]></code>
+    <input><![CDATA[call_count = 0]]></input>
+    <output><![CDATA[함수가 1번 호출되었습니다
+함수가 2번 호출되었습니다
+함수가 3번 호출되었습니다]]></output>
+    <hint><![CDATA[global 키워드로 call_count를 수정하고, 함수 호출 시마다 1씩 증가시키세요.]]></hint>
+    <solution><![CDATA[def track_calls():
+    global call_count
+    call_count += 1
+    print(f"함수가 {call_count}번 호출되었습니다")]]></solution>
+  </problem>
+
+  <!-- 3. 누적 합계 -->
+  <problem>
+    <description><![CDATA[입력받은 숫자들을 전역변수에 누적하여 합계를 계산하는 함수를 작성하세요.]]></description>
+    <code><![CDATA[total = 0
+
+def add_to_total(num):
+    # 여기에 코드를 작성하세요
+    pass
+    print(f"현재 총합: {total}")
+
+# 테스트
+add_to_total(10)
+add_to_total(20)
+add_to_total(5)]]></code>
+    <input><![CDATA[10, 20, 5]]></input>
+    <output><![CDATA[현재 총합: 10
+현재 총합: 30
+현재 총합: 35]]></output>
+    <hint><![CDATA[global 키워드를 사용하여 total에 매개변수 num을 누적하세요.]]></hint>
+    <solution><![CDATA[def add_to_total(num):
+    global total
+    total += num
+    print(f"현재 총합: {total}")]]></solution>
+  </problem>
+
+  <!-- 4. 상태 토글 -->
+  <problem>
+    <description><![CDATA[전역변수 is_on을 사용하여 ON/OFF 상태를 전환하는 함수를 작성하세요.
+True이면 False로, False이면 True로 변경합니다.]]></description>
+    <code><![CDATA[is_on = False
+
+def toggle():
+    # 여기에 코드를 작성하세요
+    pass
+    print(f"상태: {'ON' if is_on else 'OFF'}")
+
+# 테스트
+print(f"초기 상태: {'ON' if is_on else 'OFF'}")
+toggle()
+toggle()
+toggle()]]></code>
+    <input><![CDATA[is_on = False]]></input>
+    <output><![CDATA[초기 상태: OFF
+상태: ON
+상태: OFF
+상태: ON]]></output>
+    <hint><![CDATA[global 키워드를 사용하여 is_on의 값을 반전시키세요. not is_on을 활용할 수 있습니다.]]></hint>
+    <solution><![CDATA[def toggle():
+    global is_on
+    is_on = not is_on
+    print(f"상태: {'ON' if is_on else 'OFF'}")]]></solution>
+  </problem>
+
+  <!-- 5. 최댓값 추적 -->
+  <problem>
+    <description><![CDATA[입력받은 숫자들 중 최댓값을 전역변수에 기록하는 함수를 작성하세요.]]></description>
+    <code><![CDATA[max_value = 0
+
+def update_max(num):
+    pass
+    print(f"현재 최댓값: {max_value}")]]></code>
+    <input><![CDATA[5, 12, 8, 15]]></input>
+    <output><![CDATA[현재 최댓값: 5
+현재 최댓값: 12
+현재 최댓값: 12
+현재 최댓값: 15]]></output>
+    <hint><![CDATA[입력받은 num이 현재 max_value보다 크면 max_value를 업데이트하세요.]]></hint>
+    <solution><![CDATA[def update_max(num):
+    global max_value
+    if num > max_value:
+        max_value = num
+    print(f"현재 최댓값: {max_value}")]]></solution>
+  </problem>
+
+  <!-- 6. 리스트에 추가 -->
+  <problem>
+    <description><![CDATA[전역 리스트에 항목을 추가하는 함수를 작성하세요.
+리스트를 직접 수정할 때는 global이 필요하지 않지만, 연습을 위해 사용해보세요.]]></description>
+    <code><![CDATA[items = []
+
+def add_item(item):
+    pass
+    print(f"현재 목록: {items}")]]></code>
+    <input><![CDATA["사과", "바나나", "오렌지"]]></input>
+    <output><![CDATA[현재 목록: ['사과']
+현재 목록: ['사과', '바나나']
+현재 목록: ['사과', '바나나', '오렌지']]]></output>
+    <hint><![CDATA[global 키워드를 사용하고 items.append(item)로 항목을 추가하세요.]]></hint>
+    <solution><![CDATA[def add_item(item):
+    global items
+    items.append(item)
+    print(f"현재 목록: {items}")]]></solution>
+  </problem>
+
+  <!-- 7. 게임 점수 시스템 -->
+  <problem>
+    <description><![CDATA[게임 점수를 관리하는 함수들을 작성하세요.
+점수를 추가하는 함수와 점수를 초기화하는 함수를 만드세요.]]></description>
+    <code><![CDATA[score = 0
+
+def add_score(points):
+    pass
+
+def reset_score():
+    pass]]></code>
+    <input><![CDATA[100, 50]]></input>
+    <output><![CDATA[현재 점수: 100
+현재 점수: 150
+리셋 후 점수: 0]]></output>
+    <hint><![CDATA[두 함수 모두 global score를 사용해야 합니다. add_score는 점수를 누적하고, reset_score는 0으로 설정하세요.]]></hint>
+    <solution><![CDATA[def add_score(points):
+    global score
+    score += points
+
+def reset_score():
+    global score
+    score = 0]]></solution>
+  </problem>
+
+  <!-- 8. 방문 기록 -->
+  <problem>
+    <description><![CDATA[함수가 방문되었는지 확인하는 시스템을 만드세요.
+처음 방문시 True로 설정하고, 방문 상태를 확인하는 함수를 작성하세요.]]></description>
+    <code><![CDATA[visited = False
+
+def visit():
+    pass
+    print("함수를 방문했습니다!")
+
+def check_visited():
+    if visited:
+        print("이미 방문한 함수입니다")
+    else:
+        print("아직 방문하지 않은 함수입니다")]]></code>
+    <input><![CDATA[visited = False]]></input>
+    <output><![CDATA[아직 방문하지 않은 함수입니다
+함수를 방문했습니다!
+이미 방문한 함수입니다]]></output>
+    <hint><![CDATA[visit 함수에서 global visited를 사용하여 True로 설정하세요.]]></hint>
+    <solution><![CDATA[def visit():
+    global visited
+    visited = True
+    print("함수를 방문했습니다!")]]></solution>
+  </problem>
+
+  <!-- 9. 설정값 변경 -->
+  <problem>
+    <description><![CDATA[프로그램의 언어 설정을 변경하는 함수를 작성하세요.
+기본값은 "한국어"이고, 영어/한국어로 변경할 수 있습니다.]]></description>
+    <code><![CDATA[language = "한국어"
+
+def set_language(lang):
+    pass
+    print(f"언어가 {language}로 설정되었습니다")]]></code>
+    <input><![CDATA["English", "한국어"]]></input>
+    <output><![CDATA[현재 언어: 한국어
+언어가 English로 설정되었습니다
+언어가 한국어로 설정되었습니다]]></output>
+    <hint><![CDATA[global language를 사용하여 매개변수 lang으로 설정값을 변경하세요.]]></hint>
+    <solution><![CDATA[def set_language(lang):
+    global language
+    language = lang
+    print(f"언어가 {language}로 설정되었습니다")]]></solution>
+  </problem>
+
+  <!-- 10. 간단한 잔액 관리 -->
+  <problem>
+    <description><![CDATA[은행 계좌의 잔액을 관리하는 입금, 출금 함수를 작성하세요.
+출금 시 잔액이 부족하면 "잔액 부족" 메시지를 출력하세요.]]></description>
+    <code><![CDATA[balance = 1000
+
+def deposit(amount):
+    pass
+
+def withdraw(amount):
+    pass]]></code>
+    <input><![CDATA[500, 300, 2000]]></input>
+    <output><![CDATA[초기 잔액: 1000
+입금 후: 1500
+출금 후: 1200
+잔액 부족]]></output>
+    <hint><![CDATA[두 함수 모두 global balance가 필요합니다. withdraw에서는 잔액 확인 후 출금하세요.]]></hint>
+    <solution><![CDATA[def deposit(amount):
+    global balance
+    balance += amount
+
+def withdraw(amount):
+    global balance
+    if balance >= amount:
+        balance -= amount
+    else:
+        print("잔액 부족")]]></solution>
+  </problem>
+
+</problems>

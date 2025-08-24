@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  전역변수 사용법 및 주의사항 연습문제 설정
+  
+  사용법:
+  1. URL에서 ?config=config-udf-globalvariable-1 로 접근
+  2. 전역변수 기본 사용법과 주의사항 문제들이 각각 5개씩 출제됨
+  
+  설정 옵션:
+  - showSolutions: true(해설 표시) / false(해설 숨김)
+  - section의 count: 각 섹션에서 랜덤 추출할 문제 개수
+-->
+<exercise>
+  <title>Exercise 1. 전역변수 사용법 및 주의사항</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- true: 해설 표시, false: 해설 숨김 -->
+  </settings>
+  <sections>
+    <!-- 전역변수 기본 사용법 섹션 -->
+    <section title="Section 1 - 전역변수 기본 사용법" file="practice-udf-globalvariable-basic.xml" count="5"/>
+    
+    <!-- 전역변수 주의사항 섹션 -->
+    <section title="Section 2 - 전역변수 주의사항" file="practice-udf-globalvariable-caution.xml" count="5"/>
+  </sections>
+</exercise>

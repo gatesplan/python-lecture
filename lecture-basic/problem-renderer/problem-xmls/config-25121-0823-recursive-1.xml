@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  재귀함수 클래스 연습 설정
+  
+  사용법:
+  URL에서 ?config=config-25121-0823-recursive-1 로 접근
+  
+  설정 옵션:
+  - 기존 재귀함수 problem 파일들 (func2rcur, rcur2func)을 묶어서 랜덤추출 10문항 구성
+-->
+<exercise>
+  <title>Exercise 25121-0823. 재귀함수 연습 단계1</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- true: 해설 표시, false: 해설 숨김 -->
+  </settings>
+  <sections>
+    <!-- 
+      재귀함수 관련 문제들을 통합하여 랜덤 추출:
+      - func2rcur: 일반 함수를 재귀함수로 변환
+      - rcur2func: 재귀함수를 일반 함수로 변환
+    -->
+    <concatenate title="Section 1 - 재귀함수 변환 연습" count="10">
+      <source file="problems-recursion-25121-func2rcur.xml"/>
+      <source file="problems-recursion-25121-rcur2func.xml"/>
+    </concatenate>
+  </sections>
+</exercise>

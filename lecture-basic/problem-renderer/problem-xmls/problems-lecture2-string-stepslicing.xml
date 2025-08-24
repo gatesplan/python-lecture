@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  문자열 스텝 슬라이싱 문제
+  - step 문법 전용: str[start:end:step]
+  - 다양한 스텝 값 활용 (2, 3, -1 등)
+  - 문자열 뒤집기, 간격 건너뛰기 등
+  - print, f-string, format, sep, end 등과 조합
+-->
+<problems>
+  <problem>
+    <description>변수 text="hello"를 선언하고 스텝 2로 슬라이싱하여 한 글자씩 건너뛰며 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[hlo]]></output>
+    <hint>text[::2]를 사용하세요.</hint>
+    <solution><![CDATA[text = "hello"
+print(text[::2])]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 word="python"을 선언하고 스텝 -1로 슬라이싱하여 문자열을 뒤집어서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[nohtyp]]></output>
+    <hint>word[::-1]을 사용하세요.</hint>
+    <solution><![CDATA[word = "python"
+print(word[::-1])]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 name="programming"을 선언하고 1번째부터 8번째까지 스텝 2로 슬라이싱하여 "역순: marg"라고 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[역순: marg]]></output>
+    <hint>f"역순: {name[1:8:2]}" 형태로 사용하세요.</hint>
+    <solution><![CDATA[name = "programming"
+print(f"역순: {name[1:8:2]}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 city="seoul"을 선언하고 스텝 3으로 슬라이싱하여 "도시: sl"이라고 format으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[도시: sl]]></output>
+    <hint>"도시: {}".format(city[::3]) 형태로 사용하세요.</hint>
+    <solution><![CDATA[city = "seoul"
+print("도시: {}".format(city[::3]))]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 animal="elephant"를 선언하고 뒤집은 문자열을 출력한 후 느낌표(!)로 끝내세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[tnahpele!]]></output>
+    <hint>print(animal[::-1], end='!')를 사용하세요.</hint>
+    <solution><![CDATA[animal = "elephant"
+print(animal[::-1], end='!')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 fruit="strawberry"를 선언하고 2번째부터 끝까지 스텝 2로 슬라이싱해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[traer]]></output>
+    <hint>fruit[1::2]를 사용하세요.</hint>
+    <solution><![CDATA[fruit = "strawberry"
+print(fruit[1::2])]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 color="rainbow"를 선언하고 원본과 뒤집은 문자열을 하이픈(-)으로 구분하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[rainbow-wobniar]]></output>
+    <hint>print(color, color[::-1], sep='-')를 사용하세요.</hint>
+    <solution><![CDATA[color = "rainbow"
+print(color, color[::-1], sep='-')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 subject="mathematics"를 선언하고 처음부터 10번째까지 스텝 3으로 슬라이싱하여 "과목: mhm"이라고 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[과목: mhm]]></output>
+    <hint>f"과목: {subject[:10:3]}" 형태로 사용하세요.</hint>
+    <solution><![CDATA[subject = "mathematics"
+print(f"과목: {subject[:10:3]}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 game="basketball"을 선언하고 3번째부터 스텝 2로 슬라이싱하여 "게임: ktal"이라고 format으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[게임: ktal]]></output>
+    <hint>"게임: {}".format(game[3::2]) 형태로 사용하세요.</hint>
+    <solution><![CDATA[game = "basketball"
+print("게임: {}".format(game[3::2]))]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 season="winter"를 선언하고 뒤에서부터 스텝 2로 슬라이싱하여 역순으로 한 글자씩 건너뛰며 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[rtni]]></output>
+    <hint>season[::-2]를 사용하세요.</hint>
+    <solution><![CDATA[season = "winter"
+print(season[::-2])]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 hobby="reading"을 선언하고 2번째부터 6번째까지 스텝 -1로 슬라이싱하여 역순으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[ae]]></output>
+    <hint>hobby[5:1:-1]을 사용하세요.</hint>
+    <solution><![CDATA[hobby = "reading"
+print(hobby[5:1:-1])]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 country="australia"를 선언하고 스텝 4로 슬라이싱하여 "나라: aa"라고 출력한 후 별표(*)로 끝내세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[나라: aa*]]></output>
+    <hint>print(f"나라: {country[::4]}", end='*')를 사용하세요.</hint>
+    <solution><![CDATA[country = "australia"
+print(f"나라: {country[::4]}", end='*')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 food="hamburger"와 drink="lemonade"를 선언하고 각각 스텝 2로 슬라이싱하여 슬래시(/)로 구분해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[hmbge/eoae]]></output>
+    <hint>print(food[::2], drink[::2], sep='/')를 사용하세요.</hint>
+    <solution><![CDATA[food = "hamburger"
+drink = "lemonade"
+print(food[::2], drink[::2], sep='/')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 brand="samsung"을 선언하고 1번째부터 5번째까지 스텝 -1로 슬라이싱하여 "브랜드: smu"라고 format으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[브랜드: smu]]></output>
+    <hint>"브랜드: {}".format(brand[5:1:-1]) 형태로 사용하세요.</hint>
+    <solution><![CDATA[brand = "samsung"
+print("브랜드: {}".format(brand[5:1:-1]))]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 school="university"를 선언하고 전체 문자열을 스텝 3으로 슬라이싱한 결과와 뒤집은 결과를 콜론(:)으로 구분해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[unet:ytisrevinu]]></output>
+    <hint>print(school[::3], school[::-1], sep=':')를 사용하세요.</hint>
+    <solution><![CDATA[school = "university"
+print(school[::3], school[::-1], sep=':')]]></solution>
+  </problem>
+</problems>

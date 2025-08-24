@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  print() 함수의 sep 파라미터 문제
+  - sep 파라미터로 구분자 지정
+  - 다양한 구분자 활용 (-, |, /, 등)
+  - 특수문자 sep='\t' (탭), sep='\n' (줄바꿈)
+-->
+<problems>
+  <problem>
+    <description>변수 a=1, b=2, c=3을 선언하고 하이픈(-)으로 구분하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[1-2-3]]></output>
+    <hint>print(a, b, c, sep='-')를 사용하세요.</hint>
+    <solution><![CDATA[a = 1
+b = 2
+c = 3
+print(a, b, c, sep='-')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 x=10, y=20을 선언하고 슬래시(/)로 구분하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[10/20]]></output>
+    <hint>print() 함수의 sep 파라미터에 '/'를 지정하세요.</hint>
+    <solution><![CDATA[x = 10
+y = 20
+print(x, y, sep='/')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 name="김철수", age=20을 선언하고 세로막대(|)로 구분하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[김철수|20]]></output>
+    <hint>print() 함수의 sep 파라미터에 '|'를 지정하세요.</hint>
+    <solution><![CDATA[name = "김철수"
+age = 20
+print(name, age, sep='|')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 a=5, b=10, c=15, d=20을 선언하고 쉼표(,)로 구분하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[5,10,15,20]]></output>
+    <hint>print() 함수의 sep 파라미터에 ','를 지정하세요.</hint>
+    <solution><![CDATA[a = 5
+b = 10
+c = 15
+d = 20
+print(a, b, c, d, sep=',')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 city="서울", weather="맑음"을 선언하고 콜론(:)으로 구분하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[서울:맑음]]></output>
+    <hint>print() 함수의 sep 파라미터에 ':'를 지정하세요.</hint>
+    <solution><![CDATA[city = "서울"
+weather = "맑음"
+print(city, weather, sep=':')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 x=1, y=2, z=3을 선언하고 별표(*)로 구분하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[1*2*3]]></output>
+    <hint>print() 함수의 sep 파라미터에 '*'를 지정하세요.</hint>
+    <solution><![CDATA[x = 1
+y = 2
+z = 3
+print(x, y, z, sep='*')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 a="사과", b="바나나"를 선언하고 탭 문자로 구분하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[사과	바나나]]></output>
+    <hint>탭 문자는 '\t'입니다. print(a, b, sep='\t')를 사용하세요.</hint>
+    <solution><![CDATA[a = "사과"
+b = "바나나"
+print(a, b, sep='\t')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 num1=100, num2=200, num3=300을 선언하고 줄바꿈으로 구분하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[100
+200
+300]]></output>
+    <hint>줄바꿈 문자는 '\n'입니다. print(num1, num2, num3, sep='\n')를 사용하세요.</hint>
+    <solution><![CDATA[num1 = 100
+num2 = 200
+num3 = 300
+print(num1, num2, num3, sep='\n')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 item="책", price=15000을 선언하고 구분자 없이 바로 붙여서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[책15000]]></output>
+    <hint>구분자를 비우려면 sep=''를 사용하세요.</hint>
+    <solution><![CDATA[item = "책"
+price = 15000
+print(item, price, sep='')]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 p=10, q=20, r=30을 선언하고 화살표(->)로 구분하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[10->20->30]]></output>
+    <hint>print() 함수의 sep 파라미터에 '->'를 지정하세요.</hint>
+    <solution><![CDATA[p = 10
+q = 20
+r = 30
+print(p, q, r, sep='->')]]></solution>
+  </problem>
+</problems>

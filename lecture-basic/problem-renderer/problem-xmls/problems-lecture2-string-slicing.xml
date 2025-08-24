@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  문자열 슬라이싱 기초 문제
+  - 단일 참조: str[i]
+  - 기본 슬라이싱: str[start:end]
+  - 시작점 생략: str[:end]
+  - 끝점 생략: str[start:]
+  - 스텝 문법은 사용하지 않음
+-->
+<problems>
+  <!-- 단일 참조 (5문제) -->
+  <problem>
+    <description>변수 text="hello"를 선언하고 두 번째 글자(인덱스 1)를 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[e]]></output>
+    <hint>text[1]을 사용하세요.</hint>
+    <solution><![CDATA[text = "hello"
+print(text[1])]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 word="python"을 선언하고 마지막 글자를 음수 인덱스로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[n]]></output>
+    <hint>word[-1]을 사용하세요.</hint>
+    <solution><![CDATA[word = "python"
+print(word[-1])]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 name="김철수"를 선언하고 첫 번째 글자와 마지막 글자를 f-string으로 "첫글자: 김, 마지막글자: 수"라고 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[첫글자: 김, 마지막글자: 수]]></output>
+    <hint>f"첫글자: {name[0]}, 마지막글자: {name[-1]}" 형태로 사용하세요.</hint>
+    <solution><![CDATA[name = "김철수"
+print(f"첫글자: {name[0]}, 마지막글자: {name[-1]}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 city="seoul"을 선언하고 세 번째 글자(인덱스 2)를 "글자: o"라고 format으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[글자: o]]></output>
+    <hint>"글자: {}".format(city[2]) 형태로 사용하세요.</hint>
+    <solution><![CDATA[city = "seoul"
+print("글자: {}".format(city[2]))]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 animal="cat"을 선언하고 뒤에서 두 번째 글자를 출력한 후 하이픈(-)을 붙여서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[a-]]></output>
+    <hint>print(animal[-2], end='-')를 사용하세요.</hint>
+    <solution><![CDATA[animal = "cat"
+print(animal[-2], end='-')]]></solution>
+  </problem>
+
+  <!-- 기본 슬라이싱 (5문제) -->
+  <problem>
+    <description>변수 text="programming"을 선언하고 2번째부터 5번째까지(인덱스 1~4) 글자를 슬라이싱해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[rogr]]></output>
+    <hint>text[1:5]를 사용하세요.</hint>
+    <solution><![CDATA[text = "programming"
+print(text[1:5])]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 word="computer"를 선언하고 뒤에서 4번째부터 2번째까지 글자를 음수 인덱스로 슬라이싱해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[ute]]></output>
+    <hint>word[-4:-1]을 사용하세요.</hint>
+    <solution><![CDATA[word = "computer"
+print(word[-4:-1])]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 fruit="banana"를 선언하고 2~4번째 글자(인덱스 1~3)를 슬라이싱하여 "중간글자: ana"라고 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[중간글자: ana]]></output>
+    <hint>f"중간글자: {fruit[1:4]}" 형태로 사용하세요.</hint>
+    <solution><![CDATA[fruit = "banana"
+print(f"중간글자: {fruit[1:4]}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 color="rainbow"를 선언하고 3~5번째 글자를 슬라이싱하여 "색상: inb"라고 format으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[색상: inb]]></output>
+    <hint>"색상: {}".format(color[2:5]) 형태로 사용하세요.</hint>
+    <solution><![CDATA[color = "rainbow"
+print("색상: {}".format(color[2:5]))]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 game="soccer"를 선언하고 1~3번째 글자와 4~6번째 글자를 슬라이싱하여 하이픈(-)으로 구분해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[occ-er]]></output>
+    <hint>print(game[1:4], game[4:6], sep='-')를 사용하세요.</hint>
+    <solution><![CDATA[game = "soccer"
+print(game[1:4], game[4:6], sep='-')]]></solution>
+  </problem>
+
+  <!-- 시작점 생략 슬라이싱 (5문제) -->
+  <problem>
+    <description>변수 text="world"를 선언하고 처음부터 3번째까지 글자를 슬라이싱해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[wor]]></output>
+    <hint>text[:3]을 사용하세요.</hint>
+    <solution><![CDATA[text = "world"
+print(text[:3])]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 name="javascript"를 선언하고 마지막 2글자를 제외한 나머지를 음수 인덱스로 슬라이싱해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[javascri]]></output>
+    <hint>name[:-2]를 사용하세요.</hint>
+    <solution><![CDATA[name = "javascript"
+print(name[:-2])]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 school="university"를 선언하고 처음부터 5글자를 슬라이싱하여 "학교: unive"라고 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[학교: unive]]></output>
+    <hint>f"학교: {school[:5]}" 형태로 사용하세요.</hint>
+    <solution><![CDATA[school = "university"
+print(f"학교: {school[:5]}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 country="republic"를 선언하고 마지막 3글자를 제외한 나머지를 슬라이싱하여 "국가: repub"라고 format으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[국가: repub]]></output>
+    <hint>"국가: {}".format(country[:-3]) 형태로 사용하세요.</hint>
+    <solution><![CDATA[country = "republic"
+print("국가: {}".format(country[:-3]))]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 season="spring"을 선언하고 처음부터 4글자를 슬라이싱해서 출력한 후 별표(*)로 끝내세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[spri*]]></output>
+    <hint>print(season[:4], end='*')를 사용하세요.</hint>
+    <solution><![CDATA[season = "spring"
+print(season[:4], end='*')]]></solution>
+  </problem>
+
+  <!-- 끝점 생략 슬라이싱 (5문제) -->
+  <problem>
+    <description>변수 text="coding"을 선언하고 3번째 글자부터 끝까지 슬라이싱해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[ing]]></output>
+    <hint>text[3:]을 사용하세요.</hint>
+    <solution><![CDATA[text = "coding"
+print(text[3:])]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 word="kitchen"을 선언하고 뒤에서 3번째 글자부터 끝까지 음수 인덱스로 슬라이싱해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[hen]]></output>
+    <hint>word[-3:]을 사용하세요.</hint>
+    <solution><![CDATA[word = "kitchen"
+print(word[-3:])]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 hobby="reading"을 선언하고 4번째 글자부터 끝까지 슬라이싱하여 "취미: ding"이라고 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[취미: ding]]></output>
+    <hint>f"취미: {hobby[3:]}" 형태로 사용하세요.</hint>
+    <solution><![CDATA[hobby = "reading"
+print(f"취미: {hobby[3:]}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 subject="mathematics"를 선언하고 5번째 글자부터 끝까지 슬라이싱하여 "과목: ematics"라고 format으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[과목: ematics]]></output>
+    <hint>"과목: {}".format(subject[4:]) 형태로 사용하세요.</hint>
+    <solution><![CDATA[subject = "mathematics"
+print("과목: {}".format(subject[4:]))]]></solution>
+  </problem>
+
+  <problem>
+    <description>변수 brand="samsung"과 model="galaxy"를 선언하고 각각 2번째 글자부터 끝까지 슬라이싱하여 하이픈(-)으로 구분해서 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[msung-laxy]]></output>
+    <hint>print(brand[2:], model[2:], sep='-')를 사용하세요.</hint>
+    <solution><![CDATA[brand = "samsung"
+model = "galaxy"
+print(brand[2:], model[2:], sep='-')]]></solution>
+  </problem>
+</problems>

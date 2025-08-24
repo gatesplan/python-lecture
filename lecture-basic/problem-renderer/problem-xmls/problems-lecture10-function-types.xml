@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description>두 정수를 더해서 정수를 반환하는 함수를 타입 힌트와 함께 작성하세요. 함수명은 'add_integers'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[15]]></output>
+    <hint>매개변수와 반환값에 int 타입 힌트를 추가하세요. 반환값 타입은 -> int로 표시합니다.</hint>
+    <solution><![CDATA[# 정수 덧셈 함수 (타입 힌트 포함)
+def add_integers(a: int, b: int) -> int:
+    return a + b
+
+result = add_integers(7, 8)
+print(result)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>이름을 받아서 인사말 문자열을 반환하는 함수를 타입 힌트와 함께 작성하세요. 함수명은 'create_greeting'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[안녕하세요, 김철수님!]]></output>
+    <hint>매개변수는 str 타입, 반환값도 str 타입으로 지정하세요.</hint>
+    <solution><![CDATA[# 인사말 생성 함수 (타입 힌트 포함)
+def create_greeting(name: str) -> str:
+    return f"안녕하세요, {name}님!"
+
+greeting = create_greeting("김철수")
+print(greeting)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>나이를 받아서 성인 여부를 불린값으로 반환하는 함수를 타입 힌트와 함께 작성하세요. 함수명은 'is_adult'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[True]]></output>
+    <hint>bool 타입 힌트를 사용하고, 18세 이상이면 True를 반환하세요.</hint>
+    <solution><![CDATA[# 성인 여부 확인 함수 (타입 힌트 포함)
+def is_adult(age: int) -> bool:
+    return age >= 18
+
+result = is_adult(20)
+print(result)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>가격과 할인율을 받아서 할인된 가격을 실수로 반환하는 함수를 타입 힌트와 함께 작성하세요. 함수명은 'apply_discount'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[90.0]]></output>
+    <hint>float 타입 힌트를 사용하고, 가격 * (1 - 할인율) 공식을 사용하세요.</hint>
+    <solution><![CDATA[# 할인 적용 함수 (타입 힌트 포함)
+def apply_discount(price: float, discount: float) -> float:
+    return price * (1 - discount)
+
+discounted_price = apply_discount(100.0, 0.1)
+print(discounted_price)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>정수 리스트를 받아서 평균을 실수로 반환하는 함수를 타입 힌트와 함께 작성하세요. 함수명은 'calculate_average'입니다.</description>
+    <code><![CDATA[scores = [85, 90, 78, 92, 88]]]></code>
+    <input></input>
+    <output><![CDATA[86.6]]></output>
+    <hint>list 타입 힌트를 사용하고, sum()과 len()을 활용하세요.</hint>
+    <solution><![CDATA[# 평균 계산 함수 (타입 힌트 포함)
+def calculate_average(numbers: list) -> float:
+    return sum(numbers) / len(numbers)
+
+scores = [85, 90, 78, 92, 88]
+average = calculate_average(scores)
+print(average)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>이름과 나이를 받아서 딕셔너리로 반환하는 함수를 타입 힌트와 함께 작성하세요. 함수명은 'create_person'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[{'name': '이영희', 'age': 25}]]></output>
+    <hint>dict 타입 힌트를 사용하고, 딕셔너리를 생성해서 반환하세요.</hint>
+    <solution><![CDATA[# 사람 정보 생성 함수 (타입 힌트 포함)
+def create_person(name: str, age: int) -> dict:
+    return {'name': name, 'age': age}
+
+person = create_person("이영희", 25)
+print(person)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>시작과 끝 숫자를 받아서 범위 리스트를 반환하는 함수를 타입 힌트와 함께 작성하세요. 함수명은 'create_number_list'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[[3, 4, 5, 6, 7]]]></output>
+    <hint>range()를 list()로 변환해서 반환하세요.</hint>
+    <solution><![CDATA[# 숫자 리스트 생성 함수 (타입 힌트 포함)
+def create_number_list(start: int, end: int) -> list:
+    return list(range(start, end + 1))
+
+numbers = create_number_list(3, 7)
+print(numbers)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>학생 정보 딕셔너리를 받아서 이름을 문자열로 반환하는 함수를 타입 힌트와 함께 작성하세요. 함수명은 'get_student_name'입니다.</description>
+    <code><![CDATA[student = {'name': '박민수', 'age': 20, 'grade': 'A'}]]></code>
+    <input></input>
+    <output><![CDATA[박민수]]></output>
+    <hint>딕셔너리에서 'name' 키의 값을 반환하세요.</hint>
+    <solution><![CDATA[# 학생 이름 추출 함수 (타입 힌트 포함)
+def get_student_name(student: dict) -> str:
+    return student['name']
+
+student = {'name': '박민수', 'age': 20, 'grade': 'A'}
+name = get_student_name(student)
+print(name)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>좌표 튜플을 받아서 원점으로부터의 거리를 실수로 반환하는 함수를 타입 힌트와 함께 작성하세요. 함수명은 'calculate_distance'입니다.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[5.0]]></output>
+    <hint>거리 = √(x² + y²) 공식을 사용하고, math.sqrt()나 **0.5를 사용하세요.</hint>
+    <solution><![CDATA[# 거리 계산 함수 (타입 힌트 포함)
+def calculate_distance(point: tuple) -> float:
+    x, y = point
+    return (x**2 + y**2) ** 0.5
+
+distance = calculate_distance((3, 4))
+print(distance)]]></solution>
+  </problem>
+  
+  <problem>
+    <description>문자열 리스트를 받아서 가장 긴 문자열의 길이를 정수로 반환하는 함수를 타입 힌트와 함께 작성하세요. 함수명은 'find_max_length'입니다.</description>
+    <code><![CDATA[words = ['apple', 'banana', 'cherry', 'date']]]></code>
+    <input></input>
+    <output><![CDATA[6]]></output>
+    <hint>max() 함수와 key=len을 사용하거나 반복문을 사용하세요.</hint>
+    <solution><![CDATA[# 최대 길이 찾기 함수 (타입 힌트 포함)
+def find_max_length(words: list) -> int:
+    return len(max(words, key=len))
+
+words = ['apple', 'banana', 'cherry', 'date']
+max_length = find_max_length(words)
+print(max_length)]]></solution>
+  </problem>
+</problems>

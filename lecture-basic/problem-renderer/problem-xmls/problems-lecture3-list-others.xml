@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  리스트 기타 메서드 문제집
+  - index(), count(), sort(), reverse(), copy() 메서드 활용
+  - 이전 학습 내용(print, f-string, 문자열 메서드) 자연스럽게 복습
+  - 반복문, 조건문 사용 금지
+-->
+<problems>
+  <problem>
+    <description>리스트 ["사과", "바나나", "오렌지"]에서 index()로 "바나나"의 위치를 찾아 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[1]]></output>
+    <hint>index("바나나") 메서드 사용</hint>
+    <solution><![CDATA[fruits = ["사과", "바나나", "오렌지"]
+position = fruits.index("바나나")
+print(position)]]></solution>
+  </problem>
+
+  <problem>
+    <description>숫자 리스트 [1, 2, 3, 2, 4, 2]에서 count()로 숫자 2의 개수를 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[2가 3개 있습니다]]></output>
+    <hint>count(2) 후 f"2가 {개수}개 있습니다" 사용</hint>
+    <solution><![CDATA[numbers = [1, 2, 3, 2, 4, 2]
+count_2 = numbers.count(2)
+print(f"2가 {count_2}개 있습니다")]]></solution>
+  </problem>
+
+  <problem>
+    <description>리스트 [5, 2, 8, 1, 9]를 sort()로 정렬한 후 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[[1, 2, 5, 8, 9]]]></output>
+    <hint>sort() 메서드는 원본 리스트를 직접 정렬</hint>
+    <solution><![CDATA[numbers = [5, 2, 8, 1, 9]
+numbers.sort()
+print(numbers)]]></solution>
+  </problem>
+
+  <problem>
+    <description>문자열 리스트 ["apple", "banana", "cherry"]를 reverse()로 뒤집고 format()으로 "결과: {}" 형태로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[결과: ['cherry', 'banana', 'apple']]]></output>
+    <hint>reverse() 후 "결과: {}".format() 사용</hint>
+    <solution><![CDATA[fruits = ["apple", "banana", "cherry"]
+fruits.reverse()
+print("결과: {}".format(fruits))]]></solution>
+  </problem>
+
+  <problem>
+    <description>리스트 [3, 1, 4, 1, 5]를 copy()로 복사하여 원본은 sort()하고 복사본은 그대로 두어 둘 다 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[원본: [1, 1, 3, 4, 5]
+복사본: [3, 1, 4, 1, 5]]]></output>
+    <hint>copy() 후 원본만 sort() 적용</hint>
+    <solution><![CDATA[numbers = [3, 1, 4, 1, 5]
+numbers_copy = numbers.copy()
+numbers.sort()
+print(f"원본: {numbers}")
+print(f"복사본: {numbers_copy}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>색깔 리스트 ["red", "blue", "green"]에서 index("blue")의 결과와 count("red")의 결과를 sep=","로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[1,1]]></output>
+    <hint>index("blue"), count("red") 결과를 sep=","로 출력</hint>
+    <solution><![CDATA[colors = ["red", "blue", "green"]
+blue_index = colors.index("blue")
+red_count = colors.count("red")
+print(blue_index, red_count, sep=",")]]></solution>
+  </problem>
+
+  <problem>
+    <description>동물 리스트 ["cat", "dog", "cat", "bird"]에서 "cat"의 첫 번째 위치를 찾고 "cat"의 총 개수와 함께 f-string으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[cat은 0번 위치에 있고 총 2개입니다]]></output>
+    <hint>index("cat")와 count("cat") 결과를 f-string으로 조합</hint>
+    <solution><![CDATA[animals = ["cat", "dog", "cat", "bird"]
+cat_index = animals.index("cat")
+cat_count = animals.count("cat")
+print(f"cat은 {cat_index}번 위치에 있고 총 {cat_count}개입니다")]]></solution>
+  </problem>
+
+  <problem>
+    <description>점수 리스트 [85, 92, 78, 96, 88]를 sort()로 정렬하고 첫 번째와 마지막 점수를 하이픈으로 연결하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[78-96]]></output>
+    <hint>sort() 후 [0]과 [-1]을 하이픈으로 연결</hint>
+    <solution><![CDATA[scores = [85, 92, 78, 96, 88]
+scores.sort()
+print(f"{scores[0]}-{scores[-1]}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>문자 리스트 ["A", "B", "C"]를 reverse()하고 모든 문자를 소문자로 변환하여 점으로 연결하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[c.b.a]]></output>
+    <hint>reverse() 후 각 요소를 lower()하여 join(".") 사용</hint>
+    <solution><![CDATA[letters = ["A", "B", "C"]
+letters.reverse()
+lower_letters = [letters[0].lower(), letters[1].lower(), letters[2].lower()]
+print(".".join(lower_letters))]]></solution>
+  </problem>
+
+  <problem>
+    <description>문자열 "hello,world,hello"를 split(",")으로 나눈 후 "hello"의 개수와 "world"의 위치를 format()으로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[hello: 2개, world 위치: 1]]></output>
+    <hint>split(",") 후 count("hello")와 index("world") 사용</hint>
+    <solution><![CDATA[text = "hello,world,hello"
+words = text.split(",")
+hello_count = words.count("hello")
+world_index = words.index("world")
+print("hello: {}개, world 위치: {}".format(hello_count, world_index))]]></solution>
+  </problem>
+
+  <problem>
+    <description>이름 리스트 ["Alice", "Bob", "Charlie"]를 copy()하여 원본은 reverse()하고 복사본은 sort()한 후 첫 번째 이름끼리 비교하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[Charlie vs Alice]]></output>
+    <hint>copy() 후 각각 reverse(), sort() 적용하여 [0] 비교</hint>
+    <solution><![CDATA[names = ["Alice", "Bob", "Charlie"]
+names_copy = names.copy()
+names.reverse()
+names_copy.sort()
+print(f"{names[0]} vs {names_copy[0]}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>숫자 리스트 [7, 3, 7, 1, 7, 5]에서 7의 첫 번째 위치와 총 개수를 찾고 전체 리스트 길이와 함께 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[위치: 0, 개수: 3, 전체: 6]]></output>
+    <hint>index(7), count(7), len() 결과를 조합</hint>
+    <solution><![CDATA[numbers = [7, 3, 7, 1, 7, 5]
+position = numbers.index(7)
+count_7 = numbers.count(7)
+total_length = len(numbers)
+print(f"위치: {position}, 개수: {count_7}, 전체: {total_length}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>월 리스트 ["Jan", "Mar", "Jan", "Apr"]에서 "Jan"을 모두 대문자로 바꾸고 sort()한 후 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[['APR', 'JAN', 'JAN', 'MAR']]]></output>
+    <hint>각 요소를 upper()한 새 리스트 생성 후 sort()</hint>
+    <solution><![CDATA[months = ["Jan", "Mar", "Jan", "Apr"]
+upper_months = [months[0].upper(), months[1].upper(), months[2].upper(), months[3].upper()]
+upper_months.sort()
+print(upper_months)]]></solution>
+  </problem>
+
+  <problem>
+    <description>과일 리스트 ["banana", "apple", "cherry"]를 sort()하고 reverse()하여 내림차순으로 만든 후 첫 글자들을 조합하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[CBA]]></output>
+    <hint>sort() 후 reverse() 적용하여 각 요소의 [0] 조합</hint>
+    <solution><![CDATA[fruits = ["banana", "apple", "cherry"]
+fruits.sort()
+fruits.reverse()
+initials = fruits[0][0] + fruits[1][0] + fruits[2][0]
+print(initials.upper())]]></solution>
+  </problem>
+
+  <problem>
+    <description>언어 리스트 ["Python", "Java", "Python", "C++"]를 copy()하여 원본에서 "Python"의 개수를 세고 복사본에서 "Java"의 위치를 찾아 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[Python 개수: 2, Java 위치: 1]]></output>
+    <hint>copy() 후 각각 count(), index() 적용</hint>
+    <solution><![CDATA[languages = ["Python", "Java", "Python", "C++"]
+languages_copy = languages.copy()
+python_count = languages.count("Python")
+java_index = languages_copy.index("Java")
+print(f"Python 개수: {python_count}, Java 위치: {java_index}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>문자열 "z,a,m,b,z"를 split(",")으로 나누어 리스트로 만들고 "z"의 개수와 "a"의 위치를 찾은 후 리스트를 정렬하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[z개수: 2, a위치: 1, 정렬: ['a', 'b', 'm', 'z', 'z']]]></output>
+    <hint>split(",") 후 count(), index() 사용하고 마지막에 sort()</hint>
+    <solution><![CDATA[text = "z,a,m,b,z"
+letters = text.split(",")
+z_count = letters.count("z")
+a_index = letters.index("a")
+letters.sort()
+print(f"z개수: {z_count}, a위치: {a_index}, 정렬: {letters}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>도시 리스트 ["Seoul", "Tokyo", "Seoul", "London"]에서 "Seoul"의 첫 번째 위치를 찾고 전체를 reverse()한 후 마지막 도시를 소문자로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[Seoul 위치: 0, 마지막 도시: seoul]]></output>
+    <hint>index("Seoul") 후 reverse() 적용하여 [-1].lower() 출력</hint>
+    <solution><![CDATA[cities = ["Seoul", "Tokyo", "Seoul", "London"]
+seoul_index = cities.index("Seoul")
+cities.reverse()
+last_city = cities[-1].lower()
+print(f"Seoul 위치: {seoul_index}, 마지막 도시: {last_city}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>숫자 문자열 리스트 ["3", "1", "4", "1"]를 copy()하여 원본은 정수로 변환하여 정렬하고 복사본은 문자열로 정렬한 후 비교하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[숫자정렬: [1, 1, 3, 4], 문자정렬: ['1', '1', '3', '4']]]></output>
+    <hint>copy() 후 원본은 int()로 변환하여 정렬, 복사본은 문자열로 정렬</hint>
+    <solution><![CDATA[str_numbers = ["3", "1", "4", "1"]
+str_copy = str_numbers.copy()
+int_numbers = [int(str_numbers[0]), int(str_numbers[1]), int(str_numbers[2]), int(str_numbers[3])]
+int_numbers.sort()
+str_copy.sort()
+print(f"숫자정렬: {int_numbers}, 문자정렬: {str_copy}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>과목 리스트 ["Math", "Science", "Math", "Art"]에서 "Math"의 개수를 세고 전체를 sort()한 후 첫 번째와 마지막 과목을 대문자로 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[Math 개수: 2, 첫번째: ART, 마지막: SCIENCE]]></output>
+    <hint>count("Math") 후 sort() 적용하여 [0], [-1]을 upper()로 출력</hint>
+    <solution><![CDATA[subjects = ["Math", "Science", "Math", "Art"]
+math_count = subjects.count("Math")
+subjects.sort()
+first = subjects[0].upper()
+last = subjects[-1].upper()
+print(f"Math 개수: {math_count}, 첫번째: {first}, 마지막: {last}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>리스트 ["hello", "world", "hello", "python"]를 copy()하여 원본에서 "hello"의 총 개수와 첫 번째 위치를 찾고 복사본을 reverse()한 후 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[hello 개수: 2, 위치: 0, 역순: ['python', 'hello', 'world', 'hello']]]></output>
+    <hint>copy() 후 원본에서 count(), index() 사용하고 복사본은 reverse()</hint>
+    <solution><![CDATA[words = ["hello", "world", "hello", "python"]
+words_copy = words.copy()
+hello_count = words.count("hello")
+hello_index = words.index("hello")
+words_copy.reverse()
+print(f"hello 개수: {hello_count}, 위치: {hello_index}, 역순: {words_copy}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>문자 리스트 ["c", "a", "b", "a", "c"]에서 "a"와 "c"의 개수를 각각 세고 전체를 정렬한 후 중복을 제거한 것처럼 첫 번째, 세 번째, 다섯 번째 요소만 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[a: 2개, c: 2개, 유니크: a c c]]></output>
+    <hint>count() 후 sort() 적용하여 [0], [2], [4] 인덱스 사용</hint>
+    <solution><![CDATA[letters = ["c", "a", "b", "a", "c"]
+a_count = letters.count("a")
+c_count = letters.count("c")
+letters.sort()
+print(f"a: {a_count}개, c: {c_count}개, 유니크: {letters[0]} {letters[2]} {letters[4]}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>단어 리스트 ["dog", "cat", "dog", "bird"]를 sort()하고 각 단어의 첫 글자를 대문자로 변환하여 점으로 연결한 후 "dog"의 개수와 함께 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[첫글자: B.C.D.D, dog개수: 2]]></output>
+    <hint>sort() 후 각 요소의 [0].upper() 조합하고 count("dog") 사용</hint>
+    <solution><![CDATA[animals = ["dog", "cat", "dog", "bird"]
+dog_count = animals.count("dog")
+animals.sort()
+initials = animals[0][0].upper() + "." + animals[1][0].upper() + "." + animals[2][0].upper() + "." + animals[3][0].upper()
+print(f"첫글자: {initials}, dog개수: {dog_count}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>색깔 리스트 ["red", "blue", "red", "green"]를 copy()하여 원본은 "red"를 모두 "RED"로 바꾸고 복사본은 reverse()한 후 둘을 비교하여 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[원본: ['RED', 'blue', 'RED', 'green']
+복사본: ['green', 'red', 'blue', 'red']]]></output>
+    <hint>copy() 후 원본의 "red" 요소들을 "RED"로 변경, 복사본은 reverse()</hint>
+    <solution><![CDATA[colors = ["red", "blue", "red", "green"]
+colors_copy = colors.copy()
+# 원본에서 red를 RED로 변경
+for i in [0, 2]:  # red가 있는 인덱스들
+    if colors[i] == "red":
+        colors[i] = "RED"
+colors_copy.reverse()
+print(f"원본: {colors}")
+print(f"복사본: {colors_copy}")]]></solution>
+  </problem>
+
+  <problem>
+    <description>리스트 ["apple", "banana", "apple", "cherry"]에서 "apple"의 개수와 전체 길이를 비교하여 비율을 계산하고 리스트를 정렬한 후 출력하세요.</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[apple 비율: 2/4, 정렬후: ['apple', 'apple', 'banana', 'cherry']]]></output>
+    <hint>count("apple")과 len() 결과로 비율 계산 후 sort()</hint>
+    <solution><![CDATA[fruits = ["apple", "banana", "apple", "cherry"]
+apple_count = fruits.count("apple")
+total_length = len(fruits)
+fruits.sort()
+print(f"apple 비율: {apple_count}/{total_length}, 정렬후: {fruits}")]]></solution>
+  </problem>
+</problems>

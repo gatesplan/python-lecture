@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: len() 함수 -->
+  <problem>
+    <description>tuple (10, 20, 30, 40, 50)의 길이를 구해서 출력하세요.</description>
+    <code><![CDATA[numbers = (10, 20, 30, 40, 50)
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[5]]></output>
+    <hint>len() 함수를 사용하면 tuple의 길이를 구할 수 있습니다.</hint>
+    <solution><![CDATA[numbers = (10, 20, 30, 40, 50)
+length = len(numbers)
+print(length)]]></solution>
+  </problem>
+
+  <!-- 문제 2: max() 함수 -->
+  <problem>
+    <description>점수 tuple (85, 92, 78, 96, 88)에서 최고 점수를 찾아서 출력하세요.</description>
+    <code><![CDATA[scores = (85, 92, 78, 96, 88)
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[최고 점수: 96]]></output>
+    <hint>max() 함수를 사용하면 최대값을 구할 수 있습니다.</hint>
+    <solution><![CDATA[scores = (85, 92, 78, 96, 88)
+highest = max(scores)
+print(f"최고 점수: {highest}")]]></solution>
+  </problem>
+
+  <!-- 문제 3: min() 함수 -->
+  <problem>
+    <description>온도 tuple (-5, 3, -2, 7, 1)에서 가장 낮은 온도를 찾아서 출력하세요.</description>
+    <code><![CDATA[temperatures = (-5, 3, -2, 7, 1)
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[최저 온도: -5도]]></output>
+    <hint>min() 함수를 사용하면 최소값을 구할 수 있습니다.</hint>
+    <solution><![CDATA[temperatures = (-5, 3, -2, 7, 1)
+lowest = min(temperatures)
+print(f"최저 온도: {lowest}도")]]></solution>
+  </problem>
+
+  <!-- 문제 4: sum() 함수 -->
+  <problem>
+    <description>구매한 물건 가격 tuple (1500, 3000, 2500, 4000)의 총합을 구해서 출력하세요.</description>
+    <code><![CDATA[prices = (1500, 3000, 2500, 4000)
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[총 금액: 11000원]]></output>
+    <hint>sum() 함수를 사용하면 모든 요소의 합을 구할 수 있습니다.</hint>
+    <solution><![CDATA[prices = (1500, 3000, 2500, 4000)
+total = sum(prices)
+print(f"총 금액: {total}원")]]></solution>
+  </problem>
+
+  <!-- 문제 5: sorted() 함수 - 오름차순 -->
+  <problem>
+    <description>이름 tuple ('김철수', '박영희', '이민수', '최지영')을 알파벳 순으로 정렬해서 출력하세요.</description>
+    <code><![CDATA[names = ('김철수', '박영희', '이민수', '최지영')
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[['김철수', '박영희', '이민수', '최지영']]]></output>
+    <hint>sorted() 함수는 정렬된 리스트를 반환합니다.</hint>
+    <solution><![CDATA[names = ('김철수', '박영희', '이민수', '최지영')
+sorted_names = sorted(names)
+print(sorted_names)]]></solution>
+  </problem>
+
+  <!-- 문제 6: sorted() 함수 - 내림차순 -->
+  <problem>
+    <description>숫자 tuple (45, 23, 67, 12, 89)을 큰 수부터 작은 수 순으로 정렬해서 출력하세요.</description>
+    <code><![CDATA[numbers = (45, 23, 67, 12, 89)
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[[89, 67, 45, 23, 12]]]></output>
+    <hint>sorted() 함수에 reverse=True 옵션을 사용하세요.</hint>
+    <solution><![CDATA[numbers = (45, 23, 67, 12, 89)
+sorted_desc = sorted(numbers, reverse=True)
+print(sorted_desc)]]></solution>
+  </problem>
+
+  <!-- 문제 7: in 연산자 -->
+  <problem>
+    <description>과일 tuple ('사과', '바나나', '오렌지', '포도')에서 '바나나'가 있는지 확인해보세요.</description>
+    <code><![CDATA[fruits = ('사과', '바나나', '오렌지', '포도')
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[바나나가 있습니다]]></output>
+    <hint>in 연산자를 사용해서 조건문을 만드세요.</hint>
+    <solution><![CDATA[fruits = ('사과', '바나나', '오렌지', '포도')
+if '바나나' in fruits:
+    print("바나나가 있습니다")
+else:
+    print("바나나가 없습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 8: not in 연산자 -->
+  <problem>
+    <description>색상 tuple ('빨강', '파랑', '노랑')에서 '초록'이 없다는 것을 확인해보세요.</description>
+    <code><![CDATA[colors = ('빨강', '파랑', '노랑')
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[초록이 없습니다]]></output>
+    <hint>not in 연산자를 사용하세요.</hint>
+    <solution><![CDATA[colors = ('빨강', '파랑', '노랑')
+if '초록' not in colors:
+    print("초록이 없습니다")
+else:
+    print("초록이 있습니다")]]></solution>
+  </problem>
+
+  <!-- 문제 9: enumerate() 함수 -->
+  <problem>
+    <description>과목 tuple ('국어', '영어', '수학', '과학')을 번호와 함께 출력하세요. (1번부터 시작)</description>
+    <code><![CDATA[subjects = ('국어', '영어', '수학', '과학')
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[1. 국어
+2. 영어
+3. 수학
+4. 과학]]></output>
+    <hint>enumerate() 함수에 start=1 옵션을 사용하세요.</hint>
+    <solution><![CDATA[subjects = ('국어', '영어', '수학', '과학')
+for i, subject in enumerate(subjects, start=1):
+    print(f"{i}. {subject}")]]></solution>
+  </problem>
+
+  <!-- 문제 10: 여러 함수 조합 -->
+  <problem>
+    <description>시험 점수 tuple (75, 88, 92, 67, 85, 90)에서 총점, 평균, 최고점, 최저점을 모두 구해서 출력하세요.</description>
+    <code><![CDATA[exam_scores = (75, 88, 92, 67, 85, 90)
+# 여기에 코드 작성]]></code>
+    <input></input>
+    <output><![CDATA[총점: 497점
+평균: 82.8점
+최고점: 92점
+최저점: 67점]]></output>
+    <hint>sum(), len(), max(), min() 함수를 모두 사용하세요.</hint>
+    <solution><![CDATA[exam_scores = (75, 88, 92, 67, 85, 90)
+total = sum(exam_scores)
+average = total / len(exam_scores)
+highest = max(exam_scores)
+lowest = min(exam_scores)
+
+print(f"총점: {total}점")
+print(f"평균: {average:.1f}점")
+print(f"최고점: {highest}점")
+print(f"최저점: {lowest}점")]]></solution>
+  </problem>
+</problems>
