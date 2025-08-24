@@ -70,7 +70,73 @@ function loadConfig() {
                                 return sectionData;
                             });
                             
-                            const result = { title, sections, showSolutions };
+                            // Concatenate 요소들 처리
+                            const concatenateElements = xmlDoc.querySelectorAll('concatenate');
+                            console.log('🔗 Concatenate 요소들:', concatenateElements.length, '개');
+                            
+                            const concatenates = Array.from(concatenateElements).map((concat, index) => {
+                                const sources = Array.from(concat.querySelectorAll('source')).map(source => ({
+                                    file: source.getAttribute('file')
+                                }));
+                                const concatenateData = {
+                                    title: concat.getAttribute('title'),
+                                    count: parseInt(concat.getAttribute('count')),
+                                    sources: sources
+                                };
+                                console.log(`🔗 Concatenate ${index + 1}:`, concatenateData);
+                                return concatenateData;
+                            });
+                            
+                            // 모든 섹션을 순서대로 수집 (sections 컨테이너 내의 모든 자식 노드)
+                            console.log('📋 통합 섹션 순서 수집 시작...');
+                            const allSections = [];
+                            const sectionsContainer = xmlDoc.querySelector('sections');
+                            
+                            if (sectionsContainer) {
+                                const sectionNodes = sectionsContainer.children;
+                                
+                                for (let i = 0; i < sectionNodes.length; i++) {
+                                    const node = sectionNodes[i];
+                                    console.log(`📋 노드 ${i + 1}: ${node.tagName}`);
+                                    
+                                    if (node.tagName === 'section') {
+                                        allSections.push({
+                                            type: 'section',
+                                            title: node.getAttribute('title'),
+                                            file: node.getAttribute('file'),
+                                            count: parseInt(node.getAttribute('count'))
+                                        });
+                                    } else if (node.tagName === 'concatenate') {
+                                        const sources = Array.from(node.querySelectorAll('source')).map(source => ({
+                                            file: source.getAttribute('file')
+                                        }));
+                                        allSections.push({
+                                            type: 'concatenate',
+                                            title: node.getAttribute('title'),
+                                            count: parseInt(node.getAttribute('count')),
+                                            sources: sources
+                                        });
+                                    }
+                                }
+                            }
+                            
+                            // sections 바깥에 있는 concatenate들도 추가 (하위 호환성)
+                            const rootConcatenates = xmlDoc.querySelectorAll('exercise > concatenate');
+                            rootConcatenates.forEach(concat => {
+                                const sources = Array.from(concat.querySelectorAll('source')).map(source => ({
+                                    file: source.getAttribute('file')
+                                }));
+                                allSections.push({
+                                    type: 'concatenate',
+                                    title: concat.getAttribute('title'),
+                                    count: parseInt(concat.getAttribute('count')),
+                                    sources: sources
+                                });
+                            });
+                            
+                            console.log('📋 통합 섹션 순서:', allSections.map((s, i) => `${i+1}. ${s.type}: ${s.title}`));
+                            
+                            const result = { title, sections, concatenates, allSections, showSolutions };
                             console.log('✅ Config 로딩 완료:', result);
                             resolve(result);
                         } catch (parseError) {
@@ -249,13 +315,73 @@ function renderDocument(config, allProblems) {
     let html = '';
     let problemNumber = 1;
     
-    config.sections.forEach(section => {
-        const sectionProblems = allProblems[section.file] || [];
-        const selectedProblems = selectRandomProblems(sectionProblems, section.count);
+    // 통합 섹션 순서대로 렌더링 (우선순위)
+    if (config.allSections && config.allSections.length > 0) {
+        console.log('📋 통합 섹션 순서대로 렌더링 시작...');
+        config.allSections.forEach((section, index) => {
+            console.log(`📋 ${index + 1}번째 섹션 처리: ${section.type} - ${section.title}`);
+            
+            if (section.type === 'section') {
+                // Section 렌더링
+                const sectionProblems = allProblems[section.file] || [];
+                const selectedProblems = selectRandomProblems(sectionProblems, section.count);
+                
+                html += renderSection(section.title, selectedProblems, problemNumber, config.showSolutions);
+                problemNumber += selectedProblems.length;
+                
+            } else if (section.type === 'concatenate') {
+                // Concatenate 렌더링
+                console.log(`🔗 Concatenate 섹션 처리: ${section.title}`);
+                
+                // 여러 소스 파일의 문제들을 하나로 병합
+                let mergedProblems = [];
+                section.sources.forEach(source => {
+                    const sourceProblems = allProblems[source.file] || [];
+                    console.log(`📁 ${source.file}에서 ${sourceProblems.length}개 문제 추가`);
+                    mergedProblems = mergedProblems.concat(sourceProblems);
+                });
+                
+                console.log(`🔗 총 ${mergedProblems.length}개 문제에서 ${section.count}개 선택`);
+                const selectedProblems = selectRandomProblems(mergedProblems, section.count);
+                
+                html += renderSection(section.title, selectedProblems, problemNumber, config.showSolutions);
+                problemNumber += selectedProblems.length;
+            }
+        });
+    } else {
+        // 하위 호환성: 기존 방식 사용
+        console.log('📋 기존 방식으로 렌더링 (하위 호환성)');
         
-        html += renderSection(section.title, selectedProblems, problemNumber, config.showSolutions);
-        problemNumber += selectedProblems.length;
-    });
+        // Section 렌더링
+        config.sections.forEach(section => {
+            const sectionProblems = allProblems[section.file] || [];
+            const selectedProblems = selectRandomProblems(sectionProblems, section.count);
+            
+            html += renderSection(section.title, selectedProblems, problemNumber, config.showSolutions);
+            problemNumber += selectedProblems.length;
+        });
+        
+        // Concatenate 렌더링
+        if (config.concatenates) {
+            config.concatenates.forEach(concat => {
+                console.log(`🔗 Concatenate 섹션 처리: ${concat.title}`);
+                
+                // 여러 소스 파일의 문제들을 하나로 병합
+                let mergedProblems = [];
+                concat.sources.forEach(source => {
+                    const sourceProblems = allProblems[source.file] || [];
+                    console.log(`📁 ${source.file}에서 ${sourceProblems.length}개 문제 추가`);
+                    mergedProblems = mergedProblems.concat(sourceProblems);
+                });
+                
+                console.log(`🔗 총 ${mergedProblems.length}개 문제에서 ${concat.count}개 선택`);
+                const selectedProblems = selectRandomProblems(mergedProblems, concat.count);
+                
+                html += renderSection(concat.title, selectedProblems, problemNumber, config.showSolutions);
+                problemNumber += selectedProblems.length;
+            });
+        }
+    }
     
     contentElement.innerHTML = html;
 }
@@ -271,11 +397,29 @@ async function init() {
         const allProblems = {};
         
         console.log('📚 문제 파일들 로딩 시작...');
+        
+        // 모든 필요한 파일 목록 수집
+        const allFiles = new Set();
+        
+        // Section 파일들 추가
+        config.sections.forEach(section => {
+            allFiles.add(section.file);
+        });
+        
+        // Concatenate 파일들 추가
+        if (config.concatenates) {
+            config.concatenates.forEach(concat => {
+                concat.sources.forEach(source => {
+                    allFiles.add(source.file);
+                });
+            });
+        }
+        
         // 모든 문제 파일 병렬 로딩
-        const loadPromises = config.sections.map(async section => {
-            console.log(`📖 로딩 중: ${section.file}`);
-            allProblems[section.file] = await loadProblems(section.file);
-            console.log(`✅ 완료: ${section.file}`);
+        const loadPromises = Array.from(allFiles).map(async file => {
+            console.log(`📖 로딩 중: ${file}`);
+            allProblems[file] = await loadProblems(file);
+            console.log(`✅ 완료: ${file}`);
         });
         
         await Promise.all(loadPromises);
