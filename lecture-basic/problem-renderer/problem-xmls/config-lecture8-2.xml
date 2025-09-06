@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Python Basic Lecture 8 - While문과 break 심화 연습문제
+  
+  break/continue 조합, 안전한 프로그램, 기본 개념 순으로 구성:
+  1. While문과 break/continue 조합 (5문제)
+  2. While문으로 안전한 프로그램 만들기 (5문제)  
+  3. While문과 break 기본 (5문제)
+-->
+<exercise>
+  <title>Exercise 8-2. While문과 break 심화 활용</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <section title="Section 1 - While문과 break/continue 조합" file="problems-lecture8-while-breakcontinue.xml" count="5"/>
+    <section title="Section 2 - While문으로 안전한 프로그램 만들기" file="problems-lecture8-while-makeitsafe.xml" count="5"/>
+    <section title="Section 3 - While문과 break 기본" file="problems-lecture8-while-break.xml" count="5"/>
+  </sections>
+</exercise>

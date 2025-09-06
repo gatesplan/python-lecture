@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  재귀함수 통합 연습문제 설정
+  
+  사용법:
+  URL에서 ?config=config-recursion-mixed 로 접근
+  
+  설정 내용:
+  - 네 가지 재귀함수 문제 파일을 통합하여 랜덤 10문제 추출
+  - 함수→재귀, 재귀→함수, 재귀 입문, 재귀 고급 문제 통합
+-->
+<exercise>
+  <title>Exercise - 재귀함수 통합 문제</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- true: 해설 표시, false: 해설 숨김 -->
+  </settings>
+  <sections>
+    <concatenate title="Section 1 - 재귀함수 통합 문제" count="10">
+      <source file="problems-recursion-25121-func2rcur.xml"/>
+      <source file="problems-recursion-25121-rcur2func.xml"/>
+      <source file="problems-recursive-apprentice.xml"/>
+      <source file="problems-recursive-master.xml"/>
+    </concatenate>
+  </sections>
+</exercise>

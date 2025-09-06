@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Python Basic Lecture 7 Expert - 종합 연습문제
+  
+  여러 lecture의 문제들을 종합해서 랜덤 20문제 구성:
+  - lecture5: if-nested (중첩 조건문)
+  - lecture6: for-enumerate, for-zip, for-range, for-enumerate-zip
+  - lecture7: tuple-method, tuple-unpacking
+-->
+<exercise>
+  <title>Exercise 7-Expert. 종합 연습문제</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <concatenate title="종합 문제 - 랜덤 20문제" count="20">
+      <source file="problems-lecture5-if-nested.xml"/>
+      <source file="problems-lecture6-for-enumerate.xml"/>
+      <source file="problems-lecture6-for-zip.xml"/>
+      <source file="problems-lecture6-for-range.xml"/>
+      <source file="problems-lecture6-for-enumerate-zip.xml"/>
+      <source file="problems-lecture7-tuple-method.xml"/>
+      <source file="problems-lecture7-tuple-unpacking.xml"/>
+    </concatenate>
+  </sections>
+</exercise>

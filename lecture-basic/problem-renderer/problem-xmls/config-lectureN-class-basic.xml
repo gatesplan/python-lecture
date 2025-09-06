@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  LectureN 클래스 기본 연습문제 설정
+  
+  사용법:
+  URL에서 ?config=config-lectureN-class-basic 로 접근
+  
+  설정 내용:
+  - problems-lectureN-class-basic.xml 파일에서 랜덤 10문제 추출
+-->
+<exercise>
+  <title>Exercise - LectureN 클래스 기본 문제</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- true: 해설 표시, false: 해설 숨김 -->
+  </settings>
+  <sections>
+    <section title="Section 1 - 클래스 기본 문제" file="problems-lectureN-class-basic.xml" count="10"/>
+  </sections>
+</exercise>

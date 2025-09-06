@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercise>
+  <title>Exercise - 재귀함수 조합(Combination) 연습</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <section title="Section 1 - 재귀함수로 조합 계산하기" file="practice-recursive-combination.xml" count="7"/>
+  </sections>
+</exercise>
