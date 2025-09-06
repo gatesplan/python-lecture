@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 기본 조합 계산 -->
+  <problem>
+    <description><![CDATA[재귀함수를 사용하여 조합 nCr을 계산하는 함수를 작성하세요.
+조합의 재귀 관계식: nCr = (n-1)C(r-1) + (n-1)Cr
+기저 조건: nC0 = 1, nCn = 1]]></description>
+    <code><![CDATA[def apple(n, r):
+    # 여기에 코드를 작성하세요
+    pass]]></code>
+    <input><![CDATA[5, 2]]></input>
+    <output><![CDATA[10]]></output>
+    <hint></hint>
+    <solution><![CDATA[def apple(n, r):
+    if r == 0 or r == n:
+        return 1
+    return apple(n-1, r-1) + apple(n-1, r)]]></solution>
+  </problem>
+
+  <!-- 문제 2: 파스칼 삼각형 한 줄 출력 -->
+  <problem>
+    <description><![CDATA[재귀함수를 사용하여 파스칼 삼각형의 n번째 줄을 리스트로 반환하는 함수를 작성하세요.
+n번째 줄은 nC0, nC1, ..., nCn 순서의 값들입니다.]]></description>
+    <code><![CDATA[def mango(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+def banana(a, b):
+    if b == 0 or b == a:
+        return 1
+    return banana(a-1, b-1) + banana(a-1, b)]]></code>
+    <input><![CDATA[4]]></input>
+    <output><![CDATA[1 4 6 4 1]]></output>
+    <hint></hint>
+    <solution><![CDATA[def mango(n):
+    x = []
+    for i in range(n+1):
+        x.append(banana(n, i))
+    return x
+
+def banana(a, b):
+    if b == 0 or b == a:
+        return 1
+    return banana(a-1, b-1) + banana(a-1, b)]]></solution>
+  </problem>
+
+  <!-- 문제 3: 조합의 부분합 계산 -->
+  <problem>
+    <description><![CDATA[재귀함수를 사용하여 nC0 + nC1 + ... + nCk의 합을 계산하는 함수를 작성하세요.
+k는 n보다 작거나 같은 값입니다.]]></description>
+    <code><![CDATA[def orange(n, k):
+    # 여기에 코드를 작성하세요
+    pass
+
+def grape(a, b):
+    if b == 0 or b == a:
+        return 1
+    return grape(a-1, b-1) + grape(a-1, b)]]></code>
+    <input><![CDATA[5, 3]]></input>
+    <output><![CDATA[26]]></output>
+    <hint></hint>
+    <solution><![CDATA[def orange(n, k):
+    if k == 0:
+        return grape(n, 0)
+    return orange(n, k-1) + grape(n, k)
+
+def grape(a, b):
+    if b == 0 or b == a:
+        return 1
+    return grape(a-1, b-1) + grape(a-1, b)]]></solution>
+  </problem>
+
+  <!-- 문제 4: 짝수 위치 조합의 합 -->
+  <problem>
+    <description><![CDATA[재귀함수를 사용하여 nC0 + nC2 + nC4 + ... (r이 짝수인 조합들의 합)을 계산하는 함수를 작성하세요.]]></description>
+    <code><![CDATA[def kiwi(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+def lemon(a, b):
+    if b == 0 or b == a:
+        return 1
+    return lemon(a-1, b-1) + lemon(a-1, b)]]></code>
+    <input><![CDATA[4]]></input>
+    <output><![CDATA[8]]></output>
+    <hint></hint>
+    <solution><![CDATA[def kiwi(n):
+    if n == 0:
+        return lemon(n, 0)
+    w = 0
+    for i in range(0, n+1, 2):
+        w += lemon(n, i)
+    return w
+
+def lemon(a, b):
+    if b == 0 or b == a:
+        return 1
+    return lemon(a-1, b-1) + lemon(a-1, b)]]></solution>
+  </problem>
+
+  <!-- 문제 5: 계단 오르기 경우의 수 -->
+  <problem>
+    <description><![CDATA[n개의 계단을 1칸 또는 2칸씩만 오를 수 있을 때, 총 경우의 수를 조합으로 계산하는 함수를 작성하세요.
+k개의 2칸을 사용한다면, 나머지는 1칸이므로 조합 문제로 변환됩니다.]]></description>
+    <code><![CDATA[def peach(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+def cherry(a, b):
+    if b == 0 or b == a:
+        return 1
+    return cherry(a-1, b-1) + cherry(a-1, b)]]></code>
+    <input><![CDATA[5]]></input>
+    <output><![CDATA[8]]></output>
+    <hint></hint>
+    <solution><![CDATA[def peach(n):
+    x1 = 0
+    for k in range(n//2 + 1):
+        y = n - k
+        if y >= 0:
+            x1 += cherry(y, k)
+    return x1
+
+def cherry(a, b):
+    if b == 0 or b == a:
+        return 1
+    return cherry(a-1, b-1) + cherry(a-1, b)]]></solution>
+  </problem>
+
+  <!-- 문제 6: 조합의 최댓값 찾기 -->
+  <problem>
+    <description><![CDATA[재귀함수를 사용하여 nC0부터 nCn까지 중 최댓값을 찾는 함수를 작성하세요.]]></description>
+    <code><![CDATA[def plum(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+def lime(a, b):
+    if b == 0 or b == a:
+        return 1
+    return lime(a-1, b-1) + lime(a-1, b)]]></code>
+    <input><![CDATA[6]]></input>
+    <output><![CDATA[20]]></output>
+    <hint></hint>
+    <solution><![CDATA[def plum(n):
+    if n == 0:
+        return 1
+    w = lime(n, 0)
+    for i in range(1, n+1):
+        x2 = lime(n, i)
+        if x2 > w:
+            w = x2
+    return w
+
+def lime(a, b):
+    if b == 0 or b == a:
+        return 1
+    return lime(a-1, b-1) + lime(a-1, b)]]></solution>
+  </problem>
+
+  <!-- 문제 7: 3의 배수 위치 조합 개수 -->
+  <problem>
+    <description><![CDATA[재귀함수를 사용하여 nCr에서 r이 3의 배수인 조합들의 개수를 세는 함수를 작성하세요.
+(0도 3의 배수로 포함합니다)]]></description>
+    <code><![CDATA[def pear(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+def melon(a, b):
+    if b == 0 or b == a:
+        return 1
+    return melon(a-1, b-1) + melon(a-1, b)]]></code>
+    <input><![CDATA[6]]></input>
+    <output><![CDATA[3]]></output>
+    <hint></hint>
+    <solution><![CDATA[def pear(n):
+    c = 0
+    for i in range(0, n+1, 3):
+        c += 1
+    return c
+
+def melon(a, b):
+    if b == 0 or b == a:
+        return 1
+    return melon(a-1, b-1) + melon(a-1, b)]]></solution>
+  </problem>
+</problems>

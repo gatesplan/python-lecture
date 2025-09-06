@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Python Basic Lecture 7 - Tuple 자료형 연습문제
+  
+  학습 순서에 따른 섹션별 3문제씩 구성:
+  1. Tuple 선언하기
+  2. Tuple 언패킹하기  
+  3. 빌트인 함수들과 tuple 조합
+  4. Tuple 메서드 (count, index)
+-->
+<exercise>
+  <title>Exercise 7-1. Tuple 자료형</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <section title="Section 1 - Tuple 선언하기" file="problems-lecture7-tuple-declaration.xml" count="3"/>
+    <section title="Section 2 - Tuple 언패킹하기" file="problems-lecture7-tuple-unpacking.xml" count="3"/>
+    <section title="Section 3 - 빌트인 함수들과 tuple 조합" file="problems-lecture7-builtin-tuple.xml" count="3"/>
+    <section title="Section 4 - Tuple 메서드 (count, index)" file="problems-lecture7-tuple-method.xml" count="3"/>
+  </sections>
+</exercise>

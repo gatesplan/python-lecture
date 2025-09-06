@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  재귀함수 종합 연습문제
+  
+  구성:
+  - Section 1: 재귀함수 기본 이해 (1문제)
+  - Section 2: 재귀→제어문 변환 (1문제)  
+  - Section 3: 제어문→재귀 변환 (1문제)
+  
+  총 3문제로 구성된 재귀함수 종합 연습
+  각 섹션에서 랜덤으로 1문제씩 출제하여 재귀함수의 다양한 측면 학습
+  
+  사용법:
+  URL에서 ?config=config-25121-recursive 로 접근
+-->
+<exercise>
+  <title>Exercise. 재귀함수 종합 연습</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- true: 해설 표시, false: 해설 숨김 -->
+  </settings>
+  <sections>
+    <!-- Section 1: 재귀함수 기본 이해 -->
+    <section title="Section 1 - 재귀함수 기본 이해" file="problems-recursive-25121-basic.xml" count="1"/>
+    
+    <!-- Section 2: 재귀함수를 제어문으로 변환 -->
+    <section title="Section 2 - 재귀함수를 제어문으로 변환" file="problems-recursion-25121-rcur2func.xml" count="1"/>
+    
+    <!-- Section 3: 제어문을 재귀함수로 변환 -->
+    <section title="Section 3 - 제어문을 재귀함수로 변환" file="problems-recursion-25121-func2rcur.xml" count="1"/>
+  </sections>
+</exercise>

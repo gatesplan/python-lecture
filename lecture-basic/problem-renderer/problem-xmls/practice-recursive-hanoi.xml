@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  하노이탑 재귀함수 연습문제
+  
+  이 파일은 하노이탑을 주제로 한 재귀함수 연습 문제들을 포함합니다.
+  
+  학습 목표:
+  - 재귀함수의 기본 개념과 구조 이해
+  - 하노이탑 문제를 통한 재귀적 사고 훈련
+  - 기저 조건과 재귀 호출의 올바른 설계
+-->
+<problems>
+
+  <!-- 1. 하노이탑 이동 과정 출력 -->
+  <problem>
+    <description><![CDATA[하노이탑에서 n개의 원판을 A 기둥에서 C 기둥으로 이동하는 과정을 출력하는 재귀함수를 작성하세요. B 기둥을 보조 기둥으로 사용합니다.]]></description>
+    <code><![CDATA[def apple(n, a, b, c):
+    # 여기에 코드를 작성하세요
+    pass
+
+apple(3, 'A', 'B', 'C')]]></code>
+    <input><![CDATA[n=3, a='A', b='B', c='C']]></input>
+    <output><![CDATA[A -> C
+A -> B
+C -> B
+A -> C
+B -> A
+B -> C
+A -> C]]></output>
+    <hint></hint>
+    <solution><![CDATA[def apple(n, a, b, c):
+    if n == 1:
+        print(f"{a} -> {c}")
+        return
+    
+    apple(n-1, a, c, b)
+    print(f"{a} -> {c}")
+    apple(n-1, b, a, c)]]></solution>
+  </problem>
+
+  <!-- 2. 하노이탑 이동 횟수 계산 -->
+  <problem>
+    <description><![CDATA[n개의 원판을 하노이탑에서 이동하는데 필요한 총 횟수를 재귀함수로 계산하세요.]]></description>
+    <code><![CDATA[def banana(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+print(banana(4))]]></code>
+    <input><![CDATA[4]]></input>
+    <output><![CDATA[15]]></output>
+    <hint></hint>
+    <solution><![CDATA[def banana(n):
+    if n == 1:
+        return 1
+    return 2 * banana(n-1) + 1]]></solution>
+  </problem>
+
+  <!-- 3. 하노이탑 단계별 메시지 출력 -->
+  <problem>
+    <description><![CDATA[하노이탑에서 n번째까지 각 단계별로 "단계 x 완료" 메시지를 재귀적으로 출력하세요.]]></description>
+    <code><![CDATA[def cherry(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+cherry(4)]]></code>
+    <input><![CDATA[4]]></input>
+    <output><![CDATA[단계 1 완료
+단계 2 완료
+단계 3 완료
+단계 4 완료]]></output>
+    <hint></hint>
+    <solution><![CDATA[def cherry(n):
+    if n <= 0:
+        return
+    cherry(n-1)
+    print(f"단계 {n} 완료")]]></solution>
+  </problem>
+
+  <!-- 4. 하노이탑 원판 크기 역순 출력 -->
+  <problem>
+    <description><![CDATA[하노이탑에서 n개의 원판을 큰 것부터 작은 것 순서로 재귀적으로 출력하세요.]]></description>
+    <code><![CDATA[def durian(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+durian(5)]]></code>
+    <input><![CDATA[5]]></input>
+    <output><![CDATA[원판 5
+원판 4
+원판 3
+원판 2
+원판 1]]></output>
+    <hint></hint>
+    <solution><![CDATA[def durian(n):
+    if n <= 0:
+        return
+    print(f"원판 {n}")
+    durian(n-1)]]></solution>
+  </problem>
+
+  <!-- 5. 하노이탑 2의 거듭제곱 계산 -->
+  <problem>
+    <description><![CDATA[하노이탑 문제와 관련된 2^n 값을 재귀함수로 계산하세요.]]></description>
+    <code><![CDATA[def elderberry(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+print(elderberry(6))]]></code>
+    <input><![CDATA[6]]></input>
+    <output><![CDATA[64]]></output>
+    <hint></hint>
+    <solution><![CDATA[def elderberry(n):
+    if n == 0:
+        return 1
+    return 2 * elderberry(n-1)]]></solution>
+  </problem>
+
+  <!-- 6. 하노이탑 기둥 이름 순환 출력 -->
+  <problem>
+    <description><![CDATA[하노이탑의 기둥 이름 A, B, C를 n번 순환하여 재귀적으로 출력하세요.]]></description>
+    <code><![CDATA[def fig(n, x=0):
+    # 여기에 코드를 작성하세요
+    pass
+
+fig(7)]]></code>
+    <input><![CDATA[7]]></input>
+    <output><![CDATA[A
+B
+C
+A
+B
+C
+A]]></output>
+    <hint></hint>
+    <solution><![CDATA[def fig(n, x=0):
+    if n <= 0:
+        return
+    y = ['A', 'B', 'C']
+    print(y[x % 3])
+    fig(n-1, x+1)]]></solution>
+  </problem>
+
+  <!-- 7. 하노이탑 패턴 출력 -->
+  <problem>
+    <description><![CDATA[하노이탑 모양을 별표로 그리는 재귀함수를 작성하세요. n단계까지 탑을 쌓는 형태로 출력합니다.]]></description>
+    <code><![CDATA[def grape(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+grape(4)]]></code>
+    <input><![CDATA[4]]></input>
+    <output><![CDATA[*
+**
+***
+****]]></output>
+    <hint></hint>
+    <solution><![CDATA[def grape(n):
+    if n <= 0:
+        return
+    grape(n-1)
+    print('*' * n)]]></solution>
+  </problem>
+
+  <!-- 8. 하노이탑 이동 명령 생성 -->
+  <problem>
+    <description><![CDATA[하노이탑에서 n번째부터 1번째까지 원판을 역순으로 이동 명령을 재귀적으로 출력하세요.]]></description>
+    <code><![CDATA[def honeydew(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+honeydew(3)]]></code>
+    <input><![CDATA[3]]></input>
+    <output><![CDATA[원판 3 이동
+원판 2 이동
+원판 1 이동]]></output>
+    <hint></hint>
+    <solution><![CDATA[def honeydew(n):
+    if n <= 0:
+        return
+    print(f"원판 {n} 이동")
+    honeydew(n-1)]]></solution>
+  </problem>
+
+  <!-- 9. 하노이탑 누적 이동 횟수 -->
+  <problem>
+    <description><![CDATA[하노이탑에서 1개부터 n개까지 각각의 이동 횟수를 누적하여 재귀적으로 계산하세요.]]></description>
+    <code><![CDATA[def kiwi(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+print(kiwi(4))]]></code>
+    <input><![CDATA[4]]></input>
+    <output><![CDATA[30]]></output>
+    <hint></hint>
+    <solution><![CDATA[def kiwi(n):
+    if n <= 0:
+        return 0
+    return (2**n - 1) + kiwi(n-1)]]></solution>
+  </problem>
+
+  <!-- 10. 하노이탑 완료 확인 메시지 -->
+  <problem>
+    <description><![CDATA[하노이탑에서 n개의 원판이 모두 이동 완료될 때까지의 과정을 재귀적으로 시뮬레이션하여 완료 메시지를 출력하세요.]]></description>
+    <code><![CDATA[def lemon(n):
+    # 여기에 코드를 작성하세요
+    pass
+
+lemon(3)]]></code>
+    <input><![CDATA[3]]></input>
+    <output><![CDATA[1개 원판 완료
+2개 원판 완료
+3개 원판 완료]]></output>
+    <hint></hint>
+    <solution><![CDATA[def lemon(n):
+    if n <= 0:
+        return
+    lemon(n-1)
+    print(f"{n}개 원판 완료")]]></solution>
+  </problem>
+
+</problems>

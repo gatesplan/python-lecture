@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  for문 zip() 함수 문제집
+  여러 리스트를 동시에 순회하는 zip() 함수 연습
+  대응되는 요소들을 함께 처리하는 패턴 중심
+-->
+<problems>
+  <!-- 문제 1: 이름과 나이 함께 출력 -->
+  <problem>
+    <description><![CDATA[이름 리스트 ['김철수', '이영희', '박민수']와 나이 리스트 [25, 30, 28]를 "김철수: 25세" 형식으로 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[김철수: 25세
+이영희: 30세
+박민수: 28세]]></output>
+    <hint><![CDATA[zip() 함수로 두 리스트를 동시에 순회하세요.]]></hint>
+    <solution><![CDATA[names = ['김철수', '이영희', '박민수']
+ages = [25, 30, 28]
+for name, age in zip(names, ages):
+    print(f"{name}: {age}세")]]></solution>
+  </problem>
+
+  <!-- 문제 2: 과목과 점수 함께 출력 -->
+  <problem>
+    <description><![CDATA[과목 리스트 ['수학', '영어', '과학']과 점수 리스트 [85, 92, 78]을 "수학: 85점" 형식으로 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[수학: 85점
+영어: 92점
+과학: 78점]]></output>
+    <hint>zip()을 사용해 과목과 점수를 동시에 가져오세요.</hint>
+    <solution><![CDATA[subjects = ['수학', '영어', '과학']
+scores = [85, 92, 78]
+for subject, score in zip(subjects, scores):
+    print(f"{subject}: {score}점")]]></solution>
+  </problem>
+
+  <!-- 문제 3: 두 리스트 요소 더하기 -->
+  <problem>
+    <description><![CDATA[숫자 리스트 [1, 2, 3, 4, 5]와 [10, 20, 30, 40, 50]의 대응되는 요소들을 더한 결과를 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[11
+22
+33
+44
+55]]></output>
+    <hint><![CDATA[zip()으로 두 리스트를 동시에 순회하고 요소들을 더하세요.]]></hint>
+    <solution><![CDATA[list1 = [1, 2, 3, 4, 5]
+list2 = [10, 20, 30, 40, 50]
+for a, b in zip(list1, list2):
+    print(a + b)]]></solution>
+  </problem>
+
+  <!-- 문제 4: 상품명과 가격 출력 -->
+  <problem>
+    <description><![CDATA[상품 리스트 ['사과', '바나나', '오렌지']와 가격 리스트 [1000, 1500, 2000]을 "사과 - 1000원" 형식으로 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[사과 - 1000원
+바나나 - 1500원
+오렌지 - 2000원]]></output>
+    <hint>zip()을 사용해 상품명과 가격을 함께 가져오세요.</hint>
+    <solution><![CDATA[products = ['사과', '바나나', '오렌지']
+prices = [1000, 1500, 2000]
+for product, price in zip(products, prices):
+    print(f"{product} - {price}원")]]></solution>
+  </problem>
+
+  <!-- 문제 5: 도시와 온도 출력 -->
+  <problem>
+    <description><![CDATA[도시 리스트 ['서울', '부산', '대구']와 온도 리스트 [15, 18, 12]를 "서울의 온도: 15도" 형식으로 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[서울의 온도: 15도
+부산의 온도: 18도
+대구의 온도: 12도]]></output>
+    <hint>zip()으로 도시와 온도를 동시에 순회하세요.</hint>
+    <solution><![CDATA[cities = ['서울', '부산', '대구']
+temperatures = [15, 18, 12]
+for city, temp in zip(cities, temperatures):
+    print(f"{city}의 온도: {temp}도")]]></solution>
+  </problem>
+
+  <!-- 문제 6: 색깔과 동물 조합 -->
+  <problem>
+    <description><![CDATA[색깔 리스트 ['빨간', '파란', '노란']과 동물 리스트 ['고양이', '강아지', '새']를 "빨간 고양이" 형식으로 조합하여 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[빨간 고양이
+파란 강아지
+노란 새]]></output>
+    <hint>zip()을 사용해 색깔과 동물을 조합하세요.</hint>
+    <solution><![CDATA[colors = ['빨간', '파란', '노란']
+animals = ['고양이', '강아지', '새']
+for color, animal in zip(colors, animals):
+    print(f"{color} {animal}")]]></solution>
+  </problem>
+
+  <!-- 문제 7: 두 점수 비교 -->
+  <problem>
+    <description><![CDATA[1차 시험 점수 [80, 75, 90]와 2차 시험 점수 [85, 70, 95]를 비교하여 "1차: 80, 2차: 85, 향상됨" 또는 "하락함" 형식으로 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[1차: 80, 2차: 85, 향상됨
+1차: 75, 2차: 70, 하락함
+1차: 90, 2차: 95, 향상됨]]></output>
+    <hint><![CDATA[zip()과 if문으로 점수를 비교하세요.]]></hint>
+    <solution><![CDATA[first_scores = [80, 75, 90]
+second_scores = [85, 70, 95]
+for first, second in zip(first_scores, second_scores):
+    if second > first:
+        result = "향상됨"
+    else:
+        result = "하락함"
+    print(f"1차: {first}, 2차: {second}, {result}")]]></solution>
+  </problem>
+
+  <!-- 문제 8: 영어와 한국어 단어 매칭 -->
+  <problem>
+    <description><![CDATA[영어 단어 ['apple', 'banana', 'orange']와 한국어 단어 ['사과', '바나나', '오렌지']를 "apple = 사과" 형식으로 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[apple = 사과
+banana = 바나나
+orange = 오렌지]]></output>
+    <hint>zip()으로 영어와 한국어 단어를 매칭하세요.</hint>
+    <solution><![CDATA[english = ['apple', 'banana', 'orange']
+korean = ['사과', '바나나', '오렌지']
+for eng, kor in zip(english, korean):
+    print(f"{eng} = {kor}")]]></solution>
+  </problem>
+
+  <!-- 문제 9: 학생과 등급 출력 -->
+  <problem>
+    <description><![CDATA[학생 리스트 ['홍길동', '김영수', '이민정']과 등급 리스트 ['A', 'B+', 'A-']를 "홍길동 학생의 등급: A" 형식으로 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[홍길동 학생의 등급: A
+김영수 학생의 등급: B+
+이민정 학생의 등급: A-]]></output>
+    <hint>zip()을 사용해 학생과 등급을 함께 처리하세요.</hint>
+    <solution><![CDATA[students = ['홍길동', '김영수', '이민정']
+grades = ['A', 'B+', 'A-']
+for student, grade in zip(students, grades):
+    print(f"{student} 학생의 등급: {grade}")]]></solution>
+  </problem>
+
+  <!-- 문제 10: 월별 매출 합계 -->
+  <problem>
+    <description><![CDATA[월 리스트 ['1월', '2월', '3월']과 매출 리스트 [1000, 1200, 900]의 총 매출을 계산하여 "총 매출: 3100" 형식으로 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[1월 매출: 1000
+2월 매출: 1200
+3월 매출: 900
+총 매출: 3100]]></output>
+    <hint><![CDATA[zip()으로 월별 매출을 출력하고, 매출의 합계를 구하세요.]]></hint>
+    <solution><![CDATA[months = ['1월', '2월', '3월']
+sales = [1000, 1200, 900]
+total = 0
+for month, sale in zip(months, sales):
+    print(f"{month} 매출: {sale}")
+    total = total + sale
+print(f"총 매출: {total}")]]></solution>
+  </problem>
+</problems>

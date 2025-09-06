@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  for문 range() 함수 문제집
+  range(n), range(start, stop), range(start, stop, step) 활용
+  반복 연습을 통한 range() 함수 사용법 체득
+-->
+<problems>
+  <!-- 문제 1: 1부터 5까지 출력 -->
+  <problem>
+    <description><![CDATA[1부터 5까지의 숫자를 한 줄씩 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[1
+2
+3
+4
+5]]></output>
+    <hint><![CDATA[range(1, 6)을 사용하세요.]]></hint>
+    <solution><![CDATA[for i in range(1, 6):
+    print(i)]]></solution>
+  </problem>
+
+  <!-- 문제 2: 0부터 4까지 출력 -->
+  <problem>
+    <description><![CDATA[0부터 4까지의 숫자를 한 줄씩 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[0
+1
+2
+3
+4]]></output>
+    <hint><![CDATA[range(5)를 사용하세요.]]></hint>
+    <solution><![CDATA[for i in range(5):
+    print(i)]]></solution>
+  </problem>
+
+  <!-- 문제 3: 2씩 증가하며 출력 -->
+  <problem>
+    <description><![CDATA[0부터 8까지 2씩 증가하는 숫자를 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[0
+2
+4
+6
+8]]></output>
+    <hint><![CDATA[range(0, 9, 2)를 사용하세요.]]></hint>
+    <solution><![CDATA[for i in range(0, 9, 2):
+    print(i)]]></solution>
+  </problem>
+
+  <!-- 문제 4: 구구단 3단 출력 -->
+  <problem>
+    <description><![CDATA[구구단 3단을 "3 x 1 = 3" 형식으로 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[3 x 1 = 3
+3 x 2 = 6
+3 x 3 = 9
+3 x 4 = 12
+3 x 5 = 15
+3 x 6 = 18
+3 x 7 = 21
+3 x 8 = 24
+3 x 9 = 27]]></output>
+    <hint><![CDATA[range(1, 10)을 사용하고 f-string으로 출력하세요.]]></hint>
+    <solution><![CDATA[for i in range(1, 10):
+    print(f"3 x {i} = {3 * i}")]]></solution>
+  </problem>
+
+  <!-- 문제 5: 1부터 10까지 합계 -->
+  <problem>
+    <description><![CDATA[1부터 10까지의 숫자를 모두 더한 결과를 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[55]]></output>
+    <hint>합계 변수를 0으로 초기화하고 range로 1부터 10까지 더하세요.</hint>
+    <solution><![CDATA[total = 0
+for i in range(1, 11):
+    total = total + i
+print(total)]]></solution>
+  </problem>
+
+  <!-- 문제 6: 10부터 1까지 거꾸로 출력 -->
+  <problem>
+    <description><![CDATA[10부터 1까지 거꾸로 숫자를 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[10
+9
+8
+7
+6
+5
+4
+3
+2
+1]]></output>
+    <hint><![CDATA[range(10, 0, -1)을 사용하세요.]]></hint>
+    <solution><![CDATA[for i in range(10, 0, -1):
+    print(i)]]></solution>
+  </problem>
+
+  <!-- 문제 7: 별표 패턴 출력 -->
+  <problem>
+    <description><![CDATA[5번 반복하여 각 줄에 "*"를 1개, 2개, 3개, 4개, 5개씩 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[*
+**
+***
+****
+*****]]></output>
+    <hint><![CDATA[range(1, 6)을 사용하고 "*" * i로 별표를 반복하세요.]]></hint>
+    <solution><![CDATA[for i in range(1, 6):
+    print("*" * i)]]></solution>
+  </problem>
+
+  <!-- 문제 8: 5의 배수만 출력 -->
+  <problem>
+    <description><![CDATA[5부터 25까지 5의 배수만 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[5
+10
+15
+20
+25]]></output>
+    <hint><![CDATA[range(5, 26, 5)를 사용하세요.]]></hint>
+    <solution><![CDATA[for i in range(5, 26, 5):
+    print(i)]]></solution>
+  </problem>
+
+  <!-- 문제 9: 숫자와 제곱 출력 -->
+  <problem>
+    <description><![CDATA[1부터 5까지의 숫자와 그 제곱을 "1의 제곱: 1" 형식으로 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[1의 제곱: 1
+2의 제곱: 4
+3의 제곱: 9
+4의 제곱: 16
+5의 제곱: 25]]></output>
+    <hint><![CDATA[range(1, 6)과 i ** 2를 사용하세요.]]></hint>
+    <solution><![CDATA[for i in range(1, 6):
+    print(f"{i}의 제곱: {i ** 2}")]]></solution>
+  </problem>
+
+  <!-- 문제 10: 짝수만 출력 -->
+  <problem>
+    <description><![CDATA[2부터 10까지 짝수만 출력하는 프로그램을 작성하세요.]]></description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[2
+4
+6
+8
+10]]></output>
+    <hint><![CDATA[range(2, 11, 2)를 사용하세요.]]></hint>
+    <solution><![CDATA[for i in range(2, 11, 2):
+    print(i)]]></solution>
+  </problem>
+</problems>

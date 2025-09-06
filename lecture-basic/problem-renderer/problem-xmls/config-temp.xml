@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  문자열 슬라이싱 연습문제 설정
+  
+  사용법:
+  1. URL에서 ?config=config-temp 로 접근
+  2. 문자열 슬라이싱과 스텝 슬라이싱 문제들이 출제됨
+  
+  설정 옵션:
+  - showSolutions: true(해설 표시) / false(해설 숨김)
+  - section의 count: 각 섹션에서 랜덤 추출할 문제 개수
+-->
+<exercise>
+  <title>임시 연습문제. 문자열 슬라이싱</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- true: 해설 표시, false: 해설 숨김 -->
+  </settings>
+  <sections>
+    <!-- 문자열 기본 슬라이싱 섹션 -->
+    <section title="Section 1 - 문자열 기본 슬라이싱" file="problems-lecture2-string-slicing.xml" count="5"/>
+    
+    <!-- 문자열 스텝 슬라이싱 섹션 -->
+    <section title="Section 2 - 문자열 스텝 슬라이싱" file="problems-lecture2-string-stepslicing.xml" count="5"/>
+  </sections>
+</exercise>
