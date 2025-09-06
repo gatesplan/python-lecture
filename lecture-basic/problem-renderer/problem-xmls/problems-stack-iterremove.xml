@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 괄호 검사 문제 -->
+  <problem>
+    <description>다음 코드를 완성하여 괄호가 올바르게 매칭되는지 검사하는 함수를 구현하세요.</description>
+    <code><![CDATA[class Stack:
+    # ... 생략
+
+def is_valid_brackets(s):
+    stack = Stack()
+    pairs = {'(': ')', '[': ']', '{': '}'}
+    
+    for char in s:
+        if char in pairs:
+            stack.push(char)
+        elif char in pairs.values():
+            # 여기를 완성하세요 (닫는 괄호 처리)
+    
+    return stack.is_empty()]]></code>
+    <input><![CDATA[is_valid_brackets("()")
+is_valid_brackets("([{}])")
+is_valid_brackets("([)]")
+is_valid_brackets("(((")]]></input>
+    <output><![CDATA[True
+True
+False
+False]]></output>
+    <hint>여는 괄호는 스택에 push하고, 닫는 괄호는 스택에서 pop해서 매칭을 확인하세요.</hint>
+    <solution><![CDATA[def is_valid_brackets(s):
+    stack = Stack()
+    pairs = {'(': ')', '[': ']', '{': '}'}
+    
+    for char in s:
+        if char in pairs:  # 여는 괄호
+            stack.push(char)
+        elif char in pairs.values():  # 닫는 괄호
+            if stack.is_empty():
+                return False
+            if pairs[stack.pop()] != char:
+                return False
+    
+    return stack.is_empty()]]></solution>
+  </problem>
+
+  <!-- 괄호 교정 문제 1: for문 -->
+  <problem>
+    <description>다음 코드를 완성하여 괄호를 depth에 따라 교정하는 함수를 구현하세요. depth 0은 (), depth 1은 [], depth 2는 {}를 사용합니다.</description>
+    <code><![CDATA[def fix_brackets(s):
+    stack = []
+    result = []
+    brackets = ['()', '[]', '{}']
+    
+    # 여기를 완성하세요 (각 문자를 처리하는 for문)
+    
+    while stack:
+        stack.pop()
+        depth = len(stack)
+        result.append(brackets[depth % 3][1])
+    
+    return ''.join(result)]]></code>
+    <input><![CDATA[fix_brackets("([)]")
+fix_brackets("({[)")]]></input>
+    <output><![CDATA[([])]
+([{}])]]></output>
+    <hint>여는 괄호일 때는 depth를 구해서 적절한 여는 괄호를 추가하고, 닫는 괄호일 때는 스택에서 pop 후 depth를 구해서 적절한 닫는 괄호를 추가하세요.</hint>
+    <solution><![CDATA[def fix_brackets(s):
+    stack = []
+    result = []
+    brackets = ['()', '[]', '{}']
+    
+    for char in s:
+        if char in '([{':
+            depth = len(stack)
+            stack.append(char)
+            result.append(brackets[depth % 3][0])
+        elif char in ')]}':
+            if stack:
+                stack.pop()
+                depth = len(stack)
+                result.append(brackets[depth % 3][1])
+    
+    while stack:
+        stack.pop()
+        depth = len(stack)
+        result.append(brackets[depth % 3][1])
+    
+    return ''.join(result)]]></solution>
+  </problem>
+
+  <!-- 괄호 교정 문제 2: while문 -->
+  <problem>
+    <description>다음 코드를 완성하여 남은 여는 괄호들을 닫아주는 함수를 구현하세요.</description>
+    <code><![CDATA[def fix_brackets(s):
+    stack = []
+    result = []
+    brackets = ['()', '[]', '{}']
+    
+    for char in s:
+        if char in '([{':
+            depth = len(stack)
+            stack.append(char)
+            result.append(brackets[depth % 3][0])
+        elif char in ')]}':
+            if stack:
+                stack.pop()
+                depth = len(stack)
+                result.append(brackets[depth % 3][1])
+    
+    # 여기를 완성하세요 (남은 여는 괄호들 처리하는 while문)
+    
+    return ''.join(result)]]></code>
+    <input><![CDATA[fix_brackets("(((")
+fix_brackets("({[")]]></input>
+    <output><![CDATA[((()))
+([{}])]]></output>
+    <hint>스택이 비어있지 않은 동안 pop하면서 현재 depth에 맞는 닫는 괄호를 추가하세요.</hint>
+    <solution><![CDATA[def fix_brackets(s):
+    stack = []
+    result = []
+    brackets = ['()', '[]', '{}']
+    
+    for char in s:
+        if char in '([{':
+            depth = len(stack)
+            stack.append(char)
+            result.append(brackets[depth % 3][0])
+        elif char in ')]}':
+            if stack:
+                stack.pop()
+                depth = len(stack)
+                result.append(brackets[depth % 3][1])
+    
+    while stack:
+        stack.pop()
+        depth = len(stack)
+        result.append(brackets[depth % 3][1])
+    
+    return ''.join(result)]]></solution>
+  </problem>
+
+  <!-- 십진수를 이진수로 변환 문제 -->
+  <problem>
+    <description>다음 코드를 완성하여 십진수를 이진수로 변환하는 함수를 구현하세요.</description>
+    <code><![CDATA[class Stack:
+    # ... 생략
+
+def decimal_to_binary(num):
+    stack = Stack()
+    
+    if num == 0:
+        return "0"
+    
+    # 여기를 완성하세요 (나머지를 스택에 저장하는 while문)
+    
+    binary = ""
+    while not stack.is_empty():
+        binary += str(stack.pop())
+    
+    return binary]]></code>
+    <input><![CDATA[decimal_to_binary(10)
+decimal_to_binary(25)
+decimal_to_binary(0)
+decimal_to_binary(255)]]></input>
+    <output><![CDATA[1010
+11001
+0
+11111111]]></output>
+    <hint>나머지를 스택에 저장한 후, 스택에서 꺼내면서 이진수 문자열을 만드세요.</hint>
+    <solution><![CDATA[def decimal_to_binary(num):
+    stack = Stack()
+    
+    if num == 0:
+        return "0"
+    
+    # 나머지를 스택에 저장
+    while num > 0:
+        remainder = num % 2
+        stack.push(remainder)
+        num = num // 2
+    
+    # 스택에서 꺼내면서 이진수 만들기
+    binary = ""
+    while not stack.is_empty():
+        binary += str(stack.pop())
+    
+    return binary]]></solution>
+  </problem>
+
+  <!-- 중위식을 후위식으로 변환 문제 -->
+  <problem>
+    <description>다음 코드를 완성하여 중위식을 후위식으로 변환하는 함수를 구현하세요.</description>
+    <code><![CDATA[class Stack:
+    # ... 생략
+
+def infix_to_postfix(infix):
+    precedence = {'+': 1, '-': 1, '*': 2, '/': 2}
+    
+    stack = Stack()
+    output = []
+    tokens = infix.split()
+    
+    for token in tokens:
+        if token.isalnum():
+            output.append(token)
+        elif token == '(':
+            stack.push(token)
+        elif token == ')':
+            while not stack.is_empty() and stack.peek() != '(':
+                output.append(stack.pop())
+            if not stack.is_empty():
+                stack.pop()
+        elif token in precedence:
+            # 여기를 완성하세요 (연산자 우선순위 처리)
+            stack.push(token)
+    
+    while not stack.is_empty():
+        output.append(stack.pop())
+    
+    return ' '.join(output)]]></code>
+    <input><![CDATA[infix_to_postfix("2 + 3 * 4")
+infix_to_postfix("( 2 + 3 ) * 4")
+infix_to_postfix("A + B * C - D")]]></input>
+    <output><![CDATA[2 3 4 * +
+2 3 + 4 *
+A B C * + D -]]></output>
+    <hint>Shunting Yard 알고리즘을 사용하세요. 연산자 우선순위를 고려해서 스택을 관리하세요.</hint>
+    <solution><![CDATA[def infix_to_postfix(infix):
+    precedence = {'+': 1, '-': 1, '*': 2, '/': 2}
+    
+    stack = Stack()
+    output = []
+    tokens = infix.split()
+    
+    for token in tokens:
+        if token.isalnum():
+            output.append(token)
+        elif token == '(':
+            stack.push(token)
+        elif token == ')':
+            while not stack.is_empty() and stack.peek() != '(':
+                output.append(stack.pop())
+            if not stack.is_empty():
+                stack.pop()  # '(' 제거
+        elif token in precedence:
+            while (not stack.is_empty() and 
+                   stack.peek() != '(' and
+                   stack.peek() in precedence and
+                   precedence[stack.peek()] >= precedence[token]):
+                output.append(stack.pop())
+            stack.push(token)
+    
+    # 남은 연산자들 추가
+    while not stack.is_empty():
+        output.append(stack.pop())
+    
+    return ' '.join(output)]]></solution>
+  </problem>
+
+  <!-- 후위식 계산 문제 -->
+  <problem>
+    <description>다음 코드를 완성하여 후위식을 계산하는 함수를 구현하세요.</description>
+    <code><![CDATA[class Stack:
+    # ... 생략
+
+def evaluate_postfix(postfix):
+    stack = Stack()
+    tokens = postfix.split()
+    
+    for token in tokens:
+        if token.replace('.', '').replace('-', '').isdigit():
+            stack.push(float(token))
+        elif token in ['+', '-', '*', '/']:
+            if stack.size() < 2:
+                raise ValueError("Invalid expression")
+            
+            right = stack.pop()
+            left = stack.pop()
+            
+            # 여기를 완성하세요 (연산자에 따라 result 계산)
+            
+            stack.push(result)
+    
+    return stack.pop()]]></code>
+    <input><![CDATA[evaluate_postfix("2 3 4 * +")
+evaluate_postfix("2 3 + 4 *")
+evaluate_postfix("5 2 - 3 * 4 +")]]></input>
+    <output><![CDATA[14.0
+20.0
+13.0]]></output>
+    <hint>숫자는 스택에 push하고, 연산자를 만나면 두 개를 pop해서 계산 후 다시 push하세요.</hint>
+    <solution><![CDATA[def evaluate_postfix(postfix):
+    stack = Stack()
+    tokens = postfix.split()
+    
+    for token in tokens:
+        if token.replace('.', '').replace('-', '').isdigit():
+            stack.push(float(token))
+        elif token in ['+', '-', '*', '/']:
+            if stack.size() < 2:
+                raise ValueError("Invalid expression")
+            
+            # 순서 주의: 오른쪽 피연산자가 먼저 pop됨
+            right = stack.pop()
+            left = stack.pop()
+            
+            if token == '+':
+                result = left + right
+            elif token == '-':
+                result = left - right
+            elif token == '*':
+                result = left * right
+            elif token == '/':
+                if right == 0:
+                    raise ValueError("Division by zero")
+                result = left / right
+            
+            stack.push(result)
+    
+    return stack.pop()]]></solution>
+  </problem>
+
+  <!-- DFS 스택 탐색 문제 -->
+  <problem>
+    <description>다음 코드를 완성하여 스택을 이용한 DFS 탐색을 구현하세요.</description>
+    <code><![CDATA[class Stack:
+    # ... 생략
+
+def dfs_iterative(graph, start):
+    visited = set()
+    path = []
+    stack = Stack()
+    
+    stack.push(start)
+    
+    while not stack.is_empty():
+        current = stack.pop()
+        
+        if current in visited:
+            continue
+        
+        visited.add(current)
+        path.append(current)
+        
+        # 여기를 완성하세요 (이웃 노드들을 스택에 추가)
+    
+    return path]]></code>
+    <input><![CDATA[graph = {0: [1, 3], 1: [0, 2, 4], 2: [1, 5], 3: [0, 4], 4: [1, 3, 5], 5: [2, 4]}
+dfs_iterative(graph, 0)]]></input>
+    <output><![CDATA[[0, 1, 2, 5, 4, 3]]]></output>
+    <hint>이웃 노드들을 역순으로 스택에 추가하여 올바른 탐색 순서를 보장하세요.</hint>
+    <solution><![CDATA[def dfs_iterative(graph, start):
+    visited = set()
+    path = []
+    stack = Stack()
+    
+    stack.push(start)
+    
+    while not stack.is_empty():
+        current = stack.pop()
+        
+        if current in visited:
+            continue
+        
+        visited.add(current)
+        path.append(current)
+        
+        # 이웃 노드들을 스택에 추가 (역순으로)
+        for neighbor in reversed(graph[current]):
+            if neighbor not in visited:
+                stack.push(neighbor)
+    
+    return path]]></solution>
+  </problem>
+
+  <!-- DFS 초기화 문제 -->
+  <problem>
+    <description>다음 코드를 완성하여 DFS 시작 전 스택을 초기화하는 부분을 구현하세요.</description>
+    <code><![CDATA[class Stack:
+    # ... 생략
+
+def dfs_iterative(graph, start):
+    visited = set()
+    path = []
+    stack = Stack()
+    
+    # 여기를 완성하세요 (시작 노드 초기화)
+    
+    while not stack.is_empty():
+        current = stack.pop()
+        
+        if current in visited:
+            continue
+        
+        visited.add(current)
+        path.append(current)
+        
+        for neighbor in reversed(graph[current]):
+            if neighbor not in visited:
+                stack.push(neighbor)
+    
+    return path]]></code>
+    <input><![CDATA[graph = {0: [1, 3], 1: [0, 2, 4], 2: [1, 5], 3: [0, 4], 4: [1, 3, 5], 5: [2, 4]}
+dfs_iterative(graph, 0)]]></input>
+    <output><![CDATA[[0, 1, 2, 5, 4, 3]]]></output>
+    <hint>DFS를 시작하기 위해 시작 노드를 스택에 push하세요.</hint>
+    <solution><![CDATA[def dfs_iterative(graph, start):
+    visited = set()
+    path = []
+    stack = Stack()
+    
+    # 시작 노드를 스택에 추가
+    stack.push(start)
+    
+    while not stack.is_empty():
+        current = stack.pop()
+        
+        if current in visited:
+            continue
+        
+        visited.add(current)
+        path.append(current)
+        
+        for neighbor in reversed(graph[current]):
+            if neighbor not in visited:
+                stack.push(neighbor)
+    
+    return path]]></solution>
+  </problem>
+
+  <!-- 스택 정렬 1단계 문제 -->
+  <problem>
+    <description>다음 코드를 완성하여 임시 스택으로 정렬하는 부분을 구현하세요.</description>
+    <code><![CDATA[class Stack:
+    # ... 생략
+
+def sort_stack(stack):
+    temp_stack = Stack()
+    
+    while not stack.is_empty():
+        temp = stack.pop()
+        
+        # 여기를 완성하세요 (temp보다 큰 값들을 되돌리기)
+        
+        temp_stack.push(temp)
+    
+    while not temp_stack.is_empty():
+        stack.push(temp_stack.pop())]]></code>
+    <input><![CDATA[stack = Stack()
+for num in [5, 2, 8, 1, 9, 3]:
+    stack.push(num)
+sort_stack(stack)]]></input>
+    <output><![CDATA[정렬됨]]></output>
+    <hint>temp보다 큰 값들을 임시 스택에서 원래 스택으로 되돌려 보내세요.</hint>
+    <solution><![CDATA[def sort_stack(stack):
+    temp_stack = Stack()
+    
+    while not stack.is_empty():
+        temp = stack.pop()
+        
+        # temp보다 큰 값들을 원래 스택으로 되돌리기
+        while not temp_stack.is_empty() and temp_stack.peek() > temp:
+            stack.push(temp_stack.pop())
+        
+        temp_stack.push(temp)
+    
+    while not temp_stack.is_empty():
+        stack.push(temp_stack.pop())]]></solution>
+  </problem>
+
+  <!-- 스택 정렬 2단계 문제 -->
+  <problem>
+    <description>다음 코드를 완성하여 임시 스택의 정렬된 값들을 원래 스택으로 옮기는 부분을 구현하세요.</description>
+    <code><![CDATA[class Stack:
+    # ... 생략
+
+def sort_stack(stack):
+    temp_stack = Stack()
+    
+    while not stack.is_empty():
+        temp = stack.pop()
+        
+        while not temp_stack.is_empty() and temp_stack.peek() > temp:
+            stack.push(temp_stack.pop())
+        
+        temp_stack.push(temp)
+    
+    # 여기를 완성하세요 (정렬된 값들을 원래 스택으로 복원)]]></code>
+    <input><![CDATA[stack = Stack()
+for num in [5, 2, 8, 1, 9, 3]:
+    stack.push(num)
+sort_stack(stack)]]></input>
+    <output><![CDATA[정렬됨]]></output>
+    <hint>임시 스택의 모든 값들을 원래 스택으로 옮기세요.</hint>
+    <solution><![CDATA[def sort_stack(stack):
+    temp_stack = Stack()
+    
+    while not stack.is_empty():
+        temp = stack.pop()
+        
+        while not temp_stack.is_empty() and temp_stack.peek() > temp:
+            stack.push(temp_stack.pop())
+        
+        temp_stack.push(temp)
+    
+    # 정렬된 값들을 다시 원래 스택으로 옮기기
+    while not temp_stack.is_empty():
+        stack.push(temp_stack.pop())]]></solution>
+  </problem>
+
+  <!-- 미로 찾기 1단계 문제 -->
+  <problem>
+    <description>다음 코드를 완성하여 목표 지점 도달 확인 부분을 구현하세요.</description>
+    <code><![CDATA[class Stack:
+    # ... 생략
+
+def solve_maze(maze):
+    rows, cols = len(maze), len(maze[0])
+    visited = [[False] * cols for _ in range(rows)]
+    stack = Stack()
+    
+    start_path = [(0, 0)]
+    stack.push(start_path)
+    
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    
+    while not stack.is_empty():
+        path = stack.pop()
+        row, col = path[-1]
+        
+        if visited[row][col]:
+            continue
+        
+        visited[row][col] = True
+        
+        # 여기를 완성하세요 (목표 지점 확인)
+        
+        for dr, dc in directions:
+            new_row, new_col = row + dr, col + dc
+            
+            if (0 <= new_row < rows and 0 <= new_col < cols and 
+                maze[new_row][new_col] == 0 and not visited[new_row][new_col]):
+                new_path = path + [(new_row, new_col)]
+                stack.push(new_path)
+    
+    return []]]></code>
+    <input><![CDATA[maze = [[0, 1, 0, 0, 0], [0, 1, 0, 1, 0], [0, 0, 0, 1, 0], [1, 1, 0, 0, 0], [0, 0, 0, 1, 0]]
+solve_maze(maze)]]></input>
+    <output><![CDATA[경로 발견]]></output>
+    <hint>우측 하단 모서리에 도달했는지 확인하고 경로를 반환하세요.</hint>
+    <solution><![CDATA[def solve_maze(maze):
+    rows, cols = len(maze), len(maze[0])
+    visited = [[False] * cols for _ in range(rows)]
+    stack = Stack()
+    
+    start_path = [(0, 0)]
+    stack.push(start_path)
+    
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    
+    while not stack.is_empty():
+        path = stack.pop()
+        row, col = path[-1]
+        
+        if visited[row][col]:
+            continue
+        
+        visited[row][col] = True
+        
+        # 목표 지점 도달 확인
+        if row == rows - 1 and col == cols - 1:
+            return path
+        
+        for dr, dc in directions:
+            new_row, new_col = row + dr, col + dc
+            
+            if (0 <= new_row < rows and 0 <= new_col < cols and 
+                maze[new_row][new_col] == 0 and not visited[new_row][new_col]):
+                new_path = path + [(new_row, new_col)]
+                stack.push(new_path)
+    
+    return []]]></solution>
+  </problem>
+
+  <!-- 미로 찾기 2단계 문제 -->
+  <problem>
+    <description>다음 코드를 완성하여 유효한 경로 확인 및 스택 추가 부분을 구현하세요.</description>
+    <code><![CDATA[class Stack:
+    # ... 생략
+
+def solve_maze(maze):
+    rows, cols = len(maze), len(maze[0])
+    visited = [[False] * cols for _ in range(rows)]
+    stack = Stack()
+    
+    start_path = [(0, 0)]
+    stack.push(start_path)
+    
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    
+    while not stack.is_empty():
+        path = stack.pop()
+        row, col = path[-1]
+        
+        if visited[row][col]:
+            continue
+        
+        visited[row][col] = True
+        
+        if row == rows - 1 and col == cols - 1:
+            return path
+        
+        for dr, dc in directions:
+            new_row, new_col = row + dr, col + dc
+            
+            # 여기를 완성하세요 (유효한 경로인지 확인하고 스택에 추가)
+    
+    return []]]></code>
+    <input><![CDATA[maze = [[0, 1, 0, 0, 0], [0, 1, 0, 1, 0], [0, 0, 0, 1, 0], [1, 1, 0, 0, 0], [0, 0, 0, 1, 0]]
+solve_maze(maze)]]></input>
+    <output><![CDATA[경로 발견]]></output>
+    <hint>경계 내에 있고, 벽이 아니며, 방문하지 않은 경로만 스택에 추가하세요.</hint>
+    <solution><![CDATA[def solve_maze(maze):
+    rows, cols = len(maze), len(maze[0])
+    visited = [[False] * cols for _ in range(rows)]
+    stack = Stack()
+    
+    start_path = [(0, 0)]
+    stack.push(start_path)
+    
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    
+    while not stack.is_empty():
+        path = stack.pop()
+        row, col = path[-1]
+        
+        if visited[row][col]:
+            continue
+        
+        visited[row][col] = True
+        
+        if row == rows - 1 and col == cols - 1:
+            return path
+        
+        for dr, dc in directions:
+            new_row, new_col = row + dr, col + dc
+            
+            # 유효한 경로인지 확인하고 스택에 추가
+            if (0 <= new_row < rows and 0 <= new_col < cols and 
+                maze[new_row][new_col] == 0 and not visited[new_row][new_col]):
+                new_path = path + [(new_row, new_col)]
+                stack.push(new_path)
+    
+    return []]]></solution>
+  </problem>
+</problems>

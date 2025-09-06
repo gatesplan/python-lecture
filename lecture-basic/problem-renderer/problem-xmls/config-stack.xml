@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  스택 연습문제 설정
+  
+  사용법:
+  1. URL에서 ?config=config-stack 로 접근
+  
+  설정 옵션:
+  - showSolutions: true(해설 표시) / false(해설 숨김)
+  - section의 count: 각 섹션에서 랜덤 추출할 문제 개수
+-->
+<exercise>
+  <title>Exercise - Stack Problems</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- true: 해설 표시, false: 해설 숨김 -->
+  </settings>
+  <sections>
+    <!-- 
+      스택 문제 섹션:
+      - problems-stack-iterremove.xml에서 5개 문제 랜덤 추출
+    -->
+    <section title="Section 1 - Stack Implementation Problems" file="problems-stack-iterremove.xml" count="5"/>
+  </sections>
+</exercise>
