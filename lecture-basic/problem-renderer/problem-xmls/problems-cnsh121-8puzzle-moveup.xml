@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 이동 조건식 완성 -->
+  <problem>
+    <description>다음 8퍼즐에서 0 위치가 맨 윗줄이 아니면 위로 올릴 수 있도록 조건식을 완성하세요.</description>
+    <code><![CDATA[s = [0]*9
+
+for i in range(3):
+    s[i*3], s[i*3+1], s[i*3+2] = map(int, input().split())
+
+    for j in range(3):
+        if s[i*3+j] == 0:
+            pos = i*3 + j
+
+if ____:  # 여기를 채우세요
+    s[pos], s[pos-3] = s[pos-3], s[pos]
+
+    for i in range(3):
+        for j in range(3):
+            print(s[i*3+j], end=' ')
+        print()
+    print()
+
+else:
+    print("Impossible")]]></code>
+    <input><![CDATA[1 2 3
+4 0 5
+6 7 8]]></input>
+    <output><![CDATA[1 0 3
+4 2 5
+6 7 8
+]]></output>
+    <hint></hint>
+    <solution><![CDATA[if pos > 2:  # 정답: pos > 2
+# 이유: 0의 위치가 인덱스 3 이상이어야 맨 윗줄(인덱스 0, 1, 2)이 아님]]></solution>
+  </problem>
+
+  <!-- 문제 2: 위치 교환 로직 완성 및 설명 -->
+  <problem>
+    <description>다음 8퍼즐에서 0 위치와 바꿀 위치를 완성하고 이유를 설명하세요.</description>
+    <code><![CDATA[s = [0]*9
+
+for i in range(3):
+    s[i*3], s[i*3+1], s[i*3+2] = map(int, input().split())
+
+    for j in range(3):
+        if s[i*3+j] == 0:
+            pos = i*3 + j
+
+if pos > 2:
+    s[pos], s[____] = s[____], s[pos]  # 여기를 채우세요
+
+    for i in range(3):
+        for j in range(3):
+            print(s[i*3+j], end=' ')
+        print()
+    print()
+
+else:
+    print("Impossible")]]></code>
+    <input><![CDATA[1 2 3
+4 0 5
+6 7 8]]></input>
+    <output><![CDATA[1 0 3
+4 2 5
+6 7 8
+]]></output>
+    <hint></hint>
+    <solution><![CDATA[s[pos], s[pos-3] = s[pos-3], s[pos]  # 정답: pos-3, pos-3
+
+# 이유:
+# - 3x3 퍼즐에서 한 행 위로 이동하려면 인덱스가 3만큼 작아져야 함
+# - pos가 현재 0의 위치이고, pos-3이 바로 위 행의 같은 열 위치임
+# - 예: pos=4(중앙)이면 pos-3=1(위쪽 중앙)과 교환]]></solution>
+  </problem>
+
+  <!-- 문제 3: 코드 목적 설명 -->
+  <problem>
+    <description>다음 코드의 목적에 대해 설명하세요.</description>
+    <code><![CDATA[s = [0]*9
+
+for i in range(3):
+    s[i*3], s[i*3+1], s[i*3+2] = map(int, input().split())
+
+    for j in range(3):
+        if s[i*3+j] == 0:
+            pos = i*3 + j
+
+if pos > 2:
+    s[pos], s[pos-3] = s[pos-3], s[pos]
+
+    for i in range(3):
+        for j in range(3):
+            print(s[i*3+j], end=' ')
+        print()
+    print()
+
+else:
+    print("Impossible")]]></code>
+    <input><![CDATA[1 2 3
+4 0 5
+6 7 8]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[# 이 코드의 목적:
+# 8퍼즐(3x3 격자에서 0이 빈 칸)에서 빈 칸(0)을 위로 한 칸 이동시키는 프로그램
+
+# 동작 과정:
+# 1. 3x3 격자를 1차원 배열로 입력받음
+# 2. 0의 현재 위치(pos)를 찾음
+# 3. 0이 맨 윗줄이 아니면(pos > 2) 위로 이동 가능
+# 4. 0과 바로 위쪽 숫자(pos-3 위치)를 교환
+# 5. 결과를 3x3 격자 형태로 출력
+# 6. 0이 맨 윗줄에 있으면 "Impossible" 출력
+
+# 8퍼즐 게임에서 빈 칸을 위쪽으로 이동시키는 한 스텝을 구현한 것]]></solution>
+  </problem>
+</problems>

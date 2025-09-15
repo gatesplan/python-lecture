@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  중간고사 연습문제 설정 (Lecture 1-8)
+  
+  사용법:
+  URL에서 ?config=config-midterm-lecture-1to8 로 접근
+  
+  설정:
+  - Lecture 1-8까지의 모든 문제를 통합하여 랜덤 20개 추출
+  - 해설 표시
+-->
+<exercise>
+  <title>중간고사 연습문제 (Lecture 1-8) - 해설 포함</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- 해설 표시 -->
+  </settings>
+  <sections>
+    <concatenate title="Lecture 1-8 통합 문제" count="20">
+      <!-- Lecture 1: Print 관련 -->
+      <source file="problems-lecture1-print.xml"/>
+      <source file="problems-lecture1-print-sep.xml"/>
+      <source file="problems-lecture1-print-end.xml"/>
+      
+      <!-- Lecture 2: String 관련 -->
+      <source file="problems-lecture2-format.xml"/>
+      <source file="problems-lecture2-fstring.xml"/>
+      <source file="problems-lecture2-strmethod-upper.xml"/>
+      <source file="problems-lecture2-strmethod-lower.xml"/>
+      <source file="problems-lecture2-strmethod-capitalize.xml"/>
+      <source file="problems-lecture2-strmethod-strip.xml"/>
+      <source file="problems-lecture2-strmethod-replace.xml"/>
+      <source file="problems-lecture2-string-slicing.xml"/>
+      <source file="problems-lecture2-string-stepslicing.xml"/>
+      
+      <!-- Lecture 3: List 관련 -->
+      <source file="problems-lecture3-list-declaration.xml"/>
+      <source file="problems-lecture3-list-makefromstring.xml"/>
+      <source file="problems-lecture3-list-additem.xml"/>
+      <source file="problems-lecture3-list-removeitem.xml"/>
+      <source file="problems-lecture3-list-others.xml"/>
+      
+      <!-- Lecture 5: Conditional 관련 -->
+      <source file="problems-lecture5-if-basic.xml"/>
+      <source file="problems-lecture5-if-ifelse.xml"/>
+      <source file="problems-lecture5-if-ifelifelse.xml"/>
+      <source file="problems-lecture5-if-andornot.xml"/>
+      <source file="problems-lecture5-if-nested.xml"/>
+      
+      <!-- Lecture 6: For Loop 관련 -->
+      <source file="problems-lecture6-for-basic.xml"/>
+      <source file="problems-lecture6-for-range.xml"/>
+      <source file="problems-lecture6-for-enumerate.xml"/>
+      <source file="problems-lecture6-for-zip.xml"/>
+      <source file="problems-lecture6-for-enumerate-zip.xml"/>
+      <source file="problems-lecture6-for-break-continue.xml"/>
+      
+      <!-- Lecture 7: Tuple 관련 -->
+      <source file="problems-lecture7-tuple-declaration.xml"/>
+      <source file="problems-lecture7-tuple-unpacking.xml"/>
+      <source file="problems-lecture7-builtin-tuple.xml"/>
+      <source file="problems-lecture7-tuple-method.xml"/>
+      
+      <!-- Lecture 8: While Loop 관련 -->
+      <source file="problems-lecture8-while-break.xml"/>
+      <source file="problems-lecture8-while-breakcontinue.xml"/>
+      <source file="problems-lecture8-while-makeitsafe.xml"/>
+    </concatenate>
+  </sections>
+</exercise>

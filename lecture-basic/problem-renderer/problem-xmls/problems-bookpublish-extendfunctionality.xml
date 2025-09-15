@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description><![CDATA[Book 클래스에 출간된 지 30년 이상인 책을 고전으로 분류하는 is_classic 메서드를 추가하세요. 이 메서드는 출간된 지 30년 이상이면 True를, 그렇지 않으면 False를 반환해야 합니다.]]></description>
+    <code><![CDATA[from datetime import date
+
+class Book:
+    def __init__(self, title, author, publish_year):
+        self.title = title
+        self.author = author
+        self.publish_year = publish_year
+
+    def get_years_since_publication(self):
+        current_year = date.today().year
+        return current_year - self.publish_year
+    
+    def is_classic(self):
+        # 작성하세요
+        pass]]></code>
+    <input><![CDATA[book1 = Book("1984", "George Orwell", 1949)
+book2 = Book("The Hunger Games", "Suzanne Collins", 2008)
+book3 = Book("Pride and Prejudice", "Jane Austen", 1813)
+
+print(book1.is_classic())
+print(book2.is_classic())
+print(book3.is_classic())]]></input>
+    <output><![CDATA[True
+False
+True]]></output>
+    <hint></hint>
+    <solution><![CDATA[    def is_classic(self):
+        return self.get_years_since_publication() >= 30]]></solution>
+  </problem>
+
+  <problem>
+    <description><![CDATA[Book 클래스에 책 정보를 "제목 (저자, 출간년도)" 형식으로 반환하는 get_book_summary 메서드를 추가하세요.]]></description>
+    <code><![CDATA[from datetime import date
+
+class Book:
+    def __init__(self, title, author, publish_year):
+        self.title = title
+        self.author = author
+        self.publish_year = publish_year
+
+    def get_years_since_publication(self):
+        current_year = date.today().year
+        return current_year - self.publish_year
+    
+    def get_book_summary(self):
+        # 작성하세요
+        pass]]></code>
+    <input><![CDATA[book1 = Book("To Kill a Mockingbird", "Harper Lee", 1960)
+book2 = Book("The Great Gatsby", "F. Scott Fitzgerald", 1925)
+book3 = Book("Harry Potter", "J.K. Rowling", 1997)
+
+print(book1.get_book_summary())
+print(book2.get_book_summary())
+print(book3.get_book_summary())]]></input>
+    <output><![CDATA[To Kill a Mockingbird (Harper Lee, 1960)
+The Great Gatsby (F. Scott Fitzgerald, 1925)
+Harry Potter (J.K. Rowling, 1997)]]></output>
+    <hint></hint>
+    <solution><![CDATA[    def get_book_summary(self):
+        return f"{self.title} ({self.author}, {self.publish_year})"]]></solution>
+  </problem>
+</problems>

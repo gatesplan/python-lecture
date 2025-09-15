@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 재귀함수 출력값 예상 -->
+  <problem>
+    <description>다음 재귀함수 printnums(5)의 출력값을 예상하여 쓰세요.</description>
+    <code><![CDATA[def printnums(n):
+    if n < 1:
+        return
+    printnums(n-1)
+    print(n)]]></code>
+    <input><![CDATA[printnums(5)]]></input>
+    <output><![CDATA[1
+2
+3
+4
+5]]></output>
+    <hint></hint>
+    <solution><![CDATA[# printnums(5) 실행 순서:
+# 1. printnums(5) -> printnums(4) 호출 후 print(5) 대기
+# 2. printnums(4) -> printnums(3) 호출 후 print(4) 대기
+# 3. printnums(3) -> printnums(2) 호출 후 print(3) 대기
+# 4. printnums(2) -> printnums(1) 호출 후 print(2) 대기
+# 5. printnums(1) -> printnums(0) 호출 후 print(1) 대기
+# 6. printnums(0) -> return (종료)
+# 7. print(1), print(2), print(3), print(4), print(5) 순차 실행
+
+# 따라서 출력: 1, 2, 3, 4, 5]]></solution>
+  </problem>
+
+  <!-- 문제 2: 라인 순서 바꿨을 때 결과 설명 -->
+  <problem>
+    <description>다음 재귀함수에서 4번, 5번 라인(printnums(n-1)과 print(n))의 순서를 바꾸면 출력이 어떻게 바뀔지 콜 스택 용어를 사용해 설명하세요.</description>
+    <code><![CDATA[def printnums(n):
+    if n < 1:
+        return
+    printnums(n-1)  # 4번 라인
+    print(n)        # 5번 라인]]></code>
+    <input><![CDATA[printnums(3)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[# 원본 함수 (재귀 호출 후 출력):
+# 콜 스택에 printnums(3) -> printnums(2) -> printnums(1) -> printnums(0) 순으로 쌓임
+# printnums(0)에서 return 후 스택이 역순으로 해제되면서 print(1), print(2), print(3) 실행
+# 결과: 1, 2, 3
+
+# 순서를 바꾼 함수 (출력 후 재귀 호출):
+def printnums_changed(n):
+    if n < 1:
+        return
+    print(n)        # 먼저 출력
+    printnums_changed(n-1)  # 그 다음 재귀 호출
+
+# 콜 스택에 쌓이면서 바로 print(n)이 실행됨
+# printnums_changed(3) 호출 시 print(3) -> printnums_changed(2) 호출 시 print(2) -> printnums_changed(1) 호출 시 print(1)
+# 결과: 3, 2, 1
+
+# 즉, 재귀 호출 전에 출력하면 카운트다운, 재귀 호출 후에 출력하면 카운트업이 됩니다.]]></solution>
+  </problem>
+</problems>

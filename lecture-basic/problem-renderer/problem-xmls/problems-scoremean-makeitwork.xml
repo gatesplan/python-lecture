@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+    <problem>
+        <description><![CDATA[Student 클래스의 average 메서드를 구현하세요. 이 메서드는 학생의 점수 리스트(self.scores)에서 평균을 계산하여 반환해야 합니다.]]></description>
+        <code><![CDATA[class Student:
+    def __init__(self, name, scores):
+        self.name = name
+        self.scores = scores
+
+    def average(self):
+        # 작성하세요
+        pass
+
+    def grade(self):
+        avg = self.average()
+        if avg >= 90:
+            return 'A'
+        elif avg >= 80:
+            return 'B'
+        elif avg >= 70:
+            return 'C'
+        elif avg >= 60:
+            return 'D'
+        else:
+            return 'E']]></code>
+        <input><![CDATA[student1 = Student("김철수", [85, 90, 78, 92])
+student2 = Student("이영희", [95, 88, 100, 76])
+student3 = Student("박민수", [70, 65, 80, 75])
+
+print(student1.average())
+print(student2.average())
+print(student3.average())]]></input>
+        <output><![CDATA[86.25
+89.75
+72.5]]></output>
+        <hint></hint>
+        <solution><![CDATA[    def average(self):
+        return sum(self.scores) / len(self.scores)]]></solution>
+    </problem>
+
+    <problem>
+        <description><![CDATA[Student 클래스의 grade 메서드를 구현하세요. 이 메서드는 학생의 평균 점수에 따라 학점을 반환해야 합니다. 90점 이상은 'A', 80점 이상은 'B', 70점 이상은 'C', 60점 이상은 'D', 그 미만은 'E'를 반환합니다.]]></description>
+        <code><![CDATA[class Student:
+    def __init__(self, name, scores):
+        self.name = name
+        self.scores = scores
+
+    def average(self):
+        return sum(self.scores) / len(self.scores)
+
+    def grade(self):
+        # 작성하세요
+        pass]]></code>
+        <input><![CDATA[student1 = Student("김철수", [95, 92, 88, 97])
+student2 = Student("이영희", [75, 80, 78, 82])
+student3 = Student("박민수", [88, 85, 90, 87])
+student4 = Student("정수진", [55, 60, 58, 62])
+student5 = Student("최민호", [45, 50, 55, 48])
+
+print(student1.grade())
+print(student2.grade())
+print(student3.grade())
+print(student4.grade())
+print(student5.grade())]]></input>
+        <output><![CDATA[A
+B
+B
+D
+E]]></output>
+        <hint></hint>
+        <solution><![CDATA[    def grade(self):
+        avg = self.average()
+        if avg >= 90:
+            return 'A'
+        elif avg >= 80:
+            return 'B'
+        elif avg >= 70:
+            return 'C'
+        elif avg >= 60:
+            return 'D'
+        else:
+            return 'E']]></solution>
+    </problem>
+</problems>

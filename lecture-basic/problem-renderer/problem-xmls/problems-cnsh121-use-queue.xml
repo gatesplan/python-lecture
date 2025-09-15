@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: import 문 완성 -->
+  <problem>
+    <description>다음 큐 코드가 올바르게 동작하도록 import 문을 완성하세요.</description>
+    <code><![CDATA[import ____  # 여기를 채우세요
+
+q = queue.Queue()
+for i in range(1, 4):
+    q.put(i)
+while not q.empty():
+    print(q.get(), sep=' ')]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[1
+2
+3]]></output>
+    <hint></hint>
+    <solution><![CDATA[import queue  # 정답: queue
+
+q = queue.Queue()
+for i in range(1, 4):
+    q.put(i)
+while not q.empty():
+    print(q.get(), sep=' ')]]></solution>
+  </problem>
+
+  <!-- 문제 2: range() 완성하여 특정 출력 만들기 -->
+  <problem>
+    <description>출력값이 5 4 3 2 1이 되도록 range() 부분을 완성하세요.</description>
+    <code><![CDATA[import queue
+
+q = queue.Queue()
+for i in range(____):  # 여기를 채우세요
+    q.put(i)
+while not q.empty():
+    print(q.get(), sep=' ')]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[5
+4
+3
+2
+1]]></output>
+    <hint></hint>
+    <solution><![CDATA[import queue
+
+q = queue.Queue()
+for i in range(5, 0, -1):  # 정답: 5, 0, -1
+    q.put(i)
+while not q.empty():
+    print(q.get(), sep=' ')]]></solution>
+  </problem>
+
+  <!-- 문제 3: 현재 코드의 출력값 서술 -->
+  <problem>
+    <description>다음 코드의 출력값이 어떻게 되는지 서술하세요.</description>
+    <code><![CDATA[import queue
+
+q = queue.Queue()
+for i in range(1, 4):
+    q.put(i)
+while not q.empty():
+    print(q.get(), sep=' ')]]></code>
+    <input><![CDATA[]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[# 출력값: 1, 2, 3 (각각 새 줄에)
+# 이유: Queue는 FIFO(First In First Out) 구조이므로
+# for문에서 1, 2, 3 순으로 put() 했기 때문에
+# while문에서도 1, 2, 3 순으로 get()됨]]></solution>
+  </problem>
+
+  <!-- 문제 4: q.empty() 조건 설명 -->
+  <problem>
+    <description>q.empty()가 True일 때와 False일 때는 각각 어떤 상황인지 서술하세요.</description>
+    <code><![CDATA[import queue
+
+q = queue.Queue()
+for i in range(1, 4):
+    q.put(i)
+while not q.empty():
+    print(q.get(), sep=' ')]]></code>
+    <input><![CDATA[]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[# q.empty()가 True일 때:
+# - 큐에 아무 데이터도 없는 상태
+# - 모든 데이터를 get()으로 꺼내서 큐가 비어있을 때
+# - while 루프가 종료되는 조건
+
+# q.empty()가 False일 때:
+# - 큐에 하나 이상의 데이터가 있는 상태
+# - put()으로 데이터를 넣었거나, 아직 get()으로 모두 꺼내지 않은 상태
+# - while 루프가 계속 실행되는 조건]]></solution>
+  </problem>
+</problems>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 재귀함수 조건 완성 -->
+  <problem>
+    <description>다음 재귀함수에서 조건 부분을 완성하세요.</description>
+    <code><![CDATA[def f(n):
+    if ____:  # 여기를 채우세요
+        print('*')
+    else:
+        f(n-1)
+        print('*'*n)]]></code>
+    <input><![CDATA[f(3)]]></input>
+    <output><![CDATA[*
+**
+***]]></output>
+    <hint></hint>
+    <solution><![CDATA[def f(n):
+    if n <= 1:  # 정답: n <= 1
+        print('*')
+    else:
+        f(n-1)
+        print('*'*n)]]></solution>
+  </problem>
+
+  <!-- 문제 2: else 부분의 재귀 호출 완성 -->
+  <problem>
+    <description>다음 재귀함수에서 else 부분의 한 줄을 완성하세요.</description>
+    <code><![CDATA[def f(n):
+    if n <= 1:
+        print('*')
+    else:
+        # 여기에 한 줄을 작성하세요
+        print('*'*n)]]></code>
+    <input><![CDATA[f(4)]]></input>
+    <output><![CDATA[*
+**
+***
+****]]></output>
+    <hint></hint>
+    <solution><![CDATA[def f(n):
+    if n <= 1:
+        print('*')
+    else:
+        f(n-1)  # 정답: f(n-1)
+        print('*'*n)]]></solution>
+  </problem>
+
+  <!-- 문제 3: print 내부 완성 -->
+  <problem>
+    <description>다음 재귀함수에서 print() 내부를 완성하세요.</description>
+    <code><![CDATA[def f(n):
+    if n <= 1:
+        print('*')
+    else:
+        f(n-1)
+        print(____)  # 여기를 채우세요]]></code>
+    <input><![CDATA[f(5)]]></input>
+    <output><![CDATA[*
+**
+***
+****
+*****]]></output>
+    <hint></hint>
+    <solution><![CDATA[def f(n):
+    if n <= 1:
+        print('*')
+    else:
+        f(n-1)
+        print('*'*n)  # 정답: '*'*n]]></solution>
+  </problem>
+</problems>

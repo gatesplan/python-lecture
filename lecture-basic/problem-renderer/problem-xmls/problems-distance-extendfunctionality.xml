@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description><![CDATA[Point 클래스에 점이 위치한 사분면을 반환하는 quadrant() 메서드를 구현하세요.
+사분면 규칙:
+- 1사분면 (x > 0, y > 0): 1을 반환
+- 2사분면 (x < 0, y > 0): 2를 반환  
+- 3사분면 (x < 0, y < 0): 3을 반환
+- 4사분면 (x > 0, y < 0): 4를 반환
+- 축 위의 점 (x = 0 또는 y = 0): 0을 반환]]></description>
+    <code><![CDATA[import math
+
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def distance(self, v):
+        return math.sqrt((self.x - v.x)**2 + (self.y - v.y)**2)
+    
+    def quadrant(self):
+        # 작성하세요
+        pass]]></code>
+    <input><![CDATA[p1 = Point(3, 4)
+print(p1.quadrant())
+
+p2 = Point(-2, 5)
+print(p2.quadrant())
+
+p3 = Point(-1, -3)
+print(p3.quadrant())
+
+p4 = Point(2, -1)
+print(p4.quadrant())
+
+p5 = Point(0, 5)
+print(p5.quadrant())]]></input>
+    <output><![CDATA[1
+2
+3
+4
+0]]></output>
+    <hint></hint>
+    <solution><![CDATA[    def quadrant(self):
+        if self.x > 0 and self.y > 0:
+            return 1
+        elif self.x < 0 and self.y > 0:
+            return 2
+        elif self.x < 0 and self.y < 0:
+            return 3
+        elif self.x > 0 and self.y < 0:
+            return 4
+        else:
+            return 0]]></solution>
+  </problem>
+</problems>

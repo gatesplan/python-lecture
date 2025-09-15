@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 재귀함수 return 완성 -->
+  <problem>
+    <description>다음 순열(permutation) 재귀함수에서 return 부분을 완성하세요.</description>
+    <code><![CDATA[def permutation(n, r):
+    if r == 0:
+        return 1
+    return ____  # 여기를 채우세요]]></code>
+    <input><![CDATA[print(permutation(5, 3))
+print(permutation(4, 2))]]></input>
+    <output><![CDATA[60
+12]]></output>
+    <hint></hint>
+    <solution><![CDATA[def permutation(n, r):
+    if r == 0:
+        return 1
+    return n * permutation(n-1, r-1)  # 정답: n * permutation(n-1, r-1)]]></solution>
+  </problem>
+
+  <!-- 문제 2: permutation(5, 3) 계산과정 서술 -->
+  <problem>
+    <description>permutation(5, 3) 출력값의 계산과정을 단계별로 서술하세요.</description>
+    <code><![CDATA[def permutation(n, r):
+    if r == 0:
+        return 1
+    return n * permutation(n-1, r-1)]]></code>
+    <input><![CDATA[permutation(5, 3)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[# permutation(5, 3) 계산과정:
+
+# 1. permutation(5, 3) 호출
+#    r ≠ 0이므로 return 5 * permutation(4, 2)
+
+# 2. permutation(4, 2) 호출
+#    r ≠ 0이므로 return 4 * permutation(3, 1)
+
+# 3. permutation(3, 1) 호출
+#    r ≠ 0이므로 return 3 * permutation(2, 0)
+
+# 4. permutation(2, 0) 호출
+#    r == 0이므로 return 1
+
+# 역산 과정:
+# permutation(2, 0) = 1
+# permutation(3, 1) = 3 * 1 = 3
+# permutation(4, 2) = 4 * 3 = 12
+# permutation(5, 3) = 5 * 12 = 60
+
+# 결과: 60 (이는 5P3 = 5!/(5-3)! = 5*4*3 = 60과 동일)]]></solution>
+  </problem>
+
+  <!-- 문제 3: 반복문으로 재구현 -->
+  <problem>
+    <description>다음 재귀 순열 함수를 반복문으로 재구현하세요.</description>
+    <code><![CDATA[def permutation(n, r):
+    if r == 0:
+        return 1
+    return n * permutation(n-1, r-1)
+
+# 반복문 버전을 작성하세요
+def permutation_loop(n, r):
+    pass]]></code>
+    <input><![CDATA[print(permutation_loop(5, 3))
+print(permutation_loop(4, 2))]]></input>
+    <output><![CDATA[60
+12]]></output>
+    <hint></hint>
+    <solution><![CDATA[def permutation_loop(n, r):
+    if r == 0:
+        return 1
+
+    result = 1
+    for i in range(r):
+        result *= (n - i)
+    return result
+
+# 또는
+def permutation_loop(n, r):
+    result = 1
+    for i in range(n, n-r, -1):
+        result *= i
+    return result]]></solution>
+  </problem>
+</problems>

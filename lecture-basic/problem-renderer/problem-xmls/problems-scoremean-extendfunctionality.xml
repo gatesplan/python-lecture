@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description><![CDATA[Student 클래스에 max_score() 메서드를 추가하여 학생의 점수 중 최고점을 반환하도록 구현하세요.]]></description>
+    <code><![CDATA[class Student:
+    def __init__(self, name, scores):
+        self.name = name
+        self.scores = scores
+
+    def average(self):
+        return sum(self.scores) / len(self.scores)
+
+    def grade(self):
+        avg = self.average()
+        if avg >= 90:
+            return 'A'
+        elif avg >= 80:
+            return 'B'
+        elif avg >= 70:
+            return 'C'
+        elif avg >= 60:
+            return 'D'
+        else:
+            return 'E'
+    
+    def max_score(self):
+        # 작성하세요
+        pass]]></code>
+    <input><![CDATA[student1 = Student("김철수", [85, 92, 78, 88])
+print(student1.max_score())
+
+student2 = Student("이영희", [75, 83, 91, 77])
+print(student2.max_score())
+
+student3 = Student("박민수", [68, 74, 82, 79])
+print(student3.max_score())]]></input>
+    <output><![CDATA[92
+91
+82]]></output>
+    <hint></hint>
+    <solution><![CDATA[    def max_score(self):
+        return max(self.scores)]]></solution>
+  </problem>
+
+  <problem>
+    <description><![CDATA[Student 클래스에 count_pass() 메서드를 추가하여 60점 이상인 과목의 개수를 반환하도록 구현하세요.]]></description>
+    <code><![CDATA[class Student:
+    def __init__(self, name, scores):
+        self.name = name
+        self.scores = scores
+
+    def average(self):
+        return sum(self.scores) / len(self.scores)
+
+    def grade(self):
+        avg = self.average()
+        if avg >= 90:
+            return 'A'
+        elif avg >= 80:
+            return 'B'
+        elif avg >= 70:
+            return 'C'
+        elif avg >= 60:
+            return 'D'
+        else:
+            return 'E'
+    
+    def count_pass(self):
+        # 작성하세요
+        pass]]></code>
+    <input><![CDATA[student1 = Student("김철수", [85, 92, 78, 58])
+print(student1.count_pass())
+
+student2 = Student("이영희", [45, 83, 91, 55])
+print(student2.count_pass())
+
+student3 = Student("박민수", [68, 74, 82, 79])
+print(student3.count_pass())]]></input>
+    <output><![CDATA[3
+2
+4]]></output>
+    <hint></hint>
+    <solution><![CDATA[    def count_pass(self):
+        count = 0
+        for score in self.scores:
+            if score >= 60:
+                count += 1
+        return count]]></solution>
+  </problem>
+</problems>

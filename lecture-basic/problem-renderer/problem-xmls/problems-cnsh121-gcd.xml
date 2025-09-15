@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: while문 조건식 완성 -->
+  <problem>
+    <description>다음 유클리드 호제법 함수에서 while문의 조건식을 완성하세요.</description>
+    <code><![CDATA[def gcd(a, b):
+    while ____:  # 여기를 채우세요
+        a, b = b % a, a
+    return b]]></code>
+    <input><![CDATA[print(gcd(48, 18))
+print(gcd(100, 25))]]></input>
+    <output><![CDATA[6
+25]]></output>
+    <hint></hint>
+    <solution><![CDATA[def gcd(a, b):
+    while a != 0:  # 정답: a != 0
+        a, b = b % a, a
+    return b]]></solution>
+  </problem>
+
+  <!-- 문제 2: while문 실행부분 완성 -->
+  <problem>
+    <description>다음 유클리드 호제법 함수에서 while문 실행부분을 완성하세요.</description>
+    <code><![CDATA[def gcd(a, b):
+    while a != 0:
+        a, b = ____, ____  # 여기를 채우세요
+    return b]]></code>
+    <input><![CDATA[print(gcd(48, 18))
+print(gcd(56, 42))]]></input>
+    <output><![CDATA[6
+14]]></output>
+    <hint></hint>
+    <solution><![CDATA[def gcd(a, b):
+    while a != 0:
+        a, b = b % a, a  # 정답: b % a, a
+    return b]]></solution>
+  </problem>
+
+  <!-- 문제 3: 재귀함수로 재구현 -->
+  <problem>
+    <description>다음 while문 기반 최대공약수 함수를 재귀함수로 재구현하세요.</description>
+    <code><![CDATA[def gcd(a, b):
+    while a != 0:
+        a, b = b % a, a
+    return b
+
+# 재귀함수 버전을 작성하세요
+def gcd_recursive(a, b):
+    pass]]></code>
+    <input><![CDATA[print(gcd_recursive(48, 18))
+print(gcd_recursive(100, 25))]]></input>
+    <output><![CDATA[6
+25]]></output>
+    <hint></hint>
+    <solution><![CDATA[def gcd_recursive(a, b):
+    if a == 0:
+        return b
+    return gcd_recursive(b % a, a)]]></solution>
+  </problem>
+</problems>

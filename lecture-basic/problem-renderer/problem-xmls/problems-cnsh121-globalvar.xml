@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 전역변수 제거 시 결과 예측 -->
+  <problem>
+    <description>다음 코드에서 첫 번째 줄의 `s = 0` 변수를 제거하고 실행할 때 무슨 일이 벌어지는지 서술하세요.</description>
+    <code><![CDATA[s = 0
+
+def f(n):
+    global s
+    k=0
+    while k<n:
+        k = k+1
+        s = s+k]]></code>
+    <input><![CDATA[f(5)
+print(s)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[# s = 0을 제거하면 NameError가 발생합니다.
+# 함수 f() 내부에서 global s로 전역변수 s를 참조하려고 하지만,
+# s가 정의되지 않았기 때문에 "NameError: name 's' is not defined" 오류가 발생합니다.
+# 전역변수는 함수에서 사용하기 전에 미리 정의되어 있어야 합니다.]]></solution>
+  </problem>
+</problems>

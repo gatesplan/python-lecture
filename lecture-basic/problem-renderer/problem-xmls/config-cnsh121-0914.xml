@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  cnsh-121 연습문제 설정 - 2024.09.14
+
+  사용법:
+  1. URL에서 ?config=config-cnsh121-0914 로 접근
+
+  설정:
+  - showSolutions: true (해설 표시)
+  - 총 20문항을 랜덤으로 선택
+-->
+<exercise>
+  <title>Exercise - cnsh-121 Python Programming Problems (2024.09.14)</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <!--
+      Concatenate 섹션:
+      - 모든 cnsh-121 문제 파일들을 통합하여 20문제 랜덤 선택
+      - 총 84개 문제 중 20개를 무작위로 선택
+    -->
+    <concatenate title="Python Programming Problems" count="20">
+      <!-- 클래스 관련 파일들 (11문제) -->
+      <source file="problems-cnsh121-8puzzle.xml"/>
+      <source file="problems-cnsh121-distance.xml"/>
+      <source file="problems-cnsh121-movie.xml"/>
+      <source file="problems-cnsh121-student.xml"/>
+
+      <!-- 함수 관련 파일들 (73문제) -->
+      <source file="problems-cnsh121-8puzzle-moveup.xml"/>
+      <source file="problems-cnsh121-adjlist.xml"/>
+      <source file="problems-cnsh121-adjmatrix.xml"/>
+      <source file="problems-cnsh121-countdown.xml"/>
+      <source file="problems-cnsh121-evensum.xml"/>
+      <source file="problems-cnsh121-factorial.xml"/>
+      <source file="problems-cnsh121-gcd.xml"/>
+      <source file="problems-cnsh121-globalvar.xml"/>
+      <source file="problems-cnsh121-makestack.xml"/>
+      <source file="problems-cnsh121-minmax.xml"/>
+      <source file="problems-cnsh121-recursive-countdown.xml"/>
+      <source file="problems-cnsh121-recursive-factorial.xml"/>
+      <source file="problems-cnsh121-recursive-gcd.xml"/>
+      <source file="problems-cnsh121-recursive-lcm-global.xml"/>
+      <source file="problems-cnsh121-recursive-numtriangle.xml"/>
+      <source file="problems-cnsh121-recursive-permutation.xml"/>
+      <source file="problems-cnsh121-recursive-stars.xml"/>
+      <source file="problems-cnsh121-recursive-startriangle.xml"/>
+      <source file="problems-cnsh121-recursive-sum.xml"/>
+      <source file="problems-cnsh121-sum-using-global.xml"/>
+      <source file="problems-cnsh121-use-queue.xml"/>
+      <source file="problems-cnsh121-while-gcd.xml"/>
+    </concatenate>
+  </sections>
+</exercise>

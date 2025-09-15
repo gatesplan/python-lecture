@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  알고리즘 특별 문제 설정 - 8퍼즐, 해밀턴 경로, 스택 문제
+
+  사용법:
+  1. URL에서 ?config=config-algorithm-special 로 접근
+
+  설정:
+  - showSolutions: true (해설 표시)
+  - 세 파일의 모든 문제를 포함 (총 9문제)
+-->
+<exercise>
+  <title>Algorithm Special Problems - 8-Puzzle, Hamiltonian Path, Stack</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <!-- 8-Puzzle 문제들 (2문제) -->
+    <section title="Section 1 - 8-Puzzle Problems" file="problems-cnsh121-8puzzle.xml" count="2"/>
+
+    <!-- 해밀턴 경로 문제들 (5문제) -->
+    <section title="Section 2 - Hamiltonian Path Problems" file="problems-cnsh121-hamiltonian-traverse.xml" count="5"/>
+
+    <!-- 스택 문제들 (2문제) -->
+    <section title="Section 3 - Stack Problems" file="problems-cnsh121-makestack.xml" count="2"/>
+  </sections>
+</exercise>

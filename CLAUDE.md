@@ -29,17 +29,11 @@ python -m http.server 8000
 # Then navigate to http://localhost:8000
 ```
 
-### Working with Jupyter Notebooks
-```bash
-# Install Jupyter if needed
-pip install jupyter
+### XML template files
 
-# Start Jupyter server
-jupyter notebook
-
-# Or use Jupyter Lab
-jupyter lab
-```
+- `templates/cpml-template.xml`: Base template for problem XML and problem builder agent.
+@lecture-basic/problem-renderer/problem-xmls/template-config.xml
+@lecture-basic/problem-renderer/problem-xmls/template-problems.xml
 
 ## Key Files & Configuration
 

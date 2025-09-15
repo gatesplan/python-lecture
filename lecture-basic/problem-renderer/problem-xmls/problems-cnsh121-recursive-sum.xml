@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 재귀함수 종료조건 완성 -->
+  <problem>
+    <description>다음 재귀 합계 함수에서 종료조건을 완성하세요.</description>
+    <code><![CDATA[def sum(n):
+    if ____:  # 여기를 채우세요
+        return 1
+    return n + sum(n-1)]]></code>
+    <input><![CDATA[print(sum(5))
+print(sum(3))]]></input>
+    <output><![CDATA[15
+6]]></output>
+    <hint></hint>
+    <solution><![CDATA[def sum(n):
+    if n == 1:  # 정답: n == 1
+        return 1
+    return n + sum(n-1)]]></solution>
+  </problem>
+
+  <!-- 문제 2: 재귀함수 return 부분 완성 -->
+  <problem>
+    <description>다음 재귀 합계 함수에서 n부터 1까지의 합이 나오도록 return 부분을 완성하세요.</description>
+    <code><![CDATA[def sum(n):
+    if n == 1:
+        return 1
+    return ____  # 여기를 채우세요]]></code>
+    <input><![CDATA[print(sum(4))
+print(sum(6))]]></input>
+    <output><![CDATA[10
+21]]></output>
+    <hint></hint>
+    <solution><![CDATA[def sum(n):
+    if n == 1:
+        return 1
+    return n + sum(n-1)  # 정답: n + sum(n-1)]]></solution>
+  </problem>
+
+  <!-- 문제 3: for문으로 재구현 -->
+  <problem>
+    <description>다음 재귀 합계 함수와 같은 기능을 하는 for문 기반 함수를 구현하세요.</description>
+    <code><![CDATA[def sum(n):
+    if n == 1:
+        return 1
+    return n + sum(n-1)
+
+# for문 버전을 작성하세요
+def sum_for(n):
+    pass]]></code>
+    <input><![CDATA[print(sum_for(5))
+print(sum_for(4))]]></input>
+    <output><![CDATA[15
+10]]></output>
+    <hint></hint>
+    <solution><![CDATA[def sum_for(n):
+    result = 0
+    for i in range(1, n+1):
+        result += i
+    return result]]></solution>
+  </problem>
+
+  <!-- 문제 4: while문으로 재구현 -->
+  <problem>
+    <description>다음 재귀 합계 함수와 같은 기능을 하는 while문 기반 함수를 구현하세요.</description>
+    <code><![CDATA[def sum(n):
+    if n == 1:
+        return 1
+    return n + sum(n-1)
+
+# while문 버전을 작성하세요
+def sum_while(n):
+    pass]]></code>
+    <input><![CDATA[print(sum_while(5))
+print(sum_while(3))]]></input>
+    <output><![CDATA[15
+6]]></output>
+    <hint></hint>
+    <solution><![CDATA[def sum_while(n):
+    result = 0
+    i = 1
+    while i <= n:
+        result += i
+        i += 1
+    return result]]></solution>
+  </problem>
+</problems>

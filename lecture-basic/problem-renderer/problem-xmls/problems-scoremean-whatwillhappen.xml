@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 버그가 있는 원본 코드의 실행 결과 예측 -->
+  <problem>
+    <description><![CDATA[다음 Apple 클래스를 분석하고, 주어진 실행 코드의 결과가 무엇인지 예측하세요.]]></description>
+    <code><![CDATA[class Apple:
+    def __init__(self, tiger, lions):
+        self.tiger = tiger
+        self.lions = lions
+
+    def maple(self):
+        return sum(self.lion) / len(self.lion)
+
+    def palm(self):
+        avg = self.maple()
+        if avg >= 90:
+            return 'A'
+        elif avg >= 80:
+            return 'B'
+        elif avg >= 70:
+            return 'C'
+        elif avg >= 60:
+            return 'D'
+        else:
+            return 'E']]></code>
+    <input><![CDATA[apple_obj = Apple("김철수", [85, 90, 78, 92])
+print(apple_obj.palm())]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[AttributeError: 'Apple' object has no attribute 'lion'
+
+maple() 메서드에서 self.lion을 참조하고 있지만, 실제 속성은 self.lions이므로 AttributeError가 발생합니다.]]></solution>
+  </problem>
+
+  <!-- 문제 2: 수정된 버전의 실행 결과 예측 -->
+  <problem>
+    <description><![CDATA[다음 Mango 클래스를 분석하고, 주어진 실행 코드의 결과가 무엇인지 예측하세요.]]></description>
+    <code><![CDATA[class Mango:
+    def __init__(self, elephant, bears):
+        self.elephant = elephant
+        self.bears = bears
+
+    def pine(self):
+        return sum(self.bears) / len(self.bears)
+
+    def oak(self):
+        avg = self.pine()
+        if avg >= 90:
+            return 'A'
+        elif avg >= 80:
+            return 'B'
+        elif avg >= 70:
+            return 'C'
+        elif avg >= 60:
+            return 'D'
+        else:
+            return 'E']]></code>
+    <input><![CDATA[mango_obj = Mango("이영희", [85, 90, 78, 92])
+result = mango_obj.oak()
+print(result)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[B
+
+pine() 메서드가 (85 + 90 + 78 + 92) / 4 = 86.25를 반환하고, 
+oak() 메서드에서 86.25는 80 이상 90 미만이므로 'B'를 반환합니다.]]></solution>
+  </problem>
+
+  <!-- 문제 3: 다른 점수로 등급 계산 결과 예측 -->
+  <problem>
+    <description><![CDATA[다음 Grape 클래스를 분석하고, 주어진 실행 코드들의 결과가 무엇인지 예측하세요.]]></description>
+    <code><![CDATA[class Grape:
+    def __init__(self, monkey, cats):
+        self.monkey = monkey
+        self.cats = cats
+
+    def birch(self):
+        return sum(self.cats) / len(self.cats)
+
+    def cedar(self):
+        avg = self.birch()
+        if avg >= 90:
+            return 'A'
+        elif avg >= 80:
+            return 'B'
+        elif avg >= 70:
+            return 'C'
+        elif avg >= 60:
+            return 'D'
+        else:
+            return 'E']]></code>
+    <input><![CDATA[grape1 = Grape("박민수", [95, 88, 92, 97])
+grape2 = Grape("최지은", [65, 58, 72, 69])
+grape3 = Grape("정하늘", [45, 52, 38, 41])
+
+print(grape1.cedar())
+print(grape2.cedar())
+print(grape3.cedar())]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[A
+C
+E
+
+grape1: (95 + 88 + 92 + 97) / 4 = 93.0 → 'A'
+grape2: (65 + 58 + 72 + 69) / 4 = 66.0 → 'C'  
+grape3: (45 + 52 + 38 + 41) / 4 = 44.0 → 'E']]></solution>
+  </problem>
+
+  <!-- 문제 4: 빈 리스트로 인한 에러 예측 -->
+  <problem>
+    <description><![CDATA[다음 Orange 클래스를 분석하고, 주어진 실행 코드의 결과가 무엇인지 예측하세요.]]></description>
+    <code><![CDATA[class Orange:
+    def __init__(self, rabbit, wolves):
+        self.rabbit = rabbit
+        self.wolves = wolves
+
+    def maple(self):
+        return sum(self.wolves) / len(self.wolves)
+
+    def willow(self):
+        avg = self.maple()
+        if avg >= 90:
+            return 'A'
+        elif avg >= 80:
+            return 'B'
+        elif avg >= 70:
+            return 'C'
+        elif avg >= 60:
+            return 'D'
+        else:
+            return 'E']]></code>
+    <input><![CDATA[orange_obj = Orange("한준호", [])
+print(orange_obj.willow())]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[ZeroDivisionError: division by zero
+
+maple() 메서드에서 빈 리스트의 길이인 0으로 나누기를 시도하므로 ZeroDivisionError가 발생합니다.]]></solution>
+  </problem>
+
+  <!-- 문제 5: 하나의 점수만 있는 경우 -->
+  <problem>
+    <description><![CDATA[다음 Banana 클래스를 분석하고, 주어진 실행 코드의 결과가 무엇인지 예측하세요.]]></description>
+    <code><![CDATA[class Banana:
+    def __init__(self, deer, foxes):
+        self.deer = deer
+        self.foxes = foxes
+
+    def spruce(self):
+        return sum(self.foxes) / len(self.foxes)
+
+    def poplar(self):
+        avg = self.spruce()
+        if avg >= 90:
+            return 'A'
+        elif avg >= 80:
+            return 'B'
+        elif avg >= 70:
+            return 'C'
+        elif avg >= 60:
+            return 'D'
+        else:
+            return 'E']]></code>
+    <input><![CDATA[banana_obj = Banana("송미래", [75])
+result = banana_obj.poplar()
+print(result)
+print(banana_obj.spruce())]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[C
+75.0
+
+spruce() 메서드가 75 / 1 = 75.0을 반환하고, 
+poplar() 메서드에서 75.0은 70 이상 80 미만이므로 'C'를 반환합니다.]]></solution>
+  </problem>
+</problems>

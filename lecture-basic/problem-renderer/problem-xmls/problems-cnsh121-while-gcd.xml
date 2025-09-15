@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: while문 함수 종료조건 완성 -->
+  <problem>
+    <description>다음 while문 기반 최대공약수 함수에서 종료조건 두 줄을 완성하세요.</description>
+    <code><![CDATA[def gcd_while(a: int, b: int) -> int:
+    a, b = abs(a), abs(b)
+    # 여기에 종료조건 두 줄을 작성하세요
+
+    while b != 0:
+        a, b = b, a % b
+
+    return a]]></code>
+    <input><![CDATA[print(gcd_while(0, 25))
+print(gcd_while(48, 0))
+print(gcd_while(48, 18))]]></input>
+    <output><![CDATA[25
+48
+6]]></output>
+    <hint></hint>
+    <solution><![CDATA[def gcd_while(a: int, b: int) -> int:
+    a, b = abs(a), abs(b)
+    if a == 0: return b  # 정답
+    if b == 0: return a  # 정답
+
+    while b != 0:
+        a, b = b, a % b
+
+    return a]]></solution>
+  </problem>
+
+  <!-- 문제 2: while문 핵심 로직 완성 -->
+  <problem>
+    <description>다음 while문 기반 최대공약수 함수에서 핵심 로직 부분을 완성하세요.</description>
+    <code><![CDATA[def gcd_while(a: int, b: int) -> int:
+    a, b = abs(a), abs(b)
+    if a == 0: return b
+    if b == 0: return a
+
+    while b != 0:
+        # 이 줄을 완성하세요
+        pass
+
+    return a]]></code>
+    <input><![CDATA[print(gcd_while(48, 18))
+print(gcd_while(100, 25))]]></input>
+    <output><![CDATA[6
+25]]></output>
+    <hint></hint>
+    <solution><![CDATA[def gcd_while(a: int, b: int) -> int:
+    a, b = abs(a), abs(b)
+    if a == 0: return b
+    if b == 0: return a
+
+    while b != 0:
+        a, b = b, a % b  # 정답
+
+    return a]]></solution>
+  </problem>
+
+  <!-- 문제 3: while문 함수를 재귀함수로 변환 -->
+  <problem>
+    <description>다음 while문 함수와 같은 기능을 하는 재귀함수를 구현하세요.</description>
+    <code><![CDATA[# 참고: while문 버전
+def gcd_while(a: int, b: int) -> int:
+    a, b = abs(a), abs(b)
+    if a == 0: return b
+    if b == 0: return a
+
+    while b != 0:
+        a, b = b, a % b
+
+    return a
+
+# 여기에 재귀함수 버전을 작성하세요
+def gcd_recursive(a: int, b: int) -> int:
+    pass]]></code>
+    <input><![CDATA[print(gcd_recursive(48, 18))
+print(gcd_recursive(100, 25))]]></input>
+    <output><![CDATA[6
+25]]></output>
+    <hint></hint>
+    <solution><![CDATA[def gcd_recursive(a: int, b: int) -> int:
+    a, b = abs(a), abs(b)
+    if b == 0:
+        return a
+    return gcd_recursive(b, a % b)]]></solution>
+  </problem>
+</problems>

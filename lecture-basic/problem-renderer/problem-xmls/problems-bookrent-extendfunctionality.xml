@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description>Student 클래스에 return_book(book) 메서드를 추가하세요. 이 메서드는 학생이 대여한 책을 반납하는 기능을 합니다. 반납이 성공하면 "{책제목} 반납함."을 반환하고, 대여하지 않은 책을 반납하려 하면 "{책제목} 대여하지 않음"을 반환해야 합니다.</description>
+    <code><![CDATA[class Book:
+    def __init__(self, title, author):
+        self.title=title
+        self.author=author
+        self.is_rented=False
+
+    def __str__(self):
+        return f'{self.title}'
+
+class Student:
+    def __init__(self, id, name):
+        self.id=id
+        self.name=name
+        self.rented_books=[]
+
+    def rent_book(self, book):
+        if not book.is_rented:
+            book.is_rented=True
+            self.rented_books.append(book)
+            return f'{book.title} 대여함.'
+        else:
+            return f'{book.title} 대여 중'
+
+    def return_book(self, book):
+        # 작성하세요
+        pass]]></code>
+    <input><![CDATA[# 테스트 코드
+book1 = Book("파이썬 기초", "김파이")
+book2 = Book("자료구조", "이알고")
+student = Student(1, "홍길동")
+
+student.rent_book(book1)
+print(student.return_book(book1))
+print(student.return_book(book2))
+student.rent_book(book1)
+print(student.return_book(book1))]]></input>
+    <output><![CDATA[파이썬 기초 반납함.
+자료구조 대여하지 않음
+파이썬 기초 반납함.]]></output>
+    <hint></hint>
+    <solution><![CDATA[    def return_book(self, book):
+        if book in self.rented_books:
+            book.is_rented = False
+            self.rented_books.remove(book)
+            return f'{book.title} 반납함.'
+        else:
+            return f'{book.title} 대여하지 않음']]></solution>
+  </problem>
+
+  <problem>
+    <description>Student 클래스에 count_rented_books() 메서드를 추가하세요. 이 메서드는 학생이 현재 대여한 책의 개수를 반환합니다.</description>
+    <code><![CDATA[class Book:
+    def __init__(self, title, author):
+        self.title=title
+        self.author=author
+        self.is_rented=False
+
+    def __str__(self):
+        return f'{self.title}'
+
+class Student:
+    def __init__(self, id, name):
+        self.id=id
+        self.name=name
+        self.rented_books=[]
+
+    def rent_book(self, book):
+        if not book.is_rented:
+            book.is_rented=True
+            self.rented_books.append(book)
+            return f'{book.title} 대여함.'
+        else:
+            return f'{book.title} 대여 중'
+
+    def count_rented_books(self):
+        # 작성하세요
+        pass]]></code>
+    <input><![CDATA[# 테스트 코드
+book1 = Book("파이썬 기초", "김파이")
+book2 = Book("자료구조", "이알고")
+book3 = Book("알고리즘", "박코드")
+student = Student(1, "홍길동")
+
+print(student.count_rented_books())
+student.rent_book(book1)
+print(student.count_rented_books())
+student.rent_book(book2)
+student.rent_book(book3)
+print(student.count_rented_books())]]></input>
+    <output><![CDATA[0
+1
+3]]></output>
+    <hint></hint>
+    <solution><![CDATA[    def count_rented_books(self):
+        return len(self.rented_books)]]></solution>
+  </problem>
+</problems>

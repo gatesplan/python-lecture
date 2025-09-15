@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description>다음 코드를 보고 obj.monkey와 obj.cat의 값을 예측하세요.</description>
+    <code><![CDATA[class Apple:
+    def __init__(self, monkey, cat):
+        self.monkey = monkey
+        self.cat = cat
+
+    def palm(self):
+        if self.cat > 0:
+            self.cat -= 1
+            return True
+        else:
+            return False]]></code>
+    <input><![CDATA[obj = Apple("영화A", 5)
+print(obj.monkey)
+print(obj.cat)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[영화A
+5]]></solution>
+  </problem>
+
+  <problem>
+    <description>다음 코드를 보고 palm() 메서드의 반환값과 obj.cat의 최종 값을 예측하세요.</description>
+    <code><![CDATA[class Apple:
+    def __init__(self, monkey, cat):
+        self.monkey = monkey
+        self.cat = cat
+
+    def palm(self):
+        if self.cat > 0:
+            self.cat -= 1
+            return True
+        else:
+            return False]]></code>
+    <input><![CDATA[obj = Apple("영화B", 3)
+result = obj.palm()
+print(result)
+print(obj.cat)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[True
+2]]></solution>
+  </problem>
+
+  <problem>
+    <description>다음 코드를 보고 세 번의 palm() 호출 각각의 반환값을 예측하세요.</description>
+    <code><![CDATA[class Apple:
+    def __init__(self, monkey, cat):
+        self.monkey = monkey
+        self.cat = cat
+
+    def palm(self):
+        if self.cat > 0:
+            self.cat -= 1
+            return True
+        else:
+            return False]]></code>
+    <input><![CDATA[obj = Apple("영화C", 2)
+result1 = obj.palm()
+result2 = obj.palm()
+result3 = obj.palm()
+print(result1)
+print(result2)
+print(result3)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[True
+True
+False]]></solution>
+  </problem>
+
+  <problem>
+    <description>다음 코드를 보고 palm() 메서드의 반환값과 obj.cat의 최종 값을 예측하세요.</description>
+    <code><![CDATA[class Apple:
+    def __init__(self, monkey, cat):
+        self.monkey = monkey
+        self.cat = cat
+
+    def palm(self):
+        if self.cat > 0:
+            self.cat -= 1
+            return True
+        else:
+            return False]]></code>
+    <input><![CDATA[obj = Apple("영화D", 0)
+result = obj.palm()
+print(result)
+print(obj.cat)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[False
+0]]></solution>
+  </problem>
+
+  <problem>
+    <description>다음 코드를 보고 최종 출력 결과를 예측하세요.</description>
+    <code><![CDATA[class Apple:
+    def __init__(self, monkey, cat):
+        self.monkey = monkey
+        self.cat = cat
+
+    def palm(self):
+        if self.cat > 0:
+            self.cat -= 1
+            return True
+        else:
+            return False]]></code>
+    <input><![CDATA[obj1 = Apple("액션", 1)
+obj2 = Apple("코미디", 2)
+
+print(obj1.palm())
+print(obj2.palm())
+print(obj1.palm())
+print(obj1.cat)
+print(obj2.cat)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[True
+True
+False
+0
+1]]></solution>
+  </problem>
+</problems>
