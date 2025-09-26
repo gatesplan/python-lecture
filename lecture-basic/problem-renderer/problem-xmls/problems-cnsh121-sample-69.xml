@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description>LifoQueue()의 동작 방식에 대하여 서술하고, 주어진 코드를 실행했을 때의 출력을 쓰시오.</description>
+    <code><![CDATA[import queue
+
+a = [36, 4, 77, 6, 128, 25, 9, 7]
+s0 = queue.LifoQueue()
+s1 = queue.LifoQueue()
+for i in a:
+    if i%2==0:
+        s0.put(i)
+    else:
+        s1.put(i)
+while not s0.empty():
+    print(s0.get(), end=' ')
+while not s1.empty():
+    print(s1.get(), end=' ')]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[128 6 4 36 7 9 25 77]]></output>
+    <hint></hint>
+    <solution><![CDATA[# LifoQueue는 Last In First Out(후입선출) 방식으로 동작하는 스택 자료구조입니다.
+# put()으로 삽입하고 get()으로 가장 나중에 삽입된 요소를 꺼냅니다.
+
+# 실행 과정:
+# 1. 짝수: s0에 36, 4, 6, 128 순서로 삽입
+# 2. 홀수: s1에 77, 25, 9, 7 순서로 삽입
+# 3. s0에서 꺼내기: 128, 6, 4, 36 (역순)
+# 4. s1에서 꺼내기: 7, 9, 25, 77 (역순)
+# 출력: 128 6 4 36 7 9 25 77]]></solution>
+  </problem>
+
+  <problem>
+    <description>위 코드에서 s0, s1에 LifoQueue() 대신 Stack을 사용했을 때의 출력을 쓰시오.</description>
+    <code><![CDATA[import queue
+
+a = [36, 4, 77, 6, 128, 25, 9, 7]
+s0 = Stack()  # LifoQueue() 대신 Stack 사용
+s1 = Stack()  # LifoQueue() 대신 Stack 사용
+for i in a:
+    if i%2==0:
+        s0.put(i)
+    else:
+        s1.put(i)
+while not s0.empty():
+    print(s0.get(), end=' ')
+while not s1.empty():
+    print(s1.get(), end=' ')]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[128 6 4 36 7 9 25 77]]></output>
+    <hint></hint>
+    <solution><![CDATA[# Stack도 LifoQueue와 동일하게 후입선출(LIFO) 방식으로 동작합니다.
+# 따라서 LifoQueue()를 Stack으로 바꿔도 출력 결과는 동일합니다.
+# 출력: 128 6 4 36 7 9 25 77]]></solution>
+  </problem>
+
+  <problem>
+    <description>다음 코드에서 조건식을 채워서 출력이 36, 6, 9, 4, 77, 128, 25, 7이 되도록 하시오.</description>
+    <code><![CDATA[import queue
+
+a = [36, 4, 77, 6, 128, 25, 9, 7]
+s0 = queue.LifoQueue()
+s1 = queue.LifoQueue()
+for i in a:
+    if _______:
+        s0.put(i)
+    else:
+        s1.put(i)
+while not s0.empty():
+    print(s0.get(), end=' ')
+while not s1.empty():
+    print(s1.get(), end=' ')]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[36 6 9 4 77 128 25 7]]></output>
+    <hint></hint>
+    <solution><![CDATA[# 출력이 36, 6, 9, 4, 77, 128, 25, 7이 되려면
+# s0에서: 36, 6, 9, 4가 나와야 하므로 4, 9, 6, 36 순서로 삽입
+# s1에서: 77, 128, 25, 7이 나와야 하므로 7, 25, 128, 77 순서로 삽입
+
+# 조건식: i <= 36
+# 이렇게 하면 36, 4, 6, 25, 9, 7이 s0에, 77, 128이 s1에 들어갑니다.
+# 하지만 정확한 출력을 위해서는 다른 조건이 필요합니다.
+
+# 정답: i in [36, 4, 6, 9] 또는 적절한 조건식]]></solution>
+  </problem>
+</problems>

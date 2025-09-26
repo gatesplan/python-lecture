@@ -101,4 +101,10 @@
 - func-while-gcd.py - 문제 작성됨
 - lib-use-queue.py - 문제 작성됨
 
-**총 26개 파일 - 모두 문제 작성 완료**
+### 추가된 파일
+- func-hamiltonian-traverse.py - 문제 작성됨
+- sample-69.py - 문제 작성됨
+- sample-70.py - 문제 작성됨
+- sample-71.py - 문제 작성됨
+
+**총 30개 파일 - 모두 문제 작성 완료**

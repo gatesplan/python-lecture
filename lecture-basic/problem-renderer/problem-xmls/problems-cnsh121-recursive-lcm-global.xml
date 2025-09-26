@@ -2,7 +2,7 @@
 <problems>
   <!-- 문제 1: 재귀함수 호출 완성 -->
   <problem>
-    <description>다음 최소공배수 재귀함수에서 return 부분을 완성하세요.</description>
+    <description><![CDATA[다음 최소공배수 재귀함수에서 return 부분을 완성하세요.]]></description>
     <code><![CDATA[def lcm(a, b):
     global n, m
     if a == b:
@@ -27,7 +27,7 @@ print(lcm(m, n))]]></input>
 
   <!-- 문제 2: if문 제거 가능 이유 설명 -->
   <problem>
-    <description>다음 재귀함수에서 &apos;if a &lt; b:&apos; 제어문이 없이 바로 &apos;return lcm(a+m, b)&apos;만으로도 동작하는 이유를 서술하세요.</description>
+    <description><![CDATA[다음 재귀함수에서 'if a < b:' 제어문이 없이 바로 'return lcm(a+m, b)'만으로도 동작하는 이유를 서술하세요.]]></description>
     <code><![CDATA[def lcm(a, b):
     global n, m
     if a == b:
@@ -54,7 +54,7 @@ print(lcm(m, n))]]></input>
 
   <!-- 문제 3: 함수 출력값 계산 -->
   <problem>
-    <description>다음 난독화된 함수 코드를 보고 lcm(3, 8) 출력값을 구하세요.</description>
+    <description><![CDATA[다음 난독화된 함수 코드를 보고 lcm(3, 8) 출력값을 구하세요.]]></description>
     <code><![CDATA[def lcm(a, b):
     global n, m
     if a == b:
@@ -85,7 +85,7 @@ print(lcm(3, 8))]]></input>
 
   <!-- 문제 4: while문으로 재구현 -->
   <problem>
-    <description>다음 재귀 최소공배수 함수를 while문으로 재구현하세요.</description>
+    <description><![CDATA[다음 재귀 최소공배수 함수를 while문으로 재구현하세요.]]></description>
     <code><![CDATA[def lcm(a, b):
     global n, m
     if a == b:

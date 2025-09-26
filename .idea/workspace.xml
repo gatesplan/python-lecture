@@ -4,44 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e551840b-8e31-46e1-9bea-af6fae0cef5d" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/class-8puzzle.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/class-distance.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/class-movie.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/class-student.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-8puzzle-moveup.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-adjlist.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-adjmatrix.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-countdown.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-evensum.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-factorial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-gcd.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-globalvar.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-hamiltonian-traverse.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-makestack.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-minmax.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-countdown.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-factorial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-gcd.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-lcm-global.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-numtriangle.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-permutation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-stars.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-startriangle.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-sum.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-sum-using-global.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/func-while-gcd.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/lib-use-queue.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/cpml-template.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PythonLecture.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/python-lecture.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python-lecture.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CLAUDE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Test.ipynb" afterDir="false" />
+    <list default="true" id="e551840b-8e31-46e1-9bea-af6fae0cef5d" name="변경" comment="..">
+      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/sample-69.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/sample-70.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/codes/cnsh-121/sample-71.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/for-agent-specialwork.md" beforeDir="false" afterPath="$PROJECT_DIR$/codes/cnsh-121/for-agent-specialwork.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-recursive-lcm-global.xml" beforeDir="false" afterPath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-recursive-lcm-global.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +51,7 @@
   &quot;keyToString&quot;: {
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
@@ -114,10 +84,28 @@
       <workItem from="1757398590817" duration="15938000" />
       <workItem from="1757595525446" duration="9068000" />
       <workItem from="1757777536927" duration="16821000" />
+      <workItem from="1757910623203" duration="63000" />
+      <workItem from="1758002190410" duration="60000" />
+      <workItem from="1758334580859" duration="1747000" />
+      <workItem from="1758351833894" duration="9354000" />
+      <workItem from="1758422923875" duration="1055000" />
     </task>
+    <task id="LOCAL-00001" summary="..">
+      <option name="closed" value="true" />
+      <created>1757910669265</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1757910669265</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=".." />
+    <option name="LAST_COMMIT_MESSAGE" value=".." />
   </component>
 </project>

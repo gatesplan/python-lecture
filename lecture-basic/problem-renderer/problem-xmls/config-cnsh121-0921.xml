@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  cnsh-121 연습문제 설정 - 2024.09.21
+
+  사용법:
+  1. URL에서 ?config=config-cnsh121-0921 로 접근
+
+  설정:
+  - showSolutions: true (해설 표시)
+  - hamiltonian, 새로 만든 문제들(sample-69,70,71), 8puzzle, makestack: 모든 문제 포함
+  - 나머지 문제들: 랜덤 35문제 추출
+-->
+<exercise>
+  <title>Exercise - cnsh-121 Python Programming Problems (2024.09.21)</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <!-- 전체 문제 포함 섹션들 -->
+    <section title="Hamiltonian Traverse Problems" file="problems-cnsh121-hamiltonian-traverse.xml" count="3"/>
+    <section title="Queue/Stack Sample Problems 69" file="problems-cnsh121-sample-69.xml" count="3"/>
+    <section title="Radix Sort Sample Problems 70" file="problems-cnsh121-sample-70.xml" count="4"/>
+    <section title="Queue vs Stack Sample Problems 71" file="problems-cnsh121-sample-71.xml" count="3"/>
+    <section title="8-Puzzle Problems" file="problems-cnsh121-8puzzle.xml" count="3"/>
+    <section title="Stack Implementation Problems" file="problems-cnsh121-makestack.xml" count="5"/>
+
+    <!-- 나머지 문제들에서 랜덤 35문제 추출 -->
+    <concatenate title="Mixed Programming Problems" count="35">
+      <!-- 클래스 관련 파일들 -->
+      <source file="problems-cnsh121-distance.xml"/>
+      <source file="problems-cnsh121-movie.xml"/>
+      <source file="problems-cnsh121-student.xml"/>
+
+      <!-- 함수 관련 파일들 -->
+      <source file="problems-cnsh121-8puzzle-moveup.xml"/>
+      <source file="problems-cnsh121-adjlist.xml"/>
+      <source file="problems-cnsh121-adjmatrix.xml"/>
+      <source file="problems-cnsh121-countdown.xml"/>
+      <source file="problems-cnsh121-evensum.xml"/>
+      <source file="problems-cnsh121-factorial.xml"/>
+      <source file="problems-cnsh121-gcd.xml"/>
+      <source file="problems-cnsh121-globalvar.xml"/>
+      <source file="problems-cnsh121-minmax.xml"/>
+      <source file="problems-cnsh121-recursive-countdown.xml"/>
+      <source file="problems-cnsh121-recursive-factorial.xml"/>
+      <source file="problems-cnsh121-recursive-gcd.xml"/>
+      <source file="problems-cnsh121-recursive-lcm-global.xml"/>
+      <source file="problems-cnsh121-recursive-numtriangle.xml"/>
+      <source file="problems-cnsh121-recursive-permutation.xml"/>
+      <source file="problems-cnsh121-recursive-stars.xml"/>
+      <source file="problems-cnsh121-recursive-startriangle.xml"/>
+      <source file="problems-cnsh121-recursive-sum.xml"/>
+      <source file="problems-cnsh121-sum-using-global.xml"/>
+      <source file="problems-cnsh121-use-queue.xml"/>
+      <source file="problems-cnsh121-while-gcd.xml"/>
+    </concatenate>
+  </sections>
+</exercise>
