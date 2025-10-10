@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercise>
+  <title>기초 코딩 테스트</title>
+  <settings>
+    <showSolutions>false</showSolutions>
+  </settings>
+  <sections>
+    <concatenate title="KOI 연습문제 세트 (랜덤 15문제)" count="15">
+      <source file="problems-koi-practice-1.xml"/>
+      <source file="problems-koi-practice-2.xml"/>
+    </concatenate>
+  </sections>
+</exercise>
