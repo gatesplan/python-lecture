@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Lecture 10 연습문제 - 학습 순서별 (각 섹션 3문항, 해설 포함)
+-->
+<exercise>
+  <title>Exercise 10. 함수 (Functions)</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <section title="Section 1 - 함수 정의" file="problems-lecture10-function-def.xml" count="3"/>
+    <section title="Section 2 - 함수 매개변수" file="problems-lecture10-function-params.xml" count="3"/>
+    <section title="Section 3 - 함수 매개변수 심화" file="problems-lecture10-function-params-fixed.xml" count="3"/>
+    <section title="Section 4 - 함수 인자" file="problems-lecture10-function-args.xml" count="3"/>
+    <section title="Section 5 - 기본값 매개변수" file="problems-lecture10-function-defaults.xml" count="3"/>
+    <section title="Section 6 - 함수 타입" file="problems-lecture10-function-types.xml" count="3"/>
+  </sections>
+</exercise>
