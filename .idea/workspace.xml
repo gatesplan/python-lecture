@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e551840b-8e31-46e1-9bea-af6fae0cef5d" name="변경" comment="..">
+      <change afterPath="$PROJECT_DIR$/lecture-apprentice/Python Apprentice Lecture 5 - BTree Traversing.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/python-lecture.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python-lecture.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture 10 - Functions.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture 10 - Functions.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codes/cnsh-sample/1413-LJ-077.py" beforeDir="false" afterPath="$PROJECT_DIR$/codes/cnsh-sample/1413-LJ-077.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +38,12 @@
     &quot;assignee&quot;: &quot;gatesplan&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/gatesplan/python-lecture.git&quot;,
-    &quot;accountId&quot;: &quot;0875c1e5-fdb7-4512-b07d-020e3b7f0721&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/gatesplan/python-lecture.git",
+    "accountId": "e207bf1d-49a6-4986-be7f-90e331ab2e13"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -97,6 +99,7 @@
       <workItem from="1760077251248" duration="10815000" />
       <workItem from="1760107777978" duration="38000" />
       <workItem from="1760149024431" duration="19831000" />
+      <workItem from="1760794938779" duration="9793000" />
     </task>
     <task id="LOCAL-00001" summary="..">
       <option name="closed" value="true" />
