@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Lecture 9 리스트 컴프리헨션 연습문제 설정 (해설 포함)
+
+  구성:
+  - lecture9 관련 4개 파일을 순서대로 통합
+  - 총 30문항 랜덤 추출
+  - 해설 표시
+
+  사용법:
+  URL에서 ?config=config-lecture9-listcomp-with-sol 로 접근
+-->
+<exercise>
+  <title>Exercise 9. List Comprehension (with Solutions)</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <concatenate title="Lecture 9 - List Comprehension Practice" count="15">
+      <source file="problems-lecture9-listcomp-basic.xml"/>
+      <source file="problems-lecture9-convert-for-listcomp-basic.xml"/>
+      <source file="problems-lecture9-listcomp-if.xml"/>
+      <source file="problems-lecture9-listcomp-ifelse.xml"/>
+    </concatenate>
+  </sections>
+</exercise>
