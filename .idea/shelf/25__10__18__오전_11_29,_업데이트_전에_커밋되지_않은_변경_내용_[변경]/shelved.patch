@@ -1,0 +1,1159 @@
+Index: .idea/python-lecture.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"PYTHON_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\">\r\n    <content url=\"file://$MODULE_DIR$\" />\r\n    <orderEntry type=\"jdk\" jdkName=\"C:\\ProgramData\\miniconda3\" jdkType=\"Python SDK\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/python-lecture.iml b/.idea/python-lecture.iml
+--- a/.idea/python-lecture.iml	(revision 16032dc70989fecad21239170ccbe8c181e65b4c)
++++ b/.idea/python-lecture.iml	(date 1760754519012)
+@@ -2,7 +2,7 @@
+ <module type="PYTHON_MODULE" version="4">
+   <component name="NewModuleRootManager">
+     <content url="file://$MODULE_DIR$" />
+-    <orderEntry type="jdk" jdkName="C:\ProgramData\miniconda3" jdkType="Python SDK" />
++    <orderEntry type="jdk" jdkName="mlbase-py3.12" jdkType="Python SDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: lecture-basic/Python Basic Lecture 6 - for loop.ipynb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n \"cells\": [\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"# 복습 키워드\\n\",\r\n    \"\\n\",\r\n    \"1. `print()` 출력함수\\n\",\r\n    \"2. `print(sep: str, end: str)` 출력함수의 키워드 파라메터\\n\",\r\n    \"3. `f-string` 문법\\n\",\r\n    \"4. `\\\"str\\\".builtin()` 기본적인 문자열 빌트인 함수들\\n\",\r\n    \"    - `\\\"str\\\".upper()` 대문자로 변환\\n\",\r\n    \"    - `\\\"str\\\".lower()` 소문자로 변환\\n\",\r\n    \"    - `\\\"str\\\".capitalize()` 첫 글자만 대문자로 변환\\n\",\r\n    \"    - `\\\"str\\\".replace(old:str, new:str)` 특정 문자열 교체\\n\",\r\n    \"    - `\\\"str\\\".strip()` 양쪽 공백 제거\\n\",\r\n    \"    - `\\\"str\\\".lstrip()` 왼쪽 공백 제거\\n\",\r\n    \"    - `\\\"str\\\".rstrip()` 오른쪽 공백 제거\\n\",\r\n    \"5. list 자료형 선언과 사용법\\n\",\r\n    \"    - `list = [1, 2, 3]` 리스트 선언\\n\",\r\n    \"    - `print(list)` 리스트 출력\\n\",\r\n    \"    - `list(\\\"str\\\")` 문자열을 리스트로 변환\\n\",\r\n    \"    - `\\\"str\\\".split(sep: str)` 문자열을 리스트로 변환\\n\",\r\n    \"    - `list[a:b]` 리스트 슬라이싱\\n\",\r\n    \"6. `*list` 언패킹\\n\",\r\n    \"7. `[].builtin()` 리스트 빌트인 함수들\\n\",\r\n    \"    - `[].append(any)` 리스트에 요소 추가\\n\",\r\n    \"    - `[].insert(index:int, any)` 리스트 특정 위치에 요소 추가\\n\",\r\n    \"    - `[].extend(list)` 리스트에 다른 리스트 요소 추가\\n\",\r\n    \"    - `[].remove(any)` 리스트에서 요소 제거\\n\",\r\n    \"    - `[].pop()` 리스트 마지막 요소 제거\\n\",\r\n    \"    - `[].clear()` 리스트 비우기\\n\",\r\n    \"    - `[].index(any)` 리스트에서 요소의 인덱스 찾기\\n\",\r\n    \"    - `[].count(any)` 리스트에서 요소의 개수 세기\\n\",\r\n    \"    - `[].sort()` 리스트 정렬\\n\",\r\n    \"    - `[].reverse()` 리스트 역순 정렬\\n\",\r\n    \"    - `[].copy()` 리스트 복사\\n\",\r\n    \"8. `input()` 입력 함수\\n\",\r\n    \"9. `type()` 자료형 확인 함수\\n\",\r\n    \"10. 자료형 변환 (캐스팅)\\n\",\r\n    \"    - `int()` 정수로 변환\\n\",\r\n    \"    - `float()` 실수로 변환\\n\",\r\n    \"    - `str()` 문자열로 변환\\n\",\r\n    \"    - `list()` 리스트로 변환\\n\",\r\n    \"11. 조건문 (if문)\\n\",\r\n    \"    - `if` 문\\n\",\r\n    \"    - `if-else` 문\\n\",\r\n    \"    - `if-elif-else` 문\\n\",\r\n    \"    - 비교연산자: `==`, `!=`, `>`, `<`, `>=`, `<=`\\n\",\r\n    \"    - 논리연산자: `and`, `or`, `not`\\n\",\r\n    \"    - `in` 연산자\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": \"1. 기본 for문 (리스트, 문자열 순회)\\n2. `break`와 `continue` 제어문\\n3. `range()` 함수와 for문\\n4. `enumerate()` 함수 활용\\n5. `zip()` 함수 활용\\n6. `enumerate(zip())` 조합 활용\"\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"## 1. 기본 for문\\n\",\r\n    \"\\n\",\r\n    \"for문의 가장 기본적인 사용법은 리스트나 문자열의 각 요소를 하나씩 가져와서 처리하는 것이다.\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 리스트의 각 요소 출력\\n\",\r\n    \"fruits = ['사과', '바나나', '오렌지']\\n\",\r\n    \"for fruit in fruits:\\n\",\r\n    \"    print(fruit)\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 문자열의 각 글자 출력\\n\",\r\n    \"word = \\\"HELLO\\\"\\n\",\r\n    \"for char in word:\\n\",\r\n    \"    print(char)\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 숫자 리스트 처리\\n\",\r\n    \"numbers = [1, 2, 3, 4, 5]\\n\",\r\n    \"total = 0\\n\",\r\n    \"for number in numbers:\\n\",\r\n    \"    total = total + number\\n\",\r\n    \"print(f\\\"합계: {total}\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# for문에 조건문 활용\\n\",\r\n    \"numbers = [1, 2, 3, 4, 5, 6]\\n\",\r\n    \"for number in numbers:\\n\",\r\n    \"    if number % 2 == 0:\\n\",\r\n    \"        print(f\\\"{number}는 짝수\\\")\\n\",\r\n    \"    else:\\n\",\r\n    \"        print(f\\\"{number}는 홀수\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"### 연습문제 - 기본 for문\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 1. 색깔 리스트의 모든 요소를 출력하세요\\n\",\r\n    \"colors = ['빨강', '파랑', '노랑', '초록']\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 2. 문자열 \\\"PYTHON\\\"의 각 글자를 한 줄씩 출력하세요\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 3. 숫자 리스트 [10, 20, 30, 40, 50]의 평균을 구하세요\\n\",\r\n    \"numbers = [10, 20, 30, 40, 50]\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"source\": \"# break - 반복문 종료\\nnumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\\nfor number in numbers:\\n    if number == 5:\\n        print(\\\"5를 찾았습니다! 반복을 종료합니다.\\\")\\n        break\\n    print(number)\",\r\n   \"metadata\": {},\r\n   \"execution_count\": null,\r\n   \"outputs\": []\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"source\": \"# continue - 현재 반복 건너뛰기\\nnumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\\nfor number in numbers:\\n    if number % 2 == 0:  # 짝수면 건너뛰기\\n        continue\\n    print(f\\\"{number}는 홀수\\\")\",\r\n   \"metadata\": {},\r\n   \"execution_count\": null,\r\n   \"outputs\": []\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"source\": \"# 실용적 예제: 사용자 입력 처리\\nfruits = ['사과', '바나나', '독버섯', '오렌지', '포도']\\nfor fruit in fruits:\\n    if fruit == '독버섯':\\n        print(f\\\"{fruit}는 위험합니다! 건너뜁니다.\\\")\\n        continue\\n    print(f\\\"{fruit}를 바구니에 담습니다.\\\")\",\r\n   \"metadata\": {},\r\n   \"execution_count\": null,\r\n   \"outputs\": []\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"source\": \"# break와 continue 함께 사용\\nscores = [85, 92, 45, 78, 95, 30, 88]\\npassing_scores = []\\n\\nfor score in scores:\\n    if score < 50:  # 너무 낮은 점수는 건너뛰기\\n        print(f\\\"점수 {score}는 너무 낮습니다. 제외합니다.\\\")\\n        continue\\n    \\n    passing_scores.append(score)\\n    print(f\\\"점수 {score} 추가됨\\\")\\n    \\n    if len(passing_scores) >= 5:  # 5개 이상 모으면 종료\\n        print(\\\"합격 점수 5개를 모았습니다!\\\")\\n        break\\n\\nprint(f\\\"최종 합격 점수: {passing_scores}\\\")\",\r\n   \"metadata\": {},\r\n   \"execution_count\": null,\r\n   \"outputs\": []\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"source\": \"### 연습문제 - break와 continue\",\r\n   \"metadata\": {}\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"source\": \"# 1. 리스트에서 음수를 만나면 반복을 종료하세요\\nnumbers = [1, 3, 5, 7, -2, 9, 11]\\n# 여기에 코드 작성\",\r\n   \"metadata\": {},\r\n   \"execution_count\": null,\r\n   \"outputs\": []\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"source\": \"# 2. 문자열에서 모음(a, e, i, o, u)은 건너뛰고 자음만 출력하세요\\nword = \\\"hello world\\\"\\n# 여기에 코드 작성\",\r\n   \"metadata\": {},\r\n   \"execution_count\": null,\r\n   \"outputs\": []\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"source\": \"## 3. range() 함수와 for문\\n\\n`range()` 함수는 연속된 숫자를 생성하는 함수로, for문과 함께 매우 자주 사용된다.\\n\\n- `range(n)`: 0부터 n-1까지\\n- `range(start, stop)`: start부터 stop-1까지\\n- `range(start, stop, step)`: start부터 stop-1까지 step씩 증가\",\r\n   \"metadata\": {},\r\n   \"execution_count\": null,\r\n   \"outputs\": []\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"source\": \"## 2. break와 continue 제어문\\n\\nfor문 안에서 반복을 제어하는 두 가지 중요한 키워드가 있다.\\n\\n- `break`: 반복문을 완전히 종료\\n- `continue`: 현재 반복을 건너뛰고 다음 반복으로 진행\",\r\n   \"metadata\": {}\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"## 2. range() 함수와 for문\\n\",\r\n    \"\\n\",\r\n    \"`range()` 함수는 연속된 숫자를 생성하는 함수로, for문과 함께 매우 자주 사용된다.\\n\",\r\n    \"\\n\",\r\n    \"- `range(n)`: 0부터 n-1까지\\n\",\r\n    \"- `range(start, stop)`: start부터 stop-1까지\\n\",\r\n    \"- `range(start, stop, step)`: start부터 stop-1까지 step씩 증가\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# range(n) - 0부터 n-1까지\\n\",\r\n    \"for i in range(5):\\n\",\r\n    \"    print(i)\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# range(start, stop) - start부터 stop-1까지\\n\",\r\n    \"for i in range(1, 6):\\n\",\r\n    \"    print(f\\\"{i}번째\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# range(start, stop, step) - step씩 증가\\n\",\r\n    \"for i in range(0, 10, 2):\\n\",\r\n    \"    print(f\\\"짝수: {i}\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 거꾸로 세기 (음수 step)\\n\",\r\n    \"for i in range(5, 0, -1):\\n\",\r\n    \"    print(f\\\"카운트다운: {i}\\\")\\n\",\r\n    \"print(\\\"발사!\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 구구단 만들기\\n\",\r\n    \"dan = 3\\n\",\r\n    \"for i in range(1, 10):\\n\",\r\n    \"    print(f\\\"{dan} x {i} = {dan * i}\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 별표 패턴 만들기\\n\",\r\n    \"for i in range(1, 6):\\n\",\r\n    \"    print(\\\"*\\\" * i)\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"### 연습문제 - range() 함수\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 1. 1부터 10까지 출력하세요\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 2. 1부터 100까지의 합을 구하세요\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 3. 5의 배수를 5부터 50까지 출력하세요\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"## 3. enumerate() 함수 활용\\n\",\r\n    \"\\n\",\r\n    \"`enumerate()` 함수는 리스트의 요소와 함께 그 인덱스(위치)도 함께 가져올 수 있게 해준다.\\n\",\r\n    \"\\n\",\r\n    \"순위를 매기거나 번호를 붙일 때 매우 유용하다.\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 기본 enumerate 사용법\\n\",\r\n    \"fruits = ['사과', '바나나', '오렌지']\\n\",\r\n    \"for i, fruit in enumerate(fruits):\\n\",\r\n    \"    print(f\\\"{i}: {fruit}\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 순위 매기기 (인덱스에 1을 더함)\\n\",\r\n    \"students = ['김철수', '이영희', '박민수']\\n\",\r\n    \"for i, student in enumerate(students):\\n\",\r\n    \"    print(f\\\"{i+1}등: {student}\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 문자열에서 enumerate 사용\\n\",\r\n    \"word = \\\"HELLO\\\"\\n\",\r\n    \"for i, char in enumerate(word):\\n\",\r\n    \"    print(f\\\"{i+1}번째 글자: {char}\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 조건에 맞는 인덱스 찾기\\n\",\r\n    \"numbers = [10, 25, 30, 15, 40]\\n\",\r\n    \"for i, number in enumerate(numbers):\\n\",\r\n    \"    if number > 20:\\n\",\r\n    \"        print(f\\\"인덱스 {i}에서 {number} 발견\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"### 연습문제 - enumerate() 함수\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 1. 과일 리스트에 번호를 매겨 출력하세요 (1번: 사과 형식)\\n\",\r\n    \"fruits = ['사과', '바나나', '오렌지', '포도']\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 2. 짝수 인덱스에 있는 요소만 출력하세요\\n\",\r\n    \"colors = ['빨강', '파랑', '노랑', '초록', '보라']\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 3. 리스트에서 특정 값의 위치를 모두 찾아 출력하세요\\n\",\r\n    \"numbers = [1, 3, 2, 3, 4, 3, 5]\\n\",\r\n    \"target = 3\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"## 4. zip() 함수 활용\\n\",\r\n    \"\\n\",\r\n    \"`zip()` 함수는 여러 개의 리스트를 동시에 순회할 수 있게 해준다.\\n\",\r\n    \"\\n\",\r\n    \"이름과 점수, 과목과 성적 등 대응되는 데이터를 함께 처리할 때 유용하다.\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 기본 zip 사용법\\n\",\r\n    \"names = ['김철수', '이영희', '박민수']\\n\",\r\n    \"scores = [85, 92, 78]\\n\",\r\n    \"\\n\",\r\n    \"for name, score in zip(names, scores):\\n\",\r\n    \"    print(f\\\"{name}: {score}점\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 세 개 이상의 리스트도 가능\\n\",\r\n    \"subjects = ['수학', '영어', '과학']\\n\",\r\n    \"scores = [85, 92, 78]\\n\",\r\n    \"grades = ['B', 'A', 'C']\\n\",\r\n    \"\\n\",\r\n    \"for subject, score, grade in zip(subjects, scores, grades):\\n\",\r\n    \"    print(f\\\"{subject}: {score}점 ({grade}등급)\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 두 리스트의 요소 연산\\n\",\r\n    \"list1 = [1, 2, 3, 4, 5]\\n\",\r\n    \"list2 = [10, 20, 30, 40, 50]\\n\",\r\n    \"\\n\",\r\n    \"for a, b in zip(list1, list2):\\n\",\r\n    \"    print(f\\\"{a} + {b} = {a + b}\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 실용적 예제: 상품과 가격\\n\",\r\n    \"products = ['노트북', '마우스', '키보드']\\n\",\r\n    \"prices = [1000000, 30000, 80000]\\n\",\r\n    \"\\n\",\r\n    \"total_price = 0\\n\",\r\n    \"for product, price in zip(products, prices):\\n\",\r\n    \"    print(f\\\"{product}: {price:,}원\\\")\\n\",\r\n    \"    total_price += price\\n\",\r\n    \"    \\n\",\r\n    \"print(f\\\"총 가격: {total_price:,}원\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"### 연습문제 - zip() 함수\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 1. 도시와 온도를 함께 출력하세요\\n\",\r\n    \"cities = ['서울', '부산', '대구', '광주']\\n\",\r\n    \"temperatures = [15, 18, 12, 16]\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 2. 두 시험 점수를 비교해서 향상/하락 여부를 출력하세요\\n\",\r\n    \"first_exam = [80, 75, 90, 85]\\n\",\r\n    \"second_exam = [85, 70, 95, 85]\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 3. 영어 단어와 한국어 뜻을 매칭해서 출력하세요\\n\",\r\n    \"english = ['apple', 'banana', 'orange', 'grape']\\n\",\r\n    \"korean = ['사과', '바나나', '오렌지', '포도']\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"## 5. enumerate(zip()) 조합 활용\\n\",\r\n    \"\\n\",\r\n    \"`enumerate()`와 `zip()`을 함께 사용하면 순번과 여러 리스트의 대응 요소를 모두 가져올 수 있다.\\n\",\r\n    \"\\n\",\r\n    \"복잡한 데이터를 체계적으로 처리할 때 매우 유용하다.\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 기본 enumerate(zip()) 사용법\\n\",\r\n    \"names = ['김철수', '이영희', '박민수']\\n\",\r\n    \"scores = [85, 92, 78]\\n\",\r\n    \"\\n\",\r\n    \"for i, (name, score) in enumerate(zip(names, scores)):\\n\",\r\n    \"    print(f\\\"{i+1}등: {name} - {score}점\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 세 개 리스트와 순번 함께 처리\\n\",\r\n    \"students = ['홍길동', '김영수', '이민정']\\n\",\r\n    \"korean = [90, 85, 95]\\n\",\r\n    \"math = [80, 95, 85]\\n\",\r\n    \"\\n\",\r\n    \"for i, (student, kor, mat) in enumerate(zip(students, korean, math)):\\n\",\r\n    \"    average = (kor + mat) / 2\\n\",\r\n    \"    print(f\\\"{i+1}번 {student}: 국어 {kor}, 수학 {mat}, 평균 {average:.1f}\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 조건에 따른 처리\\n\",\r\n    \"products = ['노트북', '마우스', '키보드', '모니터']\\n\",\r\n    \"prices = [1000000, 30000, 80000, 300000]\\n\",\r\n    \"\\n\",\r\n    \"for i, (product, price) in enumerate(zip(products, prices)):\\n\",\r\n    \"    if price >= 100000:\\n\",\r\n    \"        category = \\\"고가품\\\"\\n\",\r\n    \"    else:\\n\",\r\n    \"        category = \\\"일반품\\\"\\n\",\r\n    \"    print(f\\\"{i+1}. {product}: {price:,}원 ({category})\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 월별 데이터 분석\\n\",\r\n    \"months = ['1월', '2월', '3월', '4월']\\n\",\r\n    \"income = [300, 350, 280, 400]\\n\",\r\n    \"expense = [250, 300, 290, 320]\\n\",\r\n    \"\\n\",\r\n    \"for i, (month, inc, exp) in enumerate(zip(months, income, expense)):\\n\",\r\n    \"    profit = inc - exp\\n\",\r\n    \"    status = \\\"흑자\\\" if profit > 0 else \\\"적자\\\"\\n\",\r\n    \"    print(f\\\"{i+1}분기 {month}: 수입 {inc}, 지출 {exp}, {status} {abs(profit)}\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"### 연습문제 - enumerate(zip()) 조합\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 1. 과목과 점수를 순위와 함께 출력하세요\\n\",\r\n    \"subjects = ['수학', '영어', '과학', '사회']\\n\",\r\n    \"scores = [85, 92, 78, 88]\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 2. 색깔과 개수를 인덱스와 함께 출력하되, 짝수 인덱스만 처리하세요\\n\",\r\n    \"colors = ['빨강', '파랑', '노랑', '초록', '보라', '검정']\\n\",\r\n    \"counts = [5, 3, 8, 2, 6, 4]\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 3. 학생, 국어점수, 영어점수를 받아서 평균이 90점 이상인 학생만 출력하세요\\n\",\r\n    \"students = ['김철수', '이영희', '박민수', '최유진']\\n\",\r\n    \"korean_scores = [85, 95, 80, 92]\\n\",\r\n    \"english_scores = [90, 88, 75, 96]\\n\",\r\n    \"# 여기에 코드 작성\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"## 실용적인 종합 예제들\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 학급 성적 관리 시스템\\n\",\r\n    \"students = ['김철수', '이영희', '박민수', '최유진', '정태호']\\n\",\r\n    \"korean = [85, 90, 78, 88, 92]\\n\",\r\n    \"english = [80, 85, 82, 90, 87]\\n\",\r\n    \"math = [90, 88, 85, 85, 95]\\n\",\r\n    \"\\n\",\r\n    \"print(\\\"=== 학급 성적표 ===\\\")\\n\",\r\n    \"print(\\\"순위\\\\t이름\\\\t\\\\t국어\\\\t영어\\\\t수학\\\\t평균\\\")\\n\",\r\n    \"print(\\\"-\\\" * 50)\\n\",\r\n    \"\\n\",\r\n    \"for i, (name, kor, eng, mat) in enumerate(zip(students, korean, english, math)):\\n\",\r\n    \"    avg = (kor + eng + mat) / 3\\n\",\r\n    \"    print(f\\\"{i+1}\\\\t{name}\\\\t\\\\t{kor}\\\\t{eng}\\\\t{mat}\\\\t{avg:.1f}\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 온라인 쇼핑몰 주문 처리\\n\",\r\n    \"products = ['노트북', '마우스', '키보드', '모니터', '스피커']\\n\",\r\n    \"prices = [1200000, 35000, 90000, 280000, 150000]\\n\",\r\n    \"quantities = [1, 2, 1, 1, 2]\\n\",\r\n    \"\\n\",\r\n    \"print(\\\"=== 주문 내역 ===\\\")\\n\",\r\n    \"total_amount = 0\\n\",\r\n    \"\\n\",\r\n    \"for i, (product, price, qty) in enumerate(zip(products, prices, quantities)):\\n\",\r\n    \"    subtotal = price * qty\\n\",\r\n    \"    total_amount += subtotal\\n\",\r\n    \"    print(f\\\"{i+1}. {product}: {price:,}원 x {qty}개 = {subtotal:,}원\\\")\\n\",\r\n    \"\\n\",\r\n    \"print(\\\"-\\\" * 40)\\n\",\r\n    \"print(f\\\"총 주문금액: {total_amount:,}원\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 날씨 데이터 분석\\n\",\r\n    \"cities = ['서울', '부산', '대구', '인천', '광주', '대전', '울산']\\n\",\r\n    \"temperatures = [15, 18, 12, 14, 16, 13, 17]\\n\",\r\n    \"humidity = [60, 70, 55, 65, 68, 58, 72]\\n\",\r\n    \"\\n\",\r\n    \"print(\\\"=== 전국 날씨 현황 ===\\\")\\n\",\r\n    \"\\n\",\r\n    \"hot_cities = []\\n\",\r\n    \"humid_cities = []\\n\",\r\n    \"\\n\",\r\n    \"for i, (city, temp, hum) in enumerate(zip(cities, temperatures, humidity)):\\n\",\r\n    \"    print(f\\\"{i+1}. {city}: {temp}°C, 습도 {hum}%\\\")\\n\",\r\n    \"    \\n\",\r\n    \"    if temp >= 16:\\n\",\r\n    \"        hot_cities.append(city)\\n\",\r\n    \"    if hum >= 65:\\n\",\r\n    \"        humid_cities.append(city)\\n\",\r\n    \"\\n\",\r\n    \"print(f\\\"\\\\n더운 지역 (16도 이상): {', '.join(hot_cities)}\\\")\\n\",\r\n    \"print(f\\\"습한 지역 (습도 65% 이상): {', '.join(humid_cities)}\\\")\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"## 최종 종합 연습문제\\n\",\r\n    \"\\n\",\r\n    \"지금까지 배운 모든 for문 기법을 활용해서 다음 문제들을 해결해보자.\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 문제 1: 구구단 전체 출력하기\\n\",\r\n    \"# 2단부터 9단까지 모든 구구단을 출력하세요\\n\",\r\n    \"# 힌트: range()를 중첩해서 사용하세요\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 문제 2: 학생별 총점과 평균 계산\\n\",\r\n    \"students = ['김철수', '이영희', '박민수']\\n\",\r\n    \"korean = [85, 90, 78]\\n\",\r\n    \"english = [80, 85, 82]\\n\",\r\n    \"math = [90, 88, 85]\\n\",\r\n    \"science = [88, 92, 80]\\n\",\r\n    \"\\n\",\r\n    \"# 각 학생의 총점과 평균을 계산해서 출력하세요\\n\",\r\n    \"# 출력 예: \\\"1등 김철수: 총점 343점, 평균 85.8점\\\"\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 문제 3: 단어 빈도수 계산\\n\",\r\n    \"sentence = \\\"python is great python is fun python is useful\\\"\\n\",\r\n    \"words = sentence.split()\\n\",\r\n    \"\\n\",\r\n    \"# 각 단어가 몇 번 나타나는지 세어서 출력하세요\\n\",\r\n    \"# 힌트: 빈 리스트를 만들고 이미 처리한 단어는 건너뛰세요\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 문제 4: 가장 긴 단어 찾기\\n\",\r\n    \"words = ['apple', 'banana', 'orange', 'grape', 'watermelon', 'kiwi']\\n\",\r\n    \"\\n\",\r\n    \"# 가장 긴 단어와 그 길이를 찾아서 출력하세요\\n\",\r\n    \"# enumerate()를 사용해서 위치도 함께 출력하세요\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"execution_count\": null,\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"source\": [\r\n    \"# 문제 5: 패턴 만들기\\n\",\r\n    \"# 다음과 같은 패턴을 출력하세요:\\n\",\r\n    \"# 1\\n\",\r\n    \"# 12\\n\",\r\n    \"# 123\\n\",\r\n    \"# 1234\\n\",\r\n    \"# 12345\\n\",\r\n    \"# range()와 문자열 연결을 활용하세요\"\r\n   ]\r\n  }\r\n ],\r\n \"metadata\": {\r\n  \"kernelspec\": {\r\n   \"display_name\": \"Python 3\",\r\n   \"language\": \"python\",\r\n   \"name\": \"python3\"\r\n  },\r\n  \"language_info\": {\r\n   \"codemirror_mode\": {\r\n    \"name\": \"ipython\",\r\n    \"version\": 3\r\n   },\r\n   \"file_extension\": \".py\",\r\n   \"mimetype\": \"text/x-python\",\r\n   \"name\": \"python\",\r\n   \"nbconvert_exporter\": \"python\",\r\n   \"pygments_lexer\": \"ipython3\",\r\n   \"version\": \"3.8.0\"\r\n  }\r\n },\r\n \"nbformat\": 4,\r\n \"nbformat_minor\": 4\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lecture-basic/Python Basic Lecture 6 - for loop.ipynb b/lecture-basic/Python Basic Lecture 6 - for loop.ipynb
+--- a/lecture-basic/Python Basic Lecture 6 - for loop.ipynb	(revision 16032dc70989fecad21239170ccbe8c181e65b4c)
++++ b/lecture-basic/Python Basic Lecture 6 - for loop.ipynb	(date 1760754519012)
+@@ -1,3 +1,4 @@
++#%% raw
+ {
+  "cells": [
+   {
+@@ -852,4 +853,207 @@
+  },
+  "nbformat": 4,
+  "nbformat_minor": 4
+-}
+\ No newline at end of file
++}
++#%% md
++## 1. 기본 for문
++
++for문의 가장 기본적인 사용법은 리스트나 문자열의 각 요소를 하나씩 가져와서 처리하는 것이다.
++#%%
++# 문자열의 각 글자 출력
++word = "HELLO"
++for char in word:
++    print(char)
++#%%
++# for문에 조건문 활용
++numbers = [1, 2, 3, 4, 5, 6]
++for number in numbers:
++    if number % 2 == 0:
++        print(f"{number}는 짝수")
++    else:
++        print(f"{number}는 홀수")
++#%%
++# 1. 색깔 리스트의 모든 요소를 출력하세요
++colors = ['빨강', '파랑', '노랑', '초록']
++# 여기에 코드 작성
++#%%
++# 3. 숫자 리스트 [10, 20, 30, 40, 50]의 평균을 구하세요
++numbers = [10, 20, 30, 40, 50]
++# 여기에 코드 작성
++#%%
++# continue - 현재 반복 건너뛰기
++numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
++for number in numbers:
++    if number % 2 == 0:  # 짝수면 건너뛰기
++        continue
++    print(f"{number}는 홀수")
++#%%
++# break와 continue 함께 사용
++scores = [85, 92, 45, 78, 95, 30, 88]
++passing_scores = []
++
++for score in scores:
++    if score < 50:  # 너무 낮은 점수는 건너뛰기
++        print(f"점수 {score}는 너무 낮습니다. 제외합니다.")
++        continue
++    
++    passing_scores.append(score)
++    print(f"점수 {score} 추가됨")
++    
++    if len(passing_scores) >= 5:  # 5개 이상 모으면 종료
++        print("합격 점수 5개를 모았습니다!")
++        break
++
++print(f"최종 합격 점수: {passing_scores}")
++#%%
++# 1. 리스트에서 음수를 만나면 반복을 종료하세요
++numbers = [1, 3, 5, 7, -2, 9, 11]
++# 여기에 코드 작성
++#%%
++## 3. range() 함수와 for문
++
++`range()` 함수는 연속된 숫자를 생성하는 함수로, for문과 함께 매우 자주 사용된다.
++
++- `range(n)`: 0부터 n-1까지
++- `range(start, stop)`: start부터 stop-1까지
++- `range(start, stop, step)`: start부터 stop-1까지 step씩 증가
++#%% md
++## 2. range() 함수와 for문
++
++`range()` 함수는 연속된 숫자를 생성하는 함수로, for문과 함께 매우 자주 사용된다.
++
++- `range(n)`: 0부터 n-1까지
++- `range(start, stop)`: start부터 stop-1까지
++- `range(start, stop, step)`: start부터 stop-1까지 step씩 증가
++#%%
++# range(start, stop) - start부터 stop-1까지
++for i in range(1, 6):
++    print(f"{i}번째")
++#%%
++# 거꾸로 세기 (음수 step)
++for i in range(5, 0, -1):
++    print(f"카운트다운: {i}")
++print("발사!")
++#%%
++# 별표 패턴 만들기
++for i in range(1, 6):
++    print("*" * i)
++#%%
++# 1. 1부터 10까지 출력하세요
++# 여기에 코드 작성
++#%%
++# 3. 5의 배수를 5부터 50까지 출력하세요
++# 여기에 코드 작성
++#%%
++# 기본 enumerate 사용법
++fruits = ['사과', '바나나', '오렌지']
++for i, fruit in enumerate(fruits):
++    print(f"{i}: {fruit}")
++#%%
++# 문자열에서 enumerate 사용
++word = "HELLO"
++for i, char in enumerate(word):
++    print(f"{i+1}번째 글자: {char}")
++#%% md
++### 연습문제 - enumerate() 함수
++#%%
++# 2. 짝수 인덱스에 있는 요소만 출력하세요
++colors = ['빨강', '파랑', '노랑', '초록', '보라']
++# 여기에 코드 작성
++#%% md
++## 4. zip() 함수 활용
++
++`zip()` 함수는 여러 개의 리스트를 동시에 순회할 수 있게 해준다.
++
++이름과 점수, 과목과 성적 등 대응되는 데이터를 함께 처리할 때 유용하다.
++#%%
++# 세 개 이상의 리스트도 가능
++subjects = ['수학', '영어', '과학']
++scores = [85, 92, 78]
++grades = ['B', 'A', 'C']
++
++for subject, score, grade in zip(subjects, scores, grades):
++    print(f"{subject}: {score}점 ({grade}등급)")
++#%%
++# 실용적 예제: 상품과 가격
++products = ['노트북', '마우스', '키보드']
++prices = [1000000, 30000, 80000]
++
++total_price = 0
++for product, price in zip(products, prices):
++    print(f"{product}: {price:,}원")
++    total_price += price
++    
++print(f"총 가격: {total_price:,}원")
++#%%
++# 1. 도시와 온도를 함께 출력하세요
++cities = ['서울', '부산', '대구', '광주']
++temperatures = [15, 18, 12, 16]
++# 여기에 코드 작성
++#%%
++# 3. 영어 단어와 한국어 뜻을 매칭해서 출력하세요
++english = ['apple', 'banana', 'orange', 'grape']
++korean = ['사과', '바나나', '오렌지', '포도']
++# 여기에 코드 작성
++#%%
++# 기본 enumerate(zip()) 사용법
++names = ['김철수', '이영희', '박민수']
++scores = [85, 92, 78]
++
++for i, (name, score) in enumerate(zip(names, scores)):
++    print(f"{i+1}등: {name} - {score}점")
++#%%
++# 조건에 따른 처리
++products = ['노트북', '마우스', '키보드', '모니터']
++prices = [1000000, 30000, 80000, 300000]
++
++for i, (product, price) in enumerate(zip(products, prices)):
++    if price >= 100000:
++        category = "고가품"
++    else:
++        category = "일반품"
++    print(f"{i+1}. {product}: {price:,}원 ({category})")
++#%% md
++### 연습문제 - enumerate(zip()) 조합
++#%%
++# 2. 색깔과 개수를 인덱스와 함께 출력하되, 짝수 인덱스만 처리하세요
++colors = ['빨강', '파랑', '노랑', '초록', '보라', '검정']
++counts = [5, 3, 8, 2, 6, 4]
++# 여기에 코드 작성
++#%% md
++## 실용적인 종합 예제들
++#%%
++# 온라인 쇼핑몰 주문 처리
++products = ['노트북', '마우스', '키보드', '모니터', '스피커']
++prices = [1200000, 35000, 90000, 280000, 150000]
++quantities = [1, 2, 1, 1, 2]
++
++print("=== 주문 내역 ===")
++total_amount = 0
++
++for i, (product, price, qty) in enumerate(zip(products, prices, quantities)):
++    subtotal = price * qty
++    total_amount += subtotal
++    print(f"{i+1}. {product}: {price:,}원 x {qty}개 = {subtotal:,}원")
++
++print("-" * 40)
++print(f"총 주문금액: {total_amount:,}원")
++#%% md
++## 최종 종합 연습문제
++
++지금까지 배운 모든 for문 기법을 활용해서 다음 문제들을 해결해보자.
++#%%
++# 문제 2: 학생별 총점과 평균 계산
++students = ['김철수', '이영희', '박민수']
++korean = [85, 90, 78]
++english = [80, 85, 82]
++math = [90, 88, 85]
++science = [88, 92, 80]
++
++# 각 학생의 총점과 평균을 계산해서 출력하세요
++# 출력 예: "1등 김철수: 총점 343점, 평균 85.8점"
++#%%
++# 문제 4: 가장 긴 단어 찾기
++words = ['apple', 'banana', 'orange', 'grape', 'watermelon', 'kiwi']
++
++# 가장 긴 단어와 그 길이를 찾아서 출력하세요
++# enumerate()를 사용해서 위치도 함께 출력하세요
+\ No newline at end of file
+Index: lecture-basic/Python Basic Lecture 7 - Tuple.ipynb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n \"cells\": [\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"# 복습 키워드\\n\",\r\n    \"\\n\",\r\n    \"1. `print()` 출력함수\\n\",\r\n    \"2. `print(sep: str, end: str)` 출력함수의 키워드 파라메터\\n\",\r\n    \"3. `f-string` 문법\\n\",\r\n    \"4. `\\\"str\\\".builtin()` 기본적인 문자열 빌트인 함수들\\n\",\r\n    \"    - `\\\"str\\\".upper()` 대문자로 변환\\n\",\r\n    \"    - `\\\"str\\\".lower()` 소문자로 변환\\n\",\r\n    \"    - `\\\"str\\\".capitalize()` 첫 글자만 대문자로 변환\\n\",\r\n    \"    - `\\\"str\\\".replace(old:str, new:str)` 특정 문자열 교체\\n\",\r\n    \"    - `\\\"str\\\".strip()` 양쪽 공백 제거\\n\",\r\n    \"    - `\\\"str\\\".lstrip()` 왼쪽 공백 제거\\n\",\r\n    \"    - `\\\"str\\\".rstrip()` 오른쪽 공백 제거\\n\",\r\n    \"5. list 자료형 선언과 사용법\\n\",\r\n    \"    - `list = [1, 2, 3]` 리스트 선언\\n\",\r\n    \"    - `print(list)` 리스트 출력\\n\",\r\n    \"    - `list(\\\"str\\\")` 문자열을 리스트로 변환\\n\",\r\n    \"    - `\\\"str\\\".split(sep: str)` 문자열을 리스트로 변환\\n\",\r\n    \"    - `list[a:b]` 리스트 슬라이싱\\n\",\r\n    \"6. `*list` 언패킹\\n\",\r\n    \"7. `[].builtin()` 리스트 빌트인 함수들\\n\",\r\n    \"    - `[].append(any)` 리스트에 요소 추가\\n\",\r\n    \"    - `[].insert(index:int, any)` 리스트 특정 위치에 요소 추가\\n\",\r\n    \"    - `[].extend(list)` 리스트에 다른 리스트 요소 추가\\n\",\r\n    \"    - `[].remove(any)` 리스트에서 요소 제거\\n\",\r\n    \"    - `[].pop()` 리스트 마지막 요소 제거\\n\",\r\n    \"    - `[].clear()` 리스트 비우기\\n\",\r\n    \"    - `[].index(any)` 리스트에서 요소의 인덱스 찾기\\n\",\r\n    \"    - `[].count(any)` 리스트에서 요소의 개수 세기\\n\",\r\n    \"    - `[].sort()` 리스트 정렬\\n\",\r\n    \"    - `[].reverse()` 리스트 역순 정렬\\n\",\r\n    \"    - `[].copy()` 리스트 복사\\n\",\r\n    \"8. `input()` 입력 함수\\n\",\r\n    \"9. `type()` 자료형 확인 함수\\n\",\r\n    \"10. 자료형 변환 (캐스팅)\\n\",\r\n    \"    - `int()` 정수로 변환\\n\",\r\n    \"    - `float()` 실수로 변환\\n\",\r\n    \"    - `str()` 문자열로 변환\\n\",\r\n    \"    - `list()` 리스트로 변환\\n\",\r\n    \"11. 비교 연산자와 조건문\\n\",\r\n    \"    - `==, !=, >, <, >=, <=` 비교 연산자\\n\",\r\n    \"    - `if, elif, else` 조건문\\n\",\r\n    \"    - `and, or, not` 논리 연산자\\n\",\r\n    \"    - `in` 포함 연산자\"\r\n   ]\r\n  },\r\n  {\r\n   \"metadata\": {},\r\n   \"cell_type\": \"code\",\r\n   \"source\": \"a = input()\",\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"metadata\": {},\r\n   \"cell_type\": \"code\",\r\n   \"source\": [\r\n    \"alist = 'x y z'.split()\\n\",\r\n    \"blist = 'a b c d'.split()\\n\",\r\n    \"\\n\",\r\n    \"for i, v in enumerate(zip(alist, blist)):\\n\",\r\n    \"    a, b = v\\n\",\r\n    \"    print(v, \\\"->\\\", a, b)\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"# Python Basic Lecture 7: Tuple 자료형\\n\",\r\n    \"\\n\",\r\n    \"이번 단원에서는 새로운 자료형인 tuple을 배운다.\\n\",\r\n    \"\\n\",\r\n    \"Tuple은 좌표, 상태 정보 등을 저장할 때 유용하다.\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": \"## 1. Tuple 자료형\\n\\n이번 시간에는 새로운 자료형인 tuple을 배운다. 지금까지 배운 자료형은 문자열`string`, 정수`int`, 실수`float`, 리스트`list`이다.\\n\\nTuple은 리스트와 비슷하지만 중요한 차이점이 있다. 한 번 만들면 변경할 수 없다는 점이다. 이런 특성을 **불변(immutable)**이라고 한다.\\n\\n구체적인 내용은 다음 네 가지이다:\\n\\n1. Tuple 선언하기\\n2. Tuple 언패킹하기\\n3. Tuple 빌트인 함수들\\n4. Tuple 이해하기\"\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"### 1.1. Tuple 선언하기\\n\",\r\n    \"\\n\",\r\n    \"Tuple은 소괄호 `()`를 사용해서 선언한다. 리스트가 대괄호 `[]`를 쓰는 것과 대비된다.\"\r\n   ]\r\n  },\r\n  {\r\n   \"metadata\": {},\r\n   \"cell_type\": \"code\",\r\n   \"source\": [\r\n    \"alist = [1,]\\n\",\r\n    \"atuple = (1,2)\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"# 기본 tuple 선언\\n\",\r\n    \"point = (10, 20)  # 좌표 (x, y)\\n\",\r\n    \"color = (255, 128, 0)  # RGB 색상\\n\",\r\n    \"student = ('김철수', 20, 'A')  # 이름, 나이, 등급\\n\",\r\n    \"\\n\",\r\n    \"print(\\\"좌표:\\\", point)\\n\",\r\n    \"print(\\\"색상:\\\", color)\\n\",\r\n    \"print(\\\"학생 정보:\\\", student)\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"# 빈 tuple과 요소 하나인 tuple\\n\",\r\n    \"empty_tuple = ()  # 빈 tuple\\n\",\r\n    \"single_tuple = (42,)  # 요소 하나 - 콤마가 중요!\\n\",\r\n    \"\\n\",\r\n    \"print(\\\"빈 tuple:\\\", empty_tuple)\\n\",\r\n    \"print(\\\"하나 tuple:\\\", single_tuple)\\n\",\r\n    \"\\n\",\r\n    \"# 콤마 없으면 그냥 괄호로 인식됨\\n\",\r\n    \"not_tuple = (42)  # 이건 그냥 숫자 42\\n\",\r\n    \"print(\\\"이건 tuple이 아님:\\\", type(not_tuple))\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"# 괄호 없이도 tuple 만들 수 있음\\n\",\r\n    \"coordinates = 100, 200  # 이것도 tuple\\n\",\r\n    \"print(\\\"좌표:\\\", coordinates)\\n\",\r\n    \"print(\\\"타입:\\\", type(coordinates))\\n\",\r\n    \"\\n\",\r\n    \"# 리스트를 tuple로 변환\\n\",\r\n    \"my_list = [1, 2, 3, 4, 5]\\n\",\r\n    \"my_tuple = tuple(my_list)\\n\",\r\n    \"print(\\\"원본 리스트:\\\", my_list)\\n\",\r\n    \"print(\\\"변환된 tuple:\\\", my_tuple)\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"metadata\": {},\r\n   \"cell_type\": \"code\",\r\n   \"source\": [\r\n    \"xx = tuple(list(tuple('홍길동 남자 문어'.split())))\\n\",\r\n    \"xx\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"### 1.2. Tuple 언패킹하기\\n\",\r\n    \"\\n\",\r\n    \"Tuple의 각 요소를 개별 변수에 할당하는 것을 언패킹이라고 한다. 리스트 언패킹과 똑같은 방법이다.\"\r\n   ]\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"# 기본 언패킹\\n\",\r\n    \"point = (10, 20)\\n\",\r\n    \"x, y = point\\n\",\r\n    \"print(f\\\"x 좌표: {x}\\\")\\n\",\r\n    \"print(f\\\"y 좌표: {y}\\\")\\n\",\r\n    \"\\n\",\r\n    \"# 학생 정보 언패킹\\n\",\r\n    \"student_info = ('이영희', 19, 'B+')\\n\",\r\n    \"name, age, grade = student_info\\n\",\r\n    \"print(f\\\"이름: {name}, 나이: {age}, 성적: {grade}\\\")\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"# * 사용한 언패킹\\n\",\r\n    \"rgb_color = (255, 128, 64, 32, 16)  # RGB + 추가 정보\\n\",\r\n    \"red, green, blue, *others = rgb_color\\n\",\r\n    \"print(f\\\"빨강: {red}, 초록: {green}, 파랑: {blue}\\\")\\n\",\r\n    \"print(f\\\"기타: {others}\\\")\\n\",\r\n    \"\\n\",\r\n    \"# 함수에서 여러 값 반환할 때 자주 사용됨\\n\",\r\n    \"def get_name_age():\\n\",\r\n    \"    return '박민수', 25  # 자동으로 tuple이 됨\\n\",\r\n    \"\\n\",\r\n    \"student_name, student_age = get_name_age()\\n\",\r\n    \"print(f\\\"학생: {student_name}, 나이: {student_age}\\\")\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"metadata\": {},\r\n   \"cell_type\": \"markdown\",\r\n   \"source\": [\r\n    \"### 1.3. 빌트인 함수들과 `tuple` 조합\\n\",\r\n    \"\\n\",\r\n    \"Tuple은 불변이므로 List처럼 많은 메서드를 제공하지 않지만, 몇 가지 유용한 빌트인 함수들을 사용할 수 있다.\"\r\n   ]\r\n  },\r\n  {\r\n   \"metadata\": {},\r\n   \"cell_type\": \"code\",\r\n   \"source\": [\r\n    \"# 기본 빌트인 함수들\\n\",\r\n    \"numbers = (3, 1, 4, 1, 5, 9, 2, 6)\\n\",\r\n    \"colors = ('red', 'green', 'blue', 'red', 'yellow')\\n\",\r\n    \"\\n\",\r\n    \"# 길이 구하기\\n\",\r\n    \"print(\\\"숫자 tuple 길이:\\\", len(numbers))\\n\",\r\n    \"print(\\\"색상 tuple 길이:\\\", len(colors))\\n\",\r\n    \"\\n\",\r\n    \"# 최대값, 최소값\\n\",\r\n    \"print(\\\"최대값:\\\", max(numbers))\\n\",\r\n    \"print(\\\"최소값:\\\", min(numbers))\\n\",\r\n    \"\\n\",\r\n    \"# 합계 (숫자 tuple만 가능)\\n\",\r\n    \"print(\\\"합계:\\\", sum(numbers))\\n\",\r\n    \"\\n\",\r\n    \"# 정렬된 리스트 반환 (원본은 변경되지 않음)\\n\",\r\n    \"print(\\\"원본:\\\", numbers)\\n\",\r\n    \"print(\\\"정렬된 리스트:\\\", sorted(numbers))\\n\",\r\n    \"print(\\\"내림차순 정렬:\\\", sorted(numbers, reverse=True))\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"source\": \"# Tuple 전용 메서드들\\nnumbers = (1, 2, 3, 2, 4, 2, 5)\\nfruits = ('apple', 'banana', 'apple', 'orange', 'apple')\\n\\n# count() - 특정 요소의 개수 세기\\nprint(\\\"2의 개수:\\\", numbers.count(2))\\nprint(\\\"apple의 개수:\\\", fruits.count('apple'))\\nprint(\\\"grape의 개수:\\\", fruits.count('grape'))  # 없으면 0\\n\\n# index() - 특정 요소의 첫 번째 인덱스 찾기\\nprint(\\\"2의 첫 번째 위치:\\\", numbers.index(2))\\nprint(\\\"apple의 첫 번째 위치:\\\", fruits.index('apple'))\\n\\n# index() 범위 지정 (시작, 끝)\\nprint(\\\"두 번째 2의 위치:\\\", numbers.index(2, 2))  # 인덱스 2부터 찾기\\n\\n# 없는 요소 찾으면 오류 발생\\n# print(numbers.index(10))  # ValueError 발생!\",\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"source\": \"# in 연산자와 기타 유용한 연산들\\ncoordinates = (10, 20, 30)\\ncolors = ('red', 'green', 'blue')\\n\\n# in 연산자 - 포함 여부 확인\\nprint(\\\"20이 좌표에 있나?\\\", 20 in coordinates)\\nprint(\\\"50이 좌표에 있나?\\\", 50 in coordinates)\\nprint(\\\"red가 색상에 있나?\\\", 'red' in colors)\\n\\n# not in 연산자\\nprint(\\\"purple이 색상에 없나?\\\", 'purple' not in colors)\\n\\n# tuple() 함수 - 다른 자료형을 tuple로 변환\\nstring = \\\"hello\\\"\\nlist_data = [1, 2, 3, 4, 5]\\nrange_data = range(1, 6)\\n\\nprint(\\\"문자열을 tuple로:\\\", tuple(string))\\nprint(\\\"리스트를 tuple로:\\\", tuple(list_data))\\nprint(\\\"range를 tuple로:\\\", tuple(range_data))\\n\\n# enumerate() - 인덱스와 값을 함께 얻기\\nfor index, value in enumerate(colors):\\n    print(f\\\"{index}: {value}\\\")\",\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": \"### 1.4. Tuple 이해하기\\n\\nTuple을 깊이 이해하기 위해 List와의 차이점, 사용 시기, 성능 특성을 알아보자.\\n\\n#### 1.4.1. List와 Tuple의 차이점\\n\\n가장 중요한 차이점은 tuple은 **불변(immutable)**이라는 것이다. 한 번 만들면 내용을 바꿀 수 없다.\"\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"# 리스트는 변경 가능\\n\",\r\n    \"my_list = [1, 2, 3]\\n\",\r\n    \"print(\\\"원본 리스트:\\\", my_list)\\n\",\r\n    \"\\n\",\r\n    \"my_list[0] = 100  # 첫 번째 요소 변경 가능\\n\",\r\n    \"my_list.append(4)  # 새 요소 추가 가능\\n\",\r\n    \"print(\\\"변경된 리스트:\\\", my_list)\\n\",\r\n    \"\\n\",\r\n    \"# Tuple은 변경 불가능\\n\",\r\n    \"my_tuple = (1, 2, 3)\\n\",\r\n    \"print(\\\"원본 tuple:\\\", my_tuple)\\n\",\r\n    \"\\n\",\r\n    \"# my_tuple[0] = 100  # 오류! tuple은 변경 불가\\n\",\r\n    \"# my_tuple.append(4)  # 오류! append 메서드도 없음\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"# 하지만 읽기는 가능\\n\",\r\n    \"point = (100, 200)\\n\",\r\n    \"print(\\\"x 좌표:\\\", point[0])\\n\",\r\n    \"print(\\\"y 좌표:\\\", point[1])\\n\",\r\n    \"\\n\",\r\n    \"# 슬라이싱도 가능\\n\",\r\n    \"numbers = (1, 2, 3, 4, 5)\\n\",\r\n    \"print(\\\"앞의 3개:\\\", numbers[:3])\\n\",\r\n    \"print(\\\"뒤의 2개:\\\", numbers[-2:])\\n\",\r\n    \"\\n\",\r\n    \"# len(), in 연산자도 사용 가능\\n\",\r\n    \"print(\\\"길이:\\\", len(numbers))\\n\",\r\n    \"print(\\\"3이 있나?\\\", 3 in numbers)\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"cell_type\": \"markdown\",\r\n   \"metadata\": {},\r\n   \"source\": \"#### 1.4.2. Tuple을 언제 사용하는가\\n\\nTuple은 **변경되지 않아야 하는 데이터**를 저장할 때 사용한다. 다음과 같은 경우에 유용하다:\\n\\n1. **좌표**: (x, y), (x, y, z)\\n2. **RGB 색상**: (red, green, blue)\\n3. **날짜**: (년, 월, 일)\\n4. **고정된 설정값**: (가로, 세로, 깊이)\\n5. **함수에서 여러 값 반환**할 때\"\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"metadata\": {},\r\n   \"source\": [\r\n    \"# 실제 사용 예시들\\n\",\r\n    \"# 1. 좌표 저장\\n\",\r\n    \"player_position = (50, 100)\\n\",\r\n    \"enemy_position = (200, 300)\\n\",\r\n    \"\\n\",\r\n    \"# 2. 색상 정의\\n\",\r\n    \"RED = (255, 0, 0)\\n\",\r\n    \"GREEN = (0, 255, 0)\\n\",\r\n    \"BLUE = (0, 0, 255)\\n\",\r\n    \"\\n\",\r\n    \"# 3. 게임 캐릭터 상태 (변경되지 않는 기본 정보)\\n\",\r\n    \"character_stats = (100, 50, 25)  # 체력, 마나, 공격력\\n\",\r\n    \"hp, mp, attack = character_stats\\n\",\r\n    \"\\n\",\r\n    \"print(f\\\"캐릭터 상태 - 체력: {hp}, 마나: {mp}, 공격력: {attack}\\\")\\n\",\r\n    \"\\n\",\r\n    \"# 4. 설정 정보\\n\",\r\n    \"SCREEN_SIZE = (800, 600)\\n\",\r\n    \"width, height = SCREEN_SIZE\\n\",\r\n    \"print(f\\\"화면 크기: {width}x{height}\\\")\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"cell_type\": \"code\",\r\n   \"source\": [\r\n    \"# 100만건 데이터로 메모리 사용량 비교\\n\",\r\n    \"import sys\\n\",\r\n    \"import time\\n\",\r\n    \"import random\\n\",\r\n    \"\\n\",\r\n    \"# 100만개의 랜덤 실수 데이터 생성\\n\",\r\n    \"data_size = 10000000\\n\",\r\n    \"print(f\\\"=== {data_size:,}건 랜덤 실수 데이터 비교 ===\\\")\\n\",\r\n    \"\\n\",\r\n    \"# 랜덤 실수 데이터 생성 (0.0 ~ 1000.0 범위)\\n\",\r\n    \"random_floats = [random.uniform(0.0, 1000.0) for _ in range(data_size)]\\n\",\r\n    \"\\n\",\r\n    \"# 랜덤 튜플 데이터 생성\\n\",\r\n    \"random_tuples = tuple(zip(\\n\",\r\n    \"    [random.uniform(0.0, 1000.0) for _ in range(data_size)],))\\n\"\r\n   ],\r\n   \"metadata\": {},\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"metadata\": {},\r\n   \"cell_type\": \"code\",\r\n   \"source\": [\r\n    \"# 2. 읽기 속도 비교 (순회)\\n\",\r\n    \"print(\\\"\\\\\\\\n2. 순회 속도 비교:\\\")\\n\",\r\n    \"\\n\",\r\n    \"# Tuple 순회 시간 측정\\n\",\r\n    \"start_time = time.time()\\n\",\r\n    \"total = 0\\n\",\r\n    \"for item in random_tuples:\\n\",\r\n    \"    total += 1\\n\",\r\n    \"tuple_time = time.time() - start_time\\n\",\r\n    \"\\n\",\r\n    \"# List 순회 시간 측정\\n\",\r\n    \"start_time = time.time()\\n\",\r\n    \"total = 0\\n\",\r\n    \"for item in random_floats:\\n\",\r\n    \"    total += 1\\n\",\r\n    \"list_time = time.time() - start_time\\n\",\r\n    \"\\n\",\r\n    \"print(f\\\"Tuple 순회 시간: {tuple_time:.4f}초\\\")\\n\",\r\n    \"print(f\\\"List 순회 시간:  {list_time:.4f}초\\\")\\n\",\r\n    \"if tuple_time < list_time:\\n\",\r\n    \"    print(f\\\"Tuple이 {(list_time/tuple_time-1)*100:.1f}% 빠름\\\")\\n\",\r\n    \"else:\\n\",\r\n    \"    print(f\\\"List가 {(tuple_time/list_time-1)*100:.1f}% 빠름\\\")\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"metadata\": {},\r\n   \"cell_type\": \"code\",\r\n   \"source\": [\r\n    \"# 3. 인덱싱 속도 비교\\n\",\r\n    \"print(\\\"\\\\\\\\n3. 인덱싱 속도 비교:\\\")\\n\",\r\n    \"\\n\",\r\n    \"# Tuple 인덱싱 시간 측정 (100만번 랜덤 접근)\\n\",\r\n    \"import random\\n\",\r\n    \"indices = [random.randint(0, data_size-1) for _ in range(data_size)]\\n\",\r\n    \"\\n\",\r\n    \"start_time = time.time()\\n\",\r\n    \"for i in indices:\\n\",\r\n    \"    value = random_tuples[i]\\n\",\r\n    \"tuple_index_time = time.time() - start_time\\n\",\r\n    \"\\n\",\r\n    \"# List 인덱싱 시간 측정 (같은 인덱스들로)\\n\",\r\n    \"start_time = time.time()\\n\",\r\n    \"for i in indices:\\n\",\r\n    \"    value = random_floats[i]\\n\",\r\n    \"list_index_time = time.time() - start_time\\n\",\r\n    \"\\n\",\r\n    \"print(f\\\"Tuple 인덱싱 시간: {tuple_index_time:.4f}초\\\")\\n\",\r\n    \"print(f\\\"List 인덱싱 시간:  {list_index_time:.4f}초\\\")\\n\",\r\n    \"if tuple_index_time < list_index_time:\\n\",\r\n    \"    print(f\\\"Tuple이 {(list_index_time/tuple_index_time-1)*100:.1f}% 빠름\\\")\\n\",\r\n    \"else:\\n\",\r\n    \"    print(f\\\"List가 {(tuple_index_time/list_index_time-1)*100:.1f}% 빠름\\\")\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"metadata\": {},\r\n   \"cell_type\": \"code\",\r\n   \"source\": [\r\n    \"# 4. 결론\\n\",\r\n    \"print(\\\"\\\\\\\\n=== 결론 ===\\\")\\n\",\r\n    \"print(\\\"✅ Tuple의 장점:\\\")\\n\",\r\n    \"print(\\\"   - 캐싱 가능해서 재사용시 빨라짐 - 처음엔 느림\\\")\\n\",\r\n    \"print(\\\"   - 불변이므로 안전하고 예측 가능\\\")\\n\",\r\n    \"print(\\\"   - 딕셔너리 키로 사용 가능\\\")\\n\",\r\n    \"print()\\n\",\r\n    \"print(\\\"✅ List의 장점:\\\")\\n\",\r\n    \"print(\\\"   - 내용 변경 가능 (append, remove 등)\\\")\\n\",\r\n    \"print(\\\"   - 동적 크기 조절 가능\\\")\\n\",\r\n    \"print(\\\"   - 다양한 메서드 제공\\\")\\n\",\r\n    \"print(\\\"   - 순회 작업이 빠름\\\")\\n\",\r\n    \"print()\\n\",\r\n    \"print(\\\"\uD83D\uDCA1 사용 권장:\\\")\\n\",\r\n    \"print(\\\"   - 변경하지 않을 데이터 → Tuple\\\")\\n\",\r\n    \"print(\\\"   - 변경해야 하는 데이터 → List\\\")\"\r\n   ],\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"metadata\": {},\r\n   \"cell_type\": \"code\",\r\n   \"source\": \"'바나나' in ('망고', '바나나')\",\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  },\r\n  {\r\n   \"metadata\": {},\r\n   \"cell_type\": \"code\",\r\n   \"source\": \"\",\r\n   \"outputs\": [],\r\n   \"execution_count\": null\r\n  }\r\n ],\r\n \"metadata\": {\r\n  \"kernelspec\": {\r\n   \"display_name\": \"Python 3\",\r\n   \"language\": \"python\",\r\n   \"name\": \"python3\"\r\n  },\r\n  \"language_info\": {\r\n   \"codemirror_mode\": {\r\n    \"name\": \"ipython\",\r\n    \"version\": 3\r\n   },\r\n   \"file_extension\": \".py\",\r\n   \"mimetype\": \"text/x-python\",\r\n   \"name\": \"python\",\r\n   \"nbconvert_exporter\": \"python\",\r\n   \"pygments_lexer\": \"ipython3\",\r\n   \"version\": \"3.8.5\"\r\n  }\r\n },\r\n \"nbformat\": 4,\r\n \"nbformat_minor\": 4\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lecture-basic/Python Basic Lecture 7 - Tuple.ipynb b/lecture-basic/Python Basic Lecture 7 - Tuple.ipynb
+--- a/lecture-basic/Python Basic Lecture 7 - Tuple.ipynb	(revision 16032dc70989fecad21239170ccbe8c181e65b4c)
++++ b/lecture-basic/Python Basic Lecture 7 - Tuple.ipynb	(date 1760754519012)
+@@ -1,495 +1,389 @@
+-{
+- "cells": [
+-  {
+-   "cell_type": "markdown",
+-   "metadata": {},
+-   "source": [
+-    "# 복습 키워드\n",
+-    "\n",
+-    "1. `print()` 출력함수\n",
+-    "2. `print(sep: str, end: str)` 출력함수의 키워드 파라메터\n",
+-    "3. `f-string` 문법\n",
+-    "4. `\"str\".builtin()` 기본적인 문자열 빌트인 함수들\n",
+-    "    - `\"str\".upper()` 대문자로 변환\n",
+-    "    - `\"str\".lower()` 소문자로 변환\n",
+-    "    - `\"str\".capitalize()` 첫 글자만 대문자로 변환\n",
+-    "    - `\"str\".replace(old:str, new:str)` 특정 문자열 교체\n",
+-    "    - `\"str\".strip()` 양쪽 공백 제거\n",
+-    "    - `\"str\".lstrip()` 왼쪽 공백 제거\n",
+-    "    - `\"str\".rstrip()` 오른쪽 공백 제거\n",
+-    "5. list 자료형 선언과 사용법\n",
+-    "    - `list = [1, 2, 3]` 리스트 선언\n",
+-    "    - `print(list)` 리스트 출력\n",
+-    "    - `list(\"str\")` 문자열을 리스트로 변환\n",
+-    "    - `\"str\".split(sep: str)` 문자열을 리스트로 변환\n",
+-    "    - `list[a:b]` 리스트 슬라이싱\n",
+-    "6. `*list` 언패킹\n",
+-    "7. `[].builtin()` 리스트 빌트인 함수들\n",
+-    "    - `[].append(any)` 리스트에 요소 추가\n",
+-    "    - `[].insert(index:int, any)` 리스트 특정 위치에 요소 추가\n",
+-    "    - `[].extend(list)` 리스트에 다른 리스트 요소 추가\n",
+-    "    - `[].remove(any)` 리스트에서 요소 제거\n",
+-    "    - `[].pop()` 리스트 마지막 요소 제거\n",
+-    "    - `[].clear()` 리스트 비우기\n",
+-    "    - `[].index(any)` 리스트에서 요소의 인덱스 찾기\n",
+-    "    - `[].count(any)` 리스트에서 요소의 개수 세기\n",
+-    "    - `[].sort()` 리스트 정렬\n",
+-    "    - `[].reverse()` 리스트 역순 정렬\n",
+-    "    - `[].copy()` 리스트 복사\n",
+-    "8. `input()` 입력 함수\n",
+-    "9. `type()` 자료형 확인 함수\n",
+-    "10. 자료형 변환 (캐스팅)\n",
+-    "    - `int()` 정수로 변환\n",
+-    "    - `float()` 실수로 변환\n",
+-    "    - `str()` 문자열로 변환\n",
+-    "    - `list()` 리스트로 변환\n",
+-    "11. 비교 연산자와 조건문\n",
+-    "    - `==, !=, >, <, >=, <=` 비교 연산자\n",
+-    "    - `if, elif, else` 조건문\n",
+-    "    - `and, or, not` 논리 연산자\n",
+-    "    - `in` 포함 연산자"
+-   ]
+-  },
+-  {
+-   "metadata": {},
+-   "cell_type": "code",
+-   "source": "a = input()",
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "metadata": {},
+-   "cell_type": "code",
+-   "source": [
+-    "alist = 'x y z'.split()\n",
+-    "blist = 'a b c d'.split()\n",
+-    "\n",
+-    "for i, v in enumerate(zip(alist, blist)):\n",
+-    "    a, b = v\n",
+-    "    print(v, \"->\", a, b)"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "cell_type": "markdown",
+-   "metadata": {},
+-   "source": [
+-    "# Python Basic Lecture 7: Tuple 자료형\n",
+-    "\n",
+-    "이번 단원에서는 새로운 자료형인 tuple을 배운다.\n",
+-    "\n",
+-    "Tuple은 좌표, 상태 정보 등을 저장할 때 유용하다."
+-   ]
+-  },
+-  {
+-   "cell_type": "markdown",
+-   "metadata": {},
+-   "source": "## 1. Tuple 자료형\n\n이번 시간에는 새로운 자료형인 tuple을 배운다. 지금까지 배운 자료형은 문자열`string`, 정수`int`, 실수`float`, 리스트`list`이다.\n\nTuple은 리스트와 비슷하지만 중요한 차이점이 있다. 한 번 만들면 변경할 수 없다는 점이다. 이런 특성을 **불변(immutable)**이라고 한다.\n\n구체적인 내용은 다음 네 가지이다:\n\n1. Tuple 선언하기\n2. Tuple 언패킹하기\n3. Tuple 빌트인 함수들\n4. Tuple 이해하기"
+-  },
+-  {
+-   "cell_type": "markdown",
+-   "metadata": {},
+-   "source": [
+-    "### 1.1. Tuple 선언하기\n",
+-    "\n",
+-    "Tuple은 소괄호 `()`를 사용해서 선언한다. 리스트가 대괄호 `[]`를 쓰는 것과 대비된다."
+-   ]
+-  },
+-  {
+-   "metadata": {},
+-   "cell_type": "code",
+-   "source": [
+-    "alist = [1,]\n",
+-    "atuple = (1,2)"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "cell_type": "code",
+-   "metadata": {},
+-   "source": [
+-    "# 기본 tuple 선언\n",
+-    "point = (10, 20)  # 좌표 (x, y)\n",
+-    "color = (255, 128, 0)  # RGB 색상\n",
+-    "student = ('김철수', 20, 'A')  # 이름, 나이, 등급\n",
+-    "\n",
+-    "print(\"좌표:\", point)\n",
+-    "print(\"색상:\", color)\n",
+-    "print(\"학생 정보:\", student)"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "cell_type": "code",
+-   "metadata": {},
+-   "source": [
+-    "# 빈 tuple과 요소 하나인 tuple\n",
+-    "empty_tuple = ()  # 빈 tuple\n",
+-    "single_tuple = (42,)  # 요소 하나 - 콤마가 중요!\n",
+-    "\n",
+-    "print(\"빈 tuple:\", empty_tuple)\n",
+-    "print(\"하나 tuple:\", single_tuple)\n",
+-    "\n",
+-    "# 콤마 없으면 그냥 괄호로 인식됨\n",
+-    "not_tuple = (42)  # 이건 그냥 숫자 42\n",
+-    "print(\"이건 tuple이 아님:\", type(not_tuple))"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "cell_type": "code",
+-   "metadata": {},
+-   "source": [
+-    "# 괄호 없이도 tuple 만들 수 있음\n",
+-    "coordinates = 100, 200  # 이것도 tuple\n",
+-    "print(\"좌표:\", coordinates)\n",
+-    "print(\"타입:\", type(coordinates))\n",
+-    "\n",
+-    "# 리스트를 tuple로 변환\n",
+-    "my_list = [1, 2, 3, 4, 5]\n",
+-    "my_tuple = tuple(my_list)\n",
+-    "print(\"원본 리스트:\", my_list)\n",
+-    "print(\"변환된 tuple:\", my_tuple)"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "metadata": {},
+-   "cell_type": "code",
+-   "source": [
+-    "xx = tuple(list(tuple('홍길동 남자 문어'.split())))\n",
+-    "xx"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "cell_type": "markdown",
+-   "metadata": {},
+-   "source": [
+-    "### 1.2. Tuple 언패킹하기\n",
+-    "\n",
+-    "Tuple의 각 요소를 개별 변수에 할당하는 것을 언패킹이라고 한다. 리스트 언패킹과 똑같은 방법이다."
+-   ]
+-  },
+-  {
+-   "cell_type": "code",
+-   "metadata": {},
+-   "source": [
+-    "# 기본 언패킹\n",
+-    "point = (10, 20)\n",
+-    "x, y = point\n",
+-    "print(f\"x 좌표: {x}\")\n",
+-    "print(f\"y 좌표: {y}\")\n",
+-    "\n",
+-    "# 학생 정보 언패킹\n",
+-    "student_info = ('이영희', 19, 'B+')\n",
+-    "name, age, grade = student_info\n",
+-    "print(f\"이름: {name}, 나이: {age}, 성적: {grade}\")"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "cell_type": "code",
+-   "metadata": {},
+-   "source": [
+-    "# * 사용한 언패킹\n",
+-    "rgb_color = (255, 128, 64, 32, 16)  # RGB + 추가 정보\n",
+-    "red, green, blue, *others = rgb_color\n",
+-    "print(f\"빨강: {red}, 초록: {green}, 파랑: {blue}\")\n",
+-    "print(f\"기타: {others}\")\n",
+-    "\n",
+-    "# 함수에서 여러 값 반환할 때 자주 사용됨\n",
+-    "def get_name_age():\n",
+-    "    return '박민수', 25  # 자동으로 tuple이 됨\n",
+-    "\n",
+-    "student_name, student_age = get_name_age()\n",
+-    "print(f\"학생: {student_name}, 나이: {student_age}\")"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "metadata": {},
+-   "cell_type": "markdown",
+-   "source": [
+-    "### 1.3. 빌트인 함수들과 `tuple` 조합\n",
+-    "\n",
+-    "Tuple은 불변이므로 List처럼 많은 메서드를 제공하지 않지만, 몇 가지 유용한 빌트인 함수들을 사용할 수 있다."
+-   ]
+-  },
+-  {
+-   "metadata": {},
+-   "cell_type": "code",
+-   "source": [
+-    "# 기본 빌트인 함수들\n",
+-    "numbers = (3, 1, 4, 1, 5, 9, 2, 6)\n",
+-    "colors = ('red', 'green', 'blue', 'red', 'yellow')\n",
+-    "\n",
+-    "# 길이 구하기\n",
+-    "print(\"숫자 tuple 길이:\", len(numbers))\n",
+-    "print(\"색상 tuple 길이:\", len(colors))\n",
+-    "\n",
+-    "# 최대값, 최소값\n",
+-    "print(\"최대값:\", max(numbers))\n",
+-    "print(\"최소값:\", min(numbers))\n",
+-    "\n",
+-    "# 합계 (숫자 tuple만 가능)\n",
+-    "print(\"합계:\", sum(numbers))\n",
+-    "\n",
+-    "# 정렬된 리스트 반환 (원본은 변경되지 않음)\n",
+-    "print(\"원본:\", numbers)\n",
+-    "print(\"정렬된 리스트:\", sorted(numbers))\n",
+-    "print(\"내림차순 정렬:\", sorted(numbers, reverse=True))"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "cell_type": "code",
+-   "source": "# Tuple 전용 메서드들\nnumbers = (1, 2, 3, 2, 4, 2, 5)\nfruits = ('apple', 'banana', 'apple', 'orange', 'apple')\n\n# count() - 특정 요소의 개수 세기\nprint(\"2의 개수:\", numbers.count(2))\nprint(\"apple의 개수:\", fruits.count('apple'))\nprint(\"grape의 개수:\", fruits.count('grape'))  # 없으면 0\n\n# index() - 특정 요소의 첫 번째 인덱스 찾기\nprint(\"2의 첫 번째 위치:\", numbers.index(2))\nprint(\"apple의 첫 번째 위치:\", fruits.index('apple'))\n\n# index() 범위 지정 (시작, 끝)\nprint(\"두 번째 2의 위치:\", numbers.index(2, 2))  # 인덱스 2부터 찾기\n\n# 없는 요소 찾으면 오류 발생\n# print(numbers.index(10))  # ValueError 발생!",
+-   "metadata": {},
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "cell_type": "code",
+-   "source": "# in 연산자와 기타 유용한 연산들\ncoordinates = (10, 20, 30)\ncolors = ('red', 'green', 'blue')\n\n# in 연산자 - 포함 여부 확인\nprint(\"20이 좌표에 있나?\", 20 in coordinates)\nprint(\"50이 좌표에 있나?\", 50 in coordinates)\nprint(\"red가 색상에 있나?\", 'red' in colors)\n\n# not in 연산자\nprint(\"purple이 색상에 없나?\", 'purple' not in colors)\n\n# tuple() 함수 - 다른 자료형을 tuple로 변환\nstring = \"hello\"\nlist_data = [1, 2, 3, 4, 5]\nrange_data = range(1, 6)\n\nprint(\"문자열을 tuple로:\", tuple(string))\nprint(\"리스트를 tuple로:\", tuple(list_data))\nprint(\"range를 tuple로:\", tuple(range_data))\n\n# enumerate() - 인덱스와 값을 함께 얻기\nfor index, value in enumerate(colors):\n    print(f\"{index}: {value}\")",
+-   "metadata": {},
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "cell_type": "markdown",
+-   "metadata": {},
+-   "source": "### 1.4. Tuple 이해하기\n\nTuple을 깊이 이해하기 위해 List와의 차이점, 사용 시기, 성능 특성을 알아보자.\n\n#### 1.4.1. List와 Tuple의 차이점\n\n가장 중요한 차이점은 tuple은 **불변(immutable)**이라는 것이다. 한 번 만들면 내용을 바꿀 수 없다."
+-  },
+-  {
+-   "cell_type": "code",
+-   "metadata": {},
+-   "source": [
+-    "# 리스트는 변경 가능\n",
+-    "my_list = [1, 2, 3]\n",
+-    "print(\"원본 리스트:\", my_list)\n",
+-    "\n",
+-    "my_list[0] = 100  # 첫 번째 요소 변경 가능\n",
+-    "my_list.append(4)  # 새 요소 추가 가능\n",
+-    "print(\"변경된 리스트:\", my_list)\n",
+-    "\n",
+-    "# Tuple은 변경 불가능\n",
+-    "my_tuple = (1, 2, 3)\n",
+-    "print(\"원본 tuple:\", my_tuple)\n",
+-    "\n",
+-    "# my_tuple[0] = 100  # 오류! tuple은 변경 불가\n",
+-    "# my_tuple.append(4)  # 오류! append 메서드도 없음"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "cell_type": "code",
+-   "metadata": {},
+-   "source": [
+-    "# 하지만 읽기는 가능\n",
+-    "point = (100, 200)\n",
+-    "print(\"x 좌표:\", point[0])\n",
+-    "print(\"y 좌표:\", point[1])\n",
+-    "\n",
+-    "# 슬라이싱도 가능\n",
+-    "numbers = (1, 2, 3, 4, 5)\n",
+-    "print(\"앞의 3개:\", numbers[:3])\n",
+-    "print(\"뒤의 2개:\", numbers[-2:])\n",
+-    "\n",
+-    "# len(), in 연산자도 사용 가능\n",
+-    "print(\"길이:\", len(numbers))\n",
+-    "print(\"3이 있나?\", 3 in numbers)"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "cell_type": "markdown",
+-   "metadata": {},
+-   "source": "#### 1.4.2. Tuple을 언제 사용하는가\n\nTuple은 **변경되지 않아야 하는 데이터**를 저장할 때 사용한다. 다음과 같은 경우에 유용하다:\n\n1. **좌표**: (x, y), (x, y, z)\n2. **RGB 색상**: (red, green, blue)\n3. **날짜**: (년, 월, 일)\n4. **고정된 설정값**: (가로, 세로, 깊이)\n5. **함수에서 여러 값 반환**할 때"
+-  },
+-  {
+-   "cell_type": "code",
+-   "metadata": {},
+-   "source": [
+-    "# 실제 사용 예시들\n",
+-    "# 1. 좌표 저장\n",
+-    "player_position = (50, 100)\n",
+-    "enemy_position = (200, 300)\n",
+-    "\n",
+-    "# 2. 색상 정의\n",
+-    "RED = (255, 0, 0)\n",
+-    "GREEN = (0, 255, 0)\n",
+-    "BLUE = (0, 0, 255)\n",
+-    "\n",
+-    "# 3. 게임 캐릭터 상태 (변경되지 않는 기본 정보)\n",
+-    "character_stats = (100, 50, 25)  # 체력, 마나, 공격력\n",
+-    "hp, mp, attack = character_stats\n",
+-    "\n",
+-    "print(f\"캐릭터 상태 - 체력: {hp}, 마나: {mp}, 공격력: {attack}\")\n",
+-    "\n",
+-    "# 4. 설정 정보\n",
+-    "SCREEN_SIZE = (800, 600)\n",
+-    "width, height = SCREEN_SIZE\n",
+-    "print(f\"화면 크기: {width}x{height}\")"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "cell_type": "code",
+-   "source": [
+-    "# 100만건 데이터로 메모리 사용량 비교\n",
+-    "import sys\n",
+-    "import time\n",
+-    "import random\n",
+-    "\n",
+-    "# 100만개의 랜덤 실수 데이터 생성\n",
+-    "data_size = 10000000\n",
+-    "print(f\"=== {data_size:,}건 랜덤 실수 데이터 비교 ===\")\n",
+-    "\n",
+-    "# 랜덤 실수 데이터 생성 (0.0 ~ 1000.0 범위)\n",
+-    "random_floats = [random.uniform(0.0, 1000.0) for _ in range(data_size)]\n",
+-    "\n",
+-    "# 랜덤 튜플 데이터 생성\n",
+-    "random_tuples = tuple(zip(\n",
+-    "    [random.uniform(0.0, 1000.0) for _ in range(data_size)],))\n"
+-   ],
+-   "metadata": {},
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "metadata": {},
+-   "cell_type": "code",
+-   "source": [
+-    "# 2. 읽기 속도 비교 (순회)\n",
+-    "print(\"\\\\n2. 순회 속도 비교:\")\n",
+-    "\n",
+-    "# Tuple 순회 시간 측정\n",
+-    "start_time = time.time()\n",
+-    "total = 0\n",
+-    "for item in random_tuples:\n",
+-    "    total += 1\n",
+-    "tuple_time = time.time() - start_time\n",
+-    "\n",
+-    "# List 순회 시간 측정\n",
+-    "start_time = time.time()\n",
+-    "total = 0\n",
+-    "for item in random_floats:\n",
+-    "    total += 1\n",
+-    "list_time = time.time() - start_time\n",
+-    "\n",
+-    "print(f\"Tuple 순회 시간: {tuple_time:.4f}초\")\n",
+-    "print(f\"List 순회 시간:  {list_time:.4f}초\")\n",
+-    "if tuple_time < list_time:\n",
+-    "    print(f\"Tuple이 {(list_time/tuple_time-1)*100:.1f}% 빠름\")\n",
+-    "else:\n",
+-    "    print(f\"List가 {(tuple_time/list_time-1)*100:.1f}% 빠름\")"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "metadata": {},
+-   "cell_type": "code",
+-   "source": [
+-    "# 3. 인덱싱 속도 비교\n",
+-    "print(\"\\\\n3. 인덱싱 속도 비교:\")\n",
+-    "\n",
+-    "# Tuple 인덱싱 시간 측정 (100만번 랜덤 접근)\n",
+-    "import random\n",
+-    "indices = [random.randint(0, data_size-1) for _ in range(data_size)]\n",
+-    "\n",
+-    "start_time = time.time()\n",
+-    "for i in indices:\n",
+-    "    value = random_tuples[i]\n",
+-    "tuple_index_time = time.time() - start_time\n",
+-    "\n",
+-    "# List 인덱싱 시간 측정 (같은 인덱스들로)\n",
+-    "start_time = time.time()\n",
+-    "for i in indices:\n",
+-    "    value = random_floats[i]\n",
+-    "list_index_time = time.time() - start_time\n",
+-    "\n",
+-    "print(f\"Tuple 인덱싱 시간: {tuple_index_time:.4f}초\")\n",
+-    "print(f\"List 인덱싱 시간:  {list_index_time:.4f}초\")\n",
+-    "if tuple_index_time < list_index_time:\n",
+-    "    print(f\"Tuple이 {(list_index_time/tuple_index_time-1)*100:.1f}% 빠름\")\n",
+-    "else:\n",
+-    "    print(f\"List가 {(tuple_index_time/list_index_time-1)*100:.1f}% 빠름\")"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "metadata": {},
+-   "cell_type": "code",
+-   "source": [
+-    "# 4. 결론\n",
+-    "print(\"\\\\n=== 결론 ===\")\n",
+-    "print(\"✅ Tuple의 장점:\")\n",
+-    "print(\"   - 캐싱 가능해서 재사용시 빨라짐 - 처음엔 느림\")\n",
+-    "print(\"   - 불변이므로 안전하고 예측 가능\")\n",
+-    "print(\"   - 딕셔너리 키로 사용 가능\")\n",
+-    "print()\n",
+-    "print(\"✅ List의 장점:\")\n",
+-    "print(\"   - 내용 변경 가능 (append, remove 등)\")\n",
+-    "print(\"   - 동적 크기 조절 가능\")\n",
+-    "print(\"   - 다양한 메서드 제공\")\n",
+-    "print(\"   - 순회 작업이 빠름\")\n",
+-    "print()\n",
+-    "print(\"💡 사용 권장:\")\n",
+-    "print(\"   - 변경하지 않을 데이터 → Tuple\")\n",
+-    "print(\"   - 변경해야 하는 데이터 → List\")"
+-   ],
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "metadata": {},
+-   "cell_type": "code",
+-   "source": "'바나나' in ('망고', '바나나')",
+-   "outputs": [],
+-   "execution_count": null
+-  },
+-  {
+-   "metadata": {},
+-   "cell_type": "code",
+-   "source": "",
+-   "outputs": [],
+-   "execution_count": null
+-  }
+- ],
+- "metadata": {
+-  "kernelspec": {
+-   "display_name": "Python 3",
+-   "language": "python",
+-   "name": "python3"
+-  },
+-  "language_info": {
+-   "codemirror_mode": {
+-    "name": "ipython",
+-    "version": 3
+-   },
+-   "file_extension": ".py",
+-   "mimetype": "text/x-python",
+-   "name": "python",
+-   "nbconvert_exporter": "python",
+-   "pygments_lexer": "ipython3",
+-   "version": "3.8.5"
+-  }
+- },
+- "nbformat": 4,
+- "nbformat_minor": 4
+-}
++#%% md
++# 복습 키워드
++
++1. `print()` 출력함수
++2. `print(sep: str, end: str)` 출력함수의 키워드 파라메터
++3. `f-string` 문법
++4. `"str".builtin()` 기본적인 문자열 빌트인 함수들
++    - `"str".upper()` 대문자로 변환
++    - `"str".lower()` 소문자로 변환
++    - `"str".capitalize()` 첫 글자만 대문자로 변환
++    - `"str".replace(old:str, new:str)` 특정 문자열 교체
++    - `"str".strip()` 양쪽 공백 제거
++    - `"str".lstrip()` 왼쪽 공백 제거
++    - `"str".rstrip()` 오른쪽 공백 제거
++5. list 자료형 선언과 사용법
++    - `list = [1, 2, 3]` 리스트 선언
++    - `print(list)` 리스트 출력
++    - `list("str")` 문자열을 리스트로 변환
++    - `"str".split(sep: str)` 문자열을 리스트로 변환
++    - `list[a:b]` 리스트 슬라이싱
++6. `*list` 언패킹
++7. `[].builtin()` 리스트 빌트인 함수들
++    - `[].append(any)` 리스트에 요소 추가
++    - `[].insert(index:int, any)` 리스트 특정 위치에 요소 추가
++    - `[].extend(list)` 리스트에 다른 리스트 요소 추가
++    - `[].remove(any)` 리스트에서 요소 제거
++    - `[].pop()` 리스트 마지막 요소 제거
++    - `[].clear()` 리스트 비우기
++    - `[].index(any)` 리스트에서 요소의 인덱스
++    - `[].count(any)` 리스트에서 요소의 개수 세기
++    - `[].sort()` 리스트 정렬
++    - `[].reverse()` 리스트 역순 정렬
++    - `[].copy()` 리스트 복사
++8. `input()` 입력 함수
++9. `type()` 자료형 확인 함수
++10. 자료형 변환 (캐스팅)
++    - `int()` 정수로 변환
++    - `float()` 실수로 변환
++    - `str()` 문자열로 변환
++    - `list()` 리스트로 변환
++11. 비교 연산자와 조건문
++    - `==, !=, >, <, >=, <=` 비교 연산자
++    - `if, elif, else` 조건문
++    - `and, or, not` 논리 연산자
++    - `in` 포함 연산자
++#%%
++alist = 'x y z'.split()
++blist = 'a b c d'.split()
++
++for idx, (a, b) in enumerate(zip(alist, blist)):
++    print(idx, a, b)
++#%% md
++# Python Basic Lecture 7: Tuple 자료형
++
++이번 단원에서는 새로운 자료형인 tuple을 배운다.
++
++Tuple은 좌표, 상태 정보 등을 저장할 때 유용하다.
++#%% md
++## 1. Tuple 자료형
++
++이번 시간에는 새로운 자료형인 tuple을 배운다. 지금까지 배운 자료형은 문자열`string`, 정수`int`, 실수`float`, 리스트`list`이다.
++
++Tuple은 리스트와 비슷하지만 중요한 차이점이 있다. 한 번 만들면 변경할 수 없다는 점이다. 이런 특성을 **불변(immutable)**이라고 한다.
++
++구체적인 내용은 다음 네 가지이다:
++
++1. Tuple 선언하기
++2. Tuple 언패킹하기
++3. Tuple 빌트인 함수들
++4. Tuple 이해하기
++#%% md
++### 1.1. Tuple 선언하기
++
++Tuple은 소괄호 `()`를 사용해서 선언한다. 리스트가 대괄호 `[]`를 쓰는 것과 대비된다.
++#%%
++print([1, 2, 3])
++#%%
++# 기본 tuple 선언
++point = (10, 20)  # 좌표 (x, y)
++color = (255, 128, 0)  # RGB 색상
++student = ('김철수', 20, 'A')  # 이름, 나이, 등급
++
++print("좌표:", point)
++print("색상:", color)
++print("학생 정보:", student)
++#%%
++# 빈 tuple과 요소 하나인 tuple
++empty_tuple = ()  # 빈 tuple
++single_tuple = (42,)  # 요소 하나 - 콤마가 중요!
++
++print("빈 tuple:", empty_tuple)
++print("하나 tuple:", single_tuple)
++
++# 콤마 없으면 그냥 괄호로 인식됨
++not_tuple = (42)  # 이건 그냥 숫자 42
++print("이건 tuple이 아님:", type(not_tuple))
++#%%
++# 괄호 없이도 tuple 만들 수 있음
++coordinates = 100, 200  # 이것도 tuple
++print("좌표:", coordinates)
++print("타입:", type(coordinates))
++
++# 리스트를 tuple로 변환
++my_list = [1, 2, 3, 4, 5]
++my_tuple = tuple(my_list)
++print("원본 리스트:", my_list)
++print("변환된 tuple:", my_tuple)
++#%%
++xx = tuple(list(tuple('홍길동 남자 문어'.split())))
++xx = tuple(list(tuple(['홍길동', '남자', '문어'])))
++xx = tuple(['홍길동', '남자', '문어'])
++xx
++#%% md
++### 1.2. Tuple 언패킹하기
++
++Tuple의 각 요소를 개별 변수에 할당하는 것을 언패킹이라고 한다. 리스트 언패킹과 똑같은 방법이다.
++#%%
++# 기본 언패킹
++point = (10, 20)
++x, y = point
++print(f"x 좌표: {x}")
++print(f"y 좌표: {y}")
++
++# 학생 정보 언패킹
++student_info = ('이영희', 19, 'B+')
++name, age, grade = student_info
++print(f"이름: {name}, 나이: {age}, 성적: {grade}")
++#%%
++# * 사용한 언패킹
++rgb_color = (255, 128, 64, 32, 16)  # RGB + 추가 정보
++red, green, blue, *others = rgb_color
++print(f"빨강: {red}, 초록: {green}, 파랑: {blue}")
++print(f"기타: {others}", type(others))
++
++# 함수에서 여러 값 반환할 때 자주 사용됨
++def get_name_age():
++    return '박민수', 25  # 자동으로 tuple이 됨
++
++student_name, student_age = get_name_age()
++print(f"학생: {student_name}, 나이: {student_age}")
++#%% md
++### 1.3. 빌트인 함수들과 `tuple` 조합
++
++Tuple은 불변이므로 List처럼 많은 메서드를 제공하지 않지만, 몇 가지 유용한 빌트인 함수들을 사용할 수 있다.
++#%%
++# 기본 빌트인 함수들
++numbers = (3, 1, 4, 1, 5, 9, 2, 6)
++colors = ('red', 'green', 'blue', 'red', 'yellow')
++
++# 길이 구하기
++print("숫자 tuple 길이:", len(numbers))
++print("색상 tuple 길이:", len(colors))
++
++# 최대값, 최소값
++print("최대값:", max(numbers))
++print("최소값:", min(numbers))
++
++# 합계 (숫자 tuple만 가능)
++print("합계:", sum(numbers))
++
++# 정렬된 리스트 반환 (원본은 변경되지 않음)
++print("원본:", numbers)
++print("정렬된 리스트:", sorted(numbers))
++print("내림차순 정렬:", sorted(numbers, reverse=True))
++#%%
++# Tuple 전용 메서드들
++numbers = (1, 2, 3, 2, 4, 2, 5)
++fruits = ('apple', 'banana', 'apple', 'orange', 'apple')
++
++# count() - 특정 요소의 개수 세기
++print("2의 개수:", numbers.count(2))
++print("apple의 개수:", fruits.count('apple'))
++print("grape의 개수:", fruits.count('grape'))  # 없으면 0
++
++# index() - 특정 요소의 첫 번째 인덱스 찾기
++print("2의 첫 번째 위치:", numbers.index(2))
++print("apple의 첫 번째 위치:", fruits.index('apple'))
++
++# index() 범위 지정 (시작, 끝)
++print("두 번째 2의 위치:", numbers.index(2, 2))  # 인덱스 2부터 찾기
++
++# 없는 요소 찾으면 오류 발생
++# print(numbers.index(10))  # ValueError 발생!
++#%%
++# in 연산자와 기타 유용한 연산들
++coordinates = (10, 20, 30)
++colors = ('red', 'green', 'blue')
++
++# in 연산자 - 포함 여부 확인
++print("20이 좌표에 있나?", 20 in coordinates)
++print("50이 좌표에 있나?", 50 in coordinates)
++print("red가 색상에 있나?", 'red' in colors)
++
++# not in 연산자
++print("purple이 색상에 없나?", 'purple' not in colors)
++
++# tuple() 함수 - 다른 자료형을 tuple로 변환
++string = "hello"
++list_data = [1, 2, 3, 4, 5]
++range_data = range(1, 6)
++
++print("문자열을 tuple로:", tuple(string))
++print("리스트를 tuple로:", tuple(list_data))
++print("range를 tuple로:", tuple(range_data))
++
++# enumerate() - 인덱스와 값을 함께 얻기
++for index, value in enumerate(colors):
++    print(f"{index}: {value}")
++#%%
++at = (1, 2, 3)
++bt = ('a', 'b', 'd')
++
++for idx, (a, b) in enumerate(zip(at, bt)):
++    print(idx, a, b)
++#%% md
++### 1.4. Tuple 이해하기
++
++Tuple을 깊이 이해하기 위해 List와의 차이점, 사용 시기, 성능 특성을 알아보자.
++
++#### 1.4.1. List와 Tuple의 차이점
++
++가장 중요한 차이점은 tuple은 **불변(immutable)**이라는 것이다. 한 번 만들면 내용을 바꿀 수 없다.
++#%%
++# 리스트는 변경 가능
++my_list = [1, 2, 3]
++print("원본 리스트:", my_list)
++
++my_list[0] = 100  # 첫 번째 요소 변경 가능
++my_list.append(4)  # 새 요소 추가 가능
++print("변경된 리스트:", my_list)
++
++# Tuple은 변경 불가능
++my_tuple = (1, 2, 3)
++print("원본 tuple:", my_tuple)
++
++# my_tuple[0] = 100  # 오류! tuple은 변경 불가
++# my_tuple.append(4)  # 오류! append 메서드도 없음
++#%%
++# 하지만 읽기는 가능
++point = (100, 200)
++print("x 좌표:", point[0])
++print("y 좌표:", point[1])
++
++# 슬라이싱도 가능
++numbers = (1, 2, 3, 4, 5)
++print("앞의 3개:", numbers[:3])
++print("뒤의 2개:", numbers[-2:])
++
++# len(), in 연산자도 사용 가능
++print("길이:", len(numbers))
++print("3이 있나?", 3 in numbers)
++#%% md
++#### 1.4.2. Tuple을 언제 사용하는가
++
++Tuple은 **변경되지 않아야 하는 데이터**를 저장할 때 사용한다. 다음과 같은 경우에 유용하다:
++
++1. **좌표**: (x, y), (x, y, z)
++2. **RGB 색상**: (red, green, blue)
++3. **날짜**: (년, 월, 일)
++4. **고정된 설정값**: (가로, 세로, 깊이)
++5. **함수에서 여러 값 반환**할 때
++#%%
++# 실제 사용 예시들
++# 1. 좌표 저장
++player_position = (50, 100)
++enemy_position = (200, 300)
++
++# 2. 색상 정의
++RED = (255, 0, 0)
++GREEN = (0, 255, 0)
++BLUE = (0, 0, 255)
++
++# 3. 게임 캐릭터 상태 (변경되지 않는 기본 정보)
++character_stats = (100, 50, 25)  # 체력, 마나, 공격력
++hp, mp, attack = character_stats
++
++print(f"캐릭터 상태 - 체력: {hp}, 마나: {mp}, 공격력: {attack}")
++
++# 4. 설정 정보
++SCREEN_SIZE = (800, 600)
++width, height = SCREEN_SIZE
++print(f"화면 크기: {width}x{height}")
++#%%
++# 100만건 데이터로 메모리 사용량 비교
++import sys
++import time
++import random
++
++# 100만개의 랜덤 실수 데이터 생성
++data_size = 10000000
++print(f"=== {data_size:,}건 랜덤 실수 데이터 비교 ===")
++
++# 랜덤 실수 데이터 생성 (0.0 ~ 1000.0 범위)
++random_floats = [random.uniform(0.0, 1000.0) for _ in range(data_size)]
++
++# 랜덤 튜플 데이터 생성
++random_tuples = tuple(zip(
++    [random.uniform(0.0, 1000.0) for _ in range(data_size)],))
++
++#%%
++# 2. 읽기 속도 비교 (순회)
++print("\\n2. 순회 속도 비교:")
++
++# Tuple 순회 시간 측정
++start_time = time.time()
++total = 0
++for item in random_tuples:
++    total += 1
++tuple_time = time.time() - start_time
++
++# List 순회 시간 측정
++start_time = time.time()
++total = 0
++for item in random_floats:
++    total += 1
++list_time = time.time() - start_time
++
++print(f"Tuple 순회 시간: {tuple_time:.4f}초")
++print(f"List 순회 시간:  {list_time:.4f}초")
++if tuple_time < list_time:
++    print(f"Tuple이 {(list_time/tuple_time-1)*100:.1f}% 빠름")
++else:
++    print(f"List가 {(tuple_time/list_time-1)*100:.1f}% 빠름")
++#%%
++# 3. 인덱싱 속도 비교
++print("\\n3. 인덱싱 속도 비교:")
++
++# Tuple 인덱싱 시간 측정 (100만번 랜덤 접근)
++import random
++indices = [random.randint(0, data_size-1) for _ in range(data_size)]
++
++start_time = time.time()
++for i in indices:
++    value = random_tuples[i]
++tuple_index_time = time.time() - start_time
++
++# List 인덱싱 시간 측정 (같은 인덱스들로)
++start_time = time.time()
++for i in indices:
++    value = random_floats[i]
++list_index_time = time.time() - start_time
++
++print(f"Tuple 인덱싱 시간: {tuple_index_time:.4f}초")
++print(f"List 인덱싱 시간:  {list_index_time:.4f}초")
++if tuple_index_time < list_index_time:
++    print(f"Tuple이 {(list_index_time/tuple_index_time-1)*100:.1f}% 빠름")
++else:
++    print(f"List가 {(tuple_index_time/list_index_time-1)*100:.1f}% 빠름")
++#%%
++# 4. 결론
++print("\\n=== 결론 ===")
++print("✅ Tuple의 장점:")
++print("   - 캐싱 가능해서 재사용시 빨라짐 - 처음엔 느림")
++print("   - 불변이므로 안전하고 예측 가능")
++print("   - 딕셔너리 키로 사용 가능")
++print()
++print("✅ List의 장점:")
++print("   - 내용 변경 가능 (append, remove 등)")
++print("   - 동적 크기 조절 가능")
++print("   - 다양한 메서드 제공")
++print("   - 순회 작업이 빠름")
++print()
++print("💡 사용 권장:")
++print("   - 변경하지 않을 데이터 → Tuple")
++print("   - 변경해야 하는 데이터 → List")
++#%%
++'바나나' in ('망고', '바나나')
++#%%
++def return_as_tuple():
++    return "김철수", 32, '서울'
++
++a = "김철수", 32, '서울'
++#%%
++# 서식문자
++a = 1/7
++a
++#%%
++print(f"a is {a:.2f}")
++#%%
++# gatesplan@gmail.com
++# 생기부: nice -> 4~8 체크 -> 복사 -> 메일 붙여넣기
++# 3학년 -> 세특 행동특성
++# 자소서:
++# 1. 내용만
++# 2. 내용만
++# 3. 내용만
++# ..
++# 6. 내용만
++# 도서 내용 그대로 복사해서
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"Black\">\r\n    <option name=\"sdkName\" value=\"C:\\ProgramData\\miniconda3\" />\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" project-jdk-name=\"C:\\ProgramData\\miniconda3\" project-jdk-type=\"Python SDK\" />\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 16032dc70989fecad21239170ccbe8c181e65b4c)
++++ b/.idea/misc.xml	(date 1760754518996)
+@@ -3,5 +3,5 @@
+   <component name="Black">
+     <option name="sdkName" value="C:\ProgramData\miniconda3" />
+   </component>
+-  <component name="ProjectRootManager" version="2" project-jdk-name="C:\ProgramData\miniconda3" project-jdk-type="Python SDK" />
++  <component name="ProjectRootManager" version="2" project-jdk-name="mlbase-py3.12" project-jdk-type="Python SDK" />
+ </project>
+\ No newline at end of file
