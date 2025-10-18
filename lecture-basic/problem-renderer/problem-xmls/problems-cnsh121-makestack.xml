@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: while 조건식 완성 -->
+  <problem>
+    <description>다음 스택 코드에서 while 조건식을 완성하여 올바르게 동작하도록 하세요.</description>
+    <code><![CDATA[stack = []
+goal = [2, 1, 3, 4]
+
+def push(x):
+    global stack
+    stack.append(x)
+
+def pop():
+    global stack
+    return stack.pop()
+
+now = 0
+for i in range(1, 5):
+    push(i)
+    while len(stack)>0 and ____:  # 여기를 채우세요
+        print(pop())
+        now += 1]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[2
+1
+3
+4]]></output>
+    <hint></hint>
+    <solution><![CDATA[stack = []
+goal = [2, 1, 3, 4]
+
+def push(x):
+    global stack
+    stack.append(x)
+
+def pop():
+    global stack
+    return stack.pop()
+
+now = 0
+for i in range(1, 5):
+    push(i)
+    while len(stack)>0 and stack[-1] == goal[now]:  # 정답: stack[-1] == goal[now]
+        print(pop())
+        now += 1]]></solution>
+  </problem>
+
+  <!-- 문제 2: 스택 동작 과정 서술 -->
+  <problem>
+    <description>위 코드에서 for문에 의한 각 i값의 순서에 따라 while 조건식의 동작 과정과 stack의 변화 과정을 서술하세요.</description>
+    <code><![CDATA[stack = []
+goal = [2, 1, 3, 4]
+
+def push(x):
+    global stack
+    stack.append(x)
+
+def pop():
+    global stack
+    return stack.pop()
+
+now = 0
+for i in range(1, 5):
+    push(i)
+    while len(stack)>0 and stack[-1] == goal[now]:
+        print(pop())
+        now += 1]]></code>
+    <input><![CDATA[]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[# 스택 동작 과정:
+# i=1: push(1) -> stack=[1], stack[-1]=1, goal[0]=2, 조건 불만족, while 종료
+# i=2: push(2) -> stack=[1,2], stack[-1]=2, goal[0]=2, 조건 만족
+#      pop() 출력: 2, now=1, stack=[1]
+#      stack[-1]=1, goal[1]=1, 조건 만족
+#      pop() 출력: 1, now=2, stack=[]
+#      len(stack)=0, while 종료
+# i=3: push(3) -> stack=[3], stack[-1]=3, goal[2]=3, 조건 만족
+#      pop() 출력: 3, now=3, stack=[]
+# i=4: push(4) -> stack=[4], stack[-1]=4, goal[3]=4, 조건 만족
+#      pop() 출력: 4, now=4, stack=[]
+
+# 결과: goal 배열 순서대로 2, 1, 3, 4가 출력됨]]></solution>
+  </problem>
+</problems>

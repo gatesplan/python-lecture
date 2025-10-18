@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 재귀함수 호출 완성 -->
+  <problem>
+    <description><![CDATA[다음 최소공배수 재귀함수에서 return 부분을 완성하세요.]]></description>
+    <code><![CDATA[def lcm(a, b):
+    global n, m
+    if a == b:
+        return a
+    if a > b:
+        return ____  # 여기를 채우세요
+    if a < b:
+        return lcm(a+m, b)]]></code>
+    <input><![CDATA[n, m = 3, 8
+print(lcm(m, n))]]></input>
+    <output><![CDATA[24]]></output>
+    <hint></hint>
+    <solution><![CDATA[def lcm(a, b):
+    global n, m
+    if a == b:
+        return a
+    if a > b:
+        return lcm(a, b+n)  # 정답: lcm(a, b+n)
+    if a < b:
+        return lcm(a+m, b)]]></solution>
+  </problem>
+
+  <!-- 문제 2: if문 제거 가능 이유 설명 -->
+  <problem>
+    <description><![CDATA[다음 재귀함수에서 'if a < b:' 제어문이 없이 바로 'return lcm(a+m, b)'만으로도 동작하는 이유를 서술하세요.]]></description>
+    <code><![CDATA[def lcm(a, b):
+    global n, m
+    if a == b:
+        return a
+    if a > b:
+        return lcm(a, b+n)
+    if a < b:       # 이 라인이 없어도 되는 이유는?
+        return lcm(a+m, b)]]></code>
+    <input><![CDATA[]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[# 이유: 논리적 완전성 때문입니다.
+
+# 조건 분석:
+# 1. if a == b: return a  (a와 b가 같으면 종료)
+# 2. if a > b: return lcm(a, b+n)  (a가 더 크면 b를 증가)
+# 3. if a < b: return lcm(a+m, b)  (a가 더 작으면 a를 증가)
+
+# a와 b는 정수이므로 a == b, a > b, a < b 중 하나만 가능합니다.
+# 첫 번째와 두 번째 조건에 해당하지 않으면 자동으로 a < b입니다.
+# 따라서 마지막 조건문 없이 바로 else나 그냥 return lcm(a+m, b)를 써도
+# a < b인 경우에만 실행되므로 동일하게 동작합니다.]]></solution>
+  </problem>
+
+  <!-- 문제 3: 함수 출력값 계산 -->
+  <problem>
+    <description><![CDATA[다음 난독화된 함수 코드를 보고 lcm(3, 8) 출력값을 구하세요.]]></description>
+    <code><![CDATA[def lcm(a, b):
+    global n, m
+    if a == b:
+        return a
+    if a > b:
+        return lcm(a, b+n)
+    if a < b:
+        return lcm(a+m, b)]]></code>
+    <input><![CDATA[n, m = 3, 8
+print(lcm(3, 8))]]></input>
+    <output><![CDATA[24]]></output>
+    <hint></hint>
+    <solution><![CDATA[# lcm(3, 8) 계산 과정 (m=3, n=8):
+
+# a=3, b=8 → a<b → lcm(3+3, 8) = lcm(6, 8)
+# a=6, b=8 → a<b → lcm(6+3, 8) = lcm(9, 8)
+# a=9, b=8 → a>b → lcm(9, 8+8) = lcm(9, 16)
+# a=9, b=16 → a<b → lcm(9+3, 16) = lcm(12, 16)
+# a=12, b=16 → a<b → lcm(12+3, 16) = lcm(15, 16)
+# a=15, b=16 → a<b → lcm(15+3, 16) = lcm(18, 16)
+# a=18, b=16 → a>b → lcm(18, 16+8) = lcm(18, 24)
+# a=18, b=24 → a<b → lcm(18+3, 24) = lcm(21, 24)
+# a=21, b=24 → a<b → lcm(21+3, 24) = lcm(24, 24)
+# a=24, b=24 → a==b → return 24
+
+# 결과: 24 (3과 8의 올바른 최소공배수)]]></solution>
+  </problem>
+
+  <!-- 문제 4: while문으로 재구현 -->
+  <problem>
+    <description><![CDATA[다음 재귀 최소공배수 함수를 while문으로 재구현하세요.]]></description>
+    <code><![CDATA[def lcm(a, b):
+    global n, m
+    if a == b:
+        return a
+    if a > b:
+        return lcm(a, b+n)
+    if a < b:
+        return lcm(a+m, b)
+
+# while문 버전을 작성하세요
+def lcm_while(a, b):
+    global n, m
+    pass]]></code>
+    <input><![CDATA[n, m = 4, 6
+print(lcm_while(4, 6))]]></input>
+    <output><![CDATA[12]]></output>
+    <hint></hint>
+    <solution><![CDATA[def lcm_while(a, b):
+    global n, m
+    while a != b:
+        if a > b:
+            b += n
+        else:
+            a += m
+    return a]]></solution>
+  </problem>
+</problems>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  하노이탑 재귀함수 연습문제 설정
+  
+  사용법:
+  - URL에서 ?config=config-recursive-hanoi 로 접근
+  - 하노이탑을 주제로 한 재귀함수 연습문제 10개
+  
+  학습 목표:
+  - 재귀함수의 기본 개념과 구조 이해
+  - 하노이탑 문제를 통한 재귀적 사고 훈련
+  - 기저 조건과 재귀 호출의 올바른 설계
+-->
+<exercise>
+  <title>Exercise - 하노이탑 재귀함수 연습</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <section title="Section 1 - 하노이탑 재귀함수 연습문제" file="practice-recursive-hanoi.xml" count="10"/>
+  </sections>
+</exercise>

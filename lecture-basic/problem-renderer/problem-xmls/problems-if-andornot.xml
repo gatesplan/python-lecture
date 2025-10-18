@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Python Basic Lecture 5 - 5. 논리 연산자 (and, or, not) 연습문제
+  
+  복습 키워드 결합:
+  - print() 출력함수 및 키워드 파라메터
+  - f-string 문법
+  - 문자열 빌트인 함수들
+  - list 자료형 및 빌트인 함수들
+  - *list 언패킹
+  - input() 입력 함수
+  - type() 자료형 확인
+  - 자료형 변환 (캐스팅)
+  
+  새로운 내용: 논리 연산자
+  - and: 둘 다 참이어야 True
+  - or: 하나라도 참이면 True  
+  - not: 참을 거짓으로, 거짓을 참으로
+  - 복합 조건문
+-->
+<problems>
+  <!-- 문제 1: 기본 and 연산자 -->
+  <problem>
+    <description><![CDATA[나이와 운전면허 보유 여부를 입력받아 둘 다 조건을 만족하면 "운전 가능", 그렇지 않으면 "운전 불가"를 출력하는 프로그램을 작성하세요. (나이 18세 이상, 면허 "yes")]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[20
+yes]]></input>
+    <output><![CDATA[운전 가능]]></output>
+    <hint><![CDATA[and 연산자는 두 조건이 모두 참일 때만 True입니다.]]></hint>
+    <solution><![CDATA[age = int(input())
+license = input()
+if age >= 18 and license == "yes":
+    print("운전 가능")
+else:
+    print("운전 불가")]]></solution>
+  </problem>
+
+  <!-- 문제 2: 기본 or 연산자 -->
+  <problem>
+    <description><![CDATA[주말 여부와 공휴일 여부를 입력받아 둘 중 하나라도 해당하면 "쉬는 날", 그렇지 않으면 "근무일"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[no
+yes]]></input>
+    <output><![CDATA[쉬는 날]]></output>
+    <hint><![CDATA[or 연산자는 두 조건 중 하나라도 참이면 True입니다.]]></hint>
+    <solution><![CDATA[weekend = input()
+holiday = input()
+if weekend == "yes" or holiday == "yes":
+    print("쉬는 날")
+else:
+    print("근무일")]]></solution>
+  </problem>
+
+  <!-- 문제 3: 기본 not 연산자 -->
+  <problem>
+    <description><![CDATA[비가 오는지 입력받아서 비가 오지 않으면 "산책 좋은 날", 비가 오면 "실내에서 휴식"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[no]]></input>
+    <output><![CDATA[산책 좋은 날]]></output>
+    <hint><![CDATA[not 연산자는 조건을 반대로 만듭니다.]]></hint>
+    <solution><![CDATA[rain = input()
+if not rain == "yes":
+    print("산책 좋은 날")
+else:
+    print("실내에서 휴식")]]></solution>
+  </problem>
+
+  <!-- 문제 4: 숫자 범위 확인 (and) -->
+  <problem>
+    <description><![CDATA[숫자를 입력받아 10 이상이고 20 이하이면 "범위 안", 그렇지 않으면 "범위 밖"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[15]]></input>
+    <output><![CDATA[범위 안]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[num = int(input())
+if num >= 10 and num <= 20:
+    print("범위 안")
+else:
+    print("범위 밖")]]></solution>
+  </problem>
+
+  <!-- 문제 5: 다중 조건 (or) -->
+  <problem>
+    <description><![CDATA[점수를 입력받아 90점 이상이거나 80점대이면서 출석률이 90% 이상이면 "우수", 그렇지 않으면 "일반"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[85
+95]]></input>
+    <output><![CDATA[우수]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[score = int(input())
+attendance = int(input())
+if score >= 90 or (score >= 80 and attendance >= 90):
+    print("우수")
+else:
+    print("일반")]]></solution>
+  </problem>
+
+  <!-- 문제 6: 문자열 조건 (and) -->
+  <problem>
+    <description><![CDATA[사용자로부터 비밀번호를 입력받아 길이가 8자 이상이고 숫자를 포함하면 "강한 비밀번호", 그렇지 않으면 "약한 비밀번호"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[hello123]]></input>
+    <output><![CDATA[강한 비밀번호]]></output>
+    <hint><![CDATA[문자열에 숫자가 포함되어 있는지 확인하는 방법을 생각해보세요.]]></hint>
+    <solution><![CDATA[password = input()
+has_digit = False
+for char in password:
+    if char.isdigit():
+        has_digit = True
+if len(password) >= 8 and has_digit:
+    print("강한 비밀번호")
+else:
+    print("약한 비밀번호")]]></solution>
+  </problem>
+
+  <!-- 문제 7: 성적 범위 (and) -->
+  <problem>
+    <description><![CDATA[국어와 영어 점수를 입력받아 둘 다 80점 이상이면 "우수", 그렇지 않으면 "보완 필요"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[85 75]]></input>
+    <output><![CDATA[보완 필요]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[korean, english = input().split()
+korean = int(korean)
+english = int(english)
+if korean >= 80 and english >= 80:
+    print("우수")
+else:
+    print("보완 필요")]]></solution>
+  </problem>
+
+  <!-- 문제 8: 요일 확인 (or) -->
+  <problem>
+    <description><![CDATA[요일 번호를 입력받아 주말(6, 7)이면 "휴일", 평일이면 "근무일"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[6]]></input>
+    <output><![CDATA[휴일]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[day = int(input())
+if day == 6 or day == 7:
+    print("휴일")
+else:
+    print("근무일")]]></solution>
+  </problem>
+
+  <!-- 문제 9: 리스트 조건 (and) -->
+  <problem>
+    <description><![CDATA[리스트의 길이가 3 이상이고 첫 번째 요소가 1이면 "조건 만족", 그렇지 않으면 "조건 불만족"을 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[my_list = [1, 2, 3]]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[조건 만족]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[my_list = [1, 2, 3]
+if len(my_list) >= 3 and my_list[0] == 1:
+    print("조건 만족")
+else:
+    print("조건 불만족")]]></solution>
+  </problem>
+
+  <!-- 문제 10: not과 조합 -->
+  <problem>
+    <description><![CDATA[문자열을 입력받아 빈 문자열이 아니고 "test"와 다르면 "유효한 입력", 그렇지 않으면 "무효한 입력"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[hello]]></input>
+    <output><![CDATA[유효한 입력]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[text = input()
+if not text == "" and not text == "test":
+    print("유효한 입력")
+else:
+    print("무효한 입력")]]></solution>
+  </problem>
+
+  <!-- 문제 11: 복합 조건 (나이대) -->
+  <problem>
+    <description><![CDATA[나이를 입력받아 10대(10-19세) 또는 20대(20-29세)이면 "청년", 그렇지 않으면 "기타"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[25]]></input>
+    <output><![CDATA[청년]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[age = int(input())
+if (age >= 10 and age <= 19) or (age >= 20 and age <= 29):
+    print("청년")
+else:
+    print("기타")]]></solution>
+  </problem>
+
+  <!-- 문제 12: 온도와 습도 -->
+  <problem>
+    <description><![CDATA[온도와 습도를 입력받아 온도가 20도 이상 30도 이하이고 습도가 40% 이상이면 "쾌적", 그렇지 않으면 "불쾌적"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[25 50]]></input>
+    <output><![CDATA[쾌적]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[temp, humidity = input().split()
+temp = int(temp)
+humidity = int(humidity)
+if temp >= 20 and temp <= 30 and humidity >= 40:
+    print("쾌적")
+else:
+    print("불쾌적")]]></solution>
+  </problem>
+
+  <!-- 문제 13: 문자 유형 확인 -->
+  <problem>
+    <description><![CDATA[문자 하나를 입력받아 알파벳이거나 숫자이면 "유효한 문자", 그렇지 않으면 "특수문자"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[@]]></input>
+    <output><![CDATA[특수문자]]></output>
+    <hint><![CDATA[.isalpha()와 .isdigit() 메서드를 활용하세요.]]></hint>
+    <solution><![CDATA[char = input()
+if char.isalpha() or char.isdigit():
+    print("유효한 문자")
+else:
+    print("특수문자")]]></solution>
+  </problem>
+
+  <!-- 문제 14: 학점 계산 -->
+  <problem>
+    <description><![CDATA[출석점수와 시험점수를 입력받아 출석점수가 18점 이상이고 시험점수가 60점 이상이면 "합격", 그렇지 않으면 "불합격"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[20 55]]></input>
+    <output><![CDATA[불합격]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[attendance, exam = input().split()
+attendance = int(attendance)
+exam = int(exam)
+if attendance >= 18 and exam >= 60:
+    print("합격")
+else:
+    print("불합격")]]></solution>
+  </problem>
+
+  <!-- 문제 15: 할인 조건 -->
+  <problem>
+    <description><![CDATA[나이와 구매금액을 입력받아 65세 이상이거나 구매금액이 100000원 이상이면 "할인 대상", 그렇지 않으면 "일반 고객"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[30 120000]]></input>
+    <output><![CDATA[할인 대상]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[age, amount = input().split()
+age = int(age)
+amount = int(amount)
+if age >= 65 or amount >= 100000:
+    print("할인 대상")
+else:
+    print("일반 고객")]]></solution>
+  </problem>
+
+  <!-- 문제 16: 비밀번호 검증 -->
+  <problem>
+    <description><![CDATA[비밀번호를 입력받아 길이가 6자 이상이고 "123456"이 아니면 "사용 가능", 그렇지 않으면 "사용 불가"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[123456]]></input>
+    <output><![CDATA[사용 불가]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[password = input()
+if len(password) >= 6 and password != "123456":
+    print("사용 가능")
+else:
+    print("사용 불가")]]></solution>
+  </problem>
+
+  <!-- 문제 17: 계절 판별 -->
+  <problem>
+    <description><![CDATA[월을 입력받아 봄(3,4,5월)이나 가을(9,10,11월)이면 "좋은 계절", 그렇지 않으면 "보통 계절"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[4]]></input>
+    <output><![CDATA[좋은 계절]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[month = int(input())
+if (month == 3 or month == 4 or month == 5) or (month == 9 or month == 10 or month == 11):
+    print("좋은 계절")
+else:
+    print("보통 계절")]]></solution>
+  </problem>
+
+  <!-- 문제 18: 리스트 범위 확인 -->
+  <problem>
+    <description><![CDATA[숫자 리스트에서 모든 요소가 0 이상이고 100 이하이면 "유효한 범위", 그렇지 않으면 "범위 초과"를 출력하는 코드를 작성하세요.]]></description>
+    <code><![CDATA[numbers = [10, 50, 80]]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[유효한 범위]]></output>
+    <hint><![CDATA[모든 요소를 확인하는 방법을 생각해보세요.]]></hint>
+    <solution><![CDATA[numbers = [10, 50, 80]
+valid = True
+for num in numbers:
+    if not (num >= 0 and num <= 100):
+        valid = False
+if valid:
+    print("유효한 범위")
+else:
+    print("범위 초과")]]></solution>
+  </problem>
+
+  <!-- 문제 19: 사용자 권한 -->
+  <problem>
+    <description><![CDATA[사용자 이름과 역할을 입력받아 이름이 "admin"이거나 역할이 "manager"이면 "접근 허용", 그렇지 않으면 "접근 거부"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[user
+manager]]></input>
+    <output><![CDATA[접근 허용]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[name = input()
+role = input()
+if name == "admin" or role == "manager":
+    print("접근 허용")
+else:
+    print("접근 거부")]]></solution>
+  </problem>
+
+  <!-- 문제 20: 시간 범위 -->
+  <problem>
+    <description><![CDATA[시간을 입력받아 근무시간(9-18시)이 아니면 "업무 외 시간", 근무시간이면 "업무 시간"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[20]]></input>
+    <output><![CDATA[업무 외 시간]]></output>
+    <hint><![CDATA[not 연산자를 활용하세요.]]></hint>
+    <solution><![CDATA[hour = int(input())
+if not (hour >= 9 and hour <= 18):
+    print("업무 외 시간")
+else:
+    print("업무 시간")]]></solution>
+  </problem>
+
+  <!-- 문제 21: 성적 장학금 -->
+  <problem>
+    <description><![CDATA[평점과 봉사시간을 입력받아 평점이 3.5 이상이고 봉사시간이 20시간 이상이면 "장학금 대상", 그렇지 않으면 "일반 학생"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[3.8 25]]></input>
+    <output><![CDATA[장학금 대상]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[gpa, volunteer = input().split()
+gpa = float(gpa)
+volunteer = int(volunteer)
+if gpa >= 3.5 and volunteer >= 20:
+    print("장학금 대상")
+else:
+    print("일반 학생")]]></solution>
+  </problem>
+
+  <!-- 문제 22: 파일 형식 확인 -->
+  <problem>
+    <description><![CDATA[파일명을 입력받아 ".jpg"나 ".png"로 끝나면 "이미지 파일", 그렇지 않으면 "기타 파일"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[photo.png]]></input>
+    <output><![CDATA[이미지 파일]]></output>
+    <hint><![CDATA[.endswith() 메서드를 활용하세요.]]></hint>
+    <solution><![CDATA[filename = input()
+if filename.endswith(".jpg") or filename.endswith(".png"):
+    print("이미지 파일")
+else:
+    print("기타 파일")]]></solution>
+  </problem>
+
+  <!-- 문제 23: 중복 조건 -->
+  <problem>
+    <description><![CDATA[두 숫자를 입력받아 둘 다 양수이거나 둘 다 음수이면 "같은 부호", 그렇지 않으면 "다른 부호"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[-5 -3]]></input>
+    <output><![CDATA[같은 부호]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[a, b = input().split()
+a = int(a)
+b = int(b)
+if (a > 0 and b > 0) or (a < 0 and b < 0):
+    print("같은 부호")
+else:
+    print("다른 부호")]]></solution>
+  </problem>
+
+  <!-- 문제 24: 문자열 조건들 -->
+  <problem>
+    <description><![CDATA[문자열을 입력받아 길이가 5자 이상이고 대문자를 포함하면 "강한 텍스트", 그렇지 않으면 "약한 텍스트"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[Hello]]></input>
+    <output><![CDATA[강한 텍스트]]></output>
+    <hint><![CDATA[문자열에 대문자가 있는지 확인하는 방법을 생각해보세요.]]></hint>
+    <solution><![CDATA[text = input()
+has_upper = False
+for char in text:
+    if char.isupper():
+        has_upper = True
+if len(text) >= 5 and has_upper:
+    print("강한 텍스트")
+else:
+    print("약한 텍스트")]]></solution>
+  </problem>
+
+  <!-- 문제 25: 배수 확인 -->
+  <problem>
+    <description><![CDATA[숫자를 입력받아 3의 배수이거나 5의 배수이면 "특별한 수", 그렇지 않으면 "일반 수"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[15]]></input>
+    <output><![CDATA[특별한 수]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[num = int(input())
+if num % 3 == 0 or num % 5 == 0:
+    print("특별한 수")
+else:
+    print("일반 수")]]></solution>
+  </problem>
+
+  <!-- 문제 26: 좌표 영역 -->
+  <problem>
+    <description><![CDATA[x, y 좌표를 입력받아 1사분면(x>0, y>0)이나 3사분면(x<0, y<0)에 있으면 "대각선 영역", 그렇지 않으면 "기타 영역"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[3 4]]></input>
+    <output><![CDATA[대각선 영역]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[x, y = input().split()
+x = int(x)
+y = int(y)
+if (x > 0 and y > 0) or (x < 0 and y < 0):
+    print("대각선 영역")
+else:
+    print("기타 영역")]]></solution>
+  </problem>
+
+  <!-- 문제 27: 회원 등급 -->
+  <problem>
+    <description><![CDATA[구매횟수와 구매금액을 입력받아 구매횟수가 10회 이상이거나 구매금액이 500000원 이상이면 "VIP 회원", 그렇지 않으면 "일반 회원"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[8 600000]]></input>
+    <output><![CDATA[VIP 회원]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[count, amount = input().split()
+count = int(count)
+amount = int(amount)
+if count >= 10 or amount >= 500000:
+    print("VIP 회원")
+else:
+    print("일반 회원")]]></solution>
+  </problem>
+
+  <!-- 문제 28: 안전 구간 -->
+  <problem>
+    <description><![CDATA[속도를 입력받아 안전구간(30-60km/h)에 있지 않으면 "위험", 안전구간이면 "안전"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[80]]></input>
+    <output><![CDATA[위험]]></output>
+    <hint><![CDATA[not 연산자를 활용하세요.]]></hint>
+    <solution><![CDATA[speed = int(input())
+if not (speed >= 30 and speed <= 60):
+    print("위험")
+else:
+    print("안전")]]></solution>
+  </problem>
+
+  <!-- 문제 29: 복합 자격 조건 -->
+  <problem>
+    <description><![CDATA[나이, 경력, 자격증 보유 여부를 입력받아 (25세 이상이고 경력 2년 이상) 또는 자격증이 있으면 "지원 가능", 그렇지 않으면 "지원 불가"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[23 1 yes]]></input>
+    <output><![CDATA[지원 가능]]></output>
+    <hint><![CDATA[괄호를 사용하여 조건을 명확히 구분하세요.]]></hint>
+    <solution><![CDATA[age, experience, certificate = input().split()
+age = int(age)
+experience = int(experience)
+if (age >= 25 and experience >= 2) or certificate == "yes":
+    print("지원 가능")
+else:
+    print("지원 불가")]]></solution>
+  </problem>
+
+  <!-- 문제 30: 종합 문제 -->
+  <problem>
+    <description><![CDATA[학생의 출석률, 과제점수, 시험점수를 입력받아 다음 조건을 만족하면 "수료", 그렇지 않으면 "미수료"를 출력하는 프로그램을 작성하세요.
+조건: (출석률 80% 이상이고 과제점수 70점 이상) 그리고 시험점수 60점 이상]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[85 75 65]]></input>
+    <output><![CDATA[수료]]></output>
+    <hint><![CDATA[복합 조건에서 괄호의 우선순위를 고려하세요.]]></hint>
+    <solution><![CDATA[attendance, assignment, exam = input().split()
+attendance = int(attendance)
+assignment = int(assignment)
+exam = int(exam)
+if (attendance >= 80 and assignment >= 70) and exam >= 60:
+    print("수료")
+else:
+    print("미수료")]]></solution>
+  </problem>
+</problems>

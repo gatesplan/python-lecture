@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Python Basic Lecture 5 - 6. 중첩 조건문 연습문제
+  
+  복습 키워드 결합:
+  - print() 출력함수 및 키워드 파라메터
+  - f-string 문법
+  - 문자열 빌트인 함수들
+  - list 자료형 및 빌트인 함수들
+  - *list 언패킹
+  - input() 입력 함수
+  - type() 자료형 확인
+  - 자료형 변환 (캐스팅)
+  - 논리 연산자 (and, or, not)
+  
+  새로운 내용: 중첩 조건문
+  - if 안에 또 다른 if
+  - 복잡한 논리 구조
+  - 단계적 조건 판별
+-->
+<problems>
+  <!-- 문제 1: 기본 중첩 if -->
+  <problem>
+    <description><![CDATA[나이를 입력받아 18세 이상이면 성인 구분을, 미만이면 미성년자 구분을 세부적으로 출력하세요.
+성인: 65세 이상 "노인", 나머지 "일반 성인"
+미성년자: 13세 이상 "청소년", 나머지 "어린이"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[25]]></input>
+    <output><![CDATA[일반 성인]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[age = int(input())
+if age >= 18:
+    if age >= 65:
+        print("노인")
+    else:
+        print("일반 성인")
+else:
+    if age >= 13:
+        print("청소년")
+    else:
+        print("어린이")]]></solution>
+  </problem>
+
+  <!-- 문제 2: 점수와 출석률 -->
+  <problem>
+    <description><![CDATA[점수와 출석률을 입력받아 다음과 같이 판별하세요.
+점수 80점 이상: 출석률 90% 이상 "A등급", 80% 이상 "B등급", 나머지 "C등급"  
+점수 80점 미만: 출석률 90% 이상 "D등급", 나머지 "F등급"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[85 75]]></input>
+    <output><![CDATA[C등급]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[score, attendance = input().split()
+score = int(score)
+attendance = int(attendance)
+if score >= 80:
+    if attendance >= 90:
+        print("A등급")
+    elif attendance >= 80:
+        print("B등급")
+    else:
+        print("C등급")
+else:
+    if attendance >= 90:
+        print("D등급")
+    else:
+        print("F등급")]]></solution>
+  </problem>
+
+  <!-- 문제 3: 날씨와 온도 -->
+  <problem>
+    <description><![CDATA[날씨와 온도를 입력받아 외출 추천을 하세요.
+맑음: 20도 이상 "산책하기 좋은 날", 10도 이상 "가벼운 외출", 나머지 "따뜻하게 입고 외출"
+비: 온도 관계없이 "우산 챙기고 외출"
+기타: "실내 활동 추천"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[맑음 15]]></input>
+    <output><![CDATA[가벼운 외출]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[weather, temp = input().split()
+temp = int(temp)
+if weather == "맑음":
+    if temp >= 20:
+        print("산책하기 좋은 날")
+    elif temp >= 10:
+        print("가벼운 외출")
+    else:
+        print("따뜻하게 입고 외출")
+elif weather == "비":
+    print("우산 챙기고 외출")
+else:
+    print("실내 활동 추천")]]></solution>
+  </problem>
+
+  <!-- 문제 4: 회원 등급과 구매금액 -->
+  <problem>
+    <description><![CDATA[회원등급과 구매금액을 입력받아 할인율을 계산하세요.
+VIP 회원: 100000원 이상 30% 할인, 50000원 이상 20% 할인, 나머지 15% 할인
+일반 회원: 100000원 이상 15% 할인, 50000원 이상 10% 할인, 나머지 5% 할인]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[VIP 75000]]></input>
+    <output><![CDATA[20% 할인]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[grade, amount = input().split()
+amount = int(amount)
+if grade == "VIP":
+    if amount >= 100000:
+        print("30% 할인")
+    elif amount >= 50000:
+        print("20% 할인")
+    else:
+        print("15% 할인")
+else:
+    if amount >= 100000:
+        print("15% 할인")
+    elif amount >= 50000:
+        print("10% 할인")
+    else:
+        print("5% 할인")]]></solution>
+  </problem>
+
+  <!-- 문제 5: 문자열 타입과 길이 -->
+  <problem>
+    <description><![CDATA[문자열을 입력받아 다음과 같이 분류하세요.
+숫자 문자열: 길이 5자 이상 "긴 숫자", 나머지 "짧은 숫자"
+알파벳 문자열: 대문자 포함 "대문자 알파벳", 나머지 "소문자 알파벳"  
+기타: "특수 문자열"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[Hello]]></input>
+    <output><![CDATA[대문자 알파벳]]></output>
+    <hint><![CDATA[.isdigit(), .isalpha() 메서드와 대문자 확인 방법을 사용하세요.]]></hint>
+    <solution><![CDATA[text = input()
+if text.isdigit():
+    if len(text) >= 5:
+        print("긴 숫자")
+    else:
+        print("짧은 숫자")
+elif text.isalpha():
+    has_upper = False
+    for char in text:
+        if char.isupper():
+            has_upper = True
+    if has_upper:
+        print("대문자 알파벳")
+    else:
+        print("소문자 알파벳")
+else:
+    print("특수 문자열")]]></solution>
+  </problem>
+
+  <!-- 문제 6: 시간대와 요일 -->
+  <problem>
+    <description><![CDATA[시간과 요일을 입력받아 영업 상태를 출력하세요.
+평일(1-5): 9시-18시 "영업중", 나머지 "영업 종료"
+주말(6-7): 10시-16시 "단축 영업", 나머지 "영업 종료"
+기타: "잘못된 요일"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[14 6]]></input>
+    <output><![CDATA[단축 영업]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[hour, day = input().split()
+hour = int(hour)
+day = int(day)
+if day >= 1 and day <= 5:
+    if hour >= 9 and hour <= 18:
+        print("영업중")
+    else:
+        print("영업 종료")
+elif day == 6 or day == 7:
+    if hour >= 10 and hour <= 16:
+        print("단축 영업")
+    else:
+        print("영업 종료")
+else:
+    print("잘못된 요일")]]></solution>
+  </problem>
+
+  <!-- 문제 7: 리스트 검증 -->
+  <problem>
+    <description><![CDATA[리스트가 비어있지 않으면 첫 번째 요소의 타입에 따라 분류하세요.
+정수: 양수이면 "양의 정수", 음수이면 "음의 정수", 0이면 "영"
+실수: 소수점 아래가 0이면 "정수형 실수", 아니면 "소수"
+기타: "다른 타입"
+빈 리스트: "빈 리스트"]]></description>
+    <code><![CDATA[my_list = [3.0, "hello", 42]]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[정수형 실수]]></output>
+    <hint><![CDATA[type() 함수와 소수점 확인 방법을 사용하세요.]]></hint>
+    <solution><![CDATA[my_list = [3.0, "hello", 42]
+if len(my_list) > 0:
+    first = my_list[0]
+    if type(first) == int:
+        if first > 0:
+            print("양의 정수")
+        elif first < 0:
+            print("음의 정수")
+        else:
+            print("영")
+    elif type(first) == float:
+        if first == int(first):
+            print("정수형 실수")
+        else:
+            print("소수")
+    else:
+        print("다른 타입")
+else:
+    print("빈 리스트")]]></solution>
+  </problem>
+
+  <!-- 문제 8: 사용자 인증 -->
+  <problem>
+    <description><![CDATA[아이디와 비밀번호를 입력받아 로그인 처리를 하세요.
+올바른 아이디(admin): 비밀번호가 "1234"이면 "관리자 로그인", "password"이면 "로그인 성공", 나머지 "비밀번호 오류"
+잘못된 아이디: "아이디 오류"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[admin
+password]]></input>
+    <output><![CDATA[로그인 성공]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[userid = input()
+password = input()
+if userid == "admin":
+    if password == "1234":
+        print("관리자 로그인")
+    elif password == "password":
+        print("로그인 성공")
+    else:
+        print("비밀번호 오류")
+else:
+    print("아이디 오류")]]></solution>
+  </problem>
+
+  <!-- 문제 9: BMI와 나이 -->
+  <problem>
+    <description><![CDATA[나이와 BMI를 입력받아 건강 상태를 판별하세요.
+65세 이상: BMI 22 이상 "건강한 노인", 나머지 "주의 필요"
+20-64세: BMI 18.5-24.9 "정상", 25 이상 "비만", 나머지 "저체중"
+20세 미만: BMI 관계없이 "성장기"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[45 26.5]]></input>
+    <output><![CDATA[비만]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[age, bmi = input().split()
+age = int(age)
+bmi = float(bmi)
+if age >= 65:
+    if bmi >= 22:
+        print("건강한 노인")
+    else:
+        print("주의 필요")
+elif age >= 20:
+    if bmi >= 18.5 and bmi <= 24.9:
+        print("정상")
+    elif bmi >= 25:
+        print("비만")
+    else:
+        print("저체중")
+else:
+    print("성장기")]]></solution>
+  </problem>
+
+  <!-- 문제 10: 파일 처리 -->
+  <problem>
+    <description><![CDATA[파일명을 입력받아 확장자에 따라 처리 방식을 출력하세요.
+이미지 파일(.jpg, .png): 크기가 "large" 포함시 "큰 이미지", 나머지 "일반 이미지"
+문서 파일(.txt, .doc): "문서 파일"
+기타: "알 수 없는 파일"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[large_photo.jpg]]></input>
+    <output><![CDATA[큰 이미지]]></output>
+    <hint><![CDATA[.endswith()와 in 연산자를 활용하세요.]]></hint>
+    <solution><![CDATA[filename = input()
+if filename.endswith(".jpg") or filename.endswith(".png"):
+    if "large" in filename:
+        print("큰 이미지")
+    else:
+        print("일반 이미지")
+elif filename.endswith(".txt") or filename.endswith(".doc"):
+    print("문서 파일")
+else:
+    print("알 수 없는 파일")]]></solution>
+  </problem>
+
+  <!-- 문제 11: 성적과 태도 -->
+  <problem>
+    <description><![CDATA[성적과 수업태도를 입력받아 종합 평가를 하세요.
+90점 이상: 태도 "Good" "최우수", 태도 "Normal" "우수", 나머지 "성적우수"
+70-89점: 태도 "Good" "양호", 나머지 "보통"  
+70점 미만: 태도와 관계없이 "노력 필요"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[85 Good]]></input>
+    <output><![CDATA[양호]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[score, attitude = input().split()
+score = int(score)
+if score >= 90:
+    if attitude == "Good":
+        print("최우수")
+    elif attitude == "Normal":
+        print("우수")
+    else:
+        print("성적우수")
+elif score >= 70:
+    if attitude == "Good":
+        print("양호")
+    else:
+        print("보통")
+else:
+    print("노력 필요")]]></solution>
+  </problem>
+
+  <!-- 문제 12: 계절과 온도 -->
+  <problem>
+    <description><![CDATA[계절과 온도를 입력받아 옷차림을 추천하세요.
+여름: 30도 이상 "반팔+반바지", 25도 이상 "얇은 옷", 나머지 "긴팔"
+겨울: 0도 이하 "두꺼운 패딩", 10도 이하 "코트", 나머지 "자켓"
+기타 계절: "계절에 맞는 옷"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[겨울 -5]]></input>
+    <output><![CDATA[두꺼운 패딩]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[season, temp = input().split()
+temp = int(temp)
+if season == "여름":
+    if temp >= 30:
+        print("반팔+반바지")
+    elif temp >= 25:
+        print("얇은 옷")
+    else:
+        print("긴팔")
+elif season == "겨울":
+    if temp <= 0:
+        print("두꺼운 패딩")
+    elif temp <= 10:
+        print("코트")
+    else:
+        print("자켓")
+else:
+    print("계절에 맞는 옷")]]></solution>
+  </problem>
+
+  <!-- 문제 13: 데이터 유효성 -->
+  <problem>
+    <description><![CDATA[입력받은 데이터가 숫자인지 확인하고, 숫자라면 범위를 체크하세요.
+숫자: 1-100 범위 "유효한 데이터", 나머지 "범위 초과"
+숫자 아님: 빈 문자열 "입력 없음", 나머지 "잘못된 형식"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[150]]></input>
+    <output><![CDATA[범위 초과]]></output>
+    <hint><![CDATA[.isdigit() 메서드를 활용하세요.]]></hint>
+    <solution><![CDATA[data = input()
+if data.isdigit():
+    num = int(data)
+    if num >= 1 and num <= 100:
+        print("유효한 데이터")
+    else:
+        print("범위 초과")
+else:
+    if data == "":
+        print("입력 없음")
+    else:
+        print("잘못된 형식")]]></solution>
+  </problem>
+
+  <!-- 문제 14: 교통수단과 거리 -->
+  <problem>
+    <description><![CDATA[교통수단과 거리를 입력받아 요금을 계산하세요.
+지하철: 10km 이하 1500원, 20km 이하 2000원, 나머지 2500원
+버스: 5km 이하 1200원, 나머지 1800원
+택시: 2km 이하 3000원, 나머지는 km당 1000원 추가
+기타: "요금 정보 없음"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[택시 5]]></input>
+    <output><![CDATA[6000원]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[transport, distance = input().split()
+distance = int(distance)
+if transport == "지하철":
+    if distance <= 10:
+        print("1500원")
+    elif distance <= 20:
+        print("2000원")
+    else:
+        print("2500원")
+elif transport == "버스":
+    if distance <= 5:
+        print("1200원")
+    else:
+        print("1800원")
+elif transport == "택시":
+    if distance <= 2:
+        print("3000원")
+    else:
+        fare = 3000 + (distance - 2) * 1000
+        print(f"{fare}원")
+else:
+    print("요금 정보 없음")]]></solution>
+  </problem>
+
+  <!-- 문제 15: 쇼핑몰 배송 -->
+  <problem>
+    <description><![CDATA[지역과 구매금액을 입력받아 배송비를 계산하세요.
+서울/경기: 30000원 이상 무료배송, 나머지 3000원
+지방: 50000원 이상 무료배송, 나머지 5000원
+제주도: 금액 관계없이 10000원]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[서울 25000]]></input>
+    <output><![CDATA[배송비 3000원]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[region, amount = input().split()
+amount = int(amount)
+if region == "서울" or region == "경기":
+    if amount >= 30000:
+        print("무료배송")
+    else:
+        print("배송비 3000원")
+elif region == "제주도":
+    print("배송비 10000원")
+else:
+    if amount >= 50000:
+        print("무료배송")
+    else:
+        print("배송비 5000원")]]></solution>
+  </problem>
+
+  <!-- 문제 16: 학생 장학금 -->
+  <problem>
+    <description><![CDATA[학년과 평점을 입력받아 장학금을 계산하세요.
+4학년: 평점 3.8 이상 "최우수 장학금", 3.5 이상 "우수 장학금", 나머지 "없음"
+3학년 이하: 평점 4.0 이상 "성적 장학금", 나머지 "없음"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[4 3.6]]></input>
+    <output><![CDATA[우수 장학금]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[grade, gpa = input().split()
+grade = int(grade)
+gpa = float(gpa)
+if grade == 4:
+    if gpa >= 3.8:
+        print("최우수 장학금")
+    elif gpa >= 3.5:
+        print("우수 장학금")
+    else:
+        print("없음")
+else:
+    if gpa >= 4.0:
+        print("성적 장학금")
+    else:
+        print("없음")]]></solution>
+  </problem>
+
+  <!-- 문제 17: 게임 레벨 -->
+  <problem>
+    <description><![CDATA[레벨과 경험치를 입력받아 다음 레벨까지 필요한 경험치를 계산하세요.
+레벨 10 이상: 경험치가 1000 이상이면 "레벨업 가능", 나머지는 부족한 경험치 출력
+레벨 10 미만: 경험치가 500 이상이면 "레벨업 가능", 나머지는 부족한 경험치 출력]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[8 300]]></input>
+    <output><![CDATA[200 경험치 부족]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[level, exp = input().split()
+level = int(level)
+exp = int(exp)
+if level >= 10:
+    if exp >= 1000:
+        print("레벨업 가능")
+    else:
+        need = 1000 - exp
+        print(f"{need} 경험치 부족")
+else:
+    if exp >= 500:
+        print("레벨업 가능")
+    else:
+        need = 500 - exp
+        print(f"{need} 경험치 부족")]]></solution>
+  </problem>
+
+  <!-- 문제 18: 도서 대출 -->
+  <problem>
+    <description><![CDATA[회원등급과 연체일수를 입력받아 대출 가능 여부를 확인하세요.
+우수회원: 연체일이 0일이면 "5권 대출 가능", 7일 이하 "3권 대출 가능", 나머지 "대출 불가"
+일반회원: 연체일이 0일이면 "3권 대출 가능", 나머지 "대출 불가"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[우수회원 3]]></input>
+    <output><![CDATA[3권 대출 가능]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[grade, overdue = input().split()
+overdue = int(overdue)
+if grade == "우수회원":
+    if overdue == 0:
+        print("5권 대출 가능")
+    elif overdue <= 7:
+        print("3권 대출 가능")
+    else:
+        print("대출 불가")
+else:
+    if overdue == 0:
+        print("3권 대출 가능")
+    else:
+        print("대출 불가")]]></solution>
+  </problem>
+
+  <!-- 문제 19: 주차 요금 -->
+  <problem>
+    <description><![CDATA[차량 종류와 주차 시간을 입력받아 주차 요금을 계산하세요.
+일반차: 2시간 이하 2000원, 4시간 이하 4000원, 나머지는 시간당 1500원 추가
+대형차: 2시간 이하 3000원, 4시간 이하 6000원, 나머지는 시간당 2000원 추가]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[일반차 6]]></input>
+    <output><![CDATA[7000원]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[car_type, hours = input().split()
+hours = int(hours)
+if car_type == "일반차":
+    if hours <= 2:
+        print("2000원")
+    elif hours <= 4:
+        print("4000원")
+    else:
+        fee = 4000 + (hours - 4) * 1500
+        print(f"{fee}원")
+else:
+    if hours <= 2:
+        print("3000원")
+    elif hours <= 4:
+        print("6000원")
+    else:
+        fee = 6000 + (hours - 4) * 2000
+        print(f"{fee}원")]]></solution>
+  </problem>
+
+  <!-- 문제 20: 영화 관람등급 -->
+  <problem>
+    <description><![CDATA[영화 등급과 나이를 입력받아 관람 가능 여부를 확인하세요.
+전체관람가: 나이 관계없이 "관람 가능"
+12세이상: 12세 미만 "관람 불가", 나머지 "관람 가능"
+15세이상: 15세 미만 "관람 불가", 나머지 "관람 가능"  
+청소년관람불가: 18세 미만 "관람 불가", 나머지 "관람 가능"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[15세이상 14]]></input>
+    <output><![CDATA[관람 불가]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[rating, age = input().split()
+age = int(age)
+if rating == "전체관람가":
+    print("관람 가능")
+elif rating == "12세이상":
+    if age < 12:
+        print("관람 불가")
+    else:
+        print("관람 가능")
+elif rating == "15세이상":
+    if age < 15:
+        print("관람 불가")
+    else:
+        print("관람 가능")
+elif rating == "청소년관람불가":
+    if age < 18:
+        print("관람 불가")
+    else:
+        print("관람 가능")]]></solution>
+  </problem>
+
+  <!-- 문제 21: 카페 주문 -->
+  <problem>
+    <description><![CDATA[음료와 사이즈를 입력받아 가격을 계산하세요.
+아메리카노: Small 3000원, Medium 3500원, Large 4000원
+라떼: Small 4000원, Medium 4500원, Large 5000원  
+프라푸치노: Small 5000원, Medium 5500원, Large 6000원
+기타 음료: "메뉴에 없음"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[라떼 Medium]]></input>
+    <output><![CDATA[4500원]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[drink, size = input().split()
+if drink == "아메리카노":
+    if size == "Small":
+        print("3000원")
+    elif size == "Medium":
+        print("3500원")
+    else:
+        print("4000원")
+elif drink == "라떼":
+    if size == "Small":
+        print("4000원")
+    elif size == "Medium":
+        print("4500원")
+    else:
+        print("5000원")
+elif drink == "프라푸치노":
+    if size == "Small":
+        print("5000원")
+    elif size == "Medium":
+        print("5500원")
+    else:
+        print("6000원")
+else:
+    print("메뉴에 없음")]]></solution>
+  </problem>
+
+  <!-- 문제 22: 운동 강도 -->
+  <problem>
+    <description><![CDATA[나이와 심박수를 입력받아 운동 강도를 판별하세요.
+50세 이상: 심박수 100 이하 "가벼운 운동", 130 이하 "보통 운동", 나머지 "고강도 운동"  
+50세 미만: 심박수 120 이하 "가벼운 운동", 150 이하 "보통 운동", 나머지 "고강도 운동"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[35 140]]></input>
+    <output><![CDATA[보통 운동]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[age, heartrate = input().split()
+age = int(age)
+heartrate = int(heartrate)
+if age >= 50:
+    if heartrate <= 100:
+        print("가벼운 운동")
+    elif heartrate <= 130:
+        print("보통 운동")
+    else:
+        print("고강도 운동")
+else:
+    if heartrate <= 120:
+        print("가벼운 운동")
+    elif heartrate <= 150:
+        print("보통 운동")
+    else:
+        print("고강도 운동")]]></solution>
+  </problem>
+
+  <!-- 문제 23: 휴대폰 요금제 -->
+  <problem>
+    <description><![CDATA[요금제와 사용량을 입력받아 추가 요금을 계산하세요.
+기본요금제(30GB): 사용량 30GB 이하 "추가 요금 없음", 나머지는 GB당 1000원 추가
+프리미엄(100GB): 사용량 100GB 이하 "추가 요금 없음", 나머지는 GB당 500원 추가
+무제한: "추가 요금 없음"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[기본요금제 45]]></input>
+    <output><![CDATA[15000원 추가]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[plan, usage = input().split()
+usage = int(usage)
+if plan == "기본요금제":
+    if usage <= 30:
+        print("추가 요금 없음")
+    else:
+        extra = (usage - 30) * 1000
+        print(f"{extra}원 추가")
+elif plan == "프리미엄":
+    if usage <= 100:
+        print("추가 요금 없음")
+    else:
+        extra = (usage - 100) * 500
+        print(f"{extra}원 추가")
+else:
+    print("추가 요금 없음")]]></solution>
+  </problem>
+
+  <!-- 문제 24: 택배 배송 -->
+  <problem>
+    <description><![CDATA[무게와 배송지를 입력받아 배송비를 계산하세요.
+서울/경기: 5kg 이하 3000원, 10kg 이하 5000원, 나머지는 kg당 800원 추가
+기타지역: 5kg 이하 4000원, 10kg 이하 7000원, 나머지는 kg당 1000원 추가]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[12 서울]]></input>
+    <output><![CDATA[6600원]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[weight, region = input().split()
+weight = int(weight)
+if region == "서울" or region == "경기":
+    if weight <= 5:
+        print("3000원")
+    elif weight <= 10:
+        print("5000원")
+    else:
+        fee = 5000 + (weight - 10) * 800
+        print(f"{fee}원")
+else:
+    if weight <= 5:
+        print("4000원")
+    elif weight <= 10:
+        print("7000원")
+    else:
+        fee = 7000 + (weight - 10) * 1000
+        print(f"{fee}원")]]></solution>
+  </problem>
+
+  <!-- 문제 25: 신용등급 -->
+  <problem>
+    <description><![CDATA[연소득과 신용점수를 입력받아 대출 한도를 계산하세요.
+연소득 5000만원 이상: 신용점수 800 이상 "1억원", 700 이상 "5000만원", 나머지 "3000만원"  
+연소득 3000만원 이상: 신용점수 700 이상 "3000만원", 나머지 "1000만원"
+연소득 3000만원 미만: "대출 불가"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[4000 750]]></input>
+    <output><![CDATA[3000만원]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[income, credit = input().split()
+income = int(income)
+credit = int(credit)
+if income >= 5000:
+    if credit >= 800:
+        print("1억원")
+    elif credit >= 700:
+        print("5000만원")
+    else:
+        print("3000만원")
+elif income >= 3000:
+    if credit >= 700:
+        print("3000만원")
+    else:
+        print("1000만원")
+else:
+    print("대출 불가")]]></solution>
+  </problem>
+
+  <!-- 문제 26: 펜션 예약 -->
+  <problem>
+    <description><![CDATA[계절과 인원수를 입력받아 펜션 요금을 계산하세요.
+성수기(여름/겨울): 4인 이하 150000원, 8인 이하 250000원, 나머지 350000원
+비수기(봄/가을): 4인 이하 100000원, 8인 이하 180000원, 나머지 250000원]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[여름 6]]></input>
+    <output><![CDATA[250000원]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[season, people = input().split()
+people = int(people)
+if season == "여름" or season == "겨울":
+    if people <= 4:
+        print("150000원")
+    elif people <= 8:
+        print("250000원")
+    else:
+        print("350000원")
+else:
+    if people <= 4:
+        print("100000원")
+    elif people <= 8:
+        print("180000원")
+    else:
+        print("250000원")]]></solution>
+  </problem>
+
+  <!-- 문제 27: 온라인 쇼핑 -->
+  <problem>
+    <description><![CDATA[회원등급과 구매금액을 입력받아 적립포인트를 계산하세요.
+다이아몬드: 100000원 이상 10% 적립, 50000원 이상 7% 적립, 나머지 5% 적립
+골드: 100000원 이상 7% 적립, 50000원 이상 5% 적립, 나머지 3% 적립
+실버: 금액 관계없이 2% 적립]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[골드 75000]]></input>
+    <output><![CDATA[3750포인트]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[grade, amount = input().split()
+amount = int(amount)
+if grade == "다이아몬드":
+    if amount >= 100000:
+        point = int(amount * 0.1)
+    elif amount >= 50000:
+        point = int(amount * 0.07)
+    else:
+        point = int(amount * 0.05)
+elif grade == "골드":
+    if amount >= 100000:
+        point = int(amount * 0.07)
+    elif amount >= 50000:
+        point = int(amount * 0.05)
+    else:
+        point = int(amount * 0.03)
+else:
+    point = int(amount * 0.02)
+print(f"{point}포인트")]]></solution>
+  </problem>
+
+  <!-- 문제 28: 헬스장 회원권 -->
+  <problem>
+    <description><![CDATA[연령대와 운동 목적을 입력받아 추천 프로그램을 출력하세요.
+20-30대: 다이어트 "고강도 인터벌", 근력증가 "웨이트 트레이닝", 나머지 "기본 운동"
+40대 이상: 다이어트 "유산소 중심", 근력증가 "가벼운 웨이트", 나머지 "스트레칭"
+20대 미만: 목적 관계없이 "성장기 운동"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[25 근력증가]]></input>
+    <output><![CDATA[웨이트 트레이닝]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[age, purpose = input().split()
+age = int(age)
+if age >= 20 and age <= 39:
+    if purpose == "다이어트":
+        print("고강도 인터벌")
+    elif purpose == "근력증가":
+        print("웨이트 트레이닝")
+    else:
+        print("기본 운동")
+elif age >= 40:
+    if purpose == "다이어트":
+        print("유산소 중심")
+    elif purpose == "근력증가":
+        print("가벼운 웨이트")
+    else:
+        print("스트레칭")
+else:
+    print("성장기 운동")]]></solution>
+  </problem>
+
+  <!-- 문제 29: 항공료 할인 -->
+  <problem>
+    <description><![CDATA[좌석등급과 예약시기를 입력받아 최종 요금을 계산하세요.
+이코노미: 30일전 예약 300000원, 7일전 예약 350000원, 나머지 400000원
+비즈니스: 30일전 예약 800000원, 7일전 예약 900000원, 나머지 1000000원  
+퍼스트: 예약시기 관계없이 1500000원]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[비즈니스 20]]></input>
+    <output><![CDATA[900000원]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[seat_class, days = input().split()
+days = int(days)
+if seat_class == "이코노미":
+    if days >= 30:
+        print("300000원")
+    elif days >= 7:
+        print("350000원")
+    else:
+        print("400000원")
+elif seat_class == "비즈니스":
+    if days >= 30:
+        print("800000원")
+    elif days >= 7:
+        print("900000원")
+    else:
+        print("1000000원")
+else:
+    print("1500000원")]]></solution>
+  </problem>
+
+  <!-- 문제 30: 종합 의료 검진 -->
+  <problem>
+    <description><![CDATA[나이와 검진 항목 수를 입력받아 검진 비용을 계산하세요.
+40세 이상: 기본검진(5항목 이하) 200000원, 정밀검진(10항목 이하) 400000원, 종합검진 600000원
+40세 미만: 기본검진(5항목 이하) 150000원, 정밀검진(10항목 이하) 300000원, 종합검진 450000원]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[35 8]]></input>
+    <output><![CDATA[300000원]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[age, items = input().split()
+age = int(age)
+items = int(items)
+if age >= 40:
+    if items <= 5:
+        print("200000원")
+    elif items <= 10:
+        print("400000원")
+    else:
+        print("600000원")
+else:
+    if items <= 5:
+        print("150000원")
+    elif items <= 10:
+        print("300000원")
+    else:
+        print("450000원")]]></solution>
+  </problem>
+</problems>

@@ -11,8 +11,8 @@ y: 7]]></output>
     <hint>x, y = point 형태로 언패킹할 수 있습니다.</hint>
     <solution><![CDATA[point = (3, 7)
 x, y = point
-print(f"x: {x}")
-print(f"y: {y}")]]></solution>
+print("x:", x)
+print("y:", y)]]></solution>
   </problem>
 
   <!-- 문제 2: 학생 정보 언패킹 -->
@@ -27,9 +27,9 @@ print(f"y: {y}")]]></solution>
     <hint>name, age, grade = student 형태로 언패킹하세요.</hint>
     <solution><![CDATA[student = ('박영희', 19, 'A+')
 name, age, grade = student
-print(f"이름: {name}")
-print(f"나이: {age}")
-print(f"성적: {grade}")]]></solution>
+print("이름:", name)
+print("나이:", age)
+print("성적:", grade)]]></solution>
   </problem>
 
   <!-- 문제 3: RGB 색상 언패킹 -->
@@ -44,9 +44,9 @@ print(f"성적: {grade}")]]></solution>
     <hint>red, green, blue = color 형태로 언패킹하세요.</hint>
     <solution><![CDATA[color = (0, 128, 255)
 red, green, blue = color
-print(f"빨강: {red}")
-print(f"초록: {green}")
-print(f"파랑: {blue}")]]></solution>
+print("빨강:", red)
+print("초록:", green)
+print("파랑:", blue)]]></solution>
   </problem>
 
   <!-- 문제 4: 날짜 정보 언패킹 -->
@@ -59,28 +59,20 @@ print(f"파랑: {blue}")]]></solution>
     <hint>언패킹 후 f-string으로 출력하세요.</hint>
     <solution><![CDATA[date = (2024, 12, 25)
 year, month, day = date
-print(f"{year}년 {month}월 {day}일")]]></solution>
+print(str(year) + "년 " + str(month) + "월 " + str(day) + "일")]]></solution>
   </problem>
 
-  <!-- 문제 5: 함수 반환값 언패킹 -->
+  <!-- 문제 5: 시간 정보 언패킹 -->
   <problem>
-    <description>다음 함수가 반환하는 tuple을 언패킹해서 각각 출력하세요.</description>
-    <code><![CDATA[def get_user_info():
-    return "김민수", 25, "서울"
-
+    <description>현재 시간 tuple (14, 30, 45)를 hour, minute, second 변수에 언패킹하고 "14시 30분 45초" 형태로 출력하세요.</description>
+    <code><![CDATA[current_time = (14, 30, 45)
 # 여기에 언패킹 코드 작성]]></code>
     <input></input>
-    <output><![CDATA[이름: 김민수
-나이: 25
-도시: 서울]]></output>
-    <hint>함수 호출 결과를 바로 언패킹할 수 있습니다.</hint>
-    <solution><![CDATA[def get_user_info():
-    return "김민수", 25, "서울"
-
-name, age, city = get_user_info()
-print(f"이름: {name}")
-print(f"나이: {age}")
-print(f"도시: {city}")]]></solution>
+    <output><![CDATA[14시 30분 45초]]></output>
+    <hint>시, 분, 초 순서로 언패킹하고 f-string으로 출력하세요.</hint>
+    <solution><![CDATA[current_time = (14, 30, 45)
+hour, minute, second = current_time
+print(str(hour) + "시 " + str(minute) + "분 " + str(second) + "초")]]></solution>
   </problem>
 
   <!-- 문제 6: * 사용한 언패킹 -->
@@ -95,9 +87,9 @@ print(f"도시: {city}")]]></solution>
     <hint>first, second, *rest = numbers 형태로 사용하세요.</hint>
     <solution><![CDATA[numbers = (1, 2, 3, 4, 5)
 first, second, *rest = numbers
-print(f"첫 번째: {first}")
-print(f"두 번째: {second}")
-print(f"나머지: {rest}")]]></solution>
+print("첫 번째:", first)
+print("두 번째:", second)
+print("나머지:", rest)]]></solution>
   </problem>
 
   <!-- 문제 7: 캐릭터 스탯 언패킹 -->
@@ -110,7 +102,7 @@ print(f"나머지: {rest}")]]></solution>
     <hint>언패킹 후 한 줄로 출력하세요.</hint>
     <solution><![CDATA[character = (150, 80, 35)
 hp, mp, attack = character
-print(f"체력: {hp}, 마나: {mp}, 공격력: {attack}")]]></solution>
+print("체력: " + str(hp) + ", 마나: " + str(mp) + ", 공격력: " + str(attack))]]></solution>
   </problem>
 
   <!-- 문제 8: 좌표 교환 -->
@@ -125,11 +117,11 @@ point2 = (30, 40)
     <hint>tuple 언패킹을 이용하면 쉽게 값을 교환할 수 있습니다.</hint>
     <solution><![CDATA[point1 = (10, 20)
 point2 = (30, 40)
-print(f"교환 전: {point1}, {point2}")
+print("교환 전:", point1, ",", point2)
 
 # tuple 언패킹으로 교환
 point1, point2 = point2, point1
-print(f"교환 후: {point1}, {point2}")]]></solution>
+print("교환 후:", point1, ",", point2)]]></solution>
   </problem>
 
   <!-- 문제 9: 첫 번째와 마지막 요소 -->
@@ -143,8 +135,8 @@ print(f"교환 후: {point1}, {point2}")]]></solution>
     <hint>first, *_, last = data 형태를 사용하면 중간 요소들을 무시할 수 있습니다.</hint>
     <solution><![CDATA[data = (5, 10, 15, 20, 25)
 first, *_, last = data
-print(f"첫 번째: {first}")
-print(f"마지막: {last}")]]></solution>
+print("첫 번째:", first)
+print("마지막:", last)]]></solution>
   </problem>
 
   <!-- 문제 10: 중첩 tuple 언패킹 -->
@@ -161,7 +153,7 @@ student_info, grade_info = student_data
 name, age = student_info
 subject, score = grade_info
 
-print(f"학생: {name} ({age}세)")
-print(f"과목: {subject}, 점수: {score}점")]]></solution>
+print("학생: " + name + " (" + str(age) + "세)")
+print("과목: " + subject + ", 점수: " + str(score) + "점")]]></solution>
   </problem>
 </problems>

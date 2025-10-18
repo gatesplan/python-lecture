@@ -10,7 +10,7 @@
     <hint>tuple.count() 메서드를 사용하세요.</hint>
     <solution><![CDATA[numbers = (1, 2, 3, 2, 4, 2, 5)
 count_2 = numbers.count(2)
-print(f"2의 개수: {count_2}개")]]></solution>
+print("2의 개수: " + str(count_2) + "개")]]></solution>
   </problem>
 
   <!-- 문제 2: count() 문자열 -->
@@ -23,7 +23,7 @@ print(f"2의 개수: {count_2}개")]]></solution>
     <hint>문자열도 count() 메서드로 셀 수 있습니다.</hint>
     <solution><![CDATA[fruits = ('사과', '바나나', '사과', '오렌지', '사과')
 apple_count = fruits.count('사과')
-print(f"사과의 개수: {apple_count}개")]]></solution>
+print("사과의 개수: " + str(apple_count) + "개")]]></solution>
   </problem>
 
   <!-- 문제 3: count() 없는 요소 -->
@@ -36,7 +36,7 @@ print(f"사과의 개수: {apple_count}개")]]></solution>
     <hint>없는 요소를 count()하면 0이 반환됩니다.</hint>
     <solution><![CDATA[colors = ('빨강', '파랑', '노랑', '빨강')
 green_count = colors.count('초록')
-print(f"초록의 개수: {green_count}개")]]></solution>
+print("초록의 개수: " + str(green_count) + "개")]]></solution>
   </problem>
 
   <!-- 문제 4: index() 기본 사용 -->
@@ -49,7 +49,7 @@ print(f"초록의 개수: {green_count}개")]]></solution>
     <hint>tuple.index() 메서드를 사용하면 첫 번째로 나타나는 위치를 찾습니다.</hint>
     <solution><![CDATA[animals = ('고양이', '강아지', '토끼', '햄스터')
 rabbit_index = animals.index('토끼')
-print(f"토끼의 위치: {rabbit_index}")]]></solution>
+print("토끼의 위치:", rabbit_index)]]></solution>
   </problem>
 
   <!-- 문제 5: index() 첫 번째 위치 -->
@@ -62,7 +62,7 @@ print(f"토끼의 위치: {rabbit_index}")]]></solution>
     <hint>index() 메서드는 항상 첫 번째로 찾은 위치를 반환합니다.</hint>
     <solution><![CDATA[numbers = (5, 3, 7, 3, 9, 3)
 first_3_index = numbers.index(3)
-print(f"3의 첫 번째 위치: {first_3_index}")]]></solution>
+print("3의 첫 번째 위치:", first_3_index)]]></solution>
   </problem>
 
   <!-- 문제 6: count()와 index() 조합 -->
@@ -77,8 +77,8 @@ A 학점 첫 위치: 0]]></output>
     <solution><![CDATA[grades = ('A', 'B', 'A', 'C', 'A', 'B')
 a_count = grades.count('A')
 a_index = grades.index('A')
-print(f"A 학점 개수: {a_count}개")
-print(f"A 학점 첫 위치: {a_index}")]]></solution>
+print("A 학점 개수: " + str(a_count) + "개")
+print("A 학점 첫 위치:", a_index)]]></solution>
   </problem>
 
   <!-- 문제 7: 여러 요소 찾기 -->
@@ -93,8 +93,8 @@ print(f"A 학점 첫 위치: {a_index}")]]></solution>
     <solution><![CDATA[weekdays = ('월', '화', '수', '목', '금', '토', '일')
 wed_index = weekdays.index('수')
 fri_index = weekdays.index('금')
-print(f"수요일 위치: {wed_index}")
-print(f"금요일 위치: {fri_index}")]]></solution>
+print("수요일 위치:", wed_index)
+print("금요일 위치:", fri_index)]]></solution>
   </problem>
 
   <!-- 문제 8: 범위 지정 index() -->
@@ -107,7 +107,7 @@ print(f"금요일 위치: {fri_index}")]]></solution>
     <hint>index(값, 시작위치) 형태로 사용할 수 있습니다.</hint>
     <solution><![CDATA[numbers = (1, 5, 3, 5, 7, 5, 9)
 index_from_2 = numbers.index(5, 2)
-print(f"인덱스 2부터 찾은 5의 위치: {index_from_2}")]]></solution>
+print("인덱스 2부터 찾은 5의 위치:", index_from_2)]]></solution>
   </problem>
 
   <!-- 문제 9: 실용적인 예제 - 메뉴 선택 -->
@@ -121,7 +121,7 @@ print(f"인덱스 2부터 찾은 5의 위치: {index_from_2}")]]></solution>
     <solution><![CDATA[menu = ('김치찌개', '된장찌개', '부대찌개', '순두부찌개')
 budae_index = menu.index('부대찌개')
 menu_number = budae_index + 1
-print(f"부대찌개는 {menu_number}번 메뉴입니다")]]></solution>
+print("부대찌개는 " + str(menu_number) + "번 메뉴입니다")]]></solution>
   </problem>
 
   <!-- 문제 10: 종합 문제 -->
@@ -141,7 +141,7 @@ reversed_scores = tuple(reversed(scores))
 last_85_from_end = reversed_scores.index(85)
 last_85_index = len(scores) - 1 - last_85_from_end
 
-print(f"85점 개수: {count_85}개")
-print(f"마지막 85점 위치: {last_85_index}")]]></solution>
+print("85점 개수: " + str(count_85) + "개")
+print("마지막 85점 위치:", last_85_index)]]></solution>
   </problem>
 </problems>

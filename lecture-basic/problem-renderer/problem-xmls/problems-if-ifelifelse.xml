@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Python Basic Lecture 5 - 4. if-elif-else문 연습문제
+  
+  복습 키워드 결합:
+  - print() 출력함수 및 키워드 파라메터
+  - f-string 문법
+  - 문자열 빌트인 함수들
+  - list 자료형 및 빌트인 함수들
+  - *list 언패킹
+  - input() 입력 함수
+  - type() 자료형 확인
+  - 자료형 변환 (캐스팅)
+  
+  새로운 내용: if-elif-else문
+  - if-elif (else 없음)
+  - if-elif-else (else 있음)
+  - 다중 elif 구조
+  - 조건 필터링 순서의 중요성
+-->
+<problems>
+  <!-- 문제 1: 기본 if-elif-else -->
+  <problem>
+    <description><![CDATA[점수를 입력받아 90점 이상이면 "A등급", 80점 이상이면 "B등급", 70점 이상이면 "C등급", 나머지는 "F등급"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[85]]></input>
+    <output><![CDATA[B등급]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[score = int(input())
+if score >= 90:
+    print("A등급")
+elif score >= 80:
+    print("B등급")
+elif score >= 70:
+    print("C등급")
+else:
+    print("F등급")]]></solution>
+  </problem>
+
+  <!-- 문제 2: if-elif (else 없음) -->
+  <problem>
+    <description><![CDATA[나이를 입력받아 10세 미만이면 "어린이", 20세 미만이면 "청소년", 65세 이상이면 "노인"을 출력하는 프로그램을 작성하세요. (20~64세는 아무것도 출력하지 않음)]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[25]]></input>
+    <output><![CDATA[]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[age = int(input())
+if age < 10:
+    print("어린이")
+elif age < 20:
+    print("청소년")
+elif age >= 65:
+    print("노인")]]></solution>
+  </problem>
+
+  <!-- 문제 3: 온도 분류 -->
+  <problem>
+    <description><![CDATA[온도를 입력받아 30도 이상이면 "더움", 20도 이상이면 "따뜻함", 10도 이상이면 "선선함", 0도 이상이면 "추움", 나머지는 "매우 추움"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[15]]></input>
+    <output><![CDATA[선선함]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[temp = int(input())
+if temp >= 30:
+    print("더움")
+elif temp >= 20:
+    print("따뜻함")
+elif temp >= 10:
+    print("선선함")
+elif temp >= 0:
+    print("추움")
+else:
+    print("매우 추움")]]></solution>
+  </problem>
+
+  <!-- 문제 4: 순서 중요성 - 잘못된 예 -->
+  <problem>
+    <description><![CDATA[점수를 입력받아 다음과 같이 출력하려고 합니다. 하지만 조건 순서가 잘못되어 항상 "낮음"만 출력됩니다. 올바른 순서로 수정하세요.
+원하는 동작: 80점 이상 "높음", 60점 이상 "보통", 나머지 "낮음"]]></description>
+    <code><![CDATA[# 잘못된 코드
+score = int(input())
+if score >= 0:      # 문제가 있는 조건
+    print("낮음")
+elif score >= 60:
+    print("보통") 
+elif score >= 80:
+    print("높음")]]></code>
+    <input><![CDATA[85]]></input>
+    <output><![CDATA[높음]]></output>
+    <hint><![CDATA[조건들은 위에서부터 순서대로 검사됩니다.]]></hint>
+    <solution><![CDATA[score = int(input())
+if score >= 80:
+    print("높음")
+elif score >= 60:
+    print("보통")
+else:
+    print("낮음")]]></solution>
+  </problem>
+
+  <!-- 문제 5: 문자열 길이 분류 -->
+  <problem>
+    <description><![CDATA[문자열을 입력받아 길이가 10자 이상이면 "긴 문자열", 5자 이상이면 "중간 문자열", 1자 이상이면 "짧은 문자열", 나머지는 "빈 문자열"을 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[Hello]]></input>
+    <output><![CDATA[중간 문자열]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[text = input()
+if len(text) >= 10:
+    print("긴 문자열")
+elif len(text) >= 5:
+    print("중간 문자열")
+elif len(text) >= 1:
+    print("짧은 문자열")
+else:
+    print("빈 문자열")]]></solution>
+  </problem>
+
+  <!-- 문제 6: 리스트 크기 분류 (else 없음) -->
+  <problem>
+    <description><![CDATA[리스트의 길이에 따라 분류하는 프로그램을 작성하세요. 길이가 5 이상이면 "대형", 3 이상이면 "중형", 1 이상이면 "소형"을 출력합니다. (빈 리스트는 아무것도 출력하지 않음)]]></description>
+    <code><![CDATA[my_list = [1, 2, 3, 4]]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[중형]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[my_list = [1, 2, 3, 4]
+if len(my_list) >= 5:
+    print("대형")
+elif len(my_list) >= 3:
+    print("중형")
+elif len(my_list) >= 1:
+    print("소형")]]></solution>
+  </problem>
+
+  <!-- 문제 7: 문자 분류 -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자 하나를 입력받아 숫자이면 "숫자", 대문자이면 "대문자", 소문자이면 "소문자", 나머지는 "기타"를 출력하는 프로그램을 작성하세요.]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[A]]></input>
+    <output><![CDATA[대문자]]></output>
+    <hint><![CDATA[.isdigit(), .isupper(), .islower() 메서드가 도움이 됩니다.]]></hint>
+    <solution><![CDATA[char = input()
+if char.isdigit():
+    print("숫자")
+elif char.isupper():
+    print("대문자")
+elif char.islower():
+    print("소문자")
+else:
+    print("기타")]]></solution>
+  </problem>
+
+  <!-- 문제 8: BMI 분류 -->
+  <problem>
+    <description><![CDATA[체중과 키를 입력받아 BMI를 계산하고 다음과 같이 분류하세요.
+25 이상: "비만"
+23 이상: "과체중"  
+18.5 이상: "정상"
+나머지: "저체중"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[70 1.7]]></input>
+    <output><![CDATA[정상]]></output>
+    <hint><![CDATA[BMI = 체중 / (키 * 키)]]></hint>
+    <solution><![CDATA[weight, height = input().split()
+weight = float(weight)
+height = float(height)
+bmi = weight / (height * height)
+if bmi >= 25:
+    print("비만")
+elif bmi >= 23:
+    print("과체중")
+elif bmi >= 18.5:
+    print("정상")
+else:
+    print("저체중")]]></solution>
+  </problem>
+
+  <!-- 문제 9: 시험 결과 (다중 elif) -->
+  <problem>
+    <description><![CDATA[점수를 입력받아 다음과 같이 세분화된 등급을 출력하세요.
+95점 이상: "A+"
+90점 이상: "A"
+85점 이상: "B+"
+80점 이상: "B"
+75점 이상: "C+"
+70점 이상: "C"
+나머지: "F"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[87]]></input>
+    <output><![CDATA[B+]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[score = int(input())
+if score >= 95:
+    print("A+")
+elif score >= 90:
+    print("A")
+elif score >= 85:
+    print("B+")
+elif score >= 80:
+    print("B")
+elif score >= 75:
+    print("C+")
+elif score >= 70:
+    print("C")
+else:
+    print("F")]]></solution>
+  </problem>
+
+  <!-- 문제 10: 조건 순서 함정 -->
+  <problem>
+    <description><![CDATA[다음 코드를 보고 점수가 85일 때 어떤 결과가 출력될지 예측하고, 실제로 코드를 실행해서 확인하세요.]]></description>
+    <code><![CDATA[score = 85
+if score >= 60:
+    print("합격")
+elif score >= 80:
+    print("우수")
+elif score >= 90:
+    print("최우수")]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[합격]]></output>
+    <hint><![CDATA[첫 번째 조건이 True이면 나머지는 검사하지 않습니다.]]></hint>
+    <solution><![CDATA[score = 85
+if score >= 60:
+    print("합격")
+elif score >= 80:
+    print("우수")
+elif score >= 90:
+    print("최우수")]]></solution>
+  </problem>
+
+  <!-- 문제 11: 요일 판별 -->
+  <problem>
+    <description><![CDATA[숫자를 입력받아 요일을 출력하는 프로그램을 작성하세요.
+1: "월요일", 2: "화요일", 3: "수요일", 4: "목요일", 5: "금요일"
+6과 7: "주말", 나머지: "잘못된 입력"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[3]]></input>
+    <output><![CDATA[수요일]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[day = int(input())
+if day == 1:
+    print("월요일")
+elif day == 2:
+    print("화요일")
+elif day == 3:
+    print("수요일")
+elif day == 4:
+    print("목요일")
+elif day == 5:
+    print("금요일")
+elif day == 6 or day == 7:
+    print("주말")
+else:
+    print("잘못된 입력")]]></solution>
+  </problem>
+
+  <!-- 문제 12: 할인 계산 -->
+  <problem>
+    <description><![CDATA[구매 금액을 입력받아 할인율을 적용한 최종 금액을 출력하세요.
+100,000원 이상: 20% 할인
+50,000원 이상: 15% 할인  
+20,000원 이상: 10% 할인
+10,000원 이상: 5% 할인
+나머지: 할인 없음]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[75000]]></input>
+    <output><![CDATA[최종 금액: 63750원]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[amount = int(input())
+if amount >= 100000:
+    final = amount * 0.8
+elif amount >= 50000:
+    final = amount * 0.85
+elif amount >= 20000:
+    final = amount * 0.9
+elif amount >= 10000:
+    final = amount * 0.95
+else:
+    final = amount
+print(f"최종 금액: {int(final)}원")]]></solution>
+  </problem>
+
+  <!-- 문제 13: 문자열 타입 분류 -->
+  <problem>
+    <description><![CDATA[사용자로부터 문자열을 입력받아 다음과 같이 분류하세요.
+모두 숫자: "숫자 문자열"
+모두 알파벳: "알파벳 문자열"  
+알파벳과 숫자 혼합: "혼합 문자열"
+나머지: "특수 문자열"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[Hello123]]></input>
+    <output><![CDATA[혼합 문자열]]></output>
+    <hint><![CDATA[.isdigit(), .isalpha(), .isalnum() 메서드를 활용하세요.]]></hint>
+    <solution><![CDATA[text = input()
+if text.isdigit():
+    print("숫자 문자열")
+elif text.isalpha():
+    print("알파벳 문자열")
+elif text.isalnum():
+    print("혼합 문자열")
+else:
+    print("특수 문자열")]]></solution>
+  </problem>
+
+  <!-- 문제 14: 가격 범위별 상품 -->
+  <problem>
+    <description><![CDATA[가격을 입력받아 상품 카테고리를 출력하세요.
+1000000원 이상: "프리미엄"
+500000원 이상: "고급"
+100000원 이상: "중급"  
+10000원 이상: "일반"
+(10000원 미만은 아무것도 출력하지 않음)]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[5000]]></input>
+    <output><![CDATA[]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[price = int(input())
+if price >= 1000000:
+    print("프리미엄")
+elif price >= 500000:
+    print("고급")
+elif price >= 100000:
+    print("중급")
+elif price >= 10000:
+    print("일반")]]></solution>
+  </problem>
+
+  <!-- 문제 15: 성적 분석 -->
+  <problem>
+    <description><![CDATA[국어, 영어, 수학 점수를 입력받아 평균을 계산하고 다음과 같이 출력하세요.
+평균 90점 이상: "전체 우수"
+평균 70점 이상: "전체 보통"
+평균 50점 이상: "전체 미흡"
+나머지: "전체 부족"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[85 90 80]]></input>
+    <output><![CDATA[평균: 85.0
+전체 보통]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[scores = input().split()
+korean = int(scores[0])
+english = int(scores[1])
+math = int(scores[2])
+avg = (korean + english + math) / 3
+print(f"평균: {avg}")
+if avg >= 90:
+    print("전체 우수")
+elif avg >= 70:
+    print("전체 보통")
+elif avg >= 50:
+    print("전체 미흡")
+else:
+    print("전체 부족")]]></solution>
+  </problem>
+
+  <!-- 문제 16: 교통요금 계산 -->
+  <problem>
+    <description><![CDATA[나이와 거리를 입력받아 교통요금을 계산하세요.
+기본: 거리 * 100원
+65세 이상: 50% 할인
+13-18세: 20% 할인  
+7-12세: 30% 할인
+6세 이하: 무료]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[16 10]]></input>
+    <output><![CDATA[요금: 800원]]></output>
+    <hint><![CDATA[나이 조건을 먼저 확인한 후 할인율을 적용하세요.]]></hint>
+    <solution><![CDATA[age, distance = input().split()
+age = int(age)
+distance = int(distance)
+base_fee = distance * 100
+if age <= 6:
+    final_fee = 0
+elif age <= 12:
+    final_fee = int(base_fee * 0.7)
+elif age <= 18:
+    final_fee = int(base_fee * 0.8)
+elif age >= 65:
+    final_fee = int(base_fee * 0.5)
+else:
+    final_fee = base_fee
+print(f"요금: {final_fee}원")]]></solution>
+  </problem>
+
+  <!-- 문제 17: 파일 확장자 분류 -->
+  <problem>
+    <description><![CDATA[파일명을 입력받아 확장자에 따라 분류하세요.
+.jpg, .png, .gif: "이미지"
+.mp4, .avi, .mkv: "동영상"
+.txt, .doc, .pdf: "문서"
+.mp3, .wav: "음악" 
+나머지: "기타"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[photo.jpg]]></input>
+    <output><![CDATA[이미지]]></output>
+    <hint><![CDATA[.endswith() 메서드를 활용하세요.]]></hint>
+    <solution><![CDATA[filename = input()
+if filename.endswith(".jpg") or filename.endswith(".png") or filename.endswith(".gif"):
+    print("이미지")
+elif filename.endswith(".mp4") or filename.endswith(".avi") or filename.endswith(".mkv"):
+    print("동영상")
+elif filename.endswith(".txt") or filename.endswith(".doc") or filename.endswith(".pdf"):
+    print("문서")
+elif filename.endswith(".mp3") or filename.endswith(".wav"):
+    print("음악")
+else:
+    print("기타")]]></solution>
+  </problem>
+
+  <!-- 문제 18: 순서 바꾸기 실험 -->
+  <problem>
+    <description><![CDATA[다음 두 코드의 차이점을 이해하기 위해 점수 85를 입력했을 때의 결과를 예측해보세요. 올바른 버전으로 수정하여 "우수"가 출력되도록 하세요.]]></description>
+    <code><![CDATA[score = 85
+# 버전 1 (잘못된 순서)
+if score >= 70:
+    print("보통")
+elif score >= 80:
+    print("우수")
+elif score >= 90:
+    print("최우수")
+
+# 버전 2 (올바른 순서)
+# 여기에 코드를 작성하세요</code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[우수]]></output>
+    <hint><![CDATA[높은 조건부터 검사해야 정확한 분류가 가능합니다.]]></hint>
+    <solution><![CDATA[score = 85
+# 올바른 순서
+if score >= 90:
+    print("최우수")
+elif score >= 80:
+    print("우수")
+elif score >= 70:
+    print("보통")]]></solution>
+  </problem>
+
+  <!-- 문제 19: 계절 판별 -->
+  <problem>
+    <description><![CDATA[월(month)을 입력받아 계절을 출력하세요.
+12, 1, 2: "겨울"
+3, 4, 5: "봄"
+6, 7, 8: "여름"  
+9, 10, 11: "가을"
+나머지: "잘못된 월"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[7]]></input>
+    <output><![CDATA[여름]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[month = int(input())
+if month == 12 or month == 1 or month == 2:
+    print("겨울")
+elif month == 3 or month == 4 or month == 5:
+    print("봄")
+elif month == 6 or month == 7 or month == 8:
+    print("여름")
+elif month == 9 or month == 10 or month == 11:
+    print("가을")
+else:
+    print("잘못된 월")]]></solution>
+  </problem>
+
+  <!-- 문제 20: 복잡한 조건 (else 없음) -->
+  <problem>
+    <description><![CDATA[숫자를 입력받아 다음 조건에 맞으면 메시지를 출력하세요. (조건에 맞지 않으면 아무것도 출력하지 않음)
+100의 배수: "큰 수"
+10의 배수: "중간 수"
+5의 배수: "작은 수"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[50]]></input>
+    <output><![CDATA[작은 수]]></output>
+    <hint><![CDATA[나머지 연산자 %를 사용하여 배수를 확인하세요.]]></hint>
+    <solution><![CDATA[num = int(input())
+if num % 100 == 0:
+    print("큰 수")
+elif num % 10 == 0:
+    print("중간 수")
+elif num % 5 == 0:
+    print("작은 수")]]></solution>
+  </problem>
+
+  <!-- 문제 21: 비밀번호 강도 -->
+  <problem>
+    <description><![CDATA[비밀번호를 입력받아 강도를 판별하세요.
+길이 12자 이상: "매우 강함"
+길이 8자 이상: "강함"
+길이 6자 이상: "보통"
+길이 4자 이상: "약함"
+나머지: "매우 약함"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[mypassword]]></input>
+    <output><![CDATA[강함]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[password = input()
+if len(password) >= 12:
+    print("매우 강함")
+elif len(password) >= 8:
+    print("강함")
+elif len(password) >= 6:
+    print("보통")
+elif len(password) >= 4:
+    print("약함")
+else:
+    print("매우 약함")]]></solution>
+  </problem>
+
+  <!-- 문제 22: 리스트 첫 번째 요소 분류 -->
+  <problem>
+    <description><![CDATA[리스트의 첫 번째 요소 타입에 따라 분류하세요.]]></description>
+    <code><![CDATA[my_list = [3.14, "hello", 42]]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[실수]]></output>
+    <hint><![CDATA[type() 함수와 int, float, str 타입을 비교하세요.]]></hint>
+    <solution><![CDATA[my_list = [3.14, "hello", 42]
+if type(my_list[0]) == int:
+    print("정수")
+elif type(my_list[0]) == float:
+    print("실수")
+elif type(my_list[0]) == str:
+    print("문자열")
+else:
+    print("기타")]]></solution>
+  </problem>
+
+  <!-- 문제 23: 중복 문자 판별 -->
+  <problem>
+    <description><![CDATA[문자열에서 특정 문자의 개수에 따라 분류하세요. 'a' 문자의 개수를 세어서:
+5개 이상: "매우 많음"
+3개 이상: "많음"  
+1개 이상: "있음"
+(없으면 아무것도 출력하지 않음)]]></description>
+    <code><![CDATA[text = "banana"]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[많음]]></output>
+    <hint><![CDATA[.count() 메서드를 사용하세요.]]></hint>
+    <solution><![CDATA[text = "banana"
+count = text.count('a')
+if count >= 5:
+    print("매우 많음")
+elif count >= 3:
+    print("많음")
+elif count >= 1:
+    print("있음")]]></solution>
+  </problem>
+
+  <!-- 문제 24: 조건 함정 문제 -->
+  <problem>
+    <description><![CDATA[다음 코드에서 변수 x = 25일 때 어떤 결과가 나올지 예측하고, 의도한 대로 "중간"이 출력되도록 수정하세요.
+의도: 30 이상 "큰 값", 20 이상 "중간", 10 이상 "작은 값", 나머지 "매우 작음"]]></description>
+    <code><![CDATA[x = 25
+if x >= 10:
+    print("작은 값")
+elif x >= 20:
+    print("중간") 
+elif x >= 30:
+    print("큰 값")
+else:
+    print("매우 작음")]]></code>
+    <input><![CDATA[]]></input>
+    <output><![CDATA[중간]]></output>
+    <hint><![CDATA[조건의 순서를 다시 생각해보세요.]]></hint>
+    <solution><![CDATA[x = 25
+if x >= 30:
+    print("큰 값")
+elif x >= 20:
+    print("중간")
+elif x >= 10:
+    print("작은 값")
+else:
+    print("매우 작음")]]></solution>
+  </problem>
+
+  <!-- 문제 25: 종합 문제 -->
+  <problem>
+    <description><![CDATA[학생의 이름과 점수를 "이름:점수" 형태로 입력받아 다음과 같이 출력하세요.
+90점 이상: "이름님은 최우수입니다"
+80점 이상: "이름님은 우수입니다"  
+70점 이상: "이름님은 보통입니다"
+60점 이상: "이름님은 미흡합니다"
+나머지: "이름님은 재시험이 필요합니다"]]></description>
+    <code><![CDATA[]]></code>
+    <input><![CDATA[김철수:85]]></input>
+    <output><![CDATA[김철수님은 우수입니다]]></output>
+    <hint><![CDATA[]]></hint>
+    <solution><![CDATA[data = input().split(":")
+name = data[0]
+score = int(data[1])
+if score >= 90:
+    print(f"{name}님은 최우수입니다")
+elif score >= 80:
+    print(f"{name}님은 우수입니다")
+elif score >= 70:
+    print(f"{name}님은 보통입니다")
+elif score >= 60:
+    print(f"{name}님은 미흡합니다")
+else:
+    print(f"{name}님은 재시험이 필요합니다")]]></solution>
+  </problem>
+</problems>

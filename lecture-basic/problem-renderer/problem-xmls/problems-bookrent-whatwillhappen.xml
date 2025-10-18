@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description>다음 코드를 읽고 실행 결과를 예측하세요.</description>
+    <code><![CDATA[class Apple:
+    def __init__(self, monkey, cat):
+        self.monkey = monkey
+        self.cat = cat
+        self.dog = False
+
+    def __str__(self):
+        return f'{self.monkey}'
+
+class Mango:
+    def __init__(self, tiger, lion):
+        self.tiger = tiger
+        self.lion = lion
+        self.elephant = []
+
+    def palm(self, apple):
+        if not apple.dog:
+            apple.dog = True
+            self.elephant.append(apple)
+            return f'{apple.monkey} 대여함.'
+        else:
+            return f'{apple.monkey} 대여 중']]></code>
+    <input><![CDATA[apple1 = Apple("Python 입문", "김저자")
+mango1 = Mango("2023001", "홍학생")
+result = mango1.palm(apple1)
+print(result)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[def palm(self, apple):
+    if not apple.dog:  # apple.dog가 False이므로 조건 만족
+        apple.dog = True  # apple.dog를 True로 변경
+        self.elephant.append(apple)  # apple을 elephant 리스트에 추가
+        return f'{apple.monkey} 대여함.'  # "Python 입문 대여함." 반환
+    else:
+        return f'{apple.monkey} 대여 중'
+
+# 결과: Python 입문 대여함.]]></solution>
+  </problem>
+
+  <problem>
+    <description>다음 코드를 읽고 실행 결과를 예측하세요.</description>
+    <code><![CDATA[class Apple:
+    def __init__(self, monkey, cat):
+        self.monkey = monkey
+        self.cat = cat
+        self.dog = False
+
+    def __str__(self):
+        return f'{self.monkey}'
+
+class Mango:
+    def __init__(self, tiger, lion):
+        self.tiger = tiger
+        self.lion = lion
+        self.elephant = []
+
+    def palm(self, apple):
+        if not apple.dog:
+            apple.dog = True
+            self.elephant.append(apple)
+            return f'{apple.monkey} 대여함.'
+        else:
+            return f'{apple.monkey} 대여 중']]></code>
+    <input><![CDATA[apple1 = Apple("자료구조", "이교수")
+mango1 = Mango("2023002", "박학생")
+result1 = mango1.palm(apple1)
+result2 = mango1.palm(apple1)
+print(result1)
+print(result2)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[def palm(self, apple):
+    # 첫 번째 호출: apple1.dog는 False
+    if not apple.dog:  # 조건 만족
+        apple.dog = True  # apple1.dog를 True로 변경
+        self.elephant.append(apple)
+        return f'{apple.monkey} 대여함.'  # "자료구조 대여함." 반환
+    
+    # 두 번째 호출: apple1.dog는 이미 True
+    if not apple.dog:  # 조건 불만족
+        ...
+    else:
+        return f'{apple.monkey} 대여 중'  # "자료구조 대여 중" 반환
+
+# 결과: 
+# 자료구조 대여함.
+# 자료구조 대여 중]]></solution>
+  </problem>
+
+  <problem>
+    <description>다음 코드를 읽고 실행 결과를 예측하세요.</description>
+    <code><![CDATA[class Apple:
+    def __init__(self, monkey, cat):
+        self.monkey = monkey
+        self.cat = cat
+        self.dog = False
+
+    def __str__(self):
+        return f'{self.monkey}'
+
+class Mango:
+    def __init__(self, tiger, lion):
+        self.tiger = tiger
+        self.lion = lion
+        self.elephant = []
+
+    def palm(self, apple):
+        if not apple.dog:
+            apple.dog = True
+            self.elephant.append(apple)
+            return f'{apple.monkey} 대여함.'
+        else:
+            return f'{apple.monkey} 대여 중']]></code>
+    <input><![CDATA[apple1 = Apple("알고리즘", "정저자")
+apple2 = Apple("데이터베이스", "최교수")
+mango1 = Mango("2023003", "김학생")
+
+result1 = mango1.palm(apple1)
+result2 = mango1.palm(apple2)
+print(len(mango1.elephant))
+print(result1)
+print(result2)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[def palm(self, apple):
+    # apple1에 대한 호출: apple1.dog는 False
+    if not apple.dog:  # 조건 만족
+        apple.dog = True
+        self.elephant.append(apple)  # elephant 리스트에 apple1 추가
+        return f'{apple.monkey} 대여함.'  # "알고리즘 대여함."
+    
+    # apple2에 대한 호출: apple2.dog는 False
+    if not apple.dog:  # 조건 만족
+        apple.dog = True
+        self.elephant.append(apple)  # elephant 리스트에 apple2 추가
+        return f'{apple.monkey} 대여함.'  # "데이터베이스 대여함."
+
+# elephant 리스트에는 apple1, apple2 두 개의 객체가 들어감
+# 결과:
+# 2
+# 알고리즘 대여함.
+# 데이터베이스 대여함.]]></solution>
+  </problem>
+
+  <problem>
+    <description>다음 코드를 읽고 실행 결과를 예측하세요.</description>
+    <code><![CDATA[class Apple:
+    def __init__(self, monkey, cat):
+        self.monkey = monkey
+        self.cat = cat
+        self.dog = False
+
+    def __str__(self):
+        return f'{self.monkey}'
+
+class Mango:
+    def __init__(self, tiger, lion):
+        self.tiger = tiger
+        self.lion = lion
+        self.elephant = []
+
+    def palm(self, apple):
+        if not apple.dog:
+            apple.dog = True
+            self.elephant.append(apple)
+            return f'{apple.monkey} 대여함.'
+        else:
+            return f'{apple.monkey} 대여 중']]></code>
+    <input><![CDATA[apple1 = Apple("운영체제", "서교수")
+mango1 = Mango("2023004", "이학생")
+mango2 = Mango("2023005", "조학생")
+
+result1 = mango1.palm(apple1)
+result2 = mango2.palm(apple1)
+print(result1)
+print(result2)
+print(apple1.dog)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[def palm(self, apple):
+    # mango1.palm(apple1) 호출: apple1.dog는 False
+    if not apple.dog:  # 조건 만족
+        apple.dog = True  # apple1.dog를 True로 변경
+        self.elephant.append(apple)
+        return f'{apple.monkey} 대여함.'  # "운영체제 대여함."
+    
+    # mango2.palm(apple1) 호출: apple1.dog는 이미 True
+    if not apple.dog:  # 조건 불만족
+        ...
+    else:
+        return f'{apple.monkey} 대여 중'  # "운영체제 대여 중"
+
+# apple1.dog는 mango1에 의해 True로 변경됨
+# 결과:
+# 운영체제 대여함.
+# 운영체제 대여 중
+# True]]></solution>
+  </problem>
+</problems>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 올바른 라이브러리 임포트 채우기 -->
+  <problem>
+    <description>다음 Distance 클래스가 올바르게 동작하도록 필요한 라이브러리를 임포트하세요.</description>
+    <code><![CDATA[# 여기에 필요한 라이브러리를 임포트하세요
+
+class Distance:
+    def __init__(self, x1, y1, x2, y2):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+
+    def distance(self):
+        return math.sqrt((self.x2 - self.x1) ** 2 + (self.y2 - self.y1) ** 2)]]></code>
+    <input><![CDATA[distance1 = Distance(2, 3, 3, 5)
+print(f"두 점 사이의 거리는 {distance1.distance():.2f}")]]></input>
+    <output><![CDATA[두 점 사이의 거리는 2.24]]></output>
+    <hint></hint>
+    <solution><![CDATA[import math  # 정답
+
+class Distance:
+    def __init__(self, x1, y1, x2, y2):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+
+    def distance(self):
+        return math.sqrt((self.x2 - self.x1) ** 2 + (self.y2 - self.y1) ** 2)]]></solution>
+  </problem>
+
+  <!-- 문제 2: distance() 메서드 구현하기 -->
+  <problem>
+    <description>다음 Distance 클래스의 distance() 메서드를 완성하여 두 점 사이의 거리가 계산되도록 하세요.</description>
+    <code><![CDATA[import math
+
+class Distance:
+    def __init__(self, x1, y1, x2, y2):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+
+    def distance(self):
+        # 두 점 사이의 거리를 계산하는 공식을 구현하세요
+        pass]]></code>
+    <input><![CDATA[distance1 = Distance(2, 3, 3, 5)
+print(f"두 점 사이의 거리는 {distance1.distance():.2f}")]]></input>
+    <output><![CDATA[두 점 사이의 거리는 2.24]]></output>
+    <hint></hint>
+    <solution><![CDATA[import math
+
+class Distance:
+    def __init__(self, x1, y1, x2, y2):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+
+    def distance(self):
+        return math.sqrt((self.x2 - self.x1) ** 2 + (self.y2 - self.y1) ** 2)  # 정답]]></solution>
+  </problem>
+
+  <!-- 문제 3: 여러 점들 중 가장 먼 거리 구하기 -->
+  <problem>
+    <description>Distance 클래스를 사용해서 점들 (2,3), (3,5), (5,6), (-1,2) 사이의 모든 거리를 구하여 그 중 가장 먼 거리를 소수점 2자리로 출력하는 함수를 작성하세요.</description>
+    <code><![CDATA[import math
+
+class Distance:
+    def __init__(self, x1, y1, x2, y2):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+
+    def distance(self):
+        return math.sqrt((self.x2 - self.x1) ** 2 + (self.y2 - self.y1) ** 2)
+
+# 여기에 함수를 작성하세요
+def find_max_distance():
+    pass]]></code>
+    <input><![CDATA[print(f"가장 먼 거리: {find_max_distance():.2f}")]]></input>
+    <output><![CDATA[가장 먼 거리: 6.40]]></output>
+    <hint></hint>
+    <solution><![CDATA[import math
+
+class Distance:
+    def __init__(self, x1, y1, x2, y2):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+
+    def distance(self):
+        return math.sqrt((self.x2 - self.x1) ** 2 + (self.y2 - self.y1) ** 2)
+
+def find_max_distance():
+    points = [(2, 3), (3, 5), (5, 6), (-1, 2)]
+    max_dist = 0
+
+    for i in range(len(points)):
+        for j in range(i + 1, len(points)):
+            x1, y1 = points[i]
+            x2, y2 = points[j]
+            dist = Distance(x1, y1, x2, y2).distance()
+            if dist > max_dist:
+                max_dist = dist
+
+    return max_dist]]></solution>
+  </problem>
+</problems>

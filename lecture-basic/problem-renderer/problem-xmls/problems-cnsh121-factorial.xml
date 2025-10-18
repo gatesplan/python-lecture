@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: range() 파라메터 완성 -->
+  <problem>
+    <description>다음 팩토리얼 함수에서 range()의 세 파라메터를 바르게 채우세요.</description>
+    <code><![CDATA[def factorial(n):
+    result = 1
+    for i in range(____, ____, ____):  # 여기를 채우세요
+        result *= i
+
+    return result]]></code>
+    <input><![CDATA[print(factorial(5))
+print(factorial(4))]]></input>
+    <output><![CDATA[120
+24]]></output>
+    <hint></hint>
+    <solution><![CDATA[def factorial(n):
+    result = 1
+    for i in range(n, 0, -1):  # 정답: n, 0, -1
+        result *= i
+
+    return result]]></solution>
+  </problem>
+
+  <!-- 문제 2: 팩토리얼 계산 로직 완성 -->
+  <problem>
+    <description>다음 팩토리얼 함수에서 계산 로직 한 줄을 완성하세요.</description>
+    <code><![CDATA[def factorial(n):
+    result = 1
+    for i in range(n, 0, -1):
+        # 여기에 한 줄을 작성하세요
+
+    return result]]></code>
+    <input><![CDATA[print(factorial(5))
+print(factorial(3))]]></input>
+    <output><![CDATA[120
+6]]></output>
+    <hint></hint>
+    <solution><![CDATA[def factorial(n):
+    result = 1
+    for i in range(n, 0, -1):
+        result *= i  # 정답: result *= i
+
+    return result]]></solution>
+  </problem>
+
+  <!-- 문제 3: 재귀함수로 팩토리얼 구현 -->
+  <problem>
+    <description>다음 반복문 기반 팩토리얼 함수와 같은 기능을 하는 재귀함수를 구현하세요.</description>
+    <code><![CDATA[def factorial(n):
+    result = 1
+    for i in range(n, 0, -1):
+        result *= i
+    return result
+
+# 재귀함수 버전을 작성하세요
+def factorial_recursive(n):
+    pass]]></code>
+    <input><![CDATA[print(factorial_recursive(5))
+print(factorial_recursive(4))]]></input>
+    <output><![CDATA[120
+24]]></output>
+    <hint></hint>
+    <solution><![CDATA[def factorial_recursive(n):
+    if n == 1:
+        return 1
+    return n * factorial_recursive(n-1)]]></solution>
+  </problem>
+</problems>

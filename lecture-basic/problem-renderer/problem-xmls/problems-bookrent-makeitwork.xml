@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description><![CDATA[Book 클래스의 __str__ 메서드를 구현하세요. 이 메서드는 책 객체를 문자열로 표현할 때 호출되며, 책의 제목(title)을 반환해야 합니다.]]></description>
+    <code><![CDATA[class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+        self.is_rented = False
+
+    def __str__(self):
+        # 작성하세요
+        pass
+
+class Student:
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+        self.rented_books = []
+
+    def rent_book(self, book):
+        if not book.is_rented:
+            book.is_rented = True
+            self.rented_books.append(book)
+            return f'{book.title} 대여함.'
+        else:
+            return f'{book.title} 대여 중']]></code>
+    <input><![CDATA[book1 = Book("파이썬 프로그래밍", "김파이")
+book2 = Book("자바 입문서", "박자바")
+book3 = Book("웹 개발 가이드", "이웹")
+
+print(book1)
+print(book2)
+print(book3)]]></input>
+    <output><![CDATA[파이썬 프로그래밍
+자바 입문서
+웹 개발 가이드]]></output>
+    <hint></hint>
+    <solution><![CDATA[    def __str__(self):
+        return f'{self.title}']]></solution>
+  </problem>
+
+  <problem>
+    <description><![CDATA[Student 클래스의 rent_book 메서드를 구현하세요. 이 메서드는 책을 대여하는 기능을 수행합니다. 책이 이미 대여 중이 아니라면 책을 대여하고 학생의 대여 목록에 추가한 후 "책제목 대여함." 메시지를 반환해야 합니다. 책이 이미 대여 중이라면 "책제목 대여 중" 메시지를 반환해야 합니다.]]></description>
+    <code><![CDATA[class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+        self.is_rented = False
+
+    def __str__(self):
+        return f'{self.title}'
+
+class Student:
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+        self.rented_books = []
+
+    def rent_book(self, book):
+        # 작성하세요
+        pass]]></code>
+    <input><![CDATA[book1 = Book("파이썬 프로그래밍", "김파이")
+book2 = Book("자바 입문서", "박자바")
+student = Student("2024001", "홍길동")
+
+print(student.rent_book(book1))
+print(student.rent_book(book2))
+print(student.rent_book(book1))
+print(len(student.rented_books))
+print(book1.is_rented)]]></input>
+    <output><![CDATA[파이썬 프로그래밍 대여함.
+자바 입문서 대여함.
+파이썬 프로그래밍 대여 중
+2
+True]]></output>
+    <hint></hint>
+    <solution><![CDATA[    def rent_book(self, book):
+        if not book.is_rented:
+            book.is_rented = True
+            self.rented_books.append(book)
+            return f'{book.title} 대여함.'
+        else:
+            return f'{book.title} 대여 중']]></solution>
+  </problem>
+</problems>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  조건문 연습 문제 세트 4
+  
+  구성:
+  - 단순 if문: 3문제
+  - if-else문: 3문제  
+  - if-elif-else문: 4문제
+  - 논리연산자: 5문제
+  - 중첩 if문: 5문제
+  총 20문제
+-->
+<exercise>
+  <title>Exercise 4. 조건문 종합 연습</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <section title="Section 1 - 기본 if문" file="problems-if-simple.xml" count="3"/>
+    <section title="Section 2 - if-else문" file="problems-if-ifelse.xml" count="3"/>
+    <section title="Section 3 - if-elif-else문" file="problems-if-ifelifelse.xml" count="4"/>
+    <section title="Section 4 - 논리 연산자" file="problems-if-andornot.xml" count="5"/>
+    <section title="Section 5 - 중첩 조건문" file="problems-if-nested.xml" count="5"/>
+  </sections>
+</exercise>

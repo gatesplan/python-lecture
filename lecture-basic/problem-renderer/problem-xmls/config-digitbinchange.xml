@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  진수변환 연습문제 설정 파일
+
+  사용법:
+  URL에서 ?config=config-digitbinchange 로 접근
+
+  포함된 문제:
+  - 10진수를 2진수로 변환 (제어문 → 재귀함수)
+  - 10진수를 2진수로 변환 (재귀함수 → 제어문)
+  - 10진수를 n진수로 변환 (재귀함수 → 제어문)
+-->
+<exercise>
+  <title>Exercise - 진수변환 (Number Base Conversion)</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- true: 해설 표시, false: 해설 숨김 -->
+  </settings>
+  <sections>
+    <section title="Section 1 - 진수변환 문제" file="problems-digitbinchange.xml" count="3"/>
+  </sections>
+</exercise>

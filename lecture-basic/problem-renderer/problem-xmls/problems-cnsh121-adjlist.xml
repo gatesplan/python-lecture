@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 인접리스트 구현 -->
+  <problem>
+    <description>다음 코드에서 for문 내부를 구현하여 인접리스트를 만들도록 완성하세요.</description>
+    <code><![CDATA[V, E = map(int, input().split())
+adj = [[] for _ in range(V)]
+
+for i in range(E):
+    # 여기에 인접리스트를 만드는 코드를 작성하세요
+    pass
+
+print(adj)]]></code>
+    <input><![CDATA[4 3
+0 1
+2 0
+3 2]]></input>
+    <output><![CDATA[[[1, 2], [0], [0, 3], [2]]]]></output>
+    <hint></hint>
+    <solution><![CDATA[V, E = map(int, input().split())
+adj = [[] for _ in range(V)]
+
+for i in range(E):
+    u, v = map(int, input().split())  # 정답
+    adj[u].append(v)                   # 정답
+    adj[v].append(u)                   # 정답
+
+print(adj)]]></solution>
+  </problem>
+
+  <!-- 문제 2: 인접리스트 결과 예측 -->
+  <problem>
+    <description>입력을 4 3 → 0 1 → 2 0 → 3 2 순으로 주었을 때 만들어지는 인접리스트를 구하세요.</description>
+    <code><![CDATA[V, E = map(int, input().split())
+adj = [[] for _ in range(V)]
+
+for i in range(E):
+    u, v = map(int, input().split())
+    adj[u].append(v)
+    adj[v].append(u)
+
+print(adj)]]></code>
+    <input><![CDATA[4 3
+0 1
+2 0
+3 2]]></input>
+    <output><![CDATA[[[1, 2], [0], [0, 3], [2]]]]></output>
+    <hint></hint>
+    <solution><![CDATA[# 단계별 인접리스트 구성:
+# 초기: adj = [[], [], [], []]
+
+# 0 1 입력:
+# adj[0].append(1) -> adj[0] = [1]
+# adj[1].append(0) -> adj[1] = [0]
+# 결과: adj = [[1], [0], [], []]
+
+# 2 0 입력:
+# adj[2].append(0) -> adj[2] = [0]
+# adj[0].append(2) -> adj[0] = [1, 2]
+# 결과: adj = [[1, 2], [0], [0], []]
+
+# 3 2 입력:
+# adj[3].append(2) -> adj[3] = [2]
+# adj[2].append(3) -> adj[2] = [0, 3]
+# 최종 결과: adj = [[1, 2], [0], [0, 3], [2]]]]></solution>
+  </problem>
+</problems>

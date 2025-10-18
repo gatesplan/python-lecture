@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 평균 점수 계산 구현 -->
+  <problem>
+    <description>다음 Student 클래스의 avg() 메서드를 완성하여 평균 점수가 계산되도록 하세요.</description>
+    <code><![CDATA[class Student:
+    def __init__(self, name, scores):
+        self.name = name
+        self.scores = scores
+
+    def avg(self):
+        # 평균 점수를 계산하는 코드를 작성하세요
+        pass
+
+    def grade(self):
+        avg = self.avg()
+        if avg >= 90:
+            return 'A'
+        elif avg > 80:
+            return 'B'
+        elif avg > 70:
+            return 'C'
+        elif avg > 60:
+            return 'D'
+        elif avg > 50:
+            return 'E'
+        else:
+            return 'F']]></code>
+    <input><![CDATA[student1 = Student('홍길동', [90, 75, 80])
+print(f"평균 점수: {student1.avg():.2f}")]]></input>
+    <output><![CDATA[평균 점수: 81.67]]></output>
+    <hint></hint>
+    <solution><![CDATA[def avg(self):
+    return sum(self.scores) / len(self.scores)  # 정답]]></solution>
+  </problem>
+
+  <!-- 문제 2: 학점 계산 구현 -->
+  <problem>
+    <description>다음 Student 클래스의 grade() 메서드를 완성하여 평균 점수에 따른 학점이 계산되도록 하세요.</description>
+    <code><![CDATA[class Student:
+    def __init__(self, name, scores):
+        self.name = name
+        self.scores = scores
+
+    def avg(self):
+        return sum(self.scores) / len(self.scores)
+
+    def grade(self):
+        avg = self.avg()
+        # 학점 계산 로직을 구현하세요
+        # 90 이상: A, 80 초과: B, 70 초과: C, 60 초과: D, 50 초과: E, 그 외: F
+        pass]]></code>
+    <input><![CDATA[student1 = Student('홍길동', [90, 75, 80])
+student2 = Student('김철수', [95, 88, 92])
+student3 = Student('이영희', [60, 65, 70])
+print(f"{student1.name}: {student1.grade()}")
+print(f"{student2.name}: {student2.grade()}")
+print(f"{student3.name}: {student3.grade()}")]]></input>
+    <output><![CDATA[홍길동: B
+김철수: A
+이영희: D]]></output>
+    <hint></hint>
+    <solution><![CDATA[def grade(self):
+    avg = self.avg()
+    if avg >= 90:
+        return 'A'
+    elif avg > 80:
+        return 'B'
+    elif avg > 70:
+        return 'C'
+    elif avg > 60:
+        return 'D'
+    elif avg > 50:
+        return 'E'
+    else:
+        return 'F']]></solution>
+  </problem>
+
+  <!-- 문제 3: 출력 형식 문제 - 소수점 2자리 -->
+  <problem>
+    <description>다음 코드에서 {} 내부를 올바르게 채워서 평균 점수가 소수점 2자리까지 출력되도록 하세요.</description>
+    <code><![CDATA[class Student:
+    def __init__(self, name, scores):
+        self.name = name
+        self.scores = scores
+
+    def avg(self):
+        return sum(self.scores) / len(self.scores)
+
+    def grade(self):
+        avg = self.avg()
+        if avg >= 90:
+            return 'A'
+        elif avg > 80:
+            return 'B'
+        elif avg > 70:
+            return 'C'
+        elif avg > 60:
+            return 'D'
+        elif avg > 50:
+            return 'E'
+        else:
+            return 'F']]></code>
+    <input><![CDATA[student1 = Student('홍길동', [90, 75, 80])
+print(f"{student1.name}의 평균 점수는 {    }이고, 등급은 {student1.grade()}입니다.")]]></input>
+    <output><![CDATA[홍길동의 평균 점수는 81.67이고, 등급은 B입니다.]]></output>
+    <hint></hint>
+    <solution><![CDATA[print(f"{student1.name}의 평균 점수는 {student1.avg():.2f}이고, 등급은 {student1.grade()}입니다.")
+# {} 내부에 student1.avg():.2f 를 입력하면 됩니다.]]></solution>
+  </problem>
+
+  <!-- 문제 4: print() 출력 형식 완성 -->
+  <problem>
+    <description>다음 코드의 print() 문을 완성하여 "P의 평균 점수는 Q(소수점2자리까지)이고, 등급은 R입니다." 형식으로 출력되도록 하세요.</description>
+    <code><![CDATA[class Student:
+    def __init__(self, name, scores):
+        self.name = name
+        self.scores = scores
+
+    def avg(self):
+        return sum(self.scores) / len(self.scores)
+
+    def grade(self):
+        avg = self.avg()
+        if avg >= 90:
+            return 'A'
+        elif avg > 80:
+            return 'B'
+        elif avg > 70:
+            return 'C'
+        elif avg > 60:
+            return 'D'
+        elif avg > 50:
+            return 'E'
+        else:
+            return 'F']]></code>
+    <input><![CDATA[student1 = Student('홍길동', [90, 75, 80])
+# 다음 print 문을 완성하세요
+print()]]></input>
+    <output><![CDATA[홍길동의 평균 점수는 81.67이고, 등급은 B입니다.]]></output>
+    <hint></hint>
+    <solution><![CDATA[print(f"{student1.name}의 평균 점수는 {student1.avg():.2f}이고, 등급은 {student1.grade()}입니다.")]]></solution>
+  </problem>
+</problems>

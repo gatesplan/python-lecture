@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: range() 파라메터 완성 -->
+  <problem>
+    <description>다음 카운트다운 함수에서 range() 파라메터를 완성하여 카운트다운이 되도록 하세요.</description>
+    <code><![CDATA[def countdown(n):
+    for i in range(____, ____, ____):  # 여기를 채우세요
+        print(i)]]></code>
+    <input><![CDATA[countdown(5)]]></input>
+    <output><![CDATA[5
+4
+3
+2
+1]]></output>
+    <hint></hint>
+    <solution><![CDATA[def countdown(n):
+    for i in range(n, 0, -1):  # 정답: n, 0, -1
+        print(i)]]></solution>
+  </problem>
+
+  <!-- 문제 2: 재귀함수로 카운트다운 구현 -->
+  <problem>
+    <description>다음 반복문 기반 카운트다운 함수와 같은 기능을 하는 재귀함수를 구현하세요.</description>
+    <code><![CDATA[def countdown(n):
+    for i in range(n, 0, -1):
+        print(i)
+
+# 재귀함수 버전을 작성하세요
+def countdown_recursive(n):
+    pass]]></code>
+    <input><![CDATA[countdown_recursive(4)]]></input>
+    <output><![CDATA[4
+3
+2
+1]]></output>
+    <hint></hint>
+    <solution><![CDATA[def countdown_recursive(n):
+    if n < 1:
+        return
+    print(n)
+    countdown_recursive(n-1)]]></solution>
+  </problem>
+</problems>

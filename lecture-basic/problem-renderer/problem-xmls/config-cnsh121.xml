@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CNSH-121 클래스 연습문제 설정
+  
+  사용법:
+  URL에서 ?config=config-cnsh121 로 접근
+  
+  포함 문제 유형:
+  - What Will Happen: 코드 실행 결과 예측 문제
+  - Make It Work: 비어있는 메서드 구현 문제
+  - Extend Functionality: 새로운 기능 추가 문제
+-->
+<exercise>
+  <title>Exercise - CNSH-121 Class Problems</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- true: 해설 표시, false: 해설 숨김 -->
+  </settings>
+  <sections>
+    <!-- 모든 CNSH-121 클래스 문제들에서 랜덤 추출 -->
+    <concatenate title="CNSH-121 Class Problems - Random Mix (20 Problems)" count="20">
+      <source file="problems-bookpublish-whatwillhappen.xml"/>
+      <source file="problems-bookpublish-makeitwork.xml"/>
+      <source file="problems-bookpublish-extendfunctionality.xml"/>
+      <source file="problems-bookrent-whatwillhappen.xml"/>
+      <source file="problems-bookrent-makeitwork.xml"/>
+      <source file="problems-bookrent-extendfunctionality.xml"/>
+      <source file="problems-movieticket-whatwillhappen.xml"/>
+      <source file="problems-movieticket-makeitwork.xml"/>
+      <source file="problems-movieticket-extendfunctionality.xml"/>
+      <source file="problems-distance-whatwillhappen.xml"/>
+      <source file="problems-distance-makeitwork.xml"/>
+      <source file="problems-distance-extendfunctionality.xml"/>
+      <source file="problems-scoremean-whatwillhappen.xml"/>
+      <source file="problems-scoremean-makeitwork.xml"/>
+      <source file="problems-scoremean-extendfunctionality.xml"/>
+    </concatenate>
+  </sections>
+</exercise>

@@ -23,7 +23,7 @@ print(length)]]></solution>
     <hint>max() 함수를 사용하면 최대값을 구할 수 있습니다.</hint>
     <solution><![CDATA[scores = (85, 92, 78, 96, 88)
 highest = max(scores)
-print(f"최고 점수: {highest}")]]></solution>
+print("최고 점수:", highest)]]></solution>
   </problem>
 
   <!-- 문제 3: min() 함수 -->
@@ -36,7 +36,7 @@ print(f"최고 점수: {highest}")]]></solution>
     <hint>min() 함수를 사용하면 최소값을 구할 수 있습니다.</hint>
     <solution><![CDATA[temperatures = (-5, 3, -2, 7, 1)
 lowest = min(temperatures)
-print(f"최저 온도: {lowest}도")]]></solution>
+print("최저 온도: " + str(lowest) + "도")]]></solution>
   </problem>
 
   <!-- 문제 4: sum() 함수 -->
@@ -49,7 +49,7 @@ print(f"최저 온도: {lowest}도")]]></solution>
     <hint>sum() 함수를 사용하면 모든 요소의 합을 구할 수 있습니다.</hint>
     <solution><![CDATA[prices = (1500, 3000, 2500, 4000)
 total = sum(prices)
-print(f"총 금액: {total}원")]]></solution>
+print("총 금액: " + str(total) + "원")]]></solution>
   </problem>
 
   <!-- 문제 5: sorted() 함수 - 오름차순 -->
@@ -121,7 +121,7 @@ else:
     <hint>enumerate() 함수에 start=1 옵션을 사용하세요.</hint>
     <solution><![CDATA[subjects = ('국어', '영어', '수학', '과학')
 for i, subject in enumerate(subjects, start=1):
-    print(f"{i}. {subject}")]]></solution>
+    print(str(i) + ". " + subject)]]></solution>
   </problem>
 
   <!-- 문제 10: 여러 함수 조합 -->
@@ -141,9 +141,9 @@ average = total / len(exam_scores)
 highest = max(exam_scores)
 lowest = min(exam_scores)
 
-print(f"총점: {total}점")
-print(f"평균: {average:.1f}점")
-print(f"최고점: {highest}점")
-print(f"최저점: {lowest}점")]]></solution>
+print("총점: " + str(total) + "점")
+print("평균: " + str(round(average, 1)) + "점")
+print("최고점: " + str(highest) + "점")
+print("최저점: " + str(lowest) + "점")]]></solution>
   </problem>
 </problems>

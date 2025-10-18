@@ -5,7 +5,7 @@
     <code></code>
     <input></input>
     <output><![CDATA[[2, 4, 6, 8, 10, 12, 14, 16, 18, 20]]]></output>
-    <hint>[x for x in range(1, 21) if 조건] 형태에서 x % 2 == 0 조건을 사용하세요.</hint>
+    <hint></hint>
     <solution><![CDATA[# 1부터 20까지 중 짝수만
 even_numbers = [x for x in range(1, 21) if x % 2 == 0]
 print(even_numbers)]]></solution>
@@ -16,7 +16,7 @@ print(even_numbers)]]></solution>
     <code><![CDATA[scores = [85, 67, 92, 78, 95, 73, 89, 64, 91]]]></code>
     <input></input>
     <output><![CDATA[[85, 92, 95, 89, 91]]]></output>
-    <hint>score >= 80 조건을 사용하세요.</hint>
+    <hint></hint>
     <solution><![CDATA[# 80점 이상인 점수만 필터링
 scores = [85, 67, 92, 78, 95, 73, 89, 64, 91]
 high_scores = [score for score in scores if score >= 80]
@@ -28,7 +28,7 @@ print(high_scores)]]></solution>
     <code><![CDATA[words = ['cat', 'elephant', 'dog', 'python', 'ant', 'tiger']]]></code>
     <input></input>
     <output><![CDATA[['ELEPHANT', 'PYTHON', 'TIGER']]]></output>
-    <hint>len(word) >= 5 조건과 word.upper() 변환을 함께 사용하세요.</hint>
+    <hint></hint>
     <solution><![CDATA[# 길이가 5 이상인 단어만 대문자로 변환
 words = ['cat', 'elephant', 'dog', 'python', 'ant', 'tiger']
 long_words = [word.upper() for word in words if len(word) >= 5]
@@ -40,7 +40,7 @@ print(long_words)]]></solution>
     <code></code>
     <input></input>
     <output><![CDATA[[9, 36, 81, 144, 225]]]></output>
-    <hint>x % 3 == 0 조건과 x ** 2 변환을 함께 사용하세요.</hint>
+    <hint></hint>
     <solution><![CDATA[# 1부터 15까지 중 3의 배수만 제곱
 multiples_of_3_squared = [x ** 2 for x in range(1, 16) if x % 3 == 0]
 print(multiples_of_3_squared)]]></solution>
@@ -51,7 +51,7 @@ print(multiples_of_3_squared)]]></solution>
     <code><![CDATA[numbers = [-3, 7, -1, 0, 5, -8, 2, -4, 9]]]></code>
     <input></input>
     <output><![CDATA[[7, 5, 2, 9]]]></output>
-    <hint>num > 0 조건을 사용하세요.</hint>
+    <hint></hint>
     <solution><![CDATA[# 양수만 필터링
 numbers = [-3, 7, -1, 0, 5, -8, 2, -4, 9]
 positive_numbers = [num for num in numbers if num > 0]
@@ -63,7 +63,7 @@ print(positive_numbers)]]></solution>
     <code><![CDATA[text = "hello programming world"]]></code>
     <input></input>
     <output><![CDATA[['e', 'o', 'o', 'a', 'i', 'o']]]></output>
-    <hint>char in 'aeiou' 조건을 사용하세요. 공백은 제외됩니다.</hint>
+    <hint></hint>
     <solution><![CDATA[# 문자열에서 모음만 추출
 text = "hello programming world"
 vowels = [char for char in text if char in 'aeiou']
@@ -75,7 +75,7 @@ print(vowels)]]></solution>
     <code><![CDATA[names = ['김철수', '이영희', '김미영', '박민수', '김태호', '최유진']]]></code>
     <input></input>
     <output><![CDATA[['김철수', '김미영', '김태호']]]></output>
-    <hint>name.startswith('김') 조건을 사용하세요.</hint>
+    <hint></hint>
     <solution><![CDATA[# '김'으로 시작하는 이름만 필터링
 names = ['김철수', '이영희', '김미영', '박민수', '김태호', '최유진']
 kim_names = [name for name in names if name.startswith('김')]
@@ -87,7 +87,7 @@ print(kim_names)]]></solution>
     <code></code>
     <input></input>
     <output><![CDATA[[5, 15, 25]]]></output>
-    <hint>x % 5 == 0 and x % 10 != 0 조건을 사용하세요.</hint>
+    <hint></hint>
     <solution><![CDATA[# 5의 배수이면서 10의 배수가 아닌 숫자
 special_numbers = [x for x in range(31) if x % 5 == 0 and x % 10 != 0]
 print(special_numbers)]]></solution>
@@ -98,7 +98,7 @@ print(special_numbers)]]></solution>
     <code><![CDATA[words = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig']]]></code>
     <input></input>
     <output><![CDATA[[5, 6, 4]]]></output>
-    <hint>'a' in word 조건과 len(word) 변환을 함께 사용하세요.</hint>
+    <hint></hint>
     <solution><![CDATA[# 'a'가 포함된 단어의 길이
 words = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig']
 lengths_with_a = [len(word) for word in words if 'a' in word]
@@ -110,7 +110,7 @@ print(lengths_with_a)]]></solution>
     <code><![CDATA[prices = [800, 1200, 500, 1500, 900, 2000, 750]]]></code>
     <input></input>
     <output><![CDATA[[1080.0, 1350.0, 1800.0]]]></output>
-    <hint>price >= 1000 조건과 price * 0.9 변환을 함께 사용하세요.</hint>
+    <hint></hint>
     <solution><![CDATA[# 1000원 이상 상품에 10% 할인 적용
 prices = [800, 1200, 500, 1500, 900, 2000, 750]
 discounted_prices = [price * 0.9 for price in prices if price >= 1000]

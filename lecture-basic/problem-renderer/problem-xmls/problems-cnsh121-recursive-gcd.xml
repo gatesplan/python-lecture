@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 재귀함수 종료조건 완성 -->
+  <problem>
+    <description>다음 재귀함수에서 조건식 부분을 비워두고 종료조건을 올바르게 채우세요.</description>
+    <code><![CDATA[def gcd_recursive(a: int, b: int) -> int:
+    a, b = abs(a), abs(b)
+    if ____:  # 여기를 채우세요
+        return a
+    return gcd_recursive(b, a % b)]]></code>
+    <input><![CDATA[print(gcd_recursive(48, 18))
+print(gcd_recursive(100, 25))]]></input>
+    <output><![CDATA[6
+25]]></output>
+    <hint></hint>
+    <solution><![CDATA[def gcd_recursive(a: int, b: int) -> int:
+    a, b = abs(a), abs(b)
+    if b == 0:  # 정답: b == 0
+        return a
+    return gcd_recursive(b, a % b)]]></solution>
+  </problem>
+
+  <!-- 문제 2: 재귀함수 호출 부분 완성 -->
+  <problem>
+    <description>다음 재귀함수에서 괄호 내부를 비워두고 동작하도록 채우세요.</description>
+    <code><![CDATA[def gcd_recursive(a: int, b: int) -> int:
+    a, b = abs(a), abs(b)
+    if b == 0:
+        return a
+    return gcd_recursive(____, ____)  # 여기를 채우세요]]></code>
+    <input><![CDATA[print(gcd_recursive(48, 18))
+print(gcd_recursive(100, 25))]]></input>
+    <output><![CDATA[6
+25]]></output>
+    <hint></hint>
+    <solution><![CDATA[def gcd_recursive(a: int, b: int) -> int:
+    a, b = abs(a), abs(b)
+    if b == 0:
+        return a
+    return gcd_recursive(b, a % b)  # 정답: b, a % b]]></solution>
+  </problem>
+
+  <!-- 문제 3: 재귀함수를 while문으로 변환 -->
+  <problem>
+    <description>다음 재귀함수와 같은 기능을 하는 while문 기반 함수를 구현하세요.</description>
+    <code><![CDATA[# 참고: 재귀함수 버전
+def gcd_recursive(a: int, b: int) -> int:
+    a, b = abs(a), abs(b)
+    if b == 0:
+        return a
+    return gcd_recursive(b, a % b)
+
+# 여기에 while문 버전을 작성하세요
+def gcd_while(a: int, b: int) -> int:
+    pass]]></code>
+    <input><![CDATA[print(gcd_while(48, 18))
+print(gcd_while(100, 25))]]></input>
+    <output><![CDATA[6
+25]]></output>
+    <hint></hint>
+    <solution><![CDATA[def gcd_while(a: int, b: int) -> int:
+    a, b = abs(a), abs(b)
+    if a == 0: return b
+    if b == 0: return a
+
+    while b != 0:
+        a, b = b, a % b
+
+    return a]]></solution>
+  </problem>
+</problems>

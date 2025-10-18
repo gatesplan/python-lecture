@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 기본 객체 메서드 호출 결과 예측 -->
+  <problem>
+    <description>다음 코드를 분석하고, 아래의 실행 코드가 출력하는 값을 예측하세요.</description>
+    <code><![CDATA[from datetime import date
+
+class Apple:
+    def __init__(self, monkey, cat, dog):
+        self.monkey = monkey
+        self.cat = cat
+        self.dog = dog
+    
+    def maple(self):
+        tiger = date.today().year
+        return tiger - self.dog]]></code>
+    <input><![CDATA[apple1 = Apple("소설", "김작가", 2020)
+print(apple1.maple())]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[def maple(self):
+    tiger = date.today().year  # 2025
+    return tiger - self.dog    # 2025 - 2020 = 5
+# 정답: 5]]></solution>
+  </problem>
+
+  <!-- 문제 2: 여러 객체의 메서드 호출 결과 비교 -->
+  <problem>
+    <description>다음 코드를 분석하고, 각각의 실행 결과를 순서대로 예측하세요.</description>
+    <code><![CDATA[from datetime import date
+
+class Apple:
+    def __init__(self, monkey, cat, dog):
+        self.monkey = monkey
+        self.cat = cat
+        self.dog = dog
+    
+    def maple(self):
+        tiger = date.today().year
+        return tiger - self.dog]]></code>
+    <input><![CDATA[apple1 = Apple("역사서", "박작가", 2010)
+apple2 = Apple("과학서", "이작가", 2000)
+apple3 = Apple("문학", "최작가", 2015)
+
+print(apple1.maple())
+print(apple2.maple())
+print(apple3.maple())]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[def maple(self):
+    tiger = date.today().year  # 2025
+    return tiger - self.dog
+    
+# apple1: 2025 - 2010 = 15
+# apple2: 2025 - 2000 = 25  
+# apple3: 2025 - 2015 = 10
+# 정답: 15, 25, 10]]></solution>
+  </problem>
+
+  <!-- 문제 3: 특수 케이스 - 미래 연도 -->
+  <problem>
+    <description>다음 코드를 분석하고, 실행 결과를 예측하세요. 특히 결과값의 부호에 주의하세요.</description>
+    <code><![CDATA[from datetime import date
+
+class Apple:
+    def __init__(self, monkey, cat, dog):
+        self.monkey = monkey
+        self.cat = cat
+        self.dog = dog
+    
+    def maple(self):
+        tiger = date.today().year
+        return tiger - self.dog]]></code>
+    <input><![CDATA[apple1 = Apple("미래소설", "신작가", 2030)
+apple2 = Apple("SF소설", "정작가", 2028)
+print(apple1.maple())
+print(apple2.maple())]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[def maple(self):
+    tiger = date.today().year  # 2025
+    return tiger - self.dog
+    
+# apple1: 2025 - 2030 = -5
+# apple2: 2025 - 2028 = -3
+# 미래 연도이므로 음수가 나온다
+# 정답: -5, -3]]></solution>
+  </problem>
+
+  <!-- 문제 4: 메서드 체이닝과 속성 접근 -->
+  <problem>
+    <description>다음 코드를 분석하고, 각 출력문의 결과를 예측하세요.</description>
+    <code><![CDATA[from datetime import date
+
+class Apple:
+    def __init__(self, monkey, cat, dog):
+        self.monkey = monkey
+        self.cat = cat
+        self.dog = dog
+    
+    def maple(self):
+        tiger = date.today().year
+        return tiger - self.dog]]></code>
+    <input><![CDATA[apple1 = Apple("추리소설", "홍작가", 1995)
+print(apple1.monkey)
+print(apple1.cat) 
+print(apple1.dog)
+print(apple1.maple())]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[# 객체의 속성들과 메서드 호출 결과
+print(apple1.monkey)  # "추리소설"
+print(apple1.cat)     # "홍작가"
+print(apple1.dog)     # 1995
+print(apple1.maple()) # 2025 - 1995 = 30
+# 정답: "추리소설", "홍작가", 1995, 30]]></solution>
+  </problem>
+</problems>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: Movie 클래스 분석 및 예약 시스템 이해 -->
+  <problem>
+    <description>다음 Movie 클래스를 분석하고, 주어진 코드를 실행했을 때의 출력 결과를 예측하세요.</description>
+    <code><![CDATA[class Movie:
+    def __init__(self, name, seat):
+        self.name = name
+        self.total_seats = seat
+
+    def reserve(self):
+        if self.total_seats > 0:
+            self.total_seats -= 1
+            return True
+        else:
+            return False]]></code>
+    <input><![CDATA[seat1 = Movie('ET', 5)
+result = seat1.reserve()
+print('예약 성공' if result else '예약 실패')
+
+# 추가 예약 시도
+for i in range(6):
+    result = seat1.reserve()
+    print(f"{i+2}번째 예약: {'성공' if result else '실패'}")]]></input>
+    <output><![CDATA[예약 성공
+2번째 예약: 성공
+3번째 예약: 성공
+4번째 예약: 성공
+5번째 예약: 성공
+6번째 예약: 실패
+7번째 예약: 실패]]></output>
+    <hint></hint>
+    <solution><![CDATA[class Movie:
+    def __init__(self, name, seat):
+        self.name = name
+        self.total_seats = seat
+
+    def reserve(self):
+        if self.total_seats > 0:
+            self.total_seats -= 1
+            return True
+        else:
+            return False
+
+# 처음 total_seats가 5이므로 5번까지는 예약이 가능하고,
+# 6번째부터는 좌석이 없어서 예약 실패가 됩니다.]]></solution>
+  </problem>
+
+  <!-- 문제 2: Movie 클래스 확장 -->
+  <problem>
+    <description>Movie 클래스에 cancel() 메서드를 추가하여 예약을 취소할 수 있도록 확장하세요. 취소 시 좌석 수가 증가해야 합니다.</description>
+    <code><![CDATA[class Movie:
+    def __init__(self, name, seat):
+        self.name = name
+        self.total_seats = seat
+
+    def reserve(self):
+        if self.total_seats > 0:
+            self.total_seats -= 1
+            return True
+        else:
+            return False
+
+    def cancel(self):
+        # 예약 취소 메서드를 구현하세요
+        pass]]></code>
+    <input><![CDATA[seat1 = Movie('ET', 2)
+print(f"초기 좌석 수: {seat1.total_seats}")
+
+seat1.reserve()
+print(f"1번 예약 후: {seat1.total_seats}")
+
+seat1.reserve()
+print(f"2번 예약 후: {seat1.total_seats}")
+
+seat1.cancel()
+print(f"1번 취소 후: {seat1.total_seats}")]]></input>
+    <output><![CDATA[초기 좌석 수: 2
+1번 예약 후: 1
+2번 예약 후: 0
+1번 취소 후: 1]]></output>
+    <hint></hint>
+    <solution><![CDATA[def cancel(self):
+    self.total_seats += 1  # 좌석 수 증가
+    return True]]></solution>
+  </problem>
+</problems>

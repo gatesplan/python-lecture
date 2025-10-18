@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: range() 파라메터 완성 -->
+  <problem>
+    <description>다음 짝수합 함수에서 range() 파라메터를 완성하세요.</description>
+    <code><![CDATA[def even_sum(n):
+    result = 0
+    for i in range(____):  # 여기를 채우세요
+        if i % 2 == 0:
+            result += i
+    return result]]></code>
+    <input><![CDATA[print(even_sum(10))
+print(even_sum(6))]]></input>
+    <output><![CDATA[30
+12]]></output>
+    <hint></hint>
+    <solution><![CDATA[def even_sum(n):
+    result = 0
+    for i in range(n+1):  # 정답: n+1
+        if i % 2 == 0:
+            result += i
+    return result]]></solution>
+  </problem>
+
+  <!-- 문제 2: 짝수합 계산 로직 완성 -->
+  <problem>
+    <description>다음 짝수합 함수에서 계산 로직 한 줄을 완성하세요.</description>
+    <code><![CDATA[def even_sum(n):
+    result = 0
+    for i in range(n+1):
+        if i % 2 == 0:
+            # 여기에 한 줄을 작성하세요
+    return result]]></code>
+    <input><![CDATA[print(even_sum(8))
+print(even_sum(4))]]></input>
+    <output><![CDATA[20
+6]]></output>
+    <hint></hint>
+    <solution><![CDATA[def even_sum(n):
+    result = 0
+    for i in range(n+1):
+        if i % 2 == 0:
+            result += i  # 정답: result += i
+    return result]]></solution>
+  </problem>
+
+  <!-- 문제 3: 한 줄로 바꾸기 -->
+  <problem>
+    <description>다음 짝수합 함수를 한 줄로 바꿔서 구현하세요.</description>
+    <code><![CDATA[def even_sum(n):
+    result = 0
+    for i in range(n+1):
+        if i % 2 == 0:
+            result += i
+    return result
+
+# 한 줄로 구현하세요
+def even_sum_oneline(n):
+    return ____]]></code>
+    <input><![CDATA[print(even_sum_oneline(10))
+print(even_sum_oneline(6))]]></input>
+    <output><![CDATA[30
+12]]></output>
+    <hint></hint>
+    <solution><![CDATA[def even_sum_oneline(n):
+    return sum(i for i in range(n+1) if i % 2 == 0)  # 정답]]></solution>
+  </problem>
+
+  <!-- 문제 4: 재귀함수로 구현 -->
+  <problem>
+    <description>짝수합을 재귀함수로 구현하세요.</description>
+    <code><![CDATA[def even_sum(n):
+    result = 0
+    for i in range(n+1):
+        if i % 2 == 0:
+            result += i
+    return result
+
+# 재귀함수 버전을 작성하세요
+def even_sum_recursive(n):
+    pass]]></code>
+    <input><![CDATA[print(even_sum_recursive(10))
+print(even_sum_recursive(4))]]></input>
+    <output><![CDATA[30
+6]]></output>
+    <hint></hint>
+    <solution><![CDATA[def even_sum_recursive(n):
+    if n < 0:
+        return 0
+    if n % 2 == 0:
+        return n + even_sum_recursive(n-2)
+    else:
+        return even_sum_recursive(n-1)]]></solution>
+  </problem>
+
+  <!-- 문제 5: while문으로 구현 -->
+  <problem>
+    <description>짝수합을 while문으로 구현하세요.</description>
+    <code><![CDATA[def even_sum(n):
+    result = 0
+    for i in range(n+1):
+        if i % 2 == 0:
+            result += i
+    return result
+
+# while문 버전을 작성하세요
+def even_sum_while(n):
+    pass]]></code>
+    <input><![CDATA[print(even_sum_while(8))
+print(even_sum_while(6))]]></input>
+    <output><![CDATA[20
+12]]></output>
+    <hint></hint>
+    <solution><![CDATA[def even_sum_while(n):
+    result = 0
+    i = 0
+    while i <= n:
+        if i % 2 == 0:
+            result += i
+        i += 1
+    return result]]></solution>
+  </problem>
+</problems>

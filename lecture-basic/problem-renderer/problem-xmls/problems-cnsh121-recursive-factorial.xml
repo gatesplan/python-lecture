@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 재귀함수 종료조건 완성 -->
+  <problem>
+    <description>다음 재귀 팩토리얼 함수에서 종료조건을 완성하세요.</description>
+    <code><![CDATA[def factorial(n):
+    if ____:  # 여기를 채우세요
+        return 1
+    return n * factorial(n-1)]]></code>
+    <input><![CDATA[print(factorial(5))
+print(factorial(1))]]></input>
+    <output><![CDATA[120
+1]]></output>
+    <hint></hint>
+    <solution><![CDATA[def factorial(n):
+    if n == 1:  # 정답: n == 1
+        return 1
+    return n * factorial(n-1)]]></solution>
+  </problem>
+
+  <!-- 문제 2: 재귀함수 계산 부분 완성 -->
+  <problem>
+    <description>다음 재귀 팩토리얼 함수에서 return 부분을 완성하세요.</description>
+    <code><![CDATA[def factorial(n):
+    if n == 1:
+        return 1
+    return ____  # 여기를 채우세요]]></code>
+    <input><![CDATA[print(factorial(5))
+print(factorial(4))]]></input>
+    <output><![CDATA[120
+24]]></output>
+    <hint></hint>
+    <solution><![CDATA[def factorial(n):
+    if n == 1:
+        return 1
+    return n * factorial(n-1)  # 정답: n * factorial(n-1)]]></solution>
+  </problem>
+
+  <!-- 문제 3: for문으로 재구현 -->
+  <problem>
+    <description>다음 재귀 팩토리얼 함수와 같은 기능을 하는 for문 기반 함수를 구현하세요.</description>
+    <code><![CDATA[def factorial(n):
+    if n == 1:
+        return 1
+    return n * factorial(n-1)
+
+# for문 버전을 작성하세요
+def factorial_for(n):
+    pass]]></code>
+    <input><![CDATA[print(factorial_for(5))
+print(factorial_for(4))]]></input>
+    <output><![CDATA[120
+24]]></output>
+    <hint></hint>
+    <solution><![CDATA[def factorial_for(n):
+    result = 1
+    for i in range(n, 0, -1):
+        result *= i
+    return result]]></solution>
+  </problem>
+
+  <!-- 문제 4: while문으로 재구현 -->
+  <problem>
+    <description>다음 재귀 팩토리얼 함수와 같은 기능을 하는 while문 기반 함수를 구현하세요.</description>
+    <code><![CDATA[def factorial(n):
+    if n == 1:
+        return 1
+    return n * factorial(n-1)
+
+# while문 버전을 작성하세요
+def factorial_while(n):
+    pass]]></code>
+    <input><![CDATA[print(factorial_while(5))
+print(factorial_while(3))]]></input>
+    <output><![CDATA[120
+6]]></output>
+    <hint></hint>
+    <solution><![CDATA[def factorial_while(n):
+    result = 1
+    while n > 0:
+        result *= n
+        n -= 1
+    return result]]></solution>
+  </problem>
+
+  <!-- 문제 5: call stack 설명 -->
+  <problem>
+    <description>factorial(4)를 호출했을 때 재귀함수의 call stack이 어떻게 쌓이고 해제되는지 단계별로 서술하세요.</description>
+    <code><![CDATA[def factorial(n):
+    if n == 1:
+        return 1
+    return n * factorial(n-1)]]></code>
+    <input><![CDATA[factorial(4)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[# factorial(4) call stack 과정:
+# 1. factorial(4) 호출 -> 4 * factorial(3) 대기
+# 2. factorial(3) 호출 -> 3 * factorial(2) 대기
+# 3. factorial(2) 호출 -> 2 * factorial(1) 대기
+# 4. factorial(1) 호출 -> 1 반환 (종료조건)
+# 5. factorial(2) = 2 * 1 = 2 반환
+# 6. factorial(3) = 3 * 2 = 6 반환
+# 7. factorial(4) = 4 * 6 = 24 반환
+
+# Stack: factorial(4) -> factorial(3) -> factorial(2) -> factorial(1)
+# 결과: 24 <- 6 <- 2 <- 1]]></solution>
+  </problem>
+</problems>

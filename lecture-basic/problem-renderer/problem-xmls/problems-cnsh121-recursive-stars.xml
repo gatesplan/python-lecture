@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 재귀함수 파라메터 완성 -->
+  <problem>
+    <description>다음 재귀함수가 올바르게 동작하도록 재귀 호출 파라메터를 완성하세요.</description>
+    <code><![CDATA[def stars(n):
+    if n == 1:
+        print('*')
+
+    stars(____)  # 여기를 채우세요
+    print('*'*n)]]></code>
+    <input><![CDATA[stars(4)]]></input>
+    <output><![CDATA[*
+**
+***
+****]]></output>
+    <hint></hint>
+    <solution><![CDATA[def stars(n):
+    if n == 1:
+        print('*')
+
+    stars(n-1)  # 정답: n-1
+    print('*'*n)]]></solution>
+  </problem>
+
+  <!-- 문제 2: print() 내용 완성 -->
+  <problem>
+    <description>다음 재귀함수에서 *이 올바른 개수만큼 나오도록 print() 내용을 완성하세요.</description>
+    <code><![CDATA[def stars(n):
+    if n == 1:
+        print('*')
+
+    stars(n-1)
+    print(____)  # 여기를 채우세요]]></code>
+    <input><![CDATA[stars(3)]]></input>
+    <output><![CDATA[*
+**
+***]]></output>
+    <hint></hint>
+    <solution><![CDATA[def stars(n):
+    if n == 1:
+        print('*')
+
+    stars(n-1)
+    print('*'*n)  # 정답: '*'*n]]></solution>
+  </problem>
+
+  <!-- 문제 3: 라인 순서 바꿨을 때 결과 설명 -->
+  <problem>
+    <description>다음 재귀함수에서 5번, 6번 라인(stars(n-1)과 print('*'*n))의 순서를 바꾸면 출력이 어떻게 변하는지 설명하세요.</description>
+    <code><![CDATA[def stars(n):
+    if n == 1:
+        print('*')
+
+    stars(n-1)      # 5번 라인
+    print('*'*n)    # 6번 라인]]></code>
+    <input><![CDATA[stars(3)]]></input>
+    <output></output>
+    <hint></hint>
+    <solution><![CDATA[# 원본 함수 (재귀 호출 후 출력):
+# stars(3) -> stars(2) -> stars(1) 순으로 호출
+# stars(1)에서 '*' 출력 후, 역순으로 '**', '***' 출력
+# 결과: *, **, ***
+
+# 순서를 바꾼 함수 (출력 후 재귀 호출):
+def stars_changed(n):
+    if n == 1:
+        print('*')
+
+    print('*'*n)    # 먼저 출력
+    stars_changed(n-1)  # 그 다음 재귀 호출
+
+# stars_changed(3) 호출 시
+# '***' 출력 -> stars_changed(2) 호출
+# '**' 출력 -> stars_changed(1) 호출
+# '*' 출력
+# 결과: ***, **, *
+
+# 즉, 재귀 호출 전에 출력하면 역삼각형, 재귀 호출 후에 출력하면 정삼각형이 됩니다.]]></solution>
+  </problem>
+
+  <!-- 문제 4: for문으로 재구현 -->
+  <problem>
+    <description>다음 재귀함수와 같은 기능을 하는 for문 기반 함수를 구현하세요.</description>
+    <code><![CDATA[def stars(n):
+    if n == 1:
+        print('*')
+
+    stars(n-1)
+    print('*'*n)
+
+# for문 버전을 작성하세요
+def stars_for(n):
+    pass]]></code>
+    <input><![CDATA[stars_for(4)]]></input>
+    <output><![CDATA[*
+**
+***
+****]]></output>
+    <hint></hint>
+    <solution><![CDATA[def stars_for(n):
+    for i in range(1, n+1):
+        print('*'*i)]]></solution>
+  </problem>
+</problems>

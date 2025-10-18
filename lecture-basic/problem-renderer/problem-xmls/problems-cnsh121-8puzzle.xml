@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: display 메서드 완성하기 -->
+  <problem>
+    <description>다음 EightPuzzle 클래스의 display 메서드에서 빈 라인을 완성하여 3x3 숫자판이 올바르게 출력되도록 하세요.</description>
+    <code><![CDATA[class EightPuzzle:
+    def __init__(self, numbers):
+        self.numbers = numbers
+
+    def display(self):
+        for i in range(3):
+            for j in range(3):
+                # 이 라인을 완성하세요
+            print()
+        print()
+
+    def find_zero(self):
+        for i in range(3):
+            for j in range(3):
+                if self.numbers[3*i + j] == 0:
+                    return i*3 + j
+        print("Zero not found")
+
+    def move_up(self):
+        pos = self.find_zero()
+        if pos > 2:
+            self.numbers[pos], self.numbers[pos-3] = self.numbers[pos-3], self.numbers[pos]
+        else:
+            print("Cannot move up")
+        self.display()]]></code>
+    <input><![CDATA[puzzle = EightPuzzle([1, 2, 3, 4, 0, 5, 6, 7, 8])
+puzzle.display()]]></input>
+    <output><![CDATA[1 2 3
+4 0 5
+6 7 8
+
+]]></output>
+    <hint></hint>
+    <solution><![CDATA[class EightPuzzle:
+    def __init__(self, numbers):
+        self.numbers = numbers
+
+    def display(self):
+        for i in range(3):
+            for j in range(3):
+                print(self.numbers[3*i + j], end=' ')  # 정답
+            print()
+        print()
+
+    def find_zero(self):
+        for i in range(3):
+            for j in range(3):
+                if self.numbers[3*i + j] == 0:
+                    return i*3 + j
+        print("Zero not found")
+
+    def move_up(self):
+        pos = self.find_zero()
+        if pos > 2:
+            self.numbers[pos], self.numbers[pos-3] = self.numbers[pos-3], self.numbers[pos]
+        else:
+            print("Cannot move up")
+        self.display()]]></solution>
+  </problem>
+
+  <!-- 문제 2: 나머지 메서드들 완성하기 -->
+  <problem>
+    <description>다음 EightPuzzle 클래스의 나머지 메서드들(move_down, move_left, move_right)을 모두 완성하세요.</description>
+    <code><![CDATA[class EightPuzzle:
+    def __init__(self, numbers):
+        self.numbers = numbers
+
+    def display(self):
+        for i in range(3):
+            for j in range(3):
+                print(self.numbers[3*i + j], end=' ')
+            print()
+        print()
+
+    def find_zero(self):
+        for i in range(3):
+            for j in range(3):
+                if self.numbers[3*i + j] == 0:
+                    return i*3 + j
+        print("Zero not found")
+
+    def move_up(self):
+        pos = self.find_zero()
+        if pos > 2:
+            self.numbers[pos], self.numbers[pos-3] = self.numbers[pos-3], self.numbers[pos]
+        else:
+            print("Cannot move up")
+        self.display()
+
+    def move_down(self):
+        pass
+
+    def move_left(self):
+        pass
+
+    def move_right(self):
+        pass]]></code>
+    <input><![CDATA[puzzle = EightPuzzle([1, 2, 3, 4, 0, 5, 6, 7, 8])
+puzzle.move_down()
+puzzle.move_left()
+puzzle.move_right()]]></input>
+    <output><![CDATA[1 2 3
+4 7 5
+6 0 8
+
+1 2 3
+4 7 5
+0 6 8
+
+1 2 3
+4 7 5
+6 0 8
+
+]]></output>
+    <hint></hint>
+    <solution><![CDATA[def move_down(self):
+    pos = self.find_zero()
+    if pos < 6:  # 맨 아래 행이 아닌 경우
+        self.numbers[pos], self.numbers[pos+3] = self.numbers[pos+3], self.numbers[pos]
+    else:
+        print("Cannot move down")
+    self.display()
+
+def move_left(self):
+    pos = self.find_zero()
+    if pos % 3 != 0:  # 맨 왼쪽 열이 아닌 경우
+        self.numbers[pos], self.numbers[pos-1] = self.numbers[pos-1], self.numbers[pos]
+    else:
+        print("Cannot move left")
+    self.display()
+
+def move_right(self):
+    pos = self.find_zero()
+    if pos % 3 != 2:  # 맨 오른쪽 열이 아닌 경우
+        self.numbers[pos], self.numbers[pos+1] = self.numbers[pos+1], self.numbers[pos]
+    else:
+        print("Cannot move right")
+    self.display()]]></solution>
+  </problem>
+</problems>

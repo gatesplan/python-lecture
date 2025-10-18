@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 두 수 비교하여 큰 수 반환 함수 작성 -->
+  <problem>
+    <description>두 수를 비교하여 큰 수를 반환하는 함수를 삼항 연산자를 사용하여 작성하세요.</description>
+    <code><![CDATA[def minmax(a, b):
+    return ____  # 여기를 채우세요]]></code>
+    <input><![CDATA[print(minmax(5, 3))
+print(minmax(2, 8))
+print(minmax(10, 10))]]></input>
+    <output><![CDATA[5
+8
+10]]></output>
+    <hint></hint>
+    <solution><![CDATA[def minmax(a, b):
+    return a if a >= b else b  # 정답: a if a >= b else b]]></solution>
+  </problem>
+
+  <!-- 문제 2: if-else 문으로 구현 -->
+  <problem>
+    <description>위의 삼항 연산자 함수를 if-else 문으로 다시 구현하세요.</description>
+    <code><![CDATA[def minmax(a, b):
+    return a if a >= b else b
+
+# if-else 문 버전을 작성하세요
+def minmax_ifelse(a, b):
+    pass]]></code>
+    <input><![CDATA[print(minmax_ifelse(7, 4))
+print(minmax_ifelse(1, 9))]]></input>
+    <output><![CDATA[7
+9]]></output>
+    <hint></hint>
+    <solution><![CDATA[def minmax_ifelse(a, b):
+    if a >= b:
+        return a
+    else:
+        return b]]></solution>
+  </problem>
+
+  <!-- 문제 3: 최솟값 반환 함수 작성 -->
+  <problem>
+    <description>두 수를 비교하여 작은 수를 반환하는 함수를 작성하세요.</description>
+    <code><![CDATA[def minmax(a, b):
+    return a if a >= b else b
+
+# 최솟값 반환 함수를 작성하세요
+def findmin(a, b):
+    pass]]></code>
+    <input><![CDATA[print(findmin(5, 3))
+print(findmin(2, 8))]]></input>
+    <output><![CDATA[3
+2]]></output>
+    <hint></hint>
+    <solution><![CDATA[def findmin(a, b):
+    return a if a <= b else b]]></solution>
+  </problem>
+</problems>

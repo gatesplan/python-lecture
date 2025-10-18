@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <description>Movie 클래스에 예약을 취소하는 cancel_reservation 메서드를 추가하세요. 이 메서드는 좌석 수를 1 증가시키는 기능을 수행합니다.</description>
+    <code><![CDATA[class Movie:
+    def __init__(self, title, seats):
+        self.title = title
+        self.seats = seats
+
+    def reserve_seat(self):
+        if self.seats > 0:
+            self.seats -= 1
+            return True
+        else:
+            return False
+    
+    def cancel_reservation(self):
+        # 작성하세요
+        pass]]></code>
+    <input><![CDATA[movie = Movie("어벤져스", 2)
+movie.reserve_seat()
+print(movie.seats)
+movie.cancel_reservation()
+print(movie.seats)
+
+movie2 = Movie("스파이더맨", 0)
+movie2.cancel_reservation()
+print(movie2.seats)
+
+movie3 = Movie("아이언맨", 5)
+movie3.cancel_reservation()
+print(movie3.seats)]]></input>
+    <output><![CDATA[1
+2
+1
+6]]></output>
+    <hint></hint>
+    <solution><![CDATA[    def cancel_reservation(self):
+        self.seats += 1]]></solution>
+  </problem>
+
+  <problem>
+    <description>Movie 클래스에 예약 가능 여부를 확인하는 is_available 메서드를 추가하세요. 이 메서드는 남은 좌석이 있으면 True, 없으면 False를 반환합니다.</description>
+    <code><![CDATA[class Movie:
+    def __init__(self, title, seats):
+        self.title = title
+        self.seats = seats
+
+    def reserve_seat(self):
+        if self.seats > 0:
+            self.seats -= 1
+            return True
+        else:
+            return False
+    
+    def is_available(self):
+        # 작성하세요
+        pass]]></code>
+    <input><![CDATA[movie1 = Movie("토르", 3)
+print(movie1.is_available())
+
+movie2 = Movie("헐크", 0)
+print(movie2.is_available())
+
+movie3 = Movie("캡틴 아메리카", 1)
+movie3.reserve_seat()
+print(movie3.is_available())]]></input>
+    <output><![CDATA[True
+False
+False]]></output>
+    <hint></hint>
+    <solution><![CDATA[    def is_available(self):
+        return self.seats > 0]]></solution>
+  </problem>
+</problems>

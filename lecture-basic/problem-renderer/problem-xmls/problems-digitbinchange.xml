@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  진수변환 문제 모음
+
+  이 파일은 여러 파일에서 진수변환 관련 문제들을 추출하여 모은 것입니다.
+
+  포함된 문제:
+  1. 10진수를 2진수로 변환 (제어문 → 재귀함수)
+  2. 10진수를 2진수로 변환 (재귀함수 → 제어문)
+  3. 10진수를 n진수로 변환 (재귀함수 → 제어문)
+
+  학습 목표:
+  - 진수변환 알고리즘 이해
+  - 재귀함수와 제어문 상호 변환
+  - 다양한 진법 체계 이해
+-->
+<problems>
+
+  <!-- 1. 10진수를 2진수로 변환 (제어문 → 재귀함수) -->
+  <problem>
+    <description><![CDATA[다음 제어문으로 구현된 함수를 재귀함수로 변환하세요.]]></description>
+    <code><![CDATA[def kiwi_iterative(n):
+    if n == 0:
+        return "0"
+
+    result = ""
+    while n > 0:
+        result = str(n % 2) + result
+        n = n // 2
+    return result
+
+def kiwi(n):
+    # 여기에 코드를 작성하세요
+    pass]]></code>
+    <input><![CDATA[10]]></input>
+    <output><![CDATA[1010]]></output>
+    <hint></hint>
+    <solution><![CDATA[def kiwi(n):
+    if n == 0:
+        return "0"
+    if n == 1:
+        return "1"
+    return kiwi(n // 2) + str(n % 2)]]></solution>
+  </problem>
+
+  <!-- 2. 10진수를 2진수로 변환 (재귀함수 → 제어문) -->
+  <problem>
+    <description><![CDATA[다음 재귀함수를 제어문만 사용하여 하나의 함수로 구현하세요.]]></description>
+    <code><![CDATA[def kiwi_recursive(n):
+    if n == 0:
+        return "0"
+    if n == 1:
+        return "1"
+    return kiwi_recursive(n // 2) + str(n % 2)
+
+def kiwi(n):
+    # 여기에 코드를 작성하세요
+    pass]]></code>
+    <input><![CDATA[10]]></input>
+    <output><![CDATA[1010]]></output>
+    <hint></hint>
+    <solution><![CDATA[def kiwi(n):
+    if n == 0:
+        return "0"
+
+    result = ""
+    while n > 0:
+        result = str(n % 2) + result
+        n = n // 2
+    return result]]></solution>
+  </problem>
+
+  <!-- 3. 10진수를 n진수로 변환 (재귀함수 → 제어문) -->
+  <problem>
+    <description><![CDATA[다음 재귀함수를 제어문만 사용하여 하나의 함수로 구현하세요.]]></description>
+    <code><![CDATA[def lemon_recursive(n, base):
+    if n == 0:
+        return "0"
+    if n < base:
+        if n < 10:
+            return str(n)
+        else:
+            return chr(ord('A') + n - 10)
+
+    remainder = n % base
+    if remainder < 10:
+        remainder_char = str(remainder)
+    else:
+        remainder_char = chr(ord('A') + remainder - 10)
+
+    return lemon_recursive(n // base, base) + remainder_char
+
+def lemon(n, base):
+    # 여기에 코드를 작성하세요
+    pass]]></code>
+    <input><![CDATA[n=255, base=16]]></input>
+    <output><![CDATA[FF]]></output>
+    <hint></hint>
+    <solution><![CDATA[def lemon(n, base):
+    if n == 0:
+        return "0"
+
+    result = ""
+    while n > 0:
+        remainder = n % base
+        if remainder < 10:
+            result = str(remainder) + result
+        else:
+            result = chr(ord('A') + remainder - 10) + result
+        n = n // base
+    return result]]></solution>
+  </problem>
+
+</problems>
