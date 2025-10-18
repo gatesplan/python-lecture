@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Lecture 10 연습문제 - 랜덤 20문제 (해설 없음)
+-->
+<exercise>
+  <title>Exercise 10. 함수 (Functions) - Random Practice</title>
+  <settings>
+    <showSolutions>false</showSolutions>
+  </settings>
+  <sections>
+    <concatenate title="함수 종합 연습" count="20">
+      <source file="problems-lecture10-function-def.xml"/>
+      <source file="problems-lecture10-function-params.xml"/>
+      <source file="problems-lecture10-function-params-fixed.xml"/>
+      <source file="problems-lecture10-function-args.xml"/>
+      <source file="problems-lecture10-function-defaults.xml"/>
+      <source file="problems-lecture10-function-types.xml"/>
+    </concatenate>
+  </sections>
+</exercise>
