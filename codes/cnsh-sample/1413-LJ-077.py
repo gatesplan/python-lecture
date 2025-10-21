@@ -1,15 +1,20 @@
 def f(x,y,z,d):
     global V, visited, ok , ans
-    if ok : return
-    if y == V :
-        if ans < d : ans = d
+    if ok :
         return
+    if y == V :
+        if ans > d :
+            ans = d
+        return
+
     visited[x] = True
+
     for u, w in M[x]:
         if visited[u] == False:
             z.append(u)
             f(u, y+1, z, d+w)
             z.pop()
+
     visited[x] = False
     return
 
