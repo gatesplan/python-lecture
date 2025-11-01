@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e551840b-8e31-46e1-9bea-af6fae0cef5d" name="변경" comment="..">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/python-lecture.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python-lecture.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Test.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-apprentice/Python Apprentice Lecture 4 - Recursive Hanoi Tower.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/lecture-apprentice/Python Apprentice Lecture 4 - Recursive Hanoi Tower.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-apprentice/Python Apprentice Lecture 6 - Time Complexity and Big-O Notation.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/lecture-apprentice/Python Apprentice Lecture 6 - Time Complexity and Big-O Notation.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
