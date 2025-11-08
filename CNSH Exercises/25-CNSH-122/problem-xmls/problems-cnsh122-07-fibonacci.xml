@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 출력 예측 (피보나치 값) - 워밍업 -->
+  <problem>
+    <description>다음 코드의 출력 결과를 쓰세요.</description>
+    <code><![CDATA[def f(n):
+    if n <= 1:
+        return n
+    return f(n-1) + f(n-2)
+
+print(f(6))
+print(f(7))]]></code>
+    <input></input>
+    <output><![CDATA[8
+13]]></output>
+    <solution><![CDATA[# 피보나치 수열: 0, 1, 1, 2, 3, 5, 8, 13, 21, ...
+# f(0)=0, f(1)=1
+# f(2)=1, f(3)=2, f(4)=3, f(5)=5, f(6)=8, f(7)=13
+#
+# 정답: 8, 13]]></solution>
+  </problem>
+
+  <!-- 문제 2: 빈칸 채우기 (기저 조건) -->
+  <problem>
+    <description>피보나치 수열을 구하는 재귀함수입니다. 빈칸을 채우세요.</description>
+    <code><![CDATA[def f(n):
+    if n == 0:
+        return ____
+    if n == 1:
+        return ____
+    return f(n-1) + f(n-2)]]></code>
+    <input><![CDATA[print(f(5))
+print(f(8))]]></input>
+    <output><![CDATA[5
+21]]></output>
+    <solution><![CDATA[def f(n):
+    if n == 0:
+        return 0  # 정답: 0
+    if n == 1:
+        return 1  # 정답: 1
+    return f(n-1) + f(n-2)
+
+# 피보나치 수열의 정의:
+# f(0) = 0
+# f(1) = 1
+# f(n) = f(n-1) + f(n-2) (n ≥ 2)]]></solution>
+  </problem>
+
+  <!-- 문제 3: 트레이싱 (f(5) 호출 횟수) -->
+  <problem>
+    <description>다음 피보나치 함수에서 f(5)를 실행할 때, f 함수가 총 몇 번 호출되는지 구하세요.</description>
+    <code><![CDATA[def f(n):
+    if n <= 1:
+        return n
+    return f(n-1) + f(n-2)]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# f(5) 호출 트리:
+#                 f(5)
+#             /          \
+#         f(4)            f(3)
+#       /     \         /     \
+#     f(3)   f(2)     f(2)   f(1)
+#    /  \    /  \     /  \
+#  f(2) f(1) f(1) f(0) f(1) f(0)
+#  / \
+# f(1) f(0)
+#
+# 호출 횟수 계산:
+# f(5): 1번
+# f(4): 1번
+# f(3): 2번
+# f(2): 3번
+# f(1): 5번
+# f(0): 3번
+# 합계: 1+1+2+3+5+3 = 15번
+#
+# 일반 공식: 약 2×f(n+1) - 1
+# f(6) = 8이므로, 2×8 - 1 = 15
+#
+# 정답: 15번]]></solution>
+  </problem>
+
+  <!-- 문제 4: 디버깅 (기저 조건 순서 오류) -->
+  <problem>
+    <description>다음 피보나치 함수에 오류가 있습니다. 오류를 찾아 고치세요.</description>
+    <code><![CDATA[def f(n):
+    if n == 1:
+        return 1
+    if n == 0:
+        return 0
+    return f(n-1) + f(n-2)]]></code>
+    <input><![CDATA[print(f(5))]]></input>
+    <output><![CDATA[5]]></output>
+    <solution><![CDATA[def f(n):
+    if n == 0:  # 오류: 순서 바꿔야 함
+        return 0
+    if n == 1:
+        return 1
+    return f(n-1) + f(n-2)
+
+# 잘못된 부분: 기저 조건 순서
+# 이유: 실제로는 작동하지만, 일반적으로 작은 값부터 확인하는 것이 관례
+# 더 중요한 이유: n <= 1로 통합할 때 0을 먼저 확인해야 함
+# 권장: if n == 0 먼저, 또는 if n <= 1: return n
+#
+# 더 나은 버전:
+def f(n):
+    if n <= 1:
+        return n
+    return f(n-1) + f(n-2)]]></solution>
+  </problem>
+
+  <!-- 문제 5: 전체 작성 (기본 피보나치) -->
+  <problem>
+    <description>n번째 피보나치 수를 구하는 재귀함수를 작성하세요. (f(0)=0, f(1)=1)</description>
+    <code><![CDATA[def f(n):
+    pass]]></code>
+    <input><![CDATA[print(f(10))
+print(f(12))]]></input>
+    <output><![CDATA[55
+144]]></output>
+    <solution><![CDATA[def f(n):
+    if n <= 1:
+        return n
+    return f(n-1) + f(n-2)
+
+# 피보나치 수열: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...
+# f(10) = 55
+# f(12) = 144]]></solution>
+  </problem>
+
+  <!-- 문제 6: 서술형 (경로 문제와 피보나치 관계) -->
+  <problem>
+    <description>0에서 출발하여 1 또는 2를 더해 n에 도달하는 경우의 수가 피보나치 수열과 같은 이유를 서술하세요.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 경로 문제와 피보나치의 관계
+#
+# 문제: 0 → n에 도달하는 경로 수 (매번 +1 또는 +2)
+#
+# 점화식 유도:
+# - n에 도달하는 방법:
+#   1) (n-1)에서 +1로 도달
+#   2) (n-2)에서 +2로 도달
+# - 따라서 f(n) = f(n-1) + f(n-2)
+#
+# 기저 조건:
+# - f(0) = 1 (아무것도 안 더함)
+# - f(1) = 1 (0→1: +1만 가능)
+# - f(2) = 2 (0→2: +2 또는 +1+1)
+#
+# 예: n=4에 도달하는 경로
+# 1. +1+1+1+1
+# 2. +2+1+1
+# 3. +1+2+1
+# 4. +1+1+2
+# 5. +2+2
+# 총 5가지 = f(4)
+#
+# 결론: 경로 문제는 피보나치 수열과 동일한 점화식
+# f(n) = f(n-1) + f(n-2)
+#
+# 참고: 계단 오르기, 타일링 문제도 같은 원리]]></solution>
+  </problem>
+
+  <!-- 문제 7: 전체 작성 (계단 오르기) -->
+  <problem>
+    <description>n칸 계단을 오르는데, 한 번에 1칸 또는 2칸씩 오를 수 있습니다. n칸 계단을 오르는 방법의 수를 구하는 재귀함수를 작성하세요. (n=1일 때 1, n=2일 때 2)</description>
+    <code><![CDATA[def f(n):
+    pass]]></code>
+    <input><![CDATA[print(f(5))
+print(f(6))]]></input>
+    <output><![CDATA[8
+13]]></output>
+    <solution><![CDATA[def f(n):
+    if n == 1:
+        return 1
+    if n == 2:
+        return 2
+    return f(n-1) + f(n-2)
+
+# 계단 오르기 방법:
+# n=1: 1가지 (1)
+# n=2: 2가지 (1+1, 2)
+# n=3: 3가지 (1+1+1, 1+2, 2+1)
+# n=4: 5가지
+# n=5: 8가지
+# n=6: 13가지
+#
+# 패턴: 피보나치와 동일 (시작값만 다름)]]></solution>
+  </problem>
+
+  <!-- 문제 8: 코드 비교 (일반 vs 메모이제이션) -->
+  <problem>
+    <description>다음 두 피보나치 구현 방법의 차이점을 설명하세요.</description>
+    <code><![CDATA[# 방법 A: 일반 재귀
+def f(n):
+    if n <= 1:
+        return n
+    return f(n-1) + f(n-2)
+
+# 방법 B: 메모이제이션
+memo = {}
+def f(n):
+    if n <= 1:
+        return n
+    if n in memo:
+        return memo[n]
+    memo[n] = f(n-1) + f(n-2)
+    return memo[n]]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 방법 A (일반 재귀):
+# - 시간복잡도: O(2^n) (지수 시간)
+# - 공간복잡도: O(n) (재귀 스택)
+# - f(5) 계산 시 f(3)을 2번, f(2)를 3번 중복 계산
+# - 중복 계산이 매우 많음
+# - n=40만 되어도 수십억 번 호출
+#
+# 방법 B (메모이제이션):
+# - 시간복잡도: O(n) (선형 시간)
+# - 공간복잡도: O(n) (재귀 스택 + memo 딕셔너리)
+# - 한 번 계산한 값을 memo에 저장
+# - 같은 값은 다시 계산하지 않고 memo에서 가져옴
+# - f(5) 계산 시 f(0)~f(5) 각각 1번만 계산
+# - n=40도 순식간에 계산
+#
+# 성능 비교 (n=30):
+# - 방법 A: 약 2,692,537번 호출 (수 초 소요)
+# - 방법 B: 약 30번 호출 (즉시 완료)
+#
+# 결론: 메모이제이션으로 지수 → 선형 시간 개선
+# 동적 계획법(Dynamic Programming)의 기본 기법]]></solution>
+  </problem>
+
+  <!-- 문제 9: 복잡도 분석 (O(2^n) vs O(n)) -->
+  <problem>
+    <description>일반 재귀 피보나치의 시간복잡도가 O(2^n)인 이유를 설명하고, n=10, 20, 30일 때 대략적인 함수 호출 횟수를 계산하세요.</description>
+    <code><![CDATA[def f(n):
+    if n <= 1:
+        return n
+    return f(n-1) + f(n-2)]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# O(2^n) 이유:
+# - 각 함수 호출이 2개의 재귀 호출 생성
+# - 재귀 트리가 이진 트리 형태
+# - 깊이가 n인 이진 트리의 노드 수: 약 2^n
+#
+# 정확한 분석:
+# T(n) = T(n-1) + T(n-2) + 1
+# 이는 피보나치 수열과 비례
+# T(n) ≈ 2 × f(n+1) - 1
+# f(n) ≈ φ^n / √5 (φ = 황금비 ≈ 1.618)
+# 따라서 T(n) ≈ O(φ^n) ≈ O(1.6^n) ≈ O(2^n)
+#
+# 호출 횟수 계산:
+# n=10: f(11) × 2 - 1 ≈ 89 × 2 - 1 = 177번
+# n=20: f(21) × 2 - 1 ≈ 10,946 × 2 - 1 = 21,891번
+# n=30: f(31) × 2 - 1 ≈ 1,346,269 × 2 - 1 = 2,692,537번
+#
+# 실제 측정 (대략):
+# n=10: 177번
+# n=20: 21,891번
+# n=30: 2,692,537번
+# n=40: 331,160,281번 (3억 번!)
+#
+# 결론: n이 10 증가할 때마다 호출 횟수가 약 100배 증가
+# 메모이제이션 없이는 n=50도 계산 불가능]]></solution>
+  </problem>
+
+  <!-- 문제 10: 전체 작성 (타일링) -->
+  <problem>
+    <description>2×n 크기의 직사각형을 2×1 크기의 타일로 채우는 방법의 수를 구하는 재귀함수를 작성하세요.</description>
+    <code><![CDATA[def f(n):
+    pass]]></code>
+    <input><![CDATA[print(f(4))
+print(f(5))]]></input>
+    <output><![CDATA[5
+8]]></output>
+    <solution><![CDATA[def f(n):
+    if n == 1:
+        return 1
+    if n == 2:
+        return 2
+    return f(n-1) + f(n-2)
+
+# 2×n 타일링 문제:
+# - 2×1 타일을 세로로 놓거나 가로로 2개 놓기
+# - n=1: 1가지 (세로 1개)
+# - n=2: 2가지 (세로 2개 또는 가로 2개)
+# - n=3: 3가지
+# - n=4: 5가지
+# - n=5: 8가지
+#
+# 점화식 유도:
+# - 왼쪽 끝에 세로 타일 1개 놓으면: f(n-1)
+# - 왼쪽 끝에 가로 타일 2개 놓으면: f(n-2)
+# - f(n) = f(n-1) + f(n-2)
+#
+# 결과: 피보나치 수열과 동일 (시작값이 같음)]]></solution>
+  </problem>
+</problems>

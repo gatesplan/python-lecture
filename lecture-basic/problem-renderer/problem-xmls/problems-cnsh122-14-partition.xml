@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 출력 예측 (4의 분할) - 워밍업 -->
+  <problem>
+    <description>다음 코드의 출력 결과를 쓰세요.</description>
+    <code><![CDATA[ans = 0
+
+def f(s, k):
+    if k == 0:
+        if n == s:
+            return 1
+        return 0
+    if s > n:
+        return 0
+    cnt = 0
+    for i in range(1, n+1):
+        cnt = cnt + f(s + i, k - 1)
+    return cnt
+
+n = 4
+
+for i in range(1, n+1):
+    ans = ans + f(0, i)
+
+print(ans)]]></code>
+    <input></input>
+    <output><![CDATA[8]]></output>
+    <solution><![CDATA[# 4를 자연수의 합으로 나타내는 모든 순열:
+# 1+1+1+1
+# 1+1+2
+# 1+2+1
+# 2+1+1
+# 2+2
+# 1+3
+# 3+1
+# 4
+# 총 8가지
+#
+# 정답: 8]]></solution>
+  </problem>
+
+  <!-- 문제 2: 서술형 (분기 한정법 개념) -->
+  <problem>
+    <description>분기 한정법(Branch and Bound)의 개념과 가지치기(Pruning)가 필요한 이유를 서술하세요.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 분기 한정법(Branch and Bound)
+#
+# 개념:
+# - 모든 경우의 수를 탐색하되, 불필요한 경로는 조기에 종료하는 알고리즘
+# - 분기(Branch): 가능한 모든 경우를 나누어 탐색
+# - 한정(Bound): 조건을 만족하지 않는 경로는 더 이상 탐색하지 않음
+#
+# 가지치기(Pruning)가 필요한 이유:
+# 1. 효율성: 불필요한 계산을 제거하여 실행 시간 단축
+# 2. 메모리: 탐색 트리의 크기를 줄여 메모리 절약
+# 3. 실용성: 완전 탐색으로는 불가능한 큰 문제도 해결 가능
+#
+# 예: 자연수 분할 문제 (n=4)
+# - 가지치기 없이: s가 4를 초과해도 계속 탐색 → 무한 재귀
+# - 가지치기 있음: s > n이면 즉시 종료 → 효율적
+#
+# 가지치기 조건 예시:
+# - s > n: 합이 목표를 초과하면 중단
+# - d >= ans: 이미 찾은 최소값보다 크면 중단
+#
+# 시간복잡도 개선:
+# - 완전 탐색: O(k^n) (k: 선택지 개수)
+# - 가지치기: 실제로는 훨씬 적은 연산
+#
+# 결론: 가지치기는 탐색 공간을 줄여 실행 시간과 메모리를 절약]]></solution>
+  </problem>
+
+  <!-- 문제 3: 빈칸 채우기 (가지치기 조건) -->
+  <problem>
+    <description>다음 자연수 분할 개수를 세는 코드입니다. 빈칸을 채우세요.</description>
+    <code><![CDATA[ans = 0
+
+def f(s, k):
+    if k == 0:
+        if n == s:
+            return 1
+        return 0
+    if ____:
+        return 0
+    cnt = 0
+    for i in range(1, n+1):
+        cnt = cnt + f(s + i, k - 1)
+    return cnt
+
+n = int(input())
+
+for i in range(1, n+1):
+    ans = ans + f(0, i)
+
+print(ans)]]></code>
+    <input><![CDATA[5]]></input>
+    <output><![CDATA[16]]></output>
+    <solution><![CDATA[ans = 0
+
+def f(s, k):
+    if k == 0:
+        if n == s:
+            return 1
+        return 0
+    if s > n:  # 정답: s > n
+        return 0
+    cnt = 0
+    for i in range(1, n+1):
+        cnt = cnt + f(s + i, k - 1)
+    return cnt
+
+n = int(input())
+
+for i in range(1, n+1):
+    ans = ans + f(0, i)
+
+print(ans)
+
+# 가지치기 조건: s > n
+# 이유: 지금까지의 합이 목표값 n을 초과하면
+#       더 이상 탐색할 필요가 없음
+# 이 조건이 없으면 무한 재귀 발생]]></solution>
+  </problem>
+
+  <!-- 문제 4: 디버깅 (무한 재귀) -->
+  <problem>
+    <description>다음 자연수 분할 개수 세기 함수에 오류가 있습니다. 오류를 찾아 고치세요.</description>
+    <code><![CDATA[ans = 0
+
+def f(s, k):
+    if k == 0:
+        if n == s:
+            return 1
+        return 0
+    cnt = 0
+    for i in range(1, n+1):
+        cnt = cnt + f(s + i, k - 1)
+    return cnt
+
+n = 5
+
+for i in range(1, n+1):
+    ans = ans + f(0, i)
+
+print(ans)]]></code>
+    <input></input>
+    <output><![CDATA[16]]></output>
+    <solution><![CDATA[ans = 0
+
+def f(s, k):
+    if k == 0:
+        if n == s:
+            return 1
+        return 0
+    if s > n:  # 추가: 가지치기 조건
+        return 0
+    cnt = 0
+    for i in range(1, n+1):
+        cnt = cnt + f(s + i, k - 1)
+    return cnt
+
+n = 5
+
+for i in range(1, n+1):
+    ans = ans + f(0, i)
+
+print(ans)
+
+# 잘못된 부분: 가지치기 조건 누락
+# 이유: s > n인 경우에도 계속 재귀 호출
+#       k가 0이 될 때까지 무한히 재귀 호출 발생
+# 정답: if s > n: return 0 추가
+#       합이 n을 초과하면 즉시 중단]]></solution>
+  </problem>
+
+  <!-- 문제 5: 트레이싱 (재귀 트리) -->
+  <problem>
+    <description>다음 코드에서 f(0, 2)를 호출할 때, n=3이면 재귀 트리를 그리고 총 몇 가지 경우가 카운트되는지 설명하세요.</description>
+    <code><![CDATA[def f(s, k):
+    if k == 0:
+        if n == s:
+            return 1
+        return 0
+    if s > n:
+        return 0
+    cnt = 0
+    for i in range(1, n+1):
+        cnt = cnt + f(s + i, k - 1)
+    return cnt
+
+n = 3]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# f(0, 2) 재귀 트리 (n=3):
+#
+#                f(0, 2)
+#        /         |         \
+#    f(1,1)     f(2,1)     f(3,1)
+#   / | \       / | \      / | \
+# f(2,0) f(3,0) f(4,0) f(3,0) f(4,0) f(5,0) f(4,0) f(5,0) f(6,0)
+#
+# k=0일 때 s==n 확인:
+# - f(2,0): s=2, n=3 → 0
+# - f(3,0): s=3, n=3 → 1 (1+2)
+# - f(4,0): s=4, n=3 → s>n이므로 0
+# - f(3,0): s=3, n=3 → 1 (2+1)
+# - f(4,0): s=4, n=3 → 0
+# - f(5,0): s=5, n=3 → 0
+# - f(4,0): s=4, n=3 → 0
+# - f(5,0): s=5, n=3 → 0
+# - f(6,0): s=6, n=3 → 0
+#
+# 카운트되는 경우:
+# 1. 1+2 = 3
+# 2. 2+1 = 3
+# 총 2가지
+#
+# 정답: 2가지 (1+2, 2+1)]]></solution>
+  </problem>
+
+  <!-- 문제 6: 전체 작성 (분할 개수) -->
+  <problem>
+    <description>자연수 n을 자연수의 합으로 나타내는 모든 순열의 개수를 구하는 함수를 작성하세요.</description>
+    <code><![CDATA[def g(n):
+    pass]]></code>
+    <input><![CDATA[print(g(3))
+print(g(4))]]></input>
+    <output><![CDATA[4
+8]]></output>
+    <solution><![CDATA[def g(n):
+    def f(s, k):
+        if k == 0:
+            if n == s:
+                return 1
+            return 0
+        if s > n:
+            return 0
+        cnt = 0
+        for i in range(1, n+1):
+            cnt = cnt + f(s + i, k - 1)
+        return cnt
+
+    ans = 0
+    for i in range(1, n+1):
+        ans = ans + f(0, i)
+    return ans
+
+# n=3: 1+1+1, 1+2, 2+1, 3 → 4가지
+# n=4: 1+1+1+1, 1+1+2, 1+2+1, 2+1+1, 2+2, 1+3, 3+1, 4 → 8가지
+#
+# 패턴: g(n) = 2^(n-1)
+# 이유: n개의 1로 나타낸 후, (n-1)개의 '+' 위치에서
+#       각각 유지 또는 제거를 선택 → 2^(n-1)]]></solution>
+  </problem>
+
+  <!-- 문제 7: 블록 채우기 (최적화 부분) -->
+  <problem>
+    <description>다음 코드는 분할 개수를 세되, 이미 찾은 최소 개수보다 많으면 중단하는 최적화를 추가하려 합니다. 빈칸을 채우세요.</description>
+    <code><![CDATA[best = 1e9
+
+def f(s, k):
+    global best
+    if k == 0:
+        if n == s:
+            best = min(best, k)
+            return 1
+        return 0
+    if s > n:
+        return 0
+    if ____:
+        return 0
+    cnt = 0
+    for i in range(1, n+1):
+        cnt = cnt + f(s + i, k - 1)
+    return cnt]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[best = 1e9
+
+def f(s, k):
+    global best
+    if k == 0:
+        if n == s:
+            best = min(best, k)
+            return 1
+        return 0
+    if s > n:
+        return 0
+    if k >= best:  # 정답: k >= best
+        return 0
+    cnt = 0
+    for i in range(1, n+1):
+        cnt = cnt + f(s + i, k - 1)
+    return cnt
+
+# 가지치기 조건: k >= best
+# 이유: 지금까지 사용한 개수가 이미 찾은 최소값 이상이면
+#       더 탐색해도 최소값을 갱신할 수 없음
+# 이 조건으로 불필요한 탐색을 줄여 효율 향상]]></solution>
+  </problem>
+
+  <!-- 문제 8: 코드 비교 (가지치기 유무) -->
+  <problem>
+    <description>다음 두 코드의 차이점과 성능 차이를 설명하세요.</description>
+    <code><![CDATA[# 코드 A: 가지치기 없음
+def f(s, k):
+    if k == 0:
+        if n == s:
+            return 1
+        return 0
+    cnt = 0
+    for i in range(1, n+1):
+        cnt = cnt + f(s + i, k - 1)
+    return cnt
+
+# 코드 B: 가지치기 있음
+def f(s, k):
+    if k == 0:
+        if n == s:
+            return 1
+        return 0
+    if s > n:
+        return 0
+    cnt = 0
+    for i in range(1, n+1):
+        cnt = cnt + f(s + i, k - 1)
+    return cnt]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 코드 A (가지치기 없음):
+# - 문제: s > n인 경우에도 계속 재귀 호출
+# - 결과: k=0이 될 때까지 무한히 재귀 → 스택 오버플로우
+# - 시간복잡도: 무한대 (종료 안 됨)
+# - 예: n=5, f(0, 3) 호출 시
+#       f(6, 2), f(12, 1), ... 계속 증가
+#
+# 코드 B (가지치기 있음):
+# - 조건: s > n이면 즉시 return 0
+# - 효과: 불필요한 경로를 조기 종료
+# - 시간복잡도: O(n^n) → 가지치기로 실제로는 훨씬 적음
+# - 예: n=5, f(6, 2) 호출 시 즉시 종료
+#
+# 성능 비교 (n=5):
+# - 코드 A: 무한 재귀 → 실행 불가
+# - 코드 B: 16 반환 → 정상 작동
+#
+# 결론: 가지치기는 필수
+# - 가지치기 없이는 프로그램이 종료되지 않음
+# - s > n 조건으로 탐색 공간을 제한]]></solution>
+  </problem>
+
+  <!-- 문제 9: 조건 역추론 (n의 분할 = k가지) -->
+  <problem>
+    <description>자연수 n을 자연수의 합으로 나타내는 순열의 개수가 정확히 16개가 되려면 n은 얼마여야 하는지 구하세요.</description>
+    <code><![CDATA[def g(n):
+    def f(s, k):
+        if k == 0:
+            if n == s:
+                return 1
+            return 0
+        if s > n:
+            return 0
+        cnt = 0
+        for i in range(1, n+1):
+            cnt = cnt + f(s + i, k - 1)
+        return cnt
+
+    ans = 0
+    for i in range(1, n+1):
+        ans = ans + f(0, i)
+    return ans]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 패턴 분석:
+# n=1: 1 → 1가지 = 2^0
+# n=2: 1+1, 2 → 2가지 = 2^1
+# n=3: 1+1+1, 1+2, 2+1, 3 → 4가지 = 2^2
+# n=4: 1+1+1+1, 1+1+2, 1+2+1, 2+1+1, 2+2, 1+3, 3+1, 4 → 8가지 = 2^3
+# n=5: 16가지 = 2^4
+#
+# 일반 공식: g(n) = 2^(n-1)
+#
+# 이유:
+# - n을 1의 합으로 나타내면: 1+1+...+1 (n개의 1)
+# - (n-1)개의 '+' 기호가 있음
+# - 각 '+' 위치에서 유지 또는 제거 선택
+# - 제거하면 옆의 1과 합쳐짐 (예: 1+1 → 2)
+# - 2^(n-1)가지 선택
+#
+# 16 = 2^4이므로 n-1 = 4
+# 따라서 n = 5
+#
+# 검증:
+# print(g(5)) → 16
+#
+# 정답: n = 5]]></solution>
+  </problem>
+
+  <!-- 문제 10: 복잡도 분석 (가지치기 효과) -->
+  <problem>
+    <description>가지치기 조건이 있을 때와 없을 때의 시간복잡도를 분석하고, n=10일 때 대략적인 함수 호출 횟수 차이를 설명하세요.</description>
+    <code><![CDATA[def f(s, k):
+    if k == 0:
+        if n == s:
+            return 1
+        return 0
+    if s > n:
+        return 0
+    cnt = 0
+    for i in range(1, n+1):
+        cnt = cnt + f(s + i, k - 1)
+    return cnt]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 가지치기 없을 때:
+# - 시간복잡도: 무한대 (종료 안 됨)
+# - 문제: s가 계속 증가하며 무한 재귀
+# - 예: f(0, 3) → f(1, 2) → f(2, 1) → f(3, 0)
+#                                    → f(4, 0) → ...
+#       k=0에 도달해도 s > n인 경로가 계속 생성됨
+#
+# 가지치기 있을 때:
+# - 시간복잡도: O(n^n) (최악의 경우)
+# - 실제: 가지치기로 훨씬 적음
+# - 분석:
+#   - 각 재귀 단계에서 최대 n개 분기
+#   - 최대 깊이 n (k ≤ n)
+#   - 이론상 n^n, 실제로는 s > n 조건으로 대부분 제거
+#
+# n=10일 때 호출 횟수 추정:
+# - 가지치기 없음: 무한대 (실행 불가)
+# - 가지치기 있음: 약 수십만 번
+#   - 정확한 계산은 복잡하지만
+#   - s > n 조건으로 대부분의 경로가 조기 종료
+#   - 실제 유효한 경로는 2^9 = 512가지
+#   - 각 경로당 평균 탐색 비용 고려 시 약 10만~50만 번
+#
+# 결론:
+# - 가지치기는 무한 → 유한으로 만드는 필수 조건
+# - s > n 조건 하나로 실행 가능한 알고리즘이 됨
+# - n이 커질수록 가지치기의 효과가 기하급수적으로 증가]]></solution>
+  </problem>
+</problems>

@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 출력 예측 (해밀토니안 경로) - 워밍업 -->
+  <problem>
+    <description>다음 코드의 출력 결과를 쓰세요.</description>
+    <code><![CDATA[ans = 999
+visited = [False] * 4
+
+def f(x, y, z, d):
+    global ans, visited
+    if y == 3:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True
+    for u, w in M[x]:
+        if not visited[u]:
+            z.append(u)
+            f(u, y+1, z, d+w)
+            z.pop()
+    visited[x] = False
+
+M = [[(1,2), (2,5)], [(0,2), (2,3)], [(0,5), (1,3)]]
+f(0, 1, [0], 0)
+print(ans)]]></code>
+    <input></input>
+    <output><![CDATA[5]]></output>
+    <solution><![CDATA[# 그래프 구조:
+#   0
+#  /|\
+# 2 5 |
+# |   |
+# 1---3---2
+#
+# 가능한 경로 (3개 노드 방문):
+# 0 → 1 → 2: 2 + 3 = 5
+# 0 → 2 → 1: 5 + 3 = 8
+#
+# 최솟값: 5
+# 정답: 5]]></solution>
+  </problem>
+
+  <!-- 문제 2: 서술형 (파라미터 의미) -->
+  <problem>
+    <description>다음 해밀토니안 경로 탐색 함수에서 파라미터 x, y, z, d의 의미를 각각 서술하세요.</description>
+    <code><![CDATA[def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True
+    for u, w in M[x]:
+        if not visited[u]:
+            z.append(u)
+            f(u, y+1, z, d+w)
+            z.pop()
+    visited[x] = False]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 파라미터 의미:
+#
+# x (int): 현재 방문 중인 노드 번호
+#   - 재귀 호출마다 변경됨
+#   - 현재 탐색 위치를 나타냄
+#
+# y (int): 지금까지 방문한 노드 개수
+#   - 1부터 시작하여 V까지 증가
+#   - 재귀 깊이를 나타냄
+#   - 종료 조건 판단에 사용 (y == V)
+#
+# z (list): 현재까지의 경로 리스트
+#   - [시작노드, ..., 현재노드] 형태
+#   - append/pop으로 백트래킹 관리
+#   - 디버깅이나 경로 출력에 사용
+#
+# d (int): 현재까지의 가중치 누적 합계
+#   - 0부터 시작하여 누적 증가
+#   - 최소 비용 계산에 사용
+#   - 종료 시 ans와 비교하여 최솟값 갱신]]></solution>
+  </problem>
+
+  <!-- 문제 3: 빈칸 채우기 (visited 관리) -->
+  <problem>
+    <description>해밀토니안 경로 백트래킹에서 visited 관리 부분을 완성하세요.</description>
+    <code><![CDATA[def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    ____ = True
+    for u, w in M[x]:
+        if not visited[u]:
+            z.append(u)
+            f(u, y+1, z, d+w)
+            z.pop()
+    ____ = False]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True  # 정답: visited[x]
+    for u, w in M[x]:
+        if not visited[u]:
+            z.append(u)
+            f(u, y+1, z, d+w)
+            z.pop()
+    visited[x] = False  # 정답: visited[x]
+
+# 백트래킹 핵심:
+# 1. 진입: visited[x] = True (현재 노드 방문 표시)
+# 2. 탐색: 인접 노드 재귀 호출
+# 3. 복원: visited[x] = False (다른 경로를 위해 방문 취소)
+#
+# 대칭성이 중요: True/False 쌍으로 관리]]></solution>
+  </problem>
+
+  <!-- 문제 4: 빈칸 채우기 (z.append/pop) -->
+  <problem>
+    <description>경로 리스트 z를 관리하는 부분을 완성하세요.</description>
+    <code><![CDATA[def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True
+    for u, w in M[x]:
+        if not visited[u]:
+            ____
+            f(u, y+1, z, d+w)
+            ____
+    visited[x] = False]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True
+    for u, w in M[x]:
+        if not visited[u]:
+            z.append(u)  # 정답: z.append(u)
+            f(u, y+1, z, d+w)
+            z.pop()  # 정답: z.pop()
+
+    visited[x] = False
+
+# 경로 관리:
+# 1. z.append(u): 다음 노드를 경로에 추가
+# 2. 재귀 호출: 추가된 상태로 탐색
+# 3. z.pop(): 백트래킹 - 경로에서 제거
+#
+# append와 pop은 쌍을 이룸
+# 재귀 전후로 리스트 상태 복원]]></solution>
+  </problem>
+
+  <!-- 문제 5: 디버깅 (visited 복원 누락) -->
+  <problem>
+    <description>다음 해밀토니안 경로 함수에 오류가 있습니다. 오류를 찾아 고치세요.</description>
+    <code><![CDATA[def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True
+    for u, w in M[x]:
+        if not visited[u]:
+            z.append(u)
+            f(u, y+1, z, d+w)
+            z.pop()]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True
+    for u, w in M[x]:
+        if not visited[u]:
+            z.append(u)
+            f(u, y+1, z, d+w)
+            z.pop()
+    visited[x] = False  # 오류: 이 줄이 누락됨
+
+# 잘못된 부분: visited[x] = False 누락
+#
+# 문제점:
+# - visited[x]를 True로 설정한 후 복원하지 않음
+# - 첫 번째 경로 탐색 후 x가 계속 방문 상태로 남음
+# - 다른 경로에서 x를 다시 방문할 수 없게 됨
+#
+# 결과: 첫 번째 경로만 탐색하고 나머지 경로는 건너뜀
+#
+# 백트래킹의 핵심: 상태 변경과 복원의 대칭성
+# visited[x] = True 후 반드시 visited[x] = False로 복원]]></solution>
+  </problem>
+
+  <!-- 문제 6: 트레이싱 (백트래킹 과정) -->
+  <problem>
+    <description>다음 코드에서 f(0, 1, [0], 0) 호출 시 재귀 함수가 총 몇 번 호출되는지 구하세요. (V=3, 완전 그래프)</description>
+    <code><![CDATA[V = 3
+M = [[(1,1), (2,1)], [(0,1), (2,1)], [(0,1), (1,1)]]
+visited = [False] * 3
+ans = 999
+
+def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True
+    for u, w in M[x]:
+        if not visited[u]:
+            z.append(u)
+            f(u, y+1, z, d+w)
+            z.pop()
+    visited[x] = False]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 완전 그래프 (모든 노드가 연결됨)
+#   0---1
+#    \ /
+#     2
+#
+# f(0, 1, [0], 0) 호출 트리:
+#
+# f(0, 1, [0], 0)
+#   visited[0] = True
+#   ├─ f(1, 2, [0,1], 1)
+#   │    visited[1] = True
+#   │    └─ f(2, 3, [0,1,2], 2)  → y==V, ans 갱신
+#   │    visited[1] = False
+#   └─ f(2, 2, [0,2], 1)
+#        visited[2] = True
+#        └─ f(1, 3, [0,2,1], 2)  → y==V, ans 갱신
+#        visited[2] = False
+#   visited[0] = False
+#
+# 총 호출 횟수:
+# f(0, 1, ...) : 1번
+# f(1, 2, ...) : 1번
+# f(2, 3, ...) : 1번
+# f(2, 2, ...) : 1번
+# f(1, 3, ...) : 1번
+#
+# 합계: 5번
+#
+# 정답: 5번
+#
+# 일반 공식 (완전 그래프):
+# V개 노드의 경우 약 V! (팩토리얼) 수준]]></solution>
+  </problem>
+
+  <!-- 문제 7: 블록 채우기 (for 내부) -->
+  <problem>
+    <description>해밀토니안 경로 탐색에서 for 루프 블록 내부를 완성하세요.</description>
+    <code><![CDATA[def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True
+    for u, w in M[x]:
+        # 여기를 채우세요 (3줄)
+    visited[x] = False]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True
+    for u, w in M[x]:
+        # 미방문 노드만 탐색
+        if not visited[u]:
+            z.append(u)           # 경로에 추가
+            f(u, y+1, z, d+w)     # 재귀 호출
+            z.pop()               # 백트래킹
+    visited[x] = False
+
+# for 루프 내부 3단계:
+# 1. if not visited[u]: 미방문 노드 확인
+# 2. z.append(u), f(...), z.pop(): 백트래킹 패턴
+# 3. y+1 (방문 개수 증가), d+w (비용 누적)
+#
+# M[x]는 [(노드, 가중치), ...] 형태
+# u, w로 언패킹하여 사용]]></solution>
+  </problem>
+
+  <!-- 문제 8: 전체 작성 (기본 해밀토니안) -->
+  <problem>
+    <description>해밀토니안 경로의 최소 비용을 구하는 재귀 함수를 작성하세요. 전역변수 V, M, visited, ans를 사용합니다.</description>
+    <code><![CDATA[def f(x, y, z, d):
+    pass]]></code>
+    <input><![CDATA[V = 4
+M = [[(1,1), (2,3)], [(0,1), (2,2), (3,4)], [(0,3), (1,2), (3,1)], [(1,4), (2,1)]]
+visited = [False] * 4
+ans = 999999
+for v in range(V):
+    f(v, 1, [v], 0)
+print(ans)]]></input>
+    <output><![CDATA[4]]></output>
+    <solution><![CDATA[def f(x, y, z, d):
+    # 전역 변수 선언
+    global V, visited, ans
+
+    # 종료 조건: 모든 노드 방문 완료
+    if y == V:
+        # 최소 비용 갱신
+        if ans > d:
+            ans = d
+        return
+
+    # 현재 노드 방문 표시
+    visited[x] = True
+
+    # 인접 노드 탐색
+    for u, w in M[x]:
+        # 미방문 노드만 탐색
+        if not visited[u]:
+            # 경로 추가
+            z.append(u)
+            # 재귀 호출
+            f(u, y+1, z, d+w)
+            # 백트래킹: 경로 제거
+            z.pop()
+
+    # 백트래킹: 방문 표시 해제
+    visited[x] = False
+
+# 해밀토니안 경로 탐색 기본 구조:
+# 1. 종료 조건 (y == V)
+# 2. 방문 표시 (visited[x] = True)
+# 3. 인접 노드 탐색 (for u, w in M[x])
+# 4. 백트래킹 (z.pop(), visited[x] = False)]]></solution>
+  </problem>
+
+  <!-- 문제 9: 디버깅 (가중치 누적 오류) -->
+  <problem>
+    <description>다음 코드는 최소 비용을 잘못 계산합니다. 오류를 찾아 고치세요.</description>
+    <code><![CDATA[def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True
+    for u, w in M[x]:
+        if not visited[u]:
+            z.append(u)
+            d = d + w
+            f(u, y+1, z, d)
+            z.pop()
+    visited[x] = False]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True
+    for u, w in M[x]:
+        if not visited[u]:
+            z.append(u)
+            # d = d + w  # 오류: 파라미터 d를 직접 수정
+            f(u, y+1, z, d+w)  # 정답: 재귀 호출 시 d+w 전달
+            z.pop()
+    visited[x] = False
+
+# 잘못된 부분: d = d + w
+#
+# 문제점:
+# - 파라미터 d를 직접 수정하면 백트래킹이 안 됨
+# - 첫 번째 경로 탐색 후 d가 누적된 상태로 유지됨
+# - 두 번째 경로 탐색 시 잘못된 d 값 사용
+#
+# 예시:
+# d=0에서 시작
+# 첫 경로: d=0 → d=5 (누적)
+# 두 번째 경로: d=5부터 시작 (잘못됨!)
+#
+# 올바른 방법:
+# - f(u, y+1, z, d+w)로 새로운 값 전달
+# - 재귀에서 돌아온 후 d는 원래 값 유지
+# - 불변성: 정수는 복사되므로 자동 백트래킹
+#
+# 백트래킹 원칙:
+# - 가변 객체 (z, visited): 명시적 복원 필요
+# - 불변 객체 (d, y): 파라미터 전달로 자동 복원]]></solution>
+  </problem>
+
+  <!-- 문제 10: 서술형 (백트래킹 3단계) -->
+  <problem>
+    <description>백트래킹의 3단계 과정을 해밀토니안 경로 코드를 예로 들어 설명하세요.</description>
+    <code><![CDATA[def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True
+    for u, w in M[x]:
+        if not visited[u]:
+            z.append(u)
+            f(u, y+1, z, d+w)
+            z.pop()
+    visited[x] = False]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 백트래킹 3단계 과정
+#
+# ========================================
+# 1단계: 선택 (Choose)
+# ========================================
+# - 가능한 선택지 중 하나를 선택
+# - 상태를 변경함
+#
+# 코드:
+#   visited[x] = True    # 현재 노드 방문 표시
+#   z.append(u)          # 경로에 다음 노드 추가
+#
+# ========================================
+# 2단계: 탐색 (Explore)
+# ========================================
+# - 선택을 바탕으로 다음 단계로 진행
+# - 재귀 호출을 통해 더 깊이 탐색
+#
+# 코드:
+#   f(u, y+1, z, d+w)    # 다음 노드로 재귀 호출
+#
+# ========================================
+# 3단계: 복원 (Unchoose)
+# ========================================
+# - 탐색이 끝나면 이전 상태로 되돌림
+# - 다른 선택지를 시도하기 위해
+#
+# 코드:
+#   z.pop()              # 경로에서 노드 제거
+#   visited[x] = False   # 방문 표시 해제
+#
+# ========================================
+# 핵심 원칙
+# ========================================
+# - 선택과 복원은 반드시 쌍을 이룸
+# - append/pop, True/False가 대칭적
+# - 재귀 전후로 상태가 동일해야 함
+#
+# ========================================
+# 비유
+# ========================================
+# 미로 탐색:
+# 1. 선택: 특정 길로 들어감 (표시)
+# 2. 탐색: 그 길을 따라 계속 진행
+# 3. 복원: 막다른 길이면 되돌아옴 (표시 지움)
+#
+# 모든 가능한 경로를 빠짐없이 탐색하면서
+# 불필요한 경로는 조기에 포기하는 것이 백트래킹]]></solution>
+  </problem>
+
+  <!-- 문제 11: 순서 맞추기 (백트래킹 코드) -->
+  <problem>
+    <description>다음 코드 조각들을 올바른 순서로 배열하여 해밀토니안 경로 함수를 완성하세요.</description>
+    <code><![CDATA[A: visited[x] = True
+B: if y == V:
+C: for u, w in M[x]:
+D: visited[x] = False
+E: if ans > d:
+F: z.append(u)
+G: ans = d
+H: if not visited[u]:
+I: f(u, y+1, z, d+w)
+J: z.pop()
+K: return]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 올바른 순서:
+#
+# def f(x, y, z, d):
+#     global V, visited, ans
+#     B: if y == V:              # 종료 조건
+#     E:     if ans > d:         # 최솟값 확인
+#     G:         ans = d         # 갱신
+#     K:     return              # 종료
+#     A: visited[x] = True       # 방문 표시
+#     C: for u, w in M[x]:       # 인접 노드 탐색
+#     H:     if not visited[u]:  # 미방문 확인
+#     F:         z.append(u)     # 경로 추가
+#     I:         f(u, y+1, z, d+w)  # 재귀 호출
+#     J:         z.pop()         # 경로 제거
+#     D: visited[x] = False      # 방문 해제
+#
+# 정답: B → E → G → K → A → C → H → F → I → J → D
+#
+# 구조 설명:
+# 1. 종료 조건 (B, E, G, K): 모든 노드 방문 완료 시 처리
+# 2. 방문 표시 (A): 백트래킹 시작
+# 3. 탐색 루프 (C, H, F, I, J): 인접 노드 재귀 탐색
+# 4. 복원 (D): 백트래킹 완료
+#
+# 중요 포인트:
+# - A(True)와 D(False)는 함수 시작/끝
+# - F(append)와 J(pop)는 재귀 전/후
+# - 대칭 구조 유지]]></solution>
+  </problem>
+
+  <!-- 문제 12: 복잡도 분석 -->
+  <problem>
+    <description>해밀토니안 경로 탐색 알고리즘의 시간복잡도가 O(V!)인 이유를 설명하고, V=5, 10일 때 대략적인 연산 횟수를 계산하세요.</description>
+    <code><![CDATA[def f(x, y, z, d):
+    global V, visited, ans
+    if y == V:
+        if ans > d:
+            ans = d
+        return
+    visited[x] = True
+    for u, w in M[x]:
+        if not visited[u]:
+            z.append(u)
+            f(u, y+1, z, d+w)
+            z.pop()
+    visited[x] = False]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# ========================================
+# O(V!) 시간복잡도 이유
+# ========================================
+#
+# 1. 해밀토니안 경로의 본질:
+#    - V개 노드를 방문하는 순서의 순열
+#    - 가능한 순열 개수: V!
+#
+# 2. 탐색 구조 (완전 그래프 기준):
+#    - 1번째 노드: V개 선택지
+#    - 2번째 노드: V-1개 선택지
+#    - 3번째 노드: V-2개 선택지
+#    - ...
+#    - V번째 노드: 1개 선택지
+#    - 총 경로: V × (V-1) × (V-2) × ... × 1 = V!
+#
+# 3. 재귀 호출 횟수:
+#    - 최악의 경우 모든 순열을 탐색
+#    - visited 배열로 일부 가지치기 가능하지만
+#    - 기본적으로 V! 수준의 탐색
+#
+# ========================================
+# 연산 횟수 계산
+# ========================================
+#
+# V=5:
+#   5! = 5 × 4 × 3 × 2 × 1 = 120
+#   약 120번의 경로 탐색
+#
+# V=10:
+#   10! = 10 × 9 × 8 × 7 × 6 × 5 × 4 × 3 × 2 × 1
+#       = 3,628,800
+#   약 360만 번의 경로 탐색
+#
+# V=15:
+#   15! = 1,307,674,368,000
+#   약 1.3조 번 (실용적으로 불가능)
+#
+# ========================================
+# 실제 성능
+# ========================================
+#
+# - 완전 그래프가 아닌 경우 더 빠를 수 있음
+# - 간선이 적으면 (sparse graph) 가지치기 효과
+# - 그래프 구조에 따라 실제 연산 횟수 변동
+#
+# 예: V=10, 평균 간선 3개
+#   최악: 10! = 3,628,800
+#   실제: 약 3^10 = 59,049 (훨씬 적음)
+#
+# ========================================
+# 결론
+# ========================================
+#
+# - 해밀토니안 경로는 NP-완전 문제
+# - 백트래킹은 완전 탐색을 개선하지만 지수 시간
+# - V > 15 정도면 실용적으로 어려움
+# - 근사 알고리즘이나 휴리스틱 필요
+#
+# 비교:
+# - 완전 탐색: O(V^V) - 더 느림
+# - 백트래킹: O(V!) - 개선됨
+# - 동적 계획법: O(V^2 × 2^V) - TSP 경우
+# - 근사: O(V^2) 또는 O(V log V) - 근사해]]></solution>
+  </problem>
+</problems>

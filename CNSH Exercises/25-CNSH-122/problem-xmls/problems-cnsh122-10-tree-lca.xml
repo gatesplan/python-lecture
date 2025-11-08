@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 출력 예측 (LCA 결과) - 워밍업 -->
+  <problem>
+    <description>다음 코드의 출력 결과를 쓰세요.</description>
+    <code><![CDATA[s = '-ABCDEFG'
+T = {c: i for i, c in enumerate(s) if c != '-'}
+
+def f(a, b):
+    while T[a] != T[b]:
+        if T[a] > T[b]:
+            a = s[T[a]//2]
+        else:
+            b = s[T[b]//2]
+    return a
+
+print(f('D', 'E'))
+print(f('G', 'F'))]]></code>
+    <input></input>
+    <output><![CDATA[B
+C]]></output>
+    <solution><![CDATA[# 트리 구조:
+#        A(1)
+#       /    \
+#     B(2)    C(3)
+#    /   \   /   \
+#  D(4) E(5) F(6) G(7)
+#
+# T = {'A':1, 'B':2, 'C':3, 'D':4, 'E':5, 'F':6, 'G':7}
+#
+# f('D', 'E'):
+# 초기: a='D'(4), b='E'(5)
+# 1회: 4 < 5 → b=s[5//2]=s[2]='B'
+# 2회: 4 > 2 → a=s[4//2]=s[2]='B'
+# 종료: T['B']=2, T['B']=2 → 'B'
+#
+# f('G', 'F'):
+# 초기: a='G'(7), b='F'(6)
+# 1회: 7 > 6 → a=s[7//2]=s[3]='C'
+# 2회: 3 < 6 → b=s[6//2]=s[3]='C'
+# 종료: T['C']=3, T['C']=3 → 'C'
+#
+# 정답: B, C]]></solution>
+  </problem>
+
+  <!-- 문제 2: 서술형 (LCA 개념 설명) -->
+  <problem>
+    <description>LCA(Lowest Common Ancestor)가 무엇인지 설명하고, 왜 유용한지 서술하세요.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# LCA (Lowest Common Ancestor, 최소 공통 조상)
+#
+# 정의:
+# - 두 노드의 공통 조상 중 가장 가까운(깊이가 가장 깊은) 조상
+# - 트리에서 두 노드가 처음으로 만나는 조상 노드
+#
+# 예시:
+#        A
+#       / \
+#      B   C
+#     / \   \
+#    D   E   F
+#
+# LCA(D, E) = B  (D와 E의 직접적인 부모)
+# LCA(D, F) = A  (D는 B를 거쳐, F는 C를 거쳐 A에서 만남)
+# LCA(E, B) = B  (한쪽이 조상이면 그 노드가 LCA)
+#
+# 유용한 이유:
+#
+# 1. 두 노드 간 거리 계산
+#    - 거리 = depth(a) + depth(b) - 2*depth(lca)
+#    - LCA를 알면 O(1)에 거리 계산 가능
+#
+# 2. 경로 찾기
+#    - A에서 B로 가는 경로 = A → LCA → B
+#    - 트리에서 유일한 경로
+#
+# 3. 트리 구조 분석
+#    - 두 노드의 관계 파악
+#    - 공통 조상이 루트인지 확인
+#
+# 4. 실제 응용
+#    - 가계도: 가장 가까운 공통 조상 찾기
+#    - 파일 시스템: 두 경로의 공통 디렉토리
+#    - 네트워크: 두 노드의 라우팅 경로
+#
+# 5. 트리의 지름 구하기
+#    - 가장 먼 두 노드 찾을 때 활용
+#
+# 배열 표현에서 LCA 찾기:
+# - 인덱스가 큰 노드를 부모로 계속 올림
+# - 두 인덱스가 같아질 때까지 반복
+# - 시간복잡도: O(log n) (트리 높이만큼)]]></solution>
+  </problem>
+
+  <!-- 문제 3: 트레이싱 (LCA 찾기 과정) -->
+  <problem>
+    <description>배열 표현 s = '-ABCDEFGH'에서 노드 'G'와 'E'의 LCA를 찾는 과정을 단계별로 서술하세요. 각 단계에서 비교하는 인덱스와 이동하는 노드를 모두 나열하세요.</description>
+    <code><![CDATA[s = '-ABCDEFGH'
+T = {c: i for i, c in enumerate(s) if c != '-'}
+
+def f(a, b):
+    while T[a] != T[b]:
+        if T[a] > T[b]:
+            a = s[T[a]//2]
+        else:
+            b = s[T[b]//2]
+    return a]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 트리 구조:
+#        A(1)
+#       /    \
+#     B(2)    C(3)
+#    /  \    /  \
+#  D(4) E(5) F(6) G(7)
+# /
+#H(8)
+#
+# T = {'A':1, 'B':2, 'C':3, 'D':4, 'E':5, 'F':6, 'G':7, 'H':8}
+#
+# f('G', 'E') 실행 과정:
+#
+# 초기: a='G', b='E'
+#       T['G']=7, T['E']=5
+#
+# 1회차:
+# - 비교: T['G']=7 vs T['E']=5
+# - 조건: 7 > 5 (a가 더 큼)
+# - 이동: a = s[7//2] = s[3] = 'C'
+# - 결과: a='C' (T=3), b='E' (T=5)
+#
+# 2회차:
+# - 비교: T['C']=3 vs T['E']=5
+# - 조건: 3 < 5 (b가 더 큼)
+# - 이동: b = s[5//2] = s[2] = 'B'
+# - 결과: a='C' (T=3), b='B' (T=2)
+#
+# 3회차:
+# - 비교: T['C']=3 vs T['B']=2
+# - 조건: 3 > 2 (a가 더 큼)
+# - 이동: a = s[3//2] = s[1] = 'A'
+# - 결과: a='A' (T=1), b='B' (T=2)
+#
+# 4회차:
+# - 비교: T['A']=1 vs T['B']=2
+# - 조건: 1 < 2 (b가 더 큼)
+# - 이동: b = s[2//2] = s[1] = 'A'
+# - 결과: a='A' (T=1), b='A' (T=1)
+#
+# 종료: T['A'] == T['A']
+# 반환: 'A'
+#
+# 정답: LCA('G', 'E') = 'A'
+# (G는 C를 거쳐, E는 B를 거쳐 A에서 만남)
+#
+# 루프 실행 횟수: 4번]]></solution>
+  </problem>
+
+  <!-- 문제 4: 빈칸 채우기 (LCA while 조건) -->
+  <problem>
+    <description>두 노드의 LCA를 찾는 함수입니다. 빈칸을 채우세요.</description>
+    <code><![CDATA[s = '-ABCDEFGH'
+T = {c: i for i, c in enumerate(s) if c != '-'}
+
+def f(a, b):
+    while ____:
+        if T[a] > T[b]:
+            a = s[T[a]//2]
+        else:
+            b = s[T[b]//2]
+    return a]]></code>
+    <input><![CDATA[print(f('D', 'E'))
+print(f('H', 'G'))]]></input>
+    <output><![CDATA[B
+A]]></output>
+    <solution><![CDATA[s = '-ABCDEFGH'
+T = {c: i for i, c in enumerate(s) if c != '-'}
+
+def f(a, b):
+    while T[a] != T[b]:  # 정답: T[a] != T[b]
+        if T[a] > T[b]:
+            a = s[T[a]//2]
+        else:
+            b = s[T[b]//2]
+    return a
+
+# 트리 구조:
+#        A(1)
+#       /    \
+#     B(2)    C(3)
+#    /  \    /  \
+#  D(4) E(5) F(6) G(7)
+# /
+#H(8)
+#
+# 조건 설명:
+# - T[a] != T[b]: 두 노드의 인덱스가 다를 때까지 반복
+# - 인덱스가 같아지면 = 같은 노드에 도달 = LCA 찾음
+# - 깊이가 깊은(인덱스가 큰) 노드를 부모로 올림
+#
+# f('D', 'E'):
+# T[D]=4, T[E]=5 → 5>4 → E를 부모로(2)
+# T[D]=4, T[E]=2 → 4>2 → D를 부모로(2)
+# T[D]=2, T[E]=2 → 같음 → 'B'
+#
+# f('H', 'G'):
+# T[H]=8, T[G]=7 → 8>7 → H를 부모로(4='D')
+# T[D]=4, T[G]=7 → 4<7 → G를 부모로(3='C')
+# T[D]=4, T[C]=3 → 4>3 → D를 부모로(2='B')
+# T[B]=2, T[C]=3 → 2<3 → C를 부모로(1='A')
+# T[B]=2, T[A]=1 → 2>1 → B를 부모로(1='A')
+# T[A]=1, T[A]=1 → 같음 → 'A']]></solution>
+  </problem>
+
+  <!-- 문제 5: 디버깅 (인덱스 비교 오류) -->
+  <problem>
+    <description>다음 LCA 함수에 오류가 있습니다. 오류를 찾아 고치세요.</description>
+    <code><![CDATA[s = '-ABCDEFGH'
+T = {c: i for i, c in enumerate(s) if c != '-'}
+
+def f(a, b):
+    while a != b:
+        if T[a] > T[b]:
+            a = s[T[a]//2]
+        else:
+            b = s[T[b]//2]
+    return a]]></code>
+    <input><![CDATA[print(f('D', 'E'))]]></input>
+    <output><![CDATA[B]]></output>
+    <solution><![CDATA[s = '-ABCDEFGH'
+T = {c: i for i, c in enumerate(s) if c != '-'}
+
+def f(a, b):
+    while T[a] != T[b]:  # 오류: a != b가 아니라 T[a] != T[b]
+        if T[a] > T[b]:
+            a = s[T[a]//2]
+        else:
+            b = s[T[b]//2]
+    return a
+
+# 잘못된 부분: while a != b
+#
+# 이유:
+# - a와 b는 문자(노드 이름)이고, 비교해야 하는 것은 인덱스
+# - 'D' != 'E'는 항상 참이므로 무한 루프에 빠질 수 있음
+# - 예: a='D', b='E'일 때
+#   → 두 노드를 부모로 올려서 둘 다 'B'가 되어도
+#   → 문자 비교는 'D' != 'E'로 여전히 참
+#   (실제로는 a='B', b='B'로 바뀌므로 종료되지만 논리적으로 잘못됨)
+#
+# 올바른 비교:
+# - T[a] != T[b]: 인덱스를 비교
+# - 인덱스가 같아지면 같은 위치에 도달했다는 의미
+# - 이것이 LCA를 찾는 올바른 조건
+#
+# 예시:
+# f('D', 'E'):
+# - 초기: T['D']=4, T['E']=5
+# - 1회: T['D']=4, T['B']=2 (E→B)
+# - 2회: T['B']=2, T['B']=2 (D→B)
+# - 종료: T[a] == T[b] (둘 다 2)
+# - 반환: 'B'
+#
+# 수정 버전이 정확함]]></solution>
+  </problem>
+
+  <!-- 문제 6: 전체 작성 (LCA 함수) -->
+  <problem>
+    <description>배열 표현된 이진 트리에서 두 노드의 LCA를 찾는 함수를 작성하세요. 전역변수 s와 T를 사용하세요.</description>
+    <code><![CDATA[s = '-ABCDEFGH'
+T = {c: i for i, c in enumerate(s) if c != '-'}
+
+def f(a, b):
+    pass]]></code>
+    <input><![CDATA[print(f('D', 'G'))
+print(f('H', 'E'))]]></input>
+    <output><![CDATA[A
+B]]></output>
+    <solution><![CDATA[s = '-ABCDEFGH'
+T = {c: i for i, c in enumerate(s) if c != '-'}
+
+def f(a, b):
+    while T[a] != T[b]:
+        if T[a] > T[b]:
+            a = s[T[a]//2]
+        else:
+            b = s[T[b]//2]
+    return a
+
+# 트리 구조:
+#        A(1)
+#       /    \
+#     B(2)    C(3)
+#    /  \    /  \
+#  D(4) E(5) F(6) G(7)
+# /
+#H(8)
+#
+# 알고리즘:
+# 1. 두 노드의 인덱스가 다른 동안 반복
+# 2. 인덱스가 큰(더 깊은) 노드를 부모로 이동
+#    - 부모 인덱스 = 현재 인덱스 // 2
+#    - 부모 노드 = s[부모 인덱스]
+# 3. 두 인덱스가 같아지면 LCA 찾음
+#
+# f('D', 'G'):
+# 초기: a='D'(4), b='G'(7)
+# 1회: 7>4 → a=s[7//2]=s[3]='C'
+# 2회: 4>3 → a=s[4//2]=s[2]='B'
+# 3회: 2<3 → b=s[3//2]=s[1]='A'
+# 4회: 2>1 → a=s[2//2]=s[1]='A'
+# 종료: T['A']=1, T['A']=1 → 'A'
+#
+# f('H', 'E'):
+# 초기: a='H'(8), b='E'(5)
+# 1회: 8>5 → a=s[8//2]=s[4]='D'
+# 2회: 4<5 → b=s[5//2]=s[2]='B'
+# 3회: 4>2 → a=s[4//2]=s[2]='B'
+# 종료: T['B']=2, T['B']=2 → 'B'
+#
+# 정답: A, B]]></solution>
+  </problem>
+
+  <!-- 문제 7: 출력 예측 (두 노드 거리) -->
+  <problem>
+    <description>다음 코드의 출력 결과를 쓰세요.</description>
+    <code><![CDATA[s = '-ABCDE'
+T = {c: i for i, c in enumerate(s) if c != '-'}
+
+def f(a, b):
+    d = 0
+    while T[a] != T[b]:
+        if T[a] > T[b]:
+            a = s[T[a]//2]
+        else:
+            b = s[T[b]//2]
+        d += 1
+    return d
+
+print(f('D', 'E'))
+print(f('D', 'A'))]]></code>
+    <input></input>
+    <output><![CDATA[2
+2]]></output>
+    <solution><![CDATA[# 트리 구조:
+#      A(1)
+#     /  \
+#   B(2)  C(3)
+#  / \
+# D(4) E(5)
+#
+# T = {'A':1, 'B':2, 'C':3, 'D':4, 'E':5}
+#
+# f('D', 'E'):
+# 초기: a='D'(4), b='E'(5), d=0
+# 1회: 4<5 → b=s[5//2]=s[2]='B'(2), d=1
+# 2회: 4>2 → a=s[4//2]=s[2]='B'(2), d=2
+# 종료: T[B]=2, T[B]=2
+# 반환: 2
+#
+# f('D', 'A'):
+# 초기: a='D'(4), b='A'(1), d=0
+# 1회: 4>1 → a=s[4//2]=s[2]='B'(2), d=1
+# 2회: 2>1 → a=s[2//2]=s[1]='A'(1), d=2
+# 종료: T[A]=1, T[A]=1
+# 반환: 2
+#
+# 거리 의미:
+# - D와 E 사이: D → B → E (2칸)
+# - D와 A 사이: D → B → A (2칸)
+#
+# 주의: 이 함수는 LCA까지의 이동 횟수를 센다
+# 실제 간선 개수와는 다를 수 있음
+#
+# 정답: 2, 2]]></solution>
+  </problem>
+
+  <!-- 문제 8: 전체 작성 (거리 계산) -->
+  <problem>
+    <description>배열 표현된 이진 트리에서 두 노드 사이의 거리(간선 개수)를 구하는 함수를 작성하세요. 전역변수 s와 T를 사용하세요.</description>
+    <code><![CDATA[s = '-ABCDE'
+T = {c: i for i, c in enumerate(s) if c != '-'}
+
+def f(a, b):
+    pass]]></code>
+    <input><![CDATA[print(f('D', 'E'))
+print(f('D', 'C'))
+print(f('B', 'C'))]]></input>
+    <output><![CDATA[2
+3
+2]]></output>
+    <solution><![CDATA[s = '-ABCDE'
+T = {c: i for i, c in enumerate(s) if c != '-'}
+
+def f(a, b):
+    d = 0
+    while T[a] != T[b]:
+        if T[a] > T[b]:
+            a = s[T[a]//2]
+        else:
+            b = s[T[b]//2]
+        d += 1
+    return d
+
+# 트리 구조:
+#      A(1)
+#     /  \
+#   B(2)  C(3)
+#  / \
+# D(4) E(5)
+#
+# 거리 계산 원리:
+# - 두 노드를 각각 부모로 올리면서 만날 때까지의 이동 횟수
+# - 이동 1회 = 간선 1개 = 거리 1
+#
+# f('D', 'E'):
+# D(4) → B(2), E(5) → B(2): 2번 이동
+# 거리 = 2 (D-B-E)
+#
+# f('D', 'C'):
+# D(4) → B(2) (1회)
+# B(2) → A(1), C(3) → A(1) (2회)
+# 총 3번 이동
+# 거리 = 3 (D-B-A-C)
+#
+# f('B', 'C'):
+# B(2) → A(1), C(3) → A(1): 2번 이동
+# 거리 = 2 (B-A-C)
+#
+# 참고: 깊이를 이용한 다른 공식
+# distance = depth(a) + depth(b) - 2*depth(lca)
+#
+# 예: f('D', 'E')
+# depth(D)=2, depth(E)=2, depth(B)=1
+# distance = 2 + 2 - 2*1 = 2]]></solution>
+  </problem>
+
+  <!-- 문제 9: 서술형 (트리 직경 알고리즘) -->
+  <problem>
+    <description>트리의 지름(diameter)이 무엇인지 설명하고, DFS를 두 번 사용하여 O(n) 시간에 지름을 구하는 알고리즘을 서술하세요.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 트리의 지름(Diameter)
+#
+# 정의:
+# - 트리에서 가장 먼 두 노드 사이의 거리
+# - 트리의 "가장 긴 경로"
+#
+# 예시:
+#        A
+#       / \
+#      B   C
+#     / \   \
+#    D   E   F
+#   /
+#  G
+#
+# 모든 노드 쌍의 거리:
+# - D-E: 2
+# - G-E: 3
+# - G-F: 5  ← 최대값!
+# - D-F: 4
+#
+# 트리의 지름 = 5 (G와 F 사이)
+#
+# 알고리즘: DFS 두 번
+#
+# 핵심 아이디어:
+# 1. 임의의 노드 X에서 가장 먼 노드 Y를 찾는다
+# 2. Y에서 가장 먼 노드 Z를 찾는다
+# 3. Y-Z 거리가 트리의 지름이다!
+#
+# 왜 작동하는가?
+# - 임의의 노드에서 가장 먼 노드는 지름의 한쪽 끝점
+# - 그 끝점에서 가장 먼 노드는 지름의 다른 끝점
+# - 증명: 귀류법으로 증명 가능 (복잡하므로 생략)
+#
+# 단계별 알고리즘:
+#
+# 1단계: 아무 노드(예: 루트)에서 DFS 수행
+#    - 모든 노드까지의 거리 계산
+#    - 가장 먼 노드 Y 찾기
+#    - 시간: O(n)
+#
+# 2단계: 노드 Y에서 DFS 수행
+#    - 모든 노드까지의 거리 계산
+#    - 가장 먼 노드 Z 찾기
+#    - Y-Z 거리가 지름
+#    - 시간: O(n)
+#
+# 총 시간복잡도: O(n) + O(n) = O(n)
+#
+# 의사코드:
+# def find_diameter():
+#     # 1. 아무 노드에서 가장 먼 노드 찾기
+#     Y = find_farthest(root)
+#
+#     # 2. Y에서 가장 먼 노드 찾기
+#     Z, diameter = find_farthest(Y)
+#
+#     return diameter
+#
+# def find_farthest(start):
+#     max_dist = 0
+#     farthest = start
+#
+#     for node in all_nodes:
+#         dist = distance(start, node)
+#         if dist > max_dist:
+#             max_dist = dist
+#             farthest = node
+#
+#     return farthest, max_dist
+#
+# 모든 쌍 비교와의 차이:
+# - 모든 쌍: O(n²) - n개 노드에서 n(n-1)/2 쌍
+# - DFS 두 번: O(n) - 2번의 순회만
+# - 약 n/2배 빠름 (n이 클수록 효율적)
+#
+# 응용:
+# - 네트워크 설계: 최대 지연 시간
+# - 조직 구조: 최대 보고 단계
+# - 파일 시스템: 가장 깊은 경로]]></solution>
+  </problem>
+
+  <!-- 문제 10: 복잡도 분석 -->
+  <problem>
+    <description>배열 표현된 이진 트리에서 LCA를 찾는 알고리즘의 시간복잡도를 분석하세요. 최선, 평균, 최악의 경우를 모두 고려하세요.</description>
+    <code><![CDATA[def f(a, b):
+    while T[a] != T[b]:
+        if T[a] > T[b]:
+            a = s[T[a]//2]
+        else:
+            b = s[T[b]//2]
+    return a]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# LCA 알고리즘 시간복잡도 분석
+#
+# 핵심: 루프 실행 횟수
+# - 각 반복마다 한 노드를 부모로 이동
+# - 부모로 이동 = 트리에서 한 레벨 위로
+# - 최대 이동 횟수 = 트리의 높이
+#
+# 시간복잡도: O(h) (h = 트리의 높이)
+#
+# 1. 최선의 경우: O(1)
+#
+# 예: 두 노드가 형제이거나 부모-자식 관계
+#      A(1)
+#     /  \
+#   B(2)  C(3)
+#
+# LCA(B, C):
+# - 1회: B(2) → A(1)
+# - 1회: C(3) → A(1)
+# - 총 2회 → O(1)
+#
+# LCA(A, B):
+# - 1회: B(2) → A(1)
+# - 총 1회 → O(1)
+#
+# 2. 평균의 경우: O(log n)
+#
+# 균형 이진 트리에서:
+# - 높이 h = log₂(n)
+# - 평균적으로 h/2 레벨 정도 이동
+# - O(log n)
+#
+# 예: 완전 이진 트리 (n=7, h=2)
+#        A
+#       / \
+#      B   C
+#     / \ / \
+#    D  E F  G
+#
+# 평균 이동: 약 1~2회
+#
+# 3. 최악의 경우: O(h)
+#
+# a) 균형 트리: O(log n)
+# - 높이 h = log₂(n)
+# - 가장 깊은 두 리프의 LCA가 루트
+#
+# 예: LCA(D, G)
+#        A
+#       / \
+#      B   C
+#     /     \
+#    D       G
+#
+# D → B → A (2회)
+# G → C → A (2회)
+# 총 4회 = 2 × 높이
+#
+# b) 편향 트리: O(n)
+# - 높이 h = n-1
+# - 한쪽으로만 치우친 경우
+#
+# 예:
+#     A
+#    /
+#   B
+#  /
+# C
+#
+# LCA(A, C):
+# C → B → A (2회)
+# 이동 횟수 = 높이 = O(n)
+#
+# 정리:
+#
+# | 트리 형태 | 높이 | 시간복잡도 |
+# |-----------|------|-----------|
+# | 균형 트리 | log n | O(log n) |
+# | 완전 이진 트리 | log n | O(log n) |
+# | 편향 트리 | n | O(n) |
+#
+# 공간복잡도: O(1)
+# - 반복문 사용 (재귀 아님)
+# - 추가 메모리 불필요
+#
+# 개선 방법:
+# - 희소 테이블(Sparse Table): 전처리 O(n log n), 쿼리 O(log n)
+# - 이진 상승(Binary Lifting): 전처리 O(n log n), 쿼리 O(log n)
+# - 오일러 투어 + RMQ: 전처리 O(n), 쿼리 O(1)
+#
+# 결론: 배열 표현에서는 O(log n) ~ O(n)
+# 균형 트리라면 효율적, 편향되면 비효율적]]></solution>
+  </problem>
+</problems>

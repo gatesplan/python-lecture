@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 출력 예측 (약수 개수) -->
+  <problem>
+    <description>다음 코드의 출력 결과를 쓰세요.</description>
+    <code><![CDATA[def f(n):
+    cnt = 0
+    for i in range(1, n+1):
+        if n % i == 0:
+            cnt += 1
+    return cnt
+
+print(f(12))
+print(f(10))]]></code>
+    <input></input>
+    <output><![CDATA[6
+4]]></output>
+    <solution><![CDATA[# f(12): 12의 약수는 1, 2, 3, 4, 6, 12 → 6개
+# f(10): 10의 약수는 1, 2, 5, 10 → 4개
+#
+# 정답: 6, 4]]></solution>
+  </problem>
+
+  <!-- 문제 2: 빈칸 채우기 (약수 판별 조건) -->
+  <problem>
+    <description>약수의 합을 구하는 함수입니다. if문의 조건부를 완성하세요.</description>
+    <code><![CDATA[def f(n):
+    s = 0
+    for i in range(1, n+1):
+        if ____:
+            s = s + i
+    return s]]></code>
+    <input><![CDATA[print(f(12))
+print(f(6))]]></input>
+    <output><![CDATA[28
+12]]></output>
+    <solution><![CDATA[def f(n):
+    s = 0
+    for i in range(1, n+1):
+        if n % i == 0:  # 정답: n % i == 0
+            s = s + i
+    return s
+
+# 약수 조건: n을 i로 나눈 나머지가 0
+# 12의 약수: 1+2+3+4+6+12 = 28]]></solution>
+  </problem>
+
+  <!-- 문제 3: 전체 작성 (약수의 합) -->
+  <problem>
+    <description>주어진 수 n의 모든 약수의 합을 구하는 함수를 작성하세요.</description>
+    <code><![CDATA[def f(n):
+    pass]]></code>
+    <input><![CDATA[print(f(10))
+print(f(15))]]></input>
+    <output><![CDATA[18
+24]]></output>
+    <solution><![CDATA[def f(n):
+    s = 0
+    for i in range(1, n+1):
+        if n % i == 0:
+            s = s + i
+    return s
+
+# 10의 약수: 1, 2, 5, 10 → 합 = 18
+# 15의 약수: 1, 3, 5, 15 → 합 = 24]]></solution>
+  </problem>
+
+  <!-- 문제 4: 디버깅 (범위 오류) -->
+  <problem>
+    <description>다음 약수 개수 함수에 오류가 있습니다. 오류를 찾아 고치세요.</description>
+    <code><![CDATA[def f(n):
+    cnt = 0
+    for i in range(2, n):
+        if n % i == 0:
+            cnt += 1
+    return cnt]]></code>
+    <input><![CDATA[print(f(6))
+print(f(12))]]></input>
+    <output><![CDATA[4
+6]]></output>
+    <solution><![CDATA[def f(n):
+    cnt = 0
+    for i in range(1, n+1):  # 오류: range(2, n)이 아니라 range(1, n+1)
+        if n % i == 0:
+            cnt += 1
+    return cnt
+
+# 잘못된 부분: range(2, n)
+# 오류 1: 1을 포함하지 않음 (1은 모든 수의 약수)
+# 오류 2: n 자신을 포함하지 않음 (n도 n의 약수)
+# 6의 약수: 1, 2, 3, 6 → 4개 (원래 코드는 2, 3만 세어 2개)]]></solution>
+  </problem>
+
+  <!-- 문제 5: 서술형 (완전수 개념) -->
+  <problem>
+    <description>완전수(Perfect Number)의 정의를 서술하고, 6과 28이 완전수인 이유를 설명하세요.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 완전수의 정의:
+# 자기 자신을 제외한 모든 약수의 합이 자기 자신과 같은 수
+#
+# 6이 완전수인 이유:
+# - 6의 약수: 1, 2, 3, 6
+# - 자기 자신 제외: 1, 2, 3
+# - 합: 1 + 2 + 3 = 6 (자기 자신과 같음)
+#
+# 28이 완전수인 이유:
+# - 28의 약수: 1, 2, 4, 7, 14, 28
+# - 자기 자신 제외: 1, 2, 4, 7, 14
+# - 합: 1 + 2 + 4 + 7 + 14 = 28 (자기 자신과 같음)
+#
+# 참고: 완전수는 매우 희귀함 (6, 28, 496, 8128, ...)]]></solution>
+  </problem>
+
+  <!-- 문제 6: 빈칸 채우기 (완전수 판별) -->
+  <problem>
+    <description>완전수를 판별하는 함수입니다. 빈칸을 채우세요.</description>
+    <code><![CDATA[def f(n):
+    s = 0
+    for i in range(1, ____):
+        if n % i == 0:
+            s += i
+    return s == n]]></code>
+    <input><![CDATA[print(f(6))
+print(f(28))
+print(f(12))]]></input>
+    <output><![CDATA[True
+True
+False]]></output>
+    <solution><![CDATA[def f(n):
+    s = 0
+    for i in range(1, n):  # 정답: n (자기 자신 제외)
+        if n % i == 0:
+            s += i
+    return s == n
+
+# 완전수: 자기 자신을 제외한 약수의 합 = 자기 자신
+# range(1, n): 1부터 n-1까지 (n 제외)
+# 6: 1+2+3 = 6 → True
+# 28: 1+2+4+7+14 = 28 → True
+# 12: 1+2+3+4+6 = 16 ≠ 12 → False]]></solution>
+  </problem>
+
+  <!-- 문제 7: 코드 비교 (O(n) vs O(√n)) -->
+  <problem>
+    <description>다음 두 약수의 합 함수 중 더 효율적인 것은? 그 이유는?</description>
+    <code><![CDATA[# 코드 A
+def f(n):
+    s = 0
+    for i in range(1, n+1):
+        if n % i == 0:
+            s += i
+    return s
+
+# 코드 B
+def f(n):
+    s = 0
+    i = 1
+    while i * i <= n:
+        if n % i == 0:
+            s += i
+            if i != n // i:
+                s += n // i
+        i += 1
+    return s]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 정답: 코드 B가 더 효율적
+#
+# 코드 A: O(n)
+# - 1부터 n까지 모든 수 확인
+# - n = 1000일 때 1000번 반복
+#
+# 코드 B: O(√n)
+# - 1부터 √n까지만 확인
+# - 약수는 √n을 기준으로 대칭 (예: 12 = 2×6, 3×4)
+# - i가 약수면 n//i도 약수
+# - n = 1000일 때 약 32번 반복 (√1000 ≈ 31.6)
+#
+# 예: n=12
+# 코드 A: 1,2,3,4,5,6,7,8,9,10,11,12 모두 확인 (12번)
+# 코드 B: 1(+12), 2(+6), 3(+4) 만 확인 (3번)
+#
+# 결론: 코드 B가 약 √n배 빠름]]></solution>
+  </problem>
+
+  <!-- 문제 8: 복잡도 분석 -->
+  <problem>
+    <description>다음 약수 개수 함수의 시간복잡도를 Big-O 표기법으로 나타내세요.</description>
+    <code><![CDATA[def f(n):
+    cnt = 0
+    for i in range(1, n+1):
+        if n % i == 0:
+            cnt += 1
+    return cnt]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 분석:
+# - for 루프: 1부터 n까지 반복 → n번
+# - 각 반복마다: 나머지 연산 (%) + 비교 + 증가 → O(1)
+# - 총 연산: n × O(1) = O(n)
+#
+# 정답: O(n)
+#
+# 개선 방법:
+# √n까지만 확인하고 쌍을 찾으면 O(√n)으로 개선 가능
+# 예: n=100일 때, O(100) → O(10)으로 10배 빠름]]></solution>
+  </problem>
+</problems>

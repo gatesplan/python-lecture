@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 출력 예측 (소수 여부) - 워밍업 -->
+  <problem>
+    <description>다음 코드의 출력 결과를 쓰세요.</description>
+    <code><![CDATA[def f(k):
+    for i in range(2, int(k**0.5)+1):
+        if (k%i) == 0:
+            return False
+    return True
+
+print(f(7))
+print(f(9))
+print(f(2))]]></code>
+    <input></input>
+    <output><![CDATA[True
+False
+True]]></output>
+    <solution><![CDATA[# f(7): 7은 소수 → True
+# f(9): 9는 3으로 나누어떨어짐 (9 = 3×3) → False
+# f(2): 2는 소수 (가장 작은 소수) → True
+#
+# 정답: True, False, True]]></solution>
+  </problem>
+
+  <!-- 문제 2: 빈칸 채우기 (if 조건) [기존] -->
+  <problem>
+    <description>소수를 판별하는 함수입니다. if문의 조건부를 완성하세요.</description>
+    <code><![CDATA[def f(k):
+    for i in range(2, int(k**0.5)+1):
+        if ____:
+            return False
+    return True]]></code>
+    <input><![CDATA[print(f(13))
+print(f(15))
+print(f(2))]]></input>
+    <output><![CDATA[True
+False
+True]]></output>
+    <solution><![CDATA[def f(k):
+    for i in range(2, int(k**0.5)+1):
+        if (k%i) == 0:  # 정답: (k%i) == 0 또는 k%i == 0
+            return False
+    return True
+
+# k가 i로 나누어떨어지면 소수가 아님]]></solution>
+  </problem>
+
+  <!-- 문제 3: 전체 작성 (기본 버전) [기존] -->
+  <problem>
+    <description>주어진 수 k가 소수인지 판별하는 함수를 작성하세요. 2부터 k의 제곱근까지 확인하여 나누어떨어지는 수가 없으면 True, 있으면 False를 반환합니다.</description>
+    <code><![CDATA[def f(k):
+    pass]]></code>
+    <input><![CDATA[print(f(29))
+print(f(30))
+print(f(7))]]></input>
+    <output><![CDATA[True
+False
+True]]></output>
+    <solution><![CDATA[def f(k):
+    for i in range(2, int(k**0.5)+1):
+        if (k%i) == 0:
+            return False
+    return True
+
+# 2부터 √k까지 확인
+# 나누어떨어지는 수가 있으면 소수가 아님
+# 모두 확인 후 나누어떨어지는 수가 없으면 소수]]></solution>
+  </problem>
+
+  <!-- 문제 4: 디버깅 (논리 오류 - != 대신 ==) -->
+  <problem>
+    <description>다음 소수 판별 함수에는 논리적 오류가 있습니다. 잘못된 부분을 찾아 올바르게 고치세요.</description>
+    <code><![CDATA[def f(k):
+    for i in range(2, k):
+        if (k%i) != 0:
+            return False
+    return True]]></code>
+    <input><![CDATA[print(f(7))
+print(f(9))]]></input>
+    <output><![CDATA[True
+False]]></output>
+    <solution><![CDATA[def f(k):
+    for i in range(2, k):
+        if (k%i) == 0:  # 오류: != 0이 아니라 == 0이어야 함
+            return False
+    return True
+
+# 잘못된 부분: if (k%i) != 0 → if (k%i) == 0
+# 이유: 나누어떨어지면(==0) 소수가 아니므로 False 반환
+# != 0 조건은 나누어떨어지지 않으면 False를 반환하므로 논리가 반대
+# 예: f(7)은 7%2=1(!=0)이므로 바로 False 반환 (잘못됨)]]></solution>
+  </problem>
+
+  <!-- 문제 5: 서술형 (√n까지만 확인하는 이유) -->
+  <problem>
+    <description>소수 판별 시 2부터 n-1까지 모두 확인하지 않고 √n까지만 확인하는 이유를 서술하세요.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 약수의 대칭성을 이용한 최적화
+#
+# 이유:
+# n의 약수 a와 b가 있다면 (a×b = n), a와 b 중 하나는 반드시 √n 이하
+#
+# 증명:
+# 만약 a > √n이고 b > √n이면
+# a×b > √n × √n = n (모순)
+#
+# 예: 36의 약수
+# - 1 × 36 (1 ≤ √36 = 6)
+# - 2 × 18 (2 ≤ 6)
+# - 3 × 12 (3 ≤ 6)
+# - 4 × 9  (4 ≤ 6)
+# - 6 × 6  (6 = 6)
+# → √36 = 6까지만 확인하면 모든 약수 쌍을 찾을 수 있음
+#
+# 효과:
+# - 시간복잡도: O(n) → O(√n)
+# - n=100일 때: 98번 → 8번 (약 12배 빠름)]]></solution>
+  </problem>
+
+  <!-- 문제 6: 빈칸 채우기 (최적화 버전) -->
+  <problem>
+    <description>소수 판별 함수의 최적화 버전입니다. for문의 범위를 완성하세요.</description>
+    <code><![CDATA[def f(k):
+    for i in range(2, ____):
+        if (k%i) == 0:
+            return False
+    return True]]></code>
+    <input><![CDATA[print(f(101))
+print(f(100))]]></input>
+    <output><![CDATA[True
+False]]></output>
+    <solution><![CDATA[def f(k):
+    for i in range(2, int(k**0.5)+1):  # 정답: int(k**0.5)+1
+        if (k%i) == 0:
+            return False
+    return True
+
+# k**0.5: k의 제곱근
+# int(): 소수점 이하 버림
+# +1: range의 끝은 포함되지 않으므로
+# 예: k=100일 때, int(100**0.5)+1 = 10+1 = 11
+#     → range(2, 11) = 2,3,4,5,6,7,8,9,10]]></solution>
+  </problem>
+
+  <!-- 문제 7: 코드 비교 (기본 vs 최적화) -->
+  <problem>
+    <description>다음 두 소수 판별 함수 중 더 효율적인 것은? 그 이유는?</description>
+    <code><![CDATA[# 코드 A
+def f(k):
+    for i in range(2, k):
+        if (k%i) == 0:
+            return False
+    return True
+
+# 코드 B
+def f(k):
+    for i in range(2, int(k**0.5)+1):
+        if (k%i) == 0:
+            return False
+    return True]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 정답: 코드 B가 더 효율적
+#
+# 코드 A: O(n)
+# - 2부터 k-1까지 모두 확인
+# - k = 101일 때 99번 반복
+#
+# 코드 B: O(√n)
+# - 2부터 √k까지만 확인
+# - k = 101일 때 9번 반복 (√101 ≈ 10.05)
+# - 약 11배 빠름
+#
+# 왜 √k까지만?
+# - 약수는 √k를 기준으로 대칭
+# - k = a×b라면, a ≤ √k 또는 b ≤ √k
+# - √k까지만 확인해도 모든 약수 발견 가능
+#
+# 결론: 코드 B가 시간복잡도 면에서 우수]]></solution>
+  </problem>
+
+  <!-- 문제 8: 복잡도 분석 (O(n) vs O(√n)) -->
+  <problem>
+    <description>다음 두 소수 판별 방식의 시간복잡도를 각각 Big-O 표기법으로 나타내고, n=10000일 때 연산 횟수를 비교하세요.</description>
+    <code><![CDATA[# 방식 A: 2부터 n-1까지 확인
+for i in range(2, n):
+    if (n%i) == 0:
+        return False
+
+# 방식 B: 2부터 √n까지 확인
+for i in range(2, int(n**0.5)+1):
+    if (n%i) == 0:
+        return False]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 방식 A: O(n)
+# - 최악의 경우 (소수일 때): 2부터 n-1까지 모두 확인
+# - 반복 횟수: n-2번
+# - n=10000일 때: 9998번
+#
+# 방식 B: O(√n)
+# - 최악의 경우 (소수일 때): 2부터 √n까지 모두 확인
+# - 반복 횟수: √n-1번
+# - n=10000일 때: 100-1 = 99번
+#
+# 비교:
+# - 연산 횟수 비율: 9998 / 99 ≈ 101배
+# - n이 클수록 차이가 더 커짐
+# - n=1000000일 때: 999998번 vs 999번 (약 1000배)
+#
+# 정답:
+# - 방식 A: O(n), 10000일 때 약 9998번
+# - 방식 B: O(√n), 10000일 때 약 99번]]></solution>
+  </problem>
+
+  <!-- 문제 9: 조건 역추론 (n번째 소수 찾기) -->
+  <problem>
+    <description>다음 소수 판별 함수를 이용하여, n번째 소수를 찾는 함수를 작성하세요. (첫 번째 소수는 2입니다)</description>
+    <code><![CDATA[def is_prime(k):
+    if k < 2:
+        return False
+    for i in range(2, int(k**0.5)+1):
+        if (k%i) == 0:
+            return False
+    return True
+
+def f(n):
+    pass]]></code>
+    <input><![CDATA[print(f(1))
+print(f(5))
+print(f(10))]]></input>
+    <output><![CDATA[2
+11
+29]]></output>
+    <solution><![CDATA[def is_prime(k):
+    if k < 2:
+        return False
+    for i in range(2, int(k**0.5)+1):
+        if (k%i) == 0:
+            return False
+    return True
+
+def f(n):
+    cnt = 0
+    k = 2
+    while True:
+        if is_prime(k):
+            cnt += 1
+            if cnt == n:
+                return k
+        k += 1
+
+# 알고리즘:
+# 1. 2부터 시작
+# 2. 소수를 발견할 때마다 카운트 증가
+# 3. n번째 소수를 찾으면 반환
+#
+# 실행 예시:
+# f(1): 2 (1번째 소수)
+# f(5): 2,3,5,7,11 → 11 (5번째 소수)
+# f(10): 2,3,5,7,11,13,17,19,23,29 → 29 (10번째 소수)]]></solution>
+  </problem>
+</problems>

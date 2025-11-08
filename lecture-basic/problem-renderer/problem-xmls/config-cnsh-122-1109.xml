@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CNSH-122 기말고사 예상문제 (2025-11-09 제작)
+
+  총 19개 파일, 190개 문제
+  Level 1-6: 기초부터 심화까지
+
+  사용법: ?config=config-cnsh-122-1109
+-->
+<exercise>
+  <title>CNSH-122 기말고사 예상문제 (전체)</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <!-- Level 1: 기초 재귀 및 기본 알고리즘 -->
+    <section title="Level 1-1. 재귀 함수 기초" file="problems-cnsh122-01-basic-recursion.xml" count="10"/>
+    <section title="Level 1-2. 약수 관련 알고리즘" file="problems-cnsh122-02-divisors.xml" count="8"/>
+    <section title="Level 1-3. 소수 판별" file="problems-cnsh122-03-isprime.xml" count="9"/>
+
+    <!-- Level 2: 응용 재귀 및 알고리즘 -->
+    <section title="Level 2-1. 소수 개수 세기" file="problems-cnsh122-04-countprimes.xml" count="10"/>
+    <section title="Level 2-2. GCD (최대공약수)" file="problems-cnsh122-05-gcd.xml" count="11"/>
+    <section title="Level 2-3. 서로소 및 LCM" file="problems-cnsh122-06-coprime-lcm.xml" count="10"/>
+    <section title="Level 2-4. 피보나치 응용" file="problems-cnsh122-07-fibonacci.xml" count="10"/>
+
+    <!-- Level 3: 이진 트리 순회 -->
+    <section title="Level 3-1. 트리 순회 기초" file="problems-cnsh122-08-tree-traversal.xml" count="12"/>
+    <section title="Level 3-2. 레벨 순서 순회 (BFS)" file="problems-cnsh122-09-tree-levelorder.xml" count="9"/>
+    <section title="Level 3-3. LCA 및 트리 거리" file="problems-cnsh122-10-tree-lca.xml" count="10"/>
+    <section title="Level 3-4. 트리 속성" file="problems-cnsh122-11-tree-properties.xml" count="9"/>
+
+    <!-- Level 4: 백트래킹 기초 -->
+    <section title="Level 4-1. 조합 선택" file="problems-cnsh122-12-combination.xml" count="12"/>
+    <section title="Level 4-2. 부분집합 합 문제" file="problems-cnsh122-13-subset-sum.xml" count="10"/>
+    <section title="Level 4-3. 자연수 분할" file="problems-cnsh122-14-partition.xml" count="10"/>
+    <section title="Level 4-4. 동전 문제" file="problems-cnsh122-15-coin-change.xml" count="11"/>
+
+    <!-- Level 5: 백트래킹 심화 -->
+    <section title="Level 5-1. 해밀토니안 경로" file="problems-cnsh122-16-hamiltonian.xml" count="12"/>
+    <section title="Level 5-2. 백트래킹 응용" file="problems-cnsh122-17-backtracking-misc.xml" count="8"/>
+
+    <!-- Level 6: 시간복잡도 분석 -->
+    <section title="Level 6-1. 시간복잡도 분석" file="problems-cnsh122-18-complexity.xml" count="14"/>
+    <section title="Level 6-2. 정렬 알고리즘 복잡도" file="problems-cnsh122-19-sorting-complexity.xml" count="12"/>
+  </sections>
+</exercise>

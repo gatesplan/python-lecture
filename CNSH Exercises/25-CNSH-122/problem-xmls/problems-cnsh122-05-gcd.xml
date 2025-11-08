@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 출력 예측 (GCD 결과) - 워밍업 -->
+  <problem>
+    <description>다음 코드의 출력 결과를 쓰세요.</description>
+    <code><![CDATA[def f(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+print(f(24, 36))
+print(f(15, 25))]]></code>
+    <input></input>
+    <output><![CDATA[12
+5]]></output>
+    <solution><![CDATA[# f(24, 36):
+# 24, 36 → 36, 24 → 24, 12 → 12, 0 → 결과: 12
+#
+# f(15, 25):
+# 15, 25 → 25, 15 → 15, 10 → 10, 5 → 5, 0 → 결과: 5
+#
+# 정답: 12, 5]]></solution>
+  </problem>
+
+  <!-- 문제 2: 빈칸 채우기 (if 조건) [기존] -->
+  <problem>
+    <description>다음 코드는 두 수의 최대공약수를 구하는 코드입니다. if문의 조건을 완성하세요.</description>
+    <code><![CDATA[x, y = 10, 15
+a, b = min(x, y), max(x, y)
+gcd = 1
+
+for i in range(2, a+1):
+    if ____:
+        gcd = i
+
+print(gcd)]]></code>
+    <input></input>
+    <output><![CDATA[5]]></output>
+    <solution><![CDATA[x, y = 10, 15
+a, b = min(x, y), max(x, y)
+gcd = 1
+
+for i in range(2, a+1):
+    if a%i == 0 and b%i == 0:  # 정답: a%i == 0 and b%i == 0
+        gcd = i
+
+print(gcd)
+
+# 두 수 모두 i로 나누어떨어지면 i는 공약수]]></solution>
+  </problem>
+
+  <!-- 문제 3: 블록 채우기 [기존] -->
+  <problem>
+    <description>다음 코드는 두 수의 최대공약수를 구하는 코드입니다. for 반복문 내부를 완성하세요.</description>
+    <code><![CDATA[x, y = 10, 15
+a, b = min(x, y), max(x, y)
+gcd = 1
+
+for i in range(2, a+1):
+    # 여기를 채우세요
+
+print(gcd)]]></code>
+    <input></input>
+    <output><![CDATA[5]]></output>
+    <solution><![CDATA[x, y = 10, 15
+a, b = min(x, y), max(x, y)
+gcd = 1
+
+for i in range(2, a+1):
+    if a%i == 0 and b%i == 0:
+        gcd = i
+
+print(gcd)
+
+# 2부터 작은 수까지 확인하여 마지막 공약수가 최대공약수]]></solution>
+  </problem>
+
+  <!-- 문제 4: 디버깅 (while 조건 오류) -->
+  <problem>
+    <description>다음 유클리드 호제법 코드에 오류가 있습니다. 오류를 찾아 고치세요.</description>
+    <code><![CDATA[x, y = 10, 15
+a, b = x, y
+
+while b > 0:
+    a, b = b, a % b
+
+print(a)]]></code>
+    <input></input>
+    <output><![CDATA[5]]></output>
+    <solution><![CDATA[x, y = 10, 15
+a, b = x, y
+
+while b != 0:  # 오류: b > 0이 아니라 b != 0
+    a, b = b, a % b
+
+print(a)
+
+# 잘못된 부분: while b > 0
+# 이유: b가 0이 아닌 양수일 때만 반복하는 것은 맞지만
+# Python에서는 명시적으로 b != 0으로 쓰는 것이 더 명확
+# 실제로는 b > 0도 작동하지만, 음수 입력 시 문제 발생 가능
+# 표준 관례: b != 0 사용]]></solution>
+  </problem>
+
+  <!-- 문제 5: 트레이싱 (유클리드 호제법 과정) -->
+  <problem>
+    <description>다음 유클리드 호제법으로 f(48, 18)을 계산할 때, while 루프가 몇 번 실행되는지 구하고, 각 단계의 (a, b) 값을 나열하세요.</description>
+    <code><![CDATA[def f(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# f(48, 18) 실행 과정:
+# 초기: a=48, b=18
+#
+# 1회: a, b = 18, 48%18 = 18, 12
+# 2회: a, b = 12, 18%12 = 12, 6
+# 3회: a, b = 6, 12%6 = 6, 0
+# 종료: b=0이므로 반복 종료, 결과 a=6
+#
+# 루프 실행 횟수: 3번
+# (a, b) 변화: (48,18) → (18,12) → (12,6) → (6,0)
+#
+# 정답: 3번 실행]]></solution>
+  </problem>
+
+  <!-- 문제 6: 빈칸 채우기 (재귀 버전) -->
+  <problem>
+    <description>최대공약수를 재귀함수로 구현합니다. 빈칸을 채우세요.</description>
+    <code><![CDATA[def f(a, b):
+    if ____:
+        return a
+    return f(____, ____)]]></code>
+    <input><![CDATA[print(f(24, 36))
+print(f(15, 25))]]></input>
+    <output><![CDATA[12
+5]]></output>
+    <solution><![CDATA[def f(a, b):
+    if b == 0:  # 정답: b == 0
+        return a
+    return f(b, a % b)  # 정답: b, a % b
+
+print(f(24, 36))
+print(f(15, 25))
+
+# 기저 조건: b가 0이면 a 반환
+# 재귀: f(b, a%b) 호출]]></solution>
+  </problem>
+
+  <!-- 문제 7: 전체 작성 (유클리드 호제법) -->
+  <problem>
+    <description>두 수의 최대공약수를 나머지 연산을 사용하는 유클리드 호제법으로 구하는 함수를 작성하세요.</description>
+    <code><![CDATA[def f(a, b):
+    pass]]></code>
+    <input><![CDATA[print(f(48, 18))
+print(f(100, 35))]]></input>
+    <output><![CDATA[6
+5]]></output>
+    <solution><![CDATA[def f(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+# 유클리드 호제법 원리:
+# gcd(a, b) = gcd(b, a%b)
+# b가 0이 될 때까지 반복
+# 예: gcd(48, 18) = gcd(18, 12) = gcd(12, 6) = gcd(6, 0) = 6]]></solution>
+  </problem>
+
+  <!-- 문제 8: 코드 비교 (반복 vs 재귀) -->
+  <problem>
+    <description>다음 두 GCD 구현 방법의 차이점을 설명하세요.</description>
+    <code><![CDATA[# 방법 A: 반복문
+def f(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+# 방법 B: 재귀
+def f(a, b):
+    if b == 0:
+        return a
+    return f(b, a % b)]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 방법 A (반복문):
+# - while 루프 사용
+# - 공간복잡도: O(1) (추가 메모리 없음)
+# - 스택 오버플로 위험 없음
+# - 실행 속도 약간 빠름
+#
+# 방법 B (재귀):
+# - 재귀 호출 사용
+# - 공간복잡도: O(log min(a,b)) (콜스택)
+# - 깊은 재귀 시 스택 오버플로 가능
+# - 코드가 더 간결하고 직관적
+#
+# 시간복잡도: 둘 다 O(log min(a,b))
+#
+# 유클리드 호제법의 효율성:
+# - 최악의 경우에도 log₂(min(a,b)) 번의 반복/재귀
+# - 예: gcd(10000, 1)도 약 14번만에 종료
+#
+# 실무 권장: 방법 A (반복문)
+# - 더 안전하고 효율적
+# - Python은 재귀 깊이 제한 있음 (기본 1000)]]></solution>
+  </problem>
+
+  <!-- 문제 9: 서술형 (유클리드 호제법 원리) -->
+  <problem>
+    <description>유클리드 호제법이 왜 작동하는지 수학적 원리를 서술하세요.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 유클리드 호제법의 수학적 원리
+#
+# 핵심 정리: gcd(a, b) = gcd(b, a mod b)
+#
+# 증명:
+# 1. d = gcd(a, b)라고 하자
+#    → a = d×m, b = d×n (m과 n은 서로소)
+#
+# 2. a를 b로 나눈 나머지를 r이라 하면
+#    a = b×q + r (0 ≤ r < b)
+#    → r = a - b×q
+#
+# 3. r에 d를 대입하면
+#    r = d×m - d×n×q = d×(m - n×q)
+#    → r도 d의 배수
+#
+# 4. 따라서 d는 b와 r의 공약수
+#    또한 b와 r의 모든 공약수는 a의 약수
+#    → gcd(a, b) = gcd(b, r)
+#
+# 예시: gcd(48, 18)
+# 48 = 18×2 + 12 → gcd(48, 18) = gcd(18, 12)
+# 18 = 12×1 + 6  → gcd(18, 12) = gcd(12, 6)
+# 12 = 6×2 + 0   → gcd(12, 6) = gcd(6, 0) = 6
+#
+# 종료 조건: b=0일 때, gcd(a, 0) = a]]></solution>
+  </problem>
+
+  <!-- 문제 10: 전체 작성 (3개 수 GCD) -->
+  <problem>
+    <description>세 개의 수 x, y, z의 최대공약수를 구하는 함수를 작성하세요.</description>
+    <code><![CDATA[def gcd2(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(x, y, z):
+    pass]]></code>
+    <input><![CDATA[print(f(12, 18, 24))
+print(f(15, 25, 35))]]></input>
+    <output><![CDATA[6
+5]]></output>
+    <solution><![CDATA[def gcd2(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(x, y, z):
+    return gcd2(gcd2(x, y), z)
+
+# 원리: gcd(x, y, z) = gcd(gcd(x, y), z)
+# 1. 먼저 x와 y의 gcd 구하기
+# 2. 그 결과와 z의 gcd 구하기
+#
+# 예: f(12, 18, 24)
+# gcd(12, 18) = 6
+# gcd(6, 24) = 6
+# 결과: 6]]></solution>
+  </problem>
+
+  <!-- 문제 11: 복잡도 분석 -->
+  <problem>
+    <description>유클리드 호제법의 시간복잡도를 분석하세요.</description>
+    <code><![CDATA[def f(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 시간복잡도: O(log min(a, b))
+#
+# 분석:
+# - 최악의 경우: 연속된 피보나치 수
+# - 예: gcd(F(n), F(n-1))은 n번 반복
+# - F(n) ≈ φⁿ (φ = 황금비 ≈ 1.618)
+# - 따라서 n ≈ log₁.₆₁₈(min(a,b))
+#
+# Lamé의 정리 (1844):
+# - gcd(a, b) 계산에 필요한 나눗셈 횟수는
+#   min(a, b)의 십진수 자릿수 × 5 이하
+# - 예: min(a,b) = 1000 (4자리) → 최대 20번
+#
+# 실제 성능:
+# gcd(1000000, 999999) → 약 20번 반복
+# gcd(1000000, 1) → 약 20번 반복
+#
+# 비교:
+# - 기본 방법 O(min(a,b)): 1000000번
+# - 유클리드 O(log): 20번
+# - 약 50000배 빠름!
+#
+# 정답: O(log min(a, b))]]></solution>
+  </problem>
+</problems>

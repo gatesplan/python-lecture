@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 출력 예측 (서로소 여부) - 워밍업 -->
+  <problem>
+    <description>다음 코드의 출력 결과를 쓰세요.</description>
+    <code><![CDATA[def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(a, b):
+    return gcd(a, b) == 1
+
+print(f(8, 15))
+print(f(12, 18))]]></code>
+    <input></input>
+    <output><![CDATA[True
+False]]></output>
+    <solution><![CDATA[# f(8, 15): gcd(8, 15) = 1 → 서로소 → True
+# f(12, 18): gcd(12, 18) = 6 → 서로소 아님 → False
+#
+# 정답: True, False]]></solution>
+  </problem>
+
+  <!-- 문제 2: 서술형 (서로소 개념) -->
+  <problem>
+    <description>서로소(Coprime 또는 Relatively Prime)의 정의를 서술하고, 예시를 들어 설명하세요.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 서로소의 정의:
+# 두 정수 a와 b의 최대공약수가 1인 경우, a와 b는 서로소 관계
+# 즉, gcd(a, b) = 1
+#
+# 특징:
+# - 1보다 큰 공약수가 없음
+# - 1은 모든 수와 서로소
+# - 서로 다른 소수는 항상 서로소
+#
+# 예시:
+# - 8과 15는 서로소 (gcd(8, 15) = 1)
+#   8의 약수: 1, 2, 4, 8
+#   15의 약수: 1, 3, 5, 15
+#   공약수: 1만 존재
+#
+# - 12와 18은 서로소 아님 (gcd(12, 18) = 6)
+#   12의 약수: 1, 2, 3, 4, 6, 12
+#   18의 약수: 1, 2, 3, 6, 9, 18
+#   공약수: 1, 2, 3, 6 → 1보다 큰 공약수 존재
+#
+# 응용:
+# - 기약분수: 분자와 분모가 서로소인 분수
+# - RSA 암호화: 서로소 관계 이용]]></solution>
+  </problem>
+
+  <!-- 문제 3: 빈칸 채우기 (GCD=1 판별) [기존 스타일] -->
+  <problem>
+    <description>두 수가 서로소인지 판별하는 함수입니다. 빈칸을 채우세요.</description>
+    <code><![CDATA[def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(a, b):
+    return gcd(a, b) == ____]]></code>
+    <input><![CDATA[print(f(21, 35))
+print(f(14, 15))]]></input>
+    <output><![CDATA[False
+True]]></output>
+    <solution><![CDATA[def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(a, b):
+    return gcd(a, b) == 1  # 정답: 1
+
+# 서로소: gcd가 1
+# 21과 35: gcd = 7 → False
+# 14와 15: gcd = 1 → True]]></solution>
+  </problem>
+
+  <!-- 문제 4: 전체 작성 (서로소 개수 세기) -->
+  <problem>
+    <description>1부터 n까지의 수 중 k와 서로소인 수의 개수를 세는 함수를 작성하세요.</description>
+    <code><![CDATA[def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(k, n):
+    pass]]></code>
+    <input><![CDATA[print(f(10, 10))
+print(f(12, 12))]]></input>
+    <output><![CDATA[4
+4]]></output>
+    <solution><![CDATA[def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(k, n):
+    cnt = 0
+    for i in range(1, n+1):
+        if gcd(k, i) == 1:
+            cnt += 1
+    return cnt
+
+# 10과 서로소: 1, 3, 7, 9 → 4개
+# 12와 서로소: 1, 5, 7, 11 → 4개]]></solution>
+  </problem>
+
+  <!-- 문제 5: 디버깅 (범위 오류) -->
+  <problem>
+    <description>다음 서로소 개수 세기 함수에 오류가 있습니다. 오류를 찾아 고치세요.</description>
+    <code><![CDATA[def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(k, n):
+    cnt = 0
+    for i in range(2, n+1):
+        if gcd(k, i) == 1:
+            cnt += 1
+    return cnt]]></code>
+    <input><![CDATA[print(f(10, 10))]]></input>
+    <output><![CDATA[4]]></output>
+    <solution><![CDATA[def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(k, n):
+    cnt = 0
+    for i in range(1, n+1):  # 오류: range(2, n+1)이 아니라 range(1, n+1)
+        if gcd(k, i) == 1:
+            cnt += 1
+    return cnt
+
+# 잘못된 부분: range(2, n+1)
+# 이유: 1을 포함하지 않음
+# 1은 모든 수와 서로소 (gcd(k, 1) = 1 항상 참)
+# 1을 빠뜨리면 결과가 1 작아짐
+# 정답: range(1, n+1)]]></solution>
+  </problem>
+
+  <!-- 문제 6: 서술형 (LCM 공식 유도) -->
+  <problem>
+    <description>최소공배수(LCM)를 최대공약수(GCD)를 이용하여 구하는 공식을 유도하세요.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# LCM 공식: lcm(a, b) = (a × b) / gcd(a, b)
+#
+# 유도:
+# 1. a와 b를 소인수분해
+#    a = 2² × 3¹
+#    b = 2¹ × 3²
+#
+# 2. GCD는 공통 소인수의 최소 지수
+#    gcd(a, b) = 2¹ × 3¹ = 6
+#
+# 3. LCM은 모든 소인수의 최대 지수
+#    lcm(a, b) = 2² × 3² = 36
+#
+# 4. a × b를 계산하면
+#    a × b = (2² × 3¹) × (2¹ × 3²) = 2³ × 3³
+#
+# 5. (a × b) / gcd(a, b)를 계산하면
+#    (2³ × 3³) / (2¹ × 3¹) = 2² × 3² = lcm(a, b)
+#
+# 일반화:
+# - a × b는 모든 소인수의 지수 합
+# - gcd는 최소 지수
+# - 지수 합 - 최소 지수 = 최대 지수
+# - 따라서 (a × b) / gcd = lcm
+#
+# 예: a=12, b=18
+# gcd(12, 18) = 6
+# lcm(12, 18) = (12 × 18) / 6 = 216 / 6 = 36]]></solution>
+  </problem>
+
+  <!-- 문제 7: 빈칸 채우기 (LCM 구하기) -->
+  <problem>
+    <description>최소공배수를 구하는 함수입니다. 빈칸을 채우세요.</description>
+    <code><![CDATA[def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(a, b):
+    return ____ // gcd(a, b)]]></code>
+    <input><![CDATA[print(f(12, 18))
+print(f(15, 25))]]></input>
+    <output><![CDATA[36
+75]]></output>
+    <solution><![CDATA[def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(a, b):
+    return (a * b) // gcd(a, b)  # 정답: (a * b) 또는 a * b
+
+# LCM 공식: (a × b) / gcd(a, b)
+# //는 정수 나눗셈 (몫만)
+# 12와 18: (12×18) / 6 = 216 / 6 = 36
+# 15와 25: (15×25) / 5 = 375 / 5 = 75]]></solution>
+  </problem>
+
+  <!-- 문제 8: 전체 작성 (LCM 함수) -->
+  <problem>
+    <description>두 수의 최소공배수를 구하는 함수를 작성하세요.</description>
+    <code><![CDATA[def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(a, b):
+    pass]]></code>
+    <input><![CDATA[print(f(20, 30))
+print(f(14, 21))]]></input>
+    <output><![CDATA[60
+42]]></output>
+    <solution><![CDATA[def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(a, b):
+    return (a * b) // gcd(a, b)
+
+# 20과 30: gcd=10, lcm=(20×30)/10 = 60
+# 14와 21: gcd=7, lcm=(14×21)/7 = 42]]></solution>
+  </problem>
+
+  <!-- 문제 9: 조건 역추론 (LCM이 주어졌을 때 a, b) -->
+  <problem>
+    <description>두 수의 GCD가 6이고 LCM이 72일 때, 이 두 수의 곱은 얼마인가요? 또한 가능한 두 수의 쌍을 모두 구하세요.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 주어진 정보:
+# gcd(a, b) = 6
+# lcm(a, b) = 72
+#
+# 1. 두 수의 곱 구하기
+# 공식: a × b = gcd(a, b) × lcm(a, b)
+# a × b = 6 × 72 = 432
+#
+# 정답: 432
+#
+# 2. 가능한 (a, b) 쌍 구하기
+# a = 6m, b = 6n (m과 n은 서로소)
+# a × b = 36mn = 432
+# mn = 12
+#
+# m과 n이 서로소이고 mn=12인 경우:
+# - (m, n) = (1, 12) → (a, b) = (6, 72)
+# - (m, n) = (3, 4) → (a, b) = (18, 24)
+# - (m, n) = (4, 3) → (a, b) = (24, 18)
+# - (m, n) = (12, 1) → (a, b) = (72, 6)
+#
+# 검증:
+# gcd(6, 72) = 6, lcm(6, 72) = 72 ✓
+# gcd(18, 24) = 6, lcm(18, 24) = 72 ✓
+#
+# 가능한 쌍: (6,72), (18,24), (24,18), (72,6)]]></solution>
+  </problem>
+
+  <!-- 문제 10: 복잡도 분석 -->
+  <problem>
+    <description>1부터 n까지의 수 중 k와 서로소인 수의 개수를 세는 함수의 시간복잡도를 분석하세요.</description>
+    <code><![CDATA[def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def f(k, n):
+    cnt = 0
+    for i in range(1, n+1):
+        if gcd(k, i) == 1:
+            cnt += 1
+    return cnt]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 시간복잡도: O(n log k)
+#
+# 분석:
+# - 외부 루프: 1부터 n까지 → n번 반복
+# - 각 반복마다 gcd(k, i) 계산
+# - gcd의 시간복잡도: O(log min(k, i))
+# - 평균적으로 O(log k)
+# - 전체: n × O(log k) = O(n log k)
+#
+# 예: k=1000, n=1000
+# - 반복 횟수: 1000번
+# - 각 gcd: 약 log₂(1000) ≈ 10번
+# - 총 연산: 약 10,000번
+#
+# 참고: 오일러 파이 함수
+# - φ(n): n과 서로소인 1~n 사이 정수의 개수
+# - 이 함수는 φ(k)를 계산하는 것
+# - 직접 계산보다 수학 공식 이용하면 O(√k)로 개선 가능
+#
+# 정답: O(n log k)]]></solution>
+  </problem>
+</problems>

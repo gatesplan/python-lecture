@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 출력 예측 (연산 횟수) - 워밍업 -->
+  <problem>
+    <description>다음 코드의 출력 결과를 쓰세요.</description>
+    <code><![CDATA[cnt = 0
+for i in range(10):
+    for j in range(10):
+        cnt += 1
+
+print(cnt)]]></code>
+    <input></input>
+    <output><![CDATA[100]]></output>
+    <solution><![CDATA[# 외부 루프: 10번
+# 내부 루프: 각각 10번
+# 총: 10 × 10 = 100번
+#
+# 정답: 100]]></solution>
+  </problem>
+
+  <!-- 문제 2: 복잡도 분석 (단일 루프) -->
+  <problem>
+    <description>다음 함수의 시간복잡도를 Big-O 표기법으로 쓰세요.</description>
+    <code><![CDATA[def f(n):
+    s = 0
+    for i in range(n):
+        s += i
+    return s]]></code>
+    <input></input>
+    <output><![CDATA[O(n)]]></output>
+    <solution><![CDATA[# 연산 횟수 분석:
+# - s = 0: 1번
+# - for i in range(n): n번 반복
+# - s += i: n번 (덧셈 + 대입)
+# - return s: 1번
+# 총: 1 + n + n + 1 = 2n + 2번
+#
+# Big-O 규칙:
+# - 상수 무시: 2n + 2 → n
+# - 정답: O(n)]]></solution>
+  </problem>
+
+  <!-- 문제 3: 복잡도 분석 (이중 루프) -->
+  <problem>
+    <description>다음 함수의 시간복잡도를 Big-O 표기법으로 쓰세요.</description>
+    <code><![CDATA[def f(n):
+    cnt = 0
+    for i in range(n):
+        for j in range(n):
+            cnt += 1
+    return cnt]]></code>
+    <input></input>
+    <output><![CDATA[O(n²)]]></output>
+    <solution><![CDATA[# 연산 횟수 분석:
+# - 외부 루프: n번
+# - 내부 루프: 각각 n번
+# - cnt += 1: n × n = n²번
+#
+# 총: n²번
+# 정답: O(n²)
+#
+# 핵심: 중첩된 반복문 → 곱셈]]></solution>
+  </problem>
+
+  <!-- 문제 4: 복잡도 분석 (절반씩) -->
+  <problem>
+    <description>다음 함수의 시간복잡도를 Big-O 표기법으로 쓰세요.</description>
+    <code><![CDATA[def f(n):
+    cnt = 0
+    i = n
+    while i > 1:
+        cnt += 1
+        i = i // 2
+    return cnt]]></code>
+    <input></input>
+    <output><![CDATA[O(log n)]]></output>
+    <solution><![CDATA[# 연산 횟수 분석:
+# - i가 절반씩 줄어듦
+# - n → n/2 → n/4 → n/8 → ... → 1
+# - 몇 번 나누면 1이 되는가? log₂(n)번
+#
+# 예시:
+# n=16: 16 → 8 → 4 → 2 → 1 (4번, log₂16 = 4)
+# n=32: 5번 (log₂32 = 5)
+#
+# 정답: O(log n)
+#
+# 핵심: 절반씩 줄어듦 → 로그]]></solution>
+  </problem>
+
+  <!-- 문제 5: 복잡도 분석 (재귀) -->
+  <problem>
+    <description>다음 재귀 함수의 시간복잡도를 Big-O 표기법으로 쓰세요.</description>
+    <code><![CDATA[def f(n):
+    if n <= 1:
+        return n
+    return f(n-1) + f(n-2)]]></code>
+    <input></input>
+    <output><![CDATA[O(2^n)]]></output>
+    <solution><![CDATA[# 연산 횟수 분석:
+# - 각 호출이 2개의 재귀 호출 생성
+# - 재귀 트리가 2갈래로 갈라짐
+#
+# 호출 트리 (n=5):
+#              f(5)
+#            /      \
+#         f(4)      f(3)
+#        /   \      /   \
+#     f(3)  f(2) f(2)  f(1)
+#     ...
+#
+# 깊이: n
+# 각 레벨의 노드 수: 1, 2, 4, 8, ...
+# 총 노드 수: 약 2^n
+#
+# 정답: O(2^n)
+#
+# 핵심: 2갈래 재귀 + n 깊이 → 지수]]></solution>
+  </problem>
+
+  <!-- 문제 6: 서술형 (Big-O 규칙) -->
+  <problem>
+    <description>Big-O 표기법에서 "상수를 무시한다"는 규칙을 설명하고, 3n + 5를 Big-O로 나타내세요.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# Big-O 표기법의 상수 무시 규칙
+#
+# 원리:
+# - n이 충분히 크면 상수는 의미 없음
+# - 증가 "추세"가 중요
+# - 정확한 횟수보다 "비례 관계" 중요
+#
+# 예시: 3n + 5
+# n=10:    3×10 + 5 = 35
+# n=100:   3×100 + 5 = 305 (n항이 98.4%)
+# n=1000:  3×1000 + 5 = 3005 (n항이 99.8%)
+#
+# 결론: n이 커질수록 상수(3, 5)는 무의미
+# 3n + 5 → n → O(n)
+#
+# 정답: O(n)
+#
+# 일반 규칙:
+# - 100n → O(n)
+# - n/2 → O(n)
+# - 5n² + 3n + 100 → O(n²)]]></solution>
+  </problem>
+
+  <!-- 문제 7: 디버깅 (복잡도 판단 오류) -->
+  <problem>
+    <description>다음 시간복잡도 분석에 오류가 있습니다. 오류를 찾아 고치세요.</description>
+    <code><![CDATA[def f(n):
+    for i in range(n):
+        for j in range(1000):
+            print(i, j)]]></code>
+    <input></input>
+    <output><![CDATA[잘못된 분석: 이중 루프이므로 O(n²)
+올바른 분석: O(n)]]></output>
+    <solution><![CDATA[# 잘못된 분석: "이중 루프이므로 O(n²)"
+#
+# 오류 이유:
+# - 내부 루프가 상수(1000)번만 반복
+# - n과 무관한 반복은 상수 취급
+#
+# 올바른 분석:
+# - 외부 루프: n번
+# - 내부 루프: 1000번 (상수)
+# - 총: n × 1000 = 1000n번
+# - 상수 무시: O(n)
+#
+# 정답: O(n)
+#
+# 핵심:
+# - for j in range(n) → O(n²)
+# - for j in range(1000) → O(n)
+# - 상수 반복은 O(1) 취급]]></solution>
+  </problem>
+
+  <!-- 문제 8: 코드 비교 (O(n) vs O(n²)) -->
+  <problem>
+    <description>다음 두 함수 중 더 효율적인 것은? 각각의 시간복잡도를 쓰고 이유를 설명하세요.</description>
+    <code><![CDATA[def f(A):
+    n = len(A)
+    s = 0
+    for i in range(n):
+        s += A[i]
+    return s
+
+def g(A):
+    n = len(A)
+    s = 0
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                s += A[i]
+    return s]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 함수 f 분석:
+# - 단일 루프: n번
+# - 각 원소를 1번씩 더함
+# - 시간복잡도: O(n)
+#
+# 함수 g 분석:
+# - 이중 루프: n × n = n²번
+# - i == j일 때만 더함 (n번)
+# - 하지만 비교는 n²번 수행
+# - 시간복잡도: O(n²)
+#
+# 비교:
+# - 두 함수 모두 같은 결과 (배열 합계)
+# - f: O(n) - 효율적
+# - g: O(n²) - 비효율적
+#
+# 예시 (n=1000):
+# - f: 약 1,000번 연산
+# - g: 약 1,000,000번 연산 (1000배 차이!)
+#
+# 정답: 함수 f가 더 효율적
+# f는 O(n), g는 O(n²)]]></solution>
+  </problem>
+
+  <!-- 문제 9: 코드 비교 (O(n) vs O(log n)) -->
+  <problem>
+    <description>정렬된 배열에서 특정 값을 찾는 두 방법의 시간복잡도를 비교하세요.</description>
+    <code><![CDATA[def f(A, x):
+    for i in range(len(A)):
+        if A[i] == x:
+            return i
+    return -1
+
+def g(A, x):
+    L = 0
+    R = len(A) - 1
+    while L <= R:
+        M = (L + R) // 2
+        if A[M] == x:
+            return M
+        elif A[M] < x:
+            L = M + 1
+        else:
+            R = M - 1
+    return -1]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 함수 f (선형 탐색):
+# - 배열을 처음부터 끝까지 순회
+# - 최악: n번 비교
+# - 시간복잡도: O(n)
+#
+# 함수 g (이진 탐색):
+# - 매번 탐색 범위를 절반으로 줄임
+# - 최악: log₂(n)번 비교
+# - 시간복잡도: O(log n)
+#
+# 비교 (n=1000):
+# - f: 최악 1,000번 비교
+# - g: 최악 10번 비교 (log₂1000 ≈ 10)
+# - 약 100배 차이!
+#
+# 비교 (n=1,000,000):
+# - f: 최악 1,000,000번
+# - g: 최악 20번 (log₂1,000,000 ≈ 20)
+# - 약 50,000배 차이!
+#
+# 정답: 함수 g가 훨씬 효율적
+# f는 O(n), g는 O(log n)
+#
+# 단, g는 정렬된 배열에서만 사용 가능]]></solution>
+  </problem>
+
+  <!-- 문제 10: 서술형 (최선/평균/최악) -->
+  <problem>
+    <description>알고리즘의 최선, 평균, 최악의 경우를 설명하고, 선형 탐색을 예시로 각 경우를 서술하세요.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 시간복잡도의 세 가지 경우
+#
+# 1. 최선의 경우 (Best Case):
+#    - 알고리즘이 가장 빨리 끝나는 입력
+#    - 이상적인 상황
+#
+# 2. 평균의 경우 (Average Case):
+#    - 모든 가능한 입력의 평균
+#    - 실제 사용 환경에서의 기대값
+#
+# 3. 최악의 경우 (Worst Case):
+#    - 알고리즘이 가장 오래 걸리는 입력
+#    - Big-O 표기법의 기준
+#
+# 예시: 선형 탐색 (배열에서 값 찾기)
+#
+# def linear_search(A, x):
+#     for i in range(len(A)):
+#         if A[i] == x:
+#             return i
+#     return -1
+#
+# - 최선: O(1)
+#   → 찾는 값이 첫 번째 위치
+#   → 1번만 비교
+#
+# - 평균: O(n/2) = O(n)
+#   → 찾는 값이 중간쯤 위치
+#   → 약 n/2번 비교
+#   → 상수 무시하면 O(n)
+#
+# - 최악: O(n)
+#   → 찾는 값이 마지막 또는 없음
+#   → n번 모두 비교
+#
+# Big-O는 보통 "최악의 경우"를 의미
+# 왜냐하면 성능 보장을 위해서는 최악을 대비해야 함]]></solution>
+  </problem>
+
+  <!-- 문제 11: 조건 역추론 (n이 2배 → 시간 4배) -->
+  <problem>
+    <description>어떤 알고리즘의 실행 시간이 입력 크기 n이 2배가 되면 4배가 됩니다. 이 알고리즘의 시간복잡도는 무엇입니까?</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[O(n²)]]></output>
+    <solution><![CDATA[# 조건 분석:
+# - n이 2배 → 시간이 4배
+# - 즉, T(2n) = 4 × T(n)
+#
+# 복잡도별 배수 관계:
+# - O(1): n이 2배 → 시간 1배 (변화 없음)
+# - O(log n): n이 2배 → 시간 약 1.3배
+# - O(n): n이 2배 → 시간 2배
+# - O(n log n): n이 2배 → 시간 약 2.6배
+# - O(n²): n이 2배 → 시간 4배 ✓
+# - O(2^n): n이 2배 → 시간 제곱배
+#
+# 수학적 증명:
+# T(n) = c × n²라고 하면
+# T(2n) = c × (2n)² = c × 4n² = 4 × (c × n²) = 4 × T(n)
+#
+# 정답: O(n²)
+#
+# 확인:
+# n=10 → 100 연산
+# n=20 → 400 연산 (4배)
+# n=40 → 1600 연산 (4배)]]></solution>
+  </problem>
+
+  <!-- 문제 12: 트레이싱 (루프 실행 횟수) -->
+  <problem>
+    <description>다음 코드에서 print가 총 몇 번 실행되는지 구하세요. (n=5일 때)</description>
+    <code><![CDATA[def f(n):
+    cnt = 0
+    for i in range(n):
+        for j in range(i):
+            cnt += 1
+    return cnt
+
+print(f(5))]]></code>
+    <input></input>
+    <output><![CDATA[10]]></output>
+    <solution><![CDATA[# n=5일 때 실행 추적:
+#
+# i=0: j는 range(0) → 0번
+# i=1: j는 range(1) → 1번 (j=0)
+# i=2: j는 range(2) → 2번 (j=0,1)
+# i=3: j는 range(3) → 3번 (j=0,1,2)
+# i=4: j는 range(4) → 4번 (j=0,1,2,3)
+#
+# 총: 0 + 1 + 2 + 3 + 4 = 10번
+#
+# 정답: 10
+#
+# 일반 공식:
+# n번 실행 시 총 횟수 = 0 + 1 + 2 + ... + (n-1)
+#                    = n(n-1)/2
+# n=5: 5×4/2 = 10
+#
+# 시간복잡도: O(n²)]]></solution>
+  </problem>
+
+  <!-- 문제 13: 순서 맞추기 (복잡도 순서) -->
+  <problem>
+    <description>다음 시간복잡도를 빠른 것부터 느린 것 순서로 나열하세요: O(2^n), O(n), O(1), O(n²), O(log n), O(n log n)</description>
+    <code></code>
+    <input></input>
+    <output><![CDATA[O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2^n)]]></output>
+    <solution><![CDATA[# 시간복잡도 순서 (빠름 → 느림)
+#
+# O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2^n) < O(n!)
+#
+# 구체적 비교 (n=1000):
+# - O(1):       1번
+# - O(log n):   약 10번 (log₂1000 ≈ 10)
+# - O(n):       1,000번
+# - O(n log n): 약 10,000번
+# - O(n²):      1,000,000번 (100만)
+# - O(2^n):     너무 큼 (계산 불가능)
+#
+# 성장 속도:
+# - O(1): 변화 없음
+# - O(log n): 매우 느리게 증가
+# - O(n): 선형 증가
+# - O(n log n): 약간 빠르게 증가
+# - O(n²): 빠르게 증가
+# - O(2^n): 폭발적으로 증가
+#
+# 정답: O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2^n)]]></solution>
+  </problem>
+
+  <!-- 문제 14: 서술형 (상수 무시 이유) -->
+  <problem>
+    <description>Big-O 표기법에서 최고차항만 남기고 나머지를 무시하는 이유를 n² + 100n + 1000을 예시로 설명하세요.</description>
+    <code></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# Big-O에서 최고차항만 남기는 이유
+#
+# 예시: f(n) = n² + 100n + 1000
+#
+# 구체적 계산:
+# n=10:     100 + 1,000 + 1,000 = 2,100
+#           (n²: 4.8%, 100n: 47.6%, 1000: 47.6%)
+#
+# n=100:    10,000 + 10,000 + 1,000 = 21,000
+#           (n²: 47.6%, 100n: 47.6%, 1000: 4.8%)
+#
+# n=1,000:  1,000,000 + 100,000 + 1,000 = 1,101,000
+#           (n²: 90.8%, 100n: 9.1%, 1000: 0.1%)
+#
+# n=10,000: 100,000,000 + 1,000,000 + 1,000 = 101,001,000
+#           (n²: 99.0%, 100n: 1.0%, 1000: 0.001%)
+#
+# 관찰:
+# - n이 커질수록 n²이 압도적
+# - 100n과 1000은 상대적으로 무의미
+#
+# 이유:
+# 1. Big-O는 "충분히 큰 n"일 때의 추세 표현
+# 2. 최고차항이 전체 값을 지배
+# 3. 다른 항들은 비율이 0에 수렴
+#
+# 결론: n² + 100n + 1000 → O(n²)
+#
+# 실용적 의미:
+# - 알고리즘 선택 시 증가 추세가 중요
+# - 상수 최적화는 같은 복잡도 내에서만 의미]]></solution>
+  </problem>
+</problems>

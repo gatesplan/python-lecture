@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: if 조건 채우기 -->
+  <problem>
+    <description>다음 코드는 두 수의 최대공약수를 구하는 코드입니다. if문의 조건을 완성하세요.</description>
+    <code><![CDATA[x, y = 10, 15
+a, b = min(x, y), max(x, y)
+gcd = 1
+
+for i in range(2, a+1):
+    if ____:  # 여기를 채우세요
+        gcd = i
+
+print(gcd)]]></code>
+    <input></input>
+    <output><![CDATA[5]]></output>
+    <solution><![CDATA[x, y = 10, 15
+a, b = min(x, y), max(x, y)
+gcd = 1
+
+for i in range(2, a+1):
+    if a%i == 0 and b%i == 0:
+        gcd = i
+
+print(gcd)]]></solution>
+  </problem>
+
+  <!-- 문제 2: for 내부 블록 채우기 -->
+  <problem>
+    <description>다음 코드는 두 수의 최대공약수를 구하는 코드입니다. for 반복문 내부 블럭을 완성하세요.</description>
+    <code><![CDATA[x, y = 10, 15
+a, b = min(x, y), max(x, y)
+gcd = 1
+
+for i in range(2, a+1):
+    # 여기를 채우세요
+
+print(gcd)]]></code>
+    <input></input>
+    <output><![CDATA[5]]></output>
+    <solution><![CDATA[x, y = 10, 15
+a, b = min(x, y), max(x, y)
+gcd = 1
+
+for i in range(2, a+1):
+    if a%i == 0 and b%i == 0:
+        gcd = i
+
+print(gcd)]]></solution>
+  </problem>
+
+  <!-- 문제 3: 전체 작성 -->
+  <problem>
+    <description>두 수 x, y의 최대공약수를 구하는 코드를 작성하세요. 2부터 min(x,y)까지 모든 공약수를 확인하여 마지막 공약수를 출력합니다.</description>
+    <code><![CDATA[x, y = 12, 18
+a, b = min(x, y), max(x, y)
+gcd = 1
+
+for i in range(2, a+1):
+    # 여기를 채우세요
+
+print(gcd)]]></code>
+    <input></input>
+    <output><![CDATA[6]]></output>
+    <solution><![CDATA[x, y = 12, 18
+a, b = min(x, y), max(x, y)
+gcd = 1
+
+for i in range(2, a+1):
+    if a%i == 0 and b%i == 0:
+        gcd = i
+
+print(gcd)]]></solution>
+  </problem>
+
+  <!-- 문제 4: 유클리드 호제법 빈칸 채우기 -->
+  <problem>
+    <description>다음 코드는 유클리드 호제법으로 최대공약수를 구하는 효율적인 코드입니다. 빈칸을 채우세요.</description>
+    <code><![CDATA[x, y = 10, 15
+a, b = x, y
+
+while ____:  # 여기를 채우세요
+    if a > b:
+        a = ____  # 여기를 채우세요
+    else:
+        b = ____  # 여기를 채우세요
+
+print(a)]]></code>
+    <input></input>
+    <output><![CDATA[5]]></output>
+    <solution><![CDATA[x, y = 10, 15
+a, b = x, y
+
+while a != b:
+    if a > b:
+        a = a - b
+    else:
+        b = b - a
+
+print(a)]]></solution>
+  </problem>
+
+  <!-- 문제 5: 유클리드 호제법 전체 작성 -->
+  <problem>
+    <description>두 수 x, y의 최대공약수를 유클리드 호제법(뺄셈 방식)으로 구하는 코드를 작성하세요.</description>
+    <code><![CDATA[x, y = 12, 18
+a, b = x, y
+
+while a != b:
+    # 여기를 채우세요
+
+print(a)]]></code>
+    <input></input>
+    <output><![CDATA[6]]></output>
+    <solution><![CDATA[x, y = 12, 18
+a, b = x, y
+
+while a != b:
+    if a > b:
+        a = a - b
+    else:
+        b = b - a
+
+print(a)]]></solution>
+  </problem>
+
+  <!-- 문제 6: 나머지 연산 버전 빈칸 채우기 -->
+  <problem>
+    <description>다음 코드는 나머지 연산을 사용하는 유클리드 호제법입니다. 빈칸을 채우세요.</description>
+    <code><![CDATA[x, y = 10, 15
+a, b = x, y
+
+while ____:  # 여기를 채우세요
+    a, b = ____, ____  # 여기를 채우세요
+
+print(a)]]></code>
+    <input></input>
+    <output><![CDATA[5]]></output>
+    <solution><![CDATA[x, y = 10, 15
+a, b = x, y
+
+while b != 0:
+    a, b = b, a % b
+
+print(a)]]></solution>
+  </problem>
+
+  <!-- 문제 7: 나머지 연산 버전 전체 작성 -->
+  <problem>
+    <description>두 수 x, y의 최대공약수를 나머지 연산을 사용하는 유클리드 호제법으로 구하는 코드를 작성하세요.</description>
+    <code><![CDATA[x, y = 12, 18
+a, b = x, y
+
+while b != 0:
+    # 여기를 채우세요
+
+print(a)]]></code>
+    <input></input>
+    <output><![CDATA[6]]></output>
+    <solution><![CDATA[x, y = 12, 18
+a, b = x, y
+
+while b != 0:
+    a, b = b, a % b
+
+print(a)]]></solution>
+  </problem>
+
+  <!-- 문제 8: 재귀함수로 작성 -->
+  <problem>
+    <description>두 수 x, y의 최대공약수를 재귀함수로 구현하세요.</description>
+    <code><![CDATA[def gcd(a, b):
+    pass  # 여기를 채우세요
+
+x, y = 48, 18
+print(gcd(x, y))]]></code>
+    <input></input>
+    <output><![CDATA[6]]></output>
+    <solution><![CDATA[def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a % b)
+
+x, y = 48, 18
+print(gcd(x, y))]]></solution>
+  </problem>
+</problems>
