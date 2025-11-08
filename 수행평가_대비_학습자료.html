@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수행평가 대비 학습자료 - 핵심 요약</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background: #f5f5f5;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .difficulty {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .easy { background: #d4edda; color: #155724; }
+        .medium { background: #fff3cd; color: #856404; }
+        .hard { background: #f8d7da; color: #721c24; }
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        h3 {
+            color: #764ba2;
+            margin: 20px 0 10px 0;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+        }
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+        .tip {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .example {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #667eea;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .key-point {
+            background: #fff9e6;
+            border-left: 5px solid #ffcc00;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚀 수행평가 대비 학습자료<br>난이도 순 핵심 요약</h1>
+
+    <div class="warning">
+        <strong>📌 수행평가 범위 (공지사항)</strong><br>
+        1. 백트랙 반드시 공부<br>
+        2. 정렬 알고리즘: 버블, 삽입, 퀵, 선택정렬<br>
+        3. 트리, 그래프 활용한 수업 실습 과제<br>
+        4. 선형 자료구조는 너무 쉬워서 제외<br>
+        5. 재귀함수는 어떤 형태든 구현 가능해야 함<br>
+        6. 문제에서 특정 자료구조, 자료형을 사용하라고 제한하면 지켜야 함
+    </div>
+
+    <!-- Level 1: 기초 재귀 -->
+    <div class="section">
+        <span class="difficulty easy">난이도: ★☆☆☆☆</span>
+        <h2>1️⃣ 재귀함수 기초</h2>
+
+        <h3>재귀함수 설계 3단계</h3>
+        <ol>
+            <li><strong>반복되는 동작 찾기</strong> - 같은 패턴이 반복되는 부분</li>
+            <li><strong>기저 조건 찾기</strong> - 언제 멈출 것인가?</li>
+            <li><strong>재귀 호출</strong> - 문제를 작게 만들어 자기 자신 호출</li>
+        </ol>
+
+        <div class="example">
+            <strong>예제 1: 팩토리얼 (가장 기본)</strong>
+            <pre><code>def factorial(n):
+    # 기저 조건
+    if n <= 1:
+        return 1
+
+    # 재귀 호출 (n을 n-1로 줄임)
+    return n * factorial(n-1)
+
+# factorial(5) = 5 * 4 * 3 * 2 * 1 = 120</code></pre>
+        </div>
+
+        <div class="example">
+            <strong>예제 2: 카운트다운</strong>
+            <pre><code>def countdown(n):
+    if n <= 0:  # 기저 조건
+        print("발사!")
+        return
+
+    print(n)
+    countdown(n-1)  # 재귀 호출
+
+countdown(5)  # 5, 4, 3, 2, 1, 발사!</code></pre>
+        </div>
+
+        <div class="example">
+            <strong>예제 3: 리스트 합계 (재귀로)</strong>
+            <pre><code>def sum_list(arr):
+    if len(arr) == 0:  # 기저 조건: 빈 리스트
+        return 0
+
+    # 첫 번째 원소 + 나머지의 합
+    return arr[0] + sum_list(arr[1:])
+
+print(sum_list([1, 2, 3, 4, 5]))  # 15</code></pre>
+        </div>
+
+        <div class="tip">
+            <strong>💡 재귀 디버깅 팁</strong><br>
+            재귀 함수가 어떻게 동작하는지 모르겠으면 print를 넣어보세요!
+            <pre><code>def factorial(n, depth=0):
+    indent = "  " * depth
+    print(f"{indent}factorial({n}) 호출")
+
+    if n <= 1:
+        print(f"{indent}→ 1 반환")
+        return 1
+
+    result = n * factorial(n-1, depth+1)
+    print(f"{indent}→ {result} 반환")
+    return result</code></pre>
+        </div>
+    </div>
+
+    <!-- Level 2: 정렬 알고리즘 -->
+    <div class="section">
+        <span class="difficulty easy">난이도: ★★☆☆☆</span>
+        <h2>2️⃣ 정렬 알고리즘 (필수 암기!)</h2>
+
+        <h3>정렬 알고리즘 비교표</h3>
+        <table>
+            <tr>
+                <th>알고리즘</th>
+                <th>시간복잡도</th>
+                <th>핵심 아이디어</th>
+                <th>난이도</th>
+            </tr>
+            <tr>
+                <td><strong>선택 정렬</strong></td>
+                <td>O(n²)</td>
+                <td>최솟값 찾아서 앞으로</td>
+                <td>가장 쉬움</td>
+            </tr>
+            <tr>
+                <td><strong>버블 정렬</strong></td>
+                <td>O(n²)</td>
+                <td>인접한 것 비교하며 큰 값 뒤로</td>
+                <td>쉬움</td>
+            </tr>
+            <tr>
+                <td><strong>삽입 정렬</strong></td>
+                <td>O(n²)</td>
+                <td>정렬된 부분에 삽입</td>
+                <td>보통</td>
+            </tr>
+            <tr>
+                <td><strong>퀵 정렬</strong></td>
+                <td>O(n log n)</td>
+                <td>피벗 기준으로 좌우 분할</td>
+                <td>어려움</td>
+            </tr>
+        </table>
+
+        <h3>1) 선택 정렬 (Selection Sort) - 가장 단순</h3>
+        <div class="key-point">
+            💡 핵심: 최솟값을 찾아서 맨 앞과 교환
+        </div>
+        <pre><code>def selection_sort(arr):
+    n = len(arr)
+
+    for i in range(n-1):  # 맨 앞부터 채워감
+        # i번째부터 끝까지 중 최솟값 찾기
+        min_idx = i
+        for j in range(i+1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+
+        # 최솟값을 i번째와 교환
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+
+    return arr
+
+# 동작 예시:
+# [64, 25, 12, 22, 11]
+# [11, 25, 12, 22, 64]  ← 11이 최솟값
+# [11, 12, 25, 22, 64]  ← 12가 최솟값
+# [11, 12, 22, 25, 64]  ← 22가 최솟값
+# [11, 12, 22, 25, 64]  ← 정렬 완료</code></pre>
+
+        <h3>2) 버블 정렬 (Bubble Sort) - 거품처럼 위로</h3>
+        <div class="key-point">
+            💡 핵심: 인접한 두 개를 비교하여 큰 값을 뒤로
+        </div>
+        <pre><code>def bubble_sort(arr):
+    n = len(arr)
+
+    for i in range(n):
+        # 한 번의 패스마다 가장 큰 값이 맨 뒤로 감
+        for j in range(n-i-1):
+            if arr[j] > arr[j+1]:
+                # 인접한 것 교환
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+
+    return arr
+
+# 동작 예시 (한 번의 패스):
+# [64, 34, 25, 12, 22]
+# [34, 64, 25, 12, 22]  ← 64와 34 교환
+# [34, 25, 64, 12, 22]  ← 64와 25 교환
+# [34, 25, 12, 64, 22]  ← 64와 12 교환
+# [34, 25, 12, 22, 64]  ← 64가 맨 뒤로!</code></pre>
+
+        <h3>3) 삽입 정렬 (Insertion Sort) - 카드 정렬하듯이</h3>
+        <div class="key-point">
+            💡 핵심: 앞부분은 정렬되어 있다고 가정, 하나씩 적절한 위치에 삽입
+        </div>
+        <pre><code>def insertion_sort(arr):
+    n = len(arr)
+
+    for i in range(1, n):  # 1번부터 시작 (0번은 이미 정렬됨)
+        key = arr[i]  # 삽입할 값
+        j = i - 1
+
+        # key보다 큰 값들을 한 칸씩 뒤로
+        while j >= 0 and arr[j] > key:
+            arr[j+1] = arr[j]
+            j -= 1
+
+        # key를 적절한 위치에 삽입
+        arr[j+1] = key
+
+    return arr
+
+# 동작 예시:
+# [12, 11, 13, 5, 6]
+# [12] [11, 13, 5, 6]     ← 12는 정렬됨
+# [11, 12] [13, 5, 6]     ← 11 삽입
+# [11, 12, 13] [5, 6]     ← 13 삽입
+# [5, 11, 12, 13] [6]     ← 5 삽입
+# [5, 6, 11, 12, 13]      ← 6 삽입</code></pre>
+
+        <h3>4) 퀵 정렬 (Quick Sort) - 가장 빠름</h3>
+        <div class="key-point">
+            💡 핵심: 피벗(기준값)을 정해 작은 것은 왼쪽, 큰 것은 오른쪽으로 분할
+        </div>
+        <pre><code>def quick_sort(arr):
+    # 기저 조건: 원소가 1개 이하면 이미 정렬됨
+    if len(arr) <= 1:
+        return arr
+
+    # 피벗 선택 (보통 중간 값)
+    pivot = arr[len(arr) // 2]
+
+    # 3그룹으로 분할
+    left = [x for x in arr if x < pivot]      # 피벗보다 작은 것
+    middle = [x for x in arr if x == pivot]   # 피벗과 같은 것
+    right = [x for x in arr if x > pivot]     # 피벗보다 큰 것
+
+    # 재귀적으로 정렬 후 합침
+    return quick_sort(left) + middle + quick_sort(right)
+
+# 동작 예시:
+# [3, 6, 8, 10, 1, 2, 1]  pivot=10
+# left=[3,6,8,1,2,1]  middle=[10]  right=[]
+# 다시 left를 정렬... (재귀)</code></pre>
+
+        <div class="tip">
+            <strong>🎯 시험 팁: 정렬 알고리즘 구별법</strong>
+            <ul>
+                <li><strong>선택 정렬</strong>: "최솟값 찾아서" → 두 개의 for문, min_idx 사용</li>
+                <li><strong>버블 정렬</strong>: "인접한 것 비교" → arr[j]와 arr[j+1] 비교</li>
+                <li><strong>삽입 정렬</strong>: "while로 뒤로 밀기" → while j >= 0 and arr[j] > key</li>
+                <li><strong>퀵 정렬</strong>: "피벗으로 분할" → left, middle, right 만들고 재귀</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Level 3: 재귀 정렬 -->
+    <div class="section">
+        <span class="difficulty medium">난이도: ★★★☆☆</span>
+        <h2>3️⃣ 재귀로 구현하는 정렬</h2>
+
+        <div class="tip">
+            <strong>📚 왜 재귀로 정렬을 배우나요?</strong><br>
+            수행평가에서 "재귀함수는 어떤 형태든 구현 가능해야 함"이라고 했습니다!<br>
+            정렬을 재귀로 구현할 수 있어야 합니다.
+        </div>
+
+        <h3>선택 정렬 - 재귀 버전</h3>
+        <pre><code>def selection_sort_recursive(arr, start=0):
+    # 기저 조건: 정렬할 원소가 1개 이하
+    if start >= len(arr) - 1:
+        return arr
+
+    # start부터 끝까지 중 최솟값 찾기
+    min_idx = start
+    for i in range(start + 1, len(arr)):
+        if arr[i] < arr[min_idx]:
+            min_idx = i
+
+    # 교환
+    arr[start], arr[min_idx] = arr[min_idx], arr[start]
+
+    # 나머지 부분을 재귀적으로 정렬
+    return selection_sort_recursive(arr, start + 1)</code></pre>
+
+        <h3>버블 정렬 - 재귀 버전</h3>
+        <pre><code>def bubble_sort_recursive(arr, n=None):
+    if n is None:
+        n = len(arr)
+
+    # 기저 조건: 정렬할 원소가 1개
+    if n <= 1:
+        return arr
+
+    # 한 번의 패스: 가장 큰 값을 맨 뒤로
+    for i in range(n - 1):
+        if arr[i] > arr[i + 1]:
+            arr[i], arr[i + 1] = arr[i + 1], arr[i]
+
+    # 나머지 부분 재귀 정렬
+    return bubble_sort_recursive(arr, n - 1)</code></pre>
+
+        <h3>삽입 정렬 - 재귀 버전</h3>
+        <pre><code>def insertion_sort_recursive(arr, n=None):
+    if n is None:
+        n = len(arr)
+
+    # 기저 조건
+    if n <= 1:
+        return arr
+
+    # 먼저 n-1개 정렬
+    insertion_sort_recursive(arr, n - 1)
+
+    # 마지막 원소를 적절한 위치에 삽입
+    last = arr[n - 1]
+    j = n - 2
+
+    while j >= 0 and arr[j] > last:
+        arr[j + 1] = arr[j]
+        j -= 1
+
+    arr[j + 1] = last
+    return arr</code></pre>
+    </div>
+
+    <!-- Level 4: 백트래킹 -->
+    <div class="section">
+        <span class="difficulty hard">난이도: ★★★★☆</span>
+        <h2>4️⃣ 백트래킹 (Backtracking) - 필수!</h2>
+
+        <div class="warning">
+            <strong>⚠️ 수행평가 공지: "백트랙 반드시 공부할 것"</strong>
+        </div>
+
+        <div class="key-point">
+            💡 백트래킹이란?<br>
+            모든 경우를 다 시도해보되, 불가능한 경우는 되돌아가는(backtrack) 기법<br>
+            = 완전 탐색 + 가지치기(pruning)
+        </div>
+
+        <h3>백트래킹 패턴 (외워두세요!)</h3>
+        <pre><code>def backtrack(상태):
+    # 1. 목표 달성 체크
+    if 목표_달성:
+        결과_저장()
+        return
+
+    # 2. 가능한 모든 선택지 시도
+    for 선택 in 선택지들:
+        if 선택이_유효한가:
+            # 3. 선택하기
+            선택_적용()
+
+            # 4. 다음 단계로 (재귀)
+            backtrack(다음_상태)
+
+            # 5. 선택 취소 (백트래킹!)
+            선택_취소()
+</code></pre>
+
+        <h3>예제 1: 순열 만들기 (Permutation)</h3>
+        <div class="example">
+            <strong>문제: [1, 2, 3]의 모든 순열 구하기</strong>
+            <pre><code>def permutation(arr, path, used, result):
+    # 목표: 모든 숫자를 다 사용했을 때
+    if len(path) == len(arr):
+        result.append(path[:])  # 복사해서 저장!
+        return
+
+    # 각 숫자를 시도
+    for i in range(len(arr)):
+        if not used[i]:  # 아직 사용 안 한 숫자
+            # 선택
+            path.append(arr[i])
+            used[i] = True
+
+            # 재귀
+            permutation(arr, path, used, result)
+
+            # 선택 취소 (백트래킹)
+            path.pop()
+            used[i] = False
+
+# 사용 예시
+result = []
+permutation([1, 2, 3], [], [False]*3, result)
+print(result)
+# [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]</code></pre>
+        </div>
+
+        <h3>예제 2: 그래프 경로 찾기 (Hamilton Path)</h3>
+        <div class="example">
+            <strong>문제: 모든 노드를 정확히 한 번씩 방문하는 경로</strong>
+            <pre><code># 그래프 인접 리스트
+# M[0] = [1, 2, 3]  # 0번에서 1,2,3번으로 갈 수 있음
+
+def hamilton_path(current, visited, path, M, V):
+    # 목표: 모든 노드 방문
+    if len(path) == V:
+        print(path)  # 경로 출력
+        return True
+
+    # 현재 노드 방문 처리
+    visited[current] = True
+
+    # 인접한 노드들 시도
+    for next_node in M[current]:
+        if not visited[next_node]:
+            # 선택
+            path.append(next_node)
+
+            # 재귀
+            if hamilton_path(next_node, visited, path, M, V):
+                return True
+
+            # 백트래킹
+            path.pop()
+
+    # 현재 노드 방문 취소
+    visited[current] = False
+    return False
+
+# 사용 예시
+V = 7  # 노드 개수
+M = [[] for _ in range(V)]  # 인접 리스트
+# ... 그래프 간선 추가 ...
+
+visited = [False] * V
+hamilton_path(0, visited, [0], M, V)</code></pre>
+        </div>
+
+        <div class="tip">
+            <strong>🎯 백트래킹 핵심 포인트</strong>
+            <ol>
+                <li><strong>visited 배열</strong>: 방문 여부 체크</li>
+                <li><strong>선택 → 재귀 → 취소</strong>: 이 순서가 핵심!</li>
+                <li><strong>visited[x] = False</strong>: 되돌아갈 때 반드시 취소</li>
+                <li><strong>경로 저장</strong>: path.append() / path.pop()</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Level 5: 트리 -->
+    <div class="section">
+        <span class="difficulty medium">난이도: ★★★☆☆</span>
+        <h2>5️⃣ 이진 트리 순회</h2>
+
+        <h3>트리를 배열로 표현 (1-based index)</h3>
+        <pre><code># 문자열로 트리 표현
+s = "-ABC-EFG"
+#     A(1)
+#    /  \
+#   B(2) C(3)
+#  /    / \
+# E(4) F(5) G(6)
+
+# 부모-자식 관계
+# 부모: i // 2
+# 왼쪽 자식: i * 2
+# 오른쪽 자식: i * 2 + 1</code></pre>
+
+        <h3>4가지 순회 방법 (암기 필수!)</h3>
+        <table>
+            <tr>
+                <th>순회 방법</th>
+                <th>순서</th>
+                <th>특징</th>
+            </tr>
+            <tr>
+                <td><strong>전위 순회</strong></td>
+                <td>루트 → 왼쪽 → 오른쪽</td>
+                <td>트리 복사, 디렉토리 출력</td>
+            </tr>
+            <tr>
+                <td><strong>중위 순회</strong></td>
+                <td>왼쪽 → 루트 → 오른쪽</td>
+                <td>BST에서 정렬된 순서</td>
+            </tr>
+            <tr>
+                <td><strong>후위 순회</strong></td>
+                <td>왼쪽 → 오른쪽 → 루트</td>
+                <td>트리 삭제, 계산</td>
+            </tr>
+            <tr>
+                <td><strong>레벨 순서</strong></td>
+                <td>레벨별 좌→우</td>
+                <td>BFS, 최단 경로</td>
+            </tr>
+        </table>
+
+        <h3>전위 순회 (Preorder)</h3>
+        <pre><code>def preorder(s, node):
+    if node >= len(s) or s[node] == '-':
+        return
+
+    print(s[node], end=' ')  # 루트 먼저
+    preorder(s, node * 2)     # 왼쪽
+    preorder(s, node * 2 + 1) # 오른쪽
+
+# s = "-ABC-EFG"
+# preorder(s, 1)  # 출력: A B E C F G</code></pre>
+
+        <h3>중위 순회 (Inorder)</h3>
+        <pre><code>def inorder(s, node):
+    if node >= len(s) or s[node] == '-':
+        return
+
+    inorder(s, node * 2)      # 왼쪽 먼저
+    print(s[node], end=' ')  # 루트
+    inorder(s, node * 2 + 1)  # 오른쪽
+
+# s = "-ABC-EFG"
+# inorder(s, 1)  # 출력: B E A F C G</code></pre>
+
+        <h3>후위 순회 (Postorder)</h3>
+        <pre><code>def postorder(s, node):
+    if node >= len(s) or s[node] == '-':
+        return
+
+    postorder(s, node * 2)     # 왼쪽
+    postorder(s, node * 2 + 1) # 오른쪽
+    print(s[node], end=' ')   # 루트 마지막
+
+# s = "-ABC-EFG"
+# postorder(s, 1)  # 출력: E B F G C A</code></pre>
+
+        <div class="tip">
+            <strong>🎯 순회 구별 팁</strong><br>
+            print(s[node])의 위치만 보면 됩니다!
+            <ul>
+                <li><strong>전위</strong>: print가 <strong>맨 위</strong></li>
+                <li><strong>중위</strong>: print가 <strong>중간</strong></li>
+                <li><strong>후위</strong>: print가 <strong>맨 아래</strong></li>
+            </ul>
+        </div>
+
+        <h3>LCA (최소 공통 조상) 찾기</h3>
+        <pre><code>def find_lca(a, b, s, T):
+    """두 노드의 최소 공통 조상"""
+    # T[a], T[b]는 각 노드의 인덱스
+    while T[a] != T[b]:
+        if T[a] > T[b]:
+            a = s[T[a] // 2]  # a를 부모로
+        else:
+            b = s[T[b] // 2]  # b를 부모로
+    return a  # 같아지면 그게 LCA
+
+# s = "-ABCDEFG"
+# T = {'A': 1, 'B': 2, 'C': 3, 'D': 4, ...}
+# find_lca('D', 'E', s, T)  # B 반환</code></pre>
+
+        <h3>두 노드 사이의 거리</h3>
+        <pre><code>def distance(a, b, s, T):
+    """두 노드 사이의 간선 개수"""
+    dist = 0
+    while T[a] != T[b]:
+        if T[a] > T[b]:
+            a = s[T[a] // 2]
+        else:
+            b = s[T[b] // 2]
+        dist += 1  # 이동할 때마다 +1
+    return dist</code></pre>
+    </div>
+
+    <!-- Level 6: 그래프 -->
+    <div class="section">
+        <span class="difficulty medium">난이도: ★★★☆☆</span>
+        <h2>6️⃣ 그래프 표현과 DFS</h2>
+
+        <h3>그래프 표현 방법</h3>
+
+        <h4>1) 인접 리스트 (가장 많이 씀)</h4>
+        <pre><code># 각 노드에서 갈 수 있는 노드들을 리스트로
+M = [[] for _ in range(V)]  # V개의 빈 리스트
+
+# 간선 추가
+M[0].append(1)  # 0 → 1
+M[0].append(2)  # 0 → 2
+M[1].append(2)  # 1 → 2
+
+# M[0] = [1, 2]  # 0번에서 1, 2로 갈 수 있음
+# M[1] = [2]     # 1번에서 2로 갈 수 있음</code></pre>
+
+        <h4>2) 인접 행렬</h4>
+        <pre><code># 2차원 배열
+M = [[0]*V for _ in range(V)]
+
+# 간선 추가
+M[0][1] = 1  # 0 → 1 (가중치 1)
+M[0][2] = 1  # 0 → 2
+M[1][2] = 1  # 1 → 2
+
+# M[i][j] = 1이면 i에서 j로 갈 수 있음</code></pre>
+
+        <h3>DFS (깊이 우선 탐색) - 재귀</h3>
+        <pre><code>def dfs(node, visited, M):
+    visited[node] = True
+    print(node, end=' ')
+
+    # 인접한 노드들 방문
+    for next_node in M[node]:
+        if not visited[next_node]:
+            dfs(next_node, visited, M)
+
+# 사용 예시
+V = 7
+M = [[] for _ in range(V)]
+# ... 간선 추가 ...
+
+visited = [False] * V
+dfs(0, visited, M)  # 0번부터 시작</code></pre>
+
+        <h3>DFS - 스택</h3>
+        <pre><code>def dfs_stack(start, M, V):
+    visited = [False] * V
+    stack = [start]
+
+    while stack:
+        node = stack.pop()
+
+        if visited[node]:
+            continue
+
+        visited[node] = True
+        print(node, end=' ')
+
+        # 인접 노드들을 스택에 추가
+        for next_node in M[node]:
+            if not visited[next_node]:
+                stack.append(next_node)</code></pre>
+    </div>
+
+    <!-- 빠른 참조 -->
+    <div class="section">
+        <h2>📋 빠른 참조 - 시험 직전 보기</h2>
+
+        <h3>재귀 함수 체크리스트</h3>
+        <ol>
+            <li>기저 조건 있나? (if n <= 1: return ...)</li>
+            <li>재귀 호출에서 n이 작아지나?</li>
+            <li>return이 제대로 있나?</li>
+        </ol>
+
+        <h3>백트래킹 체크리스트</h3>
+        <ol>
+            <li>visited 배열 선언했나?</li>
+            <li>선택 적용 → 재귀 → 선택 취소 순서인가?</li>
+            <li>visited[x] = False로 복구했나?</li>
+            <li>path.pop()으로 되돌렸나?</li>
+        </ol>
+
+        <h3>정렬 알고리즘 한 줄 요약</h3>
+        <ul>
+            <li><strong>선택</strong>: min_idx 찾아서 앞과 swap</li>
+            <li><strong>버블</strong>: arr[j]와 arr[j+1] 비교 swap</li>
+            <li><strong>삽입</strong>: while로 밀고 key 삽입</li>
+            <li><strong>퀵</strong>: pivot으로 left/middle/right 분할</li>
+        </ul>
+
+        <h3>트리 순회 한 줄 요약</h3>
+        <ul>
+            <li><strong>전위</strong>: print → left → right</li>
+            <li><strong>중위</strong>: left → print → right</li>
+            <li><strong>후위</strong>: left → right → print</li>
+        </ul>
+    </div>
+
+    <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+        <h2 style="color: white; border-bottom: 3px solid white;">🎯 최종 점검</h2>
+        <ul style="font-size: 1.1em;">
+            <li>✅ 재귀함수 기본 구조 이해했나?</li>
+            <li>✅ 4가지 정렬 알고리즘 손으로 쓸 수 있나?</li>
+            <li>✅ 백트래킹 패턴 외웠나?</li>
+            <li>✅ 트리 순회 3가지 순서 외웠나?</li>
+            <li>✅ 그래프 DFS 구현할 수 있나?</li>
+        </ul>
+        <br>
+        <strong style="font-size: 1.3em;">화이팅! 🚀</strong>
+    </div>
+
+</body>
+</html>

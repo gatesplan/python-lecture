@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: 재귀함수 종료조건 완성 -->
+  <problem>
+    <description>계단을 내려가는 방법의 수를 구하는 재귀함수입니다. 한 번에 1칸 또는 2칸씩 내려갈 수 있을 때, n칸 계단을 내려가는 방법의 수를 반환합니다. 종료조건을 완성하세요.</description>
+    <code><![CDATA[def f(n):
+    if ____:  # 여기를 채우세요
+        return 2
+    if ____:  # 여기를 채우세요
+        return 1
+    return f(n-1) + f(n-2)]]></code>
+    <input><![CDATA[print(f(4))
+print(f(3))]]></input>
+    <output><![CDATA[5
+3]]></output>
+    <solution><![CDATA[def f(n):
+    if n == 2:  # 정답: n == 2
+        return 2
+    if n == 1:  # 정답: n == 1
+        return 1
+    return f(n-1) + f(n-2)]]></solution>
+  </problem>
+
+  <!-- 문제 2: 재귀함수 계산 부분 완성 -->
+  <problem>
+    <description>계단을 내려가는 방법의 수를 구하는 재귀함수입니다. return 부분을 완성하세요.</description>
+    <code><![CDATA[def f(n):
+    if n == 2:
+        return 2
+    if n == 1:
+        return 1
+    return ____  # 여기를 채우세요]]></code>
+    <input><![CDATA[print(f(5))
+print(f(4))]]></input>
+    <output><![CDATA[8
+5]]></output>
+    <solution><![CDATA[def f(n):
+    if n == 2:
+        return 2
+    if n == 1:
+        return 1
+    return f(n-1) + f(n-2)  # 정답: f(n-1) + f(n-2)]]></solution>
+  </problem>
+
+  <!-- 문제 3: 전체 함수 작성 -->
+  <problem>
+    <description>계단을 한 번에 1칸 또는 2칸씩 내려갈 수 있을 때, n칸 계단을 내려가는 방법의 수를 재귀함수로 구현하세요. (n=1일 때 1가지, n=2일 때 2가지)</description>
+    <code><![CDATA[def f(n):
+    pass  # 여기를 채우세요]]></code>
+    <input><![CDATA[print(f(6))
+print(f(3))
+print(f(1))]]></input>
+    <output><![CDATA[13
+3
+1]]></output>
+    <solution><![CDATA[def f(n):
+    if n == 2:
+        return 2
+    if n == 1:
+        return 1
+    return f(n-1) + f(n-2)]]></solution>
+  </problem>
+
+  <!-- 문제 4: for문으로 변환 -->
+  <problem>
+    <description>계단을 한 번에 1칸 또는 2칸씩 내려갈 수 있을 때, n칸 계단을 내려가는 방법의 수를 for문으로 구현하세요. for문 블록 내부를 완성하세요.</description>
+    <code><![CDATA[def f(n):
+    if n == 1:
+        return 1
+    if n == 2:
+        return 2
+
+    p2 = 1
+    p1 = 2
+
+    for i in range(3, n+1):
+        # 여기를 채우세요
+
+    return p1]]></code>
+    <input><![CDATA[print(f(6))
+print(f(4))]]></input>
+    <output><![CDATA[13
+5]]></output>
+    <solution><![CDATA[def f(n):
+    if n == 1:
+        return 1
+    if n == 2:
+        return 2
+
+    p2 = 1  # f(1)
+    p1 = 2  # f(2)
+
+    for i in range(3, n+1):
+        # i칸에 도달하는 방법 = (i-1)칸에서 1칸 + (i-2)칸에서 2칸
+        # f(i) = f(i-1) + f(i-2)
+        c = p1 + p2  # 전단계(p1)와 전전단계(p2)를 합침
+        p2 = p1      # 다음 반복을 위해 값 이동
+        p1 = c
+
+    return p1]]></solution>
+  </problem>
+</problems>

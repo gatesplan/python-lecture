@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CNSH-122 1102 연습문제 설정
+
+  사용법:
+  URL에서 ?config=config-cnsh122-1102 로 접근
+
+  포함 내용:
+  - Section 1: Stair Down (계단 내려가기 - 재귀/for 변환)
+  - Section 2: Is Prime (소수 판별)
+  - Section 3: Count Primes (소수 개수 세기)
+  - Section 4: GCD (최대공약수)
+  - Section 5: Find Coprime (서로소 찾기)
+  - Section 6: Recursive Select 3 (재귀 조합 선택)
+-->
+<exercise>
+  <title>Exercise - CNSH-122 1102</title>
+  <settings>
+    <showSolutions>true</showSolutions> <!-- true: 해설 표시, false: 해설 숨김 -->
+  </settings>
+  <sections>
+    <!-- Section 1: Stair Down - 4문제 -->
+    <section title="Section 1 - Stair Down (재귀/반복문 변환)" file="problems-cnsh122-stairdown.xml" count="4"/>
+
+    <!-- Section 2: Is Prime - 4문제 -->
+    <section title="Section 2 - Is Prime (소수 판별)" file="problems-cnsh122-isprime.xml" count="4"/>
+
+    <!-- Section 3: Count Primes - 5문제 -->
+    <section title="Section 3 - Count Primes (소수 개수 세기)" file="problems-cnsh122-countprimes.xml" count="5"/>
+
+    <!-- Section 4: GCD - 8문제 -->
+    <section title="Section 4 - GCD (최대공약수)" file="problems-cnsh122-gcd.xml" count="8"/>
+
+    <!-- Section 5: Find Coprime - 6문제 -->
+    <section title="Section 5 - Find Coprime (서로소 찾기)" file="problems-cnsh122-findcoprime.xml" count="6"/>
+
+    <!-- Section 6: Recursive Select 3 - 8문제 -->
+    <section title="Section 6 - Recursive Select 3 (재귀 조합)" file="problems-cnsh122-recursive-select3.xml" count="8"/>
+  </sections>
+</exercise>

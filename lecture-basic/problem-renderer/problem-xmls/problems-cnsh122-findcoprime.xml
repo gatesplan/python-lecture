@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: while 조건과 내부 빈칸 채우기 -->
+  <problem>
+    <description>다음 코드는 1부터 n까지의 수 중 k와 서로소인 수의 개수를 세는 코드입니다. while문의 조건과 내부 빈칸을 완성하세요.</description>
+    <code><![CDATA[k = 10
+n = 10
+ans = 0
+
+for i in range(1, n+1):
+    a, b = k, i
+    while ____:  # 여기를 채우세요
+        if a > b:
+            a = ____  # 여기를 채우세요
+        else:
+            b = ____  # 여기를 채우세요
+
+    if a == 1:
+        ans += 1
+
+print(ans)]]></code>
+    <input></input>
+    <output><![CDATA[4]]></output>
+    <solution><![CDATA[k = 10
+n = 10
+ans = 0
+
+for i in range(1, n+1):
+    a, b = k, i
+    while a != b:
+        if a > b:
+            a = a - b
+        else:
+            b = b - a
+
+    if a == 1:
+        ans += 1
+
+print(ans)]]></solution>
+  </problem>
+
+  <!-- 문제 2: if 조건과 내부 빈칸 채우기 -->
+  <problem>
+    <description>다음 코드는 1부터 n까지의 수 중 k와 서로소인 수의 개수를 세는 코드입니다. if문의 조건과 내부 빈칸을 완성하세요.</description>
+    <code><![CDATA[k = 10
+n = 10
+ans = 0
+
+for i in range(1, n+1):
+    a, b = k, i
+    while a != b:
+        if a > b:
+            a = a - b
+        else:
+            b = b - a
+
+    if ____:  # 여기를 채우세요
+        ____  # 여기를 채우세요
+
+print(ans)]]></code>
+    <input></input>
+    <output><![CDATA[4]]></output>
+    <solution><![CDATA[k = 10
+n = 10
+ans = 0
+
+for i in range(1, n+1):
+    a, b = k, i
+    while a != b:
+        if a > b:
+            a = a - b
+        else:
+            b = b - a
+
+    if a == 1:
+        ans += 1
+
+print(ans)]]></solution>
+  </problem>
+
+  <!-- 문제 3: while 블록 채우기 -->
+  <problem>
+    <description>다음 코드는 1부터 n까지의 수 중 k와 서로소인 수의 개수를 세는 코드입니다. while 반복문 내부 블럭을 완성하세요.</description>
+    <code><![CDATA[k = 10
+n = 10
+ans = 0
+
+for i in range(1, n+1):
+    a, b = k, i
+    while a != b:
+        # 여기를 채우세요
+
+    if a == 1:
+        ans += 1
+
+print(ans)]]></code>
+    <input></input>
+    <output><![CDATA[4]]></output>
+    <solution><![CDATA[k = 10
+n = 10
+ans = 0
+
+for i in range(1, n+1):
+    a, b = k, i
+    while a != b:
+        if a > b:
+            a = a - b
+        else:
+            b = b - a
+
+    if a == 1:
+        ans += 1
+
+print(ans)]]></solution>
+  </problem>
+
+  <!-- 문제 4: for 블록 채우기 -->
+  <problem>
+    <description>다음 코드는 1부터 n까지의 수 중 k와 서로소인 수의 개수를 세는 코드입니다. for 반복문 내부 블럭을 완성하세요.</description>
+    <code><![CDATA[k = 12
+n = 12
+ans = 0
+
+for i in range(1, n+1):
+    # 여기를 채우세요
+
+print(ans)]]></code>
+    <input></input>
+    <output><![CDATA[4]]></output>
+    <solution><![CDATA[k = 12
+n = 12
+ans = 0
+
+for i in range(1, n+1):
+    a, b = k, i
+    while a != b:
+        if a > b:
+            a = a - b
+        else:
+            b = b - a
+
+    if a == 1:
+        ans += 1
+
+print(ans)]]></solution>
+  </problem>
+
+  <!-- 문제 5: 나머지 연산 버전 빈칸 채우기 -->
+  <problem>
+    <description>다음 코드는 나머지 연산을 사용하는 효율적인 버전입니다. 빈칸을 채우세요.</description>
+    <code><![CDATA[k = 10
+n = 10
+ans = 0
+
+for i in range(1, n+1):
+    a, b = k, i
+    while ____:  # 여기를 채우세요
+        a, b = ____, ____  # 여기를 채우세요
+
+    if a == 1:
+        ans += 1
+
+print(ans)]]></code>
+    <input></input>
+    <output><![CDATA[4]]></output>
+    <solution><![CDATA[k = 10
+n = 10
+ans = 0
+
+for i in range(1, n+1):
+    a, b = k, i
+    while b != 0:
+        a, b = b, a % b
+
+    if a == 1:
+        ans += 1
+
+print(ans)]]></solution>
+  </problem>
+
+  <!-- 문제 6: 나머지 연산 버전 전체 작성 -->
+  <problem>
+    <description>1부터 n까지의 수 중 k와 서로소인 수의 개수를 세는 코드를 나머지 연산을 사용하여 작성하세요.</description>
+    <code><![CDATA[k = 12
+n = 12
+ans = 0
+
+for i in range(1, n+1):
+    # 여기를 채우세요
+
+print(ans)]]></code>
+    <input></input>
+    <output><![CDATA[4]]></output>
+    <solution><![CDATA[k = 12
+n = 12
+ans = 0
+
+for i in range(1, n+1):
+    a, b = k, i
+    while b != 0:
+        a, b = b, a % b
+
+    if a == 1:
+        ans += 1
+
+print(ans)]]></solution>
+  </problem>
+</problems>

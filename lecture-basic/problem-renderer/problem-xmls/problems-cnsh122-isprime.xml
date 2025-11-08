@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <!-- 문제 1: if문 조건부 채우기 -->
+  <problem>
+    <description>소수를 판별하는 함수입니다. if문의 조건부를 완성하세요.</description>
+    <code><![CDATA[def f(k):
+    for i in range(2, int(k**0.5)+1):
+        if ____:  # 여기를 채우세요
+            return False
+    return True]]></code>
+    <input><![CDATA[print(f(13))
+print(f(15))
+print(f(2))]]></input>
+    <output><![CDATA[True
+False
+True]]></output>
+    <solution><![CDATA[def f(k):
+    for i in range(2, int(k**0.5)+1):
+        if (k%i) == 0:  # 정답: (k%i) == 0 또는 k%i == 0
+            return False
+    return True]]></solution>
+  </problem>
+
+  <!-- 문제 2: 전체 함수 작성 -->
+  <problem>
+    <description>주어진 수 k가 소수인지 판별하는 함수를 작성하세요. 2부터 k의 제곱근까지 확인하여 나누어떨어지는 수가 없으면 True, 있으면 False를 반환합니다.</description>
+    <code><![CDATA[def f(k):
+    pass  # 여기를 채우세요]]></code>
+    <input><![CDATA[print(f(29))
+print(f(30))
+print(f(7))]]></input>
+    <output><![CDATA[True
+False
+True]]></output>
+    <solution><![CDATA[def f(k):
+    for i in range(2, int(k**0.5)+1):
+        if (k%i) == 0:
+            return False
+    return True]]></solution>
+  </problem>
+
+  <!-- 문제 3: 코드 목적 서술 -->
+  <problem>
+    <description>다음 코드의 목적을 서술하세요.</description>
+    <code><![CDATA[def f(k):
+    for i in range(2, int(k**0.5)+1):
+        if (k%i) == 0:
+            return False
+    return True]]></code>
+    <input></input>
+    <output></output>
+    <solution><![CDATA[# 코드의 목적:
+# k가 소수인지 판별하는 함수
+# 2부터 k의 제곱근까지 나누어떨어지는 수가 있으면 False, 없으면 True 반환]]></solution>
+  </problem>
+
+  <!-- 문제 4: 상태 공간 배제 방식으로 개선 -->
+  <problem>
+    <description>다음 코드는 비효율적인 소수 판별 함수입니다. 상태 공간 배제를 포함하여 더 효율적인 코드를 작성하고, 어떤 변경을 하였는지 서술하세요.</description>
+    <code><![CDATA[def f(k):
+    cnt = 0
+    for i in range(2, k):
+        if (k%i) == 0:
+            cnt += 1
+
+    if cnt == 0:
+        return True
+    else:
+        return False
+
+# 개선 버전
+def f(k):
+    pass  # 여기를 채우세요]]></code>
+    <input><![CDATA[print(f(17))
+print(f(18))]]></input>
+    <output><![CDATA[True
+False]]></output>
+    <solution><![CDATA[def f(k):
+    for i in range(2, int(k**0.5)+1):
+        if (k%i) == 0:
+            return False
+    return True
+
+# 변경 사항:
+# 1. range 개선: range(2, k) → range(2, int(k**0.5)+1)
+#    - 2부터 √k까지만 확인 (약수의 대칭성 이용)
+#    - 시간복잡도: O(k) → O(√k)
+# 2. 조기 종료: cnt 변수 제거, 약수 발견 즉시 return False
+#    - 불필요한 반복 제거
+#    - 메모리 효율성 향상]]></solution>
+  </problem>
+</problems>
