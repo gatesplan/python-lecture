@@ -1,0 +1,3645 @@
+[
+  {
+    "id": "g1-001",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "nums = [4, 7, 2, 9, 5]\nbox = []\nfor n in nums:\n    if n % 2 == 0:\n        box.append(n)\n    else:\n        box.insert(0, n)\nprint(box)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "[5, 9, 7, 4, 2]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "box는 빈 리스트에서 시작한다. append(n)은 맨 뒤, insert(0, n)은 맨 앞에 넣는다."
+          },
+          {
+            "type": "text",
+            "content": "4(짝)->뒤:[4], 7(홀)->앞:[7,4], 2(짝)->뒤:[7,4,2], 9(홀)->앞:[9,7,4,2], 5(홀)->앞:[5,9,7,4,2]"
+          },
+          {
+            "type": "text",
+            "content": "정답: [5, 9, 7, 4, 2]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-002",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드를 실행할 때, 두 번째 'a'를 처리한 직후 count의 값을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "text = \"banana\"\ncount = {}\nfor ch in text:\n    count[ch] = count.get(ch, 0) + 1"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "{'b': 1, 'a': 2, 'n': 1}"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "count.get(ch, 0)은 키가 없으면 0을 돌려주므로 처음 등장한 글자는 1이 된다."
+          },
+          {
+            "type": "text",
+            "content": "b->{b:1}, a->{b:1,a:1}, n->{b:1,a:1,n:1}, 두 번째 a->{b:1,a:2,n:1}"
+          },
+          {
+            "type": "text",
+            "content": "정답: {'b': 1, 'a': 2, 'n': 1}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-003",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 함수가 하는 일을 한 문장으로 설명하시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def mystery(data):\n    out = []\n    for x in data:\n        if x not in out:\n            out.append(x)\n    return out"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "리스트에서 중복을 제거하고, 처음 등장한 순서를 유지해 고유한 값만 모아 반환한다."
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "out에 없는 값만 append하므로 이미 담긴 값은 다시 추가되지 않는다."
+          },
+          {
+            "type": "text",
+            "content": "입력 순서대로 검사하므로 처음 나온 순서가 그대로 유지된다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 중복을 제거하고 처음 등장 순서를 유지해 고유한 값만 반환한다."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-004",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "msg = \"vwxyz\"\nshift = 4\nout = \"\"\nfor ch in msg:\n    idx = (ord(ch) - ord('a') + shift) % 26\n    out += chr(idx + ord('a'))\nprint(out)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "zabcd"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "ord(ch) - ord('a')로 알파벳을 0~25 번호로 바꾼다."
+          },
+          {
+            "type": "text",
+            "content": "shift를 더한 뒤 % 26으로 z를 넘으면 a로 되돌아온다(카이사르)."
+          },
+          {
+            "type": "text",
+            "content": "v->z, w->a, x->b, y->c, z->d"
+          },
+          {
+            "type": "text",
+            "content": "정답: zabcd"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-005",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드에서 while문을 두 번 반복한 직후 digits와 n의 값을 각각 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "n = 45\ndigits = []\nwhile n > 0:\n    digits.append(n % 3)\n    n //= 3\nprint(digits)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "digits = [0, 0], n = 5"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "append(n % 3)으로 3으로 나눈 나머지를 담고, n //= 3으로 몫만 남긴다(3진법 변환)."
+          },
+          {
+            "type": "text",
+            "content": "1회: 45 % 3 = 0 -> digits=[0], n=15"
+          },
+          {
+            "type": "text",
+            "content": "2회: 15 % 3 = 0 -> digits=[0,0], n=5"
+          },
+          {
+            "type": "text",
+            "content": "정답: digits = [0, 0], n = 5"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-006",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "nums = [10, 7, 12, 13, 9]\nprimes = []\nfor n in nums:\n    cnt = 0\n    for d in range(1, n + 1):\n        if n % d == 0:\n            cnt += 1\n    if [[]]:\n        primes.append(n)\nprint(primes)"
+      },
+      {
+        "type": "output-sample",
+        "content": "[7, 13]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "cnt == 2"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "안쪽 for는 1부터 n까지 나누어떨어지는 개수(cnt) = 약수의 개수를 센다."
+          },
+          {
+            "type": "text",
+            "content": "약수가 정확히 2개(1과 자기 자신)이면 소수다."
+          },
+          {
+            "type": "text",
+            "content": "약수 개수: 10->4, 7->2, 12->6, 13->2, 9->3 이므로 소수는 7, 13."
+          },
+          {
+            "type": "text",
+            "content": "정답: cnt == 2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-007",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "n = 6358\ntotal = 0\nwhile n > 0:\n    total += n % 10\n    n //= 10\nprint(total)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "22"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "n % 10은 일의 자리 숫자, n //= 10은 자리를 하나 줄인다(자릿수 합)."
+          },
+          {
+            "type": "text",
+            "content": "8 -> total 8, 5 -> 13, 3 -> 16, 6 -> 22"
+          },
+          {
+            "type": "text",
+            "content": "정답: 22"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-008",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 함수가 하는 일을 한 문장으로 설명하시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def check(s):\n    i = 0\n    j = len(s) - 1\n    while i < j:\n        if s[i] != s[j]:\n            return False\n        i += 1\n        j -= 1\n    return True"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "문자열 s가 회문(앞에서 읽으나 뒤에서 읽으나 같은 문자열)인지 양 끝에서 안쪽으로 비교하며 판별한다."
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "i는 앞에서, j는 뒤에서 출발해 안쪽으로 좁혀가며 양 끝 문자를 비교한다."
+          },
+          {
+            "type": "text",
+            "content": "하나라도 다르면 False, 끝까지 같으면 True를 반환한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 문자열이 회문인지 판별한다."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-009",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "a = 48\nb = 36\nwhile b > 0:\n    a, b = b, a % [[]]\nprint(a)"
+      },
+      {
+        "type": "output-sample",
+        "content": "12"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "b"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "a, b = b, a % b 는 유클리드 호제법으로, 큰 수를 작은 수로 나눈 나머지로 교체한다(최대공약수)."
+          },
+          {
+            "type": "text",
+            "content": "(48,36) -> (36,12) -> (12,0). b=0이 되어 멈추고 a=12를 출력."
+          },
+          {
+            "type": "text",
+            "content": "정답: b"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-010",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "matrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9],\n]\ns = 0\nfor i in range(3):\n    s += matrix[i][i]\nprint(s)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "15"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "matrix[i][i]는 행과 열 인덱스가 같은 주대각선 원소다."
+          },
+          {
+            "type": "text",
+            "content": "matrix[0][0]=1, matrix[1][1]=5, matrix[2][2]=9 -> 1 + 5 + 9 = 15"
+          },
+          {
+            "type": "text",
+            "content": "정답: 15"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-011",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드에서 i가 2일 때(i=0,1,2)까지 처리한 직후 sums의 값을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "data = [2, 5, 1, 3, 6]\nwindow = 2\nsums = []\nfor i in range(len(data) - window + 1):\n    sums.append(data[i] + data[i + 1])\nprint(sums)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "[7, 6, 4]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "range(len(data) - window + 1) = range(4)이므로 i=0,1,2,3."
+          },
+          {
+            "type": "text",
+            "content": "각 i에서 data[i] + data[i+1]을 담는다(슬라이딩 윈도우): i0=2+5=7, i1=5+1=6, i2=1+3=4"
+          },
+          {
+            "type": "text",
+            "content": "i=2까지 처리한 직후 sums=[7, 6, 4]"
+          },
+          {
+            "type": "text",
+            "content": "정답: [7, 6, 4]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-012",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "total_bytes = 5242880\nunit = 0\nwhile total_bytes >= 1024:\n    total_bytes //= 1024\n    unit += 1\nprint(total_bytes, unit)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "5 2"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "1024로 나눠지는 동안 //= 1024를 반복하며 단위를 한 칸씩 올린다(byte->KB->MB)."
+          },
+          {
+            "type": "text",
+            "content": "5242880 -> 5120 (unit 1) -> 5 (unit 2). 5는 1024 미만이라 멈춤."
+          },
+          {
+            "type": "text",
+            "content": "unit 2는 두 번 올라간 것 = 5 MB."
+          },
+          {
+            "type": "text",
+            "content": "정답: 5 2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-013",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "words = [\"sky\", \"sea\", \"tree\", \"sun\", \"moon\"]\ngroups = {}\nfor w in words:\n    key = len(w)\n    if key not in groups:\n        groups[key] = []\n    groups[key].[[]](w)\nprint(groups)"
+      },
+      {
+        "type": "output-sample",
+        "content": "{3: ['sky', 'sea', 'sun'], 4: ['tree', 'moon']}"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "append"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "처음 보는 길이(key)면 빈 리스트를 만들고, 그 리스트에 단어를 추가한다(길이별 분류)."
+          },
+          {
+            "type": "text",
+            "content": "리스트 끝에 원소를 넣는 메서드는 append."
+          },
+          {
+            "type": "text",
+            "content": "정답: append"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-014",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드가 출력하는 winner가 무엇을 의미하는지 설명하고, 출력값을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "votes = [\"A\", \"B\", \"A\", \"C\", \"A\", \"B\"]\nresult = {}\nfor v in votes:\n    result[v] = result.get(v, 0) + 1\nwinner = \"\"\nbest = 0\nfor name, cnt in result.items():\n    if cnt > best:\n        best = cnt\n        winner = name\nprint(winner)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "투표 목록에서 가장 많이 등장한(최다 득표) 항목. 출력값은 A."
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "result.get(v, 0) + 1로 항목별 등장 횟수를 센다: A:3, B:2, C:1"
+          },
+          {
+            "type": "text",
+            "content": "cnt가 best보다 크면 갱신하며 최댓값 항목을 winner에 담는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 최다 득표 항목을 찾아 출력한다. 여기서는 A."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-015",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "fib = [1, 1]\nfor i in range(2, 7):\n    fib.append(fib[i - 1] + fib[[[]]])\nprint(fib)"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 1, 2, 3, 5, 8, 13]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "i - 2"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "피보나치 수열은 바로 앞 두 항의 합이다: fib[i-1] + fib[i-2]."
+          },
+          {
+            "type": "text",
+            "content": "왼쪽 항이 i-1이므로 빈칸은 i-2."
+          },
+          {
+            "type": "text",
+            "content": "정답: i - 2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-016",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "data = [(\"A\", 90), (\"B\", 80), (\"A\", 70), (\"C\", 60), (\"B\", 100)]\ngroups = {}\nfor name, score in data:\n    if name not in groups:\n        groups[name] = []\n    groups[name].append(score)\nresult = {}\nfor name, scores in groups.items():\n    result[name] = sum(scores) // len(scores)\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "{'A': 80, 'B': 90, 'C': 60}"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "처음 보는 이름이면 빈 리스트를 만들고(if name not in groups), 그 리스트에 점수를 추가한다: A->[90,70], B->[80,100], C->[60]"
+          },
+          {
+            "type": "text",
+            "content": "각 이름의 점수 합을 개수로 정수 나눗셈(//)해 평균을 구한다: A->80, B->90, C->60"
+          },
+          {
+            "type": "text",
+            "content": "정답: {'A': 80, 'B': 90, 'C': 60}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-017",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드에서 세 번째 글자까지 처리한 직후 plain의 값을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "cipher = \"khoor\"\nshift = 3\nplain = \"\"\nfor ch in cipher:\n    plain += chr((ord(ch) - ord('a') - shift) % 26 + ord('a'))\nprint(plain)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "hel"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "카이사르 복호화: shift만큼 빼고 % 26으로 'a' 앞으로 넘어가면 'z'쪽으로 되돌린다."
+          },
+          {
+            "type": "text",
+            "content": "k->h, h->e, o->l 이므로 세 글자 처리 후 plain='hel' (전체는 'hello')."
+          },
+          {
+            "type": "text",
+            "content": "정답: hel"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-018",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "text = \"ABCDEF\"\ncols = 3\nrows = len(text) // cols\nresult = \"\"\nfor col in range(cols):\n    for row in range(rows):\n        result += text[row * cols + [[]]]\nprint(result)"
+      },
+      {
+        "type": "output-sample",
+        "content": "ADBECF"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "col"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "text를 cols=3 너비 격자로 보면 0행 ABC, 1행 DEF. 이를 열 우선으로 읽는 전치다."
+          },
+          {
+            "type": "text",
+            "content": "열 col, 행 row의 원소 위치는 row * cols + col."
+          },
+          {
+            "type": "text",
+            "content": "정답: col"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-019",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 함수가 하는 일을 한 문장으로 설명하시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f(matrix):\n    n = len(matrix)\n    for i in range(n):\n        for j in range(i + 1, n):\n            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]\n    return matrix"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "정사각 2차원 리스트의 행과 열을 맞바꾼다(주대각선 기준으로 위/아래를 교환 = 전치행렬)."
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "j가 i+1부터 시작하므로 주대각선 위쪽 원소만 골라 대칭 위치(matrix[j][i])와 맞바꾼다."
+          },
+          {
+            "type": "text",
+            "content": "결과적으로 행과 열이 뒤바뀐 전치행렬이 된다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 정사각 행렬을 전치한다(행과 열 교환)."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-020",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "total = 0\nfor i in range(1, 6):\n    for j in range(1, 6):\n        if j == i:\n            continue\n        if i * j > 12:\n            break\n        total += i * j\nprint(total)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "100"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "j == i면 건너뛰고(continue), i*j가 12를 넘으면 안쪽 반복을 끊는다(break)."
+          },
+          {
+            "type": "text",
+            "content": "i별 합: i=1->14, i=2->26, i=3->21, i=4->24, i=5->15"
+          },
+          {
+            "type": "text",
+            "content": "누적: 14+26+21+24+15 = 100"
+          },
+          {
+            "type": "text",
+            "content": "정답: 100"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-021",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a\na, b = 12, 18\nlcm = a * b // [[]]\nprint(lcm)"
+      },
+      {
+        "type": "output-sample",
+        "content": "36"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "gcd(a, b)"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "두 수의 최소공배수(LCM)는 (a * b) // 최대공약수(GCD) 이다."
+          },
+          {
+            "type": "text",
+            "content": "gcd(12, 18)=6 이므로 12 * 18 // 6 = 36."
+          },
+          {
+            "type": "text",
+            "content": "정답: gcd(a, b)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-022",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "matrix = [[0] * 3] * 3\nmatrix[0][0] = 1\nprint(matrix)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "[[1, 0, 0], [1, 0, 0], [1, 0, 0]]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "[[0]*3]*3은 같은 리스트 1개를 3번 '참조'하는 함정이다(세 행이 같은 객체)."
+          },
+          {
+            "type": "text",
+            "content": "matrix[0][0]=1은 그 공유 리스트를 바꾸므로 모든 행이 함께 바뀐다."
+          },
+          {
+            "type": "text",
+            "content": "정답: [[1, 0, 0], [1, 0, 0], [1, 0, 0]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-023",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "n = 1221\noriginal = n\nrev = 0\nwhile n > 0:\n    rev = rev * 10 + n % 10\n    n //= 10\nprint(rev == original)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "True"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "rev = rev*10 + (일의 자리)로 숫자를 뒤집는다: 1221 -> 1221."
+          },
+          {
+            "type": "text",
+            "content": "뒤집은 값과 원래 값이 같으므로 회문수이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: True"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-024",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "scores = {\"kim\": 85, \"lee\": 92, \"park\": 78, \"choi\": 92}\nbest = None\nfor name in scores:\n    if best is None or scores[name] > scores[[[]]]:\n        best = name\nprint(best)"
+      },
+      {
+        "type": "output-sample",
+        "content": "lee"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "best"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "현재까지 최고인 best의 점수와 비교해 더 높으면 best를 갱신한다."
+          },
+          {
+            "type": "text",
+            "content": "비교 대상은 scores[best]. 동점은 갱신하지 않으므로 먼저 나온 lee가 남는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: best"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-025",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 함수가 하는 일을 한 문장으로 설명하시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f(d):\n    result = {}\n    for key, value in d.items():\n        result[value] = key\n    return result"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "딕셔너리의 키와 값을 서로 뒤바꾼 새 딕셔너리를 반환한다(값이 중복되면 나중 것이 덮어씀)."
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "각 (key, value)에 대해 result[value] = key로 넣으므로 값이 새 키가 된다."
+          },
+          {
+            "type": "text",
+            "content": "같은 value가 둘 이상이면 마지막 것만 남는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 키와 값을 뒤바꾼 딕셔너리를 반환한다."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-026",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "bits = \"1011\"\nvalue = 0\nfor ch in bits:\n    value = value * 2 + int(ch)\nprint(value)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "11"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "왼쪽 자리부터 value = value*2 + 자릿값으로 2진수를 10진수로 바꾼다."
+          },
+          {
+            "type": "text",
+            "content": "1 -> 2+0=2 -> 4+1=5 -> 10+1=11"
+          },
+          {
+            "type": "text",
+            "content": "정답: 11"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-027",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드에서 'avocado'까지 처리한 직후 result의 값을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "words = [\"apple\", \"banana\", \"avocado\", \"cherry\", \"blueberry\"]\nresult = {}\nfor w in words:\n    first = w[0]\n    result[first] = result.get(first, 0) + 1\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "{'a': 2, 'b': 1}"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "각 단어의 첫 글자(w[0])별 개수를 센다."
+          },
+          {
+            "type": "text",
+            "content": "apple->{a:1}, banana->{a:1,b:1}, avocado->{a:2,b:1}"
+          },
+          {
+            "type": "text",
+            "content": "정답: {'a': 2, 'b': 1}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-028",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "mb = 2\nbits = mb * 1024 * 1024 * [[]]\nprint(bits)"
+      },
+      {
+        "type": "output-sample",
+        "content": "16777216"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "8"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "2 MB = 2 * 1024 KB = 2 * 1024 * 1024 byte = 2097152 byte."
+          },
+          {
+            "type": "text",
+            "content": "1 byte = 8 bit이므로 byte에 8을 곱해 bit로 바꾼다: 2097152 * 8 = 16777216."
+          },
+          {
+            "type": "text",
+            "content": "정답: 8"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-029",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "grid = [\n    [1, 2, 3],\n    [4, 5, 6],\n]\ncol_sums = [0] * 3\nfor row in grid:\n    for j in range(3):\n        col_sums[j] += row[j]\nprint(col_sums)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "[5, 7, 9]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "각 행을 돌며 같은 열 인덱스끼리 col_sums에 누적한다(열 합)."
+          },
+          {
+            "type": "text",
+            "content": "열0:1+4=5, 열1:2+5=7, 열2:3+6=9"
+          },
+          {
+            "type": "text",
+            "content": "정답: [5, 7, 9]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-030",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 함수가 무엇을 판별하는지 설명하시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f(n):\n    total = 0\n    for i in range(1, n):\n        if n % i == 0:\n            total += i\n    return total == n"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "n이 완전수인지 판별한다(자기 자신을 뺀 모든 약수의 합이 n과 같으면 True). 예: 6=1+2+3."
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "1부터 n-1까지 중 n의 약수를 모두 더한다(자기 자신 제외)."
+          },
+          {
+            "type": "text",
+            "content": "그 합이 n과 같으면 완전수다. 예: 6의 약수 합 1+2+3=6 -> True."
+          },
+          {
+            "type": "text",
+            "content": "정답: n이 완전수인지 판별한다."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-031",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "price = 1234.5\nprint(f\"{price:.[[]]f}\")"
+      },
+      {
+        "type": "output-sample",
+        "content": "1234.50"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "2"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": ":.Nf 는 소수점 아래 N자리까지 반올림해 표시한다."
+          },
+          {
+            "type": "text",
+            "content": ".2f 이면 1234.5 -> 1234.50"
+          },
+          {
+            "type": "text",
+            "content": "정답: 2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-032",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "total = 10\ncount = 3\nprint(f\"{total / count:.2f}\")"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "3.33"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "10 / 3 = 3.3333... 이고 :.2f로 소수점 둘째 자리까지 반올림한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 3.33"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-033",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오. (수량이 오른쪽으로 정렬되어 칸이 맞춰진다)"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "items = [(\"apple\", 3), (\"kiwi\", 15)]\nfor name, qty in items:\n    print(f\"{name:<8}{qty:[[]]4}\")"
+      },
+      {
+        "type": "output-sample",
+        "content": "apple      3\nkiwi      15"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": ">"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": ":<8 은 왼쪽 정렬(폭 8), :>4 는 오른쪽 정렬(폭 4)이다."
+          },
+          {
+            "type": "text",
+            "content": "수량을 오른쪽 정렬해야 자릿수가 칸에 맞춰져 표처럼 정렬된다."
+          },
+          {
+            "type": "text",
+            "content": "정답: >"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-034",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "for n in [1, 22, 333]:\n    print(f\"[{n:>[[]]}]\")"
+      },
+      {
+        "type": "output-sample",
+        "content": "[    1]\n[   22]\n[  333]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "5"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": ":>N 은 폭 N 칸에 오른쪽 정렬하고 남는 칸은 공백으로 채운다."
+          },
+          {
+            "type": "text",
+            "content": "1 -> '    1', 22 -> '   22', 333 -> '  333' (모두 폭 5)"
+          },
+          {
+            "type": "text",
+            "content": "정답: 5"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-035",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "title = \"MENU\"\nprint(f\"|{title:[[]]10}|\")"
+      },
+      {
+        "type": "output-sample",
+        "content": "|   MENU   |"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "^"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": ":^10 은 폭 10 칸에 가운데 정렬한다."
+          },
+          {
+            "type": "text",
+            "content": "MENU(4글자)를 10칸 가운데 두면 양쪽에 공백 3칸씩 붙는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: ^"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-036",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "for word in [\"a\", \"bb\", \"ccc\"]:\n    print(f\"{word:[[]]5}|\")"
+      },
+      {
+        "type": "output-sample",
+        "content": "a    |\nbb   |\nccc  |"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "<"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": ":<5 는 폭 5 칸에 왼쪽 정렬하고 오른쪽을 공백으로 채운다."
+          },
+          {
+            "type": "text",
+            "content": "a -> 'a    ', bb -> 'bb   ', ccc -> 'ccc  '"
+          },
+          {
+            "type": "text",
+            "content": "정답: <"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-037",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오. (가격을 소수점 2자리로, 폭 7에 오른쪽 정렬)"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "data = [(\"Rice\", 2.5), (\"Oil\", 12.0)]\nfor name, price in data:\n    print(f\"{name:<6}{price:[[]]}\")"
+      },
+      {
+        "type": "output-sample",
+        "content": "Rice     2.50\nOil     12.00"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": ">7.2f"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "정렬/폭/소수점을 함께 지정한다: >(오른쪽) 7(폭) .2f(소수 2자리)."
+          },
+          {
+            "type": "text",
+            "content": "2.5 -> '   2.50', 12.0 -> '  12.00' (폭 7, 소수 2자리)"
+          },
+          {
+            "type": "text",
+            "content": "정답: >7.2f"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-038",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "score = 91.5\nprint(f\"평균: {score:.1f}점\")"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "평균: 91.5점"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": ":.1f 는 소수점 첫째 자리까지 표시한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 평균: 91.5점"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-039",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "data = [5, 8, 3, 9, 2]\ntarget = 9\nfound = -1\nfor i in range(len(data)):\n    if data[i] == target:\n        found = i\n        break\nprint(found)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "3"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "앞에서부터 차례로 target과 비교하다 처음 일치하면 그 인덱스를 found에 넣고 멈춘다(선형 탐색)."
+          },
+          {
+            "type": "text",
+            "content": "9는 인덱스 3에 있다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 3"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-040",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 함수가 하는 일을 한 문장으로 설명하시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f(data, x):\n    for i in range(len(data)):\n        if data[i] == x:\n            return i\n    return -1"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "리스트에서 x를 앞에서부터 찾아 처음 나오는 위치(인덱스)를 반환하고, 없으면 -1을 반환한다(선형 탐색)."
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "0번 인덱스부터 순서대로 x와 비교한다."
+          },
+          {
+            "type": "text",
+            "content": "찾으면 즉시 그 인덱스를 반환, 끝까지 없으면 -1."
+          },
+          {
+            "type": "text",
+            "content": "정답: 선형 탐색으로 x의 첫 위치를 반환(없으면 -1)."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-041",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드에서 while 루프가 처음 실행될 때 mid와 data[mid]의 값을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "data = [1, 3, 5, 7, 9, 11]\ntarget = 7\nlo = 0\nhi = len(data) - 1\nwhile lo <= hi:\n    mid = (lo + hi) // 2\n    if data[mid] == target:\n        print(mid)\n        break\n    elif data[mid] < target:\n        lo = mid + 1\n    else:\n        hi = mid - 1"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "mid = 2, data[mid] = 5"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "이진 탐색: lo=0, hi=5에서 mid=(0+5)//2=2."
+          },
+          {
+            "type": "text",
+            "content": "data[2]=5. (5<7이므로 다음엔 lo=3으로 좁혀짐)"
+          },
+          {
+            "type": "text",
+            "content": "정답: mid = 2, data[mid] = 5"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-042",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "data = [2, 4, 6, 8, 10, 12]\ntarget = 10\nlo, hi = 0, len(data) - 1\nwhile lo <= hi:\n    mid = (lo + hi) // 2\n    if data[mid] == target:\n        break\n    elif data[mid] < target:\n        lo = [[]]\n    else:\n        hi = mid - 1\nprint(mid)"
+      },
+      {
+        "type": "output-sample",
+        "content": "4"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "mid + 1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "이진 탐색에서 중간값이 target보다 작으면 오른쪽 절반만 남긴다 -> lo를 mid 다음으로."
+          },
+          {
+            "type": "text",
+            "content": "lo = mid + 1 (mid=2->lo=3, 이후 mid=4에서 data[4]=10 일치)"
+          },
+          {
+            "type": "text",
+            "content": "정답: mid + 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-043",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "for i in range(1, 5):\n    print(\"*\" * [[]])"
+      },
+      {
+        "type": "output-sample",
+        "content": "*\n**\n***\n****"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "i"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "문자열 * 정수 는 그 문자열을 정수만큼 반복한다."
+          },
+          {
+            "type": "text",
+            "content": "줄마다 i개의 별을 찍어야 하므로 '*' * i."
+          },
+          {
+            "type": "text",
+            "content": "정답: i"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-044",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오. (오른쪽 정렬 삼각형)"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "n = 4\nfor i in range(1, n + 1):\n    print(\" \" * ([[]]) + \"*\" * i)"
+      },
+      {
+        "type": "output-sample",
+        "content": "   *\n  **\n ***\n****"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "n - i"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "별 i개 앞에 공백을 넣어 오른쪽으로 밀어 정렬한다."
+          },
+          {
+            "type": "text",
+            "content": "i번째 줄의 공백 수는 n - i (i=1->3개, i=4->0개)."
+          },
+          {
+            "type": "text",
+            "content": "정답: n - i"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-045",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "count = 0\nfor i in range(1, 5):\n    for j in range(i):\n        count += 1\nprint(count)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "10"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "i번째 바깥 반복에서 안쪽 반복이 i번 돌며 count를 1씩 늘린다."
+          },
+          {
+            "type": "text",
+            "content": "1 + 2 + 3 + 4 = 10"
+          },
+          {
+            "type": "text",
+            "content": "정답: 10"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-046",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "n = 13\nresult = \"\"\nwhile n > 0:\n    result = str(n % 2) + result\n    n //= 2\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "1101"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "n % 2(나머지)를 앞에 붙이고 n //= 2로 줄이면 2진수가 만들어진다."
+          },
+          {
+            "type": "text",
+            "content": "13 -> 1101"
+          },
+          {
+            "type": "text",
+            "content": "정답: 1101"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-047",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "digits = [2, 0, 3]\nvalue = 0\nfor d in digits:\n    value = value * 5 + d\nprint(value)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "53"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "왼쪽 자리부터 value = value*5 + 자릿값 으로 5진수를 10진수로 바꾼다."
+          },
+          {
+            "type": "text",
+            "content": "2 -> 10+0=10 -> 50+3=53"
+          },
+          {
+            "type": "text",
+            "content": "정답: 53"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-048",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "n = 5829\nbiggest = 0\nwhile n > 0:\n    digit = n % 10\n    if digit > biggest:\n        biggest = digit\n    n //= 10\nprint(biggest)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "9"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "한 자리씩(n % 10) 떼어내며 가장 큰 숫자를 biggest에 갱신한다."
+          },
+          {
+            "type": "text",
+            "content": "자릿수 9, 2, 8, 5 중 최대는 9."
+          },
+          {
+            "type": "text",
+            "content": "정답: 9"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-049",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드에서 while문을 두 번 반복한 직후 count와 n의 값을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "n = 4070\ncount = 0\nwhile n > 0:\n    count += 1\n    n //= 10\nprint(count)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "count = 2, n = 40"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "한 번 돌 때마다 count를 1 늘리고 n을 //10으로 줄인다(자릿수 세기)."
+          },
+          {
+            "type": "text",
+            "content": "1회: count=1, n=407 / 2회: count=2, n=40"
+          },
+          {
+            "type": "text",
+            "content": "정답: count = 2, n = 40"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-050",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "result = 1\nfor i in range(1, 6):\n    result *= i\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "120"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "1부터 5까지 차례로 곱한다(팩토리얼 5!)."
+          },
+          {
+            "type": "text",
+            "content": "1*2*3*4*5 = 120"
+          },
+          {
+            "type": "text",
+            "content": "정답: 120"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-051",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "total = 0\nn = 0\nwhile total < 20:\n    n += 1\n    total += [[]]\nprint(n, total)"
+      },
+      {
+        "type": "output-sample",
+        "content": "6 21"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "n"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "1, 2, 3, ... 을 차례로 더하다가 합이 20 이상이 되면 멈춘다."
+          },
+          {
+            "type": "text",
+            "content": "각 회차에 더하는 값은 현재 n. 1+2+3+4+5+6=21에서 멈춤."
+          },
+          {
+            "type": "text",
+            "content": "정답: n"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-052",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 함수가 하는 일을 한 문장으로 설명하시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f(nums):\n    best = nums[0]\n    for x in nums:\n        if x > best:\n            best = x\n    return best"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "리스트에서 가장 큰 값을 찾아 반환한다(내장 max와 동일)."
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "첫 원소를 best로 두고, 더 큰 값을 만날 때마다 best를 갱신한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 리스트의 최댓값을 반환한다."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-053",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "n = 12\ntotal = 0\nfor i in range(1, n + 1):\n    if n % i == 0:\n        total += i\nprint(total)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "28"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "1부터 n까지 중 n을 나누어떨어지게 하는 수(약수)를 모두 더한다."
+          },
+          {
+            "type": "text",
+            "content": "12의 약수: 1+2+3+4+6+12 = 28"
+          },
+          {
+            "type": "text",
+            "content": "정답: 28"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-054",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "count = 0\nfor i in range(1, 51):\n    if i % 3 == 0 or i % [[]] == 0:\n        count += 1\nprint(count)"
+      },
+      {
+        "type": "output-sample",
+        "content": "23"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "5"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "1~50 중 3의 배수 또는 (빈칸)의 배수의 개수를 센다."
+          },
+          {
+            "type": "text",
+            "content": "출력 23 = 3의 배수(16) + 5의 배수(10) - 15의 배수(3). 따라서 빈칸은 5."
+          },
+          {
+            "type": "text",
+            "content": "정답: 5"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-055",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "grid = [[1, 2], [3, 4], [5, 6]]\nresult = []\nfor row in grid:\n    result.append(sum(row))\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "[3, 7, 11]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "각 행(row)의 합을 구해 result에 차례로 담는다."
+          },
+          {
+            "type": "text",
+            "content": "1+2=3, 3+4=7, 5+6=11"
+          },
+          {
+            "type": "text",
+            "content": "정답: [3, 7, 11]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-056",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드에서 i=2의 행이 table에 추가된 직후 table의 값을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "n = 3\ntable = []\nfor i in range(1, n + 1):\n    row = []\n    for j in range(1, n + 1):\n        row.append(i * j)\n    table.append(row)\nprint(table)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "[[1, 2, 3], [2, 4, 6]]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "각 i마다 i*1, i*2, i*3 행을 만들어 table에 추가한다(구구단 표)."
+          },
+          {
+            "type": "text",
+            "content": "i=1행 [1,2,3], i=2행 [2,4,6] 까지 추가된 상태."
+          },
+          {
+            "type": "text",
+            "content": "정답: [[1, 2, 3], [2, 4, 6]]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-057",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "grid = [[1, 2, 3], [4, 5, 6]]\ntarget = 5\npos = None\nfor i in range(len(grid)):\n    for j in range(len(grid[i])):\n        if grid[i][j] == target:\n            pos = ([[]], j)\nprint(pos)"
+      },
+      {
+        "type": "output-sample",
+        "content": "(1, 1)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "i"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "2차원 리스트를 행(i), 열(j)로 훑어 target의 위치 (행, 열)을 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "5는 grid[1][1]에 있으므로 pos=(i, j)=(1, 1). 빈칸은 행 인덱스 i."
+          },
+          {
+            "type": "text",
+            "content": "정답: i"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-058",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "text = \"ABCDEFGH\"\neven = \"\"\nodd = \"\"\nfor i in range(len(text)):\n    if i % 2 == 0:\n        even += text[i]\n    else:\n        odd += text[i]\nprint(even + odd)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ACEGBDFH"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "짝수 인덱스 글자는 even에, 홀수 인덱스 글자는 odd에 모은다(자리 섞기 전치)."
+          },
+          {
+            "type": "text",
+            "content": "even=ACEG, odd=BDFH -> 이어붙이면 ACEGBDFH"
+          },
+          {
+            "type": "text",
+            "content": "정답: ACEGBDFH"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-059",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "text = \"abc\"\nkey = 2\nresult = \"\"\nfor ch in text:\n    result += chr((ord(ch) - ord('a') + key) % [[]] + ord('a'))\nprint(result)"
+      },
+      {
+        "type": "output-sample",
+        "content": "cde"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "26"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "알파벳은 26글자이므로 % 26으로 z를 넘으면 a로 되돌린다(카이사르)."
+          },
+          {
+            "type": "text",
+            "content": "a->c, b->d, c->e"
+          },
+          {
+            "type": "text",
+            "content": "정답: 26"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-060",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 함수가 하는 일을 한 문장으로 설명하시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f(names, scores):\n    result = {}\n    for i in range(len(names)):\n        result[names[i]] = scores[i]\n    return result"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "두 리스트(이름, 점수)를 같은 인덱스끼리 짝지어 {이름: 점수} 딕셔너리로 만든다."
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "같은 위치 i의 names[i]를 키, scores[i]를 값으로 넣는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 두 리스트를 인덱스로 짝지어 딕셔너리로 결합한다."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-061",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 카이사르(shift=3)를 적용한 결과를 쓰시오."
+      },
+      {
+        "type": "text",
+        "content": "평문: HELLO"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "카이사르: 각 알파벳을 뒤로 정해진 칸수만큼 민다. Z를 넘으면 A로 되돌아온다(A~Z 26글자 순환)."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "KHOOR"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "카이사르(shift=3): HELLO -> KHOOR"
+          },
+          {
+            "type": "text",
+            "content": "정답: KHOOR"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-062",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 카이사르(shift=5)를 적용한 결과를 쓰시오."
+      },
+      {
+        "type": "text",
+        "content": "평문: PYTHON"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "카이사르: 각 알파벳을 뒤로 정해진 칸수만큼 민다. Z를 넘으면 A로 되돌아온다(A~Z 26글자 순환)."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "UDYMTS"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "카이사르(shift=5): PYTHON -> UDYMTS"
+          },
+          {
+            "type": "text",
+            "content": "정답: UDYMTS"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-063",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 전치(3열)를 적용한 결과를 쓰시오."
+      },
+      {
+        "type": "text",
+        "content": "평문: ABCDEF"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "전치(열 N개): 평문을 왼쪽->오른쪽, 위->아래 순서로 N열 격자에 채운 뒤, 1열부터 각 열을 위->아래로 읽어 이어 붙인다."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ADBECF"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "전치(3열): ABCDEF -> ADBECF"
+          },
+          {
+            "type": "text",
+            "content": "정답: ADBECF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-064",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 전치(4열)를 적용한 결과를 쓰시오."
+      },
+      {
+        "type": "text",
+        "content": "평문: DATABASE"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "전치(열 N개): 평문을 왼쪽->오른쪽, 위->아래 순서로 N열 격자에 채운 뒤, 1열부터 각 열을 위->아래로 읽어 이어 붙인다."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "DBAATSAE"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "전치(4열): DATABASE -> DBAATSAE"
+          },
+          {
+            "type": "text",
+            "content": "정답: DBAATSAE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-065",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문을 허프만 부호화하시오. (트리를 그리고, 각 문자의 코드와 최종 비트열을 쓰시오.)"
+      },
+      {
+        "type": "text",
+        "content": "평문: BANANA"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "허프만: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+          "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+          "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+          "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "100110110"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "허프만 대상: BANANA"
+          },
+          {
+            "type": "text",
+            "content": "빈도: A:3, B:1, N:2"
+          },
+          {
+            "type": "text",
+            "content": "B(1) + N(2) -> BN(3): B=왼쪽(0), N=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "A(3) + BN(3) -> ABN(6): A=왼쪽(0), BN=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "코드: A=0, B=10, N=11"
+          },
+          {
+            "type": "text",
+            "content": "비트열: 10 0 11 0 11 0 = 100110110"
+          },
+          {
+            "type": "text",
+            "content": "정답: 100110110"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-066",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문을 허프만 부호화하시오. (트리를 그리고, 각 문자의 코드와 최종 비트열을 쓰시오.)"
+      },
+      {
+        "type": "text",
+        "content": "평문: PEPPER"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "허프만: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+          "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+          "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+          "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "100110001"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "허프만 대상: PEPPER"
+          },
+          {
+            "type": "text",
+            "content": "빈도: E:2, P:3, R:1"
+          },
+          {
+            "type": "text",
+            "content": "E(2) + R(1) -> ER(3): E=왼쪽(0), R=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "ER(3) + P(3) -> ERP(6): ER=왼쪽(0), P=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "코드: E=00, P=1, R=01"
+          },
+          {
+            "type": "text",
+            "content": "비트열: 1 00 1 1 00 01 = 100110001"
+          },
+          {
+            "type": "text",
+            "content": "정답: 100110001"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-067",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 카이사르(shift=1) -> 전치(3열) 순으로 적용한 결과를 쓰시오."
+      },
+      {
+        "type": "text",
+        "content": "평문: SECRET"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "카이사르: 각 알파벳을 뒤로 정해진 칸수만큼 민다. Z를 넘으면 A로 되돌아온다(A~Z 26글자 순환).",
+          "전치(열 N개): 평문을 왼쪽->오른쪽, 위->아래 순서로 N열 격자에 채운 뒤, 1열부터 각 열을 위->아래로 읽어 이어 붙인다."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "TSFFDU"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "카이사르(shift=1): SECRET -> TFDSFU"
+          },
+          {
+            "type": "text",
+            "content": "전치(3열): TFDSFU -> TSFFDU"
+          },
+          {
+            "type": "text",
+            "content": "정답: TSFFDU"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-068",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 카이사르(shift=2) -> 전치(2열) 순으로 적용한 결과를 쓰시오."
+      },
+      {
+        "type": "text",
+        "content": "평문: PLANET"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "카이사르: 각 알파벳을 뒤로 정해진 칸수만큼 민다. Z를 넘으면 A로 되돌아온다(A~Z 26글자 순환).",
+          "전치(열 N개): 평문을 왼쪽->오른쪽, 위->아래 순서로 N열 격자에 채운 뒤, 1열부터 각 열을 위->아래로 읽어 이어 붙인다."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "RCGNPV"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "카이사르(shift=2): PLANET -> RNCPGV"
+          },
+          {
+            "type": "text",
+            "content": "전치(2열): RNCPGV -> RCGNPV"
+          },
+          {
+            "type": "text",
+            "content": "정답: RCGNPV"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-069",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 전치(3열) -> 카이사르(shift=1) 순으로 적용한 결과를 쓰시오."
+      },
+      {
+        "type": "text",
+        "content": "평문: FRIEND"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "카이사르: 각 알파벳을 뒤로 정해진 칸수만큼 민다. Z를 넘으면 A로 되돌아온다(A~Z 26글자 순환).",
+          "전치(열 N개): 평문을 왼쪽->오른쪽, 위->아래 순서로 N열 격자에 채운 뒤, 1열부터 각 열을 위->아래로 읽어 이어 붙인다."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "GFSOJE"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "전치(3열): FRIEND -> FERNID"
+          },
+          {
+            "type": "text",
+            "content": "카이사르(shift=1): FERNID -> GFSOJE"
+          },
+          {
+            "type": "text",
+            "content": "정답: GFSOJE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-070",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 전치(2열) -> 카이사르(shift=3) 순으로 적용한 결과를 쓰시오."
+      },
+      {
+        "type": "text",
+        "content": "평문: GARDEN"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "카이사르: 각 알파벳을 뒤로 정해진 칸수만큼 민다. Z를 넘으면 A로 되돌아온다(A~Z 26글자 순환).",
+          "전치(열 N개): 평문을 왼쪽->오른쪽, 위->아래 순서로 N열 격자에 채운 뒤, 1열부터 각 열을 위->아래로 읽어 이어 붙인다."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "JUHDGQ"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "전치(2열): GARDEN -> GREADN"
+          },
+          {
+            "type": "text",
+            "content": "카이사르(shift=3): GREADN -> JUHDGQ"
+          },
+          {
+            "type": "text",
+            "content": "정답: JUHDGQ"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-071",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 카이사르(shift=1) -> 허프만 순으로 적용한 결과를 쓰시오. (허프만 트리를 그리고, 각 문자의 코드와 최종 비트열을 쓰시오.)"
+      },
+      {
+        "type": "text",
+        "content": "평문: APPLE"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "카이사르: 각 알파벳을 뒤로 정해진 칸수만큼 민다. Z를 넘으면 A로 되돌아온다(A~Z 26글자 순환).",
+          "허프만: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+          "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+          "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+          "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "0001101001"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "카이사르(shift=1): APPLE -> BQQMF"
+          },
+          {
+            "type": "text",
+            "content": "허프만 대상: BQQMF"
+          },
+          {
+            "type": "text",
+            "content": "빈도: B:1, F:1, M:1, Q:2"
+          },
+          {
+            "type": "text",
+            "content": "B(1) + F(1) -> BF(2): B=왼쪽(0), F=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "BF(2) + M(1) -> BFM(3): BF=왼쪽(0), M=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "BFM(3) + Q(2) -> BFMQ(5): BFM=왼쪽(0), Q=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "코드: B=000, F=001, M=01, Q=1"
+          },
+          {
+            "type": "text",
+            "content": "비트열: 000 1 1 01 001 = 0001101001"
+          },
+          {
+            "type": "text",
+            "content": "정답: 0001101001"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-072",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 카이사르(shift=2) -> 허프만 순으로 적용한 결과를 쓰시오. (허프만 트리를 그리고, 각 문자의 코드와 최종 비트열을 쓰시오.)"
+      },
+      {
+        "type": "text",
+        "content": "평문: BUBBLE"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "카이사르: 각 알파벳을 뒤로 정해진 칸수만큼 민다. Z를 넘으면 A로 되돌아온다(A~Z 26글자 순환).",
+          "허프만: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+          "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+          "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+          "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "01100101100"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "카이사르(shift=2): BUBBLE -> DWDDNG"
+          },
+          {
+            "type": "text",
+            "content": "허프만 대상: DWDDNG"
+          },
+          {
+            "type": "text",
+            "content": "빈도: D:3, G:1, N:1, W:1"
+          },
+          {
+            "type": "text",
+            "content": "G(1) + N(1) -> GN(2): G=왼쪽(0), N=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "GN(2) + W(1) -> GNW(3): GN=왼쪽(0), W=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "D(3) + GNW(3) -> DGNW(6): D=왼쪽(0), GNW=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "코드: D=0, G=100, N=101, W=11"
+          },
+          {
+            "type": "text",
+            "content": "비트열: 0 11 0 0 101 100 = 01100101100"
+          },
+          {
+            "type": "text",
+            "content": "정답: 01100101100"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-073",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 전치(2열) -> 허프만 순으로 적용한 결과를 쓰시오. (허프만 트리를 그리고, 각 문자의 코드와 최종 비트열을 쓰시오.)"
+      },
+      {
+        "type": "text",
+        "content": "평문: LETTER"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "전치(열 N개): 평문을 왼쪽->오른쪽, 위->아래 순서로 N열 격자에 채운 뒤, 1열부터 각 열을 위->아래로 읽어 이어 붙인다.",
+          "허프만: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+          "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+          "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+          "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "010100001011"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "전치(2열): LETTER -> LTEETR"
+          },
+          {
+            "type": "text",
+            "content": "허프만 대상: LTEETR"
+          },
+          {
+            "type": "text",
+            "content": "빈도: E:2, L:1, R:1, T:2"
+          },
+          {
+            "type": "text",
+            "content": "L(1) + R(1) -> LR(2): L=왼쪽(0), R=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "E(2) + LR(2) -> ELR(4): E=왼쪽(0), LR=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "ELR(4) + T(2) -> ELRT(6): ELR=왼쪽(0), T=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "코드: E=00, L=010, R=011, T=1"
+          },
+          {
+            "type": "text",
+            "content": "비트열: 010 1 00 00 1 011 = 010100001011"
+          },
+          {
+            "type": "text",
+            "content": "정답: 010100001011"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-074",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 전치(3열) -> 허프만 순으로 적용한 결과를 쓰시오. (허프만 트리를 그리고, 각 문자의 코드와 최종 비트열을 쓰시오.)"
+      },
+      {
+        "type": "text",
+        "content": "평문: COFFEE"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "전치(열 N개): 평문을 왼쪽->오른쪽, 위->아래 순서로 N열 격자에 채운 뒤, 1열부터 각 열을 위->아래로 읽어 이어 붙인다.",
+          "허프만: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+          "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+          "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+          "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "000100101101"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "전치(3열): COFFEE -> CFOEFE"
+          },
+          {
+            "type": "text",
+            "content": "허프만 대상: CFOEFE"
+          },
+          {
+            "type": "text",
+            "content": "빈도: C:1, E:2, F:2, O:1"
+          },
+          {
+            "type": "text",
+            "content": "C(1) + O(1) -> CO(2): C=왼쪽(0), O=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "CO(2) + E(2) -> COE(4): CO=왼쪽(0), E=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "COE(4) + F(2) -> COEF(6): COE=왼쪽(0), F=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "코드: C=000, E=01, F=1, O=001"
+          },
+          {
+            "type": "text",
+            "content": "비트열: 000 1 001 01 1 01 = 000100101101"
+          },
+          {
+            "type": "text",
+            "content": "정답: 000100101101"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-075",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 카이사르(shift=1) -> 전치(3열) -> 허프만 순으로 적용한 결과를 쓰시오. (허프만 트리를 그리고, 각 문자의 코드와 최종 비트열을 쓰시오.)"
+      },
+      {
+        "type": "text",
+        "content": "평문: PUZZLE"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "카이사르: 각 알파벳을 뒤로 정해진 칸수만큼 민다. Z를 넘으면 A로 되돌아온다(A~Z 26글자 순환).",
+          "전치(열 N개): 평문을 왼쪽->오른쪽, 위->아래 순서로 N열 격자에 채운 뒤, 1열부터 각 열을 위->아래로 읽어 이어 붙인다.",
+          "허프만: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+          "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+          "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+          "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "10001101100010"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "카이사르(shift=1): PUZZLE -> QVAAMF"
+          },
+          {
+            "type": "text",
+            "content": "전치(3열): QVAAMF -> QAVMAF"
+          },
+          {
+            "type": "text",
+            "content": "허프만 대상: QAVMAF"
+          },
+          {
+            "type": "text",
+            "content": "빈도: A:2, F:1, M:1, Q:1, V:1"
+          },
+          {
+            "type": "text",
+            "content": "F(1) + M(1) -> FM(2): F=왼쪽(0), M=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "Q(1) + V(1) -> QV(2): Q=왼쪽(0), V=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "A(2) + FM(2) -> AFM(4): A=왼쪽(0), FM=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "AFM(4) + QV(2) -> AFMQV(6): AFM=왼쪽(0), QV=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "코드: A=00, F=010, M=011, Q=10, V=11"
+          },
+          {
+            "type": "text",
+            "content": "비트열: 10 00 11 011 00 010 = 10001101100010"
+          },
+          {
+            "type": "text",
+            "content": "정답: 10001101100010"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-076",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 카이사르(shift=2) -> 전치(2열) -> 허프만 순으로 적용한 결과를 쓰시오. (허프만 트리를 그리고, 각 문자의 코드와 최종 비트열을 쓰시오.)"
+      },
+      {
+        "type": "text",
+        "content": "평문: GARDEN"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "카이사르: 각 알파벳을 뒤로 정해진 칸수만큼 민다. Z를 넘으면 A로 되돌아온다(A~Z 26글자 순환).",
+          "전치(열 N개): 평문을 왼쪽->오른쪽, 위->아래 순서로 N열 격자에 채운 뒤, 1열부터 각 열을 위->아래로 읽어 이어 붙인다.",
+          "허프만: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+          "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+          "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+          "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "0111101000000110"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "카이사르(shift=2): GARDEN -> ICTFGP"
+          },
+          {
+            "type": "text",
+            "content": "전치(2열): ICTFGP -> ITGCFP"
+          },
+          {
+            "type": "text",
+            "content": "허프만 대상: ITGCFP"
+          },
+          {
+            "type": "text",
+            "content": "빈도: C:1, F:1, G:1, I:1, P:1, T:1"
+          },
+          {
+            "type": "text",
+            "content": "C(1) + F(1) -> CF(2): C=왼쪽(0), F=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "G(1) + I(1) -> GI(2): G=왼쪽(0), I=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "P(1) + T(1) -> PT(2): P=왼쪽(0), T=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "CF(2) + GI(2) -> CFGI(4): CF=왼쪽(0), GI=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "CFGI(4) + PT(2) -> CFGIPT(6): CFGI=왼쪽(0), PT=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "코드: C=000, F=001, G=010, I=011, P=10, T=11"
+          },
+          {
+            "type": "text",
+            "content": "비트열: 011 11 010 000 001 10 = 0111101000000110"
+          },
+          {
+            "type": "text",
+            "content": "정답: 0111101000000110"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-077",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 전치(2열) -> 카이사르(shift=1) -> 허프만 순으로 적용한 결과를 쓰시오. (허프만 트리를 그리고, 각 문자의 코드와 최종 비트열을 쓰시오.)"
+      },
+      {
+        "type": "text",
+        "content": "평문: SUMMER"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "카이사르: 각 알파벳을 뒤로 정해진 칸수만큼 민다. Z를 넘으면 A로 되돌아온다(A~Z 26글자 순환).",
+          "전치(열 N개): 평문을 왼쪽->오른쪽, 위->아래 순서로 N열 격자에 채운 뒤, 1열부터 각 열을 위->아래로 읽어 이어 붙인다.",
+          "허프만: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+          "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+          "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+          "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "10010001101001"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "전치(2열): SUMMER -> SMEUMR"
+          },
+          {
+            "type": "text",
+            "content": "카이사르(shift=1): SMEUMR -> TNFVNS"
+          },
+          {
+            "type": "text",
+            "content": "허프만 대상: TNFVNS"
+          },
+          {
+            "type": "text",
+            "content": "빈도: F:1, N:2, S:1, T:1, V:1"
+          },
+          {
+            "type": "text",
+            "content": "F(1) + S(1) -> FS(2): F=왼쪽(0), S=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "T(1) + V(1) -> TV(2): T=왼쪽(0), V=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "FS(2) + N(2) -> FSN(4): FS=왼쪽(0), N=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "FSN(4) + TV(2) -> FSNTV(6): FSN=왼쪽(0), TV=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "코드: F=000, N=01, S=001, T=10, V=11"
+          },
+          {
+            "type": "text",
+            "content": "비트열: 10 01 000 11 01 001 = 10010001101001"
+          },
+          {
+            "type": "text",
+            "content": "정답: 10010001101001"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-078",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 전치(3열) -> 카이사르(shift=2) -> 허프만 순으로 적용한 결과를 쓰시오. (허프만 트리를 그리고, 각 문자의 코드와 최종 비트열을 쓰시오.)"
+      },
+      {
+        "type": "text",
+        "content": "평문: WINTER"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "카이사르: 각 알파벳을 뒤로 정해진 칸수만큼 민다. Z를 넘으면 A로 되돌아온다(A~Z 26글자 순환).",
+          "전치(열 N개): 평문을 왼쪽->오른쪽, 위->아래 순서로 N열 격자에 채운 뒤, 1열부터 각 열을 위->아래로 읽어 이어 붙인다.",
+          "허프만: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+          "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+          "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+          "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "1110001000010011"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "전치(3열): WINTER -> WTIENR"
+          },
+          {
+            "type": "text",
+            "content": "카이사르(shift=2): WTIENR -> YVKGPT"
+          },
+          {
+            "type": "text",
+            "content": "허프만 대상: YVKGPT"
+          },
+          {
+            "type": "text",
+            "content": "빈도: G:1, K:1, P:1, T:1, V:1, Y:1"
+          },
+          {
+            "type": "text",
+            "content": "G(1) + K(1) -> GK(2): G=왼쪽(0), K=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "P(1) + T(1) -> PT(2): P=왼쪽(0), T=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "V(1) + Y(1) -> VY(2): V=왼쪽(0), Y=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "GK(2) + PT(2) -> GKPT(4): GK=왼쪽(0), PT=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "GKPT(4) + VY(2) -> GKPTVY(6): GKPT=왼쪽(0), VY=오른쪽(1)"
+          },
+          {
+            "type": "text",
+            "content": "코드: G=000, K=001, P=010, T=011, V=10, Y=11"
+          },
+          {
+            "type": "text",
+            "content": "비트열: 11 10 001 000 010 011 = 1110001000010011"
+          },
+          {
+            "type": "text",
+            "content": "정답: 1110001000010011"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-079",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 런길이를 적용한 결과를 쓰시오."
+      },
+      {
+        "type": "text",
+        "content": "평문: AAABBBCCD"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "런길이: 같은 문자가 연속된 구간을 (문자)(개수)로 적는다. 예) AAAB -> A3B1."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "A3B3C2D1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "런길이: AAABBBCCD -> A3B3C2D1"
+          },
+          {
+            "type": "text",
+            "content": "정답: A3B3C2D1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "g1-080",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 평문에 카이사르(shift=1) -> 런길이 순으로 적용한 결과를 쓰시오."
+      },
+      {
+        "type": "text",
+        "content": "평문: AABBA"
+      },
+      {
+        "type": "condition-box",
+        "title": "규칙",
+        "marker": "kr-con",
+        "items": [
+          "카이사르: 각 알파벳을 뒤로 정해진 칸수만큼 민다. Z를 넘으면 A로 되돌아온다(A~Z 26글자 순환).",
+          "런길이: 같은 문자가 연속된 구간을 (문자)(개수)로 적는다. 예) AAAB -> A3B1."
+        ]
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "B2C2B1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "카이사르(shift=1): AABBA -> BBCCB"
+          },
+          {
+            "type": "text",
+            "content": "런길이: BBCCB -> B2C2B1"
+          },
+          {
+            "type": "text",
+            "content": "정답: B2C2B1"
+          }
+        ]
+      }
+    ]
+  }
+]
