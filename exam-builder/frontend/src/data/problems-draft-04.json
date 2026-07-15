@@ -1,0 +1,348 @@
+[
+  {
+    "id": "fb-192",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 문자열을 허프만 부호화한 결과(비트열)를 쓰시오." },
+      { "type": "text", "content": "원본 문자열: AAADDB0000" },
+      {
+        "type": "condition-box",
+        "title": "허프만 부호화 규칙",
+        "marker": "kr-con",
+        "items": [
+          "빈도가 가장 작은 두 노드를 합쳐 부모 노드를 생성한다(반복).",
+          "빈도가 동률일 때는 알파벳(ASCII) 빠른 노드를 먼저 선택한다.",
+          "합칠 때 좌우 배치는 항상 알파벳/ASCII 순서로 한다. 빠른 쪽이 왼쪽(0), 늦은 쪽이 오른쪽(1).",
+          "ASCII 순서 참고: '0'(48) < 'A'(65) < 'B'(66) < ... < 'Z'(90)"
+        ]
+      }
+    ],
+    "answer": { "type": "value", "value": "1010101111111100000" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "빈도: 0:4, A:3, D:2, B:1" },
+          { "type": "text", "content": "단계 1: 최소 둘 B(1)+D(2). B<D이므로 B=0, D=1. BD(3) 생성." },
+          { "type": "text", "content": "단계 2: A(3), BD(3), 0(4). 동률(A,BD)이고 A<B이므로 A 먼저. A+BD에서 A=0, BD=1. ABD(6) 생성." },
+          { "type": "text", "content": "단계 3: 0(4), ABD(6). '0'<'A'이므로 0=0, ABD=1." },
+          { "type": "text", "content": "코드: 0=0, A=10, B=110, D=111" },
+          { "type": "text", "content": "부호화: A(10) A(10) A(10) D(111) D(111) B(110) 0(0) 0(0) 0(0) 0(0) = 1010101111111100000" },
+          { "type": "text", "content": "정답: 1010101111111100000" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-193",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 문자열을 허프만 부호화한 결과(비트열)를 쓰시오." },
+      { "type": "text", "content": "원본 문자열: ABCCCDDDDD" },
+      {
+        "type": "condition-box",
+        "title": "허프만 부호화 규칙",
+        "marker": "kr-con",
+        "items": [
+          "빈도가 가장 작은 두 노드를 합쳐 부모 노드를 생성한다(반복).",
+          "빈도가 동률일 때는 알파벳(ASCII) 빠른 노드를 먼저 선택한다.",
+          "합칠 때 좌우 배치는 항상 알파벳/ASCII 순서로 한다. 빠른 쪽이 왼쪽(0), 늦은 쪽이 오른쪽(1)."
+        ]
+      }
+    ],
+    "answer": { "type": "value", "value": "00000101010111111" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "빈도: D:5, C:3, A:1, B:1" },
+          { "type": "text", "content": "단계 1: 동률(A,B), A 먼저. A+B에서 A=0, B=1. AB(2) 생성." },
+          { "type": "text", "content": "단계 2: AB(2), C(3). A<C이므로 AB=0, C=1. ABC(5) 생성." },
+          { "type": "text", "content": "단계 3: ABC(5), D(5). 동률, A<D이므로 ABC=0, D=1." },
+          { "type": "text", "content": "코드: A=000, B=001, C=01, D=1" },
+          { "type": "text", "content": "부호화: A(000) B(001) C(01) C(01) C(01) D(1) D(1) D(1) D(1) D(1) = 00000101010111111" },
+          { "type": "text", "content": "정답: 00000101010111111" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-194",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 문자열을 허프만 부호화한 결과(비트열)를 쓰시오." },
+      { "type": "text", "content": "원본 문자열: AABBCCCDDD" },
+      {
+        "type": "condition-box",
+        "title": "허프만 부호화 규칙",
+        "marker": "kr-con",
+        "items": [
+          "빈도가 가장 작은 두 노드를 합쳐 부모 노드를 생성한다(반복).",
+          "빈도가 동률일 때는 알파벳(ASCII) 빠른 노드를 먼저 선택한다.",
+          "합칠 때 좌우 배치는 항상 알파벳/ASCII 순서로 한다. 빠른 쪽이 왼쪽(0), 늦은 쪽이 오른쪽(1)."
+        ]
+      }
+    ],
+    "answer": { "type": "value", "value": "00000101101010111111" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "빈도: C:3, D:3, A:2, B:2" },
+          { "type": "text", "content": "단계 1: 동률(A,B), A 먼저. A+B에서 A=0, B=1. AB(4) 생성." },
+          { "type": "text", "content": "단계 2: 동률(C,D), C 먼저. C+D에서 C=0, D=1. CD(6) 생성." },
+          { "type": "text", "content": "단계 3: AB(4), CD(6). A<C이므로 AB=0, CD=1." },
+          { "type": "text", "content": "코드: A=00, B=01, C=10, D=11 (모두 2비트, 균형 트리)" },
+          { "type": "text", "content": "부호화: A(00) A(00) B(01) B(01) C(10) C(10) C(10) D(11) D(11) D(11) = 00000101101010111111" },
+          { "type": "text", "content": "정답: 00000101101010111111" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-195",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 비트열을 주어진 허프만 코드 표에 따라 복호화한 결과를 쓰시오." },
+      { "type": "text", "content": "비트열: 10111110" },
+      {
+        "type": "condition-box",
+        "title": "허프만 코드 표",
+        "marker": "kr-con",
+        "items": [
+          "0 -> 0",
+          "A -> 10",
+          "B -> 110",
+          "D -> 111"
+        ]
+      }
+    ],
+    "answer": { "type": "value", "value": "ADB" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "허프만 코드는 prefix-free이므로 비트를 한 개씩 읽으며 코드 표와 일치하는 순간 출력한다." },
+          { "type": "text", "content": "1 -> 1 (불일치) -> 10 (A 일치) -> A 출력" },
+          { "type": "text", "content": "1 -> 11 -> 111 (D 일치) -> D 출력" },
+          { "type": "text", "content": "1 -> 11 -> 110 (B 일치) -> B 출력" },
+          { "type": "text", "content": "정답: ADB" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-196",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 비트열을 주어진 허프만 코드 표에 따라 복호화한 결과를 쓰시오." },
+      { "type": "text", "content": "비트열: 101000001" },
+      {
+        "type": "condition-box",
+        "title": "허프만 코드 표",
+        "marker": "kr-con",
+        "items": [
+          "D -> 1",
+          "C -> 01",
+          "A -> 000",
+          "B -> 001"
+        ]
+      }
+    ],
+    "answer": { "type": "value", "value": "DCAB" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "1 (D 일치) -> D 출력" },
+          { "type": "text", "content": "0 -> 01 (C 일치) -> C 출력" },
+          { "type": "text", "content": "0 -> 00 -> 000 (A 일치) -> A 출력" },
+          { "type": "text", "content": "0 -> 00 -> 001 (B 일치) -> B 출력" },
+          { "type": "text", "content": "정답: DCAB" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-197",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 출력 결과를 쓰시오." },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f(s):\n    result = \"\"\n    count = 1\n    for i in range(len(s)):\n        if i == len(s) - 1 or s[i] != s[i+1]:\n            result += s[i] + str(count)\n            count = 1\n        else:\n            count += 1\n    return result\n\nprint(f(\"AABBBCCCC\"))"
+      }
+    ],
+    "answer": { "type": "value", "value": "A2B3C4" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "런 길이 부호화: 연속된 같은 문자를 '문자+개수' 형태로 표현한다." },
+          { "type": "text", "content": "A 2번 -> A2, B 3번 -> B3, C 4번 -> C4" },
+          { "type": "text", "content": "정답: A2B3C4" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-198",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 출력 결과를 쓰시오." },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f(s):\n    result = \"\"\n    count = 1\n    for i in range(len(s)):\n        if i == len(s) - 1 or s[i] != s[i+1]:\n            result += s[i] + str(count)\n            count = 1\n        else:\n            count += 1\n    return result\n\nprint(f(\"ZZZAAB\"))"
+      }
+    ],
+    "answer": { "type": "value", "value": "Z3A2B1" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "Z 3번 -> Z3, A 2번 -> A2, B 1번 -> B1" },
+          { "type": "text", "content": "단독으로 등장한 문자도 개수 1이 붙는다." },
+          { "type": "text", "content": "정답: Z3A2B1" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-199",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 출력 결과를 쓰시오." },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def g(text, shift):\n    result = \"\"\n    for ch in text:\n        if 'A' <= ch <= 'Z':\n            result += chr((ord(ch) - ord('A') + shift) % 26 + ord('A'))\n        elif 'a' <= ch <= 'z':\n            result += chr((ord(ch) - ord('a') + shift) % 26 + ord('a'))\n        else:\n            result += ch\n    return result\n\nprint(g(\"HELLO\", 3))"
+      }
+    ],
+    "answer": { "type": "value", "value": "KHOOR" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "카이사르 암호: 각 글자를 알파벳에서 정해진 칸만큼 뒤로 민다." },
+          { "type": "text", "content": "H(+3)=K, E(+3)=H, L(+3)=O, L(+3)=O, O(+3)=R" },
+          { "type": "text", "content": "정답: KHOOR" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-200",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 출력 결과를 쓰시오." },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def g(text, shift):\n    result = \"\"\n    for ch in text:\n        if 'A' <= ch <= 'Z':\n            result += chr((ord(ch) - ord('A') + shift) % 26 + ord('A'))\n        elif 'a' <= ch <= 'z':\n            result += chr((ord(ch) - ord('a') + shift) % 26 + ord('a'))\n        else:\n            result += ch\n    return result\n\nprint(g(\"XYZ\", 5))"
+      }
+    ],
+    "answer": { "type": "value", "value": "CDE" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "알파벳 끝(Z)을 넘어가면 처음(A)으로 순환한다. (% 26 연산)" },
+          { "type": "text", "content": "X(23)+5=28, 28%26=2 -> C" },
+          { "type": "text", "content": "Y(24)+5=29, 29%26=3 -> D" },
+          { "type": "text", "content": "Z(25)+5=30, 30%26=4 -> E" },
+          { "type": "text", "content": "정답: CDE" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-201",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 출력 결과를 쓰시오." },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f(s):\n    result = \"\"\n    count = 1\n    for i in range(len(s)):\n        if i == len(s) - 1 or s[i] != s[i+1]:\n            result += s[i] + str(count)\n            count = 1\n        else:\n            count += 1\n    return result\n\ndef g(text, shift):\n    result = \"\"\n    for ch in text:\n        if 'A' <= ch <= 'Z':\n            result += chr((ord(ch) - ord('A') + shift) % 26 + ord('A'))\n        elif 'a' <= ch <= 'z':\n            result += chr((ord(ch) - ord('a') + shift) % 26 + ord('a'))\n        else:\n            result += ch\n    return result\n\ns = \"AAABBC\"\nresult = g(f(s), 5)\nprint(result)"
+      }
+    ],
+    "answer": { "type": "value", "value": "F3G2H1" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "단계 1: f(\"AAABBC\") = \"A3B2C1\"" },
+          { "type": "text", "content": "단계 2: g(\"A3B2C1\", 5)" },
+          { "type": "text", "content": "영문자만 시프트, 숫자는 그대로 통과한다." },
+          { "type": "text", "content": "A(+5)=F, 3=3, B(+5)=G, 2=2, C(+5)=H, 1=1" },
+          { "type": "text", "content": "정답: F3G2H1" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-202",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 두 표현 중 일반적으로 어느 쪽이 더 빠르게 실행되는지 답하고, 그 이유를 서술하시오. (단, 입력 s에 연속된 같은 문자가 충분히 많다고 가정한다.)" },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "a = g(f(s), 5)\nb = f(g(s, 5))"
+      },
+      { "type": "answer-box", "lines": 8 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "정답: a (g(f(s), 5))가 더 빠르다." },
+          { "type": "text", "content": "이유: 카이사르 변환은 같은 문자를 항상 같은 문자로 바꾸므로, 연속된 같은 문자는 변환 후에도 연속이 유지된다. 즉 g 전후의 f 결과 길이는 같다." },
+          { "type": "text", "content": "a의 작업량: f 처리는 len(s) 길이 입력, g 처리는 len(f(s)) 길이 입력 (짧은 입력)." },
+          { "type": "text", "content": "b의 작업량: g 처리는 len(s) 길이 입력, f 처리도 len(s) 길이 입력 (긴 입력)." },
+          { "type": "text", "content": "따라서 압축이 잘 되는 데이터(연속 반복이 많은 데이터)에서는 a가 더 빠르다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-203",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드를 실행했을 때 출력이 \"L5I4\"가 되도록 하는 정수 x의 값을 구하시오." },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"HHHHHEEEE\"\nresult = g(f(s), x)\nprint(result)   # L5I4"
+      }
+    ],
+    "answer": { "type": "value", "value": "4" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "단계 1: f(\"HHHHHEEEE\") = \"H5E4\"" },
+          { "type": "text", "content": "단계 2: g(\"H5E4\", x) = \"L5I4\"" },
+          { "type": "text", "content": "H -> L: H(7) -> L(11), 시프트 4" },
+          { "type": "text", "content": "E -> I: E(4) -> I(8), 시프트 4" },
+          { "type": "text", "content": "숫자는 그대로 통과한다." },
+          { "type": "text", "content": "정답: x = 4" }
+        ]
+      }
+    ]
+  }
+]

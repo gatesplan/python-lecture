@@ -1,0 +1,314 @@
+[
+  {
+    "cat": "pandas",
+    "q": "pandas 라이브러리를 불러올 때 관례적으로 사용하는 코드는?",
+    "choices": [
+      "import pandas as pd",
+      "import pd as pandas",
+      "from pandas import pd",
+      "include pandas as pd"
+    ],
+    "answer": 0,
+    "explain": "pandas는 보통 import pandas as pd 형태로 불러와 pd라는 별칭으로 사용한다. 이후 pd.read_csv 처럼 pd를 통해 기능을 호출한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "CSV 파일을 DataFrame으로 불러오는 함수는?",
+    "choices": [
+      "pd.load_csv('data.csv')",
+      "pd.open_csv('data.csv')",
+      "pd.import_csv('data.csv')",
+      "pd.read_csv('data.csv')"
+    ],
+    "answer": 3,
+    "explain": "CSV 파일은 pd.read_csv('파일명')으로 읽어 DataFrame으로 만든다. load_csv, open_csv, import_csv 같은 함수는 존재하지 않는다."
+  },
+  {
+    "cat": "pandas",
+    "q": "pandas 데이터 처리의 일반적인 전체 흐름 순서로 옳은 것은?",
+    "choices": [
+      "CSV 불러오기 -> 저장 -> 기초 탐색 -> 결측치 처리 -> 컬럼 선택",
+      "결측치 처리 -> CSV 불러오기 -> 기초 탐색 -> 컬럼 선택 -> 저장",
+      "라이브러리 준비 -> CSV 불러오기 -> 기초 탐색 -> 결측치 처리 -> 컬럼 선택/파생 -> 저장",
+      "라이브러리 준비 -> 기초 탐색 -> CSV 불러오기 -> 저장 -> 결측치 처리"
+    ],
+    "answer": 2,
+    "explain": "데이터 처리는 라이브러리 준비 -> CSV 불러오기 -> 기초 탐색 -> 결측치 처리 -> 컬럼 선택/파생 -> 저장 순서로 진행한다. 데이터를 먼저 읽고 살펴본 뒤 정리하고 마지막에 저장한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "한글 CSV를 읽을 때 다음 코드의 빈칸에 들어갈 예외 종류는?\ntry:\n    df = pd.read_csv('seoul.csv', encoding='utf-8')\nexcept ______:\n    df = pd.read_csv('seoul.csv', encoding='cp949')",
+    "choices": [
+      "ValueError",
+      "KeyError",
+      "UnicodeDecodeError",
+      "FileNotFoundError"
+    ],
+    "answer": 2,
+    "explain": "한글 CSV는 인코딩이 utf-8 또는 cp949로 갈려서, utf-8로 읽다 실패하면 UnicodeDecodeError가 발생한다. 이 예외를 잡아 cp949로 다시 읽는다."
+  },
+  {
+    "cat": "pandas",
+    "q": "한글 CSV 읽기에서 try/except로 두 인코딩을 모두 처리하는 이유로 가장 적절한 것은?",
+    "choices": [
+      "파일 크기가 너무 클 때 메모리 부족을 막기 위해",
+      "파일이 존재하지 않을 때를 대비하기 위해",
+      "결측치가 있는 행을 자동으로 제거하기 위해",
+      "한글 CSV의 인코딩이 utf-8 또는 cp949로 갈려 한쪽에서 디코딩 에러가 날 수 있어서"
+    ],
+    "answer": 3,
+    "explain": "한글이 들어간 CSV는 만든 환경에 따라 utf-8 또는 cp949로 저장되어, 한 인코딩으로 읽으면 UnicodeDecodeError가 날 수 있다. 그래서 try로 utf-8을 먼저 시도하고 except에서 cp949로 다시 읽는다."
+  },
+  {
+    "cat": "pandas",
+    "q": "DataFrame의 (행 수, 열 수)를 한 번에 확인하는 속성은?",
+    "choices": [
+      "df.size",
+      "df.count()",
+      "df.shape",
+      "df.length"
+    ],
+    "answer": 2,
+    "explain": "df.shape는 (행 수, 열 수) 튜플을 돌려준다. 괄호 없이 쓰는 속성이라는 점에 주의한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.shape의 결과가 (1000, 8)일 때 의미로 옳은 것은?",
+    "choices": [
+      "행이 8개, 열이 1000개다",
+      "결측치가 1000개, 정상값이 8개다",
+      "행이 1000개, 열이 8개다",
+      "행과 열의 곱이 8000이라는 뜻만 가진다"
+    ],
+    "answer": 2,
+    "explain": "df.shape는 (행 수, 열 수) 순서다. 따라서 (1000, 8)은 행 1000개, 열 8개를 의미한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "데이터의 위쪽 몇 개 행을 미리보기할 때 사용하는 메서드는? (인자를 주지 않으면 기본 5개)",
+    "choices": [
+      "df.head()",
+      "df.top()",
+      "df.first()",
+      "df.preview()"
+    ],
+    "answer": 0,
+    "explain": "df.head(n)은 위에서 n개 행을 미리보기한다. n을 생략하면 기본 5개 행을 보여준다."
+  },
+  {
+    "cat": "pandas",
+    "q": "컬럼 목록, 결측치 여부, 각 컬럼의 자료형을 한 번에 보여주는 메서드는?",
+    "choices": [
+      "df.info()",
+      "df.shape",
+      "df.describe()",
+      "df.head()"
+    ],
+    "answer": 0,
+    "explain": "df.info()는 컬럼 목록과 각 컬럼의 결측치 여부(non-null 개수), 자료형(dtype)을 요약해 보여준다."
+  },
+  {
+    "cat": "pandas",
+    "q": "숫자 컬럼의 개수, 평균, 표준편차, 최소/최대, 사분위 등 기초 통계를 보여주는 메서드는?",
+    "choices": [
+      "df.describe()",
+      "df.info()",
+      "df.isnull()",
+      "df.head()"
+    ],
+    "answer": 0,
+    "explain": "df.describe()는 숫자 컬럼에 대해 개수, 평균, 표준편차, 최소, 사분위수, 최대 같은 기초 통계를 표로 보여준다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.info()와 df.describe()의 차이로 가장 정확한 것은?",
+    "choices": [
+      "info()는 숫자 통계, describe()는 컬럼 자료형을 보여준다",
+      "둘 다 결측치 개수만 보여주며 차이가 없다",
+      "info()는 컬럼/결측치/자료형 구조를, describe()는 숫자 컬럼의 기초 통계를 보여준다",
+      "info()는 행을 미리보기하고, describe()는 행 수만 알려준다"
+    ],
+    "answer": 2,
+    "explain": "df.info()는 컬럼 목록, 결측치 여부, 자료형 같은 구조 정보를 보여준다. df.describe()는 숫자 컬럼의 평균, 표준편차, 사분위 등 기초 통계를 보여준다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.shape와 df.info()의 차이로 옳은 것은?",
+    "choices": [
+      "shape는 (행 수, 열 수)만, info()는 컬럼별 결측/자료형까지 보여준다",
+      "shape는 결측치 개수를, info()는 행 수만 보여준다",
+      "둘 다 숫자 통계를 보여준다",
+      "shape는 메서드, info()는 속성이다"
+    ],
+    "answer": 0,
+    "explain": "df.shape는 (행 수, 열 수) 크기만 알려주는 속성이다. df.info()는 컬럼 목록, 컬럼별 결측치 여부, 자료형까지 자세히 보여주는 메서드다."
+  },
+  {
+    "cat": "pandas",
+    "q": "컬럼별 결측치(빈칸) 개수를 세는 코드로 옳은 것은?",
+    "choices": [
+      "df.dropna().sum()",
+      "df.fillna().count()",
+      "df.shape.sum()",
+      "df.isnull().sum()"
+    ],
+    "answer": 3,
+    "explain": "df.isnull()은 각 칸이 결측치인지 True/False로 표시하고, .sum()을 붙이면 컬럼별로 True(결측)의 개수를 세어준다."
+  },
+  {
+    "cat": "pandas",
+    "q": "결측치가 들어 있는 행 자체를 제거하는 메서드는?",
+    "choices": [
+      "df.fillna()",
+      "df.dropna()",
+      "df.isnull()",
+      "df.describe()"
+    ],
+    "answer": 1,
+    "explain": "df.dropna()는 결측치(빈칸)가 있는 행을 제거한다. 결측치를 채우는 fillna()와 혼동하지 않도록 주의한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "결측치를 숫자 컬럼의 평균값으로 채우는 코드로 옳은 것은?",
+    "choices": [
+      "df.dropna(df.mean(numeric_only=True))",
+      "df.isnull(df.mean(numeric_only=True))",
+      "df.mean(df.fillna(numeric_only=True))",
+      "df.fillna(df.mean(numeric_only=True))"
+    ],
+    "answer": 3,
+    "explain": "df.fillna(값)은 결측치를 지정한 값으로 채운다. df.mean(numeric_only=True)로 숫자 컬럼의 평균을 구해 채우면 컬럼마다 그 평균값으로 빈칸이 메워진다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.dropna()와 df.fillna()의 차이로 옳은 것은?",
+    "choices": [
+      "dropna는 결측치를 0으로 채우고, fillna는 행을 지운다",
+      "dropna는 결측치가 있는 행을 제거하고, fillna는 결측치를 다른 값으로 채운다",
+      "둘 다 결측치를 평균으로 채우며 차이가 없다",
+      "dropna는 컬럼을 추가하고, fillna는 컬럼을 삭제한다"
+    ],
+    "answer": 1,
+    "explain": "dropna는 결측치가 있는 행을 통째로 제거해 데이터 양이 줄어든다. fillna는 결측치를 평균 등 다른 값으로 채워 행을 유지한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.fillna(df.mean(numeric_only=True))에서 numeric_only=True를 주는 이유로 가장 적절한 것은?",
+    "choices": [
+      "결측치가 있는 행을 모두 제거하기 위해",
+      "결과를 utf-8-sig로 저장하기 위해",
+      "숫자 컬럼만 대상으로 평균을 계산하기 위해",
+      "행 방향으로 합을 구하기 위해"
+    ],
+    "answer": 2,
+    "explain": "numeric_only=True는 평균 계산 대상을 숫자 컬럼으로 한정한다. 문자열 컬럼은 평균을 구할 수 없으므로 숫자 컬럼만 대상으로 평균을 내어 결측치를 채운다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.isnull().sum() 의 결과로 가장 알맞은 설명은?",
+    "choices": [
+      "전체 행의 합계 숫자 하나를 돌려준다",
+      "컬럼마다 결측치가 몇 개인지 알려준다",
+      "결측치가 있는 행을 제거한 새 DataFrame을 돌려준다",
+      "숫자 컬럼의 평균을 돌려준다"
+    ],
+    "answer": 1,
+    "explain": "isnull()이 각 칸의 결측 여부를 True/False로 만들고, sum()이 컬럼별로 True 개수를 더하므로 컬럼별 결측치 개수가 나온다."
+  },
+  {
+    "cat": "pandas",
+    "q": "필요한 컬럼만 골라 원본과 분리된 복사본 DataFrame을 만드는 코드로 옳은 것은?\ncols = ['날짜', '호선명', '지하철역']",
+    "choices": [
+      "df2 = df[cols]",
+      "df2 = df.copy(cols)",
+      "df2 = df.select(cols)",
+      "df2 = df[cols].copy()"
+    ],
+    "answer": 3,
+    "explain": "df[컬럼리스트]로 원하는 컬럼만 고르고, .copy()를 붙여 원본과 분리된 복사본을 만든다. .copy()를 빼면 원본을 건드릴 위험이 있다."
+  },
+  {
+    "cat": "pandas",
+    "q": "컬럼을 고른 뒤 .copy()를 붙이는 이유로 가장 적절한 것은?",
+    "choices": [
+      "결측치를 자동으로 채우기 위해",
+      "컬럼을 알파벳 순으로 정렬하기 위해",
+      "파일을 utf-8-sig로 저장하기 위해",
+      "원본 DataFrame과 분리된 복사본을 만들어 원본 손상을 막기 위해"
+    ],
+    "answer": 3,
+    "explain": ".copy()는 원본과 독립된 복사본을 만든다. 복사본을 수정해도 원본이 바뀌지 않으므로, 안 붙이면 원본을 건드릴 위험이 있다."
+  },
+  {
+    "cat": "pandas",
+    "q": "컬럼 이름에 '승차'가 포함된 컬럼만 골라 리스트로 만드는 코드로 옳은 것은?",
+    "choices": [
+      "on_cols = [c for c in df2.columns if '승차' in c]",
+      "on_cols = df2.columns('승차')",
+      "on_cols = df2['승차'].copy()",
+      "on_cols = for c in df2.columns if '승차'"
+    ],
+    "answer": 0,
+    "explain": "리스트 컴프리헨션 [c for c in df2.columns if '승차' in c]은 컬럼 이름들을 돌면서 이름에 '승차'가 들어간 컬럼만 모아 리스트로 만든다."
+  },
+  {
+    "cat": "pandas",
+    "q": "여러 컬럼을 행(가로) 방향으로 더해 파생 컬럼을 만드는 코드의 빈칸으로 옳은 것은?\ndf2['승차합계'] = df2[on_cols].______",
+    "choices": [
+      "sum(axis=0)",
+      "mean(axis=1)",
+      "sum(axis=1)",
+      "count(axis=1)"
+    ],
+    "answer": 2,
+    "explain": "sum(axis=1)은 각 행에서 여러 컬럼 값을 가로로 더한다. axis=0은 세로(컬럼별) 합이므로 행 방향 합산에는 axis=1을 써야 한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.sum(axis=1)과 df.sum(axis=0)의 차이로 옳은 것은?",
+    "choices": [
+      "axis=1은 행 방향(가로) 합, axis=0은 열 방향(세로) 합이다",
+      "axis=1은 열 방향 합, axis=0은 행 방향 합이다",
+      "둘 다 전체 한 개의 합만 돌려준다",
+      "axis=1은 평균, axis=0은 합이다"
+    ],
+    "answer": 0,
+    "explain": "axis=1은 한 행 안에서 여러 컬럼을 가로로 더한다(행마다 결과 1개). axis=0은 한 컬럼 안에서 여러 행을 세로로 더한다(컬럼마다 결과 1개)."
+  },
+  {
+    "cat": "pandas",
+    "q": "정리한 DataFrame을 CSV로 저장할 때, 행 인덱스를 파일에 쓰지 않게 하는 옵션은?",
+    "choices": [
+      "df.to_csv('out.csv', index=True)",
+      "df.to_csv('out.csv', header=False)",
+      "df.to_csv('out.csv', index=False)",
+      "df.to_csv('out.csv', drop=True)"
+    ],
+    "answer": 2,
+    "explain": "to_csv에 index=False를 주면 자동으로 붙는 행 인덱스(0,1,2...)를 파일에 쓰지 않는다. index=True(기본)이면 인덱스 열이 같이 저장된다."
+  },
+  {
+    "cat": "pandas",
+    "q": "엑셀에서 한글이 깨지지 않도록 CSV로 저장할 때 권장되는 인코딩 옵션은?",
+    "choices": [
+      "encoding='ascii'",
+      "encoding='utf-8-sig'",
+      "encoding='latin1'",
+      "encoding='binary'"
+    ],
+    "answer": 1,
+    "explain": "df.to_csv('out.csv', index=False, encoding='utf-8-sig')처럼 utf-8-sig로 저장하면 엑셀에서 한글이 깨지지 않는다."
+  },
+  {
+    "cat": "pandas",
+    "q": "다음 저장 코드에 대한 설명으로 옳은 것은?\ndf.to_csv('out.csv', index=False, encoding='utf-8-sig')",
+    "choices": [
+      "행 인덱스를 포함해 저장하고, 한글이 깨질 수 있다",
+      "행 인덱스를 빼고 저장하며, 엑셀에서 한글 깨짐을 방지한다",
+      "결측치가 있는 행을 제거한 뒤 저장한다",
+      "숫자 컬럼만 골라 저장한다"
+    ],
+    "answer": 1,
+    "explain": "index=False는 행 인덱스를 파일에 쓰지 않게 하고, encoding='utf-8-sig'는 엑셀에서 한글이 깨지지 않게 해준다. 결측치 제거나 컬럼 선택과는 무관하다."
+  }
+]

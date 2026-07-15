@@ -1,0 +1,151 @@
+[
+ {
+  "id": "ml-lr-001",
+  "type": "explain",
+  "content": [
+   {
+    "type": "text",
+    "content": "같은 종류의 데이터에 각각 선형회귀(빨간 직선)를 적용한 두 그래프 A, B다. (R2는 결정계수)"
+   },
+   {
+    "type": "image",
+    "src": "/images/lr-r2.png",
+    "alt": "R2 비교",
+    "width": 80,
+    "align": "center"
+   },
+   {
+    "type": "text",
+    "content": "A와 B 중 예측 성능이 더 좋은 쪽을 고르고, 그렇게 판단한 근거와 성능이 낮은 쪽이 왜 낮은지 서술하시오."
+   },
+   {
+    "type": "answer-box",
+    "lines": 6
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "B(R2=0.94)가 A(R2=0.34)보다 성능이 좋다. R2가 1에 가까울수록 점들이 직선에 가깝게 모여 예측이 잘 맞기 때문이다. A는 점들이 직선에서 멀리 넓게 흩어져 있어(분산이 큼) 직선으로 예측하기 어려워 R2가 낮다."
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "채점 포인트",
+    "content": [
+     {
+      "type": "text",
+      "content": "R2(결정계수)는 1에 가까울수록 데이터가 직선에 잘 맞는다는 뜻."
+     },
+     {
+      "type": "text",
+      "content": "B의 R2(0.94)가 A의 R2(0.34)보다 크므로 B가 성능이 좋다."
+     },
+     {
+      "type": "text",
+      "content": "A가 낮은 이유: 점들이 직선에서 멀리 흩어져 있어(큰 분산) 직선이 잘 설명하지 못한다."
+     },
+     {
+      "type": "text",
+      "content": "(이상치/비선형 관계도 R2를 낮추는 원인으로 언급하면 가점)"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ml-lr-002",
+  "type": "explain",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드를 읽고 물음에 답하시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "from sklearn.linear_model import LinearRegression\n\nmodel = LinearRegression()\nmodel.fit(X, y)        # X: 공부 시간, y: 시험 점수\nprint(model.predict([[7]]))   # 공부 7시간일 때"
+   },
+   {
+    "type": "text",
+    "content": "이 코드가 무엇을 예측하는지 쓰고, 그 예측 결과가 분류와 회귀 중 어느 것에 해당하는지 이유와 함께 서술하시오."
+   },
+   {
+    "type": "answer-box",
+    "lines": 5
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "공부 시간(X)으로 시험 점수(y)를, 특히 7시간 공부했을 때의 예상 점수를 예측한다. 예측 결과는 숫자(회귀)다. 시험 점수처럼 연속적인 수치를 예측하므로 회귀이며, 범주(합격/불합격 등)를 고르는 분류와 다르다."
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "채점 포인트",
+    "content": [
+     {
+      "type": "text",
+      "content": "fit(X, y)로 공부시간-점수 관계를 학습하고 predict([[7]])로 7시간일 때 점수를 예측."
+     },
+     {
+      "type": "text",
+      "content": "점수는 연속적인 숫자 -> 회귀(LinearRegression)."
+     },
+     {
+      "type": "text",
+      "content": "범주를 고르는 분류와 구분되면 정답."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ml-lr-003",
+  "type": "explain",
+  "content": [
+   {
+    "type": "text",
+    "content": "어떤 데이터에 선형회귀를 적용했더니 회귀직선(빨간 선)이 대부분의 점들과 동떨어지게 나왔다."
+   },
+   {
+    "type": "image",
+    "src": "/images/lr-outlier.png",
+    "alt": "회귀 결과",
+    "width": 85,
+    "align": "center"
+   },
+   {
+    "type": "text",
+    "content": "이 직선이 데이터의 경향과 맞지 않는 원인이 무엇인지, 그리고 어떻게 해결해야 하는지 서술하시오."
+   },
+   {
+    "type": "answer-box",
+    "lines": 6
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "데이터 대부분은 일정한 직선 경향을 보이는데, 멀리 동떨어진 점(이상치) 하나가 회귀직선을 그 쪽으로 끌어당겨 직선이 대부분의 점에서 벗어났다. 전처리 단계에서 이런 이상치를 찾아 제거(또는 수정)한 뒤 다시 학습해야 한다."
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "채점 포인트",
+    "content": [
+     {
+      "type": "text",
+      "content": "원인: 다른 점들과 크게 떨어진 이상치 1개가 회귀직선을 끌어당겼다."
+     },
+     {
+      "type": "text",
+      "content": "선형회귀는 모든 점과의 오차를 줄이려 하므로 멀리 있는 한 점에도 크게 흔들린다."
+     },
+     {
+      "type": "text",
+      "content": "해결: 전처리에서 이상치를 찾아 제거/수정한 뒤 다시 학습한다."
+     }
+    ]
+   }
+  ]
+ }
+]

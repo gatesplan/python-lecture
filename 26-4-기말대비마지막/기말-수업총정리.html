@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보 기말고사 수업 총정리</title>
+<style>
+  body { font-family: "Malgun Gothic", "맑은 고딕", sans-serif; max-width: 920px;
+         margin: 0 auto; padding: 24px; line-height: 1.65; color: #111; }
+  h1 { border-bottom: 3px solid #333; padding-bottom: 8px; }
+  h2 { margin-top: 44px; border-bottom: 2px solid #888; padding-bottom: 4px; }
+  h3 { margin-top: 28px; }
+  h4 { margin-top: 18px; margin-bottom: 4px; }
+  table { border-collapse: collapse; margin: 10px 0; width: 100%; }
+  th, td { border: 1px solid #999; padding: 5px 9px; text-align: left; vertical-align: top; }
+  th { background: #eee; }
+  pre { background: #f5f5f5; border: 1px solid #ddd; padding: 10px; overflow-x: auto;
+        white-space: pre; font-family: Consolas, "D2Coding", monospace; font-size: 13px; }
+  code { background: #f0f0f0; padding: 1px 4px; font-family: Consolas, monospace; font-size: 13px; }
+  ul, ol { margin: 6px 0; }
+  .toc { border: 1px solid #ccc; padding: 12px 18px; background: #fafafa; }
+  .toc a { text-decoration: none; color: #0033aa; }
+  .note { border-left: 4px solid #888; padding: 4px 12px; margin: 10px 0; background: #f8f8f8; }
+  .warn { border-left: 4px solid #c33; padding: 4px 12px; margin: 10px 0; background: #fdf3f3; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 30px 0; }
+  h3.collapsible { cursor: pointer; user-select: none; }
+  h3.collapsible:hover { color: #0033aa; }
+  .toggle-marker { color: #888; font-family: Consolas, monospace; font-weight: normal; }
+</style>
+</head>
+<body>
+
+<h1>정보 기말고사 수업 총정리</h1>
+<p>이번 학기에 배운 내용을 시험 전 한 번에 훑어보기 위한 정리본이다. 파이썬 문법부터
+데이터 압축/암호화, 네트워크/사물인터넷, 데이터 처리(pandas), 클래스, 인공지능까지
+수업에서 다룬 개념을 차례로 담았다.</p>
+
+<div class="note">
+<b>기말 범위 요약</b>
+<ul>
+<li>문법: 딕셔너리/튜플/리스트(중간고사 난이도 기반) + 데이터 및 인공지능 파트</li>
+<li>중간에 다룬 윤리/시스템 파트는 기말 제외</li>
+<li>클래스와 객체, AI 전체 흐름(데이터 로드 -> 학습 -> 분류) 이해 필수</li>
+<li>객관식은 최대 7문항 수준(함정 문제 포함), 서술형은 AI 흐름 이해 위주, 코딩 문제는 개념 통합형</li>
+<li>표를 print로 깔끔하게 출력하는 서식 지정자 출제 예고</li>
+</ul>
+</div>
+
+<div class="toc">
+<b>목차</b>
+<ol>
+<li><a href="#s1">파이썬 기초 문법</a></li>
+<li><a href="#s2">시험 함정 핵심 개념 (변수와 객체)</a></li>
+<li><a href="#s3">자료구조와 알고리즘</a></li>
+<li><a href="#s4">데이터의 압축과 암호화</a></li>
+<li><a href="#s5">네트워크와 사물인터넷</a></li>
+<li><a href="#s6">데이터 처리 (pandas)</a></li>
+<li><a href="#s7">클래스와 객체</a></li>
+<li><a href="#s8">인공지능과 머신러닝</a></li>
+</ol>
+</div>
+
+<hr>
+
+<!-- ===================== 1 ===================== -->
+<h2 id="s1">1. 파이썬 기초 문법</h2>
+
+<h3>1.1 입력과 출력</h3>
+<pre>print("A", "B", "C", sep="*")   # A*B*C
+print("hello", end=' ')
+print("world")                  # hello world</pre>
+<ul>
+<li><code>sep</code>: 여러 인자 사이 구분자(기본 공백), <code>end</code>: 출력 끝에 붙일 문자(기본 줄바꿈 \n).</li>
+<li><code>input()</code>의 반환값은 항상 <b>문자열</b>. 계산하려면 <code>int()</code> / <code>float()</code> 변환 필수.</li>
+<li>공백으로 구분된 여러 값 입력: <code>a, b = map(int, input().split())</code>, 개수 모르면 <code>list(map(int, input().split()))</code>.</li>
+</ul>
+
+<h3>1.2 연산자</h3>
+<ul>
+<li>산술: <code>//</code> 정수 나눗셈(소수점 버림), <code>%</code> 나머지, <code>**</code> 거듭제곱.</li>
+<li>복합 대입: <code>a *= 7</code>은 <code>a = a * 7</code>의 축약형(<code>+= -= *= /= //= %= **=</code> 모두 동일).</li>
+<li>비교 결과는 <code>True</code> / <code>False</code>. <code>==</code>(비교)와 <code>=</code>(대입)을 혼동하지 말 것.</li>
+<li>논리: <code>and</code>(둘 다 참), <code>or</code>(하나라도 참), <code>not</code>(뒤집기).</li>
+<li>우선순위: 산술 &gt; 비교 &gt; <code>not</code> &gt; <code>and</code> &gt; <code>or</code>. 헷갈리면 괄호.</li>
+</ul>
+<div class="note">대입연산자 추적 문제는 <b>위에서부터 한 줄씩</b> 실행하며 직전 결과를 다음 줄에 반영하는 것이 핵심이다.</div>
+
+<h3>1.3 조건문 (if / elif / else)</h3>
+<pre>if score &lt; 0 or score &gt; 100:
+    print("데이터 오류")
+elif score &gt;= 95:
+    print("A+")
+elif score &gt;= 90:
+    print("A")
+else:
+    print("F")</pre>
+<ul>
+<li>조건 뒤 반드시 콜론(<code>:</code>), 블록은 <b>들여쓰기</b>로 구분(파이썬은 들여쓰기가 문법).</li>
+<li><code>elif</code>는 위에서부터 검사해 <b>처음 참이 되는 블록 하나만</b> 실행. 구간 분기는 가장 엄격한 조건부터.</li>
+<li>범위 체크는 <code>10 &lt;= x &lt;= 20</code> 연속 비교 가능(<code>x &gt;= 10 and x &lt;= 20</code>과 동등).</li>
+<li>입력값 유효성 검사는 맨 위에 배치. "이거나"는 <code>or</code>, "그리고"는 <code>and</code>.</li>
+</ul>
+
+<h3>1.4 반복문 (for / while)</h3>
+<pre>for i in range(1, 100, 2):    # 1,3,5,...,99
+    print(i)
+
+while total &lt; 30:
+    n = int(input())
+    total += n</pre>
+<ul>
+<li><code>range(start, stop, step)</code>: stop은 <b>미포함</b>. step이 음수면 감소(start &gt; stop이어야 함).</li>
+<li><code>for</code>는 횟수 중심(몇 번 돌지 알 때), <code>while</code>은 조건 중심(언제 끝날지 모를 때).</li>
+<li><code>break</code>: 반복문 완전 종료. <code>continue</code>: 현재 회차만 건너뛰고 조건 검사로 복귀.</li>
+<li>누적 변수(<code>total = 0</code> 등)는 반드시 <b>반복문 밖</b>에서 초기화.</li>
+</ul>
+<div class="warn"><code>continue</code>를 쓸 때 증감식(<code>i += 1</code>)을 빠뜨리면 무한루프. 무한루프 원인 1순위.</div>
+
+<h3>1.5 리스트</h3>
+<pre>arr = ['A', 'B', 'C', 'D', 'E']
+print(arr[-1])    # 'E' (마지막)
+print(arr[0:2])   # ['A', 'B'] (끝 미포함)
+print(arr[2:])    # ['C', 'D', 'E']
+
+arr.append('F')     # 맨 뒤 추가
+arr.insert(1, 'Z')  # 인덱스 1에 끼우기
+arr.remove('Z')     # 값 'Z' 삭제(첫 번째만)
+x = arr.pop()     # 맨 뒤 꺼내며 값 반환
+arr.sort()        # 오름차순 (리스트 자체 변경, 반환값 없음)</pre>
+<ul>
+<li>인덱스는 0부터. 음수는 뒤에서부터 -1, -2 ... 슬라이싱 <code>[시작:끝]</code>은 끝 인덱스 <b>미포함</b>.</li>
+<li><code>remove(값)</code>은 값으로 삭제, <code>pop(인덱스)</code>는 위치로 삭제하며 값 반환.</li>
+<li><code>sort()</code>는 원본 변경/반환 없음, <code>sorted(arr)</code>는 새 리스트 반환. <code>sort(reverse=True)</code>는 내림차순.</li>
+<li><code>len(arr)</code>만 내장함수 형태, 나머지는 <code>arr.메서드()</code> 형태.</li>
+<li>2차원: <code>arr[행][열]</code>로 접근. 중첩 for로 순회.</li>
+</ul>
+
+<h3>1.6 튜플</h3>
+<pre>colors = ('red', 'blue')
+a, b = colors          # 언패킹
+new = colors + ('green',)   # 새 튜플 생성 (수정은 불가)
+a, b = b, a            # 변수 스왑 (우변이 튜플로 묶인 뒤 언패킹)</pre>
+<ul>
+<li>튜플은 <code>()</code>, 수정 불가(immutable). 요소 1개짜리는 반드시 쉼표: <code>(5,)</code> (<code>(5)</code>는 그냥 숫자 5).</li>
+<li>여러 값을 한 번에 묶어 반환할 때 자주 쓴다(예: <code>return (목록, 잔액)</code>).</li>
+</ul>
+
+<h3>1.7 딕셔너리</h3>
+<pre>stu = {"name": "Alice", "age": 20}
+stu["grade"] = "A"          # 키 추가 / 같은 키면 덮어쓰기
+print("grade" in stu)       # True (존재 확인)
+print(stu.get("height"))            # None (에러 없음)
+print(stu.get("height", "없음"))    # 기본값 반환
+
+count = {}
+for ch in "banana":
+    count[ch] = count.get(ch, 0) + 1   # 빈도 세기 표준 패턴
+
+for name, value in stu.items():        # 키+값 순회
+    print(name, value)</pre>
+<ul>
+<li>없는 키를 <code>[]</code>로 접근하면 <b>KeyError</b>. <code>get()</code>은 에러 대신 None(또는 지정 기본값).</li>
+<li>키는 중복 불가. 키+값 순회는 <code>for k, v in d.items()</code> 형태.</li>
+</ul>
+<div class="note">배운 범위: 딕셔너리 메서드는 <code>get()</code> / <code>items()</code> / <code>values()</code>만 사용. 키+값 순회는 반드시 <code>for k, v in d.items()</code>.</div>
+
+<h3>1.8 함수</h3>
+<pre>def total(n):
+    s = 0
+    for i in range(1, n + 1):
+        s += i
+    return s            # return 없으면 None 반환
+
+apple = 10              # 전역
+def eat():
+    global apple        # 함수 안에서 전역 값을 바꾸려면 global 선언
+    apple = 3</pre>
+<ul>
+<li>정의는 <code>def 이름(매개변수):</code>, 반환은 <code>return 값</code>.</li>
+<li>매개변수(parameter)는 정의 시, 인자(argument)는 호출 시 넘기는 값.</li>
+<li>지역변수는 함수 안에서만 생존. 전역변수는 <b>읽기만</b> 할 때는 그냥 사용 가능하나, <b>값을 바꾸려면 <code>global</code></b> 필요.</li>
+<li>내장함수: <code>len(), abs(), max(), min(), sum(), divmod(), int(), str(), list(), range(), map()</code>.</li>
+<li>외장함수: <code>import 모듈</code> 후 <code>모듈.함수()</code>. 예: <code>random.randint(1, 6)</code>.</li>
+</ul>
+
+<h3>1.9 f-string과 서식 지정자</h3>
+<pre>name = "파이썬"; count = 3; price = 5000
+print(f"{name} {count}인분: {price * count}원")   # 중괄호 안에 변수/연산 가능</pre>
+<p>"표를 깔끔하게 출력"하는 서식 지정자가 출제 예고됐다. 정리해 둘 것.</p>
+<table>
+<tr><th>지정자</th><th>의미</th><th>예시 -> 결과</th></tr>
+<tr><td><code>:.2f</code></td><td>소수점 둘째 자리까지</td><td><code>f"{10/3:.2f}"</code> -> <code>3.33</code></td></tr>
+<tr><td><code>:&gt;N</code></td><td>폭 N, 오른쪽 정렬</td><td><code>f"{22:&gt;4}"</code> -> <code>"  22"</code></td></tr>
+<tr><td><code>:&lt;N</code></td><td>폭 N, 왼쪽 정렬</td><td><code>f"{'bb':&lt;5}"</code> -> <code>"bb   "</code></td></tr>
+<tr><td><code>:^N</code></td><td>폭 N, 가운데 정렬</td><td><code>f"{'MENU':^10}"</code> -> <code>"   MENU   "</code></td></tr>
+<tr><td><code>:&gt;7.2f</code></td><td>조합(폭 7, 오른쪽, 소수 2자리)</td><td><code>f"{2.5:&gt;7.2f}"</code> -> <code>"   2.50"</code></td></tr>
+</table>
+
+<p>각 지정자의 실제 동작을 예시로 확인한다. (아래 1.9.x 제목을 누르면 접기/펼치기)</p>
+
+<h4>1.9.1 소수점 자리 :.Nf</h4>
+<pre>print(f"{1234.5:.2f}")   # 1234.50
+print(f"{10/3:.2f}")     # 3.33
+print(f"{91.5:.1f}")     # 91.5</pre>
+<p>N자리까지 반올림해 고정 소수점으로 출력한다. 모자란 자리는 0으로 채운다.</p>
+
+<h4>1.9.2 오른쪽 정렬 :&gt;N</h4>
+<pre>for n in [1, 22, 333]:
+    print(f"[{n:&gt;4}]")
+# [   1]
+# [  22]
+# [ 333]</pre>
+<p>폭 N칸을 확보하고 값을 오른쪽으로 붙인다(왼쪽을 공백으로 채움). 숫자 칸을 맞출 때 쓴다.</p>
+
+<h4>1.9.3 왼쪽 정렬 :&lt;N</h4>
+<pre>for word in ["a", "bb", "ccc"]:
+    print(f"{word:&lt;5}|")
+# a    |
+# bb   |
+# ccc  |</pre>
+<p>폭 N칸을 확보하고 값을 왼쪽으로 붙인다(오른쪽을 공백으로 채움). 이름/문자열 칸을 맞출 때 쓴다.</p>
+
+<h4>1.9.4 가운데 정렬 :^N</h4>
+<pre>print(f"|{'MENU':^10}|")   # |   MENU   |</pre>
+<p>폭 N칸 안에서 값을 가운데로 둔다(남는 칸을 좌우로 나눠 채움).</p>
+
+<h4>1.9.5 조합 :&gt;7.2f</h4>
+<pre>data = [("Rice", 2.5), ("Oil", 12.0)]
+for name, price in data:
+    print(f"{name:&lt;6}{price:&gt;7.2f}")
+# Rice     2.50
+# Oil     12.00</pre>
+<p>정렬, 폭, 소수점 자리를 한 번에 지정한다. "표를 print로 깔끔하게 출력"하는 핵심 패턴이다.</p>
+
+<hr>
+
+<!-- ===================== 2 ===================== -->
+<h2 id="s2">2. 시험 함정 핵심 개념 (변수와 객체)</h2>
+<p>객관식 함정과 서술형이 집중되는 부분이다. "변수는 값을 담는 상자가 아니라 객체에 붙은 이름표"라는 모델로 이해해야 한다.</p>
+
+<h3>2.1 이름표 모델과 가변/불변</h3>
+<ul>
+<li>대입(<code>b = a</code>)은 값을 복사하는 것이 아니라 같은 객체에 이름을 하나 더 붙이는 것.</li>
+<li><b>가변(mutable)</b>: 리스트, 딕셔너리 -> 내부 수정 가능. <b>불변(immutable)</b>: 정수, 문자열, 튜플 -> 내부 수정 불가.</li>
+</ul>
+<pre>a = [1, 2]
+b = a          # a와 b는 같은 리스트 객체
+a[1] = 99      # 객체 내부를 수정(mutation)
+print(b)       # [1, 99]  <- b도 같이 바뀜</pre>
+<pre>a = [1, 2]
+b = a
+a = [3, 4]     # a라는 이름표를 새 객체로 옮김(rebinding)
+print(a, b)    # [3, 4] [1, 2]  <- b는 원래 객체 그대로</pre>
+<div class="warn"><b>핵심 구분</b>: <code>a[i] = ...</code>(객체 내부 수정)와 <code>a = ...</code>(이름표 교체)는 완전히 다르게 동작한다.</div>
+
+<h3>2.2 리스트 복사의 함정</h3>
+<pre># 같은 행을 3번 참조하는 함정
+grid = [[0] * 3] * 3
+grid[0][0] = 1
+print(grid)   # [[1,0,0],[1,0,0],[1,0,0]]  <- 세 행이 동시에 바뀜
+
+# 올바른 방법: 매 반복마다 새 리스트 생성
+grid = [[0] * 3 for _ in range(3)]</pre>
+<ul>
+<li><code>[[0]*3]*3</code>은 같은 리스트 객체 하나를 세 번 가리킨다.</li>
+<li>얕은 복사(<code>b = a[:]</code>)는 바깥 리스트만 새로 만들고 안쪽 리스트는 참조를 공유한다. 2차원을 완전히 분리하려면 <code>[row[:] for row in a]</code> 또는 <code>copy.deepcopy()</code>.</li>
+<li>1차원 정수 리스트 <code>[0]*4</code>는 정수가 불변이라 참조 공유 문제가 없다.</li>
+</ul>
+
+<h3>2.3 튜플 불변성의 정확한 의미</h3>
+<pre>t = ([1, 2], 3)
+t[0].append(9)   # 가능! t는 ([1, 2, 9], 3)
+# t[0] = [9, 9]  # TypeError (슬롯 교체 불가)
+# del t[0]       # TypeError (슬롯 삭제 불가)</pre>
+<p>튜플의 불변성은 "튜플 자신의 구조(슬롯 개수와 각 슬롯이 가리키는 참조)가 바뀌지 않는다"는 뜻이지,
+슬롯이 가리키는 객체(리스트 등)의 내부까지 못 바꾼다는 뜻이 아니다.</p>
+
+<h3>2.4 참/거짓 판정 (truthy / falsy)</h3>
+<p><code>if</code> 조건의 값은 자동으로 참/거짓으로 평가된다. <b>거짓(falsy)</b>으로 판정되는 값:</p>
+<ul>
+<li>숫자 <code>0</code>, <code>0.0</code></li>
+<li>빈 문자열 <code>""</code></li>
+<li>빈 컨테이너 <code>[]</code>, <code>()</code>, <code>{}</code></li>
+<li><code>None</code>, <code>False</code></li>
+</ul>
+<div class="warn">함정: <code>"False"</code>(글자가 있는 문자열)와 <code>[0]</code>(요소 1개 리스트)는 모두 <b>참(truthy)</b>이다. 판정은 오직 "비었는가/영인가"만 본다.</div>
+
+<hr>
+
+<!-- ===================== 3 ===================== -->
+<h2 id="s3">3. 자료구조와 알고리즘</h2>
+
+<h3>3.1 선형 vs 비선형 자료구조</h3>
+<ul>
+<li><b>선형</b>(요소가 1:1로 차례로 연결): 배열, 리스트, 스택, 큐</li>
+<li><b>비선형</b>(한 요소가 여러 요소와 연결, 계층/관계형): 트리, 그래프</li>
+</ul>
+
+<h3>3.2 2차원 리스트 처리</h3>
+<pre>matrix = [[1,2,3],[4,5,6],[7,8,9]]
+
+# 대각합
+s = 0
+for i in range(3):
+    s += matrix[i][i]          # 15
+
+# 열 합계
+col_sums = [0] * 3
+for row in matrix:
+    for j in range(3):
+        col_sums[j] += row[j]
+
+# 전치(행/열 뒤바꾸기)
+n = 3                              # 행/열 크기
+for i in range(n):
+    for j in range(i + 1, n):
+        matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]</pre>
+<ul>
+<li>열별 합계는 결과 리스트를 0으로 초기화한 뒤, 모든 행을 돌며 같은 열 인덱스에 누적한다.</li>
+<li>최댓값 위치는 좌표 두 개(<code>best_i</code>, <code>best_j</code>)를 관리하고 <code>&gt;</code>로 비교(같은 값은 갱신 안 함 -> 앞쪽 우선).</li>
+</ul>
+
+<h3>3.3 탐색</h3>
+<h4>순차(선형) 탐색</h4>
+<pre>def search(arr, x):
+    for i in range(len(arr)):
+        if arr[i] == x:
+            return i      # 찾으면 즉시 반환
+    return -1             # 끝까지 없으면 -1</pre>
+<h4>이진 탐색 (정렬된 리스트 전제)</h4>
+<pre>while lo &lt;= hi:
+    mid = (lo + hi) // 2
+    if data[mid] == target:
+        return mid
+    elif data[mid] &lt; target:
+        lo = mid + 1      # 오른쪽 절반
+    else:
+        hi = mid - 1      # 왼쪽 절반
+return -1</pre>
+<ul>
+<li>전제: 데이터가 <b>정렬</b>되어 있어야 한다(정렬 안 됐으면 절반을 버리는 판단이 틀려서 못 찾는다).</li>
+<li>매 단계 범위가 절반으로 줄어 데이터 n개일 때 약 log2(n)번 비교(100만 개여도 약 20번). 순차 탐색의 O(n)보다 훨씬 빠름.</li>
+<li>반복(while) 방식과 재귀 방식 둘 다 구현 가능.</li>
+</ul>
+
+<h3>3.4 슬라이딩 윈도우</h3>
+<pre>data = [1, 5, 2, 8, 3]; k = 3
+for i in range(len(data) - k + 1):   # 끝범위 +1 주의
+    print(data[i:i+k])               # 길이 k 창문을 한 칸씩 이동</pre>
+<p>시작 인덱스 범위는 <code>0 .. len(data)-k</code>. <code>range(... - k + 1)</code>의 <code>+1</code>을 빠뜨리면 마지막 창문이 누락된다.</p>
+
+<h3>3.5 재귀</h3>
+<p>재귀 함수는 "자기 자신을 호출"하며, 문제를 한 단계 작은 같은 문제로 줄여 푼다. 설계의 두 축:</p>
+<ol>
+<li><b>종료조건(base case)</b>: 더 이상 호출하지 않고 답을 곧장 반환(없으면 RecursionError).</li>
+<li><b>재귀 호출</b>: 입력을 줄여 자기 자신 호출, 그 결과로 현재 답을 만듦.</li>
+</ol>
+<pre>def power(a, n):           # 거듭제곱
+    if n == 0:
+        return 1
+    return a * power(a, n - 1)
+
+def gcd(a, b):             # 최대공약수(유클리드 호제법)
+    if b == 0:
+        return a
+    return gcd(b, a % b)</pre>
+<div class="note">재귀 <-> 반복 변환: 종료조건 반환값 = 누적변수 초깃값, 재귀 깊이 = 반복 횟수, 매 단계 더하는 값이 서로 대응된다. 변환 시 <code>range</code> 끝값(<code>n+1</code>)과 누적변수 위치(반복문 밖)에 주의.</div>
+
+<h3>3.6 수론과 자릿수 처리</h3>
+<div class="note">이 단원은 시험 범위로 지정된 것이 아니라 <b>코드 연습용</b>으로 모은 자료다. 자료구조와 제어문을 활용하는 대표적인 수론/자릿수 처리 패턴을 주제별 예시 코드로 정리했다. 각 제목(3.6.x)을 눌러 접고 펼칠 수 있다.</div>
+
+<table>
+<tr><th>주제</th><th>핵심 패턴</th></tr>
+<tr><td>약수/약수 개수</td><td><code>for i in range(1, n+1): if n % i == 0:</code></td></tr>
+<tr><td>소수 판별</td><td>약수 개수가 정확히 2개(1과 자기 자신)</td></tr>
+<tr><td>완전수</td><td>자기 자신을 뺀 약수의 합 == 자기 자신</td></tr>
+<tr><td>최대공약수/최소공배수</td><td><code>gcd</code>(유클리드), <code>lcm = a * b // gcd</code></td></tr>
+<tr><td>자릿수 분해</td><td><code>n % 10</code>(끝자리), <code>n //= 10</code>(자리 줄이기)</td></tr>
+<tr><td>자릿수 합/최대 자릿수</td><td>위 분해를 <code>while n &gt; 0</code>으로 반복</td></tr>
+<tr><td>회문(숫자)</td><td><code>rev = rev * 10 + n % 10</code>으로 뒤집어 원본과 비교</td></tr>
+<tr><td>팩토리얼</td><td><code>result = 1; for i in range(1, n+1): result *= i</code></td></tr>
+<tr><td>피보나치</td><td><code>fib.append(fib[i-1] + fib[i-2])</code></td></tr>
+<tr><td>진법 변환</td><td><code>value*base+digit</code>(읽기), <code>n%base</code>/<code>n//=base</code>(만들기)</td></tr>
+</table>
+
+<h4>3.6.1 약수와 약수 개수</h4>
+<pre>def divisors(n):
+    result = []
+    for i in range(1, n + 1):
+        if n % i == 0:        # 나누어떨어지면 약수
+            result.append(i)
+    return result
+
+print(divisors(12))        # [1, 2, 3, 4, 6, 12]
+print(len(divisors(12)))   # 6  (약수 개수)</pre>
+<p>1부터 n까지 돌며 n을 나누어떨어지게 하는 수가 약수다. 약수 개수만 필요하면 리스트 대신 카운터 변수 하나만 늘려도 된다.</p>
+
+<h4>3.6.2 소수 판별</h4>
+<pre>def is_prime(n):
+    if n &lt; 2:
+        return False           # 0, 1은 소수가 아님
+    for i in range(2, n):
+        if n % i == 0:
+            return False       # 1과 자신 외의 약수를 만나면 소수 아님
+    return True
+
+print(is_prime(13))   # True
+print(is_prime(10))   # False</pre>
+<p>약수가 1과 자기 자신 둘뿐이면 소수다. 2부터 n-1까지 중 하나라도 나누어떨어지면 소수가 아니다.</p>
+
+<h4>3.6.3 완전수</h4>
+<pre>def is_perfect(n):
+    total = 0
+    for i in range(1, n):      # 자기 자신은 제외
+        if n % i == 0:
+            total += i
+    return total == n
+
+print(is_perfect(6))    # True   (1 + 2 + 3 = 6)
+print(is_perfect(28))   # True   (1 + 2 + 4 + 7 + 14 = 28)
+print(is_perfect(12))   # False</pre>
+<p>자기 자신을 뺀 약수(진약수)의 합이 자기 자신과 같으면 완전수다.</p>
+
+<h4>3.6.4 최대공약수(GCD)와 최소공배수(LCM)</h4>
+<pre>def gcd(a, b):
+    while b:                   # b가 0이 될 때까지 반복
+        a, b = b, a % b
+    return a
+
+def lcm(a, b):
+    return a * b // gcd(a, b)
+
+print(gcd(48, 18))   # 6
+print(lcm(12, 18))   # 36</pre>
+<p>유클리드 호제법: 큰 수를 작은 수로 나눈 나머지로 계속 바꾸다가 나머지가 0이 되면 그때의 a가 최대공약수다. 최소공배수는 두 수의 곱을 최대공약수로 나눈 값이다.</p>
+
+<h4>3.6.5 자릿수 분해</h4>
+<pre>n = 6358
+while n &gt; 0:
+    digit = n % 10        # 끝자리 꺼내기
+    print(digit)          # 8, 5, 3, 6  (끝자리부터)
+    n //= 10              # 끝자리 떼어내기</pre>
+<p><code>n % 10</code>으로 끝자리를 얻고, <code>n //= 10</code>으로 자리를 하나씩 줄인다. 끝자리부터 차례로 나온다는 점에 주의한다.</p>
+
+<h4>3.6.6 자릿수 합 / 개수 / 최대 자릿수</h4>
+<pre>n = 6358
+total = 0      # 자릿수의 합
+count = 0      # 자릿수 개수
+biggest = 0    # 가장 큰 자릿수
+
+while n &gt; 0:
+    d = n % 10
+    total += d
+    count += 1
+    if d &gt; biggest:
+        biggest = d
+    n //= 10
+
+print(total, count, biggest)   # 22 4 8</pre>
+<p>자릿수 분해를 반복하면서 합/개수/최댓값을 동시에 누적한다. 누적 변수는 반복문 밖에서 초기화한다.</p>
+
+<h4>3.6.7 회문(숫자) 판별</h4>
+<pre>n = 1221
+original = n
+rev = 0
+while n &gt; 0:
+    rev = rev * 10 + n % 10    # 끝자리를 앞으로 쌓아 숫자를 뒤집음
+    n //= 10
+print(rev == original)         # True (앞뒤가 같으면 회문)</pre>
+<p>숫자를 뒤집은 값이 원래 값과 같으면 회문이다. 원본을 <code>original</code>에 따로 보관한 뒤 비교한다(반복하며 n이 0이 되기 때문).</p>
+
+<h4>3.6.8 팩토리얼</h4>
+<pre>def factorial(n):
+    result = 1            # 곱셈 누적의 시작값은 1
+    for i in range(1, n + 1):
+        result *= i
+    return result
+
+print(factorial(5))   # 120  (1*2*3*4*5)</pre>
+<p>곱을 누적하므로 초깃값은 0이 아니라 1로 둔다. 1부터 n까지 차례로 곱한다.</p>
+
+<h4>3.6.9 피보나치 수열</h4>
+<pre>fib = [1, 1]              # 첫 두 항
+for i in range(2, 10):
+    fib.append(fib[i - 1] + fib[i - 2])   # 앞 두 항의 합
+print(fib)   # [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</pre>
+<p>바로 앞 두 항을 더해 다음 항을 만든다. 인덱스 <code>i-1</code>, <code>i-2</code>를 쓰므로 시작 두 항을 미리 채워 둔다.</p>
+
+<h4>3.6.10 진법 변환</h4>
+<pre># 2진수 문자열 -> 10진수 값  (왼쪽부터 읽기)
+value = 0
+for ch in "1011":
+    value = value * 2 + int(ch)
+print(value)   # 11
+
+# 10진수 -> 2진수 문자열  (나머지를 앞에 붙이기)
+n = 13
+result = ""
+while n &gt; 0:
+    result = str(n % 2) + result
+    n //= 2
+print(result)   # 1101</pre>
+<p>읽기는 <code>value = value * base + digit</code>, 만들기는 <code>n % base</code>(자리값)와 <code>n //= base</code>(자리 줄이기)가 핵심이다. <code>base</code>만 2 대신 3, 5 등으로 바꾸면 다른 진법에 그대로 적용된다.</p>
+
+<hr>
+
+<!-- ===================== 4 ===================== -->
+<h2 id="s4">4. 데이터의 압축과 암호화</h2>
+
+<h3>4.1 데이터 단위</h3>
+<table>
+<tr><th>데이터</th><th>크기</th></tr>
+<tr><td>숫자, 영문</td><td>1 byte</td></tr>
+<tr><td>한글</td><td>2 byte</td></tr>
+</table>
+<table>
+<tr><th>단위</th><th>크기(교과서 기준)</th></tr>
+<tr><td>1 KB</td><td>1024 byte</td></tr>
+<tr><td>1 MB</td><td>1024 KB</td></tr>
+<tr><td>1 GB</td><td>1024 MB</td></tr>
+<tr><td>1 TB</td><td>1024 GB</td></tr>
+</table>
+<div class="note">엄밀히는 1024 배수는 <b>KiB/MiB/GiB(이진 접두어, IEC)</b>이고, KB/MB/GB(SI)는 원래 1000 배수다. 저장장치 제조사는 1000 기준, RAM은 1024 기준, Windows는 1024로 계산하면서 GB로 표기해 "1TB가 약 931GB"로 보이는 혼란이 생긴다. 시험 표기 기준은 선생님 안내(보통 1KB=1024byte)를 따른다.</div>
+<p>단위 변환은 코드로도 출제 가능: <code>while total_bytes &gt;= 1024: total_bytes //= 1024; unit += 1</code> 형태로 몇 단계 올라가는지 센다.</p>
+
+<h3>4.2 압축의 종류</h3>
+<ul>
+<li><b>무손실 압축</b>(원본 완전 복원): ZIP, PNG, GIF</li>
+<li><b>손실 압축</b>(일부 손실, 용량 대폭 감소): JPEG, MPEG, MP3</li>
+</ul>
+<p>필요성: 전송 시간 단축, 전송 에너지 절약, 풀면 원래 형식으로 복원되어 안전하게 운용.</p>
+<div class="note">GIF는 압축 알고리즘(LZW)은 무손실이지만 256색으로 제한되어 풀컬러 사진은 색상 손실이 생긴다. 교과서/내신에서는 "GIF=무손실"로 단순화한다.</div>
+
+<h3>4.3 런 길이 부호화 (Run-Length Encoding)</h3>
+<p>같은 문자가 연속된 구간을 (문자)(개수)로 표현.</p>
+<pre>AAADDBOOOO  ->  A3D2B1O4
+(10 byte)       (8 byte)</pre>
+
+<h3>4.4 허프만 부호화 (Huffman Coding)</h3>
+<ol>
+<li>문자별 빈도를 센다.</li>
+<li>빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).</li>
+<li>합칠 때 한쪽은 0, 다른 쪽은 1을 부여(왼쪽 0, 오른쪽 1). 빈도가 자주 나오는 글자일수록 짧은 코드.</li>
+<li>각 문자의 코드로 원문을 변환해 비트열을 만든다.</li>
+</ol>
+<div class="note">동점 처리 규칙(출제 기준): 빈도가 같으면 ASCII가 작은 노드를 먼저 고르고, 합칠 때 ASCII가 작은 쪽을 왼쪽(0)에 둔다. ASCII 순서 A(65) &lt; B(66) &lt; ... &lt; Z(90).</div>
+
+<h3>4.5 카이사르(시저) 암호</h3>
+<p>각 알파벳을 정해진 칸수만큼 뒤로 민다. Z를 넘으면 A로 순환(글자 자체를 바꾸는 치환 암호).</p>
+<pre># 암호화 (shift만큼 뒤로)
+out = ""
+for ch in msg:
+    out += chr((ord(ch) - ord('a') + shift) % 26 + ord('a'))
+
+# 복호화는 shift만큼 빼면 됨 (- shift)</pre>
+<p><code>% 26</code>으로 알파벳 26글자 안에서 순환시키는 것이 핵심.</p>
+
+<h3>4.6 전치 암호 (Transposition Cipher)</h3>
+<p>글자 자체는 그대로 두고 <b>순서만 재배열</b>한다(시저 암호와 짝).</p>
+<pre>전치(3열): 평문을 왼쪽->오른쪽, 위->아래로 N열 격자에 채운 뒤
+1열부터 각 열을 위->아래로 읽어 이어 붙인다.
+
+ABCDEF (3열)        1열 2열 3열
+  A B C       ->     A   B   C
+  D E F              D   E   F
+열 순서로 읽기: ADBECF</pre>
+
+<h3>4.7 암호화 조합/연쇄</h3>
+<p>두세 가지 변환을 순서대로 적용한 뒤 최종 결과를 묻는 유형이 출제된다(예: 카이사르 -> 전치 -> 허프만).
+<b>적용 순서를 정확히 지키는 것</b>이 핵심이다(전치 먼저인지 카이사르 먼저인지에 따라 결과가 달라진다).</p>
+
+<hr>
+
+<!-- ===================== 5 ===================== -->
+<h2 id="s5">5. 네트워크와 사물인터넷</h2>
+
+<h3>5.1 IP 주소</h3>
+<ul>
+<li>기기를 구분하는 고유한 숫자 주소.</li>
+<li><b>IPv4</b>: 32비트(8비트씩 4자리) -> 약 2^32(약 43억) 개. 기기 증가로 주소 부족.</li>
+<li><b>IPv6</b>: 128비트 -> 2^128(사실상 무한)으로 전환 중.</li>
+<li>IP는 <b>네트워크 부분</b>(어느 동네) + <b>호스트 부분</b>(그 동네 몇 호)으로 나뉜다.</li>
+<li><b>라우팅</b>: 라우터가 목적지 IP의 네트워크 부분을 보고 거점을 거쳐 점점 가까이 전달한다.</li>
+<li>마지막에는 기기 고유의 물리 주소(<b>MAC 주소</b>)로 전달. 한 줄 정리: IP(위치)로 동네까지, MAC(기기 본인)으로 문 앞까지.</li>
+</ul>
+
+<h3>5.2 도메인과 DNS</h3>
+<ul>
+<li><b>도메인 이름</b>: 외우기 어려운 숫자 IP를 사람이 기억하기 쉬운 이름으로 바꾼 것.</li>
+<li><b>DNS 서버</b>: 도메인 이름을 입력하면 대응하는 IP 주소로 바꿔주는 서버(전화번호부에서 이름으로 번호 찾기).</li>
+</ul>
+<p>도메인 구조 예: <code>www.yahoo.co.kr</code></p>
+<table>
+<tr><th>부분</th><th>의미</th></tr>
+<tr><td>www</td><td>호스트 이름(웹 서비스를 가리키는 관례적 이름)</td></tr>
+<tr><td>yahoo</td><td>기관(서비스) 이름</td></tr>
+<tr><td>co</td><td>성격: 기관/회사 (공공기관은 go)</td></tr>
+<tr><td>kr</td><td>국가: 대한민국</td></tr>
+</table>
+<div class="warn">정정: <code>www</code>는 <b>프로토콜이 아니다</b>. 프로토콜은 <code>http</code>, <code>https</code>(주소 맨 앞 <code>https://</code>). 전체 구조는 <code>프로토콜://호스트.도메인/경로</code>. <code>www</code>(라벨)는 생략 가능하지만 서버를 가리키는 <b>호스트는 필수</b>다.</div>
+
+<h3>5.3 유선 vs 무선</h3>
+<table>
+<tr><th>항목</th><th>유선</th><th>무선</th></tr>
+<tr><td>속도/신뢰성</td><td>빠르고 안정적, 간섭 적음</td><td>환경에 따라 변동, 신호 간섭/거리 제한</td></tr>
+<tr><td>이동성</td><td>낮음(선에 묶임)</td><td>높음(자유로운 이동)</td></tr>
+<tr><td>보안</td><td>상대적으로 안전</td><td>도청 등에 취약 -> 암호화 필요</td></tr>
+</table>
+
+<h3>5.4 로컬 공유 보안 4원칙</h3>
+<p>공유 폴더, 에어드랍 등 가까운 기기끼리 파일을 주고받을 때:</p>
+<ol>
+<li><b>최소 공유</b>: 꼭 필요한 것만 공유(범위가 넓을수록 유출 위험 큼)</li>
+<li><b>사전 검사</b>: 공유 전 파일과 대상을 점검(악성 파일/오발송 방지)</li>
+<li><b>정보 보호</b>: 민감 정보가 새지 않게 보호</li>
+<li><b>권한 설정</b>: 접근 권한을 적절히 제한(무단 수정/삭제 방지)</li>
+</ol>
+
+<h3>5.5 사물인터넷 (IoT)</h3>
+<p>IoT = Internet of Things. 사물에 센서와 통신 기능을 넣어 인터넷에 연결하고 데이터를 주고받는 기술. 구성 요소 D / N / P:</p>
+<table>
+<tr><th>요소</th><th>이름</th><th>역할</th><th>예시</th></tr>
+<tr><td>D</td><td>Device(센서)</td><td>데이터를 수집하는 기기</td><td>마이크로컨트롤러, 각종 센서</td></tr>
+<tr><td>N</td><td>Network</td><td>수집한 데이터를 전달하는 통신</td><td>NFC, RFID, Beacon, ZigBee, WiFi</td></tr>
+<tr><td>P</td><td>Platform</td><td>데이터를 모아 유용한 정보로 가공</td><td>데이터 수집/분석 서버</td></tr>
+</table>
+
+<h3>5.6 IoT 통신 기술 비교</h3>
+<table>
+<tr><th>기술</th><th>거리(대략)</th><th>속도</th><th>전력</th><th>대표 용도</th></tr>
+<tr><td>NFC</td><td>약 10cm</td><td>매우 느림</td><td>매우 낮음</td><td>교통카드, 모바일 결제</td></tr>
+<tr><td>RFID</td><td>수 cm ~ 수 m</td><td>느림</td><td>낮음(수동형은 자체 전원 없음)</td><td>출입증, 물류/재고 관리</td></tr>
+<tr><td>Beacon(BLE)</td><td>약 수십 m</td><td>느림</td><td>매우 낮음</td><td>실내 위치 안내, 근접 알림</td></tr>
+<tr><td>ZigBee</td><td>약 10~100 m</td><td>느림</td><td>낮음</td><td>스마트홈 센서 네트워크</td></tr>
+<tr><td>WiFi</td><td>약 수십 m</td><td>빠름(수십 Mbps~기가급)</td><td>높음</td><td>인터넷 연결, 대용량 전송</td></tr>
+</table>
+<div class="note">정리: "빠르고 멀리, 인터넷에 바로" = WiFi / "느려도 오래(저전력), 가까이" = ZigBee, Beacon, NFC. WiFi는 속도/거리/인터넷 직결이 강점이지만 전력 소모가 커서 작은 센서에는 저전력 기술이 유리하다(트레이드오프).</div>
+
+<hr>
+
+<!-- ===================== 6 ===================== -->
+<h2 id="s6">6. 데이터 처리 (pandas)</h2>
+<p>흐름: 라이브러리 준비 -> CSV 불러오기 -> 기초 탐색 -> 결측치 처리 -> 컬럼 선택/파생 -> 저장.</p>
+
+<h3>6.1 CSV 불러오기 (인코딩 예외 처리)</h3>
+<pre>import pandas as pd
+
+try:
+    df = pd.read_csv('seoul.csv', encoding='utf-8')
+except UnicodeDecodeError:
+    df = pd.read_csv('seoul.csv', encoding='cp949')</pre>
+<p>한글 CSV는 인코딩이 utf-8 또는 cp949로 갈려 에러가 날 수 있어 <code>try/except</code>로 둘 다 처리한다.</p>
+
+<h3>6.2 기초 탐색</h3>
+<table>
+<tr><th>코드</th><th>의미</th></tr>
+<tr><td><code>df.shape</code></td><td>(행 수, 열 수)</td></tr>
+<tr><td><code>df.head(n)</code></td><td>위에서 n개 행 미리보기(기본 5)</td></tr>
+<tr><td><code>df.info()</code></td><td>컬럼 목록, 결측치 여부, 자료형</td></tr>
+<tr><td><code>df.describe()</code></td><td>숫자 컬럼 기초 통계(개수/평균/표준편차/최소/최대/사분위)</td></tr>
+</table>
+
+<h3>6.3 결측치 처리</h3>
+<pre>print(df.isnull().sum())        # 컬럼별 결측치 개수
+df_clean = df.dropna()          # 빈칸 있는 행 제거
+df_filled = df.fillna(df.mean(numeric_only=True))  # 평균값으로 채우기</pre>
+
+<h3>6.4 컬럼 선택과 파생 컬럼</h3>
+<pre>cols = ['날짜', '호선명', '지하철역']
+on_cols = [c for c in df_clean.columns if '승차' in c]   # 원본에서 '승차' 컬럼 검색
+df2 = df_clean[cols + on_cols].copy()        # 필요한 컬럼만 복사본으로
+df2['승차합계'] = df2[on_cols].sum(axis=1)   # 행 방향 합산</pre>
+<ul>
+<li><code>.copy()</code>: 원본과 분리된 복사본(안 붙이면 원본을 건드릴 위험).</li>
+<li><code>sum(axis=1)</code>: 행(가로) 방향 합산.</li>
+<li>저장: <code>df.to_csv('out.csv', index=False, encoding='utf-8-sig')</code> (엑셀 한글 깨짐 방지).</li>
+</ul>
+
+<hr>
+
+<!-- ===================== 7 ===================== -->
+<h2 id="s7">7. 클래스와 객체</h2>
+<ul>
+<li>클래스 = 붕어빵 틀, 객체 = 실제 붕어빵. 틀(클래스) 하나로 객체 여러 개 생성.</li>
+<li>클래스 안에는 <b>속성(attribute)</b>과 <b>메서드(method, 동작 함수)</b>가 있다.</li>
+<li><code>__init__</code>: 객체 생성 시 초기 속성값을 설정하는 메서드(거의 모든 클래스에 포함).</li>
+<li><code>self</code>: 객체 자기 자신을 가리키며 내부 속성에 접근할 때 사용(<code>self.name</code>, <code>self.hp</code>).</li>
+</ul>
+<pre>class Character:
+    def __init__(self, name, hp):
+        self.name = name
+        self.hp = hp
+
+    def take_damage(self, amount):
+        self.hp -= amount        # 객체 내부 상태 변경
+
+hero = Character("파이썬 기사", 100)
+monster = Character("슬라임", 30)   # 같은 클래스, 다른 객체
+monster.take_damage(10)            # monster.hp -> 20</pre>
+<pre>class Car:
+    def __init__(self, color, speed=0):   # 기본값 매개변수
+        self.color = color
+        self.speed = speed
+
+    def speed_up(self, amount):
+        self.speed += amount
+
+    def stop(self):
+        self.speed = 0</pre>
+<div class="note">메서드로 <code>self.x</code>를 바꾸면 객체 상태가 변한다 -> "중간단계 상태 추적" 문제로 자주 나온다. (상속, 클래스 변수는 범위 밖)</div>
+
+<hr>
+
+<!-- ===================== 8 ===================== -->
+<h2 id="s8">8. 인공지능과 머신러닝</h2>
+<p>서술형은 <b>AI 전체 흐름(데이터 로드 -> 학습 -> 분류/예측)</b>을 이해해야 풀 수 있게 출제된다.</p>
+
+<h3>8.1 세 가지 학습법</h3>
+<table>
+<tr><th>학습법</th><th>특징</th><th>키워드</th><th>목적</th></tr>
+<tr><td>지도학습</td><td>정답지(레이블)가 있는 학습</td><td>입력 + 정답</td><td>어디에 속하는지 예측</td></tr>
+<tr><td>비지도학습</td><td>정답 없이 패턴을 찾는 학습</td><td>숨은 구조 파악</td><td>군집으로 그룹화</td></tr>
+<tr><td>강화학습</td><td>보상으로 행동을 수정</td><td>환경, 행동, 보상 최대화</td><td>최적 행동 학습</td></tr>
+</table>
+<p>용어: <b>독립변수</b>(예측에 사용하는 값), <b>종속변수/레이블</b>(맞히고 싶은 진짜 정답).</p>
+
+<h3>8.2 지도학습 - 분류</h3>
+<ul>
+<li><b>k-NN(최근접 이웃)</b>: 거리 측정 -> 가까운 이웃 다수결 투표. k는 하이퍼파라미터.</li>
+<li><b>의사결정트리</b>: 스무고개처럼 예/아니오 질문으로 정답을 좁혀가는 직관적 방식.</li>
+<li><b>앙상블/랜덤 포레스트</b>: 여러 전문가(트리)의 의견을 모아 예측.</li>
+<li><b>로지스틱 회귀</b>: 이름은 회귀지만 분류용. 선을 그어 구역을 나눔. 로지스틱 함수 1/(1+e^(-x)).</li>
+</ul>
+<div class="note">아래 알고리즘들은 모두 <b>데이터 로드 -> 전처리 -> 학습 -> 평가</b>라는 같은 흐름을 따른다. 바뀌는 것은 모델 객체 한 줄과, 거리/선형 기반 모델에서의 스케일링 필요 여부뿐이다. 예시는 붓꽃(iris) 데이터(특성 4개, 품종 3종 분류)를 쓴다. 각 8.2.x 제목을 눌러 접고 펼칠 수 있다.</div>
+
+<h4>8.2.1 k-NN (최근접 이웃)</h4>
+<p><b>상세 동작 원리</b></p>
+<ul>
+<li>예측할 데이터가 들어오면 학습 데이터 중 <b>거리가 가장 가까운 k개의 이웃</b>을 찾는다.</li>
+<li>그 k개 이웃의 레이블을 <b>다수결 투표</b>해 가장 많은 클래스로 분류한다.</li>
+<li>거리는 보통 유클리드 거리. 특성마다 단위/범위가 다르면 큰 값을 가진 특성이 거리를 지배하므로 <b>스케일링이 필수</b>다.</li>
+<li>k가 작으면 noise에 민감(과적합), 크면 경계가 뭉뚱그려진다(과소적합). 동점 방지를 위해 보통 홀수를 쓴다.</li>
+<li>학습 단계에서는 데이터를 저장만 하고, 예측할 때 거리를 모두 계산하는 <b>게으른 학습(lazy learning)</b>이다.</li>
+</ul>
+<pre># 1) 데이터 로드
+from sklearn.datasets import load_iris
+data = load_iris()
+X = data.data        # 특성: 꽃받침/꽃잎의 길이와 너비 4개
+y = data.target      # 정답 레이블: 품종 0, 1, 2
+
+# 2) 전처리: 학습/평가 분리 + 스케일링
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42)    # 80% 학습 / 20% 평가, 결과 고정
+
+scaler = StandardScaler()                     # k-NN은 거리 기반이라 스케일 통일이 필수
+X_train = scaler.fit_transform(X_train)       # 학습 데이터 기준으로 평균0/표준편차1 변환
+X_test = scaler.transform(X_test)             # 평가 데이터는 같은 기준으로만 변환(정보 누수 방지)
+
+# 3) 학습
+from sklearn.neighbors import KNeighborsClassifier
+model = KNeighborsClassifier(n_neighbors=3)   # 이웃 3개로 다수결
+model.fit(X_train, y_train)                    # k-NN은 사실상 데이터를 저장하는 단계
+
+# 4) 평가
+from sklearn.metrics import accuracy_score, confusion_matrix
+pred = model.predict(X_test)                   # 평가 데이터의 품종 예측
+print("정확도:", accuracy_score(y_test, pred))     # 맞힌 비율
+print("혼동행렬:\n", confusion_matrix(y_test, pred))  # 어떤 품종을 무엇으로 틀렸는지</pre>
+
+<h4>8.2.2 의사결정트리</h4>
+<p><b>상세 동작 원리</b></p>
+<ul>
+<li>데이터를 가장 잘 나누는 <b>특성과 기준값</b>을 골라 "예/아니오" 질문(분기)을 만든다.</li>
+<li>각 분기에서 <b>불순도</b>(지니 계수 또는 엔트로피, 한 노드에 여러 클래스가 섞인 정도)가 가장 많이 줄어드는 기준을 선택한다.</li>
+<li>이 분할을 반복해 잎 노드가 한 클래스로 순수해질 때까지 트리를 키운다. 예측은 뿌리부터 질문을 따라 내려가 도달한 잎의 클래스로 한다.</li>
+<li>깊이가 깊어질수록 학습 데이터에 <b>과적합</b>되므로 <code>max_depth</code> 등으로 제한한다.</li>
+<li>기준값과의 대소 비교만 하므로 <b>스케일링이 필요 없고</b>, 규칙(if-else)으로 풀어 쓸 수 있어 해석이 쉽다.</li>
+</ul>
+<pre># 1) 데이터 로드
+from sklearn.datasets import load_iris
+data = load_iris()
+X = data.data
+y = data.target
+
+# 2) 전처리: 분리만 (트리는 기준값 비교라 스케일링 불필요)
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42)
+
+# 3) 학습
+from sklearn.tree import DecisionTreeClassifier
+model = DecisionTreeClassifier(max_depth=3, random_state=42)  # 과적합 막으려 깊이 제한
+model.fit(X_train, y_train)                                   # 분기 기준을 학습
+
+# 4) 평가
+from sklearn.metrics import accuracy_score, confusion_matrix
+pred = model.predict(X_test)
+print("정확도:", accuracy_score(y_test, pred))
+print("혼동행렬:\n", confusion_matrix(y_test, pred))</pre>
+
+<h4>8.2.3 앙상블 / 랜덤 포레스트</h4>
+<p><b>상세 동작 원리</b></p>
+<ul>
+<li>여러 개의 의사결정트리를 만들어 그 예측을 <b>다수결로 합치는</b> 앙상블(배깅) 기법이다.</li>
+<li>각 트리는 서로 다른 <b>부트스트랩 샘플</b>(중복을 허용해 무작위로 뽑은 데이터)과 일부 특성만 보고 학습한다. 그래서 트리마다 관점이 다르다.</li>
+<li>한 트리가 과적합해도 여러 트리의 의견을 모으면 오류가 상쇄되어, 단일 트리보다 <b>안정적이고 정확</b>하다.</li>
+<li>주요 하이퍼파라미터는 트리 개수 <code>n_estimators</code>. 트리 기반이라 스케일링은 필요 없다.</li>
+<li>각 특성이 분류에 얼마나 기여했는지 <code>feature_importances_</code>로 확인할 수 있다.</li>
+</ul>
+<pre># 1) 데이터 로드
+from sklearn.datasets import load_iris
+data = load_iris()
+X = data.data
+y = data.target
+
+# 2) 전처리: 분리만 (트리 기반이라 스케일링 불필요)
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42)
+
+# 3) 학습
+from sklearn.ensemble import RandomForestClassifier
+model = RandomForestClassifier(n_estimators=100, random_state=42)  # 트리 100그루
+model.fit(X_train, y_train)                                        # 100개의 트리를 각각 학습
+
+# 4) 평가
+from sklearn.metrics import accuracy_score, confusion_matrix
+pred = model.predict(X_test)                  # 100개 트리의 다수결로 예측
+print("정확도:", accuracy_score(y_test, pred))
+print("혼동행렬:\n", confusion_matrix(y_test, pred))
+print("특성 중요도:", model.feature_importances_)  # 어떤 특성이 분류에 중요했는지</pre>
+
+<h4>8.2.4 로지스틱 회귀</h4>
+<p><b>상세 동작 원리</b></p>
+<ul>
+<li>이름은 "회귀"지만 <b>분류</b> 알고리즘이다. 먼저 특성들의 선형 결합(<code>w1*x1 + w2*x2 + ... + b</code>)을 계산한다.</li>
+<li>그 값을 <b>로지스틱(시그모이드) 함수 1/(1+e^(-x))</b>에 넣어 0~1 사이의 확률로 변환한다.</li>
+<li>확률이 임계값(보통 0.5) 이상이면 한 클래스, 미만이면 다른 클래스로 분류한다. 결정 경계는 <b>선형</b>(직선/평면)이다.</li>
+<li>다중 클래스는 클래스마다 확률을 구해 <b>가장 큰 확률</b>의 클래스를 고른다.</li>
+<li>가중치(w, b)는 반복 최적화로 학습한다. 선형 결합이라 <b>스케일링하면 학습이 안정적</b>이다.</li>
+</ul>
+<pre># 1) 데이터 로드
+from sklearn.datasets import load_iris
+data = load_iris()
+X = data.data
+y = data.target
+
+# 2) 전처리: 분리 + 스케일링 (선형 결합이라 스케일 통일이 학습에 도움)
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# 3) 학습
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression(max_iter=200)      # 가중치를 반복 최적화(max_iter: 최대 반복 횟수)
+model.fit(X_train, y_train)
+
+# 4) 평가
+from sklearn.metrics import accuracy_score, confusion_matrix
+pred = model.predict(X_test)
+print("정확도:", accuracy_score(y_test, pred))
+print("혼동행렬:\n", confusion_matrix(y_test, pred))
+print("예측 확률:\n", model.predict_proba(X_test[:3]))  # 앞 3개 샘플의 클래스별 확률</pre>
+
+<h3>8.3 지도학습 - 회귀</h3>
+<p>독립변수로 연속적인 숫자 값을 예측. 예: <b>선형회귀</b>(직선으로 관계를 표현).</p>
+
+<h3>8.4 비지도학습 - 군집 (k-Means)</h3>
+<p>비슷한 특성을 가진 것들을 k개의 군집으로 나눈다. 과정: 초기화 -> 배정 -> 재설정 -> 종료(반복).</p>
+
+<h3>8.5 알고리즘 선택 맵</h3>
+<ol>
+<li>데이터에 정답이 있나? -> 있으면 지도학습 / 없으면 비지도학습</li>
+<li>(지도학습) 예측 대상이 숫자인가 범주인가? -> 숫자면 회귀 / 범주면 분류</li>
+</ol>
+
+<h3>8.6 AI 공통 흐름과 평가</h3>
+<pre>from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42)   # 보통 80/20 분리
+
+model.fit(X_train, y_train)      # 학습
+pred = model.predict(X_test)     # 예측</pre>
+<table>
+<tr><th>문제 종류</th><th>대표 평가지표</th></tr>
+<tr><td>회귀</td><td>결정계수 R^2, 평균절대오차 MAE</td></tr>
+<tr><td>분류</td><td>정확도(accuracy), 혼동행렬</td></tr>
+<tr><td>군집(k-Means)</td><td>군집 개수 n_clusters, inertia_(Elbow 기법)</td></tr>
+</table>
+<div class="note">결과 해석 서술형 대비: 선형회귀에서 결정계수(R^2)가 낮은 이유로 비선형 관계, 큰 분산/산포, 이상치, 약한 상관 등을 들 수 있다.</div>
+
+<hr>
+<p style="color:#666; font-size:13px;">출처: 26-1 정보내신(문법/자료구조 개념), 26-2 정보수업준비(260516 압축·암호화 / 260530 네트워크·IoT·pandas / 260613 머신러닝), 26-3 정보수업 연습문제(자료구조·제어문·암호화 변환).</p>
+
+<script>
+(function () {
+  function getLS(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function setLS(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  // selector에 해당하는 제목을 접기/펼치기 가능하게 만든다.
+  // stops: 본문 묶기를 멈출 태그 목록(같은/상위 레벨 제목과 hr)
+  function makeCollapsible(selector, stops) {
+    var heads = document.querySelectorAll(selector);
+    for (var i = 0; i < heads.length; i++) {
+      (function (h) {
+        var wrap = document.createElement('div');
+        wrap.className = 'sub-body';
+        var node = h.nextSibling;
+        while (node) {
+          var next = node.nextSibling;
+          if (node.nodeType === 1 && stops.indexOf(node.tagName) !== -1) break;
+          wrap.appendChild(node);
+          node = next;
+        }
+        h.parentNode.insertBefore(wrap, h.nextSibling);
+
+        // 토글 키는 마커 추가 전 원본 제목으로 고정
+        var key = 'collapse:' + h.textContent.trim();
+
+        var marker = document.createElement('span');
+        marker.className = 'toggle-marker';
+        h.insertBefore(marker, h.firstChild);
+        h.classList.add('collapsible');
+
+        function apply(collapsed) {
+          wrap.style.display = collapsed ? 'none' : '';
+          marker.textContent = collapsed ? '[+] ' : '[-] ';
+        }
+        apply(getLS(key) === '1');
+
+        h.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var collapsed = wrap.style.display !== 'none';
+          apply(collapsed);
+          setLS(key, collapsed ? '1' : '0');
+        });
+      })(heads[i]);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // h3를 먼저 묶으면 그 안의 h4가 h3 본문(div)으로 들어간다.
+    // 그 다음 h4를 중첩으로 묶어 개별 접기/펼치기되게 한다.
+    makeCollapsible('h3', ['H3', 'H2', 'HR']);
+    makeCollapsible('h4', ['H4', 'H3', 'H2', 'HR']);
+  });
+})();
+</script>
+
+</body>
+</html>

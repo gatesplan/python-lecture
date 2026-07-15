@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CNSH-122 기말고사 예상문제 - Level 3b (2025-11-15 분할)
+
+  Level 3-3, 3-4: 트리 고급
+  총 19개 문제
+
+  사용법: ?config=config-cnsh-122-1115-3b
+-->
+<exercise>
+  <title>CNSH-122 기말고사 예상문제 - Level 3b (트리 고급)</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <!-- Level 3b: 트리 고급 -->
+    <section title="Level 3-3. LCA 및 트리 거리" file="problems-cnsh122-10-tree-lca.xml" count="10"/>
+    <section title="Level 3-4. 트리 속성" file="problems-cnsh122-11-tree-properties.xml" count="9"/>
+  </sections>
+</exercise>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CNSH-122 기말고사 예상문제 - Level 4a (2025-11-15 분할)
+
+  Level 4-1, 4-2: 백트래킹 기초
+  총 22개 문제
+
+  사용법: ?config=config-cnsh-122-1115-4a
+-->
+<exercise>
+  <title>CNSH-122 기말고사 예상문제 - Level 4a (백트래킹 기초)</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <!-- Level 4a: 백트래킹 기초 -->
+    <section title="Level 4-1. 조합 선택" file="problems-cnsh122-12-combination.xml" count="12"/>
+    <section title="Level 4-2. 부분집합 합 문제" file="problems-cnsh122-13-subset-sum.xml" count="10"/>
+  </sections>
+</exercise>

@@ -1,0 +1,66 @@
+[
+ {
+  "id": "ml-cm-n01",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "다음은 스팸 필터의 혼동행렬이다. (Ham=정상 메일, Spam=스팸. 행=실제, 열=예측)"},
+   {"type": "image", "src": "/images/cm-n1.png", "alt": "스팸 필터 혼동행렬", "width": 70, "align": "center"},
+   {"type": "text", "content": "이 필터를 사용할 때 사용자가 겪는 가장 곤란한 문제가 무엇인지, 혼동행렬의 수치를 근거로 서술하시오."},
+   {"type": "answer-box", "lines": 6}
+  ],
+  "answer": {"type": "value", "value": "정상 메일(Ham) 50개 중 15개를 스팸으로 잘못 분류했다(위양성). 스팸 필터에서 위양성은 중요한 정상 메일이 스팸함으로 가서 사용자가 놓치게 되는 문제라 특히 곤란하다. 스팸을 일부 못 거르는 것(위음성, 3개)보다, 정상 메일을 스팸으로 버리는 위양성을 줄이는 것이 더 중요하다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "정상 메일 50개 중 15개를 스팸으로 오분류(위양성)."},
+    {"type": "text", "content": "위양성 -> 중요한 정상 메일을 놓침(가장 곤란)."},
+    {"type": "text", "content": "스팸 필터에서는 위양성을 줄이는 것이 중요."}
+  ]}]
+ },
+ {
+  "id": "ml-cm-n02",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "실제 정상(Neg)이 990개, 양성(Pos)이 10개인 매우 불균형한 데이터의 혼동행렬이다."},
+   {"type": "image", "src": "/images/cm-n2.png", "alt": "불균형 데이터 혼동행렬", "width": 70, "align": "center"},
+   {"type": "text", "content": "이 모델의 정확도를 구하고, 정확도만으로 이 모델을 좋다고 할 수 없는 이유를 서술하시오."},
+   {"type": "answer-box", "lines": 6}
+  ],
+  "answer": {"type": "value", "value": "정확도 = (985+2)/1000 = 약 98.7%로 높아 보인다. 하지만 실제 양성 10개 중 2개만 맞히고 8개를 놓쳤다. 데이터가 정상 쪽으로 크게 치우쳐 있어 모두 정상이라고만 찍어도 정확도가 높게 나오므로, 정작 찾아야 할 양성을 잘 찾는지는 정확도만으로 알 수 없다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "정확도 = (985+2)/1000 = 약 98.7%."},
+    {"type": "text", "content": "그러나 양성 10개 중 2개만 맞힘(8개 놓침)."},
+    {"type": "text", "content": "불균형 데이터에서는 정확도가 높아도 소수 클래스를 못 찾을 수 있음."}
+  ]}]
+ },
+ {
+  "id": "ml-cm-n03",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "다음 혼동행렬을 보고 물음에 답하시오. (행=실제, 열=예측)"},
+   {"type": "image", "src": "/images/cm-n3.png", "alt": "정확도 계산용 혼동행렬", "width": 70, "align": "center"},
+   {"type": "text", "content": "이 모델의 정확도(accuracy)를 구하는 식과 과정을 쓰고, 값을 백분율로 구하시오."},
+   {"type": "answer-box", "lines": 5}
+  ],
+  "answer": {"type": "value", "value": "정확도 = 맞게 분류한 수 / 전체 수. 맞게 분류한 것은 대각선의 50(실제 Neg를 Neg로) + 40(실제 Pos를 Pos로) = 90이고, 전체는 50+10+20+40 = 120이다. 따라서 정확도 = 90/120 = 0.75 = 75%이다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "맞게 분류 = 대각선 합 = 50 + 40 = 90."},
+    {"type": "text", "content": "전체 = 50+10+20+40 = 120."},
+    {"type": "text", "content": "정확도 = 90/120 = 75%."}
+  ]}]
+ },
+ {
+  "id": "ml-cm-n04",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "두 모델 X, Y의 혼동행렬이다. (Pos=질병 있음. 행=실제, 열=예측)"},
+   {"type": "image", "src": "/images/cm-n4.png", "alt": "두 모델 혼동행렬 비교", "width": 92, "align": "center"},
+   {"type": "text", "content": "암 진단처럼 실제 환자(Pos)를 놓치면 안 되는 상황에서 어느 모델이 더 적합한지, 위음성(실제 양성을 음성으로 판정)을 근거로 서술하시오."},
+   {"type": "answer-box", "lines": 6}
+  ],
+  "answer": {"type": "value", "value": "Model X가 더 적합하다. 환자를 놓치면 안 되는 상황에서 치명적인 오류는 실제 양성을 음성으로 판정하는 위음성이다. 위음성은 Model X가 2명, Model Y가 18명으로, X가 환자를 훨씬 적게 놓친다. X는 대신 정상인을 양성으로 판정하는 위양성이 많지만(30명), 이 상황에서는 환자를 놓치지 않는 것이 우선이므로 X가 낫다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "환자 놓침 = 위음성(실제 Pos를 Neg로). X=2, Y=18."},
+    {"type": "text", "content": "X가 위음성이 훨씬 적어 환자를 덜 놓침."},
+    {"type": "text", "content": "환자를 놓치면 안 되는 상황 -> Model X가 적합."}
+  ]}]
+ }
+]

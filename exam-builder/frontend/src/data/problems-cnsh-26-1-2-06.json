@@ -1,0 +1,492 @@
+[
+ {
+  "id": "g1-093",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Hero:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\na = Hero(\"기사\", 100)\nprint(a.name, a.hp)"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "기사 100"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "Hero 객체를 만들 때 __init__이 name, hp 속성을 설정한다. a.name=기사, a.hp=100."
+     },
+     {
+      "type": "text",
+      "content": "정답: 기사 100"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-094",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Dog:\n    def __init__(self, name):\n        self.name = name\n    def bark(self):\n        print(self.name, \"멍멍\")\n\nd = Dog(\"바둑이\")\nd.bark()"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "바둑이 멍멍"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "d.bark()는 self.name(=바둑이)과 '멍멍'을 출력한다."
+     },
+     {
+      "type": "text",
+      "content": "정답: 바둑이 멍멍"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-095",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Monster:\n    def __init__(self, hp):\n        self.hp = hp\n    def hit(self, dmg):\n        self.hp = self.hp - dmg\n\nm = Monster(50)\nm.hit(10)\nm.hit(15)\nprint(m.hp)"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "25"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "hp=50 -> hit(10) -> 40 -> hit(15) -> 25."
+     },
+     {
+      "type": "text",
+      "content": "정답: 25"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-096",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드에서 두 번째 hit를 실행하기 직전 m.hp의 값을 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Monster:\n    def __init__(self, hp):\n        self.hp = hp\n    def hit(self, dmg):\n        self.hp = self.hp - dmg\n\nm = Monster(50)\nm.hit(10)\nm.hit(15)\nprint(m.hp)"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "40"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "hp=50 -> 첫 hit(10) -> 40. 두 번째 hit 실행 직전 값은 40."
+     },
+     {
+      "type": "text",
+      "content": "정답: 40"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-097",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Car:\n    def __init__(self, color, speed=0):\n        self.color = color\n        self.speed = speed\n\nc = Car(\"red\")\nprint(c.color, c.speed)"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "red 0"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "speed는 기본값 0. color만 전달하면 speed=0이 된다."
+     },
+     {
+      "type": "text",
+      "content": "정답: red 0"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-098",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Box:\n    def __init__(self, n):\n        self.n = n\n\nx = Box(1)\ny = Box(5)\nx.n = x.n + 10\nprint(x.n, y.n)"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "11 5"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "x와 y는 서로 다른 객체. x.n만 11이 되고 y.n은 5 그대로."
+     },
+     {
+      "type": "text",
+      "content": "정답: 11 5"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-099",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Car:\n    def __init__(self):\n        self.speed = 0\n    def up(self, a):\n        self.speed = self.speed + a\n    def stop(self):\n        self.speed = 0\n\nc = Car()\nc.up(30)\nc.up(20)\nc.stop()\nc.up(5)\nprint(c.speed)"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "5"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "0 ->+30=30 ->+20=50 ->stop=0 ->+5=5."
+     },
+     {
+      "type": "text",
+      "content": "정답: 5"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-100",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과가 '민수'일 때, 빈칸에 들어갈 코드를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Student:\n    def __init__(self, name):\n        [[]] = name\n    def hello(self):\n        print(self.name)\n\ns = Student(\"민수\")\ns.hello()"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "self.name"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "hello가 self.name을 출력하므로, __init__에서 self.name = name으로 저장해야 한다."
+     },
+     {
+      "type": "text",
+      "content": "정답: self.name"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-101",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과가 2일 때, 빈칸에 들어갈 내용을 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Counter:\n    def __init__(self):\n        self.cnt = 0\n    def add([[]]):\n        self.cnt = self.cnt + 1\n\nc = Counter()\nc.add()\nc.add()\nprint(c.cnt)"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "self"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "메서드의 첫 매개변수는 self여야 self.cnt에 접근할 수 있다."
+     },
+     {
+      "type": "text",
+      "content": "정답: self"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-102",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드에서 deposit 메서드가 하는 일을 한 문장으로 설명하시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Account:\n    def __init__(self, money):\n        self.money = money\n    def deposit(self, x):\n        self.money = self.money + x\n    def withdraw(self, x):\n        self.money = self.money - x"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "money 속성(잔액)에 입력값 x를 더한다(입금)."
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "deposit(x)는 self.money에 x를 더해 잔액을 늘린다."
+     },
+     {
+      "type": "text",
+      "content": "정답: money 속성(잔액)에 입력값 x를 더한다(입금)."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-103",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Item:\n    def __init__(self, name, price):\n        self.name = name\n        self.price = price\n    def info(self):\n        print(f\"{self.name}: {self.price}원\")\n\nit = Item(\"연필\", 500)\nit.info()"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "연필: 500원"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "info()는 f-string으로 name과 price를 끼워 출력한다."
+     },
+     {
+      "type": "text",
+      "content": "정답: 연필: 500원"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-104",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Rect:\n    def __init__(self, w, h):\n        self.w = w\n        self.h = h\n    def area(self):\n        return self.w * self.h\n\nr = Rect(3, 4)\nprint(r.area())"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "12"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "area()는 self.w * self.h = 3*4 = 12를 반환한다."
+     },
+     {
+      "type": "text",
+      "content": "정답: 12"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-105",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Player:\n    def __init__(self):\n        self.hp = 100\n        self.score = 0\n    def damage(self, d):\n        self.hp = self.hp - d\n    def gain(self, s):\n        self.score = self.score + s\n\np = Player()\np.damage(30)\np.gain(50)\np.damage(20)\np.gain(10)\nprint(p.hp, p.score)"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "50 60"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "hp: 100->70->50. score: 0->50->60. 결과 50 60."
+     },
+     {
+      "type": "text",
+      "content": "정답: 50 60"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-106",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "class Calc:\n    def __init__(self, x):\n        self.x = x\n    def double(self):\n        self.x = self.x * 2\n\nc = Calc(5)\nresult = c.double()\nprint(c.x, result)"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "10 None"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "double()은 self.x를 2배(10)로 바꾸지만 return이 없어 result는 None."
+     },
+     {
+      "type": "text",
+      "content": "정답: 10 None"
+     }
+    ]
+   }
+  ]
+ }
+]

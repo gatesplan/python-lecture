@@ -1,0 +1,2249 @@
+[
+  {
+    "id": "fb-204",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEF\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ACBDFE"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [ABC] [DEF]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[0, 2, 1] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [ABC] -> ACB  : A(0) C(2) B(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [DEF] -> DFE  : D(0) F(2) E(1)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: ACBDFE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-205",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFG\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ACBDFEG"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [ABC] [DEF] [G]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[0, 2, 1] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [ABC] -> ACB  : A(0) C(2) B(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [DEF] -> DFE  : D(0) F(2) E(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [G] -> G  : G(0)  (위치 2,1는 블록 범위 밖 -> 가드로 건너뜀)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: ACBDFEG"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-206",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFGH\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ACBDFEGH"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [ABC] [DEF] [GH]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[0, 2, 1] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [ABC] -> ACB  : A(0) C(2) B(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [DEF] -> DFE  : D(0) F(2) E(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [GH] -> GH  : G(0) H(1)  (위치 2는 블록 범위 밖 -> 가드로 건너뜀)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: ACBDFEGH"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-207",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFGHI\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ACBDFEGIH"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [ABC] [DEF] [GHI]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[0, 2, 1] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [ABC] -> ACB  : A(0) C(2) B(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [DEF] -> DFE  : D(0) F(2) E(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [GHI] -> GIH  : G(0) I(2) H(1)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: ACBDFEGIH"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-208",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFG\"\nkey = [2, 1, 0]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "CBAFEDG"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [ABC] [DEF] [G]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[2, 1, 0] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [ABC] -> CBA  : C(2) B(1) A(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [DEF] -> FED  : F(2) E(1) D(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [G] -> G  : G(0)  (위치 2,1는 블록 범위 밖 -> 가드로 건너뜀)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: CBAFEDG"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-209",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFG\"\nkey = [1, 0, 2]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "BACEDFG"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [ABC] [DEF] [G]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[1, 0, 2] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [ABC] -> BAC  : B(1) A(0) C(2)"
+          },
+          {
+            "type": "text",
+            "content": "  [DEF] -> EDF  : E(1) D(0) F(2)"
+          },
+          {
+            "type": "text",
+            "content": "  [G] -> G  : G(0)  (위치 1,2는 블록 범위 밖 -> 가드로 건너뜀)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: BACEDFG"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-210",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFG\"\nkey = [2, 0, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "CABFDEG"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [ABC] [DEF] [G]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[2, 0, 1] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [ABC] -> CAB  : C(2) A(0) B(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [DEF] -> FDE  : F(2) D(0) E(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [G] -> G  : G(0)  (위치 2,1는 블록 범위 밖 -> 가드로 건너뜀)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: CABFDEG"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-211",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFG\"\nkey = [1, 2, 0]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "BCAEFDG"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [ABC] [DEF] [G]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[1, 2, 0] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [ABC] -> BCA  : B(1) C(2) A(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [DEF] -> EFD  : E(1) F(2) D(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [G] -> G  : G(0)  (위치 1,2는 블록 범위 밖 -> 가드로 건너뜀)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: BCAEFDG"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-212",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"PYTHON\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "PTYHNO"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [PYT] [HON]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[0, 2, 1] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [PYT] -> PTY  : P(0) T(2) Y(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [HON] -> HNO  : H(0) N(2) O(1)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: PTYHNO"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-213",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"PROGRAM\"\nkey = [2, 1, 0]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ORPARGM"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [PRO] [GRA] [M]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[2, 1, 0] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [PRO] -> ORP  : O(2) R(1) P(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [GRA] -> ARG  : A(2) R(1) G(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [M] -> M  : M(0)  (위치 2,1는 블록 범위 밖 -> 가드로 건너뜀)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: ORPARGM"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-214",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"12345678\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "13246578"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [123] [456] [78]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[0, 2, 1] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [123] -> 132  : 1(0) 3(2) 2(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [456] -> 465  : 4(0) 6(2) 5(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [78] -> 78  : 7(0) 8(1)  (위치 2는 블록 범위 밖 -> 가드로 건너뜀)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: 13246578"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-215",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"A1B2C3D4\"\nkey = [2, 1, 0]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "B1A3C24D"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [A1B] [2C3] [D4]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[2, 1, 0] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [A1B] -> B1A  : B(2) 1(1) A(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [2C3] -> 3C2  : 3(2) C(1) 2(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [D4] -> 4D  : 4(1) D(0)  (위치 2는 블록 범위 밖 -> 가드로 건너뜀)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: B1A3C24D"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-216",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEF\"\nkey = [1, 0]\nk = 2\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "BADCFE"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=2로 끊는다: [AB] [CD] [EF]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[1, 0] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [AB] -> BA  : B(1) A(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [CD] -> DC  : D(1) C(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [EF] -> FE  : F(1) E(0)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: BADCFE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-217",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFG\"\nkey = [1, 0]\nk = 2\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "BADCFEG"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=2로 끊는다: [AB] [CD] [EF] [G]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[1, 0] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [AB] -> BA  : B(1) A(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [CD] -> DC  : D(1) C(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [EF] -> FE  : F(1) E(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [G] -> G  : G(0)  (위치 1는 블록 범위 밖 -> 가드로 건너뜀)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: BADCFEG"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-218",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"COMPUTER\"\nkey = [1, 0]\nk = 2\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "OCPMTURE"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=2로 끊는다: [CO] [MP] [UT] [ER]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[1, 0] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [CO] -> OC  : O(1) C(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [MP] -> PM  : P(1) M(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [UT] -> TU  : T(1) U(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [ER] -> RE  : R(1) E(0)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: OCPMTURE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-219",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFGH\"\nkey = [3, 1, 2, 0]\nk = 4\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "DBCAHFGE"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=4로 끊는다: [ABCD] [EFGH]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[3, 1, 2, 0] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [ABCD] -> DBCA  : D(3) B(1) C(2) A(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [EFGH] -> HFGE  : H(3) F(1) G(2) E(0)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: DBCAHFGE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-220",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFGHIJ\"\nkey = [1, 3, 0, 2]\nk = 4\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "BDACFHEGJI"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=4로 끊는다: [ABCD] [EFGH] [IJ]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[1, 3, 0, 2] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [ABCD] -> BDAC  : B(1) D(3) A(0) C(2)"
+          },
+          {
+            "type": "text",
+            "content": "  [EFGH] -> FHEG  : F(1) H(3) E(0) G(2)"
+          },
+          {
+            "type": "text",
+            "content": "  [IJ] -> JI  : J(1) I(0)  (위치 3,2는 블록 범위 밖 -> 가드로 건너뜀)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: BDACFHEGJI"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-221",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFGHIJKL\"\nkey = [2, 0, 3, 1]\nk = 4\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "CADBGEHFKILJ"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=4로 끊는다: [ABCD] [EFGH] [IJKL]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[2, 0, 3, 1] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [ABCD] -> CADB  : C(2) A(0) D(3) B(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [EFGH] -> GEHF  : G(2) E(0) H(3) F(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [IJKL] -> KILJ  : K(2) I(0) L(3) J(1)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: CADBGEHFKILJ"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-222",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"SECURITY\"\nkey = [2, 0, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "CSEIURTY"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [SEC] [URI] [TY]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[2, 0, 1] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [SEC] -> CSE  : C(2) S(0) E(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [URI] -> IUR  : I(2) U(0) R(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [TY] -> TY  : T(0) Y(1)  (위치 2는 블록 범위 밖 -> 가드로 건너뜀)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: CSEIURTY"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-223",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"NETWORK\"\nkey = [1, 2, 0]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ETNORWK"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 크기 k=3로 끊는다: [NET] [WOR] [K]"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[1, 2, 0] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [NET] -> ETN  : E(1) T(2) N(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [WOR] -> ORW  : O(1) R(2) W(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [K] -> K  : K(0)  (위치 1,2는 블록 범위 밖 -> 가드로 건너뜀)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답: ETNORWK"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-224",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음은 전치 암호의 복호화 코드이다. 다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ACBDFE\"\nkey = [0, 2, 1]\nk = 3\ninv = [0] * k\nfor i in range(k):\n    inv[key[i]] = i\nresult = ''\nfor b in range(0, len(s), k):\n    for j in inv:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ABCDEF"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "복호화는 암호화 키의 역순열을 적용한다."
+          },
+          {
+            "type": "text",
+            "content": "key=[0, 2, 1] 의 역순열 inv=[0, 2, 1] (inv[key[i]]=i)"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[0, 2, 1] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [ACB] -> ABC  : A(0) B(2) C(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [DFE] -> DEF  : D(0) E(2) F(1)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답(원문): ABCDEF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-225",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음은 전치 암호의 복호화 코드이다. 다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"CBAFED\"\nkey = [2, 1, 0]\nk = 3\ninv = [0] * k\nfor i in range(k):\n    inv[key[i]] = i\nresult = ''\nfor b in range(0, len(s), k):\n    for j in inv:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ABCDEF"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "복호화는 암호화 키의 역순열을 적용한다."
+          },
+          {
+            "type": "text",
+            "content": "key=[2, 1, 0] 의 역순열 inv=[2, 1, 0] (inv[key[i]]=i)"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[2, 1, 0] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [CBA] -> ABC  : A(2) B(1) C(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [FED] -> DEF  : D(2) E(1) F(0)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답(원문): ABCDEF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-226",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음은 전치 암호의 복호화 코드이다. 다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"BCAEFD\"\nkey = [2, 0, 1]\nk = 3\ninv = [0] * k\nfor i in range(k):\n    inv[key[i]] = i\nresult = ''\nfor b in range(0, len(s), k):\n    for j in inv:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "CABFDE"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "복호화는 암호화 키의 역순열을 적용한다."
+          },
+          {
+            "type": "text",
+            "content": "key=[2, 0, 1] 의 역순열 inv=[1, 2, 0] (inv[key[i]]=i)"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[1, 2, 0] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [BCA] -> CAB  : C(1) A(2) B(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [EFD] -> FDE  : F(1) D(2) E(0)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답(원문): CABFDE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-227",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음은 전치 암호의 복호화 코드이다. 다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"CABFDE\"\nkey = [1, 2, 0]\nk = 3\ninv = [0] * k\nfor i in range(k):\n    inv[key[i]] = i\nresult = ''\nfor b in range(0, len(s), k):\n    for j in inv:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "BCAEFD"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "복호화는 암호화 키의 역순열을 적용한다."
+          },
+          {
+            "type": "text",
+            "content": "key=[1, 2, 0] 의 역순열 inv=[2, 0, 1] (inv[key[i]]=i)"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[2, 0, 1] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [CAB] -> BCA  : B(2) C(0) A(1)"
+          },
+          {
+            "type": "text",
+            "content": "  [FDE] -> EFD  : E(2) F(0) D(1)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답(원문): BCAEFD"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-228",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음은 전치 암호의 복호화 코드이다. 다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"BADCFE\"\nkey = [1, 0]\nk = 2\ninv = [0] * k\nfor i in range(k):\n    inv[key[i]] = i\nresult = ''\nfor b in range(0, len(s), k):\n    for j in inv:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ABCDEF"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "복호화는 암호화 키의 역순열을 적용한다."
+          },
+          {
+            "type": "text",
+            "content": "key=[1, 0] 의 역순열 inv=[1, 0] (inv[key[i]]=i)"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[1, 0] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [BA] -> AB  : A(1) B(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [DC] -> CD  : C(1) D(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [FE] -> EF  : E(1) F(0)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답(원문): ABCDEF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-229",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음은 전치 암호의 복호화 코드이다. 다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"BCDAFGHE\"\nkey = [3, 0, 1, 2]\nk = 4\ninv = [0] * k\nfor i in range(k):\n    inv[key[i]] = i\nresult = ''\nfor b in range(0, len(s), k):\n    for j in inv:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "CDABGHEF"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "복호화는 암호화 키의 역순열을 적용한다."
+          },
+          {
+            "type": "text",
+            "content": "key=[3, 0, 1, 2] 의 역순열 inv=[1, 2, 3, 0] (inv[key[i]]=i)"
+          },
+          {
+            "type": "text",
+            "content": "각 블록을 key=[1, 2, 3, 0] 위치(0-based) 순서로 재배열한다."
+          },
+          {
+            "type": "text",
+            "content": "  [BCDA] -> CDAB  : C(1) D(2) A(3) B(0)"
+          },
+          {
+            "type": "text",
+            "content": "  [FGHE] -> GHEF  : G(1) H(2) E(3) F(0)"
+          },
+          {
+            "type": "text",
+            "content": "이어 붙이면 정답(원문): CDABGHEF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-230",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오. (전치 암호를 두 번 적용한다.)"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFGH\"\nkey = [0, 2, 1]\nk = 3\ndef transpose(s, key, k):\n    r = ''\n    for b in range(0, len(s), k):\n        for j in key:\n            if b + j < len(s):\n                r += s[b + j]\n    return r\nprint(transpose(transpose(s, key, k), key, k))"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ABCDEFGH"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "1차 전치: ABCDEFGH -> ACBDFEGH"
+          },
+          {
+            "type": "text",
+            "content": "2차 전치: ACBDFEGH -> ABCDEFGH (1차 결과를 다시 같은 방식으로 전치)"
+          },
+          {
+            "type": "text",
+            "content": "정답: ABCDEFGH"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-231",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFGHI\"\nkey1 = [0, 2, 1]\nkey2 = [2, 1, 0]\nk = 3\ndef transpose(s, key, k):\n    r = ''\n    for b in range(0, len(s), k):\n        for j in key:\n            if b + j < len(s):\n                r += s[b + j]\n    return r\nprint(transpose(transpose(s, key1, k), key2, k))"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "BCAEFDHIG"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "1차 전치(key1=[0, 2, 1]): ABCDEFGHI -> ACBDFEGIH"
+          },
+          {
+            "type": "text",
+            "content": "2차 전치(key2=[2, 1, 0]): ACBDFEGIH -> BCAEFDHIG"
+          },
+          {
+            "type": "text",
+            "content": "정답: BCAEFDHIG"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-232",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오. (전치 후 시저 암호를 적용한다.)"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEF\"\nkey = [0, 2, 1]\nk = 3\nshift = 3\nt = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            t += s[b + j]\nresult = ''\nfor ch in t:\n    result += chr((ord(ch) - ord(\"A\") + shift) % 26 + ord(\"A\"))\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "DFEGIH"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "전치(key=[0, 2, 1]): ABCDEF -> ACBDFE"
+          },
+          {
+            "type": "text",
+            "content": "시저(shift=3): 각 글자를 3칸 뒤로"
+          },
+          {
+            "type": "text",
+            "content": "  A->D C->F B->E D->G F->I E->H"
+          },
+          {
+            "type": "text",
+            "content": "정답: DFEGIH"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-233",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오. (시저 후 전치 암호를 적용한다.)"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"HELLO\"\nshift = 2\nkey = [0, 2, 1]\nk = 3\nc = ''\nfor ch in s:\n    c += chr((ord(ch) - ord(\"A\") + shift) % 26 + ord(\"A\"))\nresult = ''\nfor b in range(0, len(c), k):\n    for j in key:\n        if b + j < len(c):\n            result += c[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "JNGNQ"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "시저(shift=2): HELLO -> JGNNQ"
+          },
+          {
+            "type": "text",
+            "content": "전치(key=[0, 2, 1]): JGNNQ -> JNGNQ"
+          },
+          {
+            "type": "text",
+            "content": "정답: JNGNQ"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-234",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과를 쓰시오. (전치 후 시저 암호를 적용한다.)"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"PYTHON\"\nkey = [2, 0, 1]\nk = 3\nshift = 1\nt = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            t += s[b + j]\nresult = ''\nfor ch in t:\n    result += chr((ord(ch) - ord(\"A\") + shift) % 26 + ord(\"A\"))\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "UQZOIP"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "전치(key=[2, 0, 1]): PYTHON -> TPYNHO"
+          },
+          {
+            "type": "text",
+            "content": "시저(shift=1): TPYNHO -> UQZOIP"
+          },
+          {
+            "type": "text",
+            "content": "정답: UQZOIP"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-235",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드를 실행할 때 가장 먼저 출력되는 줄(첫 번째 print 결과)을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFGH\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\n    print(result)   # 각 블록 처리 후 출력"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ACB"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "print는 바깥 for(블록 단위) 안에 있으므로 블록 하나를 처리할 때마다 현재까지의 result를 출력한다."
+          },
+          {
+            "type": "text",
+            "content": "첫 블록 [ABC] 처리 후 result = ACB"
+          },
+          {
+            "type": "text",
+            "content": "정답: ACB"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-236",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "위와 같은 코드(블록마다 result 출력)에서 두 번째로 출력되는 줄을 쓰시오. s=\"ABCDEFGH\", key=[0, 2, 1]."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFGH\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\n    print(result)   # 각 블록 처리 후 출력"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "ACBDFE"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "첫 블록 [ABC] -> ACB"
+          },
+          {
+            "type": "text",
+            "content": "둘째 블록 [DEF]까지 처리 후 result = ACBDFE"
+          },
+          {
+            "type": "text",
+            "content": "정답: ACBDFE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-237",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "코드 result += s[b + j] 실행 중 s=\"ABCDEFG\" 이고 b=3, j=2 일 때 s[b + j] 가 가리키는 글자를 쓰시오."
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "F"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "b + j = 3 + 2 = 5"
+          },
+          {
+            "type": "text",
+            "content": "s[5] = F (s=\"ABCDEFG\", 0-based)"
+          },
+          {
+            "type": "text",
+            "content": "정답: F"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-238",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드에서 조건문 if b + j < len(s) 가 거짓이 되어 글자를 건너뛰는 횟수를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFG\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "2"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "s 길이 7, k=3 -> 블록 [ABC][DEF][G]"
+          },
+          {
+            "type": "text",
+            "content": "마지막 블록 [G]는 위치 0만 유효. key=[0,2,1] 중 j=2, j=1 이 범위 밖 -> 2번 거짓"
+          },
+          {
+            "type": "text",
+            "content": "정답: 2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-239",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드에서 result에 가장 마지막으로 추가되는 글자를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFGH\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "H"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "최종 result = ACBDFEGH"
+          },
+          {
+            "type": "text",
+            "content": "마지막 글자: H"
+          },
+          {
+            "type": "text",
+            "content": "(마지막 블록 [GH]을 key 순서로 처리한 결과의 끝)"
+          },
+          {
+            "type": "text",
+            "content": "정답: H"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-240",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "문자열 s=\"ABCDEFGHIJ\" 를 블록 크기 k=3로 끊을 때 바깥 for b in range(0, len(s), k) 반복 횟수(블록 개수)를 쓰시오."
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "4"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(s)=10, k=3"
+          },
+          {
+            "type": "text",
+            "content": "range(0, 10, 3) = 0,3,6,9 -> 4회"
+          },
+          {
+            "type": "text",
+            "content": "정답: 4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-241",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때, 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFG\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), [[]]):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      },
+      {
+        "type": "output-sample",
+        "content": "ACBDFEG"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "k"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "바깥 for는 블록 시작 위치를 k 간격으로 만들어야 한다."
+          },
+          {
+            "type": "text",
+            "content": "블록 크기 = key 길이 = 3 = k"
+          },
+          {
+            "type": "text",
+            "content": "정답: k (또는 3)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-242",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때, 빈칸에 들어갈 내용을 쓰시오. (숫자로 답하시오.)"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFG\"\nkey = [0, 2, 1]\nresult = ''\nfor b in range(0, len(s), [[]]):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      },
+      {
+        "type": "output-sample",
+        "content": "ACBDFEG"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "3"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "key=[0,2,1]의 길이가 3이므로 블록을 3칸씩 끊는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 3"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-243",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때, 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFG\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in [[]]:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      },
+      {
+        "type": "output-sample",
+        "content": "ACBDFEG"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "안쪽 for는 블록 안에서 글자를 꺼낼 순서, 즉 key를 따라야 한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-244",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때, 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFG\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < [[]]:\n            result += s[b + j]\nprint(result)"
+      },
+      {
+        "type": "output-sample",
+        "content": "ACBDFEG"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(s)"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "부분 블록에서 인덱스가 문자열 끝을 넘지 않도록 막는 가드다."
+          },
+          {
+            "type": "text",
+            "content": "b + j 가 문자열 길이 len(s) 미만일 때만 유효"
+          },
+          {
+            "type": "text",
+            "content": "정답: len(s)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-245",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때, 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFG\"\nkey = [0, 2, 1]\nk = 3\nresult = ''\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + [[]]]\nprint(result)"
+      },
+      {
+        "type": "output-sample",
+        "content": "ACBDFEG"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "j"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "블록 시작 b에서 블록 내 위치 j를 더해 실제 인덱스를 만든다."
+          },
+          {
+            "type": "text",
+            "content": "정답: j"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-246",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때, 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ABCDEFG\"\nkey = [0, 2, 1]\nk = 3\nresult = [[]]\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      },
+      {
+        "type": "output-sample",
+        "content": "ACBDFEG"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "''"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "글자를 이어 붙일 빈 문자열로 초기화한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: '' (빈 문자열)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-247",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때, 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = \"ACBDFE\"\nkey = [0, 2, 1]\nk = 3\ninv = [0] * k\nfor i in range(k):\n    inv[key[i]] = [[]]\nresult = ''\nfor b in range(0, len(s), k):\n    for j in inv:\n        if b + j < len(s):\n            result += s[b + j]\nprint(result)"
+      },
+      {
+        "type": "output-sample",
+        "content": "ABCDEF"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "i"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "역순열은 'key[i] 위치에서 온 글자는 원래 i번째' 라는 대응을 만든다."
+          },
+          {
+            "type": "text",
+            "content": "따라서 inv[key[i]] = i"
+          },
+          {
+            "type": "text",
+            "content": "정답: i"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-248",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때, 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "keystr = \"132\"\nkey = []\nfor ch in keystr:\n    key.append(int(ch) - [[]])\nprint(key)"
+      },
+      {
+        "type": "output-sample",
+        "content": "[0, 2, 1]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "1-based 키 문자열 \"132\"를 0-based 인덱스로 바꾸려면 각 숫자에서 1을 뺀다."
+          },
+          {
+            "type": "text",
+            "content": "1->0, 3->2, 2->1"
+          },
+          {
+            "type": "text",
+            "content": "정답: 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-249",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "전치 암호(블록 크기 3)로 \"ABC\" 를 암호화했더니 \"ACB\" 가 되었다. 사용한 키 key(0-based 리스트)를 쓰시오."
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "[0, 2, 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "결과 ACB의 각 글자가 원본 ABC의 몇 번째인지 본다."
+          },
+          {
+            "type": "text",
+            "content": "A=원본0, C=원본2, B=원본1 -> key=[0, 2, 1]"
+          },
+          {
+            "type": "text",
+            "content": "정답: [0, 2, 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-250",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "블록 크기 3, key=[2, 0, 1] 로 암호화한 결과가 \"BCAEFD\" 이다. 원문을 쓰시오."
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "CABFDE"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "key=[2, 0, 1] 는 블록을 (원본0->2번째, 원본1->0번째, 원본2->1번째)로 보낸다."
+          },
+          {
+            "type": "text",
+            "content": "역으로 풀면 역순열 inv=[1, 2, 0]"
+          },
+          {
+            "type": "text",
+            "content": "암호문 BCAEFD 를 inv로 재배열 -> CABFDE"
+          },
+          {
+            "type": "text",
+            "content": "정답: CABFDE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-251",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "s=\"ABCDEFG\", key=[0, 2, 1] 로 전치 암호화할 때 원문의 1번 글자(B)는 암호문에서 몇 번째 위치(0-based)로 가는가?"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "2"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "첫 블록 [ABC]를 key=[0,2,1] 순서로 -> A(0)C(2)B(1) = ACB"
+          },
+          {
+            "type": "text",
+            "content": "B는 블록 안에서 마지막에 출력 -> 암호문 인덱스 2"
+          },
+          {
+            "type": "text",
+            "content": "정답: 2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-252",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "블록 크기 3인 전치 암호에서 암호문이 원문과 항상 같아지는 키 key(0-based 리스트)를 쓰시오."
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "[0, 1, 2]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "글자 순서를 바꾸지 않는 키, 즉 위치를 그대로 두는 항등 순열이어야 한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: [0, 1, 2]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-253",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "전치 암호는 글자를 바꾸지 않고 순서만 재배열한다. s=\"ABCDEFG\"(길이 7)을 암호화한 결과의 길이를 쓰시오."
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "7"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "전치 암호는 글자를 더하거나 빼지 않으므로 길이가 보존된다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 7"
+          }
+        ]
+      }
+    ]
+  }
+]

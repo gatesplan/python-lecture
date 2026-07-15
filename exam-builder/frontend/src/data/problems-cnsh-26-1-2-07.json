@@ -1,0 +1,317 @@
+[
+ {
+  "id": "ml-dt-001",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 의사결정트리를 보고 물음에 답하시오. (income(소득): 0=낮음 1=높음, age(나이))"
+   },
+   {
+    "type": "image",
+    "src": "/images/dt-1.png",
+    "alt": "의사결정트리",
+    "width": 90,
+    "align": "center"
+   },
+   {
+    "type": "text",
+    "content": "입력 income=1, age=25 가 'Yes'로 분류될 확률을 백분율로 쓰시오. (확률 = 도달한 칸의 Yes 개수 / 전체 개수)"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "75%"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "입력 income=1, age=25 가 도달한 leaf: No 1개, Yes 3개 (합 4)."
+     },
+     {
+      "type": "text",
+      "content": "Yes 확률 = 3 / 4 = 75%."
+     },
+     {
+      "type": "text",
+      "content": "정답: 75%"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ml-dt-002",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 의사결정트리를 보고 물음에 답하시오. (temp(기온), wind(바람): 0=약함 1=강함)"
+   },
+   {
+    "type": "image",
+    "src": "/images/dt-2.png",
+    "alt": "의사결정트리",
+    "width": 90,
+    "align": "center"
+   },
+   {
+    "type": "text",
+    "content": "입력 temp=28, wind=1 가 도달하는 칸(leaf)에 적힌 No 개수와 Yes 개수를 [No, Yes] 순서로 쓰시오."
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "[3, 2]"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "입력 temp=28, wind=1 를 트리 맨 위에서부터 분기 조건(예/아니오)에 따라 내려간다."
+     },
+     {
+      "type": "text",
+      "content": "도달한 칸: No 3, Yes 2."
+     },
+     {
+      "type": "text",
+      "content": "정답: [3, 2]"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ml-dt-003",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 의사결정트리를 보고 물음에 답하시오. (study(공부시간), attend(출석률))"
+   },
+   {
+    "type": "image",
+    "src": "/images/dt-3.png",
+    "alt": "의사결정트리",
+    "width": 90,
+    "align": "center"
+   },
+   {
+    "type": "text",
+    "content": "입력 study=8, attend=90 의 예측 결과(class)를 쓰시오."
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "Pass"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "입력 study=8, attend=90 가 도달한 leaf: Fail 0개, Pass 5개."
+     },
+     {
+      "type": "text",
+      "content": "더 많은 쪽으로 분류 -> Pass."
+     },
+     {
+      "type": "text",
+      "content": "정답: Pass"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ml-dt-004",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 의사결정트리를 보고 물음에 답하시오. (income(소득): 0=낮음 1=높음, age(나이))"
+   },
+   {
+    "type": "image",
+    "src": "/images/dt-4.png",
+    "alt": "의사결정트리",
+    "width": 90,
+    "align": "center"
+   },
+   {
+    "type": "text",
+    "content": "입력 income=1, age=25 가 도달하는 칸(leaf)에 적힌 No 개수와 Yes 개수를 [No, Yes] 순서로 쓰시오."
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "[2, 3]"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "입력 income=1, age=25 를 트리 맨 위에서부터 분기 조건(예/아니오)에 따라 내려간다."
+     },
+     {
+      "type": "text",
+      "content": "도달한 칸: No 2, Yes 3."
+     },
+     {
+      "type": "text",
+      "content": "정답: [2, 3]"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ml-dt-005",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 의사결정트리를 보고 물음에 답하시오. (links(링크수), caps(대문자비율%))"
+   },
+   {
+    "type": "image",
+    "src": "/images/dt-5.png",
+    "alt": "의사결정트리",
+    "width": 90,
+    "align": "center"
+   },
+   {
+    "type": "text",
+    "content": "입력 links=7, caps=30 가 'Spam'로 분류될 확률을 백분율로 쓰시오. (확률 = 도달한 칸의 Spam 개수 / 전체 개수)"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "60%"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "입력 links=7, caps=30 가 도달한 leaf: Ham 2개, Spam 3개 (합 5)."
+     },
+     {
+      "type": "text",
+      "content": "Spam 확률 = 3 / 5 = 60%."
+     },
+     {
+      "type": "text",
+      "content": "정답: 60%"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ml-dt-006",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 의사결정트리를 보고 물음에 답하시오. (level(레벨), items(아이템): 0=없음 1=있음, allies(동료): 0=없음 1=있음)"
+   },
+   {
+    "type": "image",
+    "src": "/images/dt-6.png",
+    "alt": "의사결정트리",
+    "width": 90,
+    "align": "center"
+   },
+   {
+    "type": "text",
+    "content": "입력 level=3, items=1, allies=1 의 예측 결과(class)를 쓰시오."
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "Win"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "입력 level=3, items=1, allies=1 가 도달한 leaf: Lose 0개, Win 5개."
+     },
+     {
+      "type": "text",
+      "content": "더 많은 쪽으로 분류 -> Win."
+     },
+     {
+      "type": "text",
+      "content": "정답: Win"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ml-dt-007",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 의사결정트리를 보고 물음에 답하시오. (humid(습도%), cloud(구름량%))"
+   },
+   {
+    "type": "image",
+    "src": "/images/dt-7.png",
+    "alt": "의사결정트리",
+    "width": 90,
+    "align": "center"
+   },
+   {
+    "type": "text",
+    "content": "입력 humid=85, cloud=30 가 도달하는 칸(leaf)에 적힌 No 개수와 Yes 개수를 [No, Yes] 순서로 쓰시오."
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "[3, 3]"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "입력 humid=85, cloud=30 를 트리 맨 위에서부터 분기 조건(예/아니오)에 따라 내려간다."
+     },
+     {
+      "type": "text",
+      "content": "도달한 칸: No 3, Yes 3."
+     },
+     {
+      "type": "text",
+      "content": "정답: [3, 3]"
+     }
+    ]
+   }
+  ]
+ }
+]

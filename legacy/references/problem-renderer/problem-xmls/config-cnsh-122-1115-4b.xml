@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CNSH-122 기말고사 예상문제 - Level 4b (2025-11-15 분할)
+
+  Level 4-3, 4-4: 백트래킹 응용
+  총 21개 문제
+
+  사용법: ?config=config-cnsh-122-1115-4b
+-->
+<exercise>
+  <title>CNSH-122 기말고사 예상문제 - Level 4b (백트래킹 응용)</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <!-- Level 4b: 백트래킹 응용 -->
+    <section title="Level 4-3. 자연수 분할" file="problems-cnsh122-14-partition.xml" count="10"/>
+    <section title="Level 4-4. 동전 문제" file="problems-cnsh122-15-coin-change.xml" count="11"/>
+  </sections>
+</exercise>

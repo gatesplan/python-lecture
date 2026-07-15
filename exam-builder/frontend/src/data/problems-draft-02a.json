@@ -1,0 +1,416 @@
+[
+  {
+    "id": "fb-21",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "for i in range(1, 4):\n    for j in range(1, 4):\n        print([[]], end=\" \")\n    print()" },
+      { "type": "output-sample", "content": "1 2 3 \n2 4 6 \n3 6 9 " }
+    ],
+    "answer": { "type": "value", "value": "i * j" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "i=1일 때 j=1,2,3 -> 1*1=1, 1*2=2, 1*3=3" },
+          { "type": "text", "content": "i=2일 때 j=1,2,3 -> 2*1=2, 2*2=4, 2*3=6" },
+          { "type": "text", "content": "i=3일 때 j=1,2,3 -> 3*1=3, 3*2=6, 3*3=9" },
+          { "type": "text", "content": "정답: i * j" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-22",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "for i in range(5, 0, [[]]):\n    print(\"*\" * i)" },
+      { "type": "output-sample", "content": "*****\n****\n***\n**\n*" }
+    ],
+    "answer": { "type": "value", "value": "-1" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "range(5, 0, -1)은 5, 4, 3, 2, 1을 생성한다." },
+          { "type": "text", "content": "\"*\" * 5 = \"*****\", \"*\" * 4 = \"****\", ... \"*\" * 1 = \"*\"" },
+          { "type": "text", "content": "정답: -1" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-23",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "c = 0\nfor i in range(4):\n    for j in range([[]]):\n        c = c + 1\nprint(c)" },
+      { "type": "output-sample", "content": "10" }
+    ],
+    "answer": { "type": "value", "value": "i + 1" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "range(i + 1)이면 i=0:1회, i=1:2회, i=2:3회, i=3:4회 반복한다." },
+          { "type": "text", "content": "c = 1 + 2 + 3 + 4 = 10" },
+          { "type": "text", "content": "정답: i + 1" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-24",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "for i in range(1, 6):\n    print([[]] * (5 - i) + \"*\" * i)" },
+      { "type": "output-sample", "content": "    *\n   **\n  ***\n ****\n*****" }
+    ],
+    "answer": { "type": "value", "value": "\" \"" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "(5-i)개의 공백 문자와 i개의 별을 연결하여 우측 정렬 삼각형을 만든다." },
+          { "type": "text", "content": "i=1: \" \"*4 + \"*\"*1 = \"    *\"" },
+          { "type": "text", "content": "i=5: \" \"*0 + \"*\"*5 = \"*****\"" },
+          { "type": "text", "content": "정답: \" \"" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-25",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "for i in range(3):\n    for j in range(4):\n        print(i * [[]] + j, end=\" \")\n    print()" },
+      { "type": "output-sample", "content": "0 1 2 3 \n4 5 6 7 \n8 9 10 11 " }
+    ],
+    "answer": { "type": "value", "value": "4" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "3x4 격자에서 순차 번호를 만드는 공식: i * 4 + j" },
+          { "type": "text", "content": "i=0: 0,1,2,3 / i=1: 4,5,6,7 / i=2: 8,9,10,11" },
+          { "type": "text", "content": "정답: 4" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-26",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "for i in range(4):\n    for j in range(4):\n        if i + j == [[]]:\n            print(\"*\", end=\" \")\n        else:\n            print(\".\", end=\" \")\n    print()" },
+      { "type": "output-sample", "content": ". . . * \n. . * . \n. * . . \n* . . . " }
+    ],
+    "answer": { "type": "value", "value": "3" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "i + j == 3인 위치에만 *를 출력한다." },
+          { "type": "text", "content": "(0,3), (1,2), (2,1), (3,0) 위치가 해당된다." },
+          { "type": "text", "content": "이것은 반대각선(anti-diagonal) 패턴이다." },
+          { "type": "text", "content": "정답: 3" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-27",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "c = 0\nfor i in range(5):\n    for j in range([[]], 5):\n        c = c + 1\nprint(c)" },
+      { "type": "output-sample", "content": "10" }
+    ],
+    "answer": { "type": "value", "value": "i + 1" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "range(i + 1, 5)이면 i=0:4회, i=1:3회, i=2:2회, i=3:1회, i=4:0회" },
+          { "type": "text", "content": "c = 4 + 3 + 2 + 1 + 0 = 10" },
+          { "type": "text", "content": "정답: i + 1" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-28",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "for i in range(4):\n    for j in range(4):\n        if (i + j) % [[]] == 0:\n            print(\"*\", end=\" \")\n        else:\n            print(\".\", end=\" \")\n    print()" },
+      { "type": "output-sample", "content": "* . * . \n. * . * \n* . * . \n. * . * " }
+    ],
+    "answer": { "type": "value", "value": "2" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "(i + j) % 2 == 0이면 짝수 위치에 *를 출력한다." },
+          { "type": "text", "content": "이것은 체커보드(체스판) 패턴이다." },
+          { "type": "text", "content": "정답: 2" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-29",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "c = 0\nfor i in range(1, 5):\n    for j in range(1, 5):\n        if i [[]] j:\n            c = c + 1\nprint(c)" },
+      { "type": "output-sample", "content": "6" }
+    ],
+    "answer": { "type": "value", "value": "<" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "i < j인 쌍을 센다." },
+          { "type": "text", "content": "(1,2),(1,3),(1,4),(2,3),(2,4),(3,4) = 6개" },
+          { "type": "text", "content": "정답: <" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-30",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "c = 1\nfor i in range(3):\n    for j in range(i + 1):\n        print(c, end=\" \")\n        c = c + [[]]\n    print()" },
+      { "type": "output-sample", "content": "1 \n2 3 \n4 5 6 " }
+    ],
+    "answer": { "type": "value", "value": "1" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "c가 1씩 증가하며 연속 번호를 출력한다." },
+          { "type": "text", "content": "i=0: 1개(1), i=1: 2개(2,3), i=2: 3개(4,5,6)" },
+          { "type": "text", "content": "정답: 1" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-31",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "n = 456\ns = 0\nwhile n > 0:\n    s = s + n % [[]]\n    n = n // 10\nprint(s)" },
+      { "type": "output-sample", "content": "15" }
+    ],
+    "answer": { "type": "value", "value": "10" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "n % 10은 일의 자리 숫자를 구한다." },
+          { "type": "text", "content": "456 % 10 = 6, 45 % 10 = 5, 4 % 10 = 4" },
+          { "type": "text", "content": "s = 6 + 5 + 4 = 15" },
+          { "type": "text", "content": "정답: 10" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-32",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "n = 123\nr = 0\nwhile n > 0:\n    r = r * 10 + n % 10\n    n = n // [[]]\nprint(r)" },
+      { "type": "output-sample", "content": "321" }
+    ],
+    "answer": { "type": "value", "value": "10" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "숫자 뒤집기 알고리즘이다." },
+          { "type": "text", "content": "r = 0*10+3 = 3, r = 3*10+2 = 32, r = 32*10+1 = 321" },
+          { "type": "text", "content": "n을 10으로 나누어 자릿수를 줄인다." },
+          { "type": "text", "content": "정답: 10" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-33",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "n = 12345\nc = 0\nwhile [[]] > 0:\n    c = c + 1\n    n = n // 10\nprint(c)" },
+      { "type": "output-sample", "content": "5" }
+    ],
+    "answer": { "type": "value", "value": "n" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "n이 0보다 큰 동안 10으로 나누며 횟수를 센다." },
+          { "type": "text", "content": "12345 -> 1234 -> 123 -> 12 -> 1 -> 0 (5회)" },
+          { "type": "text", "content": "정답: n" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-34",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "n = 7\nr = 1\nwhile n > 1:\n    r = [[]]\n    n = n - 1\nprint(r)" },
+      { "type": "output-sample", "content": "5040" }
+    ],
+    "answer": { "type": "value", "value": "r * n" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "팩토리얼 계산이다. r에 n을 곱한 뒤 n을 1씩 줄인다." },
+          { "type": "text", "content": "r = 1*7 = 7, 7*6 = 42, 42*5 = 210, 210*4 = 840, 840*3 = 2520, 2520*2 = 5040" },
+          { "type": "text", "content": "7! = 5040" },
+          { "type": "text", "content": "정답: r * n" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-35",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "n = 1\nc = 0\nwhile n < 1000:\n    n = n * [[]]\n    c = c + 1\nprint(c)" },
+      { "type": "output-sample", "content": "7" }
+    ],
+    "answer": { "type": "value", "value": "3" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "n에 3을 반복해서 곱한다." },
+          { "type": "text", "content": "n: 3, 9, 27, 81, 243, 729, 2187" },
+          { "type": "text", "content": "7번째 곱셈에서 2187 >= 1000이 되어 반복 종료." },
+          { "type": "text", "content": "정답: 3" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-36",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "n = 100\nc = 0\nwhile n > 1:\n    n = n // [[]]\n    c = c + 1\nprint(c)" },
+      { "type": "output-sample", "content": "4" }
+    ],
+    "answer": { "type": "value", "value": "3" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "n을 3으로 반복해서 나눈다 (정수 나눗셈)." },
+          { "type": "text", "content": "100 // 3 = 33, 33 // 3 = 11, 11 // 3 = 3, 3 // 3 = 1" },
+          { "type": "text", "content": "4회 나누면 n이 1이 되어 반복 종료." },
+          { "type": "text", "content": "정답: 3" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-37",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "n = 10\nc = 0\nwhile n != 1:\n    if n % 2 == 0:\n        n = n // 2\n    else:\n        n = n * 3 + [[]]\n    c = c + 1\nprint(c)" },
+      { "type": "output-sample", "content": "6" }
+    ],
+    "answer": { "type": "value", "value": "1" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "콜라츠 추측 알고리즘이다." },
+          { "type": "text", "content": "10 -> 5 -> 16 -> 8 -> 4 -> 2 -> 1 (6단계)" },
+          { "type": "text", "content": "짝수면 2로 나누고, 홀수면 3을 곱하고 1을 더한다." },
+          { "type": "text", "content": "정답: 1" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-38",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = 1\nb = 1\nfor i in range(5):\n    t = a + b\n    a = [[]]\n    b = t\nprint(b)" },
+      { "type": "output-sample", "content": "13" }
+    ],
+    "answer": { "type": "value", "value": "b" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "피보나치 수열 계산이다. a에 현재 b를 저장하고 b에 합을 저장한다." },
+          { "type": "text", "content": "(a,b): (1,1) -> (1,2) -> (2,3) -> (3,5) -> (5,8) -> (8,13)" },
+          { "type": "text", "content": "5회 반복 후 b = 13" },
+          { "type": "text", "content": "정답: b" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-39",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = 12\nb = 8\nwhile b != 0:\n    t = b\n    b = a [[]] b\n    a = t\nprint(a)" },
+      { "type": "output-sample", "content": "4" }
+    ],
+    "answer": { "type": "value", "value": "%" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "유클리드 호제법으로 최대공약수(GCD)를 구한다." },
+          { "type": "text", "content": "a=12, b=8: b = 12 % 8 = 4, a = 8" },
+          { "type": "text", "content": "a=8, b=4: b = 8 % 4 = 0, a = 4" },
+          { "type": "text", "content": "b=0이므로 종료. GCD(12, 8) = 4" },
+          { "type": "text", "content": "정답: %" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-40",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "n = 789\nwhile n >= 10:\n    s = 0\n    while n > 0:\n        s = s + n % 10\n        n = n [[]] 10\n    n = s\nprint(n)" },
+      { "type": "output-sample", "content": "6" }
+    ],
+    "answer": { "type": "value", "value": "//" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "각 자릿수의 합을 구하는 것을 한 자리가 될 때까지 반복한다." },
+          { "type": "text", "content": "789: 7 + 8 + 9 = 24" },
+          { "type": "text", "content": "24: 2 + 4 = 6" },
+          { "type": "text", "content": "6은 한 자리이므로 종료." },
+          { "type": "text", "content": "정답: //" }
+        ]
+      }
+    ]
+  }
+]

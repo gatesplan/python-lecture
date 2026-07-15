@@ -1,0 +1,405 @@
+[
+  {
+    "id": "fb-81",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "a = [10, 20, 30, 40, 50]\ns = 0\nc = 0\nfor i in range(5):\n    s = s + a[i]\n    c = c + [[]]\nprint(s [[]] c)" },
+      { "type": "output-sample", "content": "30" }
+    ],
+    "answer": { "type": "value", "value": "1, //" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "s는 리스트 원소의 합이므로 10+20+30+40+50=150이다. c는 반복마다 1씩 증가하므로 c=5이다. 150//5=30이므로 정수 나눗셈 연산자 //를 사용한다." },
+          { "type": "text", "content": "정답: 1, //" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-82",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "d = {}\na = \"abracadabra\"\nfor i in range(11):\n    c = a[i]\n    if c [[]] d:\n        d[c] = d[c] + 1\n    else:\n        d[c] = [[]]\nprint(d[\"a\"])" },
+      { "type": "output-sample", "content": "5" }
+    ],
+    "answer": { "type": "value", "value": "in, 1" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "c in d로 해당 문자가 딕셔너리에 있는지 확인한다. 있으면 기존 값에 1을 더하고, 없으면 1로 초기화한다. 'a'는 \"abracadabra\"에서 5번 등장한다." },
+          { "type": "text", "content": "정답: in, 1" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-83",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "a = [4, 2, 7, 1, 5]\nfor i in range(4):\n    for j in range(4 - [[]]):\n        if a[j] > a[j + [[]]]:\n            t = a[j]\n            a[j] = a[j + 1]\n            a[j + 1] = t\nprint(a)" },
+      { "type": "output-sample", "content": "[1, 2, 4, 5, 7]" }
+    ],
+    "answer": { "type": "value", "value": "i, 1" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "버블 정렬이다. 외부 반복(i)이 진행될수록 뒤쪽에 정렬된 원소가 쌓이므로 비교 범위를 4-i로 줄인다. 인접한 원소 a[j]와 a[j+1]을 비교하여 교환한다." },
+          { "type": "text", "content": "정답: i, 1" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-84",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "for i in range(1, 4):\n    print(i, i * [[]], sep=[[]])" },
+      { "type": "output-sample", "content": "1-3\n2-6\n3-9" }
+    ],
+    "answer": { "type": "value", "value": "3, \"-\"" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "i=1일 때 출력이 1-3이므로 i*?=3, 즉 ?=3이다. sep는 두 값 사이의 구분자이므로 \"-\"이다." },
+          { "type": "text", "content": "정답: 3, \"-\"" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-85",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "for i in range(5):\n    s = \"\"\n    for j in range(5):\n        if j [[]] i:\n            s = s + \" \"\n        else:\n            s = s + [[]]\n    print(s)" },
+      { "type": "output-sample", "content": "*****\n ****\n  ***\n   **\n    *" }
+    ],
+    "answer": { "type": "value", "value": "<, \"*\"" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "i=0일 때 공백 없이 *****가 출력되므로 j<0인 경우가 없어 모두 else로 간다. i=1일 때 j=0만 공백이고 나머지는 *이다. 따라서 j < i일 때 공백, 아니면 \"*\"를 추가한다." },
+          { "type": "text", "content": "정답: <, \"*\"" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-86",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\ne = []\no = []\nfor i in range(10):\n    if a[i] % [[]] == 0:\n        e.append(a[i])\n    else:\n        o.append(a[i])\nprint(len(e), [[]])" },
+      { "type": "output-sample", "content": "5 5" }
+    ],
+    "answer": { "type": "value", "value": "2, len(o)" },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "짝수 판별은 a[i] % 2 == 0이다. 1~10에서 짝수 5개, 홀수 5개이므로 len(e)=5, len(o)=5이다. 출력이 5 5이므로 두 번째 빈칸은 len(o)이다." },
+          { "type": "text", "content": "정답: 2, len(o)" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-87",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 리스트 a에서 짝수의 개수를 구하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "a = [3, 8, 1, 6, 4, 7, 2, 9]\nc = 0\nfor i in range(8):\n[[[2]]]\nprint(c)" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "a[i]가 짝수인지 판별하여 c를 1 증가시킨다." },
+          { "type": "code", "language": "python", "content": "    if a[i] % 2 == 0:\n        c = c + 1" },
+          { "type": "text", "content": "짝수는 8, 6, 4, 2로 총 4개이므로 c=4가 출력된다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-88",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 1부터 30까지의 수 중 2와 3의 공배수의 합을 구하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "s = 0\nfor i in range(1, 31):\n[[[3]]]\nprint(s)" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "2와 3의 공배수는 6의 배수이다. i가 2로도 나누어지고 3으로도 나누어지는 경우를 찾는다." },
+          { "type": "code", "language": "python", "content": "    if i % 2 == 0 and i % 3 == 0:\n        s = s + i" },
+          { "type": "text", "content": "6+12+18+24+30=90이 출력된다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-89",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 리스트 a에서 최대값과 그 위치(인덱스)를 구하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "a = [4, 7, 2, 9, 5]\nm = a[0]\np = 0\nfor i in range(1, 5):\n[[[3]]]\nprint(m, p)" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "현재 최대값 m보다 a[i]가 크면 m과 위치 p를 갱신한다." },
+          { "type": "code", "language": "python", "content": "    if a[i] > m:\n        m = a[i]\n        p = i" },
+          { "type": "text", "content": "최대값은 9이고 인덱스 3에 위치하므로 9 3이 출력된다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-90",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 정수 n을 뒤집어 출력하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "n = 5678\nr = 0\nwhile n > 0:\n[[[2]]]\nprint(r)" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "n의 마지막 자릿수(n%10)를 r의 뒤에 붙이고(r*10+), n을 10으로 나눈다." },
+          { "type": "code", "language": "python", "content": "    r = r * 10 + n % 10\n    n = n // 10" },
+          { "type": "text", "content": "5678이 뒤집혀 8765가 출력된다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-91",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 100부터 1까지의 수 중 7의 배수의 합을 구하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "s = 0\ni = 100\nwhile i >= 1:\n[[[3]]]\nprint(s)" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "i가 7의 배수인지 확인하고, 맞으면 s에 더한다. 반복마다 i를 1 감소시킨다." },
+          { "type": "code", "language": "python", "content": "    if i % 7 == 0:\n        s = s + i\n    i = i - 1" },
+          { "type": "text", "content": "7+14+21+28+35+42+49+56+63+70+77+84+91+98=735가 출력된다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-92",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 아래와 같은 패턴을 출력하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "for i in range(1, 6):\n[[[3]]]\n    print()" },
+      { "type": "output-sample", "content": "1 \n1 2 \n1 2 3 \n1 2 3 4 \n1 2 3 4 5 " },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "각 줄에서 1부터 i까지의 숫자를 공백과 함께 출력한 뒤 print()로 줄바꿈한다." },
+          { "type": "code", "language": "python", "content": "    for j in range(1, i + 1):\n        print(j, end=\" \")" },
+          { "type": "text", "content": "i=1일 때 \"1 \", i=2일 때 \"1 2 \", ..., i=5일 때 \"1 2 3 4 5 \"이 출력된다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-93",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 정수 n을 2진수 문자열로 변환하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "n = 25\ns = \"\"\nwhile n > 0:\n[[[2]]]\nprint(s)" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "n을 2로 나눈 나머지를 문자열 앞에 붙이고, n을 2로 나눈다." },
+          { "type": "code", "language": "python", "content": "    s = str(n % 2) + s\n    n = n // 2" },
+          { "type": "text", "content": "25를 2진수로 변환하면 11001이 출력된다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-94",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 리스트 a에서 각 값의 등장 횟수를 딕셔너리 d에 저장하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "a = [1, 3, 2, 1, 3, 1, 2]\nd = {}\nfor i in range(7):\n    v = a[i]\n[[[4]]]\nprint(d)" },
+      { "type": "answer-box", "lines": 5 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "v가 이미 d에 있으면 값을 1 증가시키고, 없으면 1로 초기화한다." },
+          { "type": "code", "language": "python", "content": "    if v in d:\n        d[v] = d[v] + 1\n    else:\n        d[v] = 1" },
+          { "type": "text", "content": "{1: 3, 3: 2, 2: 2}가 출력된다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-95",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 아래와 같은 구구단 일부를 출력하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "for i in range(2, 4):\n[[[2]]]\n" },
+      { "type": "output-sample", "content": "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "안쪽 반복문에서 j를 1부터 3까지 돌며 i x j = i*j 형식으로 출력한다." },
+          { "type": "code", "language": "python", "content": "    for j in range(1, 4):\n        print(i, \"x\", j, \"=\", i * j)" },
+          { "type": "text", "content": "2단과 3단의 1~3 곱이 출력된다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-96",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 리스트 a를 오름차순으로 정렬하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "a = [5, 3, 8, 1, 4]\nfor i in range(4):\n    for j in range(4 - i):\n[[[4]]]\nprint(a)" },
+      { "type": "answer-box", "lines": 5 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "버블 정렬의 핵심 부분이다. 인접한 두 원소를 비교하여 앞이 더 크면 교환한다." },
+          { "type": "code", "language": "python", "content": "        if a[j] > a[j + 1]:\n            t = a[j]\n            a[j] = a[j + 1]\n            a[j + 1] = t" },
+          { "type": "text", "content": "[1, 3, 4, 5, 8]이 출력된다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-97",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 아래와 같은 우측 정렬 삼각형을 출력하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "for i in range(1, 6):\n[[[2]]]\n" },
+      { "type": "output-sample", "content": "    *\n   **\n  ***\n ****\n*****" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "공백을 (5-i)개, *를 i개 이어 붙여 출력한다." },
+          { "type": "code", "language": "python", "content": "    print(\" \" * (5 - i) + \"*\" * i)" },
+          { "type": "text", "content": "i=1일 때 공백4개+*1개, i=5일 때 공백0개+*5개로 우측 정렬 삼각형이 된다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-98",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 정수 n의 각 자릿수의 합을 구하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "n = 9876\ns = 0\nwhile n > 0:\n[[[2]]]\nprint(s)" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "n의 마지막 자릿수(n%10)를 s에 더하고, n을 10으로 나눈다." },
+          { "type": "code", "language": "python", "content": "    s = s + n % 10\n    n = n // 10" },
+          { "type": "text", "content": "9+8+7+6=30이 출력된다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-99",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 리스트 a의 각 위치까지의 최대값을 리스트 b에 저장하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "a = [3, 1, 4, 1, 5]\nb = []\nm = a[0]\nfor i in range(5):\n[[[3]]]\nprint(b)" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "a[i]가 현재 최대값 m보다 크면 m을 갱신하고, 매번 m을 b에 추가한다." },
+          { "type": "code", "language": "python", "content": "    if a[i] > m:\n        m = a[i]\n    b.append(m)" },
+          { "type": "text", "content": "[3, 3, 4, 4, 5]가 출력된다." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-100",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 두 리스트 a, b의 원소를 번갈아 넣은 리스트 c를 만드는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "a = [1, 3, 5]\nb = [2, 4, 6]\nc = []\nfor i in range(3):\n[[[2]]]\nprint(c)" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          { "type": "text", "content": "반복마다 a[i]를 먼저 추가하고, b[i]를 추가한다." },
+          { "type": "code", "language": "python", "content": "    c.append(a[i])\n    c.append(b[i])" },
+          { "type": "text", "content": "[1, 2, 3, 4, 5, 6]이 출력된다." }
+        ]
+      }
+    ]
+  }
+]

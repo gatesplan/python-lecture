@@ -1,0 +1,3919 @@
+[
+  {
+    "id": "fb-101",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 리스트 메서드 이름을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "a = [1, 2, 3]\na.[[]](4)\nprint(a)"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 3, 4]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "append"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "append(x)는 리스트 끝에 x 하나를 추가한다."
+          },
+          {
+            "type": "text",
+            "content": "[1, 2, 3]에 4를 뒤에 추가 -> [1, 2, 3, 4]"
+          },
+          {
+            "type": "text",
+            "content": "정답: append"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-102",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "a = [1, 2, 4]\na.insert([[]], 3)\nprint(a)"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 3, 4]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "2"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "insert(i, x)는 리스트의 i번 인덱스 위치에 x를 끼워 넣는다."
+          },
+          {
+            "type": "text",
+            "content": "[1, 2, 4]에서 3이 2와 4 사이(인덱스 2)에 들어가야 한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-103",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "a = [10, 20, 30, 40]\na.pop([[]])\nprint(a)"
+      },
+      {
+        "type": "output-sample",
+        "content": "[10, 20, 40]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "2"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "pop(i)는 인덱스 i의 원소를 리스트에서 꺼내서 제거한다."
+          },
+          {
+            "type": "text",
+            "content": "[10, 20, 30, 40]에서 30이 사라져야 하므로 인덱스 2를 제거한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-104",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "a = [5, 3, 7, 3]\na.remove([[]])\nprint(a)"
+      },
+      {
+        "type": "output-sample",
+        "content": "[5, 7, 3]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "3"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "remove(x)는 리스트 앞에서부터 처음 만나는 x 하나만 제거한다."
+          },
+          {
+            "type": "text",
+            "content": "[5, 3, 7, 3]에서 앞쪽 3이 제거되어 [5, 7, 3]이 된다."
+          },
+          {
+            "type": "text",
+            "content": "정답: 3"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-105",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "a = [3, 1]\na.[[]]([4, 2])\na.[[]]()\nprint(a)"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 3, 4]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "extend, sort"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "extend(리스트)는 다른 리스트의 원소들을 현재 리스트 뒤에 전부 붙인다."
+          },
+          {
+            "type": "text",
+            "content": "[3, 1]에 [4, 2]를 extend -> [3, 1, 4, 2]"
+          },
+          {
+            "type": "text",
+            "content": "sort()는 리스트를 오름차순으로 정렬한다. -> [1, 2, 3, 4]"
+          },
+          {
+            "type": "text",
+            "content": "정답: extend, sort"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-106",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 키워드를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "[[]] f():\n    print(1)\n\nf()"
+      },
+      {
+        "type": "output-sample",
+        "content": "1"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "def"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "파이썬에서 함수를 만들 때는 def 키워드로 시작한다."
+          },
+          {
+            "type": "text",
+            "content": "def f(): 로 함수를 정의하고 f()로 호출하면 내부의 print(1)이 실행된다."
+          },
+          {
+            "type": "text",
+            "content": "정답: def"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-107",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 매개변수 이름을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f([[]]):\n    print(a * 2)\n\nf(5)"
+      },
+      {
+        "type": "output-sample",
+        "content": "10"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "a"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "함수 본문이 a를 쓰고 있으므로 괄호 안의 매개변수 이름도 a이어야 한다."
+          },
+          {
+            "type": "text",
+            "content": "f(5)를 호출하면 a=5가 되어 print(5*2) -> 10이 출력된다."
+          },
+          {
+            "type": "text",
+            "content": "정답: a"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-108",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 키워드를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f(a, b):\n    [[]] a + b\n\nprint(f(3, 4))"
+      },
+      {
+        "type": "output-sample",
+        "content": "7"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "return"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "함수가 계산한 값을 밖으로 돌려주려면 return을 사용한다."
+          },
+          {
+            "type": "text",
+            "content": "return a + b 이므로 f(3, 4)는 7을 돌려주고 print가 7을 출력한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: return"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-109",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 함수 호출식을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f(x):\n    return x + 1\n\ny = [[]]\nprint(y)"
+      },
+      {
+        "type": "output-sample",
+        "content": "11"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "f(10)"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "f(x)는 x+1을 돌려주므로, 결과가 11이 되려면 x가 10이어야 한다."
+          },
+          {
+            "type": "text",
+            "content": "y = f(10) -> y = 11 -> print(y)는 11을 출력한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: f(10)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-110",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f(a, b):\n    return [[]]\n\nprint(f(6, 2))\nprint(f(10, 5))"
+      },
+      {
+        "type": "output-sample",
+        "content": "12\n50"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "a * b"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "f(6, 2) -> 12, f(10, 5) -> 50 이 되려면 두 값을 곱해야 한다."
+          },
+          {
+            "type": "text",
+            "content": "6*2=12, 10*5=50"
+          },
+          {
+            "type": "text",
+            "content": "정답: a * b"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-111",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 키워드를 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "c = 0\n\ndef f():\n    [[]] c\n    c = c + 1\n\nf()\nf()\nprint(c)"
+      },
+      {
+        "type": "output-sample",
+        "content": "2"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "global"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "함수 안에서 전역변수 값을 바꾸려면 먼저 global 키워드로 선언해야 한다."
+          },
+          {
+            "type": "text",
+            "content": "global c가 없으면 c = c + 1에서 c를 지역변수로 인식해 오류가 난다."
+          },
+          {
+            "type": "text",
+            "content": "f()가 두 번 호출되어 c는 0 -> 1 -> 2가 된다."
+          },
+          {
+            "type": "text",
+            "content": "정답: global"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-112",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "s = 0\n\ndef f(n):\n    global s\n    s = [[]]\n\nf(10)\nf(5)\nprint(s)"
+      },
+      {
+        "type": "output-sample",
+        "content": "15"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "s + n"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "호출할 때마다 전역변수 s에 매개변수 n을 누적해야 한다."
+          },
+          {
+            "type": "text",
+            "content": "f(10) -> s = 0 + 10 = 10, f(5) -> s = 10 + 5 = 15"
+          },
+          {
+            "type": "text",
+            "content": "정답: s + n"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-113",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def f(a):\n    x = a * 2\n    return [[]]\n\nprint(f(4))"
+      },
+      {
+        "type": "output-sample",
+        "content": "8"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "x"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "x는 함수 안에서 만들어진 지역변수이다. 함수 밖에서 쓰려면 return으로 돌려줘야 한다."
+          },
+          {
+            "type": "text",
+            "content": "f(4)에서 x = 4*2 = 8, return x -> 8이 출력된다."
+          },
+          {
+            "type": "text",
+            "content": "정답: x"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-114",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 리스트 메서드 이름을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "a = []\n\ndef f(x):\n    a.[[]](x)\n\nf(1)\nf(2)\nprint(a)"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "append"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "append는 리스트 안을 직접 바꾸는 메서드라서 global 없이도 전역 리스트를 고칠 수 있다."
+          },
+          {
+            "type": "text",
+            "content": "f(1) -> a=[1], f(2) -> a=[1, 2]"
+          },
+          {
+            "type": "text",
+            "content": "정답: append"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-115",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "b = False\n\ndef f():\n    global b\n    b = [[]]\n\nf()\nprint(b)\nf()\nprint(b)"
+      },
+      {
+        "type": "output-sample",
+        "content": "True\nFalse"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "not b"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "not b는 True를 False로, False를 True로 뒤집는다."
+          },
+          {
+            "type": "text",
+            "content": "초기 b=False -> f() -> b=True -> print: True -> f() -> b=False -> print: False"
+          },
+          {
+            "type": "text",
+            "content": "정답: not b"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-116",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = [[]]\n    for i in [[]]:\n        for j in range(0, n-1-i):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), range(n)"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "외부 for는 range(n)으로 총 n번의 패스를 수행한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), range(n)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-117",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = [[]]\n    for i in range(n):\n        for j in [[]]:\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), range(0, n-1-i)"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "내부 for의 range(0, n-1-i)는 i번째 패스 이후 끝에 i개가 이미 정렬되어 있으므로 비교 범위를 그만큼 줄인다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), range(0, n-1-i)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-118",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = [[]]\n    for i in range(n):\n        for j in range(0, n-1-i):\n            if [[]]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), arr[j] > arr[j+1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "arr[j] > arr[j+1]은 인접한 두 원소 중 앞쪽이 크면 교환하도록 하는 조건이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), arr[j] > arr[j+1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-119",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = [[]]\n    for i in range(n):\n        for j in range(0, n-1-i):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = [[]]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), arr[j+1], arr[j]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "우변 arr[j+1], arr[j]는 좌변과 교차 배치되어 두 원소의 값을 서로 바꾼다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), arr[j+1], arr[j]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-120",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = [[]]\n    for i in range(n):\n        for j in range(0, n-1-i):\n            if arr[j] > arr[j+1]:\n                [[]] = arr[j+1], arr[j]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), arr[j], arr[j+1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j], arr[j+1]은 swap 대상 두 원소의 위치를 지정한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), arr[j], arr[j+1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-121",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = [[]]\n    for i in range(n):\n        for j in range(0, n-1-i):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return [[]]\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-122",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in [[]]:\n        for j in [[]]:\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(n), range(0, n-1-i)"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(n)으로 총 n번의 패스를 수행한다."
+          },
+          {
+            "type": "text",
+            "content": "내부 for의 range(0, n-1-i)는 i번째 패스 이후 끝에 i개가 이미 정렬되어 있으므로 비교 범위를 그만큼 줄인다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(n), range(0, n-1-i)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-123",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in [[]]:\n        for j in range(0, n-1-i):\n            if [[]]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(n), arr[j] > arr[j+1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(n)으로 총 n번의 패스를 수행한다."
+          },
+          {
+            "type": "text",
+            "content": "arr[j] > arr[j+1]은 인접한 두 원소 중 앞쪽이 크면 교환하도록 하는 조건이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(n), arr[j] > arr[j+1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-124",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in [[]]:\n        for j in range(0, n-1-i):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = [[]]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(n), arr[j+1], arr[j]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(n)으로 총 n번의 패스를 수행한다."
+          },
+          {
+            "type": "text",
+            "content": "우변 arr[j+1], arr[j]는 좌변과 교차 배치되어 두 원소의 값을 서로 바꾼다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(n), arr[j+1], arr[j]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-125",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in [[]]:\n        for j in range(0, n-1-i):\n            if arr[j] > arr[j+1]:\n                [[]] = arr[j+1], arr[j]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(n), arr[j], arr[j+1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(n)으로 총 n번의 패스를 수행한다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j], arr[j+1]은 swap 대상 두 원소의 위치를 지정한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(n), arr[j], arr[j+1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-126",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in [[]]:\n        for j in range(0, n-1-i):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return [[]]\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(n), arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(n)으로 총 n번의 패스를 수행한다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(n), arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-127",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in [[]]:\n            if [[]]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(0, n-1-i), arr[j] > arr[j+1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "내부 for의 range(0, n-1-i)는 i번째 패스 이후 끝에 i개가 이미 정렬되어 있으므로 비교 범위를 그만큼 줄인다."
+          },
+          {
+            "type": "text",
+            "content": "arr[j] > arr[j+1]은 인접한 두 원소 중 앞쪽이 크면 교환하도록 하는 조건이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(0, n-1-i), arr[j] > arr[j+1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-128",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in [[]]:\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = [[]]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(0, n-1-i), arr[j+1], arr[j]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "내부 for의 range(0, n-1-i)는 i번째 패스 이후 끝에 i개가 이미 정렬되어 있으므로 비교 범위를 그만큼 줄인다."
+          },
+          {
+            "type": "text",
+            "content": "우변 arr[j+1], arr[j]는 좌변과 교차 배치되어 두 원소의 값을 서로 바꾼다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(0, n-1-i), arr[j+1], arr[j]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-129",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in [[]]:\n            if arr[j] > arr[j+1]:\n                [[]] = arr[j+1], arr[j]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(0, n-1-i), arr[j], arr[j+1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "내부 for의 range(0, n-1-i)는 i번째 패스 이후 끝에 i개가 이미 정렬되어 있으므로 비교 범위를 그만큼 줄인다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j], arr[j+1]은 swap 대상 두 원소의 위치를 지정한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(0, n-1-i), arr[j], arr[j+1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-130",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in [[]]:\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return [[]]\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(0, n-1-i), arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "내부 for의 range(0, n-1-i)는 i번째 패스 이후 끝에 i개가 이미 정렬되어 있으므로 비교 범위를 그만큼 줄인다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(0, n-1-i), arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-131",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(0, n-1-i):\n            if [[]]:\n                arr[j], arr[j+1] = [[]]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j] > arr[j+1], arr[j+1], arr[j]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "arr[j] > arr[j+1]은 인접한 두 원소 중 앞쪽이 크면 교환하도록 하는 조건이다."
+          },
+          {
+            "type": "text",
+            "content": "우변 arr[j+1], arr[j]는 좌변과 교차 배치되어 두 원소의 값을 서로 바꾼다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j] > arr[j+1], arr[j+1], arr[j]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-132",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(0, n-1-i):\n            if [[]]:\n                [[]] = arr[j+1], arr[j]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j] > arr[j+1], arr[j], arr[j+1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "arr[j] > arr[j+1]은 인접한 두 원소 중 앞쪽이 크면 교환하도록 하는 조건이다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j], arr[j+1]은 swap 대상 두 원소의 위치를 지정한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j] > arr[j+1], arr[j], arr[j+1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-133",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(0, n-1-i):\n            if [[]]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return [[]]\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j] > arr[j+1], arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "arr[j] > arr[j+1]은 인접한 두 원소 중 앞쪽이 크면 교환하도록 하는 조건이다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j] > arr[j+1], arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-134",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(0, n-1-i):\n            if arr[j] > arr[j+1]:\n                [[]] = [[]]\n    return arr\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j], arr[j+1], arr[j+1], arr[j]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "좌변 arr[j], arr[j+1]과 우변 arr[j+1], arr[j]를 교차 배치하여 두 원소의 값을 서로 바꾼다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j], arr[j+1], arr[j+1], arr[j]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-135",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(0, n-1-i):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = [[]]\n    return [[]]\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j+1], arr[j], arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "우변 arr[j+1], arr[j]는 좌변과 교차 배치되어 두 원소의 값을 서로 바꾼다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j+1], arr[j], arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-136",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(0, n-1-i):\n            if arr[j] > arr[j+1]:\n                [[]] = arr[j+1], arr[j]\n    return [[]]\n\nprint(bubble_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j], arr[j+1], arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "좌변 arr[j], arr[j+1]은 swap 대상 두 원소의 위치를 지정한다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j], arr[j+1], arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-137",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = [[]]\n\n    for i in [[]]:\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), range(1, n)"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "외부 for는 range(1, n)으로 인덱스 1부터 끝까지 돌며 각 key를 정렬된 앞부분에 끼워넣는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), range(1, n)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-138",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = [[]]\n\n    for i in range(1, n):\n        key = [[]]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), arr[i]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "key = arr[i]는 현재 삽입 대상 값을 임시로 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), arr[i]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-139",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = [[]]\n\n    for i in range(1, n):\n        key = arr[i]\n        j = [[]]\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), i - 1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "j = i - 1은 정렬된 앞부분의 마지막 인덱스를 가리킨다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), i - 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-140",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = [[]]\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while [[]]:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), j >= 0 and arr[j] > key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "while 조건 j >= 0 and arr[j] > key는 key보다 큰 원소를 만나는 동안 뒤로 밀기를 계속한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), j >= 0 and arr[j] > key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-141",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = [[]]\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = [[]]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), arr[j]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "우변 arr[j]는 앞쪽 원소 값으로, 뒤로 한 칸 밀 때 대입할 값이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), arr[j]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-142",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = [[]]\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            [[]] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), arr[j + 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 현재 비교 지점보다 한 칸 뒤 위치로, 앞 원소를 덮어쓸 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), arr[j + 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-143",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = [[]]\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            [[]]\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), j -= 1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "j -= 1 (또는 j = j - 1)은 비교 지점을 왼쪽으로 한 칸 옮긴다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), j -= 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-144",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = [[]]\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = [[]]\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "우변 key는 임시로 저장해둔 삽입 대상 값으로, 비어있는 자리에 최종적으로 놓는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-145",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = [[]]\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        [[]] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), arr[j + 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 비교가 멈춘 지점 바로 뒤, 즉 key가 들어갈 빈 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), arr[j + 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-146",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = [[]]\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return [[]]\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "len(arr), arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "len(arr)는 리스트 arr의 원소 개수를 구해 n에 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: len(arr), arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-147",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in [[]]:\n        key = [[]]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(1, n), arr[i]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(1, n)으로 인덱스 1부터 끝까지 돌며 각 key를 정렬된 앞부분에 끼워넣는다."
+          },
+          {
+            "type": "text",
+            "content": "key = arr[i]는 현재 삽입 대상 값을 임시로 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(1, n), arr[i]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-148",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in [[]]:\n        key = arr[i]\n        j = [[]]\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(1, n), i - 1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(1, n)으로 인덱스 1부터 끝까지 돌며 각 key를 정렬된 앞부분에 끼워넣는다."
+          },
+          {
+            "type": "text",
+            "content": "j = i - 1은 정렬된 앞부분의 마지막 인덱스를 가리킨다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(1, n), i - 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-149",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in [[]]:\n        key = arr[i]\n        j = i - 1\n        while [[]]:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(1, n), j >= 0 and arr[j] > key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(1, n)으로 인덱스 1부터 끝까지 돌며 각 key를 정렬된 앞부분에 끼워넣는다."
+          },
+          {
+            "type": "text",
+            "content": "while 조건 j >= 0 and arr[j] > key는 key보다 큰 원소를 만나는 동안 뒤로 밀기를 계속한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(1, n), j >= 0 and arr[j] > key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-150",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in [[]]:\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = [[]]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(1, n), arr[j]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(1, n)으로 인덱스 1부터 끝까지 돌며 각 key를 정렬된 앞부분에 끼워넣는다."
+          },
+          {
+            "type": "text",
+            "content": "우변 arr[j]는 앞쪽 원소 값으로, 뒤로 한 칸 밀 때 대입할 값이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(1, n), arr[j]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-151",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in [[]]:\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            [[]] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(1, n), arr[j + 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(1, n)으로 인덱스 1부터 끝까지 돌며 각 key를 정렬된 앞부분에 끼워넣는다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 현재 비교 지점보다 한 칸 뒤 위치로, 앞 원소를 덮어쓸 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(1, n), arr[j + 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-152",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in [[]]:\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            [[]]\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(1, n), j -= 1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(1, n)으로 인덱스 1부터 끝까지 돌며 각 key를 정렬된 앞부분에 끼워넣는다."
+          },
+          {
+            "type": "text",
+            "content": "j -= 1 (또는 j = j - 1)은 비교 지점을 왼쪽으로 한 칸 옮긴다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(1, n), j -= 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-153",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in [[]]:\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = [[]]\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(1, n), key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(1, n)으로 인덱스 1부터 끝까지 돌며 각 key를 정렬된 앞부분에 끼워넣는다."
+          },
+          {
+            "type": "text",
+            "content": "우변 key는 임시로 저장해둔 삽입 대상 값으로, 비어있는 자리에 최종적으로 놓는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(1, n), key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-154",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in [[]]:\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        [[]] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(1, n), arr[j + 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(1, n)으로 인덱스 1부터 끝까지 돌며 각 key를 정렬된 앞부분에 끼워넣는다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 비교가 멈춘 지점 바로 뒤, 즉 key가 들어갈 빈 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(1, n), arr[j + 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-155",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in [[]]:\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return [[]]\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "range(1, n), arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "외부 for는 range(1, n)으로 인덱스 1부터 끝까지 돌며 각 key를 정렬된 앞부분에 끼워넣는다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: range(1, n), arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-156",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = [[]]\n        j = [[]]\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[i], i - 1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "key = arr[i]는 현재 삽입 대상 값을 임시로 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "j = i - 1은 정렬된 앞부분의 마지막 인덱스를 가리킨다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[i], i - 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-157",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = [[]]\n        j = i - 1\n        while [[]]:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[i], j >= 0 and arr[j] > key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "key = arr[i]는 현재 삽입 대상 값을 임시로 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "while 조건 j >= 0 and arr[j] > key는 key보다 큰 원소를 만나는 동안 뒤로 밀기를 계속한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[i], j >= 0 and arr[j] > key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-158",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = [[]]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = [[]]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[i], arr[j]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "key = arr[i]는 현재 삽입 대상 값을 임시로 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "우변 arr[j]는 앞쪽 원소 값으로, 뒤로 한 칸 밀 때 대입할 값이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[i], arr[j]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-159",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = [[]]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            [[]] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[i], arr[j + 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "key = arr[i]는 현재 삽입 대상 값을 임시로 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 현재 비교 지점보다 한 칸 뒤 위치로, 앞 원소를 덮어쓸 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[i], arr[j + 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-160",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = [[]]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            [[]]\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[i], j -= 1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "key = arr[i]는 현재 삽입 대상 값을 임시로 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "j -= 1 (또는 j = j - 1)은 비교 지점을 왼쪽으로 한 칸 옮긴다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[i], j -= 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-161",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = [[]]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = [[]]\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[i], key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "key = arr[i]는 현재 삽입 대상 값을 임시로 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "우변 key는 임시로 저장해둔 삽입 대상 값으로, 비어있는 자리에 최종적으로 놓는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[i], key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-162",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = [[]]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        [[]] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[i], arr[j + 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "key = arr[i]는 현재 삽입 대상 값을 임시로 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 비교가 멈춘 지점 바로 뒤, 즉 key가 들어갈 빈 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[i], arr[j + 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-163",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = [[]]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return [[]]\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[i], arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "key = arr[i]는 현재 삽입 대상 값을 임시로 저장한다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[i], arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-164",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = [[]]\n        while [[]]:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "i - 1, j >= 0 and arr[j] > key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "j = i - 1은 정렬된 앞부분의 마지막 인덱스를 가리킨다."
+          },
+          {
+            "type": "text",
+            "content": "while 조건 j >= 0 and arr[j] > key는 key보다 큰 원소를 만나는 동안 뒤로 밀기를 계속한다."
+          },
+          {
+            "type": "text",
+            "content": "정답: i - 1, j >= 0 and arr[j] > key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-165",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = [[]]\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = [[]]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "i - 1, arr[j]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "j = i - 1은 정렬된 앞부분의 마지막 인덱스를 가리킨다."
+          },
+          {
+            "type": "text",
+            "content": "우변 arr[j]는 앞쪽 원소 값으로, 뒤로 한 칸 밀 때 대입할 값이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: i - 1, arr[j]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-166",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = [[]]\n        while j >= 0 and arr[j] > key:\n            [[]] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "i - 1, arr[j + 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "j = i - 1은 정렬된 앞부분의 마지막 인덱스를 가리킨다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 현재 비교 지점보다 한 칸 뒤 위치로, 앞 원소를 덮어쓸 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: i - 1, arr[j + 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-167",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = [[]]\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            [[]]\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "i - 1, j -= 1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "j = i - 1은 정렬된 앞부분의 마지막 인덱스를 가리킨다."
+          },
+          {
+            "type": "text",
+            "content": "j -= 1 (또는 j = j - 1)은 비교 지점을 왼쪽으로 한 칸 옮긴다."
+          },
+          {
+            "type": "text",
+            "content": "정답: i - 1, j -= 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-168",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = [[]]\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = [[]]\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "i - 1, key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "j = i - 1은 정렬된 앞부분의 마지막 인덱스를 가리킨다."
+          },
+          {
+            "type": "text",
+            "content": "우변 key는 임시로 저장해둔 삽입 대상 값으로, 비어있는 자리에 최종적으로 놓는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: i - 1, key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-169",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = [[]]\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        [[]] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "i - 1, arr[j + 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "j = i - 1은 정렬된 앞부분의 마지막 인덱스를 가리킨다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 비교가 멈춘 지점 바로 뒤, 즉 key가 들어갈 빈 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: i - 1, arr[j + 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-170",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = [[]]\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return [[]]\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "i - 1, arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "j = i - 1은 정렬된 앞부분의 마지막 인덱스를 가리킨다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: i - 1, arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-171",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while [[]]:\n            arr[j + 1] = [[]]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "j >= 0 and arr[j] > key, arr[j]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "while 조건 j >= 0 and arr[j] > key는 key보다 큰 원소를 만나는 동안 뒤로 밀기를 계속한다."
+          },
+          {
+            "type": "text",
+            "content": "우변 arr[j]는 앞쪽 원소 값으로, 뒤로 한 칸 밀 때 대입할 값이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: j >= 0 and arr[j] > key, arr[j]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-172",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while [[]]:\n            [[]] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "j >= 0 and arr[j] > key, arr[j + 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "while 조건 j >= 0 and arr[j] > key는 key보다 큰 원소를 만나는 동안 뒤로 밀기를 계속한다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 현재 비교 지점보다 한 칸 뒤 위치로, 앞 원소를 덮어쓸 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: j >= 0 and arr[j] > key, arr[j + 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-173",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while [[]]:\n            arr[j + 1] = arr[j]\n            [[]]\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "j >= 0 and arr[j] > key, j -= 1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "while 조건 j >= 0 and arr[j] > key는 key보다 큰 원소를 만나는 동안 뒤로 밀기를 계속한다."
+          },
+          {
+            "type": "text",
+            "content": "j -= 1 (또는 j = j - 1)은 비교 지점을 왼쪽으로 한 칸 옮긴다."
+          },
+          {
+            "type": "text",
+            "content": "정답: j >= 0 and arr[j] > key, j -= 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-174",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while [[]]:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = [[]]\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "j >= 0 and arr[j] > key, key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "while 조건 j >= 0 and arr[j] > key는 key보다 큰 원소를 만나는 동안 뒤로 밀기를 계속한다."
+          },
+          {
+            "type": "text",
+            "content": "우변 key는 임시로 저장해둔 삽입 대상 값으로, 비어있는 자리에 최종적으로 놓는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: j >= 0 and arr[j] > key, key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-175",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while [[]]:\n            arr[j + 1] = arr[j]\n            j -= 1\n        [[]] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "j >= 0 and arr[j] > key, arr[j + 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "while 조건 j >= 0 and arr[j] > key는 key보다 큰 원소를 만나는 동안 뒤로 밀기를 계속한다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 비교가 멈춘 지점 바로 뒤, 즉 key가 들어갈 빈 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: j >= 0 and arr[j] > key, arr[j + 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-176",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while [[]]:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return [[]]\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "j >= 0 and arr[j] > key, arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "while 조건 j >= 0 and arr[j] > key는 key보다 큰 원소를 만나는 동안 뒤로 밀기를 계속한다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: j >= 0 and arr[j] > key, arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-177",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            [[]] = [[]]\n            j -= 1\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j + 1], arr[j]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 현재 비교 지점보다 한 칸 뒤 위치로, 앞 원소를 덮어쓸 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "우변 arr[j]는 앞쪽 원소 값으로, 뒤로 한 칸 밀 때 대입할 값이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j + 1], arr[j]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-178",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = [[]]\n            [[]]\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j], j -= 1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "우변 arr[j]는 앞쪽 원소 값으로, 뒤로 한 칸 밀 때 대입할 값이다."
+          },
+          {
+            "type": "text",
+            "content": "j -= 1 (또는 j = j - 1)은 비교 지점을 왼쪽으로 한 칸 옮긴다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j], j -= 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-179",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = [[]]\n            j -= 1\n        arr[j + 1] = [[]]\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j], key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "우변 arr[j]는 앞쪽 원소 값으로, 뒤로 한 칸 밀 때 대입할 값이다."
+          },
+          {
+            "type": "text",
+            "content": "우변 key는 임시로 저장해둔 삽입 대상 값으로, 비어있는 자리에 최종적으로 놓는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j], key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-180",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = [[]]\n            j -= 1\n        [[]] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j], arr[j + 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "우변 arr[j]는 앞쪽 원소 값으로, 뒤로 한 칸 밀 때 대입할 값이다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 비교가 멈춘 지점 바로 뒤, 즉 key가 들어갈 빈 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j], arr[j + 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-181",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = [[]]\n            j -= 1\n        arr[j + 1] = key\n\n    return [[]]\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j], arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "우변 arr[j]는 앞쪽 원소 값으로, 뒤로 한 칸 밀 때 대입할 값이다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j], arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-182",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            [[]] = arr[j]\n            [[]]\n        arr[j + 1] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j + 1], j -= 1"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 현재 비교 지점보다 한 칸 뒤 위치로, 앞 원소를 덮어쓸 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "j -= 1 (또는 j = j - 1)은 비교 지점을 왼쪽으로 한 칸 옮긴다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j + 1], j -= 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-183",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            [[]] = arr[j]\n            j -= 1\n        arr[j + 1] = [[]]\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j + 1], key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 현재 비교 지점보다 한 칸 뒤 위치로, 앞 원소를 덮어쓸 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "우변 key는 임시로 저장해둔 삽입 대상 값으로, 비어있는 자리에 최종적으로 놓는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j + 1], key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-184",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            [[]] = arr[j]\n            j -= 1\n        [[]] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j + 1], arr[j + 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 현재 비교 지점보다 한 칸 뒤 위치로, 앞 원소를 덮어쓸 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 비교가 멈춘 지점 바로 뒤, 즉 key가 들어갈 빈 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j + 1], arr[j + 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-185",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            [[]] = arr[j]\n            j -= 1\n        arr[j + 1] = key\n\n    return [[]]\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j + 1], arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 현재 비교 지점보다 한 칸 뒤 위치로, 앞 원소를 덮어쓸 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j + 1], arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-186",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            [[]]\n        arr[j + 1] = [[]]\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "j -= 1, key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "j -= 1 (또는 j = j - 1)은 비교 지점을 왼쪽으로 한 칸 옮긴다."
+          },
+          {
+            "type": "text",
+            "content": "우변 key는 임시로 저장해둔 삽입 대상 값으로, 비어있는 자리에 최종적으로 놓는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: j -= 1, key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-187",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            [[]]\n        [[]] = key\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "j -= 1, arr[j + 1]"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "j -= 1 (또는 j = j - 1)은 비교 지점을 왼쪽으로 한 칸 옮긴다."
+          },
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 비교가 멈춘 지점 바로 뒤, 즉 key가 들어갈 빈 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정답: j -= 1, arr[j + 1]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-188",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            [[]]\n        arr[j + 1] = key\n\n    return [[]]\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "j -= 1, arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "j -= 1 (또는 j = j - 1)은 비교 지점을 왼쪽으로 한 칸 옮긴다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: j -= 1, arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-189",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        [[]] = [[]]\n\n    return arr\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j + 1], key"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 비교가 멈춘 지점 바로 뒤, 즉 key가 들어갈 빈 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "우변 key는 임시로 저장해둔 삽입 대상 값으로, 비어있는 자리에 최종적으로 놓는다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j + 1], key"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-190",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        arr[j + 1] = [[]]\n\n    return [[]]\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "key, arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "우변 key는 임시로 저장해둔 삽입 대상 값으로, 비어있는 자리에 최종적으로 놓는다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: key, arr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-191",
+    "type": "short",
+    "content": [
+      {
+        "type": "text",
+        "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오."
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "content": "def insert_sort(arr):\n    n = len(arr)\n\n    for i in range(1, n):\n        key = arr[i]\n        j = i - 1\n        while j >= 0 and arr[j] > key:\n            arr[j + 1] = arr[j]\n            j -= 1\n        [[]] = key\n\n    return [[]]\n\nprint(insert_sort([5, 2, 8, 1, 4]))"
+      },
+      {
+        "type": "output-sample",
+        "content": "[1, 2, 4, 5, 8]"
+      }
+    ],
+    "answer": {
+      "type": "value",
+      "value": "arr[j + 1], arr"
+    },
+    "explain": [
+      {
+        "type": "process-box",
+        "title": "풀이",
+        "content": [
+          {
+            "type": "text",
+            "content": "좌변 arr[j + 1]은 비교가 멈춘 지점 바로 뒤, 즉 key가 들어갈 빈 자리이다."
+          },
+          {
+            "type": "text",
+            "content": "정렬이 끝난 arr를 반환값으로 돌려준다."
+          },
+          {
+            "type": "text",
+            "content": "정답: arr[j + 1], arr"
+          }
+        ]
+      }
+    ]
+  }
+]

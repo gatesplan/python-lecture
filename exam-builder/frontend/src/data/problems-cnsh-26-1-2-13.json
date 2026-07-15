@@ -1,0 +1,94 @@
+[
+ {
+  "id": "ml-km-n01",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "같은 데이터에 k-Means를 적용하는데, 초기 중심점(빨간 X) 위치만 다르게 두 번 실행했다(start A, start B)."},
+   {"type": "image", "src": "/images/km-n1.png", "alt": "초기 중심 위치가 다른 두 경우", "width": 92, "align": "center"},
+   {"type": "text", "content": "두 실행의 최종 결과가 달라질 수 있는 이유와, 결과를 매번 똑같게 만드는 방법을 서술하시오."},
+   {"type": "answer-box", "lines": 6}
+  ],
+  "answer": {"type": "value", "value": "k-Means는 처음 중심점을 보통 무작위로 정하는데, 시작 위치가 다르면 점들이 서로 다른 군집으로 배정되어 반복 결과(최종 군집)가 달라질 수 있다. random_state(시드)를 지정하면 초기 중심이 항상 같은 위치로 정해져 결과를 똑같이 재현할 수 있다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "초기 중심이 무작위라 시작 위치에 따라 결과가 달라질 수 있음(초기화 의존)."},
+    {"type": "text", "content": "해결: random_state(시드) 고정 -> 초기 중심 고정 -> 재현 가능."}
+  ]}]
+ },
+ {
+  "id": "ml-km-n02",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "아래 산점도의 점들에 k-Means 군집화를 적용하려고 한다."},
+   {"type": "image", "src": "/images/km-n2.png", "alt": "세 무리 산점도", "width": 82, "align": "center"},
+   {"type": "text", "content": "적절한 군집 개수 k를 정하고, 그렇게 정한 근거를 서술하시오."},
+   {"type": "answer-box", "lines": 5}
+  ],
+  "answer": {"type": "value", "value": "k=3이 적절하다. 점들이 세 무리로 뚜렷하게 뭉쳐 있으므로 군집 개수를 데이터가 자연스럽게 나뉘는 무리의 수인 3에 맞추는 것이 좋다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "점들이 3개 무리로 뚜렷이 뭉쳐 있음."},
+    {"type": "text", "content": "k는 데이터가 자연스럽게 나뉘는 무리 수에 맞춤 -> k=3."}
+  ]}]
+ },
+ {
+  "id": "ml-km-n03",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "점은 세 무리로 보이는데 k=2로 군집화한 결과다(색이 군집을 나타냄). 아래 두 무리가 같은 색(한 군집)으로 묶였다."},
+   {"type": "image", "src": "/images/km-n3.png", "alt": "k=2로 묶인 결과", "width": 82, "align": "center"},
+   {"type": "text", "content": "이 결과에서 어떤 일이 일어났는지 설명하고, 적절한 k가 몇이어야 하는지 쓰시오."},
+   {"type": "answer-box", "lines": 5}
+  ],
+  "answer": {"type": "value", "value": "군집을 2개만 만들도록 했기 때문에, 서로 가까운 아래 두 무리가 하나의 군집으로 강제로 합쳐졌다. 실제 무리는 3개이므로 k=3으로 해야 세 무리가 각각 제대로 나뉜다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "k=2라 가까운 두 무리가 한 군집으로 강제 병합됨."},
+    {"type": "text", "content": "무리가 3개 -> 적절한 k=3."}
+  ]}]
+ },
+ {
+  "id": "ml-km-n04",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "초기 중심점 center1(2,2), center2(5,5)와 7개의 점이 아래와 같이 있다."},
+   {"type": "image", "src": "/images/km-n4.png", "alt": "중심 이동 계산용 좌표", "width": 78, "align": "center"},
+   {"type": "text", "content": "(1) 각 점을 더 가까운 중심점에 배정하고, (2) 각 군집에 모인 점들의 평균으로 옮긴 새 중심점 좌표를 두 개 모두 구하시오."},
+   {"type": "answer-box", "lines": 7}
+  ],
+  "answer": {"type": "value", "value": "(1) 배정: center1 <- (1,1), (1,2), (2,1) / center2 <- (6,6), (7,6), (6,7), (7,7). (2) 새 중심: center1 = ((1+1+2)/3, (1+2+1)/3) = (약 1.33, 약 1.33). center2 = ((6+7+6+7)/4, (6+6+7+7)/4) = (6.5, 6.5)."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "각 점을 더 가까운 중심에 배정: 좌하 3개 -> center1, 우상 4개 -> center2."},
+    {"type": "text", "content": "center1 평균 = (4/3, 4/3) = 약 (1.33, 1.33)."},
+    {"type": "text", "content": "center2 평균 = (26/4, 26/4) = (6.5, 6.5)."}
+  ]}]
+ },
+ {
+  "id": "ml-km-n05",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "왼쪽은 색(정답)이 없는 데이터, 오른쪽은 색(정답)이 있는 데이터다."},
+   {"type": "image", "src": "/images/km-n5.png", "alt": "비지도 vs 지도 데이터", "width": 92, "align": "center"},
+   {"type": "text", "content": "k-Means는 둘 중 어느 상황의 학습에 해당하며, 그렇게 판단하는 이유를 서술하시오."},
+   {"type": "answer-box", "lines": 5}
+  ],
+  "answer": {"type": "value", "value": "왼쪽처럼 정답(레이블)이 없는 데이터를 다루는 비지도학습이다. k-Means는 정답을 주지 않고 데이터의 분포(점들이 가까운 정도)만 보고 비슷한 것끼리 묶어 군집을 찾기 때문이다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "k-Means는 정답(y) 없이 데이터만으로 묶음 -> 비지도학습(왼쪽)."},
+    {"type": "text", "content": "분포만 보고 비슷한 것끼리 군집화."}
+  ]}]
+ },
+ {
+  "id": "ml-km-n06",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "사람 눈에는 위/아래 두 줄(띠)로 보이는, 가로로 길게 늘어선 데이터다."},
+   {"type": "image", "src": "/images/km-n6.png", "alt": "가로로 긴 두 띠 데이터", "width": 82, "align": "center"},
+   {"type": "text", "content": "이 데이터에 k-Means(k=2)를 적용하면 위/아래 두 줄로 잘 나누지 못할 수 있다. 그 이유를 서술하시오."},
+   {"type": "answer-box", "lines": 6}
+  ],
+  "answer": {"type": "value", "value": "k-Means는 중심점까지의 거리로 점을 묶어 둥근(구형) 모양의 군집을 가정한다. 가로로 긴 띠에서는 같은 줄 안에서도 좌우 끝이 서로 멀고, 위아래 줄이 오히려 가까운 구간이 있다. 그래서 거리 기준으로는 위/아래가 아니라 좌/우로 잘리는 식으로 엉뚱하게 나뉠 수 있다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "k-Means는 중심 거리 기반이라 둥근 군집을 가정."},
+    {"type": "text", "content": "긴 띠는 같은 줄 좌우가 멀고 위아래가 가까워 좌/우로 잘릴 수 있음."},
+    {"type": "text", "content": "모양이 길쭉하거나 겹친 분포에서 k-Means의 한계."}
+  ]}]
+ }
+]

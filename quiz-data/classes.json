@@ -1,0 +1,302 @@
+[
+  {
+    "cat": "클래스",
+    "q": "클래스와 객체의 관계를 가장 잘 설명한 것은?",
+    "choices": [
+      "클래스는 붕어빵 틀이고, 객체는 그 틀로 찍어낸 실제 붕어빵이다",
+      "클래스는 실제 붕어빵이고, 객체는 붕어빵 틀이다",
+      "클래스와 객체는 완전히 같은 말이다",
+      "객체 하나로 클래스를 여러 개 만든다"
+    ],
+    "answer": 0,
+    "explain": "클래스는 설계도(붕어빵 틀)이고, 객체는 그 틀로 만든 실제 결과물(붕어빵)이다. 틀 하나(클래스)로 객체를 여러 개 만들 수 있다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 중 클래스에 대한 설명으로 옳은 것은?",
+    "choices": [
+      "틀 하나로는 객체를 단 하나만 만들 수 있다",
+      "하나의 클래스로 여러 개의 객체를 만들 수 있다",
+      "객체를 먼저 만든 뒤 클래스를 정의한다",
+      "클래스는 속성만 가지고 메서드는 가질 수 없다"
+    ],
+    "answer": 1,
+    "explain": "클래스는 객체를 찍어내는 틀이므로 하나의 클래스로 여러 객체를 생성할 수 있다. 클래스는 속성과 메서드를 모두 가질 수 있다."
+  },
+  {
+    "cat": "클래스",
+    "q": "클래스 안에 들어 있는 두 가지 핵심 구성요소는 무엇인가?",
+    "choices": [
+      "속성(attribute)과 메서드(method)",
+      "변수와 주석",
+      "조건문과 반복문",
+      "입력과 출력"
+    ],
+    "answer": 0,
+    "explain": "클래스는 객체의 데이터를 담는 속성(attribute)과 객체의 동작을 정의하는 메서드(method)로 구성된다."
+  },
+  {
+    "cat": "클래스",
+    "q": "객체가 가진 '데이터(상태값)'를 가리키는 용어는?",
+    "choices": [
+      "메서드",
+      "매개변수",
+      "반환값",
+      "속성"
+    ],
+    "answer": 3,
+    "explain": "속성(attribute)은 객체가 가진 데이터(상태값)다. 예: self.name, self.hp. 메서드는 객체의 동작(함수)을 의미한다."
+  },
+  {
+    "cat": "클래스",
+    "q": "클래스 안에 정의된 '동작을 수행하는 함수'를 무엇이라 부르는가?",
+    "choices": [
+      "속성",
+      "주석",
+      "메서드",
+      "리스트"
+    ],
+    "answer": 2,
+    "explain": "클래스 안에 정의된 함수를 메서드(method)라고 한다. take_damage, speed_up 같은 동작이 메서드다."
+  },
+  {
+    "cat": "클래스",
+    "q": "__init__ 메서드의 역할로 가장 옳은 것은?",
+    "choices": [
+      "객체를 삭제할 때 자동 호출된다",
+      "객체를 생성할 때 자동 호출되어 초기 속성값을 설정한다",
+      "객체를 화면에 출력하는 메서드다",
+      "클래스를 다른 클래스에 상속시킨다"
+    ],
+    "answer": 1,
+    "explain": "__init__은 객체가 생성될 때 자동으로 호출되어 초기 속성값을 설정하는 메서드다. 거의 모든 클래스에 포함된다."
+  },
+  {
+    "cat": "클래스",
+    "q": "self가 의미하는 것은 무엇인가?",
+    "choices": [
+      "클래스 이름 그 자체",
+      "프로그램의 가장 바깥 함수",
+      "객체 자기 자신을 가리키는 것",
+      "외부에서 전달된 정답 데이터"
+    ],
+    "answer": 2,
+    "explain": "self는 메서드가 호출된 객체 자기 자신을 가리킨다. self.name, self.hp처럼 객체 내부 속성에 접근할 때 사용한다."
+  },
+  {
+    "cat": "클래스",
+    "q": "메서드 안에서 객체 자신의 속성 hp에 접근하려고 한다. 올바른 표현은?",
+    "choices": [
+      "hp",
+      "Character.hp",
+      "this.hp",
+      "self.hp"
+    ],
+    "answer": 3,
+    "explain": "객체 자신의 속성에 접근할 때는 self.hp처럼 self를 통해 접근한다. 파이썬에서는 this가 아니라 self를 쓴다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드에서 빈칸 (가)에 들어갈 가장 알맞은 것은?\n\nclass Character:\n    def (가)(self, name, hp):\n        self.name = name\n        self.hp = hp",
+    "choices": [
+      "__init__",
+      "__main__",
+      "start",
+      "create"
+    ],
+    "answer": 0,
+    "explain": "객체 생성 시 초기 속성값을 설정하는 메서드 이름은 __init__이다. 앞뒤로 밑줄 두 개씩 붙는다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드에서 빈칸 (가), (나)에 들어갈 말로 알맞은 것은?\n\nclass Character:\n    def __init__(self, name, hp):\n        (가).name = name\n        (나).hp = hp",
+    "choices": [
+      "(가) self, (나) self",
+      "(가) name, (나) hp",
+      "(가) Character, (나) Character",
+      "(가) self, (나) name"
+    ],
+    "answer": 0,
+    "explain": "객체 자신의 속성에 값을 저장하려면 self.name, self.hp처럼 self를 사용한다. 따라서 두 칸 모두 self다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Character:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\nhero = Character(\"기사\", 100)\nprint(hero.hp)",
+    "choices": [
+      "100",
+      "기사",
+      "0",
+      "오류 발생"
+    ],
+    "answer": 0,
+    "explain": "Character(\"기사\", 100)으로 객체를 만들면 self.hp에 100이 저장된다. hero.hp는 100이다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Character:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\n    def take_damage(self, amount):\n        self.hp -= amount\n\nhero = Character(\"기사\", 100)\nhero.take_damage(10)\nhero.take_damage(10)\nprint(hero.hp)",
+    "choices": [
+      "100",
+      "90",
+      "80",
+      "10"
+    ],
+    "answer": 2,
+    "explain": "hp는 처음 100이다. take_damage(10)을 두 번 호출하면 100 - 10 - 10 = 80이 된다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Character:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\n    def take_damage(self, amount):\n        self.hp -= amount\n\nmonster = Character(\"슬라임\", 30)\nmonster.take_damage(10)\nprint(monster.hp)",
+    "choices": [
+      "30",
+      "10",
+      "20",
+      "0"
+    ],
+    "answer": 2,
+    "explain": "monster의 hp는 처음 30이다. take_damage(10)을 한 번 호출하면 30 - 10 = 20이 된다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드에서 hero와 monster에 대한 설명으로 옳은 것은?\n\nhero = Character(\"기사\", 100)\nmonster = Character(\"슬라임\", 30)",
+    "choices": [
+      "같은 클래스로 만든 서로 다른 객체다",
+      "서로 다른 클래스로 만든 객체다",
+      "둘은 완전히 같은 하나의 객체다",
+      "객체가 아니라 둘 다 클래스다"
+    ],
+    "answer": 0,
+    "explain": "hero와 monster는 모두 Character라는 같은 클래스로 만들었지만, 각각 독립된 속성값을 가진 서로 다른 객체다."
+  },
+  {
+    "cat": "클래스",
+    "q": "기본값 매개변수가 있는 다음 클래스에서 Car(\"red\") 객체를 만들면 speed 속성값은?\n\nclass Car:\n    def __init__(self, color, speed=0):\n        self.color = color\n        self.speed = speed\n\nc = Car(\"red\")\nprint(c.speed)",
+    "choices": [
+      "red",
+      "오류 발생",
+      "None",
+      "0"
+    ],
+    "answer": 3,
+    "explain": "speed=0이 기본값 매개변수이므로 speed를 따로 넘기지 않으면 0이 들어간다. 따라서 c.speed는 0이다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Car:\n    def __init__(self, color, speed=0):\n        self.color = color\n        self.speed = speed\n\n    def speed_up(self, amount):\n        self.speed += amount\n\nc = Car(\"blue\", 10)\nc.speed_up(20)\nc.speed_up(5)\nprint(c.speed)",
+    "choices": [
+      "25",
+      "30",
+      "35",
+      "10"
+    ],
+    "answer": 2,
+    "explain": "speed는 처음 10이다. speed_up(20)으로 30, speed_up(5)로 35가 된다. 10 + 20 + 5 = 35."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Car:\n    def __init__(self, color, speed=0):\n        self.color = color\n        self.speed = speed\n\n    def speed_up(self, amount):\n        self.speed += amount\n\n    def stop(self):\n        self.speed = 0\n\nc = Car(\"blue\")\nc.speed_up(50)\nc.stop()\nprint(c.speed)",
+    "choices": [
+      "50",
+      "blue",
+      "0",
+      "오류 발생"
+    ],
+    "answer": 2,
+    "explain": "speed는 기본값 0에서 시작해 speed_up(50)으로 50이 되지만, stop()이 self.speed = 0으로 다시 0으로 만든다."
+  },
+  {
+    "cat": "클래스",
+    "q": "메서드 update가 self.hp를 변경하는 코드가 하는 일을 가장 잘 설명한 것은?",
+    "choices": [
+      "클래스 자체를 새로 정의한다",
+      "객체를 메모리에서 삭제한다",
+      "다른 클래스를 상속받는다",
+      "객체의 상태(속성값)를 변화시킨다"
+    ],
+    "answer": 3,
+    "explain": "메서드 안에서 self.hp 같은 속성을 바꾸면 그 객체의 상태(속성값)가 변한다. 이것이 객체 상태 변화 추적의 핵심이다."
+  },
+  {
+    "cat": "클래스",
+    "q": "객체를 생성하고 메서드를 호출하는 올바른 문법은?",
+    "choices": [
+      "hero = Character(\"기사\", 100) 후 hero.take_damage(10)",
+      "hero = Character.take_damage(10)",
+      "hero = take_damage(Character, 10)",
+      "Character = hero(\"기사\", 100)"
+    ],
+    "answer": 0,
+    "explain": "객체는 클래스이름(인자) 형태로 생성하고, 메서드는 객체.메서드(인자) 형태로 호출한다. hero.take_damage(10)이 올바르다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드에서 hero와 monster가 서로 영향을 주지 않는 이유로 옳은 것은?\n\nhero = Character(\"기사\", 100)\nmonster = Character(\"슬라임\", 30)\nmonster.take_damage(10)\nprint(hero.hp)",
+    "choices": [
+      "각 객체는 자기만의 독립된 속성값을 가지기 때문",
+      "take_damage 메서드가 hero에는 없기 때문",
+      "두 객체가 같은 hp를 공유하기 때문",
+      "monster가 hero를 자동으로 복사하기 때문"
+    ],
+    "answer": 0,
+    "explain": "객체마다 self가 가리키는 대상이 다르므로 각자 독립된 속성값을 가진다. monster.take_damage(10)은 monster.hp만 바꾸고 hero.hp(100)는 그대로다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 빈칸 (가)에 들어갈 메서드 호출로 알맞은 것은? (목표: monster의 hp를 5만큼 줄이기)\n\nmonster = Character(\"슬라임\", 30)\n(가)\nprint(monster.hp)   # 25 출력",
+    "choices": [
+      "take_damage(5)",
+      "Character.take_damage(5)",
+      "monster.hp(5)",
+      "monster.take_damage(5)"
+    ],
+    "answer": 3,
+    "explain": "객체의 메서드는 객체.메서드(인자) 형태로 호출한다. monster.take_damage(5)를 호출하면 30 - 5 = 25가 된다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 중 self에 대한 설명으로 틀린 것은?",
+    "choices": [
+      "메서드의 첫 번째 매개변수로 보통 self를 쓴다",
+      "self를 통해 객체의 속성에 접근한다",
+      "self는 객체 자기 자신을 가리킨다",
+      "self는 클래스 이름과 항상 똑같아야 한다"
+    ],
+    "answer": 3,
+    "explain": "self는 객체 자기 자신을 가리키는 매개변수일 뿐, 클래스 이름과 같을 필요가 없다. 나머지 설명은 모두 옳다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Character:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\n    def heal(self, amount):\n        self.hp += amount\n\n    def take_damage(self, amount):\n        self.hp -= amount\n\nhero = Character(\"기사\", 100)\nhero.take_damage(30)\nhero.heal(10)\nprint(hero.hp)",
+    "choices": [
+      "100",
+      "80",
+      "70",
+      "60"
+    ],
+    "answer": 1,
+    "explain": "hp는 100에서 시작한다. take_damage(30)으로 70, heal(10)으로 80이 된다. 100 - 30 + 10 = 80."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Car:\n    def __init__(self, color, speed=0):\n        self.color = color\n        self.speed = speed\n\nc1 = Car(\"red\", 40)\nc2 = Car(\"blue\")\nprint(c1.speed, c2.speed)",
+    "choices": [
+      "40 40",
+      "0 0",
+      "40 0",
+      "red blue"
+    ],
+    "answer": 2,
+    "explain": "c1은 speed에 40을 직접 넘겼고, c2는 넘기지 않아 기본값 0이 들어간다. 따라서 40 0이 출력된다."
+  },
+  {
+    "cat": "클래스",
+    "q": "객체 c의 color 속성값을 출력하려고 한다. 올바른 코드는?\n\nc = Car(\"green\", 0)",
+    "choices": [
+      "print(color)",
+      "print(c.color)",
+      "print(Car.color)",
+      "print(c(color))"
+    ],
+    "answer": 1,
+    "explain": "객체의 속성에 접근할 때는 객체.속성 형태를 쓴다. print(c.color)로 \"green\"을 출력한다."
+  }
+]

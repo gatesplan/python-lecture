@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+backend/data/problems/*.json
+backend/data/exams/*.json
+frontend/node_modules/
+frontend/dist/

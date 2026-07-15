@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CNSH-122 기말고사 예상문제 - Level 5 (2025-11-15 분할)
+
+  Level 5: 백트래킹 심화
+  총 20개 문제
+
+  사용법: ?config=config-cnsh-122-1115-5
+-->
+<exercise>
+  <title>CNSH-122 기말고사 예상문제 - Level 5 (백트래킹 심화)</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <!-- Level 5: 백트래킹 심화 -->
+    <section title="Level 5-1. 해밀토니안 경로" file="problems-cnsh122-16-hamiltonian.xml" count="12"/>
+    <section title="Level 5-2. 백트래킹 응용" file="problems-cnsh122-17-backtracking-misc.xml" count="8"/>
+  </sections>
+</exercise>

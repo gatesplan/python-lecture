@@ -1,0 +1,183 @@
+[
+ {
+  "id": "ml-km-001",
+  "type": "explain",
+  "content": [
+   {
+    "type": "text",
+    "content": "k-Means 군집화에서 k=2로 설정했을 때 알고리즘이 어떻게 동작하는지 단계적으로 서술하시오."
+   },
+   {
+    "type": "answer-box",
+    "lines": 6
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "1) 중심점 2개를 무작위 위치에 정한다(초기화). 2) 각 점을 더 가까운 중심점에 배정해 2개 그룹을 만든다. 3) 각 그룹에 속한 점들의 평균 위치로 중심점을 옮긴다(재설정). 4) 배정과 이동을 더 이상 변화가 없을 때까지 반복하고 멈춘다. 결과로 데이터가 2개 군집으로 나뉜다."
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "채점 포인트",
+    "content": [
+     {
+      "type": "text",
+      "content": "초기화: 중심점(centroid)을 k=2개, 보통 무작위 위치에 둔다."
+     },
+     {
+      "type": "text",
+      "content": "배정: 각 점을 더 가까운 중심점 쪽으로 보내 2개 그룹을 만든다."
+     },
+     {
+      "type": "text",
+      "content": "재설정: 각 그룹 점들의 평균으로 중심점을 이동한다."
+     },
+     {
+      "type": "text",
+      "content": "반복/종료: 배정->이동을 변화가 없을 때까지 반복한다."
+     },
+     {
+      "type": "text",
+      "content": "4단계(초기화/배정/재설정/반복종료)가 들어가면 정답."
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ml-km-002",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 k-Means에 대한 설명을 읽고, 옳으면 O, 틀리면 X로 판정하시오."
+   },
+   {
+    "type": "condition-box",
+    "title": "보기",
+    "marker": "kr-con",
+    "items": [
+     "k-Means는 정답(레이블) 없이 데이터를 묶는 비지도학습이다.",
+     "k는 나눌 군집의 개수이고, 초기 중심점도 k개를 정한다.",
+     "같은 데이터, 같은 k값으로 학습하면 결과가 동일하다.",
+     "결과를 고정하려면 random_state(시드)를 지정한다.",
+     "각 점은 가장 가까운 중심점에 배정되고, 중심점은 배정된 점들의 평균으로 이동한다.",
+     "반복하면 서로 다른 두 중심점도 결국 같은 위치로 합쳐진다.",
+     "군집 개수 k는 데이터 개수보다 많아도 된다.",
+     "결과는 각 점의 군집 번호이며, 번호 자체에 크기/순서 의미는 없다."
+    ]
+   },
+   {
+    "type": "answer-box",
+    "lines": 4
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "ㄱ:O, ㄴ:O, ㄷ:X, ㄹ:O, ㅁ:O, ㅂ:X, ㅅ:X, ㅇ:O"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "채점 포인트",
+    "content": [
+     {
+      "type": "text",
+      "content": "ㄱ O: 정답 레이블 없이 묶으므로 비지도학습."
+     },
+     {
+      "type": "text",
+      "content": "ㄴ O: k = 군집 수 = 초기 중심점 개수."
+     },
+     {
+      "type": "text",
+      "content": "ㄷ X: 초기 중심점이 무작위라, 시드를 고정하지 않으면 결과가 달라질 수 있다."
+     },
+     {
+      "type": "text",
+      "content": "ㄹ O: random_state로 무작위 초기화를 고정하면 결과가 재현된다."
+     },
+     {
+      "type": "text",
+      "content": "ㅁ O: 배정(가까운 중심) + 재설정(평균 이동)이 k-Means의 핵심 반복."
+     },
+     {
+      "type": "text",
+      "content": "ㅂ X: 서로 다른 중심점은 각자 영역 점들의 평균으로 갱신되어 다른 위치를 유지한다(같은 점으로 합쳐지지 않음)."
+     },
+     {
+      "type": "text",
+      "content": "ㅅ X: 군집은 데이터 개수보다 많을 수 없다(점 없는 빈 군집 발생, 에러)."
+     },
+     {
+      "type": "text",
+      "content": "ㅇ O: 군집 번호는 단순 식별자라 크기/순서 의미가 없다."
+     },
+     {
+      "type": "text",
+      "content": "정답: ㄱ:O, ㄴ:O, ㄷ:X, ㄹ:O, ㅁ:O, ㅂ:X, ㅅ:X, ㅇ:O"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ml-km-003",
+  "type": "explain",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 산점도의 점들(좌표 데이터)을 아래 코드로 처리한다. 코드를 읽고 물음에 답하시오."
+   },
+   {
+    "type": "image",
+    "src": "/images/km-3.png",
+    "alt": "산점도",
+    "width": 80,
+    "align": "center"
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "from sklearn.cluster import KMeans\n\nmodel = KMeans(n_clusters=[[]])\nlabels = model.fit_predict(X)   # X: 점들의 좌표 (정답 y 없음)\nprint(labels)"
+   },
+   {
+    "type": "text",
+    "content": "(1) 이 코드는 지도학습과 비지도학습 중 무엇인가? (2) 빈칸(n_clusters)에 들어갈 k값을 정하고 그 이유를 쓰시오. (3) 만약 k=100으로 설정하면 어떤 문제가 생기는지 서술하시오."
+   },
+   {
+    "type": "answer-box",
+    "lines": 7
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "(1) 비지도학습 (정답 y 없이 X만 사용하고 fit_predict로 군집을 찾음). (2) k=3 (점들이 세 무리로 뚜렷이 뭉쳐 있으므로). (3) 전체 데이터가 24개뿐이라 군집을 100개 만들 수 없다. 점이 하나도 없는 빈 군집이 생겨 에러가 나거나, 사실상 점마다 따로 나뉘어 군집화가 무의미해진다."
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "채점 포인트",
+    "content": [
+     {
+      "type": "text",
+      "content": "(1) X(좌표)만 있고 정답 y가 없으며 fit_predict로 묶음 -> 비지도학습."
+     },
+     {
+      "type": "text",
+      "content": "(2) 산점도에 점 무리가 3개 -> k=3."
+     },
+     {
+      "type": "text",
+      "content": "(3) 전체 점이 24개인데 k=100이면 데이터 수보다 군집이 많다."
+     },
+     {
+      "type": "text",
+      "content": "    -> 빈 군집 발생(에러) / 군집화가 의미를 잃음."
+     }
+    ]
+   }
+  ]
+ }
+]

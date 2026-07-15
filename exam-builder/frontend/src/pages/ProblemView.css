@@ -1,0 +1,84 @@
+.a4-viewer {
+  min-height: 100vh;
+  background: #e0e0e0;
+}
+
+.a4-message {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.a4-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 20px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.a4-toolbar-title {
+  flex: 1;
+  font-weight: 600;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.a4-paper {
+  width: 210mm;
+  height: 297mm;
+  margin: 24px auto;
+  padding: 15mm 10mm;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  font-family: 'Malgun Gothic', sans-serif;
+  font-size: 10pt;
+  line-height: 1.5;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.a4-two-column {
+  column-count: 2;
+  column-gap: 20px;
+}
+
+.a4-two-column .problem {
+  break-inside: avoid;
+  margin-bottom: 40px;
+}
+
+@media print {
+  .a4-toolbar {
+    display: none;
+  }
+
+  .a4-viewer {
+    background: none;
+  }
+
+  .a4-paper {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  .a4-paper:last-child {
+    page-break-after: auto;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 15mm 10mm;
+}

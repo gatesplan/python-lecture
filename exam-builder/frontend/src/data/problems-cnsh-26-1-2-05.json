@@ -1,0 +1,646 @@
+[
+ {
+  "id": "g1-081",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "s = \"ALGORITHM\"\nkey = [2, 0, 1]\nk = 3\nr = \"\"\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            r += s[b + j]\nprint(r)"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "GALIORMTH"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "1단계: ALGORITHM -> GALIORMTH"
+     },
+     {
+      "type": "text",
+      "content": "정답: GALIORMTH"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-082",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "s = \"NOTEBOOKS\"\nkey = [1, 2, 0]\nk = 3\nr = \"\"\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            r += s[b + j]\nprint(r)"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "OTNBOEKSO"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "1단계: NOTEBOOKS -> OTNBOEKSO"
+     },
+     {
+      "type": "text",
+      "content": "정답: OTNBOEKSO"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-083",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "def f(s):\n    cols = 3\n    rows = len(s) // cols\n    r = \"\"\n    for c in range(cols):\n        for row in range(rows):\n            r += s[row * cols + c]\n    return r\n\ndef g(s):\n    key = [2, 0, 1]\n    k = 3\n    r = \"\"\n    for b in range(0, len(s), k):\n        for j in key:\n            if b + j < len(s):\n                r += s[b + j]\n    return r\n\nprint(g(f(\"COMPUTERS\")))"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "ECPROUSMT"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "1단계: COMPUTERS -> CPEOURMTS"
+     },
+     {
+      "type": "text",
+      "content": "2단계: CPEOURMTS -> ECPROUSMT"
+     },
+     {
+      "type": "text",
+      "content": "정답: ECPROUSMT"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-084",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "def f(s):\n    key = [2, 0, 1]\n    k = 3\n    r = \"\"\n    for b in range(0, len(s), k):\n        for j in key:\n            if b + j < len(s):\n                r += s[b + j]\n    return r\n\ndef g(s):\n    cols = 3\n    rows = len(s) // cols\n    r = \"\"\n    for c in range(cols):\n        for row in range(rows):\n            r += s[row * cols + c]\n    return r\n\nprint(g(f(\"ALGORITHM\")))"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "GIMAOTLRH"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "1단계: ALGORITHM -> GALIORMTH"
+     },
+     {
+      "type": "text",
+      "content": "2단계: GALIORMTH -> GIMAOTLRH"
+     },
+     {
+      "type": "text",
+      "content": "정답: GIMAOTLRH"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-085",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "def f(s):\n    cols = 2\n    rows = len(s) // cols\n    r = \"\"\n    for c in range(cols):\n        for row in range(rows):\n            r += s[row * cols + c]\n    return r\n\ndef g(s):\n    r = \"\"\n    i = 0\n    while i < len(s):\n        c = s[i]\n        cnt = 0\n        while i < len(s) and s[i] == c:\n            cnt += 1\n            i += 1\n        r += c + str(cnt)\n    return r\n\nprint(g(f(\"AAAABBBB\")))"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "A2B2A2B2"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "1단계: AAAABBBB -> AABBAABB"
+     },
+     {
+      "type": "text",
+      "content": "2단계: AABBAABB -> A2B2A2B2"
+     },
+     {
+      "type": "text",
+      "content": "정답: A2B2A2B2"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-086",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "def f(s):\n    key = [2, 0, 1]\n    k = 3\n    r = \"\"\n    for b in range(0, len(s), k):\n        for j in key:\n            if b + j < len(s):\n                r += s[b + j]\n    return r\n\ndef g(s):\n    r = \"\"\n    i = 0\n    while i < len(s):\n        c = s[i]\n        cnt = 0\n        while i < len(s) and s[i] == c:\n            cnt += 1\n            i += 1\n        r += c + str(cnt)\n    return r\n\nprint(g(f(\"AABBBA\")))"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "B1A3B2"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "1단계: AABBBA -> BAAABB"
+     },
+     {
+      "type": "text",
+      "content": "2단계: BAAABB -> B1A3B2"
+     },
+     {
+      "type": "text",
+      "content": "정답: B1A3B2"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-087",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 출력 문자열을, 아래 규칙으로 부호화한 최종 비트열을 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "s = \"COFFEE\"\nkey = [1, 0]\nk = 2\nr = \"\"\nfor b in range(0, len(s), k):\n    for j in key:\n        if b + j < len(s):\n            r += s[b + j]\nprint(r)"
+   },
+   {
+    "type": "condition-box",
+    "title": "규칙",
+    "marker": "kr-con",
+    "items": [
+     "부호화: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+     "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+     "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+     "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+    ]
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "001000110101"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "코드 1단계: COFFEE -> OCFFEE"
+     },
+     {
+      "type": "text",
+      "content": "코드 출력: OCFFEE"
+     },
+     {
+      "type": "text",
+      "content": "빈도: C:1, E:2, F:2, O:1"
+     },
+     {
+      "type": "text",
+      "content": "C(1) + O(1) -> CO(2): C=왼쪽(0), O=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "CO(2) + E(2) -> COE(4): CO=왼쪽(0), E=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "COE(4) + F(2) -> COEF(6): COE=왼쪽(0), F=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "코드: C=000, E=01, F=1, O=001"
+     },
+     {
+      "type": "text",
+      "content": "비트열: 001 000 1 1 01 01 = 001000110101"
+     },
+     {
+      "type": "text",
+      "content": "정답: 001000110101"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-088",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "def f(s):\n    cols = 2\n    rows = len(s) // cols\n    r = \"\"\n    for c in range(cols):\n        for row in range(rows):\n            r += s[row * cols + c]\n    return r\n\ndef g(s):\n    r = \"\"\n    for ch in s:\n        r += chr((ord(ch) - 65 + 1) % 26 + 65)\n    return r\n\ndef h(s):\n    r = \"\"\n    i = 0\n    while i < len(s):\n        c = s[i]\n        cnt = 0\n        while i < len(s) and s[i] == c:\n            cnt += 1\n            i += 1\n        r += c + str(cnt)\n    return r\n\nprint(h(g(f(\"AAAABBBB\"))))"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "B2C2B2C2"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "1단계: AAAABBBB -> AABBAABB"
+     },
+     {
+      "type": "text",
+      "content": "2단계: AABBAABB -> BBCCBBCC"
+     },
+     {
+      "type": "text",
+      "content": "3단계: BBCCBBCC -> B2C2B2C2"
+     },
+     {
+      "type": "text",
+      "content": "정답: B2C2B2C2"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-089",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 실행 결과를 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "def f(s):\n    r = \"\"\n    for ch in s:\n        r += chr((ord(ch) - 65 + 1) % 26 + 65)\n    return r\n\ndef g(s):\n    cols = 2\n    rows = len(s) // cols\n    r = \"\"\n    for c in range(cols):\n        for row in range(rows):\n            r += s[row * cols + c]\n    return r\n\ndef h(s):\n    r = \"\"\n    i = 0\n    while i < len(s):\n        c = s[i]\n        cnt = 0\n        while i < len(s) and s[i] == c:\n            cnt += 1\n            i += 1\n        r += c + str(cnt)\n    return r\n\nprint(h(g(f(\"AAAAAABB\"))))"
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "B3C1B3C1"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "1단계: AAAAAABB -> BBBBBBCC"
+     },
+     {
+      "type": "text",
+      "content": "2단계: BBBBBBCC -> BBBCBBBC"
+     },
+     {
+      "type": "text",
+      "content": "3단계: BBBCBBBC -> B3C1B3C1"
+     },
+     {
+      "type": "text",
+      "content": "정답: B3C1B3C1"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-090",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 출력 문자열을, 아래 규칙으로 부호화한 최종 비트열을 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "def f(s):\n    r = \"\"\n    for ch in s:\n        r += chr((ord(ch) - 65 + 2) % 26 + 65)\n    return r\n\ndef g(s):\n    key = [1, 0]\n    k = 2\n    r = \"\"\n    for b in range(0, len(s), k):\n        for j in key:\n            if b + j < len(s):\n                r += s[b + j]\n    return r\n\nprint(g(f(\"PYTHON\")))"
+   },
+   {
+    "type": "condition-box",
+    "title": "규칙",
+    "marker": "kr-con",
+    "items": [
+     "부호화: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+     "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+     "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+     "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+    ]
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "0001000111010011"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "코드 1단계: PYTHON -> RAVJQP"
+     },
+     {
+      "type": "text",
+      "content": "코드 2단계: RAVJQP -> ARJVPQ"
+     },
+     {
+      "type": "text",
+      "content": "코드 출력: ARJVPQ"
+     },
+     {
+      "type": "text",
+      "content": "빈도: A:1, J:1, P:1, Q:1, R:1, V:1"
+     },
+     {
+      "type": "text",
+      "content": "A(1) + J(1) -> AJ(2): A=왼쪽(0), J=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "P(1) + Q(1) -> PQ(2): P=왼쪽(0), Q=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "R(1) + V(1) -> RV(2): R=왼쪽(0), V=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "AJ(2) + PQ(2) -> AJPQ(4): AJ=왼쪽(0), PQ=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "AJPQ(4) + RV(2) -> AJPQRV(6): AJPQ=왼쪽(0), RV=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "코드: A=000, J=001, P=010, Q=011, R=10, V=11"
+     },
+     {
+      "type": "text",
+      "content": "비트열: 000 10 001 11 010 011 = 0001000111010011"
+     },
+     {
+      "type": "text",
+      "content": "정답: 0001000111010011"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-091",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 출력 문자열을, 아래 규칙으로 부호화한 최종 비트열을 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "def f(s):\n    key = [1, 0]\n    k = 2\n    r = \"\"\n    for b in range(0, len(s), k):\n        for j in key:\n            if b + j < len(s):\n                r += s[b + j]\n    return r\n\ndef g(s):\n    r = \"\"\n    for ch in s:\n        r += chr((ord(ch) - 65 + 1) % 26 + 65)\n    return r\n\nprint(g(f(\"LETTER\")))"
+   },
+   {
+    "type": "condition-box",
+    "title": "규칙",
+    "marker": "kr-con",
+    "items": [
+     "부호화: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+     "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+     "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+     "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+    ]
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "000101101100"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "코드 1단계: LETTER -> ELTTRE"
+     },
+     {
+      "type": "text",
+      "content": "코드 2단계: ELTTRE -> FMUUSF"
+     },
+     {
+      "type": "text",
+      "content": "코드 출력: FMUUSF"
+     },
+     {
+      "type": "text",
+      "content": "빈도: F:2, M:1, S:1, U:2"
+     },
+     {
+      "type": "text",
+      "content": "M(1) + S(1) -> MS(2): M=왼쪽(0), S=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "F(2) + MS(2) -> FMS(4): F=왼쪽(0), MS=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "FMS(4) + U(2) -> FMSU(6): FMS=왼쪽(0), U=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "코드: F=00, M=010, S=011, U=1"
+     },
+     {
+      "type": "text",
+      "content": "비트열: 00 010 1 1 011 00 = 000101101100"
+     },
+     {
+      "type": "text",
+      "content": "정답: 000101101100"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "g1-092",
+  "type": "short",
+  "content": [
+   {
+    "type": "text",
+    "content": "다음 코드의 출력 문자열을, 아래 규칙으로 부호화한 최종 비트열을 쓰시오."
+   },
+   {
+    "type": "code",
+    "language": "python",
+    "content": "def f(s):\n    key = [1, 0]\n    k = 2\n    r = \"\"\n    for b in range(0, len(s), k):\n        for j in key:\n            if b + j < len(s):\n                r += s[b + j]\n    return r\n\ndef g(s):\n    cols = 2\n    rows = len(s) // cols\n    r = \"\"\n    for c in range(cols):\n        for row in range(rows):\n            r += s[row * cols + c]\n    return r\n\nprint(g(f(\"COMPUTER\")))"
+   },
+   {
+    "type": "condition-box",
+    "title": "규칙",
+    "marker": "kr-con",
+    "items": [
+     "부호화: 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만든다(반복).",
+     "빈도가 같으면 ASCII가 작은(빠른) 노드를 먼저 고른다.",
+     "두 노드를 합칠 때 ASCII가 작은 쪽을 왼쪽(0), 큰 쪽을 오른쪽(1)에 둔다.",
+     "ASCII 순서: A(65) < B(66) < ... < Z(90)."
+    ]
+   }
+  ],
+  "answer": {
+   "type": "value",
+   "value": "011100110101000010111001"
+  },
+  "explain": [
+   {
+    "type": "process-box",
+    "title": "풀이",
+    "content": [
+     {
+      "type": "text",
+      "content": "코드 1단계: COMPUTER -> OCPMTURE"
+     },
+     {
+      "type": "text",
+      "content": "코드 2단계: OCPMTURE -> OPTRCMUE"
+     },
+     {
+      "type": "text",
+      "content": "코드 출력: OPTRCMUE"
+     },
+     {
+      "type": "text",
+      "content": "빈도: C:1, E:1, M:1, O:1, P:1, R:1, T:1, U:1"
+     },
+     {
+      "type": "text",
+      "content": "C(1) + E(1) -> CE(2): C=왼쪽(0), E=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "M(1) + O(1) -> MO(2): M=왼쪽(0), O=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "P(1) + R(1) -> PR(2): P=왼쪽(0), R=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "T(1) + U(1) -> TU(2): T=왼쪽(0), U=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "CE(2) + MO(2) -> CEMO(4): CE=왼쪽(0), MO=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "PR(2) + TU(2) -> PRTU(4): PR=왼쪽(0), TU=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "CEMO(4) + PRTU(4) -> CEMOPRTU(8): CEMO=왼쪽(0), PRTU=오른쪽(1)"
+     },
+     {
+      "type": "text",
+      "content": "코드: C=000, E=001, M=010, O=011, P=100, R=101, T=110, U=111"
+     },
+     {
+      "type": "text",
+      "content": "비트열: 011 100 110 101 000 010 111 001 = 011100110101000010111001"
+     },
+     {
+      "type": "text",
+      "content": "정답: 011100110101000010111001"
+     }
+    ]
+   }
+  ]
+ }
+]

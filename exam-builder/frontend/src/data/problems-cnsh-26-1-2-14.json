@@ -1,0 +1,67 @@
+[
+ {
+  "id": "ml-dt-n01",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "다음은 메일을 Ham(정상)/Spam(스팸)으로 분류하는 의사결정트리다. (links: 링크 수, caps: 대문자 비율%)"},
+   {"type": "image", "src": "/images/dt-n1.png", "alt": "스팸 분류 의사결정트리", "width": 88, "align": "center"},
+   {"type": "text", "content": "입력 links=8, caps=70 이 트리를 따라 분류되는 과정을 분기별로 순서대로 쓰고, 최종 분류 결과를 서술하시오."},
+   {"type": "answer-box", "lines": 6}
+  ],
+  "answer": {"type": "value", "value": "루트에서 links <= 5? 8 <= 5는 거짓이므로 False(오른쪽)로 간다. 다음 노드 caps <= 40? 70 <= 40은 거짓이므로 False(오른쪽)로 간다. 도달한 잎은 Ham 0, Spam 5이므로 더 많은 쪽인 Spam으로 분류된다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "links <= 5? 8은 거짓 -> 오른쪽(False)."},
+    {"type": "text", "content": "caps <= 40? 70은 거짓 -> 오른쪽(False)."},
+    {"type": "text", "content": "도달한 잎 Ham 0, Spam 5 -> Spam으로 분류."}
+  ]}]
+ },
+ {
+  "id": "ml-dt-n02",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "같은 데이터로 만든 두 의사결정트리다. Tree P는 얕고, Tree Q는 매우 깊어 잎마다 학습 데이터가 1개씩 남았다."},
+   {"type": "image", "src": "/images/dt-n2.png", "alt": "얕은 트리와 깊은 트리 비교", "width": 95, "align": "center"},
+   {"type": "text", "content": "학습 데이터에 과적합된 트리는 무엇인지 고르고, 그렇게 판단한 이유와 과적합의 문제점, 막는 방법을 서술하시오."},
+   {"type": "answer-box", "lines": 7}
+  ],
+  "answer": {"type": "value", "value": "Tree Q가 과적합되었다. 잎마다 학습 데이터를 1개까지 완벽히 나눠 학습 데이터는 거의 100% 맞히지만, 데이터에 섞인 우연한 noise까지 외운 것이라 처음 보는 새 데이터에서는 오히려 성능이 떨어진다(일반화 실패). max_depth로 트리 깊이를 제한하는 등으로 과적합을 막을 수 있다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "과적합된 것은 Tree Q(매우 깊음)."},
+    {"type": "text", "content": "잎마다 샘플 1개 -> 학습 데이터는 다 맞히지만 noise까지 외움."},
+    {"type": "text", "content": "새 데이터에서 성능 저하(일반화 실패)."},
+    {"type": "text", "content": "해결: max_depth 등으로 깊이 제한."}
+  ]}]
+ },
+ {
+  "id": "ml-dt-n03",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "루트 노드는 No 5, Yes 5로 두 클래스가 반반 섞여 있다. color 기준으로 한 번 나누자 두 잎이 각각 한 클래스만 남아 순수해졌다."},
+   {"type": "image", "src": "/images/dt-n3.png", "alt": "불순도 감소 트리", "width": 82, "align": "center"},
+   {"type": "text", "content": "의사결정트리가 어떤 기준으로 노드를 나누는지 이 그림을 예로 들어 서술하시오."},
+   {"type": "answer-box", "lines": 6}
+  ],
+  "answer": {"type": "value", "value": "의사결정트리는 한 노드에 여러 클래스가 섞인 정도(불순도)가 가장 많이 줄어드는(가장 순수하게 갈라지는) 특성과 기준값을 골라 나눈다. 이 그림에서는 color 기준으로 나누자 한쪽은 No만, 다른 쪽은 Yes만 남아 양쪽이 완전히 순수해졌으므로, color가 데이터를 가장 잘 갈라주는 좋은 분할 기준이다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "섞인 정도(불순도)가 가장 많이 줄어드는 기준으로 분할."},
+    {"type": "text", "content": "color 분할 후 양쪽이 한 클래스만 남아 순수해짐."},
+    {"type": "text", "content": "순수하게 갈라줄수록 좋은 분할."}
+  ]}]
+ },
+ {
+  "id": "ml-dt-n04",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "다음 의사결정트리는 맨 위(루트)에서 study_hours로 먼저 나눈다."},
+   {"type": "image", "src": "/images/dt-n4.png", "alt": "루트 특성 강조 트리", "width": 88, "align": "center"},
+   {"type": "text", "content": "study_hours가 다른 특성보다 중요하게 쓰였다고 볼 수 있는 이유를 서술하시오."},
+   {"type": "answer-box", "lines": 6}
+  ],
+  "answer": {"type": "value", "value": "루트(맨 위)에서 나누는 특성은 데이터를 클래스별로 가장 잘 갈라주는(불순도를 가장 크게 줄이는) 특성이다. study_hours <= 4로 나누자 한쪽이 거의 Fail로 몰려 분류가 크게 좋아지므로, 이 트리에서 study_hours가 가장 중요한 특성이라고 볼 수 있다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "루트 특성 = 데이터를 가장 잘 갈라주는(불순도 최대 감소) 특성."},
+    {"type": "text", "content": "study_hours로 나누자 한쪽이 거의 Fail -> 분류가 크게 개선."},
+    {"type": "text", "content": "따라서 study_hours가 가장 중요한 특성."}
+  ]}]
+ }
+]

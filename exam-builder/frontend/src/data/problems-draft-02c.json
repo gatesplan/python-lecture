@@ -1,0 +1,222 @@
+[
+  {
+    "id": "fb-61",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = [3, 1, 4, 1, 5, 9]\ni = 0\nwhile i < 6:\n    if a[i] == [[]]:\n        break\n    i = i + 1\nprint(i)" },
+      { "type": "output-sample", "content": "2" }
+    ],
+    "answer": { "type": "value", "value": "4" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["a[0]=3 != 4 -> i=1", "a[1]=1 != 4 -> i=2", "a[2]=4 == 4 -> break", "i=2 출력"] }]
+  },
+  {
+    "id": "fb-62",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "v = False\nfor i in range(1, 6):\n    for j in range(1, 6):\n        if i * j == [[]]:\n            v = True\n            break\n    if v:\n        break\nprint(i, j)" },
+      { "type": "output-sample", "content": "3 4" }
+    ],
+    "answer": { "type": "value", "value": "12" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["i=1: j=1~5, i*j 최대=5 -> 통과", "i=2: j=1~5, i*j 최대=10 -> 통과", "i=3: j=4일 때 3*4=12 -> v=True, break", "바깥 루프도 break -> i=3, j=4 출력"] }]
+  },
+  {
+    "id": "fb-63",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = [1, 2, 3, 4, 5]\nb = []\nfor i in range(4, -1, [[]]):\n    b.append(a[i])\nprint(b)" },
+      { "type": "output-sample", "content": "[5, 4, 3, 2, 1]" }
+    ],
+    "answer": { "type": "value", "value": "-1" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["range(4, -1, -1) -> 4, 3, 2, 1, 0", "a[4]=5, a[3]=4, a[2]=3, a[1]=2, a[0]=1", "b = [5, 4, 3, 2, 1]"] }]
+  },
+  {
+    "id": "fb-64",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = [5, 2, 8, 1, 9]\nm = a[0]\nfor i in range(1, 5):\n    if a[i] [[]] m:\n        m = a[i]\nprint(m)" },
+      { "type": "output-sample", "content": "1" }
+    ],
+    "answer": { "type": "value", "value": "<" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["m=5", "a[1]=2 < 5 -> m=2", "a[2]=8 < 2? No", "a[3]=1 < 2 -> m=1", "a[4]=9 < 1? No", "m=1 출력"] }]
+  },
+  {
+    "id": "fb-65",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "b = []\nfor i in range(1, 21):\n    if i % 2 == 0 and i % 3 == [[]]:\n        b.append(i)\nprint(b)" },
+      { "type": "output-sample", "content": "[6, 12, 18]" }
+    ],
+    "answer": { "type": "value", "value": "0" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["i % 2 == 0 and i % 3 == 0 -> 2와 3 모두의 배수", "6의 배수: 6, 12, 18 (20 이하)", "b = [6, 12, 18]"] }]
+  },
+  {
+    "id": "fb-66",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = [1, 2, 3, 4, 5]\na.remove([[]])\na.append(6)\nprint(a)" },
+      { "type": "output-sample", "content": "[1, 2, 4, 5, 6]" }
+    ],
+    "answer": { "type": "value", "value": "3" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["a.remove(3) -> [1, 2, 4, 5]", "a.append(6) -> [1, 2, 4, 5, 6]"] }]
+  },
+  {
+    "id": "fb-67",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = [1, -2, 3, -4, 5, -6]\np = 0\nn = 0\nfor i in range(6):\n    if a[i] [[]] 0:\n        p = p + 1\n    else:\n        n = n + 1\nprint(p, n)" },
+      { "type": "output-sample", "content": "3 3" }
+    ],
+    "answer": { "type": "value", "value": ">" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["a[i] > 0이면 p 증가, 아니면 n 증가", "양수: 1, 3, 5 -> p=3", "음수: -2, -4, -6 -> n=3"] }]
+  },
+  {
+    "id": "fb-68",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = [1, 2, 3, 4, 5, 6]\nfor i in range(0, 6, [[]]):\n    t = a[i]\n    a[i] = a[i + 1]\n    a[i + 1] = t\nprint(a)" },
+      { "type": "output-sample", "content": "[2, 1, 4, 3, 6, 5]" }
+    ],
+    "answer": { "type": "value", "value": "2" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["range(0, 6, 2) -> i = 0, 2, 4", "i=0: a[0]과 a[1] 교환 -> [2, 1, 3, 4, 5, 6]", "i=2: a[2]과 a[3] 교환 -> [2, 1, 4, 3, 5, 6]", "i=4: a[4]과 a[5] 교환 -> [2, 1, 4, 3, 6, 5]"] }]
+  },
+  {
+    "id": "fb-69",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = [1, 3, 5, 7, 9]\nfor i in range(1, 5):\n    p = i - [[]]\n    a[i] = a[i] + a[p]\nprint(a)" },
+      { "type": "output-sample", "content": "[1, 4, 9, 16, 25]" }
+    ],
+    "answer": { "type": "value", "value": "1" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["p = i - 1 -> 이전 인덱스", "a[1] = 3 + a[0] = 3 + 1 = 4", "a[2] = 5 + a[1] = 5 + 4 = 9", "a[3] = 7 + a[2] = 7 + 9 = 16", "a[4] = 9 + a[3] = 9 + 16 = 25"] }]
+  },
+  {
+    "id": "fb-70",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = [1, 3, 5, 2, 4]\nv = True\nfor i in range(4):\n    if a[i] [[]] a[i + 1]:\n        v = False\n        break\nprint(v)" },
+      { "type": "output-sample", "content": "False" }
+    ],
+    "answer": { "type": "value", "value": ">" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["오름차순이 아닌 곳을 찾는 코드", "a[0]=1 > a[1]=3? No", "a[1]=3 > a[2]=5? No", "a[2]=5 > a[3]=2? Yes -> v=False, break"] }]
+  },
+  {
+    "id": "fb-71",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = [1, 3, 1, 2, 3, 2, 1]\nb = []\nfor i in range(7):\n    if a[i] not in [[]]:\n        b.append(a[i])\nprint(b)" },
+      { "type": "output-sample", "content": "[1, 3, 2]" }
+    ],
+    "answer": { "type": "value", "value": "b" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["b에 아직 없는 값만 추가 -> 중복 제거", "a[0]=1, b에 없음 -> b=[1]", "a[1]=3, b에 없음 -> b=[1,3]", "a[2]=1, b에 있음 -> 건너뜀", "a[3]=2, b에 없음 -> b=[1,3,2]", "나머지는 모두 b에 있음 -> 건너뜀"] }]
+  },
+  {
+    "id": "fb-72",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = [1, 2, 3, 4, 5]\nt = a[0]\nfor i in range([[]], 5):\n    p = i - 1\n    a[p] = a[i]\na[4] = t\nprint(a)" },
+      { "type": "output-sample", "content": "[2, 3, 4, 5, 1]" }
+    ],
+    "answer": { "type": "value", "value": "1" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["t = a[0] = 1 (첫 원소 보관)", "i=1: a[0] = a[1] = 2", "i=2: a[1] = a[2] = 3", "i=3: a[2] = a[3] = 4", "i=4: a[3] = a[4] = 5", "a[4] = t = 1", "결과: [2, 3, 4, 5, 1] (왼쪽 회전)"] }]
+  },
+  {
+    "id": "fb-73",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = [[1, 2], [3, 4], [5, 6]]\ns = 0\nfor i in range(3):\n    for j in range([[]]):\n        s = s + a[i][j]\nprint(s)" },
+      { "type": "output-sample", "content": "21" }
+    ],
+    "answer": { "type": "value", "value": "2" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["각 내부 리스트의 길이가 2이므로 range(2)", "1+2+3+4+5+6 = 21"] }]
+  },
+  {
+    "id": "fb-74",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = [5, 3, 8, 1, 4]\np = 0\nfor i in range(1, 5):\n    if a[i] < a[p]:\n        p = [[]]\nt = a[0]\na[0] = a[p]\na[p] = t\nprint(a)" },
+      { "type": "output-sample", "content": "[1, 3, 8, 5, 4]" }
+    ],
+    "answer": { "type": "value", "value": "i" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["p는 최솟값의 인덱스를 추적", "i=1: a[1]=3 < a[0]=5 -> p=1", "i=2: a[2]=8 < a[1]=3? No", "i=3: a[3]=1 < a[1]=3 -> p=3", "i=4: a[4]=4 < a[3]=1? No", "a[0]과 a[3] 교환 -> [1, 3, 8, 5, 4]"] }]
+  },
+  {
+    "id": "fb-75",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "a = [5, 3, 8, 1, 4]\nm = a[0]\nfor i in range(1, 5):\n    if a[i] [[]] m:\n        m = [[]]\nprint(m)" },
+      { "type": "output-sample", "content": "1" }
+    ],
+    "answer": { "type": "value", "value": "<, a[i]" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["최솟값을 찾는 코드", "a[i] < m이면 m을 a[i]로 갱신", "m=5 -> 3 -> 1", "최종 m=1 출력"] }]
+  },
+  {
+    "id": "fb-76",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "for i in range(1, 6):\n    if i % 2 == [[]]:\n        print([[]], end=\" \")" },
+      { "type": "output-sample", "content": "1 9 25 " }
+    ],
+    "answer": { "type": "value", "value": "1, i * i" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["i % 2 == 1 -> 홀수 판별", "홀수: 1, 3, 5", "i * i: 1*1=1, 3*3=9, 5*5=25"] }]
+  },
+  {
+    "id": "fb-77",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "a = [4, 7, 2, 9, 1, 8]\nv = True\nfor i in range(5):\n    if a[i] [[]] a[i + 1]:\n        v = [[]]\nprint(v)" },
+      { "type": "output-sample", "content": "False" }
+    ],
+    "answer": { "type": "value", "value": ">, False" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["오름차순 정렬 여부를 확인하는 코드", "a[i] > a[i+1]이면 오름차순이 아님 -> v = False", "a[1]=7 > a[2]=2 -> v = False", "최종 출력: False"] }]
+  },
+  {
+    "id": "fb-78",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "for i in range(4):\n    for j in range(4):\n        if i [[]] j:\n            print(\"*\", end=\"\")\n        else:\n            print([[]], end=\"\")\n    print()" },
+      { "type": "output-sample", "content": "*...\n.*..\n..*.\n...*" }
+    ],
+    "answer": { "type": "value", "value": "==, \".\"" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["i == j인 대각선 위치에 * 출력", "나머지 위치에 \".\" 출력", "4x4 단위행렬 패턴"] }]
+  },
+  {
+    "id": "fb-79",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "n = 7\ns = [[]]\nfor i in range(1, n + 1):\n    s = s [[]] i\nprint(s)" },
+      { "type": "output-sample", "content": "5040" }
+    ],
+    "answer": { "type": "value", "value": "1, *" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["s = 1 (곱셈의 항등원)", "s = s * i -> 팩토리얼 계산", "1*1*2*3*4*5*6*7 = 5040", "7! = 5040"] }]
+  },
+  {
+    "id": "fb-80",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "a = [1, 2, 3, 4, 5]\nb = []\nfor i in range(5):\n    b.append(a[i] * [[]] + [[]])\nprint(b)" },
+      { "type": "output-sample", "content": "[3, 5, 7, 9, 11]" }
+    ],
+    "answer": { "type": "value", "value": "2, 1" },
+    "explain": [{ "type": "process-box", "title": "풀이", "content": ["a[i] * 2 + 1 -> 선형 변환", "1*2+1=3, 2*2+1=5, 3*2+1=7", "4*2+1=9, 5*2+1=11", "b = [3, 5, 7, 9, 11]"] }]
+  }
+]

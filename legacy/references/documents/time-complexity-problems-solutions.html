@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시간복잡도 분석 문제 - 해설</title>
+    <style>
+        /* A4 프린트용 스타일 */
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            line-height: 1.6;
+            color: #000;
+            background: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 0 10px 0;
+            page-break-after: avoid;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .problem {
+            margin-bottom: 35px;
+            page-break-inside: avoid;
+        }
+
+        .problem-header {
+            margin-bottom: 12px;
+        }
+
+        .problem-number {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .code-block {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 12px;
+            margin: 10px 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.4;
+            white-space: pre;
+            page-break-inside: avoid;
+        }
+
+        .answer {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            padding: 10px;
+            margin: 10px 0;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .solution {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .solution-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #e65100;
+        }
+
+        .analysis {
+            margin: 8px 0;
+            padding-left: 15px;
+        }
+
+        .complexity-formula {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background: #f5f5f5;
+            padding: 5px 10px;
+            margin: 5px 0;
+            display: inline-block;
+            border-radius: 3px;
+        }
+
+        @media print {
+            body {
+                font-size: 12px;
+                padding: 0;
+            }
+
+            .problem {
+                page-break-inside: avoid;
+            }
+
+            .code-block {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>시간복잡도 분석 문제 - 해설</h1>
+        <div class="subtitle">정답 및 상세 설명</div>
+
+        <!-- 문제 1 해설 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 1.</span> 배열 최댓값 찾기
+            </div>
+            <div class="code-block">def find_max(arr):
+    max_val = arr[0]
+    for i in range(1, len(arr)):
+        if arr[i] > max_val:
+            max_val = arr[i]
+    return max_val</div>
+
+            <div class="answer">정답: O(n)</div>
+
+            <div class="solution">
+                <div class="solution-title">해설:</div>
+                <div class="analysis">
+                    • <strong>반복문 분석:</strong> for 루프가 배열 전체를 한 번 순회 (n-1번)<br>
+                    • <strong>내부 연산:</strong> 비교 연산 1회 (O(1))<br>
+                    • <strong>총 연산:</strong> (n-1) × O(1) = O(n-1) ≈ <span class="complexity-formula">O(n)</span><br>
+                    • <strong>핵심:</strong> 배열의 모든 원소를 확인해야 하므로 입력 크기에 비례
+                </div>
+            </div>
+        </div>
+
+        <!-- 문제 2 해설 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 2.</span> 상수 내부 반복 (함정 문제)
+            </div>
+            <div class="code-block">def process_data(n):
+    for i in range(n):
+        for j in range(100):
+            print(i, j)</div>
+
+            <div class="answer">정답: O(n)</div>
+
+            <div class="solution">
+                <div class="solution-title">해설:</div>
+                <div class="analysis">
+                    • <strong>외부 반복:</strong> n번<br>
+                    • <strong>내부 반복:</strong> 100번 (상수!)<br>
+                    • <strong>총 연산:</strong> n × 100 = 100n<br>
+                    • <strong>Big-O 규칙 적용:</strong> 상수 계수 무시 → <span class="complexity-formula">O(n)</span><br>
+                    • <strong>주의:</strong> 내부 반복이 상수이므로 O(n²)이 아님!
+                </div>
+            </div>
+        </div>
+
+        <!-- 문제 3 해설 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 3.</span> 이중 중첩 반복문
+            </div>
+            <div class="code-block">def print_pairs(arr):
+    for i in range(len(arr)):
+        for j in range(len(arr)):
+            print(arr[i], arr[j])</div>
+
+            <div class="answer">정답: O(n²)</div>
+
+            <div class="solution">
+                <div class="solution-title">해설:</div>
+                <div class="analysis">
+                    • <strong>외부 반복:</strong> n번<br>
+                    • <strong>내부 반복:</strong> 각각 n번<br>
+                    • <strong>총 연산:</strong> n × n = n²<br>
+                    • <strong>결과:</strong> <span class="complexity-formula">O(n²)</span><br>
+                    • <strong>특징:</strong> 전형적인 이차 시간 복잡도, 모든 원소 쌍을 출력
+                </div>
+            </div>
+        </div>
+
+        <!-- 문제 4 해설 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 4.</span> 삼각형 패턴 (줄어드는 중첩)
+            </div>
+            <div class="code-block">def triangle_sum(n):
+    total = 0
+    for i in range(n):
+        for j in range(i + 1):
+            total += 1
+    return total</div>
+
+            <div class="answer">정답: O(n²)</div>
+
+            <div class="solution">
+                <div class="solution-title">해설:</div>
+                <div class="analysis">
+                    • <strong>반복 횟수:</strong> 1 + 2 + 3 + ... + n번<br>
+                    • <strong>등차수열의 합:</strong> n(n+1)/2 = (n² + n)/2<br>
+                    • <strong>최고차항:</strong> n²/2<br>
+                    • <strong>Big-O 규칙:</strong> 상수(1/2) 무시 → <span class="complexity-formula">O(n²)</span><br>
+                    • <strong>핵심:</strong> 내부 반복이 점차 증가하지만 여전히 O(n²)
+                </div>
+            </div>
+        </div>
+
+        <!-- 문제 5 해설 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 5.</span> 이진 탐색
+            </div>
+            <div class="code-block">def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1</div>
+
+            <div class="answer">정답: O(log n)</div>
+
+            <div class="solution">
+                <div class="solution-title">해설:</div>
+                <div class="analysis">
+                    • <strong>핵심 동작:</strong> 매 반복마다 탐색 범위가 절반으로 줄어듦<br>
+                    • <strong>반복 횟수:</strong> n → n/2 → n/4 → ... → 1<br>
+                    • <strong>단계 수:</strong> log₂(n)번<br>
+                    • <strong>결과:</strong> <span class="complexity-formula">O(log n)</span><br>
+                    • <strong>조건:</strong> 배열이 정렬되어 있어야 함<br>
+                    • <strong>예시:</strong> n=1024일 때 최대 10번만 비교
+                </div>
+            </div>
+        </div>
+
+        <!-- 문제 6 해설 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 6.</span> 소수 판별 (최적화)
+            </div>
+            <div class="code-block">def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True</div>
+
+            <div class="answer">정답: O(√n)</div>
+
+            <div class="solution">
+                <div class="solution-title">해설:</div>
+                <div class="analysis">
+                    • <strong>반복 범위:</strong> 2부터 √n까지<br>
+                    • <strong>반복 횟수:</strong> √n - 1 ≈ √n<br>
+                    • <strong>이유:</strong> n = a × b에서 a ≤ √n ≤ b 이므로 √n까지만 확인하면 됨<br>
+                    • <strong>결과:</strong> <span class="complexity-formula">O(√n)</span><br>
+                    • <strong>비교:</strong> O(n)보다 훨씬 효율적 (n=10000일 때 100번만 검사)
+                </div>
+            </div>
+        </div>
+
+        <!-- 문제 7 해설 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 7.</span> 소수 개수 세기 (비효율적)
+            </div>
+            <div class="code-block">def count_primes(n):
+    count = 0
+    for i in range(2, n + 1):
+        is_prime = True
+        for j in range(2, i):
+            if i % j == 0:
+                is_prime = False
+                break
+        if is_prime:
+            count += 1
+    return count</div>
+
+            <div class="answer">정답: O(n²)</div>
+
+            <div class="solution">
+                <div class="solution-title">해설:</div>
+                <div class="analysis">
+                    • <strong>외부 반복:</strong> n번 (2부터 n까지)<br>
+                    • <strong>내부 반복:</strong> 평균 i/2번 (최악 i-1번)<br>
+                    • <strong>총 연산:</strong> 2 + 3 + 4 + ... + n ≈ n²/2<br>
+                    • <strong>결과:</strong> <span class="complexity-formula">O(n²)</span><br>
+                    • <strong>개선 가능:</strong> 내부를 √i까지만 체크하면 O(n√n)으로 개선
+                </div>
+            </div>
+        </div>
+
+        <!-- 문제 8 해설 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 8.</span> 피보나치 재귀 (순수 재귀)
+            </div>
+            <div class="code-block">def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)</div>
+
+            <div class="answer">정답: O(2ⁿ)</div>
+
+            <div class="solution">
+                <div class="solution-title">해설:</div>
+                <div class="analysis">
+                    • <strong>재귀 패턴:</strong> 매번 2개로 분기 (fibonacci(n-1) + fibonacci(n-2))<br>
+                    • <strong>재귀 트리:</strong> 높이 n, 각 레벨에서 2배씩 증가<br>
+                    • <strong>호출 횟수:</strong> 1 + 2 + 4 + 8 + ... + 2ⁿ ≈ 2ⁿ⁺¹<br>
+                    • <strong>결과:</strong> <span class="complexity-formula">O(2ⁿ)</span><br>
+                    • <strong>특징:</strong> 매우 비효율적! 같은 값을 여러 번 계산<br>
+                    • <strong>예시:</strong> n=30일 때 약 10억 번 호출<br>
+                    • <strong>개선:</strong> 메모이제이션 사용 시 O(n)으로 개선 가능
+                </div>
+            </div>
+        </div>
+
+        <!-- 문제 9 해설 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 9.</span> 이진 트리 순회 (재귀)
+            </div>
+            <div class="code-block">def tree_traversal(n):
+    if n <= 0:
+        return
+    tree_traversal(n // 2)
+    tree_traversal(n // 2)</div>
+
+            <div class="answer">정답: O(n)</div>
+
+            <div class="solution">
+                <div class="solution-title">해설:</div>
+                <div class="analysis">
+                    • <strong>재귀 패턴:</strong> 2번 호출하지만 n이 절반씩 줄어듦<br>
+                    • <strong>트리 깊이:</strong> log₂(n) (절반씩 나누므로)<br>
+                    • <strong>각 레벨 노드 수:</strong><br>
+                    &nbsp;&nbsp;- 레벨 0: 1개 (n)<br>
+                    &nbsp;&nbsp;- 레벨 1: 2개 (n/2 × 2)<br>
+                    &nbsp;&nbsp;- 레벨 2: 4개 (n/4 × 4)<br>
+                    &nbsp;&nbsp;- ...<br>
+                    &nbsp;&nbsp;- 레벨 log n: n개<br>
+                    • <strong>총 노드 수:</strong> 1 + 2 + 4 + ... + n = 2n - 1<br>
+                    • <strong>결과:</strong> <span class="complexity-formula">O(n)</span><br>
+                    • <strong>핵심:</strong> 2^(log₂ n) = n
+                </div>
+            </div>
+        </div>
+
+        <!-- 문제 10 해설 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 10.</span> 모든 부분집합 생성
+            </div>
+            <div class="code-block">def all_subsets(arr, index=0):
+    if index == len(arr):
+        return [[]]
+
+    without = all_subsets(arr, index + 1)
+    with_elem = []
+    for subset in without:
+        with_elem.append([arr[index]] + subset)
+
+    return without + with_elem</div>
+
+            <div class="answer">정답: O(2ⁿ)</div>
+
+            <div class="solution">
+                <div class="solution-title">해설:</div>
+                <div class="analysis">
+                    • <strong>핵심 개념:</strong> 각 원소마다 "포함" 또는 "제외" 2가지 선택<br>
+                    • <strong>부분집합 개수:</strong> 2ⁿ개<br>
+                    • <strong>재귀 구조:</strong> 각 원소에 대해 without과 with_elem 생성<br>
+                    • <strong>결과:</strong> <span class="complexity-formula">O(2ⁿ)</span><br>
+                    • <strong>예시:</strong><br>
+                    &nbsp;&nbsp;- n=3: {}, {a}, {b}, {c}, {a,b}, {a,c}, {b,c}, {a,b,c} = 8개<br>
+                    &nbsp;&nbsp;- n=10: 1024개<br>
+                    • <strong>주의:</strong> n이 조금만 커져도 매우 느려짐
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 20px; background: #f0f0f0; border: 2px solid #666;">
+            <h3 style="margin-top: 0;">복잡도 요약</h3>
+            <div style="font-family: monospace; font-size: 14px;">
+                O(1) < O(log n) < O(√n) < O(n) < O(n log n) < O(n²) < O(2ⁿ) < O(n!)
+            </div>
+            <div style="margin-top: 15px; font-size: 13px;">
+                <strong>핵심 패턴:</strong><br>
+                • 상수 또는 직접 접근 → O(1)<br>
+                • 절반씩 나누기/증가 → O(log n)<br>
+                • 제곱근까지 반복 → O(√n)<br>
+                • 단일 반복문 → O(n)<br>
+                • 분할정복 (병합정렬 등) → O(n log n)<br>
+                • 이중 중첩 반복 → O(n²)<br>
+                • 2갈래 재귀 (피보나치, 부분집합) → O(2ⁿ)
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

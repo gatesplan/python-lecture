@@ -1,0 +1,4092 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정보 기말 문제 카드 (AI 튜터)</title>
+<style>
+  body { font-family: "Malgun Gothic", "맑은 고딕", sans-serif; max-width: 760px;
+         margin: 0 auto; padding: 24px; line-height: 1.6; color: #111; background: #fff; }
+  h1 { font-size: 22px; border-bottom: 2px solid #333; padding-bottom: 8px; }
+
+  /* 계열 필터 */
+  .panel { border: 1px solid #ccc; border-radius: 6px; padding: 12px 16px; margin: 14px 0; }
+  .panel-title { font-size: 13px; color: #666; margin-bottom: 8px; }
+  .cats { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  .cats label { font-size: 14px; cursor: pointer; user-select: none; }
+  .cat-actions { margin-top: 10px; display: flex; gap: 8px; }
+  .mini { padding: 4px 10px; font-size: 13px; font-family: inherit; cursor: pointer;
+          border: 1px solid #888; border-radius: 4px; background: #f2f2f2; }
+  .mini:hover { background: #e6e6e6; }
+
+  /* 정답률 통계 */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; }
+  .stat { border: 1px solid #ccc; border-radius: 6px; padding: 8px; text-align: center; }
+  .stat-label { font-size: 12px; color: #777; }
+  .stat-val { font-size: 20px; font-weight: bold; }
+  .stat-sub { font-size: 12px; color: #999; }
+
+  /* 문제별 진행 타일 */
+  .tiles { display: flex; flex-wrap: wrap; gap: 2px; margin: 10px 0 14px; }
+  .tile { width: 11px; height: 11px; border-radius: 2px; background: #ddd; }
+  .tile.ok { background: #4a9a52; }
+  .tile.no { background: #c14a4a; }
+  .opt { font-size: 14px; cursor: pointer; user-select: none; }
+
+  /* 문제 카드 */
+  .card { border: 1px solid #bbb; border-radius: 6px; padding: 20px; margin-top: 10px; }
+  .question { font-size: 17px; font-weight: bold; margin: 4px 0 18px; white-space: pre-wrap; }
+  .qcat { font-size: 12px; color: #888; }
+
+  .choices { display: flex; flex-direction: column; gap: 8px; }
+  .choice { text-align: left; padding: 10px 14px; border: 1px solid #ccc; border-radius: 4px;
+            background: #fafafa; cursor: pointer; font-size: 15px; font-family: inherit;
+            white-space: pre-wrap; }
+  .choice:hover:enabled { background: #eef3ff; border-color: #88a; }
+  .choice:disabled { cursor: default; }
+  .choice .mark { display: inline-block; width: 22px; color: #888; font-weight: bold; }
+  .choice.correct { background: #d8f0db; border-color: #4a9a52; }
+  .choice.wrong   { background: #f6d9d9; border-color: #c14a4a; }
+
+  .verdict { margin-top: 16px; font-weight: bold; }
+  .verdict.ok { color: #2e7d32; }
+  .verdict.no { color: #c62828; }
+  .explain { margin-top: 8px; padding: 10px 14px; background: #f5f5f5;
+             border-left: 4px solid #888; font-size: 14px; display: none; white-space: pre-wrap; }
+  .empty { color: #c62828; font-weight: bold; }
+
+  .actions { margin-top: 18px; }
+  button.btn { padding: 9px 18px; font-size: 15px; font-family: inherit; cursor: pointer;
+               border: 1px solid #555; border-radius: 4px; background: #f0f0f0; }
+  button.btn:hover:enabled { background: #e2e2e2; }
+  button.btn:disabled { color: #aaa; border-color: #ccc; cursor: default; background: #f7f7f7; }
+
+  /* AI 튜터 채팅 */
+  .chat { border: 1px solid #bbb; border-radius: 6px; margin-top: 14px; }
+  .chat-head { display: flex; justify-content: space-between; align-items: center;
+               padding: 8px 14px; border-bottom: 1px solid #ddd; background: #f7f7f7;
+               border-radius: 6px 6px 0 0; }
+  .chat-title { font-size: 13px; color: #555; font-weight: bold; }
+  .chat-msgs { max-height: 320px; overflow-y: auto; padding: 12px 14px;
+               display: flex; flex-direction: column; gap: 8px; }
+  .msg { max-width: 85%; padding: 8px 12px; border-radius: 10px; font-size: 14px;
+         white-space: pre-wrap; word-break: break-word; line-height: 1.5; }
+  .msg.user { align-self: flex-end; background: #e3edff; border: 1px solid #b9cdf2; }
+  .msg.ai   { align-self: flex-start; background: #f2f2f2; border: 1px solid #ddd; }
+  .msg.wait { align-self: flex-start; color: #888; background: #f9f9f9; border: 1px dashed #ccc; }
+  .msg.err  { align-self: flex-start; color: #c62828; background: #fdf0f0; border: 1px solid #e3b6b6; }
+  .chat-input { display: flex; gap: 8px; padding: 10px 14px; border-top: 1px solid #ddd; }
+  .chat-input textarea { flex: 1; resize: none; height: 42px; padding: 8px 10px;
+                         font-family: inherit; font-size: 14px; border: 1px solid #bbb;
+                         border-radius: 4px; }
+  .chat-empty { color: #999; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<h1>정보 기말 문제 카드 (AI 튜터)</h1>
+
+<div class="panel">
+  <div class="panel-title">계열 선택</div>
+  <div class="cats" id="cats"></div>
+  <div class="cat-actions">
+    <button class="mini" id="checkAll">전체 선택</button>
+    <button class="mini" id="uncheckAll">전체 해제</button>
+  </div>
+</div>
+
+<div class="panel">
+  <label class="opt"><input type="checkbox" id="onlyUnsolved"> 새 문제는 안 푼/틀린 문제 중에서만 출제</label>
+  <div class="cat-actions">
+    <button class="mini" id="resetProgress">기록 초기화</button>
+  </div>
+</div>
+
+<div class="stats" id="stats"></div>
+<div class="tiles" id="tiles"></div>
+
+<div class="card" id="quiz">
+  <div class="qcat" id="qcat"></div>
+  <div class="question" id="question"></div>
+  <div class="choices" id="choices"></div>
+  <div class="verdict" id="verdict"></div>
+  <div class="explain" id="explain"></div>
+  <div class="actions">
+    <button class="btn" id="nextBtn">다음 문제</button>
+  </div>
+</div>
+
+<div class="chat" id="chat">
+  <div class="chat-head">
+    <span class="chat-title">AI 튜터 - 이 문제에 대해 질문하세요</span>
+    <button class="mini" id="chatClear">대화 지우기</button>
+  </div>
+  <div class="chat-msgs" id="chatMsgs"></div>
+  <div class="chat-input">
+    <textarea id="chatText" placeholder="질문 입력 후 Enter (줄바꿈: Shift+Enter)"></textarea>
+    <button class="btn" id="chatSend">전송</button>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   설정 (문제 세트를 교체한 새 버전을 만들 때 여기만 손대면 됨)
+   1) 이 파일을 복사한다
+   2) SET_ID를 새 값으로 바꾼다 - 풀이기록/대화기록 localStorage 키가
+      이 값으로 분리되므로, 문제 세트가 다르면 반드시 바꿔야 한다
+   3) 아래 QUESTIONS 배열을 새 문제로 교체한다
+   ========================================================= */
+var SET_ID = 'final-2026-1';
+var OPENAI_API_KEY = ''; // 사용 시 키 입력
+var OPENAI_URL = 'https://api.openai.com/v1/chat/completions';
+var CHAT_MODEL = 'gpt-5.4-mini';     // 주답변 모델
+var SUMMARY_MODEL = 'gpt-5.4-nano';  // 대화 요약(60자) 모델
+
+/* =========================================================
+   문제 데이터 (이 배열만 교체하면 됨)
+   - cat     : 계열(체크박스가 자동 생성됨)
+   - q       : 문제 지문
+   - choices : 선택지 3~5개
+   - answer  : 정답 인덱스(0부터)
+   - explain : 해설 (줄바꿈은 \n)
+   ========================================================= */
+const QUESTIONS = [
+  {
+    "cat": "문법",
+    "q": "print(\"A\", \"B\", \"C\", sep=\"*\") 의 출력 결과는?",
+    "choices": [
+      "A B C",
+      "A*B*C",
+      "ABC",
+      "*A*B*C*"
+    ],
+    "answer": 1,
+    "explain": "sep는 여러 인자 사이에 끼울 구분자다. 기본값은 공백 한 칸이지만 sep=\"*\"로 바꾸면 인자 사이마다 * 가 들어가 A*B*C 가 된다. sep는 인자 '사이'에만 들어가고 맨 앞/뒤에는 붙지 않는다."
+  },
+  {
+    "cat": "문법",
+    "q": "다음 두 줄의 출력 결과는?\nprint(\"hello\", end=' ')\nprint(\"world\")",
+    "choices": [
+      "helloworld",
+      "hello\nworld",
+      "hello world",
+      "hello  world"
+    ],
+    "answer": 2,
+    "explain": "end는 출력 끝에 붙일 문자로 기본값은 줄바꿈(\\n)이다. 첫 줄에서 end=' '로 바꿨으므로 줄바꿈 대신 공백이 붙어 다음 출력이 같은 줄에 이어진다. 결과는 'hello world'."
+  },
+  {
+    "cat": "문법",
+    "q": "input() 함수에 대한 설명으로 옳은 것은?",
+    "choices": [
+      "입력값을 자동으로 숫자로 변환해 반환한다",
+      "반환값은 입력 내용에 따라 정수 또는 실수가 된다",
+      "반환값은 항상 정수다",
+      "반환값은 항상 문자열이다"
+    ],
+    "answer": 3,
+    "explain": "input()의 반환값은 항상 문자열(str)이다. 숫자 계산을 하려면 int()나 float()로 직접 형변환해야 한다. 예를 들어 '5'와 '3'을 입력받아 더하면 int 변환 전에는 '53'(문자열 이어붙이기)이 된다."
+  },
+  {
+    "cat": "문법",
+    "q": "공백으로 구분된 두 정수를 입력받아 a, b에 각각 저장하는 올바른 코드는?",
+    "choices": [
+      "a, b = input().split()",
+      "a, b = int(input().split())",
+      "a, b = map(int, input().split())",
+      "a, b = int(input()), int(input())"
+    ],
+    "answer": 2,
+    "explain": "한 줄에 공백으로 구분된 여러 정수를 받으려면 input().split()으로 문자열 리스트를 만든 뒤 map(int, ...)로 각 요소를 int로 변환한다. 1번은 문자열 그대로 들어가고, 2번은 split() 결과(리스트)에 int()를 직접 적용해 에러가 난다."
+  },
+  {
+    "cat": "문법",
+    "q": "다음 연산 결과로 옳은 것은?\nprint(7 // 2, 7 % 2, 2 ** 3)",
+    "choices": [
+      "3.5 1 6",
+      "3 1 6",
+      "3 1 8",
+      "4 1 8"
+    ],
+    "answer": 2,
+    "explain": "// 는 정수 나눗셈(소수점 버림)이므로 7//2=3, % 는 나머지이므로 7%2=1, ** 는 거듭제곱이므로 2**3=8. 따라서 '3 1 8'."
+  },
+  {
+    "cat": "문법",
+    "q": "복합 대입 연산자 a *= 7 과 동일한 의미는?",
+    "choices": [
+      "a = a + 7",
+      "a = 7",
+      "a = a ** 7",
+      "a = a * 7"
+    ],
+    "answer": 3,
+    "explain": "a *= 7 은 a = a * 7 의 축약형이다. 같은 원리로 += 는 더하기, -= 는 빼기, //= 는 정수나눗셈, %= 는 나머지, **= 는 거듭제곱의 축약형이다."
+  },
+  {
+    "cat": "문법",
+    "q": "다음 코드를 위에서부터 실행했을 때 마지막 a의 값은?\na = 5\na += 3\na *= 2\na -= 1\na //= 3",
+    "choices": [
+      "5",
+      "4",
+      "6",
+      "15"
+    ],
+    "answer": 0,
+    "explain": "대입연산 추적은 한 줄씩 직전 결과를 다음 줄에 반영한다. a=5 -> a+=3은 8 -> a*=2는 16 -> a-=1은 15 -> a//=3은 15//3=5. 최종 a는 5다."
+  },
+  {
+    "cat": "문법",
+    "q": "다음 논리 연산의 결과는?\nprint(10 > 5 and 3 > 4)",
+    "choices": [
+      "True",
+      "10",
+      "에러",
+      "False"
+    ],
+    "answer": 3,
+    "explain": "and는 두 조건이 모두 참이어야 True다. 10 > 5는 True지만 3 > 4는 False이므로 전체는 False다. or였다면 하나만 참이어도 True가 된다."
+  },
+  {
+    "cat": "문법",
+    "q": "연산자 우선순위에 따라 다음 식의 결과는?\nprint(2 + 3 * 4)",
+    "choices": [
+      "20",
+      "24",
+      "14",
+      "9"
+    ],
+    "answer": 2,
+    "explain": "산술 연산에서 곱셈(*)이 덧셈(+)보다 우선순위가 높다. 따라서 3*4를 먼저 계산해 12, 그 다음 2+12=14. (2+3)을 먼저 하려면 괄호가 필요하다."
+  },
+  {
+    "cat": "문법",
+    "q": "파이썬 연산자 우선순위가 높은 것부터 낮은 순서로 올바르게 나열한 것은?",
+    "choices": [
+      "산술 > 비교 > not > and > or",
+      "or > and > not > 비교 > 산술",
+      "비교 > 산술 > and > or > not",
+      "and > or > not > 산술 > 비교"
+    ],
+    "answer": 0,
+    "explain": "우선순위는 산술 > 비교 > not > and > or 순이다. 즉 계산을 먼저 하고, 비교한 뒤, not으로 뒤집고, and를 묶고, 마지막에 or로 묶는다. 헷갈리면 괄호로 의도를 명확히 한다."
+  },
+  {
+    "cat": "문법",
+    "q": "== 와 = 의 차이로 옳은 것은?",
+    "choices": [
+      "둘 다 값을 비교한다",
+      "== 는 대입, = 는 비교다",
+      "== 는 비교(같은지 판단), = 는 대입(값을 넣음)이다",
+      "둘 다 변수에 값을 넣는다"
+    ],
+    "answer": 2,
+    "explain": "== 는 양쪽이 같은지 판단하는 비교 연산자로 결과가 True/False다. = 는 오른쪽 값을 왼쪽 변수에 넣는 대입 연산자다. if 조건에서 = 를 쓰면 의도와 다르게 동작하거나 에러가 난다."
+  },
+  {
+    "cat": "문법",
+    "q": "다음 조건문에서 score = 92 일 때 출력은?\nif score >= 95:\n    print(\"A+\")\nelif score >= 90:\n    print(\"A\")\nelse:\n    print(\"F\")",
+    "choices": [
+      "A+",
+      "A",
+      "F",
+      "A+\\nA"
+    ],
+    "answer": 1,
+    "explain": "elif는 위에서부터 검사해 처음 참이 되는 블록 하나만 실행한다. score=92는 95 이상은 아니지만 90 이상이므로 'A'가 출력되고 나머지는 검사하지 않는다."
+  },
+  {
+    "cat": "문법",
+    "q": "변수 x가 10 이상 20 이하인지 검사하는 올바른 파이썬 식은?",
+    "choices": [
+      "if 10 <= x <= 20:",
+      "if 10 <= x and 20 >= x or 0:",
+      "if x >= 10 or x <= 20:",
+      "if 10 < x < 20:"
+    ],
+    "answer": 0,
+    "explain": "파이썬은 10 <= x <= 20 처럼 연속 비교를 지원하며 이는 x >= 10 and x <= 20 과 같다. 3번은 or라서 모든 수가 참이 되고, 4번은 양 끝값 10과 20을 제외(미만/초과)하므로 '이상/이하'가 아니다."
+  },
+  {
+    "cat": "문법",
+    "q": "list(range(1, 10, 2)) 의 결과는?",
+    "choices": [
+      "[1, 3, 5, 7, 9]",
+      "[1, 2, 3, ..., 10]",
+      "[1, 3, 5, 7, 9, 11]",
+      "[2, 4, 6, 8, 10]"
+    ],
+    "answer": 0,
+    "explain": "range(start, stop, step)에서 stop(10)은 미포함이다. 1부터 시작해 2씩 증가하며 10 미만까지 가므로 1, 3, 5, 7, 9 가 된다. 9 다음은 11이 되어 10을 넘으므로 포함되지 않는다."
+  },
+  {
+    "cat": "문법",
+    "q": "list(range(10, 0, -2)) 의 결과는?",
+    "choices": [
+      "[10, 8, 6, 4, 2, 0]",
+      "[]",
+      "[0, 2, 4, 6, 8, 10]",
+      "[10, 8, 6, 4, 2]"
+    ],
+    "answer": 3,
+    "explain": "step이 음수면 감소하며 진행한다. stop(0)은 미포함이므로 10, 8, 6, 4, 2 까지 나오고 0은 포함되지 않는다. step이 음수일 때는 start가 stop보다 커야 결과가 나온다."
+  },
+  {
+    "cat": "문법",
+    "q": "break와 continue의 차이로 옳은 것은?",
+    "choices": [
+      "break는 현재 회차만 건너뛰고, continue는 반복문을 완전히 종료한다",
+      "둘 다 반복문을 완전히 종료한다",
+      "break는 반복문을 완전히 종료하고, continue는 현재 회차만 건너뛰고 다음 반복으로 간다",
+      "둘 다 현재 회차만 건너뛴다"
+    ],
+    "answer": 2,
+    "explain": "break는 반복문 전체를 즉시 빠져나온다. continue는 현재 회차의 남은 부분만 건너뛰고 다음 반복(조건 검사)으로 돌아간다. while에서 continue 전에 증감식을 빠뜨리면 무한루프가 되기 쉽다."
+  },
+  {
+    "cat": "문법",
+    "q": "다음 코드의 출력은?\ntotal = 0\nfor i in range(1, 6):\n    if i == 3:\n        continue\n    total += i\nprint(total)",
+    "choices": [
+      "15",
+      "12",
+      "10",
+      "13"
+    ],
+    "answer": 1,
+    "explain": "i가 3일 때 continue로 더하기를 건너뛴다. 따라서 1+2+4+5 = 12 가 누적된다. 만약 continue가 없었다면 1+2+3+4+5 = 15 였을 것이다."
+  },
+  {
+    "cat": "문법",
+    "q": "arr = ['A', 'B', 'C', 'D', 'E'] 일 때 arr[-1] 의 값은?",
+    "choices": [
+      "'A'",
+      "'E'",
+      "'D'",
+      "에러"
+    ],
+    "answer": 1,
+    "explain": "음수 인덱스는 뒤에서부터 센다. -1은 맨 마지막 요소이므로 'E'다. -2는 'D', -3은 'C'가 된다."
+  },
+  {
+    "cat": "문법",
+    "q": "arr = ['A', 'B', 'C', 'D', 'E'] 일 때 arr[0:2] 의 값은?",
+    "choices": [
+      "['A', 'B', 'C']",
+      "['B', 'C']",
+      "['A']",
+      "['A', 'B']"
+    ],
+    "answer": 3,
+    "explain": "슬라이싱 [시작:끝]은 끝 인덱스를 미포함한다. arr[0:2]는 인덱스 0, 1만 포함하므로 ['A', 'B']다. 끝값 2(즉 'C')는 포함되지 않는다."
+  },
+  {
+    "cat": "문법",
+    "q": "다음 코드 실행 후 리스트 L의 상태는?\nL = [3, 1, 2]\nL.append(4)\nL.insert(1, 99)",
+    "choices": [
+      "[3, 99, 1, 2, 4]",
+      "[3, 1, 2, 4, 99]",
+      "[99, 3, 1, 2, 4]",
+      "[3, 1, 99, 2, 4]"
+    ],
+    "answer": 0,
+    "explain": "append(4)는 맨 뒤에 4를 추가해 [3, 1, 2, 4]. 그다음 insert(1, 99)는 인덱스 1 자리에 99를 끼워 넣어 기존 요소들을 한 칸씩 밀어 [3, 99, 1, 2, 4]가 된다."
+  },
+  {
+    "cat": "문법",
+    "q": "remove() 와 pop() 의 차이로 옳은 것은?",
+    "choices": [
+      "둘 다 인덱스로 삭제한다",
+      "remove는 값으로 삭제하고, pop은 인덱스로 삭제하며 그 값을 반환한다",
+      "remove는 값을 반환하고, pop은 반환하지 않는다",
+      "둘 다 값으로 삭제한다"
+    ],
+    "answer": 1,
+    "explain": "remove(값)은 해당 값을 찾아 첫 번째 것을 삭제하며 반환값이 없다. pop(인덱스)은 그 위치의 요소를 삭제하면서 그 값을 반환한다. 인덱스를 생략한 pop()은 맨 뒤 요소를 꺼낸다."
+  },
+  {
+    "cat": "문법",
+    "q": "sort() 와 sorted() 의 차이로 옳은 것은?",
+    "choices": [
+      "sort()는 새 리스트를 반환하고, sorted()는 원본을 바꾼다",
+      "둘 다 원본을 바꾼다",
+      "sort()는 원본을 직접 정렬하고 반환값이 None, sorted()는 원본은 그대로 두고 정렬된 새 리스트를 반환한다",
+      "둘 다 새 리스트를 반환한다"
+    ],
+    "answer": 2,
+    "explain": "sort()는 리스트 자체를 제자리에서 정렬하고 반환값은 None이다. sorted(arr)는 원본을 건드리지 않고 정렬된 새 리스트를 반환한다. result = arr.sort() 라고 쓰면 result에 None이 들어가는 함정에 주의한다."
+  },
+  {
+    "cat": "문법",
+    "q": "다음 코드의 출력은?\nL = [3, 1, 2]\nx = L.sort()\nprint(x)",
+    "choices": [
+      "[1, 2, 3]",
+      "[3, 1, 2]",
+      "None",
+      "3"
+    ],
+    "answer": 2,
+    "explain": "sort()는 리스트를 제자리 정렬하고 반환값은 None이다. 따라서 x에는 None이 들어간다. 정렬된 리스트를 변수에 받고 싶으면 sorted(L)을 써야 한다."
+  },
+  {
+    "cat": "문법",
+    "q": "nums = [1, 2, 2, 3, 2] 일 때 nums.count(2) 와 nums.index(2) 의 값은?",
+    "choices": [
+      "3 과 1",
+      "2 과 1",
+      "3 과 2",
+      "2 과 2"
+    ],
+    "answer": 0,
+    "explain": "count(2)는 값 2가 몇 개 있는지 세므로 3이다. index(2)는 값 2가 처음 나오는 위치를 반환하는데 인덱스 1에서 처음 나오므로 1이다."
+  },
+  {
+    "cat": "문법",
+    "q": "한 요소만 가진 튜플을 올바르게 만든 것은?",
+    "choices": [
+      "t = (5)",
+      "t = 5,",
+      "t = [5]",
+      "t = {5}"
+    ],
+    "answer": 1,
+    "explain": "요소 1개짜리 튜플은 반드시 쉼표가 있어야 한다. 5, 또는 (5,) 가 튜플이고, (5)는 괄호일 뿐 그냥 정수 5다. 3번은 리스트, 4번은 집합이다."
+  },
+  {
+    "cat": "문법",
+    "q": "다음 코드 실행 후 a, b의 값은?\na, b = 1, 2\na, b = b, a",
+    "choices": [
+      "a=1, b=2",
+      "a=2, b=2",
+      "a=1, b=1",
+      "a=2, b=1"
+    ],
+    "answer": 3,
+    "explain": "a, b = b, a 는 우변이 먼저 (2, 1)이라는 튜플로 묶인 뒤 좌변에 언패킹된다. 그래서 임시 변수 없이 값이 교환되어 a=2, b=1 이 된다. 파이썬의 대표적인 스왑 방식이다."
+  },
+  {
+    "cat": "문법",
+    "q": "stu = {\"name\": \"Alice\"} 일 때 stu.get(\"height\") 의 결과는?",
+    "choices": [
+      "KeyError 발생",
+      "None",
+      "빈 문자열",
+      "0"
+    ],
+    "answer": 1,
+    "explain": "get()은 없는 키에 접근해도 에러 없이 None을 반환한다. 반면 stu[\"height\"] 처럼 [] 로 없는 키에 접근하면 KeyError가 난다. get(\"height\", \"없음\")처럼 기본값을 지정할 수도 있다."
+  },
+  {
+    "cat": "문법",
+    "q": "딕셔너리에서 존재하지 않는 키를 stu[\"없는키\"] 처럼 대괄호로 접근하면?",
+    "choices": [
+      "None을 반환한다",
+      "빈 값을 반환한다",
+      "KeyError가 발생한다",
+      "새 키가 자동 생성된다"
+    ],
+    "answer": 2,
+    "explain": "없는 키를 [] 로 읽으면 KeyError가 발생한다. 에러 없이 안전하게 조회하려면 get()을 사용한다. 단, stu[\"새키\"] = 값 처럼 대입하면 새 키가 추가되는 것이지 읽기 접근과는 다르다."
+  },
+  {
+    "cat": "문법",
+    "q": "다음 코드 실행 후 cnt의 값은?\ncnt = {}\nfor ch in \"banana\":\n    cnt[ch] = cnt.get(ch, 0) + 1",
+    "choices": [
+      "{'b': 1, 'a': 3, 'n': 2}",
+      "{'b': 1, 'a': 2, 'n': 3}",
+      "{'banana': 6}",
+      "{'b': 2, 'a': 3, 'n': 1}"
+    ],
+    "answer": 0,
+    "explain": "빈도 세기 표준 패턴이다. 'banana'에서 b는 1번, a는 3번, n은 2번 나온다. get(ch, 0)으로 처음 보는 글자는 0에서 시작해 1씩 더한다. 결과는 {'b': 1, 'a': 3, 'n': 2}."
+  },
+  {
+    "cat": "문법",
+    "q": "딕셔너리 d의 키와 값을 동시에 순회하는 올바른 코드는?",
+    "choices": [
+      "for k in d.items():",
+      "for k, v in d:",
+      "for k, v in d.items():",
+      "for k, v in d.values():"
+    ],
+    "answer": 2,
+    "explain": "키와 값을 함께 순회하려면 for k, v in d.items() 형태를 쓴다. items()는 (키, 값) 쌍을 내준다. 그냥 for k in d 는 키만, d.values()는 값만 순회한다."
+  },
+  {
+    "cat": "문법",
+    "q": "함수 안에서 return을 만나지 못하거나 return만 단독으로 쓰면 그 함수의 반환값은?",
+    "choices": [
+      "0",
+      "빈 문자열",
+      "None",
+      "에러 발생"
+    ],
+    "answer": 2,
+    "explain": "return문이 없거나 값 없이 return만 쓰면 함수는 None을 반환한다. 따라서 print 만 하고 return이 없는 함수의 결과를 변수에 받으면 None이 들어간다."
+  },
+  {
+    "cat": "문법",
+    "q": "매개변수(parameter)와 인자(argument)의 차이로 옳은 것은?",
+    "choices": [
+      "매개변수는 함수 호출 시 넘기는 값, 인자는 함수 정의 시 받는 변수다",
+      "매개변수는 함수 정의 시 선언하는 변수, 인자는 호출 시 실제로 넘기는 값이다",
+      "둘은 완전히 같은 말이다",
+      "매개변수는 전역변수, 인자는 지역변수다"
+    ],
+    "answer": 1,
+    "explain": "매개변수(parameter)는 def 함수(x): 처럼 함수를 정의할 때 선언하는 변수이고, 인자(argument)는 함수(5)처럼 호출할 때 실제로 넘기는 값이다. 정의 시 받는 그릇이 매개변수, 호출 시 담는 내용물이 인자다."
+  },
+  {
+    "cat": "문법",
+    "q": "다음 코드의 출력은?\napple = 10\ndef eat():\n    global apple\n    apple = 3\neat()\nprint(apple)",
+    "choices": [
+      "10",
+      "None",
+      "에러",
+      "3"
+    ],
+    "answer": 3,
+    "explain": "global apple 선언으로 함수 안에서 전역변수 apple을 직접 바꿀 수 있게 된다. eat()이 apple을 3으로 바꾸므로 출력은 3이다. global이 없었다면 함수 안 apple은 지역변수가 되어 전역값 10이 그대로 출력됐을 것이다."
+  },
+  {
+    "cat": "문법",
+    "q": "다음 중 내장함수가 아닌 것은?",
+    "choices": [
+      "len()",
+      "max()",
+      "divmod()",
+      "random.randint()"
+    ],
+    "answer": 3,
+    "explain": "len(), max(), min(), sum(), abs(), divmod()는 별도 import 없이 바로 쓰는 내장함수다. random.randint()는 import random 후 모듈.함수() 형태로 쓰는 외장함수다."
+  },
+  {
+    "cat": "문법",
+    "q": "divmod(17, 5) 의 결과는?",
+    "choices": [
+      "(3, 2)",
+      "(2, 3)",
+      "3.4",
+      "(3.4, 0)"
+    ],
+    "answer": 0,
+    "explain": "divmod(a, b)는 (몫, 나머지)를 튜플로 반환한다. 17을 5로 나누면 몫 3, 나머지 2이므로 (3, 2)다. 즉 17 // 5 와 17 % 5 를 한 번에 구해준다."
+  },
+  {
+    "cat": "문법",
+    "q": "f\"{10/3:.2f}\" 의 결과는?",
+    "choices": [
+      "3.3333",
+      "3.3",
+      "3.33",
+      "3"
+    ],
+    "answer": 2,
+    "explain": ":.2f 는 소수점 둘째 자리까지 반올림해 고정 소수점으로 표시한다. 10/3 = 3.3333... 이므로 셋째 자리에서 반올림해 3.33 이 된다."
+  },
+  {
+    "cat": "문법",
+    "q": "f\"{22:>4}\" 의 결과(따옴표 안 공백 포함)는?",
+    "choices": [
+      "\"22  \"",
+      "\"0022\"",
+      "\"22\"",
+      "\"  22\""
+    ],
+    "answer": 3,
+    "explain": ":>4 는 폭 4칸을 확보하고 오른쪽 정렬한다. 22는 두 자리이므로 남는 왼쪽 2칸을 공백으로 채워 '  22'(앞에 공백 2개)가 된다. 왼쪽 정렬이라면 :<4 를 쓴다."
+  },
+  {
+    "cat": "문법",
+    "q": "f\"{'bb':<5}\" 의 결과(따옴표 안 공백 포함)는?",
+    "choices": [
+      "\"bb   \"",
+      "\"   bb\"",
+      "\" bb  \"",
+      "\"bb\""
+    ],
+    "answer": 0,
+    "explain": ":<5 는 폭 5칸을 확보하고 왼쪽 정렬한다. 'bb'는 두 글자이므로 오른쪽 남는 3칸을 공백으로 채워 'bb   '(뒤에 공백 3개)가 된다. 문자열 칸을 맞출 때 자주 쓴다."
+  },
+  {
+    "cat": "문법",
+    "q": "f\"{2.5:>7.2f}\" 의 결과(따옴표 안 공백 포함)는?",
+    "choices": [
+      "\"2.50   \"",
+      "\"   2.50\"",
+      "\"  2.500\"",
+      "\"2.5\""
+    ],
+    "answer": 1,
+    "explain": ":>7.2f 는 폭 7칸, 오른쪽 정렬, 소수점 둘째 자리까지를 동시에 지정한다. 2.5는 먼저 '2.50'(4칸)이 되고, 폭 7칸을 맞추려 왼쪽에 공백 3칸을 채워 '   2.50'이 된다. 표를 정렬해 출력하는 핵심 패턴이다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "파이썬에서 변수에 대한 가장 정확한 설명은?",
+    "choices": [
+      "변수는 객체에 붙은 이름표이며, 대입은 같은 객체에 이름을 하나 더 붙이는 것이다",
+      "변수는 값을 담는 상자이며, 대입하면 상자에 값이 복사되어 들어간다",
+      "변수는 항상 새로운 객체를 만들어 그 안에 값을 저장한다",
+      "변수는 메모리 주소 자체를 의미하며 값을 가질 수 없다"
+    ],
+    "answer": 0,
+    "explain": "파이썬의 변수는 '값을 담는 상자'가 아니라 '객체에 붙은 이름표'다. b = a는 a가 가리키는 객체에 b라는 이름표를 추가로 붙이는 것이며, 값이 복사되지 않는다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 중 가변(mutable) 객체끼리 묶인 것은?",
+    "choices": [
+      "정수, 문자열",
+      "리스트, 딕셔너리",
+      "문자열, 튜플",
+      "정수, 튜플"
+    ],
+    "answer": 1,
+    "explain": "가변(mutable)은 내부 수정이 가능한 리스트, 딕셔너리다. 불변(immutable)은 정수, 문자열, 튜플로 내부를 직접 바꿀 수 없다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 중 불변(immutable) 객체가 아닌 것은?",
+    "choices": [
+      "정수(int)",
+      "문자열(str)",
+      "리스트(list)",
+      "튜플(tuple)"
+    ],
+    "answer": 2,
+    "explain": "리스트는 가변 객체로 내부 수정이 가능하다. 정수, 문자열, 튜플은 모두 불변 객체다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [1, 2]\nb = a\na[1] = 99\nprint(b)",
+    "choices": [
+      "[1, 2]",
+      "[99, 2]",
+      "오류 발생",
+      "[1, 99]"
+    ],
+    "answer": 3,
+    "explain": "b = a로 b와 a는 같은 리스트 객체를 가리킨다. a[1] = 99는 그 공유 객체 내부를 수정(mutation)하므로 b로 봐도 [1, 99]가 된다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [1, 2]\nb = a\na = [3, 4]\nprint(a, b)",
+    "choices": [
+      "[3, 4] [1, 2]",
+      "[3, 4] [3, 4]",
+      "[1, 2] [1, 2]",
+      "[1, 2] [3, 4]"
+    ],
+    "answer": 0,
+    "explain": "a = [3, 4]는 a라는 이름표를 새 객체로 옮기는 재배치(rebinding)다. b는 여전히 원래 객체 [1, 2]를 가리킨다. a[i] = ...(내부 수정)와 a = ...(이름표 교체)의 차이가 핵심."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "a[i] = ... 와 a = ... 의 차이로 옳은 것은?",
+    "choices": [
+      "둘 다 객체 내부를 수정한다",
+      "a[i] = ...는 객체 내부 수정(mutation), a = ...는 이름표 교체(rebinding)다",
+      "a[i] = ...는 이름표 교체, a = ...는 객체 내부 수정이다",
+      "둘 다 이름표를 새 객체로 옮긴다"
+    ],
+    "answer": 1,
+    "explain": "a[i] = ...는 a가 가리키던 객체의 내부를 바꾸는 mutation으로 같은 객체를 공유한 다른 이름표에도 영향을 준다. a = ...는 a 이름표를 새 객체로 옮기는 rebinding으로 다른 이름표에는 영향이 없다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [1, 2]\nb = a\nb.append(3)\nprint(a)",
+    "choices": [
+      "[1, 2]",
+      "[3, 1, 2]",
+      "[1, 2, 3]",
+      "오류 발생"
+    ],
+    "answer": 2,
+    "explain": "b.append(3)는 b가 가리키는 객체 내부를 수정한다. b와 a는 같은 객체를 공유하므로 a도 [1, 2, 3]이 된다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [1, 2]\nb = a\nb = b + [3]\nprint(a, b)",
+    "choices": [
+      "[1, 2, 3] [1, 2, 3]",
+      "[1, 2, 3] [1, 2]",
+      "[1, 2] [1, 2]",
+      "[1, 2] [1, 2, 3]"
+    ],
+    "answer": 3,
+    "explain": "b = b + [3]는 새 리스트를 만들어 b 이름표를 그 새 객체로 옮긴다(rebinding). 원래 객체를 가리키는 a는 [1, 2] 그대로다. append와 달리 b + [3]은 원본을 바꾸지 않는다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [1, 2]\nb = a\nb += [3]\nprint(a, b)",
+    "choices": [
+      "[1, 2, 3] [1, 2, 3]",
+      "[1, 2] [1, 2, 3]",
+      "[1, 2, 3] [1, 2]",
+      "[1, 2] [1, 2]"
+    ],
+    "answer": 0,
+    "explain": "리스트의 += 는 내부적으로 extend처럼 동작해 원본 객체를 그 자리에서 수정한다. b가 가리키는 객체가 바뀌므로 같은 객체를 공유하는 a도 [1, 2, 3]이 된다. b = b + [3](새 객체 생성)과 결과가 다른 함정."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\nx = 5\ny = x\nx = 10\nprint(x, y)",
+    "choices": [
+      "10 10",
+      "10 5",
+      "5 5",
+      "5 10"
+    ],
+    "answer": 1,
+    "explain": "정수는 불변이라 x = 10은 x 이름표를 정수 10 객체로 옮기는 rebinding이다. y는 여전히 5를 가리키므로 10 5가 출력된다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\ns = 'hi'\nt = s\ns += '!'\nprint(s, t)",
+    "choices": [
+      "hi! hi!",
+      "hi hi",
+      "hi! hi",
+      "hi hi!"
+    ],
+    "answer": 2,
+    "explain": "문자열은 불변이라 s += '!'는 새 문자열 'hi!'를 만들어 s를 그쪽으로 옮긴다. t는 원래 'hi'를 그대로 가리키므로 hi! hi가 출력된다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\ngrid = [[0] * 3] * 3\ngrid[0][0] = 1\nprint(grid)",
+    "choices": [
+      "[[1, 0, 0], [0, 0, 0], [0, 0, 0]]",
+      "[[1, 1, 1], [0, 0, 0], [0, 0, 0]]",
+      "오류 발생",
+      "[[1, 0, 0], [1, 0, 0], [1, 0, 0]]"
+    ],
+    "answer": 3,
+    "explain": "[[0]*3]*3은 같은 안쪽 리스트 객체 하나를 세 번 가리킨다. grid[0]을 수정하면 grid[1], grid[2]도 같은 객체라 함께 바뀌어 세 행이 모두 [1, 0, 0]이 된다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\ngrid = [[0] * 3 for _ in range(3)]\ngrid[0][0] = 1\nprint(grid)",
+    "choices": [
+      "[[1, 0, 0], [0, 0, 0], [0, 0, 0]]",
+      "[[1, 0, 0], [1, 0, 0], [1, 0, 0]]",
+      "[[1, 1, 1], [0, 0, 0], [0, 0, 0]]",
+      "오류 발생"
+    ],
+    "answer": 0,
+    "explain": "리스트 컴프리헨션은 반복마다 새로운 안쪽 리스트를 만들어 세 행이 서로 다른 객체다. grid[0]만 바뀌므로 첫 행만 [1, 0, 0]이 된다. [[0]*3]*3 함정의 올바른 해결책."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "[[0]*3]*3로 만든 2차원 리스트가 가진 문제는?",
+    "choices": [
+      "바깥 리스트와 안쪽 리스트가 모두 같은 객체다",
+      "세 개의 안쪽 리스트가 모두 같은 객체를 가리켜, 한 행을 바꾸면 세 행이 함께 바뀐다",
+      "정수 0이 가변이라 0을 바꾸면 모든 칸이 바뀐다",
+      "안쪽 리스트가 매번 새로 생성되어 메모리를 낭비한다"
+    ],
+    "answer": 1,
+    "explain": "*3은 안쪽 리스트 '객체 하나'에 대한 참조를 세 번 복제할 뿐 새 리스트를 만들지 않는다. 그래서 세 행이 같은 객체를 공유한다. 해결책은 [[0]*3 for _ in range(3)]."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [1, 2, 3]\nb = a[:]\nb[0] = 99\nprint(a, b)",
+    "choices": [
+      "[99, 2, 3] [99, 2, 3]",
+      "[99, 2, 3] [1, 2, 3]",
+      "[1, 2, 3] [99, 2, 3]",
+      "[1, 2, 3] [1, 2, 3]"
+    ],
+    "answer": 2,
+    "explain": "b = a[:]는 얕은 복사로 바깥 리스트를 새로 만든다. 1차원이고 원소가 불변 정수라 b[0] = 99는 b만 바꾸고 a는 [1, 2, 3] 그대로다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [[1, 2], [3, 4]]\nb = a[:]\nb[0][0] = 99\nprint(a)",
+    "choices": [
+      "[[1, 2], [3, 4]]",
+      "[[99, 99], [3, 4]]",
+      "오류 발생",
+      "[[99, 2], [3, 4]]"
+    ],
+    "answer": 3,
+    "explain": "얕은 복사 a[:]는 바깥 리스트만 새로 만들고 안쪽 리스트는 참조를 공유한다. b[0]과 a[0]은 같은 객체라 b[0][0] = 99가 a에도 반영되어 a는 [[99, 2], [3, 4]]가 된다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [[1, 2], [3, 4]]\nb = list(a)\nb[1].append(5)\nprint(a)",
+    "choices": [
+      "[[1, 2], [3, 4, 5]]",
+      "[[1, 2], [3, 4]]",
+      "[[1, 2, 5], [3, 4]]",
+      "오류 발생"
+    ],
+    "answer": 0,
+    "explain": "list(a)도 얕은 복사라 안쪽 리스트는 공유된다. b[1]과 a[1]은 같은 객체라 b[1].append(5)가 a에도 반영되어 a는 [[1, 2], [3, 4, 5]]가 된다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [1, [2, 3]]\nb = list(a)\nb[0] = 99\nprint(a, b)",
+    "choices": [
+      "[99, [2, 3]] [99, [2, 3]]",
+      "[1, [2, 3]] [99, [2, 3]]",
+      "[99, [2, 3]] [1, [2, 3]]",
+      "[1, [2, 3]] [1, [2, 3]]"
+    ],
+    "answer": 1,
+    "explain": "b = list(a)는 바깥 리스트를 새로 만든다. b[0] = 99는 b의 바깥 슬롯만 교체하므로 a의 바깥 슬롯에는 영향이 없어 a는 [1, [2, 3]] 그대로다. (안쪽 리스트를 수정했다면 공유되어 함께 바뀜)"
+  },
+  {
+    "cat": "객체/참조",
+    "q": "2차원 리스트 a를 안쪽까지 완전히 독립 복사하는 방법으로 옳은 것은?",
+    "choices": [
+      "b = a",
+      "b = a[:]",
+      "b = [row[:] for row in a]",
+      "b = list(a)"
+    ],
+    "answer": 2,
+    "explain": "a[:]나 list(a)는 얕은 복사라 안쪽 리스트를 공유한다. b = [row[:] for row in a]는 각 행을 슬라이스로 새로 복사해 안쪽까지 분리한다. copy.deepcopy(a)도 가능하다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [[1, 2], [3, 4]]\nb = [row[:] for row in a]\nb[0][0] = 99\nprint(a)",
+    "choices": [
+      "[[99, 2], [3, 4]]",
+      "[[99, 99], [3, 4]]",
+      "오류 발생",
+      "[[1, 2], [3, 4]]"
+    ],
+    "answer": 3,
+    "explain": "[row[:] for row in a]는 각 안쪽 리스트를 새로 복사해 a와 b가 안쪽까지 완전히 분리된다. b[0][0] = 99는 b만 바꾸고 a는 [[1, 2], [3, 4]] 그대로다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "1차원 정수 리스트 [0]*4가 [[0]*3]*3와 달리 참조 공유 문제가 없는 이유는?",
+    "choices": [
+      "정수는 불변이라 한 칸에 다른 정수를 넣으면 그 칸의 이름표만 바뀌고 다른 칸에 영향이 없기 때문",
+      "리스트 곱하기 연산이 정수에는 적용되지 않기 때문",
+      "[0]*4는 내부적으로 컴프리헨션으로 변환되기 때문",
+      "정수 0은 매번 새 객체로 만들어지기 때문"
+    ],
+    "answer": 0,
+    "explain": "[0]*4의 네 칸은 모두 같은 정수 0을 가리키지만, 정수는 불변이라 lst[0] = 5처럼 칸에 다른 값을 넣으면 그 칸의 이름표만 새 정수로 바뀐다. 가변 리스트를 공유하는 [[0]*3]*3와 달리 문제가 생기지 않는다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\nt = ([1, 2], 3)\nt[0].append(9)\nprint(t)",
+    "choices": [
+      "([1, 2], 3)",
+      "([1, 2, 9], 3)",
+      "TypeError 발생",
+      "([1, 2], 3, 9)"
+    ],
+    "answer": 1,
+    "explain": "튜플의 불변성은 슬롯 구조(슬롯 개수와 각 슬롯이 가리키는 참조)가 안 바뀐다는 뜻이다. t[0]이 가리키는 리스트 자체는 가변이라 append가 가능해 ([1, 2, 9], 3)이 된다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "t = ([1, 2], 3) 일 때 TypeError가 발생하는 연산은?",
+    "choices": [
+      "t[0].append(9)",
+      "t[0][0] = 5",
+      "t[0] = [9, 9]",
+      "x = t[0]"
+    ],
+    "answer": 2,
+    "explain": "t[0] = [9, 9]는 튜플의 슬롯 자체를 다른 객체로 교체하려는 시도라 TypeError다. 반면 t[0].append(9)나 t[0][0] = 5는 슬롯이 가리키는 리스트 내부를 바꾸는 것이라 가능하다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "튜플의 불변성에 대한 가장 정확한 설명은?",
+    "choices": [
+      "튜플 안에 들어 있는 모든 객체의 내부까지 절대 바꿀 수 없다",
+      "튜플은 생성 후 읽기조차 불가능하다",
+      "튜플은 정수만 담을 수 있어 불변이다",
+      "튜플 자신의 슬롯 구조(슬롯 개수와 각 슬롯이 가리키는 참조)가 바뀌지 않는다는 뜻이다"
+    ],
+    "answer": 3,
+    "explain": "튜플의 불변성은 '슬롯 구조 고정'을 의미한다. 슬롯이 리스트 같은 가변 객체를 가리키면 그 객체 내부는 바꿀 수 있다. 슬롯 자체의 교체(t[0]=...)나 삭제(del t[0])만 금지된다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 중 참(truthy)으로 판정되는 값은?",
+    "choices": [
+      "[0]",
+      "0",
+      "\"\"",
+      "[]"
+    ],
+    "answer": 0,
+    "explain": "[0]은 요소가 1개 들어 있는 비어있지 않은 리스트라 참이다. 0, 빈 문자열, 빈 리스트는 모두 거짓(falsy)이다. 판정은 오직 '비었는가/영인가'만 본다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 중 거짓(falsy)으로 판정되는 값은?",
+    "choices": [
+      "\"False\"",
+      "{}",
+      "[0]",
+      "\"0\""
+    ],
+    "answer": 1,
+    "explain": "{}는 빈 딕셔너리라 거짓이다. \"False\"와 \"0\"은 글자가 들어 있는 비어있지 않은 문자열이라 참이고, [0]도 요소가 있는 리스트라 참이다. 함정 주의."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\nif \"False\":\n    print(\"A\")\nelse:\n    print(\"B\")",
+    "choices": [
+      "B",
+      "False",
+      "A",
+      "오류 발생"
+    ],
+    "answer": 2,
+    "explain": "\"False\"는 글자가 들어 있는 비어있지 않은 문자열이라 참(truthy)이다. 따옴표 안의 단어가 'False'여도 빈 문자열이 아니므로 if 조건이 참이 되어 A가 출력된다. 대표적인 함정."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 중 거짓(falsy)인 값만 모두 고른 것은?\n\n(가) 0.0  (나) None  (다) ()  (라) {}  (마) [0]",
+    "choices": [
+      "(가), (나), (다), (라), (마) 전부",
+      "(나), (다), (라), (마)",
+      "(가), (다), (마)",
+      "(가), (나), (다), (라)"
+    ],
+    "answer": 3,
+    "explain": "거짓: 0.0, None, 빈 튜플 (), 빈 딕셔너리 {}. (마) [0]은 요소가 있는 리스트라 참이다. 따라서 (가)(나)(다)(라)가 답."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [1, 2, 3]\nb = a\ndel a[0]\nprint(b)",
+    "choices": [
+      "[2, 3]",
+      "[1, 2, 3]",
+      "[1, 2]",
+      "오류 발생"
+    ],
+    "answer": 0,
+    "explain": "del a[0]은 a가 가리키는 객체 내부에서 첫 원소를 삭제하는 mutation이다. b는 같은 객체를 공유하므로 b도 [2, 3]이 된다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [1, 2, 3]\nb = a\na.clear()\nprint(b)",
+    "choices": [
+      "[1, 2, 3]",
+      "[]",
+      "None",
+      "오류 발생"
+    ],
+    "answer": 1,
+    "explain": "a.clear()는 a가 가리키는 객체 내부를 비우는 mutation이다. b는 같은 객체를 공유하므로 b도 빈 리스트 []가 된다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [1, 2]\nb = a\nprint(a is b, a == b)",
+    "choices": [
+      "False True",
+      "True False",
+      "True True",
+      "False False"
+    ],
+    "answer": 2,
+    "explain": "b = a로 둘은 같은 객체를 가리키므로 is(같은 객체인가)는 True, ==(값이 같은가)도 당연히 True다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [1, 2]\nb = [1, 2]\nprint(a is b, a == b)",
+    "choices": [
+      "True True",
+      "True False",
+      "False False",
+      "False True"
+    ],
+    "answer": 3,
+    "explain": "a와 b는 값은 같지만 서로 다른 리스트 객체다. is(같은 객체인가)는 False, ==(값이 같은가)는 True다. is와 == 의 차이를 묻는 문제."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\nt = ([1, 2], [3, 4])\nt[0].append(9)\nt[1][0] = 99\nprint(t)",
+    "choices": [
+      "([1, 2, 9], [99, 4])",
+      "([1, 2], [3, 4])",
+      "TypeError 발생",
+      "([1, 2, 9], [3, 4])"
+    ],
+    "answer": 0,
+    "explain": "튜플 슬롯이 가리키는 리스트 내부는 수정 가능하다. t[0].append(9)로 [1, 2, 9], t[1][0] = 99로 [99, 4]가 되어 ([1, 2, 9], [99, 4])가 된다. 슬롯 교체(t[0]=...)만 금지될 뿐이다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [10, 20, 30]\nb = a[1:]\nb[0] = 99\nprint(a, b)",
+    "choices": [
+      "[10, 99, 30] [99, 30]",
+      "[10, 20, 30] [99, 30]",
+      "[10, 99, 30] [20, 30]",
+      "[99, 20, 30] [99, 30]"
+    ],
+    "answer": 1,
+    "explain": "슬라이싱 a[1:]은 새 리스트 [20, 30]을 만든다. 원소가 불변 정수라 b[0] = 99는 b만 바꾸고 a는 [10, 20, 30] 그대로다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\na = [1, 2]\nb = a\nc = b\na.append(3)\nprint(a, b, c)",
+    "choices": [
+      "[1, 2, 3] [1, 2] [1, 2]",
+      "[1, 2, 3] [1, 2, 3] [1, 2]",
+      "[1, 2, 3] [1, 2, 3] [1, 2, 3]",
+      "[1, 2] [1, 2] [1, 2]"
+    ],
+    "answer": 2,
+    "explain": "b = a, c = b로 a, b, c는 모두 같은 하나의 객체를 가리킨다. a.append(3)는 그 공유 객체를 수정하므로 세 이름표 모두 [1, 2, 3]을 본다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "빈칸에 들어갈 코드로, 2차원 리스트를 안쪽까지 완전히 독립 복사하려 한다. 표준 라이브러리를 쓴다면?\n\nimport copy\nb = ______(a)",
+    "choices": [
+      "copy.copy",
+      "list",
+      "copy.shallow",
+      "copy.deepcopy"
+    ],
+    "answer": 3,
+    "explain": "copy.deepcopy(a)는 중첩된 안쪽 객체까지 재귀적으로 모두 복사해 완전히 독립된 사본을 만든다. copy.copy나 list는 얕은 복사라 안쪽 리스트를 공유한다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\ng = [[0] * 3] * 3\nprint(g[0] is g[1])",
+    "choices": [
+      "True",
+      "False",
+      "None",
+      "오류 발생"
+    ],
+    "answer": 0,
+    "explain": "[[0]*3]*3은 같은 안쪽 리스트 객체를 세 번 참조한다. 따라서 g[0]과 g[1]은 같은 객체라 is 비교가 True다. 이 때문에 한 행 수정이 모든 행에 반영된다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\ng = [[0] * 3 for _ in range(3)]\nprint(g[0] is g[1])",
+    "choices": [
+      "True",
+      "False",
+      "None",
+      "오류 발생"
+    ],
+    "answer": 1,
+    "explain": "컴프리헨션은 반복마다 새 안쪽 리스트를 만든다. g[0]과 g[1]은 서로 다른 객체라 is 비교가 False다. 그래서 행을 독립적으로 수정할 수 있다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\ns = 'abc'\ns[0] = 'x'\nprint(s)",
+    "choices": [
+      "xbc",
+      "abc",
+      "TypeError 발생",
+      "xabc"
+    ],
+    "answer": 2,
+    "explain": "문자열은 불변이라 인덱스로 한 글자를 직접 바꿀 수 없다. s[0] = 'x'는 TypeError를 일으킨다. 바꾸려면 새 문자열을 만들어 재배치해야 한다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "다음 코드의 출력은?\n\nt = (1, 2, 3)\ndel t[0]\nprint(t)",
+    "choices": [
+      "(2, 3)",
+      "(1, 2, 3)",
+      "()",
+      "TypeError 발생"
+    ],
+    "answer": 3,
+    "explain": "튜플은 불변이라 슬롯 삭제(del t[0])가 불가능해 TypeError가 발생한다. 슬롯 교체(t[0]=...)도 마찬가지로 불가능하다."
+  },
+  {
+    "cat": "객체/참조",
+    "q": "b = a 로 두 이름표가 같은 리스트를 공유할 때, a를 바꿔도 b에 영향이 없는 연산은?",
+    "choices": [
+      "a = [9, 9]",
+      "a.append(9)",
+      "a[0] = 9",
+      "a.clear()"
+    ],
+    "answer": 0,
+    "explain": "a = [9, 9]는 a 이름표를 새 객체로 옮기는 rebinding이라 b가 가리키는 원래 객체에 영향이 없다. 나머지(append, a[0]=9, clear)는 모두 공유 객체 내부를 바꾸는 mutation이라 b에도 반영된다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 중 비선형 자료구조로만 묶인 것은?",
+    "choices": [
+      "스택, 큐",
+      "배열, 리스트",
+      "트리, 그래프",
+      "리스트, 스택"
+    ],
+    "answer": 2,
+    "explain": "선형 자료구조는 요소가 1:1로 차례로 연결되는 것(배열, 리스트, 스택, 큐)이고, 비선형은 한 요소가 여러 요소와 연결되는 계층/관계형 구조(트리, 그래프)다. 따라서 비선형끼리 묶인 것은 트리, 그래프다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "선형 자료구조와 비선형 자료구조를 구분하는 핵심 기준으로 가장 알맞은 것은?",
+    "choices": [
+      "요소가 1:1로 차례로 연결되는가, 한 요소가 여러 요소와 연결되는가",
+      "데이터의 개수가 많은가 적은가",
+      "정렬되어 있는가 아닌가",
+      "숫자만 담는가 문자도 담는가"
+    ],
+    "answer": 0,
+    "explain": "선형은 요소들이 일렬로 1:1 연결되는 구조(리스트, 스택, 큐 등), 비선형은 한 요소가 여러 요소와 연결되어 계층/관계를 이루는 구조(트리, 그래프)다. 데이터 개수나 정렬 여부, 자료형은 분류 기준이 아니다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 코드의 출력은?\n\nm = [[1,2,3],[4,5,6],[7,8,9]]\ns = 0\nfor i in range(3):\n    s += m[i][i]\nprint(s)",
+    "choices": [
+      "6",
+      "45",
+      "15",
+      "18"
+    ],
+    "answer": 2,
+    "explain": "m[0][0]+m[1][1]+m[2][2] = 1+5+9 = 15. 같은 인덱스 i를 행과 열에 동시에 쓰면 주대각선 원소들의 합(대각합)이 된다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "2차원 리스트 m = [[1,2,3],[4,5,6],[7,8,9]] 에서 각 열의 합계를 구하면?",
+    "choices": [
+      "[6, 15, 24]",
+      "[12, 15, 18]",
+      "[15, 15, 15]",
+      "[1, 5, 9]"
+    ],
+    "answer": 1,
+    "explain": "열별 합계는 같은 열 인덱스끼리 더한다. 0열: 1+4+7=12, 1열: 2+5+8=15, 2열: 3+6+9=18 이므로 [12, 15, 18]. [6, 15, 24]는 행별 합계다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 전치(transpose) 코드 실행 후 m의 값은?\n\nm = [[1,2,3],[4,5,6],[7,8,9]]\nn = 3\nfor i in range(n):\n    for j in range(i+1, n):\n        m[i][j], m[j][i] = m[j][i], m[i][j]\nprint(m)",
+    "choices": [
+      "[[1,2,3],[4,5,6],[7,8,9]]",
+      "[[9,8,7],[6,5,4],[3,2,1]]",
+      "[[7,4,1],[8,5,2],[9,6,3]]",
+      "[[1,4,7],[2,5,8],[3,6,9]]"
+    ],
+    "answer": 3,
+    "explain": "전치는 행과 열을 뒤바꾼다. 원래 m[i][j]가 결과에서 [j][i] 자리로 간다. 0행은 원래 0열(1,4,7)이 되어 [[1,4,7],[2,5,8],[3,6,9]]가 된다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "2차원 리스트에서 최댓값의 위치를 찾을 때, 같은 최댓값이 여러 번 나오면 '앞쪽(먼저 나온) 위치'를 우선하도록 하려면 갱신 조건을 어떻게 써야 하는가?",
+    "choices": [
+      "if cur >= best: 로 비교한다",
+      "if cur > best: 로 비교한다 (같으면 갱신 안 함)",
+      "if cur == best: 로 비교한다",
+      "if cur < best: 로 비교한다"
+    ],
+    "answer": 1,
+    "explain": "> 로만 비교하면 현재 값이 기존 최댓값보다 클 때만 갱신하고, 같은 값일 때는 갱신하지 않으므로 먼저 나온(앞쪽) 위치가 유지된다. >= 로 쓰면 같은 값에서도 갱신되어 뒤쪽 위치가 선택된다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 코드의 출력은? (m[i][j] > 기준으로 최댓값 위치 찾기)\n\nm = [[3,8,2],[8,5,9],[1,9,4]]\nbi, bj = 0, 0\nfor i in range(3):\n    for j in range(3):\n        if m[i][j] > m[bi][bj]:\n            bi, bj = i, j\nprint(bi, bj)",
+    "choices": [
+      "1 2",
+      "2 1",
+      "0 1",
+      "1 0"
+    ],
+    "answer": 0,
+    "explain": "최댓값은 9이고 m[1][2]와 m[2][1] 두 곳에 있다. > 로만 갱신하므로 먼저 나온 m[1][2]에서 멈추고 그 뒤의 m[2][1]은 같은 값이라 갱신되지 않는다. 따라서 1 2."
+  },
+  {
+    "cat": "자료구조",
+    "q": "순차(선형) 탐색 함수에서, 찾는 값이 리스트에 없을 때 보통 무엇을 반환하는가?\n\ndef f(arr, x):\n    for i in range(len(arr)):\n        if arr[i] == x:\n            return i\n    return ___",
+    "choices": [
+      "0",
+      "None을 의미하는 빈 줄",
+      "-1",
+      "len(arr)"
+    ],
+    "answer": 2,
+    "explain": "관례적으로 '찾지 못함'을 -1로 반환한다. 0은 첫 번째 인덱스라 '찾았다'와 구분되지 않으므로 부적절하다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 순차 탐색 코드의 출력은?\n\ndef f(arr, x):\n    for i in range(len(arr)):\n        if arr[i] == x:\n            return i\n    return -1\nprint(f([4, 2, 7, 1, 9], 7))",
+    "choices": [
+      "2",
+      "7",
+      "-1",
+      "3"
+    ],
+    "answer": 0,
+    "explain": "리스트에서 값 7은 인덱스 2에 있다(4가 0, 2가 1, 7이 2). 찾으면 즉시 인덱스를 반환하므로 2."
+  },
+  {
+    "cat": "자료구조",
+    "q": "이진 탐색을 사용하기 위한 필수 전제 조건은?",
+    "choices": [
+      "데이터에 중복이 없어야 한다",
+      "데이터 개수가 짝수여야 한다",
+      "데이터가 모두 정수여야 한다",
+      "데이터가 정렬되어 있어야 한다"
+    ],
+    "answer": 3,
+    "explain": "이진 탐색은 가운데 값과 비교해 절반을 버리는 방식이라, 정렬되어 있지 않으면 어느 절반을 버릴지 판단이 틀려 값을 못 찾을 수 있다. 정렬이 핵심 전제다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "정렬된 리스트 data = [1,3,5,7,9,11,13] 에서 9를 이진 탐색할 때, 가장 먼저 검사하는 mid 인덱스와 그 위치의 값은?",
+    "choices": [
+      "mid=2, 값 5",
+      "mid=4, 값 9",
+      "mid=3, 값 7",
+      "mid=6, 값 13"
+    ],
+    "answer": 2,
+    "explain": "lo=0, hi=6이므로 mid=(0+6)//2=3, data[3]=7. 첫 비교에서 가운데인 인덱스 3(값 7)을 본다. 7<9이므로 다음엔 오른쪽 절반을 탐색한다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "data = [2,4,6,8,10,12,14,16] 에서 12를 이진 탐색한다. 다음 추적 중 옳은 것은?",
+    "choices": [
+      "첫 mid=3(값 8), 8<12라 lo=4로 이동",
+      "첫 mid=4(값 10), 10>12라 hi=3으로 이동",
+      "첫 mid=3(값 8), 8>12라 hi=2로 이동",
+      "첫 비교에서 바로 12를 찾는다"
+    ],
+    "answer": 0,
+    "explain": "lo=0, hi=7, mid=(0+7)//2=3, data[3]=8. 8<12이므로 왼쪽 절반은 버리고 lo=mid+1=4로 이동해 오른쪽 절반을 탐색한다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "이진 탐색의 효율에 대한 설명으로 옳은 것은?",
+    "choices": [
+      "데이터가 n개일 때 항상 정확히 n번 비교한다",
+      "순차 탐색보다 항상 느리다",
+      "데이터가 n개일 때 약 log2(n)번 비교한다",
+      "데이터 개수와 무관하게 항상 1번만 비교한다"
+    ],
+    "answer": 2,
+    "explain": "이진 탐색은 매 단계 범위가 절반으로 줄어 약 log2(n)번 비교한다. 100만 개여도 약 20번이면 끝나 순차 탐색의 O(n)보다 훨씬 빠르다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "이진 탐색 while 루프에서 data[mid] < target 일 때(가운데 값이 찾는 값보다 작을 때) 다음에 할 동작은?",
+    "choices": [
+      "hi = mid - 1 (왼쪽 절반 탐색)",
+      "lo = mid + 1 (오른쪽 절반 탐색)",
+      "mid = mid + 1",
+      "탐색을 종료하고 -1 반환"
+    ],
+    "answer": 1,
+    "explain": "가운데 값이 찾는 값보다 작으면 찾는 값은 오른쪽(더 큰) 절반에 있으므로 lo = mid + 1로 왼쪽 절반을 버린다. data[mid] > target일 때 hi = mid - 1이다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "슬라이딩 윈도우에서 길이 k인 창문의 시작 인덱스를 빠짐없이 만들려면 range를 어떻게 써야 하는가? (data 길이 n)",
+    "choices": [
+      "range(len(data) - k)",
+      "range(len(data) - k + 1)",
+      "range(len(data) + k)",
+      "range(len(data))"
+    ],
+    "answer": 1,
+    "explain": "시작 인덱스 범위는 0부터 n-k까지(포함)다. range는 끝값 미포함이므로 마지막 시작점 n-k까지 포함하려면 range(len(data) - k + 1)로 +1을 해야 한다. +1을 빠뜨리면 마지막 창문이 누락된다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 코드의 출력은?\n\ndata = [1, 5, 2, 8, 3]\nk = 3\ncount = 0\nfor i in range(len(data) - k + 1):\n    count += 1\nprint(count)",
+    "choices": [
+      "2",
+      "5",
+      "3",
+      "4"
+    ],
+    "answer": 2,
+    "explain": "len(data)=5, k=3 이므로 range(5-3+1)=range(3), 즉 i가 0,1,2로 3번 반복된다. 길이 3짜리 창문은 [1,5,2],[5,2,8],[2,8,3] 으로 총 3개다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "data = [10, 20, 30, 40] 에서 길이 k=2인 슬라이딩 윈도우를 만들 때, range의 +1을 빠뜨리고 range(len(data)-k) 로 쓰면 어떤 문제가 생기는가?",
+    "choices": [
+      "창문이 4개 만들어진다",
+      "마지막 창문 [30, 40]이 누락된다",
+      "에러가 발생한다",
+      "첫 창문 [10, 20]이 누락된다"
+    ],
+    "answer": 1,
+    "explain": "올바른 창문 개수는 4-2+1=3개([10,20],[20,30],[30,40])다. +1을 빼면 range(4-2)=range(2)가 되어 i=0,1만 돌고 마지막 시작점 i=2의 창문 [30,40]이 누락된다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "재귀 함수 설계에서 '종료조건(base case)'이 없으면 발생하는 문제는?",
+    "choices": [
+      "함수가 호출 자체가 안 된다",
+      "항상 0을 반환한다",
+      "끝없이 자기 자신을 호출해 RecursionError가 난다",
+      "결과가 항상 1이 된다"
+    ],
+    "answer": 2,
+    "explain": "종료조건은 더 이상 재귀호출하지 않고 답을 곧장 반환하는 조건이다. 이것이 없으면 호출이 끝없이 이어져 RecursionError(재귀 한도 초과)가 발생한다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 재귀 함수의 f(2, 5) 결과는?\n\ndef f(a, n):\n    if n == 0:\n        return 1\n    return a * f(a, n - 1)",
+    "choices": [
+      "10",
+      "16",
+      "32",
+      "25"
+    ],
+    "answer": 2,
+    "explain": "f(2,5)는 2를 5번 곱한 값, 즉 2*2*2*2*2 = 32다. 종료조건 f(a,0)=1에서부터 거꾸로 곱이 누적된다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 재귀 함수의 출력은?\n\ndef f(n):\n    if n == 0:\n        return 0\n    return n + f(n - 1)\nprint(f(5))",
+    "choices": [
+      "15",
+      "10",
+      "120",
+      "5"
+    ],
+    "answer": 0,
+    "explain": "f(5) = 5+4+3+2+1+0 = 15. 1부터 n까지의 합을 재귀로 구하는 형태다. 종료조건 f(0)=0이 누적의 시작값이 된다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "유클리드 호제법으로 최대공약수를 구하는 재귀 함수의 종료조건으로 알맞은 것은?\n\ndef f(a, b):\n    if ____:\n        return a\n    return f(b, a % b)",
+    "choices": [
+      "a == 0",
+      "a == b",
+      "a % b == 1",
+      "b == 0"
+    ],
+    "answer": 3,
+    "explain": "유클리드 호제법은 나머지가 0이 될 때까지 반복하고, b가 0이 되면 그때의 a가 최대공약수다. 따라서 종료조건은 b == 0이고 a를 반환한다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "재귀와 반복의 변환에 대한 설명으로 옳지 않은 것은?",
+    "choices": [
+      "재귀의 종료조건 반환값은 반복의 누적변수 초깃값에 대응한다",
+      "재귀 호출 깊이는 반복 횟수에 대응한다",
+      "재귀로 풀리는 문제는 반복으로 절대 풀 수 없다",
+      "매 단계 더하는(또는 곱하는) 값이 서로 대응한다"
+    ],
+    "answer": 2,
+    "explain": "재귀와 반복은 서로 변환 가능하다. 종료조건 반환값=누적변수 초깃값, 재귀 깊이=반복 횟수, 단계별 연산값이 대응된다. '절대 풀 수 없다'는 틀린 설명이다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 코드의 출력은?\n\ndef f(n):\n    res = []\n    for i in range(1, n + 1):\n        if n % i == 0:\n            res.append(i)\n    return res\nprint(len(f(12)))",
+    "choices": [
+      "4",
+      "5",
+      "12",
+      "6"
+    ],
+    "answer": 3,
+    "explain": "12의 약수는 1, 2, 3, 4, 6, 12로 총 6개다. 1부터 n까지 돌며 n을 나누어떨어지게 하는 수가 약수다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "36의 약수는 모두 몇 개인가?",
+    "choices": [
+      "6개",
+      "8개",
+      "9개",
+      "12개"
+    ],
+    "answer": 2,
+    "explain": "36의 약수는 1, 2, 3, 4, 6, 9, 12, 18, 36으로 총 9개다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 소수 판별 함수에서 f(1)의 결과는?\n\ndef f(n):\n    if n < 2:\n        return False\n    for i in range(2, n):\n        if n % i == 0:\n            return False\n    return True",
+    "choices": [
+      "True",
+      "False",
+      "0",
+      "에러 발생"
+    ],
+    "answer": 1,
+    "explain": "n < 2 조건에 의해 0과 1은 소수가 아니므로 False를 반환한다. 소수는 1과 자기 자신 외의 약수가 없는 2 이상의 자연수다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "소수 판별에서 '소수'의 정의로 가장 정확한 것은?",
+    "choices": [
+      "짝수가 아닌 모든 수",
+      "1로만 나누어떨어지는 수",
+      "약수의 합이 자기 자신과 같은 수",
+      "약수가 1과 자기 자신 둘뿐인 2 이상의 수"
+    ],
+    "answer": 3,
+    "explain": "소수는 약수가 정확히 2개(1과 자기 자신)인 2 이상의 자연수다. '약수의 합이 자기 자신과 같은 수'는 완전수의 정의다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "완전수의 정의로 옳은 것은?",
+    "choices": [
+      "자기 자신을 뺀 약수(진약수)의 합이 자기 자신과 같은 수",
+      "약수가 1과 자기 자신뿐인 수",
+      "모든 약수의 합이 자기 자신과 같은 수",
+      "자릿수의 합이 자기 자신과 같은 수"
+    ],
+    "answer": 0,
+    "explain": "완전수는 자기 자신을 제외한 약수(진약수)의 합이 자기 자신과 같은 수다. 예: 6 = 1+2+3, 28 = 1+2+4+7+14. 자기 자신을 포함하면 합이 두 배가 되므로 제외해야 한다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 중 완전수인 것은?",
+    "choices": [
+      "12",
+      "10",
+      "28",
+      "16"
+    ],
+    "answer": 2,
+    "explain": "28의 진약수는 1, 2, 4, 7, 14이고 그 합은 1+2+4+7+14=28로 자기 자신과 같으므로 완전수다. 12의 진약수 합은 1+2+3+4+6=16으로 12와 다르다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "gcd(12, 18)을 구한 뒤 lcm(12, 18) = 12 * 18 // gcd 로 최소공배수를 구하면?",
+    "choices": [
+      "6",
+      "216",
+      "36",
+      "30"
+    ],
+    "answer": 2,
+    "explain": "gcd(12,18)=6이고 lcm = 12*18//6 = 216//6 = 36이다. 최소공배수는 두 수의 곱을 최대공약수로 나눈 값이다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "유클리드 호제법으로 gcd(48, 18)을 계산할 때, a, b = b, a % b 단계가 진행되는 순서로 옳은 것은?",
+    "choices": [
+      "(48,18) -> (18,12) -> (12,6) -> (6,0), 결과 6",
+      "(48,18) -> (18,6) -> (6,0), 결과 6",
+      "(48,18) -> (18,12) -> (12,0), 결과 12",
+      "(48,18) -> (30,18) -> (18,12), 결과 12"
+    ],
+    "answer": 0,
+    "explain": "48%18=12 -> (18,12), 18%12=6 -> (12,6), 12%6=0 -> (6,0). b가 0이 되면 그때의 a=6이 최대공약수다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 코드의 출력은? (정수 6358의 자릿수 처리)\n\nn = 6358\ntotal = 0\ncount = 0\nbiggest = 0\nwhile n > 0:\n    d = n % 10\n    total += d\n    count += 1\n    if d > biggest:\n        biggest = d\n    n //= 10\nprint(total, count, biggest)",
+    "choices": [
+      "6358 4 8",
+      "22 3 6",
+      "16 4 6",
+      "22 4 8"
+    ],
+    "answer": 3,
+    "explain": "자릿수의 합 6+3+5+8=22, 자릿수 개수 4개, 가장 큰 자릿수 8이다. n%10으로 끝자리를 얻고 n//=10으로 자리를 줄이며 동시에 누적한다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 코드의 출력 순서는?\n\nn = 6358\nwhile n > 0:\n    print(n % 10, end=' ')\n    n //= 10",
+    "choices": [
+      "6 3 5 8",
+      "8 5 3 6",
+      "6 5 3 8",
+      "8 3 5 6"
+    ],
+    "answer": 1,
+    "explain": "n % 10은 끝자리부터 꺼낸다. 6358 -> 끝자리 8, 635 -> 5, 63 -> 3, 6 -> 6 순서로 나오므로 8 5 3 6 이다. 끝자리부터 거꾸로 나온다는 점이 핵심이다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "숫자 회문 판별 코드에서 빈칸에 들어갈 식으로 옳은 것은? (숫자를 뒤집어 원본과 비교)\n\nrev = 0\nwhile n > 0:\n    rev = ________\n    n //= 10",
+    "choices": [
+      "rev + n % 10",
+      "rev * n + 10",
+      "n % 10 * 10",
+      "rev * 10 + n % 10"
+    ],
+    "answer": 3,
+    "explain": "rev * 10 + n % 10 은 기존 자릿수를 한 칸 왼쪽으로 밀고(*10) 새 끝자리를 더해 숫자를 뒤집는 표준 패턴이다. 진법 변환의 읽기 패턴(value*base+digit)과 같은 원리다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 중 회문(앞뒤가 같은 수)인 것은?",
+    "choices": [
+      "1234",
+      "12321",
+      "12345",
+      "1231"
+    ],
+    "answer": 1,
+    "explain": "12321은 뒤집어도 12321로 원본과 같으므로 회문이다. 나머지는 뒤집으면 원본과 달라진다(예: 1234 -> 4321)."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 코드의 출력은? (2진수 문자열을 10진수로 읽기)\n\nvalue = 0\nfor ch in \"1011\":\n    value = value * 2 + int(ch)\nprint(value)",
+    "choices": [
+      "11",
+      "1011",
+      "13",
+      "8"
+    ],
+    "answer": 0,
+    "explain": "왼쪽부터 읽으며 value=value*2+digit 한다. 1 -> 1, 0 -> 2, 1 -> 5, 1 -> 11. 즉 2진수 1011은 10진수 11이다(8+0+2+1)."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 코드의 출력은? (10진수를 2진수 문자열로 변환)\n\nn = 13\nresult = \"\"\nwhile n > 0:\n    result = str(n % 2) + result\n    n //= 2\nprint(result)",
+    "choices": [
+      "1011",
+      "1110",
+      "1101",
+      "11010"
+    ],
+    "answer": 2,
+    "explain": "13을 2로 계속 나눈 나머지를 앞에 붙인다. 13%2=1(n=6), 6%2=0(n=3), 3%2=1(n=1), 1%2=1(n=0). 나머지를 앞에 붙여 쌓으면 1101이 된다(8+4+0+1=13)."
+  },
+  {
+    "cat": "자료구조",
+    "q": "진법 변환 코드 value = value * base + digit 에서 base만 2 대신 5로 바꾸면, 문자열 \"203\"을 읽은 결과는?",
+    "choices": [
+      "23",
+      "203",
+      "13",
+      "53"
+    ],
+    "answer": 3,
+    "explain": "5진수 읽기: 0 -> 2, 2 -> 2*5+0=10, 3 -> 10*5+3=53. 즉 5진수 203은 10진수 53이다(2*25+0*5+3=50+3=53). 읽기 패턴은 base만 바꾸면 어떤 진법에도 그대로 적용된다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 피보나치 코드의 출력에서 마지막 항(fib[9])의 값은?\n\nfib = [1, 1]\nfor i in range(2, 10):\n    fib.append(fib[i-1] + fib[i-2])\nprint(fib[-1])",
+    "choices": [
+      "34",
+      "55",
+      "89",
+      "21"
+    ],
+    "answer": 1,
+    "explain": "fib = [1,1,2,3,5,8,13,21,34,55]. 앞 두 항을 더해 다음 항을 만든다. 인덱스 9의 값은 34+21=55다."
+  },
+  {
+    "cat": "자료구조",
+    "q": "다음 팩토리얼 함수에서 누적 변수 res의 초깃값으로 알맞은 것과 그 이유는?\n\ndef f(n):\n    res = ___\n    for i in range(1, n + 1):\n        res *= i\n    return res",
+    "choices": [
+      "0, 덧셈 누적이므로",
+      "1, 곱셈 누적이라 0이면 항상 0이 되므로",
+      "n, 시작값이 n이어야 하므로",
+      "-1, 음수로 시작해야 하므로"
+    ],
+    "answer": 1,
+    "explain": "곱셈을 누적하므로 초깃값을 0으로 두면 0과 곱해져 결과가 항상 0이 된다. 곱의 항등원인 1로 초기화해야 한다. (덧셈 누적이면 0으로 시작한다.)"
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "데이터 크기 기준에서 영문 1글자와 한글 1글자가 차지하는 용량으로 옳은 것은?",
+    "choices": [
+      "영문 2byte, 한글 2byte",
+      "영문 2byte, 한글 1byte",
+      "영문 1byte, 한글 1byte",
+      "영문 1byte, 한글 2byte"
+    ],
+    "answer": 3,
+    "explain": "숫자와 영문은 1글자당 1byte, 한글은 1글자당 2byte로 계산한다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "교과서(시험) 기준에서 1KB는 몇 byte인가?",
+    "choices": [
+      "1024 byte",
+      "1000 byte",
+      "1048576 byte",
+      "100 byte"
+    ],
+    "answer": 0,
+    "explain": "시험 표기 기준은 1KB = 1024 byte이다. KB-MB-GB-TB 각 단계가 1024배씩 커진다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "1MB는 몇 byte인가? (1KB=1024byte 기준)",
+    "choices": [
+      "1024 byte",
+      "1000000 byte",
+      "1048576 byte",
+      "1024000 byte"
+    ],
+    "answer": 2,
+    "explain": "1MB = 1024KB = 1024 * 1024 byte = 1048576 byte이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "2MB는 몇 byte인가? (1KB=1024byte 기준)",
+    "choices": [
+      "2000000 byte",
+      "2048000 byte",
+      "2097152 byte",
+      "2048 byte"
+    ],
+    "answer": 2,
+    "explain": "2MB = 2 * 1024 * 1024 = 2097152 byte이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "3KB는 몇 byte인가? (1KB=1024byte 기준)",
+    "choices": [
+      "3000 byte",
+      "3024 byte",
+      "1024 byte",
+      "3072 byte"
+    ],
+    "answer": 3,
+    "explain": "3KB = 3 * 1024 = 3072 byte이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "1GB는 몇 byte인가? (1KB=1024byte 기준)",
+    "choices": [
+      "1000000000 byte",
+      "1048576 byte",
+      "1073741824 byte",
+      "1024000000 byte"
+    ],
+    "answer": 2,
+    "explain": "1GB = 1024MB = 1024 * 1024 * 1024 = 1073741824 byte이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "한글 10글자로 이루어진 문자열이 차지하는 용량은? (한글 1글자=2byte)",
+    "choices": [
+      "10 byte",
+      "5 byte",
+      "20 byte",
+      "1024 byte"
+    ],
+    "answer": 2,
+    "explain": "한글은 1글자당 2byte이므로 10글자 * 2 = 20 byte이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "다음 단위를 작은 것부터 큰 순서로 올바르게 나열한 것은?",
+    "choices": [
+      "GB < MB < KB < TB",
+      "TB < GB < MB < KB",
+      "MB < KB < GB < TB",
+      "KB < MB < GB < TB"
+    ],
+    "answer": 3,
+    "explain": "크기 순서는 KB < MB < GB < TB이며 각 단계마다 1024배씩 커진다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "엄밀하게 1024 배수를 나타내는 이진 접두어(IEC) 단위 표기로 옳은 것은?",
+    "choices": [
+      "KB, MB, GB",
+      "Kb, Mb, Gb",
+      "KiB, MiB, GiB",
+      "K, M, G"
+    ],
+    "answer": 2,
+    "explain": "1024 배수는 정확히는 KiB/MiB/GiB(이진 접두어, IEC)이고, KB/MB/GB(SI)는 원래 1000 배수다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "저장장치 제조사와 RAM의 용량 계산 기준에 대한 설명으로 옳은 것은?",
+    "choices": [
+      "저장장치는 1000, RAM은 1024 기준",
+      "저장장치는 1024, RAM은 1000 기준",
+      "둘 다 1000 기준",
+      "둘 다 1024 기준"
+    ],
+    "answer": 0,
+    "explain": "저장장치 제조사는 1000 기준으로 표기하고 RAM은 1024 기준이다. Windows는 1024로 계산하면서 GB로 표기해 1TB가 약 931GB로 보이는 혼란이 생긴다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "1TB 저장장치를 샀는데 Windows에서 약 931GB로 표시되는 이유로 가장 적절한 것은?",
+    "choices": [
+      "저장장치가 불량이라서",
+      "제조사는 1000 기준으로 표기했지만 Windows는 1024 기준으로 계산해 GB로 표기하기 때문",
+      "바이러스에 감염되어서",
+      "운영체제가 용량을 일부 숨기기 때문"
+    ],
+    "answer": 1,
+    "explain": "제조사는 1TB를 1000 기준으로 표기하지만 Windows는 1024 기준으로 나눠 GB로 표기하므로 약 931GB로 보인다. 1000 vs 1024 기준 차이에서 생기는 혼란이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "다음 중 무손실 압축 방식만으로 묶인 것은?",
+    "choices": [
+      "JPEG, MPEG, MP3",
+      "ZIP, PNG, GIF",
+      "ZIP, JPEG, MP3",
+      "PNG, MPEG, GIF"
+    ],
+    "answer": 1,
+    "explain": "무손실 압축은 원본을 완전히 복원할 수 있으며 ZIP, PNG, GIF가 해당한다. JPEG, MPEG, MP3는 손실 압축이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "다음 중 손실 압축 방식만으로 묶인 것은?",
+    "choices": [
+      "ZIP, PNG, GIF",
+      "PNG, ZIP, MP3",
+      "GIF, JPEG, ZIP",
+      "JPEG, MPEG, MP3"
+    ],
+    "answer": 3,
+    "explain": "손실 압축은 일부 데이터를 버려 용량을 대폭 줄이며 JPEG, MPEG, MP3가 해당한다. ZIP, PNG, GIF는 무손실이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "무손실 압축의 가장 큰 특징으로 옳은 것은?",
+    "choices": [
+      "압축률이 항상 손실 압축보다 높다",
+      "복원 시 데이터 일부가 사라진다",
+      "원본을 완전히 복원할 수 있다",
+      "사진에만 사용할 수 있다"
+    ],
+    "answer": 2,
+    "explain": "무손실 압축은 압축을 풀면 원본 데이터를 완전히 복원할 수 있다는 것이 핵심 특징이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "다음 중 데이터 압축의 필요성으로 보기 어려운 것은?",
+    "choices": [
+      "전송 시간 단축",
+      "전송 에너지 절약",
+      "데이터를 영구히 손실시키기 위해",
+      "저장 공간 절약"
+    ],
+    "answer": 2,
+    "explain": "압축은 전송 시간 단축, 전송 에너지 절약, 저장 공간 절약을 위해 사용하며 풀면 원래 형식으로 복원된다. 데이터를 영구 손실시키는 것은 목적이 아니다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "GIF에 대한 설명으로 가장 정확한 것은?",
+    "choices": [
+      "완전한 손실 압축이다",
+      "JPEG와 동일한 손실 방식이다",
+      "압축을 전혀 하지 않는다",
+      "압축 알고리즘(LZW)은 무손실이지만 256색 제한으로 풀컬러 사진은 색상 손실이 생긴다"
+    ],
+    "answer": 3,
+    "explain": "GIF의 압축 알고리즘 자체는 무손실이지만 256색으로 제한되어 풀컬러 사진은 색상 손실이 생긴다. 교과서/내신에서는 GIF를 무손실로 단순화해 다룬다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "런 길이 부호화(RLE)의 핵심 아이디어로 옳은 것은?",
+    "choices": [
+      "글자를 정해진 칸수만큼 민다",
+      "글자 순서를 격자로 재배열한다",
+      "같은 문자가 연속된 구간을 (문자)(개수)로 표현한다",
+      "빈도가 작은 두 노드를 합친다"
+    ],
+    "answer": 2,
+    "explain": "런 길이 부호화(RLE)는 같은 문자가 연속된 구간을 (문자)(개수) 형태로 줄여 표현하는 무손실 압축이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "문자열 \"AAAB\"를 런 길이 부호화(RLE)한 결과로 옳은 것은?",
+    "choices": [
+      "A3B1",
+      "A4B1",
+      "AB",
+      "A1A1A1B1"
+    ],
+    "answer": 0,
+    "explain": "A가 3번 연속, B가 1번이므로 A3B1이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "문자열 \"WWWWBBBWW\"를 런 길이 부호화(RLE)한 결과로 옳은 것은?",
+    "choices": [
+      "W6B3",
+      "W4B3W2",
+      "W4B3W2B0",
+      "W2B3W4"
+    ],
+    "answer": 1,
+    "explain": "W가 4번, B가 3번, 다시 W가 2번 연속이므로 W4B3W2이다. 연속 구간을 순서대로 (문자)(개수)로 적는다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "문자열 \"AAAABBBCCD\"를 런 길이 부호화(RLE)한 결과로 옳은 것은?",
+    "choices": [
+      "A4B3C2D2",
+      "A4B3C2D1",
+      "A3B3C2D1",
+      "ABCD"
+    ],
+    "answer": 1,
+    "explain": "A 4번, B 3번, C 2번, D 1번 연속이므로 A4B3C2D1이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "허프만 부호화의 절차로 가장 알맞은 것은?",
+    "choices": [
+      "빈도가 가장 큰 두 노드를 합쳐 나간다",
+      "글자를 칸수만큼 밀어 코드를 만든다",
+      "빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만드는 것을 반복한다",
+      "글자 순서를 열로 재배열한다"
+    ],
+    "answer": 2,
+    "explain": "허프만 부호화는 빈도가 가장 작은 두 노드를 합쳐 부모 노드를 만드는 과정을 반복해 트리를 만든다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "허프만 부호화에서 자주 나오는 글자에 부여되는 코드의 특징으로 옳은 것은?",
+    "choices": [
+      "더 짧은 코드가 부여된다",
+      "더 긴 코드가 부여된다",
+      "항상 같은 길이의 코드가 부여된다",
+      "코드가 부여되지 않는다"
+    ],
+    "answer": 0,
+    "explain": "허프만 부호화는 빈도가 높은(자주 나오는) 글자일수록 짧은 코드를 부여해 전체 비트 수를 줄인다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "허프만 부호화에서 빈도가 같아 동점일 때의 처리 기준(출제 기준)으로 옳은 것은?",
+    "choices": [
+      "ASCII가 큰 노드를 먼저 고른다",
+      "아무 노드나 먼저 골라도 된다",
+      "ASCII가 큰 쪽을 왼쪽(0)에 둔다",
+      "ASCII가 작은 노드를 먼저 고르고, 합칠 때 작은 쪽을 왼쪽(0)에 둔다"
+    ],
+    "answer": 3,
+    "explain": "동점이면 ASCII가 작은 노드를 먼저 고르고, 합칠 때 ASCII가 작은 쪽을 왼쪽(0)에 둔다. ASCII 순서는 A(65) < B(66) < ... < Z(90)이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "허프만 트리에서 가지에 비트를 부여하는 규칙(출제 기준)으로 옳은 것은?",
+    "choices": [
+      "왼쪽 1, 오른쪽 0",
+      "위쪽 0, 아래쪽 1",
+      "왼쪽 0, 오른쪽 1",
+      "랜덤하게 부여"
+    ],
+    "answer": 2,
+    "explain": "두 노드를 합칠 때 한쪽은 0, 다른 쪽은 1을 부여하며 출제 기준은 왼쪽 0, 오른쪽 1이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "카이사르(시저) 암호의 원리로 옳은 것은?",
+    "choices": [
+      "글자 순서만 재배열한다",
+      "같은 문자 연속을 개수로 줄인다",
+      "빈도가 작은 노드를 합친다",
+      "각 글자를 정해진 칸수만큼 밀어 다른 글자로 바꾼다(치환)"
+    ],
+    "answer": 3,
+    "explain": "카이사르 암호는 각 알파벳을 정해진 칸수만큼 밀어 다른 글자로 바꾸는 치환 암호다. Z를 넘으면 A로 순환한다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "카이사르 암호에서 알파벳을 26글자 안에서 순환시키기 위해 사용하는 연산은?",
+    "choices": [
+      "// 26 (몫 연산)",
+      "% 26 (나머지 연산)",
+      "* 26 (곱셈)",
+      "+ 26 (덧셈)"
+    ],
+    "answer": 1,
+    "explain": "% 26 (나머지 연산)으로 알파벳 26글자 범위 안에서 순환시키는 것이 카이사르 암호의 핵심이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "카이사르 암호로 shift=3을 적용할 때 \"ABC\"의 암호문은?",
+    "choices": [
+      "DEF",
+      "BCD",
+      "CDE",
+      "XYZ"
+    ],
+    "answer": 0,
+    "explain": "각 글자를 3칸 뒤로 민다. A->D, B->E, C->F 이므로 DEF이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "카이사르 암호로 shift=3을 적용할 때 \"XYZ\"의 암호문은? (Z를 넘으면 A로 순환)",
+    "choices": [
+      "WXY",
+      "ABC",
+      "DEF",
+      "UVW"
+    ],
+    "answer": 1,
+    "explain": "X->A(순환), Y->B, Z->C 이므로 ABC이다. Z를 넘으면 A로 순환하는 것이 핵심이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "카이사르 암호로 shift=5를 적용할 때 \"HELLO\"의 암호문은?",
+    "choices": [
+      "MJQQT",
+      "MJPPS",
+      "LIKKN",
+      "NKRRU"
+    ],
+    "answer": 0,
+    "explain": "H->M, E->J, L->Q, L->Q, O->T 이므로 MJQQT이다. 각 글자를 5칸씩 뒤로 민다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "카이사르 암호로 shift=2로 암호화된 \"CAT\"를 복호화하면? (복호화는 빼기, 순환 적용)",
+    "choices": [
+      "EBV",
+      "AYR",
+      "BZQ",
+      "DBU"
+    ],
+    "answer": 1,
+    "explain": "복호화는 shift만큼 뺀다. C->A, A->Y(순환), T->R 이므로 AYR이다. A에서 2칸 앞으로 가면 Y로 순환한다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "전치 암호의 특징으로 옳은 것은?",
+    "choices": [
+      "글자 자체를 다른 글자로 바꾼다",
+      "같은 문자 연속을 줄인다",
+      "글자 자체는 그대로 두고 순서만 재배열한다",
+      "빈도에 따라 코드 길이를 정한다"
+    ],
+    "answer": 2,
+    "explain": "전치 암호는 글자 자체는 그대로 두고 순서만 재배열한다. 글자를 바꾸는 카이사르 암호(치환)와 짝을 이룬다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "전치 암호(3열)로 평문 \"ABCDEF\"를 암호화하면? (왼쪽->오른쪽, 위->아래로 채우고 열 단위로 읽기)",
+    "choices": [
+      "ABCDEF",
+      "FEDCBA",
+      "ACEBDF",
+      "ADBECF"
+    ],
+    "answer": 3,
+    "explain": "3열 격자에 ABC / DEF로 채운 뒤 열 순서로 읽으면 1열(A D), 2열(B E), 3열(C F)이 되어 ADBECF이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "전치 암호(2열)로 평문 \"SECRET\"을 암호화하면? (위->아래로 채우고 열 단위로 읽기)",
+    "choices": [
+      "SCEERT",
+      "SECRET",
+      "TERCES",
+      "SEECRT"
+    ],
+    "answer": 0,
+    "explain": "2열 격자에 SE / CR / ET로 채운 뒤 열 순서로 읽으면 1열(S C E), 2열(E R T)이 되어 SCEERT이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "전치 암호(2열)로 평문 \"ATTACK\"을 암호화하면? (위->아래로 채우고 열 단위로 읽기)",
+    "choices": [
+      "ATTACK",
+      "ATCTAK",
+      "KCATTA",
+      "AATTCK"
+    ],
+    "answer": 1,
+    "explain": "2열 격자에 AT / TA / CK로 채운 뒤 열 순서로 읽으면 1열(A T C), 2열(T A K)이 되어 ATCTAK이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "전치 암호(3열)로 평문 \"HELLOWORLD\"를 암호화하면? (위->아래로 채우고 열 단위로 읽기)",
+    "choices": [
+      "HELLOWORLD",
+      "HLOWERDEOL",
+      "HLODEORLWL",
+      "DLROWOLLEH"
+    ],
+    "answer": 2,
+    "explain": "3열 격자에 HEL / LOW / ORL / D로 채운 뒤 열 순서로 읽으면 1열(H L O D), 2열(E O R), 3열(L W L)이 되어 HLODEORLWL이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "두세 가지 암호화 변환을 순서대로 적용하는 연쇄 암호에서 가장 중요한 점은?",
+    "choices": [
+      "변환의 종류만 같으면 순서는 상관없다",
+      "변환은 한 번만 적용해야 한다",
+      "적용 순서를 정확히 지켜야 한다",
+      "허프만은 반드시 마지막에 와야 한다"
+    ],
+    "answer": 2,
+    "explain": "연쇄 암호는 적용 순서를 정확히 지키는 것이 핵심이다. 전치를 먼저 하는지 카이사르를 먼저 하는지에 따라 최종 결과가 달라진다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "평문 \"ABC\"에 먼저 카이사르(shift=1)를 적용한 뒤 그 결과에 전치(2열)를 적용하면 최종 결과는? (위->아래로 채우고 열 단위로 읽기)",
+    "choices": [
+      "BDC",
+      "BCD",
+      "ABC",
+      "DCB"
+    ],
+    "answer": 0,
+    "explain": "1단계 카이사르 shift=1: A->B, B->C, C->D 이므로 BCD. 2단계 전치 2열: BC / D 격자에서 1열(B D), 2열(C)을 읽으면 BDC이다."
+  },
+  {
+    "cat": "압축/암호화",
+    "q": "치환 암호(글자 자체를 바꿈)와 전치 암호(순서만 바꿈)의 대표 예를 올바르게 짝지은 것은?",
+    "choices": [
+      "치환=전치 암호, 전치=카이사르 암호",
+      "치환=허프만, 전치=RLE",
+      "둘 다 카이사르 암호",
+      "치환=카이사르 암호, 전치=전치 암호"
+    ],
+    "answer": 3,
+    "explain": "글자 자체를 바꾸는 치환 암호의 대표가 카이사르(시저) 암호이고, 순서만 재배열하는 것이 전치 암호다. 둘은 서로 짝을 이룬다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "IP 주소에 대한 설명으로 옳은 것은?",
+    "choices": [
+      "기기를 구분하는 고유한 숫자 주소이다",
+      "사람이 외우기 쉽도록 만든 문자 이름이다",
+      "도메인 이름을 IP로 바꿔주는 서버이다",
+      "기기의 변하지 않는 물리적 주소이다"
+    ],
+    "answer": 0,
+    "explain": "IP 주소는 네트워크에서 기기를 구분하는 고유한 숫자 주소이다. 문자 이름은 도메인, 변환 서버는 DNS, 물리적 주소는 MAC 주소이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "IPv4 주소는 몇 비트로 구성되는가?",
+    "choices": [
+      "8비트",
+      "16비트",
+      "32비트",
+      "128비트"
+    ],
+    "answer": 2,
+    "explain": "IPv4는 32비트(8비트씩 4자리)로 구성되어 약 2^32(약 43억) 개의 주소를 표현한다. 128비트는 IPv6이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "IPv4가 표현할 수 있는 주소 개수로 가장 적절한 것은?",
+    "choices": [
+      "약 43만 개",
+      "약 43억 개",
+      "사실상 무한",
+      "256개"
+    ],
+    "answer": 1,
+    "explain": "IPv4는 32비트이므로 2^32, 약 43억 개의 주소를 표현한다. 기기 증가로 주소가 부족해 IPv6로 전환 중이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "IPv6에 대한 설명으로 옳은 것은?",
+    "choices": [
+      "32비트로 약 43억 개 주소를 가진다",
+      "128비트로 사실상 무한에 가까운 주소를 가진다",
+      "IPv4보다 주소 개수가 적다",
+      "기기의 물리 주소를 가리킨다"
+    ],
+    "answer": 1,
+    "explain": "IPv6는 128비트로 2^128(사실상 무한)의 주소를 제공하며, IPv4의 주소 부족 문제를 해결하기 위해 전환 중이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "IP 주소는 어떤 두 부분으로 나뉘는가?",
+    "choices": [
+      "프로토콜 부분 + 경로 부분",
+      "네트워크 부분 + 호스트 부분",
+      "도메인 부분 + DNS 부분",
+      "유선 부분 + 무선 부분"
+    ],
+    "answer": 1,
+    "explain": "IP 주소는 어느 동네인지를 나타내는 네트워크 부분과 그 동네의 몇 호인지를 나타내는 호스트 부분으로 나뉜다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "라우터가 데이터를 전달할 때 주로 참고하는 것은?",
+    "choices": [
+      "목적지 IP의 네트워크 부분",
+      "송신자의 도메인 이름",
+      "파일의 확장자",
+      "기기의 화면 크기"
+    ],
+    "answer": 0,
+    "explain": "라우팅은 라우터가 목적지 IP의 네트워크 부분을 보고 거점을 거쳐 점점 가까이 데이터를 전달하는 과정이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "데이터 전달의 마지막 단계에서 기기 본인을 식별하는 데 사용되는 주소는?",
+    "choices": [
+      "도메인 이름",
+      "IP 주소",
+      "MAC 주소",
+      "포트 번호"
+    ],
+    "answer": 2,
+    "explain": "IP(위치)로 동네까지 전달한 뒤, 마지막에는 기기 고유의 물리 주소인 MAC 주소로 문 앞까지 전달한다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "다음 중 기기의 변하지 않는 물리 주소를 가리키는 것은?",
+    "choices": [
+      "MAC 주소",
+      "IPv4 주소",
+      "도메인 이름",
+      "DNS 주소"
+    ],
+    "answer": 0,
+    "explain": "MAC 주소는 기기 고유의 물리 주소이다. IP는 위치를 나타내고, 도메인은 사람이 외우기 쉬운 이름이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "도메인 이름이 만들어진 가장 큰 이유는?",
+    "choices": [
+      "데이터 전송 속도를 높이려고",
+      "외우기 어려운 숫자 IP를 사람이 기억하기 쉽게 하려고",
+      "기기의 물리 주소를 숨기려고",
+      "무선 통신을 가능하게 하려고"
+    ],
+    "answer": 1,
+    "explain": "도메인 이름은 외우기 어려운 숫자 IP를 사람이 기억하기 쉬운 이름으로 바꾼 것이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "DNS 서버의 역할로 옳은 것은?",
+    "choices": [
+      "도메인 이름을 대응하는 IP 주소로 바꿔준다",
+      "데이터를 압축해 전송한다",
+      "기기의 MAC 주소를 새로 만든다",
+      "무선 신호의 간섭을 제거한다"
+    ],
+    "answer": 0,
+    "explain": "DNS 서버는 도메인 이름을 입력하면 대응하는 IP 주소로 바꿔주는 서버이다. 전화번호부에서 이름으로 번호를 찾는 것과 같다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "도메인 www.yahoo.co.kr 에서 'kr'이 의미하는 것은?",
+    "choices": [
+      "호스트 이름",
+      "기관(서비스) 이름",
+      "기관의 성격",
+      "국가"
+    ],
+    "answer": 3,
+    "explain": "www.yahoo.co.kr에서 www는 호스트 이름, yahoo는 기관 이름, co는 성격(기관/회사), kr은 국가(대한민국)를 의미한다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "도메인 www.yahoo.co.kr 에서 'co'가 의미하는 것은?",
+    "choices": [
+      "국가가 대한민국임",
+      "호스트가 웹 서버임",
+      "기관/회사 성격임",
+      "프로토콜이 http임"
+    ],
+    "answer": 2,
+    "explain": "co는 기관/회사 성격을 나타낸다. 공공기관은 go를 쓴다. kr은 국가, www는 호스트 이름이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "공공기관 도메인에서 성격을 나타내는 부분으로 흔히 쓰이는 것은?",
+    "choices": [
+      "co",
+      "go",
+      "kr",
+      "www"
+    ],
+    "answer": 1,
+    "explain": "기관/회사는 co, 공공기관은 go를 성격 부분에 쓴다. kr은 국가, www는 호스트 이름이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "도메인 구조에 대한 설명으로 옳지 않은 것은?",
+    "choices": [
+      "www는 프로토콜이다",
+      "프로토콜은 http 또는 https이다",
+      "www는 호스트 이름(라벨)이며 생략 가능하다",
+      "서버를 가리키는 호스트는 필수이다"
+    ],
+    "answer": 0,
+    "explain": "www는 프로토콜이 아니라 호스트 이름(라벨)이다. 프로토콜은 http, https(주소 맨 앞 https://)이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "다음 중 프로토콜에 해당하는 것은?",
+    "choices": [
+      "www",
+      "co",
+      "https",
+      "kr"
+    ],
+    "answer": 2,
+    "explain": "프로토콜은 http, https이며 주소 맨 앞에 https:// 형태로 온다. www는 호스트 이름(라벨), co는 성격, kr은 국가이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "전체 웹 주소의 구조를 바르게 나타낸 것은?",
+    "choices": [
+      "호스트://프로토콜.도메인/경로",
+      "프로토콜://호스트.도메인/경로",
+      "도메인://경로.프로토콜/호스트",
+      "경로://도메인.호스트/프로토콜"
+    ],
+    "answer": 1,
+    "explain": "웹 주소의 전체 구조는 프로토콜://호스트.도메인/경로 형태이다. 예: https://www.yahoo.co.kr/path"
+  },
+  {
+    "cat": "네트워크",
+    "q": "도메인에서 www(라벨)와 호스트에 대한 설명으로 옳은 것은?",
+    "choices": [
+      "www는 반드시 있어야 하고 호스트는 생략 가능하다",
+      "www는 생략 가능하지만 서버를 가리키는 호스트는 필수이다",
+      "www와 호스트 모두 생략할 수 없다",
+      "www와 호스트는 같은 말이며 둘 다 프로토콜이다"
+    ],
+    "answer": 1,
+    "explain": "www라는 라벨은 생략 가능하지만, 서버를 가리키는 호스트 자체는 필수이다. www는 프로토콜이 아니다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "유선 연결의 특징으로 가장 적절한 것은?",
+    "choices": [
+      "이동이 자유롭다",
+      "빠르고 안정적이며 간섭이 적다",
+      "도청 등에 매우 취약하다",
+      "거리 제한이 심하다"
+    ],
+    "answer": 1,
+    "explain": "유선은 빠르고 안정적이며 간섭이 적고 상대적으로 안전하다. 다만 선에 묶여 이동성이 낮다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "무선 연결의 특징으로 가장 적절한 것은?",
+    "choices": [
+      "선에 묶여 이동이 어렵다",
+      "항상 유선보다 빠르고 안정적이다",
+      "이동이 자유롭지만 신호 간섭과 거리 제한, 보안 취약 문제가 있다",
+      "도청 위험이 전혀 없다"
+    ],
+    "answer": 2,
+    "explain": "무선은 이동이 자유롭지만 신호 간섭과 거리 제한이 있고, 도청 등에 취약해 암호화가 필요하다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "유선과 무선을 비교한 설명으로 옳은 것은?",
+    "choices": [
+      "이동성은 무선이 유선보다 높다",
+      "보안은 무선이 유선보다 안전하다",
+      "속도와 신뢰성은 무선이 유선보다 항상 높다",
+      "간섭은 유선이 무선보다 많이 받는다"
+    ],
+    "answer": 0,
+    "explain": "이동성은 무선이 높다. 보안과 속도/신뢰성은 유선이 우세하고, 간섭은 무선이 더 많이 받는다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "다음 중 인터넷 안전수칙(로컬 공유 보안 원칙)에 해당하지 않는 것은?",
+    "choices": [
+      "최소 공유",
+      "사전 검사",
+      "정보 보호",
+      "전체 공개"
+    ],
+    "answer": 3,
+    "explain": "인터넷 안전수칙(로컬 공유 보안 원칙)은 최소 공유, 사전 검사, 정보 보호, 권한 설정, 저작권 준수의 5가지이다. 전체 공개는 보안 원칙과 정반대이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "'꼭 필요한 것만 공유하여 유출 위험을 줄인다'에 해당하는 로컬 공유 보안 원칙은?",
+    "choices": [
+      "최소 공유",
+      "사전 검사",
+      "정보 보호",
+      "권한 설정"
+    ],
+    "answer": 0,
+    "explain": "최소 공유는 꼭 필요한 것만 공유해 공유 범위가 넓을수록 커지는 유출 위험을 줄이는 원칙이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "'공유 전에 파일과 대상을 점검한다'에 해당하는 로컬 공유 보안 원칙은?",
+    "choices": [
+      "권한 설정",
+      "사전 검사",
+      "최소 공유",
+      "정보 보호"
+    ],
+    "answer": 1,
+    "explain": "사전 검사는 공유 전 파일과 대상을 점검해 악성 파일이나 오발송을 방지하는 원칙이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "'접근 권한을 적절히 제한해 무단 수정/삭제를 막는다'에 해당하는 로컬 공유 보안 원칙은?",
+    "choices": [
+      "정보 보호",
+      "사전 검사",
+      "권한 설정",
+      "최소 공유"
+    ],
+    "answer": 2,
+    "explain": "권한 설정은 접근 권한을 적절히 제한해 무단 수정이나 삭제를 막는 원칙이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "네트워크를 연결 범위(규모)에 따라 좁은 것부터 넓은 순서로 바르게 나열한 것은?",
+    "choices": [
+      "PAN < LAN < MAN < WAN",
+      "LAN < PAN < WAN < MAN",
+      "WAN < MAN < LAN < PAN",
+      "MAN < WAN < PAN < LAN"
+    ],
+    "answer": 0,
+    "explain": "연결 범위가 좁은 것부터 PAN(개인) < LAN(근거리) < MAN(도시) < WAN(광역) 순이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "가정, 학교, 사무실 건물 안처럼 좁은 지역의 기기들을 연결하는 네트워크는?",
+    "choices": [
+      "PAN",
+      "LAN",
+      "MAN",
+      "WAN"
+    ],
+    "answer": 1,
+    "explain": "LAN(Local Area Network)은 가정, 학교, 사무실 같은 좁은 지역 안의 기기를 연결하는 근거리 네트워크이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "국가나 대륙을 넘어 멀리 떨어진 지역을 연결하며, 인터넷이 대표적인 예인 네트워크는?",
+    "choices": [
+      "PAN",
+      "LAN",
+      "MAN",
+      "WAN"
+    ],
+    "answer": 3,
+    "explain": "WAN(Wide Area Network)은 국가, 대륙을 넘는 넓은 범위를 연결하는 네트워크로 인터넷이 대표적인 WAN이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "블루투스 이어폰이나 스마트워치처럼 개인 주변 기기를 수 m 이내로 연결하는 가장 좁은 네트워크는?",
+    "choices": [
+      "PAN",
+      "LAN",
+      "MAN",
+      "WAN"
+    ],
+    "answer": 0,
+    "explain": "PAN(Personal Area Network)은 블루투스 이어폰, 스마트워치 등 개인 주변 기기를 수 m 이내로 연결하는 가장 좁은 네트워크이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "여러 LAN을 묶어 도시 정도의 규모를 연결하는 네트워크는?",
+    "choices": [
+      "PAN",
+      "LAN",
+      "MAN",
+      "WAN"
+    ],
+    "answer": 2,
+    "explain": "MAN(Metropolitan Area Network)은 여러 LAN을 묶어 도시 규모를 연결하는 네트워크로 LAN보다 넓고 WAN보다 좁다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "서울에서 보스턴으로 데이터를 보낼 때, 출발지(서울)와 도착지(보스턴) 건물 내부의 좁은 영역에서 쓰이는 네트워크는?",
+    "choices": [
+      "LAN",
+      "WAN",
+      "MAN",
+      "PAN"
+    ],
+    "answer": 0,
+    "explain": "출발지와 도착지의 건물 내부 같은 좁은 영역은 LAN이 담당하고, 멀리 떨어진 구간은 WAN이 담당한다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "서울에서 보스턴까지 바다를 건너 대륙 간에 데이터를 전달하는 해저케이블 구간은 어떤 네트워크에 해당하는가?",
+    "choices": [
+      "PAN",
+      "LAN",
+      "MAN",
+      "WAN"
+    ],
+    "answer": 3,
+    "explain": "대륙 간 먼 거리를 잇는 해저케이블 구간은 WAN(광역 네트워크)에 해당한다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "큰 데이터를 인터넷으로 보낼 때 작은 단위로 나누어 전송하는데, 이 작은 단위를 무엇이라 하는가?",
+    "choices": [
+      "패킷",
+      "라우터",
+      "도메인",
+      "프로토콜"
+    ],
+    "answer": 0,
+    "explain": "큰 데이터는 패킷이라는 작은 단위로 나누어 전송되고 도착지에서 다시 합쳐진다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "서울 LAN에서 출발한 데이터가 보스턴 LAN에 도착하기까지의 네트워크 이동 순서로 옳은 것은?",
+    "choices": [
+      "LAN(서울) -> WAN(해저케이블) -> LAN(보스턴)",
+      "WAN(서울) -> LAN(해저케이블) -> WAN(보스턴)",
+      "LAN(서울) -> PAN(해저케이블) -> LAN(보스턴)",
+      "WAN(서울) -> WAN(해저케이블) -> WAN(보스턴)"
+    ],
+    "answer": 0,
+    "explain": "출발지 LAN에서 나와 라우팅을 거쳐 WAN(해저케이블 등)으로 대륙을 건넌 뒤 도착지 LAN으로 들어간다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "다음 중 운영체제(OS) 종류와 상관없이 파일을 공유할 수 있는 방법으로 가장 적절한 것은?",
+    "choices": [
+      "클라우드(구글 드라이브 등)",
+      "에어드랍(AirDrop)",
+      "윈도우 근거리 공유",
+      "운영체제별 공유 폴더"
+    ],
+    "answer": 0,
+    "explain": "클라우드는 웹 기반이라 OS와 무관하게 접근할 수 있다. 에어드랍은 애플 전용이고, 근거리 공유나 OS별 공유 폴더는 같은 환경에서 주로 동작한다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "애플(iOS/macOS) 기기끼리만 사용할 수 있는 근거리 파일 공유 기능은?",
+    "choices": [
+      "에어드랍(AirDrop)",
+      "구글 드라이브",
+      "윈도우 근거리 공유",
+      "이메일 첨부"
+    ],
+    "answer": 0,
+    "explain": "에어드랍은 애플 기기(iOS/macOS) 사이에서만 동작하는 근거리 공유 기능이라 OS가 다르면 쓸 수 없다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "클라우드 공유가 운영체제와 상관없이 동작하는 가장 큰 이유는?",
+    "choices": [
+      "웹(인터넷) 기반이라 브라우저만 있으면 접근할 수 있어서",
+      "애플 기기에서만 동작해서",
+      "USB 케이블로 직접 연결해서",
+      "같은 와이파이에 있어야만 해서"
+    ],
+    "answer": 0,
+    "explain": "클라우드는 웹(인터넷) 기반 서비스라 OS 종류와 관계없이 브라우저나 앱으로 접근할 수 있어 호환성이 높다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "최소 공유, 사전 검사, 정보 보호, 권한 설정에 더해 인터넷 안전수칙 5가지를 이루는 나머지 하나는?",
+    "choices": [
+      "저작권 준수",
+      "전체 공개",
+      "무제한 배포",
+      "암호 해제"
+    ],
+    "answer": 0,
+    "explain": "인터넷 안전수칙 5가지는 최소 공유, 사전 검사, 정보 보호, 권한 설정, 저작권 준수이다."
+  },
+  {
+    "cat": "네트워크",
+    "q": "인터넷 안전수칙 중 '저작권 준수'의 의미로 가장 적절한 것은?",
+    "choices": [
+      "남의 창작물(이미지, 음악, 글 등)을 허락이나 출처 없이 함부로 쓰지 않는다",
+      "파일을 누구에게나 전체 공개한다",
+      "백신 검사를 생략한다",
+      "접근 권한을 모두 해제한다"
+    ],
+    "answer": 0,
+    "explain": "저작권 준수는 타인의 창작물을 허락이나 출처 표시 없이 무단으로 사용하지 않는 것을 뜻한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "pandas 라이브러리를 불러올 때 관례적으로 사용하는 코드는?",
+    "choices": [
+      "import pandas as pd",
+      "import pd as pandas",
+      "from pandas import pd",
+      "include pandas as pd"
+    ],
+    "answer": 0,
+    "explain": "pandas는 보통 import pandas as pd 형태로 불러와 pd라는 별칭으로 사용한다. 이후 pd.read_csv 처럼 pd를 통해 기능을 호출한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "CSV 파일을 DataFrame으로 불러오는 함수는?",
+    "choices": [
+      "pd.load_csv('data.csv')",
+      "pd.open_csv('data.csv')",
+      "pd.import_csv('data.csv')",
+      "pd.read_csv('data.csv')"
+    ],
+    "answer": 3,
+    "explain": "CSV 파일은 pd.read_csv('파일명')으로 읽어 DataFrame으로 만든다. load_csv, open_csv, import_csv 같은 함수는 존재하지 않는다."
+  },
+  {
+    "cat": "pandas",
+    "q": "pandas 데이터 처리의 일반적인 전체 흐름 순서로 옳은 것은?",
+    "choices": [
+      "CSV 불러오기 -> 저장 -> 기초 탐색 -> 결측치 처리 -> 컬럼 선택",
+      "결측치 처리 -> CSV 불러오기 -> 기초 탐색 -> 컬럼 선택 -> 저장",
+      "라이브러리 준비 -> CSV 불러오기 -> 기초 탐색 -> 결측치 처리 -> 컬럼 선택/파생 -> 저장",
+      "라이브러리 준비 -> 기초 탐색 -> CSV 불러오기 -> 저장 -> 결측치 처리"
+    ],
+    "answer": 2,
+    "explain": "데이터 처리는 라이브러리 준비 -> CSV 불러오기 -> 기초 탐색 -> 결측치 처리 -> 컬럼 선택/파생 -> 저장 순서로 진행한다. 데이터를 먼저 읽고 살펴본 뒤 정리하고 마지막에 저장한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "한글 CSV를 읽을 때 다음 코드의 빈칸에 들어갈 예외 종류는?\ntry:\n    df = pd.read_csv('seoul.csv', encoding='utf-8')\nexcept ______:\n    df = pd.read_csv('seoul.csv', encoding='cp949')",
+    "choices": [
+      "ValueError",
+      "KeyError",
+      "UnicodeDecodeError",
+      "FileNotFoundError"
+    ],
+    "answer": 2,
+    "explain": "한글 CSV는 인코딩이 utf-8 또는 cp949로 갈려서, utf-8로 읽다 실패하면 UnicodeDecodeError가 발생한다. 이 예외를 잡아 cp949로 다시 읽는다."
+  },
+  {
+    "cat": "pandas",
+    "q": "한글 CSV 읽기에서 try/except로 두 인코딩을 모두 처리하는 이유로 가장 적절한 것은?",
+    "choices": [
+      "파일 크기가 너무 클 때 메모리 부족을 막기 위해",
+      "파일이 존재하지 않을 때를 대비하기 위해",
+      "결측치가 있는 행을 자동으로 제거하기 위해",
+      "한글 CSV의 인코딩이 utf-8 또는 cp949로 갈려 한쪽에서 디코딩 에러가 날 수 있어서"
+    ],
+    "answer": 3,
+    "explain": "한글이 들어간 CSV는 만든 환경에 따라 utf-8 또는 cp949로 저장되어, 한 인코딩으로 읽으면 UnicodeDecodeError가 날 수 있다. 그래서 try로 utf-8을 먼저 시도하고 except에서 cp949로 다시 읽는다."
+  },
+  {
+    "cat": "pandas",
+    "q": "DataFrame의 (행 수, 열 수)를 한 번에 확인하는 속성은?",
+    "choices": [
+      "df.size",
+      "df.count()",
+      "df.shape",
+      "df.length"
+    ],
+    "answer": 2,
+    "explain": "df.shape는 (행 수, 열 수) 튜플을 돌려준다. 괄호 없이 쓰는 속성이라는 점에 주의한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.shape의 결과가 (1000, 8)일 때 의미로 옳은 것은?",
+    "choices": [
+      "행이 8개, 열이 1000개다",
+      "결측치가 1000개, 정상값이 8개다",
+      "행이 1000개, 열이 8개다",
+      "행과 열의 곱이 8000이라는 뜻만 가진다"
+    ],
+    "answer": 2,
+    "explain": "df.shape는 (행 수, 열 수) 순서다. 따라서 (1000, 8)은 행 1000개, 열 8개를 의미한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "데이터의 위쪽 몇 개 행을 미리보기할 때 사용하는 메서드는? (인자를 주지 않으면 기본 5개)",
+    "choices": [
+      "df.head()",
+      "df.top()",
+      "df.first()",
+      "df.preview()"
+    ],
+    "answer": 0,
+    "explain": "df.head(n)은 위에서 n개 행을 미리보기한다. n을 생략하면 기본 5개 행을 보여준다."
+  },
+  {
+    "cat": "pandas",
+    "q": "컬럼 목록, 결측치 여부, 각 컬럼의 자료형을 한 번에 보여주는 메서드는?",
+    "choices": [
+      "df.info()",
+      "df.shape",
+      "df.describe()",
+      "df.head()"
+    ],
+    "answer": 0,
+    "explain": "df.info()는 컬럼 목록과 각 컬럼의 결측치 여부(non-null 개수), 자료형(dtype)을 요약해 보여준다."
+  },
+  {
+    "cat": "pandas",
+    "q": "숫자 컬럼의 개수, 평균, 표준편차, 최소/최대, 사분위 등 기초 통계를 보여주는 메서드는?",
+    "choices": [
+      "df.describe()",
+      "df.info()",
+      "df.isnull()",
+      "df.head()"
+    ],
+    "answer": 0,
+    "explain": "df.describe()는 숫자 컬럼에 대해 개수, 평균, 표준편차, 최소, 사분위수, 최대 같은 기초 통계를 표로 보여준다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.info()와 df.describe()의 차이로 가장 정확한 것은?",
+    "choices": [
+      "info()는 숫자 통계, describe()는 컬럼 자료형을 보여준다",
+      "둘 다 결측치 개수만 보여주며 차이가 없다",
+      "info()는 컬럼/결측치/자료형 구조를, describe()는 숫자 컬럼의 기초 통계를 보여준다",
+      "info()는 행을 미리보기하고, describe()는 행 수만 알려준다"
+    ],
+    "answer": 2,
+    "explain": "df.info()는 컬럼 목록, 결측치 여부, 자료형 같은 구조 정보를 보여준다. df.describe()는 숫자 컬럼의 평균, 표준편차, 사분위 등 기초 통계를 보여준다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.shape와 df.info()의 차이로 옳은 것은?",
+    "choices": [
+      "shape는 (행 수, 열 수)만, info()는 컬럼별 결측/자료형까지 보여준다",
+      "shape는 결측치 개수를, info()는 행 수만 보여준다",
+      "둘 다 숫자 통계를 보여준다",
+      "shape는 메서드, info()는 속성이다"
+    ],
+    "answer": 0,
+    "explain": "df.shape는 (행 수, 열 수) 크기만 알려주는 속성이다. df.info()는 컬럼 목록, 컬럼별 결측치 여부, 자료형까지 자세히 보여주는 메서드다."
+  },
+  {
+    "cat": "pandas",
+    "q": "컬럼별 결측치(빈칸) 개수를 세는 코드로 옳은 것은?",
+    "choices": [
+      "df.dropna().sum()",
+      "df.fillna().count()",
+      "df.shape.sum()",
+      "df.isnull().sum()"
+    ],
+    "answer": 3,
+    "explain": "df.isnull()은 각 칸이 결측치인지 True/False로 표시하고, .sum()을 붙이면 컬럼별로 True(결측)의 개수를 세어준다."
+  },
+  {
+    "cat": "pandas",
+    "q": "결측치가 들어 있는 행 자체를 제거하는 메서드는?",
+    "choices": [
+      "df.fillna()",
+      "df.dropna()",
+      "df.isnull()",
+      "df.describe()"
+    ],
+    "answer": 1,
+    "explain": "df.dropna()는 결측치(빈칸)가 있는 행을 제거한다. 결측치를 채우는 fillna()와 혼동하지 않도록 주의한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "결측치를 숫자 컬럼의 평균값으로 채우는 코드로 옳은 것은?",
+    "choices": [
+      "df.dropna(df.mean(numeric_only=True))",
+      "df.isnull(df.mean(numeric_only=True))",
+      "df.mean(df.fillna(numeric_only=True))",
+      "df.fillna(df.mean(numeric_only=True))"
+    ],
+    "answer": 3,
+    "explain": "df.fillna(값)은 결측치를 지정한 값으로 채운다. df.mean(numeric_only=True)로 숫자 컬럼의 평균을 구해 채우면 컬럼마다 그 평균값으로 빈칸이 메워진다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.dropna()와 df.fillna()의 차이로 옳은 것은?",
+    "choices": [
+      "dropna는 결측치를 0으로 채우고, fillna는 행을 지운다",
+      "dropna는 결측치가 있는 행을 제거하고, fillna는 결측치를 다른 값으로 채운다",
+      "둘 다 결측치를 평균으로 채우며 차이가 없다",
+      "dropna는 컬럼을 추가하고, fillna는 컬럼을 삭제한다"
+    ],
+    "answer": 1,
+    "explain": "dropna는 결측치가 있는 행을 통째로 제거해 데이터 양이 줄어든다. fillna는 결측치를 평균 등 다른 값으로 채워 행을 유지한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.fillna(df.mean(numeric_only=True))에서 numeric_only=True를 주는 이유로 가장 적절한 것은?",
+    "choices": [
+      "결측치가 있는 행을 모두 제거하기 위해",
+      "결과를 utf-8-sig로 저장하기 위해",
+      "숫자 컬럼만 대상으로 평균을 계산하기 위해",
+      "행 방향으로 합을 구하기 위해"
+    ],
+    "answer": 2,
+    "explain": "numeric_only=True는 평균 계산 대상을 숫자 컬럼으로 한정한다. 문자열 컬럼은 평균을 구할 수 없으므로 숫자 컬럼만 대상으로 평균을 내어 결측치를 채운다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.isnull().sum() 의 결과로 가장 알맞은 설명은?",
+    "choices": [
+      "전체 행의 합계 숫자 하나를 돌려준다",
+      "컬럼마다 결측치가 몇 개인지 알려준다",
+      "결측치가 있는 행을 제거한 새 DataFrame을 돌려준다",
+      "숫자 컬럼의 평균을 돌려준다"
+    ],
+    "answer": 1,
+    "explain": "isnull()이 각 칸의 결측 여부를 True/False로 만들고, sum()이 컬럼별로 True 개수를 더하므로 컬럼별 결측치 개수가 나온다."
+  },
+  {
+    "cat": "pandas",
+    "q": "필요한 컬럼만 골라 원본과 분리된 복사본 DataFrame을 만드는 코드로 옳은 것은?\ncols = ['날짜', '호선명', '지하철역']",
+    "choices": [
+      "df2 = df[cols]",
+      "df2 = df.copy(cols)",
+      "df2 = df.select(cols)",
+      "df2 = df[cols].copy()"
+    ],
+    "answer": 3,
+    "explain": "df[컬럼리스트]로 원하는 컬럼만 고르고, .copy()를 붙여 원본과 분리된 복사본을 만든다. .copy()를 빼면 원본을 건드릴 위험이 있다."
+  },
+  {
+    "cat": "pandas",
+    "q": "컬럼을 고른 뒤 .copy()를 붙이는 이유로 가장 적절한 것은?",
+    "choices": [
+      "결측치를 자동으로 채우기 위해",
+      "컬럼을 알파벳 순으로 정렬하기 위해",
+      "파일을 utf-8-sig로 저장하기 위해",
+      "원본 DataFrame과 분리된 복사본을 만들어 원본 손상을 막기 위해"
+    ],
+    "answer": 3,
+    "explain": ".copy()는 원본과 독립된 복사본을 만든다. 복사본을 수정해도 원본이 바뀌지 않으므로, 안 붙이면 원본을 건드릴 위험이 있다."
+  },
+  {
+    "cat": "pandas",
+    "q": "컬럼 이름에 '승차'가 포함된 컬럼만 골라 리스트로 만드는 코드로 옳은 것은?",
+    "choices": [
+      "on_cols = [c for c in df2.columns if '승차' in c]",
+      "on_cols = df2.columns('승차')",
+      "on_cols = df2['승차'].copy()",
+      "on_cols = for c in df2.columns if '승차'"
+    ],
+    "answer": 0,
+    "explain": "리스트 컴프리헨션 [c for c in df2.columns if '승차' in c]은 컬럼 이름들을 돌면서 이름에 '승차'가 들어간 컬럼만 모아 리스트로 만든다."
+  },
+  {
+    "cat": "pandas",
+    "q": "여러 컬럼을 행(가로) 방향으로 더해 파생 컬럼을 만드는 코드의 빈칸으로 옳은 것은?\ndf2['승차합계'] = df2[on_cols].______",
+    "choices": [
+      "sum(axis=0)",
+      "mean(axis=1)",
+      "sum(axis=1)",
+      "count(axis=1)"
+    ],
+    "answer": 2,
+    "explain": "sum(axis=1)은 각 행에서 여러 컬럼 값을 가로로 더한다. axis=0은 세로(컬럼별) 합이므로 행 방향 합산에는 axis=1을 써야 한다."
+  },
+  {
+    "cat": "pandas",
+    "q": "df.sum(axis=1)과 df.sum(axis=0)의 차이로 옳은 것은?",
+    "choices": [
+      "axis=1은 행 방향(가로) 합, axis=0은 열 방향(세로) 합이다",
+      "axis=1은 열 방향 합, axis=0은 행 방향 합이다",
+      "둘 다 전체 한 개의 합만 돌려준다",
+      "axis=1은 평균, axis=0은 합이다"
+    ],
+    "answer": 0,
+    "explain": "axis=1은 한 행 안에서 여러 컬럼을 가로로 더한다(행마다 결과 1개). axis=0은 한 컬럼 안에서 여러 행을 세로로 더한다(컬럼마다 결과 1개)."
+  },
+  {
+    "cat": "pandas",
+    "q": "정리한 DataFrame을 CSV로 저장할 때, 행 인덱스를 파일에 쓰지 않게 하는 옵션은?",
+    "choices": [
+      "df.to_csv('out.csv', index=True)",
+      "df.to_csv('out.csv', header=False)",
+      "df.to_csv('out.csv', index=False)",
+      "df.to_csv('out.csv', drop=True)"
+    ],
+    "answer": 2,
+    "explain": "to_csv에 index=False를 주면 자동으로 붙는 행 인덱스(0,1,2...)를 파일에 쓰지 않는다. index=True(기본)이면 인덱스 열이 같이 저장된다."
+  },
+  {
+    "cat": "pandas",
+    "q": "엑셀에서 한글이 깨지지 않도록 CSV로 저장할 때 권장되는 인코딩 옵션은?",
+    "choices": [
+      "encoding='ascii'",
+      "encoding='utf-8-sig'",
+      "encoding='latin1'",
+      "encoding='binary'"
+    ],
+    "answer": 1,
+    "explain": "df.to_csv('out.csv', index=False, encoding='utf-8-sig')처럼 utf-8-sig로 저장하면 엑셀에서 한글이 깨지지 않는다."
+  },
+  {
+    "cat": "pandas",
+    "q": "다음 저장 코드에 대한 설명으로 옳은 것은?\ndf.to_csv('out.csv', index=False, encoding='utf-8-sig')",
+    "choices": [
+      "행 인덱스를 포함해 저장하고, 한글이 깨질 수 있다",
+      "행 인덱스를 빼고 저장하며, 엑셀에서 한글 깨짐을 방지한다",
+      "결측치가 있는 행을 제거한 뒤 저장한다",
+      "숫자 컬럼만 골라 저장한다"
+    ],
+    "answer": 1,
+    "explain": "index=False는 행 인덱스를 파일에 쓰지 않게 하고, encoding='utf-8-sig'는 엑셀에서 한글이 깨지지 않게 해준다. 결측치 제거나 컬럼 선택과는 무관하다."
+  },
+  {
+    "cat": "클래스",
+    "q": "클래스와 객체의 관계를 가장 잘 설명한 것은?",
+    "choices": [
+      "클래스는 붕어빵 틀이고, 객체는 그 틀로 찍어낸 실제 붕어빵이다",
+      "클래스는 실제 붕어빵이고, 객체는 붕어빵 틀이다",
+      "클래스와 객체는 완전히 같은 말이다",
+      "객체 하나로 클래스를 여러 개 만든다"
+    ],
+    "answer": 0,
+    "explain": "클래스는 설계도(붕어빵 틀)이고, 객체는 그 틀로 만든 실제 결과물(붕어빵)이다. 틀 하나(클래스)로 객체를 여러 개 만들 수 있다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 중 클래스에 대한 설명으로 옳은 것은?",
+    "choices": [
+      "틀 하나로는 객체를 단 하나만 만들 수 있다",
+      "하나의 클래스로 여러 개의 객체를 만들 수 있다",
+      "객체를 먼저 만든 뒤 클래스를 정의한다",
+      "클래스는 속성만 가지고 메서드는 가질 수 없다"
+    ],
+    "answer": 1,
+    "explain": "클래스는 객체를 찍어내는 틀이므로 하나의 클래스로 여러 객체를 생성할 수 있다. 클래스는 속성과 메서드를 모두 가질 수 있다."
+  },
+  {
+    "cat": "클래스",
+    "q": "클래스 안에 들어 있는 두 가지 핵심 구성요소는 무엇인가?",
+    "choices": [
+      "속성(attribute)과 메서드(method)",
+      "변수와 주석",
+      "조건문과 반복문",
+      "입력과 출력"
+    ],
+    "answer": 0,
+    "explain": "클래스는 객체의 데이터를 담는 속성(attribute)과 객체의 동작을 정의하는 메서드(method)로 구성된다."
+  },
+  {
+    "cat": "클래스",
+    "q": "객체가 가진 '데이터(상태값)'를 가리키는 용어는?",
+    "choices": [
+      "메서드",
+      "매개변수",
+      "반환값",
+      "속성"
+    ],
+    "answer": 3,
+    "explain": "속성(attribute)은 객체가 가진 데이터(상태값)다. 예: self.name, self.hp. 메서드는 객체의 동작(함수)을 의미한다."
+  },
+  {
+    "cat": "클래스",
+    "q": "클래스 안에 정의된 '동작을 수행하는 함수'를 무엇이라 부르는가?",
+    "choices": [
+      "속성",
+      "주석",
+      "메서드",
+      "리스트"
+    ],
+    "answer": 2,
+    "explain": "클래스 안에 정의된 함수를 메서드(method)라고 한다. take_damage, speed_up 같은 동작이 메서드다."
+  },
+  {
+    "cat": "클래스",
+    "q": "__init__ 메서드의 역할로 가장 옳은 것은?",
+    "choices": [
+      "객체를 삭제할 때 자동 호출된다",
+      "객체를 생성할 때 자동 호출되어 초기 속성값을 설정한다",
+      "객체를 화면에 출력하는 메서드다",
+      "클래스를 다른 클래스에 상속시킨다"
+    ],
+    "answer": 1,
+    "explain": "__init__은 객체가 생성될 때 자동으로 호출되어 초기 속성값을 설정하는 메서드다. 거의 모든 클래스에 포함된다."
+  },
+  {
+    "cat": "클래스",
+    "q": "self가 의미하는 것은 무엇인가?",
+    "choices": [
+      "클래스 이름 그 자체",
+      "프로그램의 가장 바깥 함수",
+      "객체 자기 자신을 가리키는 것",
+      "외부에서 전달된 정답 데이터"
+    ],
+    "answer": 2,
+    "explain": "self는 메서드가 호출된 객체 자기 자신을 가리킨다. self.name, self.hp처럼 객체 내부 속성에 접근할 때 사용한다."
+  },
+  {
+    "cat": "클래스",
+    "q": "메서드 안에서 객체 자신의 속성 hp에 접근하려고 한다. 올바른 표현은?",
+    "choices": [
+      "hp",
+      "Character.hp",
+      "this.hp",
+      "self.hp"
+    ],
+    "answer": 3,
+    "explain": "객체 자신의 속성에 접근할 때는 self.hp처럼 self를 통해 접근한다. 파이썬에서는 this가 아니라 self를 쓴다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드에서 빈칸 (가)에 들어갈 가장 알맞은 것은?\n\nclass Character:\n    def (가)(self, name, hp):\n        self.name = name\n        self.hp = hp",
+    "choices": [
+      "__init__",
+      "__main__",
+      "start",
+      "create"
+    ],
+    "answer": 0,
+    "explain": "객체 생성 시 초기 속성값을 설정하는 메서드 이름은 __init__이다. 앞뒤로 밑줄 두 개씩 붙는다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드에서 빈칸 (가), (나)에 들어갈 말로 알맞은 것은?\n\nclass Character:\n    def __init__(self, name, hp):\n        (가).name = name\n        (나).hp = hp",
+    "choices": [
+      "(가) self, (나) self",
+      "(가) name, (나) hp",
+      "(가) Character, (나) Character",
+      "(가) self, (나) name"
+    ],
+    "answer": 0,
+    "explain": "객체 자신의 속성에 값을 저장하려면 self.name, self.hp처럼 self를 사용한다. 따라서 두 칸 모두 self다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Character:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\nhero = Character(\"기사\", 100)\nprint(hero.hp)",
+    "choices": [
+      "100",
+      "기사",
+      "0",
+      "오류 발생"
+    ],
+    "answer": 0,
+    "explain": "Character(\"기사\", 100)으로 객체를 만들면 self.hp에 100이 저장된다. hero.hp는 100이다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Character:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\n    def take_damage(self, amount):\n        self.hp -= amount\n\nhero = Character(\"기사\", 100)\nhero.take_damage(10)\nhero.take_damage(10)\nprint(hero.hp)",
+    "choices": [
+      "100",
+      "90",
+      "80",
+      "10"
+    ],
+    "answer": 2,
+    "explain": "hp는 처음 100이다. take_damage(10)을 두 번 호출하면 100 - 10 - 10 = 80이 된다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Character:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\n    def take_damage(self, amount):\n        self.hp -= amount\n\nmonster = Character(\"슬라임\", 30)\nmonster.take_damage(10)\nprint(monster.hp)",
+    "choices": [
+      "30",
+      "10",
+      "20",
+      "0"
+    ],
+    "answer": 2,
+    "explain": "monster의 hp는 처음 30이다. take_damage(10)을 한 번 호출하면 30 - 10 = 20이 된다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드에서 hero와 monster에 대한 설명으로 옳은 것은?\n\nhero = Character(\"기사\", 100)\nmonster = Character(\"슬라임\", 30)",
+    "choices": [
+      "같은 클래스로 만든 서로 다른 객체다",
+      "서로 다른 클래스로 만든 객체다",
+      "둘은 완전히 같은 하나의 객체다",
+      "객체가 아니라 둘 다 클래스다"
+    ],
+    "answer": 0,
+    "explain": "hero와 monster는 모두 Character라는 같은 클래스로 만들었지만, 각각 독립된 속성값을 가진 서로 다른 객체다."
+  },
+  {
+    "cat": "클래스",
+    "q": "기본값 매개변수가 있는 다음 클래스에서 Car(\"red\") 객체를 만들면 speed 속성값은?\n\nclass Car:\n    def __init__(self, color, speed=0):\n        self.color = color\n        self.speed = speed\n\nc = Car(\"red\")\nprint(c.speed)",
+    "choices": [
+      "red",
+      "오류 발생",
+      "None",
+      "0"
+    ],
+    "answer": 3,
+    "explain": "speed=0이 기본값 매개변수이므로 speed를 따로 넘기지 않으면 0이 들어간다. 따라서 c.speed는 0이다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Car:\n    def __init__(self, color, speed=0):\n        self.color = color\n        self.speed = speed\n\n    def speed_up(self, amount):\n        self.speed += amount\n\nc = Car(\"blue\", 10)\nc.speed_up(20)\nc.speed_up(5)\nprint(c.speed)",
+    "choices": [
+      "25",
+      "30",
+      "35",
+      "10"
+    ],
+    "answer": 2,
+    "explain": "speed는 처음 10이다. speed_up(20)으로 30, speed_up(5)로 35가 된다. 10 + 20 + 5 = 35."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Car:\n    def __init__(self, color, speed=0):\n        self.color = color\n        self.speed = speed\n\n    def speed_up(self, amount):\n        self.speed += amount\n\n    def stop(self):\n        self.speed = 0\n\nc = Car(\"blue\")\nc.speed_up(50)\nc.stop()\nprint(c.speed)",
+    "choices": [
+      "50",
+      "blue",
+      "0",
+      "오류 발생"
+    ],
+    "answer": 2,
+    "explain": "speed는 기본값 0에서 시작해 speed_up(50)으로 50이 되지만, stop()이 self.speed = 0으로 다시 0으로 만든다."
+  },
+  {
+    "cat": "클래스",
+    "q": "메서드 update가 self.hp를 변경하는 코드가 하는 일을 가장 잘 설명한 것은?",
+    "choices": [
+      "클래스 자체를 새로 정의한다",
+      "객체를 메모리에서 삭제한다",
+      "다른 클래스를 상속받는다",
+      "객체의 상태(속성값)를 변화시킨다"
+    ],
+    "answer": 3,
+    "explain": "메서드 안에서 self.hp 같은 속성을 바꾸면 그 객체의 상태(속성값)가 변한다. 이것이 객체 상태 변화 추적의 핵심이다."
+  },
+  {
+    "cat": "클래스",
+    "q": "객체를 생성하고 메서드를 호출하는 올바른 문법은?",
+    "choices": [
+      "hero = Character(\"기사\", 100) 후 hero.take_damage(10)",
+      "hero = Character.take_damage(10)",
+      "hero = take_damage(Character, 10)",
+      "Character = hero(\"기사\", 100)"
+    ],
+    "answer": 0,
+    "explain": "객체는 클래스이름(인자) 형태로 생성하고, 메서드는 객체.메서드(인자) 형태로 호출한다. hero.take_damage(10)이 올바르다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드에서 hero와 monster가 서로 영향을 주지 않는 이유로 옳은 것은?\n\nhero = Character(\"기사\", 100)\nmonster = Character(\"슬라임\", 30)\nmonster.take_damage(10)\nprint(hero.hp)",
+    "choices": [
+      "각 객체는 자기만의 독립된 속성값을 가지기 때문",
+      "take_damage 메서드가 hero에는 없기 때문",
+      "두 객체가 같은 hp를 공유하기 때문",
+      "monster가 hero를 자동으로 복사하기 때문"
+    ],
+    "answer": 0,
+    "explain": "객체마다 self가 가리키는 대상이 다르므로 각자 독립된 속성값을 가진다. monster.take_damage(10)은 monster.hp만 바꾸고 hero.hp(100)는 그대로다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 빈칸 (가)에 들어갈 메서드 호출로 알맞은 것은? (목표: monster의 hp를 5만큼 줄이기)\n\nmonster = Character(\"슬라임\", 30)\n(가)\nprint(monster.hp)   # 25 출력",
+    "choices": [
+      "take_damage(5)",
+      "Character.take_damage(5)",
+      "monster.hp(5)",
+      "monster.take_damage(5)"
+    ],
+    "answer": 3,
+    "explain": "객체의 메서드는 객체.메서드(인자) 형태로 호출한다. monster.take_damage(5)를 호출하면 30 - 5 = 25가 된다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 중 self에 대한 설명으로 틀린 것은?",
+    "choices": [
+      "메서드의 첫 번째 매개변수로 보통 self를 쓴다",
+      "self를 통해 객체의 속성에 접근한다",
+      "self는 객체 자기 자신을 가리킨다",
+      "self는 클래스 이름과 항상 똑같아야 한다"
+    ],
+    "answer": 3,
+    "explain": "self는 객체 자기 자신을 가리키는 매개변수일 뿐, 클래스 이름과 같을 필요가 없다. 나머지 설명은 모두 옳다."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Character:\n    def __init__(self, name, hp):\n        self.name = name\n        self.hp = hp\n\n    def heal(self, amount):\n        self.hp += amount\n\n    def take_damage(self, amount):\n        self.hp -= amount\n\nhero = Character(\"기사\", 100)\nhero.take_damage(30)\nhero.heal(10)\nprint(hero.hp)",
+    "choices": [
+      "100",
+      "80",
+      "70",
+      "60"
+    ],
+    "answer": 1,
+    "explain": "hp는 100에서 시작한다. take_damage(30)으로 70, heal(10)으로 80이 된다. 100 - 30 + 10 = 80."
+  },
+  {
+    "cat": "클래스",
+    "q": "다음 코드의 실행 결과로 출력되는 값은?\n\nclass Car:\n    def __init__(self, color, speed=0):\n        self.color = color\n        self.speed = speed\n\nc1 = Car(\"red\", 40)\nc2 = Car(\"blue\")\nprint(c1.speed, c2.speed)",
+    "choices": [
+      "40 40",
+      "0 0",
+      "40 0",
+      "red blue"
+    ],
+    "answer": 2,
+    "explain": "c1은 speed에 40을 직접 넘겼고, c2는 넘기지 않아 기본값 0이 들어간다. 따라서 40 0이 출력된다."
+  },
+  {
+    "cat": "클래스",
+    "q": "객체 c의 color 속성값을 출력하려고 한다. 올바른 코드는?\n\nc = Car(\"green\", 0)",
+    "choices": [
+      "print(color)",
+      "print(c.color)",
+      "print(Car.color)",
+      "print(c(color))"
+    ],
+    "answer": 1,
+    "explain": "객체의 속성에 접근할 때는 객체.속성 형태를 쓴다. print(c.color)로 \"green\"을 출력한다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "정답(레이블)이 있는 데이터로 입력과 정답의 관계를 배워 예측하는 학습법은?",
+    "choices": [
+      "지도학습",
+      "비지도학습",
+      "강화학습",
+      "전이학습"
+    ],
+    "answer": 0,
+    "explain": "지도학습은 입력 + 정답(레이블)이 함께 주어지고, 어디에 속하는지 예측하거나 값을 맞히는 것이 목적이다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "정답(레이블) 없이 데이터 안의 숨은 구조나 패턴을 찾아 그룹으로 묶는 학습법은?",
+    "choices": [
+      "강화학습",
+      "비지도학습",
+      "지도학습",
+      "회귀학습"
+    ],
+    "answer": 1,
+    "explain": "비지도학습은 정답이 없고 숨은 구조를 파악해 군집(클러스터)으로 그룹화하는 것이 목적이다. 대표 예가 k-Means 군집이다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "환경에서 행동을 하고 그 결과로 받는 보상을 최대화하도록 행동을 수정해 나가는 학습법은?",
+    "choices": [
+      "지도학습",
+      "비지도학습",
+      "강화학습",
+      "군집학습"
+    ],
+    "answer": 2,
+    "explain": "강화학습은 환경, 행동, 보상이 핵심 키워드이며 보상을 최대화하는 최적 행동을 학습한다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "머신러닝에서 예측에 사용하는 입력 값을 부르는 용어는?",
+    "choices": [
+      "종속변수",
+      "레이블",
+      "정답",
+      "독립변수"
+    ],
+    "answer": 3,
+    "explain": "독립변수는 예측에 사용하는 값(입력)이고, 종속변수(레이블)는 맞히고 싶은 진짜 정답이다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "모델이 맞히려고 하는 진짜 정답에 해당하는 것을 무엇이라 하는가?",
+    "choices": [
+      "종속변수(레이블)",
+      "독립변수",
+      "특성",
+      "하이퍼파라미터"
+    ],
+    "answer": 0,
+    "explain": "종속변수(레이블)는 맞히고 싶은 진짜 정답이다. 예측에 쓰는 입력 값은 독립변수다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "예측할 데이터가 들어오면 학습 데이터 중 거리가 가까운 k개 이웃을 찾아 다수결로 분류하는 알고리즘은?",
+    "choices": [
+      "의사결정트리",
+      "k-NN(최근접 이웃)",
+      "로지스틱 회귀",
+      "랜덤 포레스트"
+    ],
+    "answer": 1,
+    "explain": "k-NN은 거리를 측정해 가장 가까운 k개 이웃의 레이블을 다수결 투표하여 분류한다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "k-NN에 대한 설명으로 옳은 것은?",
+    "choices": [
+      "스케일링이 필요 없다",
+      "이름은 회귀지만 분류용이다",
+      "거리 기반이라 스케일링이 필수다",
+      "여러 트리의 다수결로 예측한다"
+    ],
+    "answer": 2,
+    "explain": "k-NN은 특성마다 단위/범위가 다르면 큰 값을 가진 특성이 거리를 지배하므로 스케일링이 필수다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "학습 단계에서는 데이터를 저장만 하고 예측할 때 비로소 거리를 모두 계산하는 방식을 무엇이라 하는가?",
+    "choices": [
+      "배깅",
+      "부트스트랩",
+      "앙상블",
+      "게으른 학습(lazy learning)"
+    ],
+    "answer": 3,
+    "explain": "k-NN은 학습 때 데이터를 저장만 하고 예측할 때 거리를 계산하는 게으른 학습(lazy learning)이다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "k-NN에서 k값에 대한 설명으로 옳은 것은?",
+    "choices": [
+      "k가 작으면 과적합되기 쉽다",
+      "k가 작으면 noise에 둔감해진다",
+      "k는 항상 짝수로 정한다",
+      "k가 크면 항상 정확도가 높아진다"
+    ],
+    "answer": 0,
+    "explain": "k가 작으면 noise에 민감해 과적합되고, 크면 경계가 뭉뚱그려져 과소적합된다. 동점 방지를 위해 보통 홀수를 쓴다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "예/아니오 질문(분기)을 반복해 정답을 좁혀가며, 불순도가 가장 많이 줄어드는 기준을 고르는 알고리즘은?",
+    "choices": [
+      "k-NN",
+      "의사결정트리",
+      "로지스틱 회귀",
+      "k-Means"
+    ],
+    "answer": 1,
+    "explain": "의사결정트리는 예/아니오 질문으로 분기하며, 각 분기에서 지니 계수나 엔트로피 같은 불순도가 가장 많이 줄어드는 기준을 선택한다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "의사결정트리에서 한 노드에 여러 클래스가 섞인 정도를 나타내며, 분기 기준 선택에 쓰이는 개념은?",
+    "choices": [
+      "보상",
+      "결정계수",
+      "불순도(지니/엔트로피)",
+      "관성(inertia)"
+    ],
+    "answer": 2,
+    "explain": "불순도는 한 노드에 여러 클래스가 섞인 정도이며, 지니 계수 또는 엔트로피로 측정한다. 불순도가 가장 많이 줄어드는 기준으로 분기한다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "다음 중 스케일링(StandardScaler)이 필요 없는 알고리즘은?",
+    "choices": [
+      "의사결정트리",
+      "k-NN",
+      "로지스틱 회귀",
+      "선형회귀"
+    ],
+    "answer": 0,
+    "explain": "의사결정트리는 기준값과의 대소 비교만 하므로 스케일링이 필요 없다. k-NN(거리), 로지스틱/선형회귀(선형 결합)는 스케일링이 필요하거나 권장된다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "여러 개의 의사결정트리를 만들어 그 예측을 다수결로 합치는 앙상블(배깅) 기법은?",
+    "choices": [
+      "k-NN",
+      "랜덤 포레스트",
+      "로지스틱 회귀",
+      "k-Means"
+    ],
+    "answer": 1,
+    "explain": "랜덤 포레스트는 여러 의사결정트리의 예측을 다수결로 합치는 앙상블(배깅) 기법이다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "랜덤 포레스트에서 각 트리가 중복을 허용해 무작위로 뽑은 데이터로 학습하는 것을 무엇이라 하는가?",
+    "choices": [
+      "스케일링",
+      "시그모이드",
+      "부트스트랩 샘플",
+      "혼동행렬"
+    ],
+    "answer": 2,
+    "explain": "각 트리는 서로 다른 부트스트랩 샘플(중복 허용해 무작위로 뽑은 데이터)과 일부 특성만 보고 학습해 관점이 달라진다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "랜덤 포레스트가 단일 의사결정트리보다 일반적으로 더 나은 이유로 옳은 것은?",
+    "choices": [
+      "스케일링을 자동으로 해주기 때문",
+      "거리를 계산하지 않기 때문",
+      "선형 결정경계를 갖기 때문",
+      "여러 트리의 의견을 모아 오류가 상쇄되어 안정적이기 때문"
+    ],
+    "answer": 3,
+    "explain": "한 트리가 과적합해도 여러 트리의 의견을 모으면 오류가 상쇄되어 단일 트리보다 안정적이고 정확하다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "이름은 회귀지만 실제로는 분류에 쓰이는 알고리즘은?",
+    "choices": [
+      "선형회귀",
+      "로지스틱 회귀",
+      "k-Means",
+      "랜덤 포레스트"
+    ],
+    "answer": 1,
+    "explain": "로지스틱 회귀는 이름은 회귀지만 분류 알고리즘이다. 선형 결합 후 시그모이드로 확률을 구해 분류한다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "로지스틱 회귀에서 선형 결합 값을 0~1 사이 확률로 변환하는 함수는?",
+    "choices": [
+      "유클리드 거리",
+      "엔트로피 함수",
+      "시그모이드 함수 1/(1+e^(-x))",
+      "소프트맥스 거리 함수"
+    ],
+    "answer": 2,
+    "explain": "로지스틱(시그모이드) 함수 1/(1+e^(-x))는 선형 결합 값을 0~1 사이의 확률로 변환한다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "로지스틱 회귀에서 두 클래스로 나눌 때 보통 사용하는 확률 임계값은?",
+    "choices": [
+      "0.1",
+      "1.0",
+      "0.95",
+      "0.5"
+    ],
+    "answer": 3,
+    "explain": "로지스틱 회귀는 확률이 임계값(보통 0.5) 이상이면 한 클래스, 미만이면 다른 클래스로 분류한다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "로지스틱 회귀의 결정 경계 형태로 옳은 것은?",
+    "choices": [
+      "선형(직선/평면) 경계",
+      "원형 경계",
+      "계단형 경계",
+      "경계가 없음"
+    ],
+    "answer": 0,
+    "explain": "로지스틱 회귀는 특성들의 선형 결합을 사용하므로 결정 경계가 선형(직선/평면)이다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "다음 알고리즘 중 스케일링이 권장(필요)되는 것끼리 묶은 것은?",
+    "choices": [
+      "의사결정트리, 랜덤 포레스트",
+      "k-NN, 로지스틱 회귀",
+      "의사결정트리, k-NN",
+      "랜덤 포레스트, 로지스틱 회귀"
+    ],
+    "answer": 1,
+    "explain": "거리 기반 k-NN과 선형 결합 기반 로지스틱 회귀는 스케일링이 필요/권장된다. 트리 기반(의사결정트리, 랜덤 포레스트)은 불필요하다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "규칙(if-else)으로 풀어 쓸 수 있어 사람이 결과를 해석하기 가장 쉬운 알고리즘은?",
+    "choices": [
+      "k-NN",
+      "로지스틱 회귀",
+      "의사결정트리",
+      "k-Means"
+    ],
+    "answer": 2,
+    "explain": "의사결정트리는 기준값과의 대소 비교(질문)로 분기하므로 규칙(if-else)으로 풀어 쓸 수 있어 해석이 쉽다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "독립변수로 연속적인 숫자 값을 예측하는 문제 유형은?",
+    "choices": [
+      "분류",
+      "군집",
+      "강화",
+      "회귀"
+    ],
+    "answer": 3,
+    "explain": "회귀는 연속적인 숫자 값을 예측한다. 대표 예가 직선으로 관계를 표현하는 선형회귀다. 범주를 맞히는 것은 분류다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "비슷한 특성을 가진 것들을 k개의 군집으로 나누는 비지도학습 알고리즘은?",
+    "choices": [
+      "k-Means",
+      "k-NN",
+      "로지스틱 회귀",
+      "의사결정트리"
+    ],
+    "answer": 0,
+    "explain": "k-Means는 비지도학습 군집 알고리즘으로, 비슷한 특성끼리 k개 군집으로 나눈다. k-NN은 지도학습 분류 알고리즘이라 다르다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "k-Means 군집의 진행 과정 순서로 옳은 것은?",
+    "choices": [
+      "배정 -> 초기화 -> 종료 -> 재설정",
+      "초기화 -> 배정 -> 재설정 -> 종료",
+      "초기화 -> 재설정 -> 배정 -> 종료",
+      "종료 -> 배정 -> 재설정 -> 초기화"
+    ],
+    "answer": 1,
+    "explain": "k-Means는 초기화 -> 배정 -> 재설정 -> 종료의 순서로 진행하며, 배정과 재설정을 반복한다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "알고리즘 선택 맵에서 가장 먼저 판단해야 하는 질문은?",
+    "choices": [
+      "예측 대상이 숫자인가 범주인가?",
+      "스케일링이 필요한가?",
+      "데이터에 정답이 있는가?",
+      "트리를 몇 개 만들 것인가?"
+    ],
+    "answer": 2,
+    "explain": "먼저 데이터에 정답이 있는지 본다. 있으면 지도학습, 없으면 비지도학습으로 갈린다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "정답이 있는 지도학습에서 예측 대상이 범주(category)일 때 선택하는 문제 유형은?",
+    "choices": [
+      "회귀",
+      "군집",
+      "강화학습",
+      "분류"
+    ],
+    "answer": 3,
+    "explain": "지도학습에서 예측 대상이 숫자면 회귀, 범주면 분류를 선택한다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "정답이 없는 데이터를 그룹으로 나누고 싶을 때 알맞은 접근은?",
+    "choices": [
+      "비지도학습 - 군집",
+      "지도학습 - 회귀",
+      "지도학습 - 분류",
+      "강화학습"
+    ],
+    "answer": 0,
+    "explain": "정답(레이블)이 없으므로 비지도학습이고, 그룹으로 나누는 것은 군집(k-Means)이다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "집값처럼 연속적인 숫자를 예측하는 작업에 알맞은 접근은?",
+    "choices": [
+      "지도학습 - 분류",
+      "지도학습 - 회귀",
+      "비지도학습 - 군집",
+      "강화학습"
+    ],
+    "answer": 1,
+    "explain": "정답(집값)이 있으니 지도학습이고, 예측 대상이 연속적인 숫자이므로 회귀다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "분류 문제에서 사용하는 대표 평가지표끼리 묶은 것은?",
+    "choices": [
+      "R^2, MAE",
+      "inertia, Elbow",
+      "n_estimators, max_depth",
+      "정확도, 혼동행렬"
+    ],
+    "answer": 3,
+    "explain": "분류는 정확도(accuracy)와 혼동행렬로 평가한다. R^2/MAE는 회귀, inertia/Elbow는 군집 평가지표다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "회귀 문제에서 사용하는 대표 평가지표끼리 묶은 것은?",
+    "choices": [
+      "결정계수 R^2, 평균절대오차 MAE",
+      "정확도, 혼동행렬",
+      "inertia, n_clusters",
+      "지니, 엔트로피"
+    ],
+    "answer": 0,
+    "explain": "회귀는 결정계수 R^2와 평균절대오차 MAE로 평가한다. 정확도/혼동행렬은 분류 평가지표다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "군집(k-Means)에서 적절한 군집 개수를 찾는 Elbow 기법에 쓰이는 지표는?",
+    "choices": [
+      "정확도",
+      "inertia",
+      "혼동행렬",
+      "MAE"
+    ],
+    "answer": 1,
+    "explain": "군집은 inertia를 보고 Elbow 기법으로 적절한 군집 개수(n_clusters)를 정한다. 정확도/혼동행렬은 분류 지표다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "분류 결과에서 어떤 클래스를 무엇으로 틀렸는지 자세히 보여주는 평가 도구는?",
+    "choices": [
+      "결정계수 R^2",
+      "inertia",
+      "혼동행렬",
+      "특성 중요도"
+    ],
+    "answer": 2,
+    "explain": "혼동행렬(confusion matrix)은 어떤 클래스를 무엇으로 맞히고 틀렸는지 보여주는 분류 평가 도구다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "선형회귀에서 결정계수(R^2)가 낮게 나오는 원인으로 보기 어려운 것은?",
+    "choices": [
+      "변수 사이가 비선형 관계라서",
+      "데이터에 이상치가 많아서",
+      "데이터의 분산/산포가 커서",
+      "스케일링을 했기 때문"
+    ],
+    "answer": 3,
+    "explain": "R^2가 낮은 원인은 비선형 관계, 큰 분산/산포, 이상치, 약한 상관 등이다. 스케일링 자체는 R^2를 낮추는 원인이 아니다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "다음 중 비지도학습에 해당하는 것은?",
+    "choices": [
+      "k-NN 분류",
+      "k-Means 군집",
+      "로지스틱 회귀",
+      "랜덤 포레스트 분류"
+    ],
+    "answer": 1,
+    "explain": "k-Means 군집은 정답 없이 패턴을 찾는 비지도학습이다. 나머지는 정답을 사용하는 지도학습이다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "k-NN과 의사결정트리의 차이로 옳은 것은?",
+    "choices": [
+      "둘 다 스케일링이 필수다",
+      "k-NN은 트리 여러 개를 합친다",
+      "k-NN은 스케일링이 필수지만 의사결정트리는 불필요하다",
+      "의사결정트리는 거리를 계산해 다수결한다"
+    ],
+    "answer": 2,
+    "explain": "k-NN은 거리 기반이라 스케일링이 필수이고, 의사결정트리는 기준값 대소 비교라 스케일링이 불필요하다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "로지스틱 회귀가 다중 클래스 문제에서 최종 클래스를 정하는 방식은?",
+    "choices": [
+      "가장 가까운 이웃을 따른다",
+      "트리들의 다수결로 정한다",
+      "불순도가 가장 큰 클래스를 고른다",
+      "클래스마다 확률을 구해 가장 큰 확률의 클래스를 고른다"
+    ],
+    "answer": 3,
+    "explain": "로지스틱 회귀는 다중 클래스에서 클래스마다 확률을 구한 뒤 가장 큰 확률의 클래스를 고른다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "AI 모델 개발의 공통 흐름 순서로 옳은 것은?",
+    "choices": [
+      "데이터 로드 -> 전처리 -> 학습 -> 평가",
+      "학습 -> 데이터 로드 -> 평가 -> 전처리",
+      "평가 -> 학습 -> 전처리 -> 데이터 로드",
+      "전처리 -> 평가 -> 데이터 로드 -> 학습"
+    ],
+    "answer": 0,
+    "explain": "거의 모든 알고리즘은 데이터 로드 -> 전처리 -> 학습 -> 평가의 같은 흐름을 따른다. 바뀌는 것은 모델 객체 한 줄과 스케일링 필요 여부 정도다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "모델이 학습 데이터에는 매우 잘 맞지만 처음 보는 새로운 데이터에서는 성능이 크게 떨어지는 현상을 무엇이라 하는가?",
+    "choices": [
+      "과적합(overfitting)",
+      "과소적합(underfitting)",
+      "정규화",
+      "일반화"
+    ],
+    "answer": 0,
+    "explain": "과적합은 모델이 학습 데이터의 사소한 특징이나 잡음까지 외워버려, 학습 데이터에는 잘 맞지만 새 데이터에는 약해지는 현상이다. 반대로 학습조차 제대로 못하면 과소적합이다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "모델이 너무 단순해서 학습 데이터의 패턴조차 제대로 학습하지 못해, 학습 데이터에서도 성능이 낮은 상태를 무엇이라 하는가?",
+    "choices": [
+      "과적합(overfitting)",
+      "과소적합(underfitting)",
+      "데이터 누수",
+      "차원의 저주"
+    ],
+    "answer": 1,
+    "explain": "과소적합은 모델이 너무 단순하거나 학습이 부족해 데이터의 패턴을 충분히 담지 못한 상태로, 학습 데이터에서도 성능이 낮다. 학습엔 잘 맞는데 새 데이터에 약한 과적합과 반대다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "모델 성능을 평가할 때 학습에 사용하지 않은 별도의 데이터로 평가하는 가장 큰 이유는?",
+    "choices": [
+      "평가 데이터가 많을수록 학습이 잘 되기 때문",
+      "데이터를 나누면 학습 속도가 빨라지기 때문",
+      "학습에 쓴 데이터로 평가하면 외운 것을 다시 맞히는 셈이라 새 데이터에 대한 진짜 실력을 알 수 없기 때문",
+      "평가 데이터는 정답이 필요 없기 때문"
+    ],
+    "answer": 2,
+    "explain": "학습에 사용한 데이터로 평가하면 모델이 이미 본 답을 되풀이하는 것이라 점수가 부풀려진다. 처음 보는 데이터로 평가해야 새로운 상황에서의 실제 성능(일반화 성능)을 알 수 있다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "키(cm)와 몸무게(kg)처럼 값의 범위가 크게 다른 특성을 거리 기반 알고리즘(k-NN 등)에 그대로 넣으면 생기는 문제는?",
+    "choices": [
+      "범위가 작은 특성만 사용되어 큰 특성이 무시된다",
+      "거리 계산이 불가능해 오류가 난다",
+      "모든 특성이 자동으로 같은 비중이 된다",
+      "값의 범위가 큰 특성이 거리 계산을 지배해 작은 범위 특성의 영향이 거의 무시된다"
+    ],
+    "answer": 3,
+    "explain": "거리 기반 알고리즘은 특성 값의 차이로 거리를 계산하므로, 숫자 범위가 큰 특성의 차이가 거리에 크게 반영된다. 그래서 범위를 비슷하게 맞추는 스케일링이 필요하다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "손으로 쓴 숫자 이미지를 보고 0부터 9 중 어떤 숫자인지 맞히는 작업은 어떤 문제 유형에 해당하는가?",
+    "choices": [
+      "회귀",
+      "분류",
+      "군집",
+      "강화학습"
+    ],
+    "answer": 1,
+    "explain": "정답(0~9 중 하나)이 정해진 범주(category)를 맞히는 문제이므로 분류에 해당한다. 연속적인 숫자 값을 예측하면 회귀, 정답 없이 묶으면 군집이다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "k-NN에서 k(이웃 수)를 1처럼 너무 작게 잡으면 나타나기 쉬운 현상은?",
+    "choices": [
+      "항상 더 정확한 예측을 한다",
+      "거리 계산을 하지 않아도 된다",
+      "가까운 한두 개 이웃에만 의존해 잡음이나 이상치에 민감하게 흔들린다",
+      "여러 이웃의 평균이라 매우 안정적이다"
+    ],
+    "answer": 2,
+    "explain": "k가 너무 작으면 가까운 소수의 이웃에 결과가 크게 좌우되어 잡음이나 이상치에 민감해진다(과적합 경향). 반대로 k가 너무 크면 경계가 뭉개져 둔감해진다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "정상 99%, 불량 1%처럼 한쪽 클래스가 압도적으로 많은 데이터에서 정확도만으로 모델을 평가하면 안 되는 이유는?",
+    "choices": [
+      "정확도는 회귀에서만 쓰는 지표이기 때문",
+      "정확도는 항상 0이 되기 때문",
+      "클래스가 많을수록 정확도 계산이 불가능하기 때문",
+      "무조건 다수 클래스(정상)로만 찍어도 정확도가 99%로 높게 나와 소수 클래스를 못 잡아도 좋아 보이기 때문"
+    ],
+    "answer": 3,
+    "explain": "심하게 불균형한 데이터에서는 전부 다수 클래스로 예측만 해도 정확도가 높게 나온다. 정작 중요한 소수 클래스(불량)를 놓쳐도 가려지므로, 혼동행렬 등 다른 지표를 함께 봐야 한다."
+  },
+  {
+    "cat": "인공지능",
+    "q": "머신러닝 모델 학습의 궁극적인 목표로 가장 적절한 것은?",
+    "choices": [
+      "학습 데이터를 통째로 외우는 것이 아니라, 처음 보는 새로운 데이터에 대해서도 잘 예측하는 것",
+      "학습 데이터의 정답을 100% 똑같이 외우는 것",
+      "가능한 한 많은 라이브러리 함수를 사용하는 것",
+      "학습 시간을 최대한 늘리는 것"
+    ],
+    "answer": 0,
+    "explain": "머신러닝의 목표는 학습 데이터 암기가 아니라, 학습에서 얻은 규칙을 새로운 데이터에 일반화해 잘 맞히는 것이다. 외우기만 하면 과적합되어 새 데이터에서 실패한다."
+  }
+];
+
+/* ===================== 동작 로직 ===================== */
+var answerLog = [];        // 정답 여부 누적 (true/false)
+var current = null;        // 현재 문제
+var recentQ = [];          // 최근 출제 문제(중복 회피용)
+var AVOID = 5;             // 최근 몇 개를 회피할지
+var answered = false;
+var selectedCats = {};     // 계열 선택 상태
+var qStatus = {};          // 문제별 최근 결과 (QUESTIONS 인덱스 -> 'ok' | 'no')
+var currentOrder = [];     // 현재 문제의 선지 표시 순서 (표시위치 -> 원본 인덱스)
+var pickedPos = null;      // 학생이 고른 선지의 표시위치 (튜터 컨텍스트용)
+var STORE_KEY = 'finalCardProgress_' + SET_ID;
+
+var chatLog = {};          // 문제 지문 해시 -> [{role, content, brief, ts}]
+var chatBusyId = null;     // 응답 대기 중인 문제 id (null이면 대기 없음)
+var chatError = null;      // 마지막 오류 메시지 (문제 이동/재전송 시 초기화)
+var CHAT_KEEP = 40;        // 문제당 보관할 최대 메시지 수
+var CHAT_STORE_KEY = 'finalCardChat_' + SET_ID;
+
+var elCats     = document.getElementById('cats');
+var elStats    = document.getElementById('stats');
+var elQcat     = document.getElementById('qcat');
+var elQuestion = document.getElementById('question');
+var elChoices  = document.getElementById('choices');
+var elVerdict  = document.getElementById('verdict');
+var elExplain  = document.getElementById('explain');
+var elNext     = document.getElementById('nextBtn');
+var elTiles    = document.getElementById('tiles');
+var elOnlyUnsolved = document.getElementById('onlyUnsolved');
+var elReset    = document.getElementById('resetProgress');
+var elChatMsgs  = document.getElementById('chatMsgs');
+var elChatText  = document.getElementById('chatText');
+var elChatSend  = document.getElementById('chatSend');
+var elChatClear = document.getElementById('chatClear');
+
+function saveProgress() {
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify({ answerLog: answerLog, qStatus: qStatus }));
+  } catch (e) {}
+}
+function loadProgress() {
+  try {
+    var raw = localStorage.getItem(STORE_KEY);
+    if (!raw) return;
+    var data = JSON.parse(raw);
+    if (data && Array.isArray(data.answerLog)) answerLog = data.answerLog;
+    if (data && data.qStatus && typeof data.qStatus === 'object') qStatus = data.qStatus;
+  } catch (e) {}
+}
+
+/* ===================== AI 튜터 채팅 ===================== */
+
+// 문제 지문 해시를 대화 저장 키로 사용 (문제 순서 변경/추가에도 기록 유지)
+function qid(item) {
+  var s = item.q, h = 5381;
+  for (var i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0;
+  return 'q' + (h >>> 0).toString(36);
+}
+
+function saveChat() {
+  try { localStorage.setItem(CHAT_STORE_KEY, JSON.stringify(chatLog)); } catch (e) {}
+}
+function loadChat() {
+  try {
+    var raw = localStorage.getItem(CHAT_STORE_KEY);
+    if (!raw) return;
+    var data = JSON.parse(raw);
+    if (data && typeof data === 'object') chatLog = data;
+  } catch (e) {}
+}
+function trimChat(id) {
+  if (chatLog[id] && chatLog[id].length > CHAT_KEEP) {
+    chatLog[id] = chatLog[id].slice(-CHAT_KEEP);
+  }
+}
+
+function renderChat() {
+  elChatMsgs.innerHTML = '';
+  elChatText.disabled = !current;
+  elChatSend.disabled = !current || !!chatBusyId;
+  elChatClear.disabled = !current;
+  if (!current) {
+    elChatMsgs.innerHTML = '<div class="chat-empty">문제가 출제되면 질문할 수 있습니다.</div>';
+    return;
+  }
+  var msgs = chatLog[qid(current)] || [];
+  if (msgs.length === 0 && !chatBusyId && !chatError) {
+    elChatMsgs.innerHTML = '<div class="chat-empty">이 문제에 대해 궁금한 점을 물어보세요. 대화는 문제별로 저장됩니다.</div>';
+    return;
+  }
+  for (var i = 0; i < msgs.length; i++) {
+    var div = document.createElement('div');
+    div.className = 'msg ' + (msgs[i].role === 'user' ? 'user' : 'ai');
+    div.textContent = msgs[i].content;
+    elChatMsgs.appendChild(div);
+  }
+  if (chatBusyId === qid(current)) {
+    var wait = document.createElement('div');
+    wait.className = 'msg wait';
+    wait.textContent = '튜터가 답변을 작성 중...';
+    elChatMsgs.appendChild(wait);
+  }
+  if (chatError) {
+    var err = document.createElement('div');
+    err.className = 'msg err';
+    err.textContent = chatError;
+    elChatMsgs.appendChild(err);
+  }
+  elChatMsgs.scrollTop = elChatMsgs.scrollHeight;
+}
+
+// 시스템 프롬프트: 문제/선지(학생 화면 번호 기준)/정답/해설/학생 상태
+function buildSystemPrompt() {
+  var lines = [];
+  lines.push('너는 고등학교 정보(파이썬) 기말고사 대비를 돕는 튜터다.');
+  lines.push('규칙: 학생이 물어본 것에만 답한다. 묻지 않은 내용을 먼저 설명하지 않는다. 간결하게 답한다.');
+  lines.push('마크다운 문법 없이 일반 텍스트로만 답한다. 코드는 들여쓰기로 표기한다. 한국어로 답한다.');
+  lines.push('');
+  lines.push('[현재 문제] (계열: ' + current.cat + ')');
+  lines.push(current.q);
+  lines.push('');
+  lines.push('[선지] (학생 화면에 보이는 번호 기준)');
+  for (var i = 0; i < currentOrder.length; i++) {
+    lines.push((i + 1) + '. ' + current.choices[currentOrder[i]]);
+  }
+  var correctPos = currentOrder.indexOf(current.answer);
+  lines.push('');
+  lines.push('[정답] ' + (correctPos + 1) + '번');
+  if (current.explain) lines.push('[해설] ' + current.explain);
+  lines.push('');
+  if (answered) {
+    var ok = qStatus[QUESTIONS.indexOf(current)] === 'ok';
+    lines.push('[학생 상태] 답을 제출함. ' + (ok ? '정답을 맞힘.'
+      : '오답이었음. 학생이 고른 답: ' + (pickedPos + 1) + '번'));
+  } else {
+    lines.push('[학생 상태] 아직 답을 제출하지 않음.');
+  }
+  return lines.join('\n');
+}
+
+// 이전 대화를 60자 요약본으로 압축한 컨텍스트 블록
+function historyBlock(msgs) {
+  var out = [];
+  for (var i = 0; i < msgs.length; i++) {
+    var m = msgs[i];
+    var text = m.brief || String(m.content).slice(0, 60);
+    out.push((m.role === 'user' ? '학생: ' : '튜터: ') + text);
+  }
+  return out.join('\n');
+}
+
+function callOpenAI(model, messages, maxTokens, effort) {
+  return fetch(OPENAI_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + OPENAI_API_KEY },
+    body: JSON.stringify({ model: model, messages: messages,
+                           max_completion_tokens: maxTokens, reasoning_effort: effort })
+  }).then(function (res) {
+    if (!res.ok) {
+      return res.json().then(function (e) {
+        throw new Error(e && e.error && e.error.message ? e.error.message : 'HTTP ' + res.status);
+      }, function () { throw new Error('HTTP ' + res.status); });
+    }
+    return res.json();
+  }).then(function (data) {
+    var msg = data.choices && data.choices[0] && data.choices[0].message;
+    if (!msg || !msg.content) throw new Error('빈 응답을 받았습니다.');
+    return String(msg.content).trim();
+  });
+}
+
+function sendChat() {
+  if (chatBusyId || !current) return;
+  var text = elChatText.value.trim();
+  if (!text) return;
+  var id = qid(current);
+  if (!chatLog[id]) chatLog[id] = [];
+  var prior = chatLog[id].slice();
+  var userMsg = { role: 'user', content: text, brief: null, ts: Date.now() };
+  chatLog[id].push(userMsg);
+  trimChat(id); saveChat();
+  elChatText.value = '';
+  chatBusyId = id;
+  chatError = null;
+  renderChat();
+
+  var messages = [{ role: 'system', content: buildSystemPrompt() }];
+  var hist = historyBlock(prior);
+  if (hist) messages.push({ role: 'system', content: '[이전 대화 요약]\n' + hist });
+  messages.push({ role: 'user', content: text });
+
+  callOpenAI(CHAT_MODEL, messages, 1200, 'low').then(function (reply) {
+    var aiMsg = { role: 'assistant', content: reply, brief: null, ts: Date.now() };
+    chatLog[id].push(aiMsg);
+    trimChat(id); saveChat();
+    chatBusyId = null;
+    renderChat();
+    summarizePair(userMsg, aiMsg);
+  }).catch(function (e) {
+    // 실패: 질문을 기록에서 되돌리고 입력창에 복원 (다시 전송하면 재시도)
+    var idx = chatLog[id].indexOf(userMsg);
+    if (idx !== -1) chatLog[id].splice(idx, 1);
+    saveChat();
+    chatBusyId = null;
+    chatError = '응답 실패: ' + e.message + ' (질문을 다시 전송해 보세요)';
+    if (!elChatText.value) elChatText.value = text;
+    renderChat();
+  });
+}
+
+// 방금 주고받은 질문/답변을 60자 이내로 요약해 brief에 저장 (다음 요청의 컨텍스트용)
+function summarizePair(userMsg, aiMsg) {
+  var messages = [
+    { role: 'system', content: '학생 질문과 튜터 답변을 각각 60글자 이내 한국어로 요약한다. 반드시 {"ask":"...","reply":"..."} 형태의 JSON만 출력한다.' },
+    { role: 'user', content: '질문: ' + userMsg.content + '\n답변: ' + aiMsg.content }
+  ];
+  callOpenAI(SUMMARY_MODEL, messages, 400, 'none').then(function (out) {
+    var s = out.indexOf('{'), e = out.lastIndexOf('}');
+    if (s === -1 || e === -1) throw new Error('bad json');
+    var obj = JSON.parse(out.slice(s, e + 1));
+    userMsg.brief = String(obj.ask || '').slice(0, 60) || userMsg.content.slice(0, 60);
+    aiMsg.brief = String(obj.reply || '').slice(0, 60) || aiMsg.content.slice(0, 60);
+    saveChat();
+  }).catch(function () {
+    userMsg.brief = userMsg.content.slice(0, 60);
+    aiMsg.brief = aiMsg.content.slice(0, 60);
+    saveChat();
+  });
+}
+
+/* ===================== 기존 로직 ===================== */
+
+// 데이터에서 계열 목록 추출(등장 순서 유지)
+function getCategories() {
+  var seen = {}, list = [];
+  for (var i = 0; i < QUESTIONS.length; i++) {
+    var c = QUESTIONS[i].cat;
+    if (!seen[c]) { seen[c] = true; list.push(c); }
+  }
+  return list;
+}
+
+function buildCats() {
+  var cats = getCategories();
+  elCats.innerHTML = '';
+  for (var i = 0; i < cats.length; i++) {
+    (function (c) {
+      if (selectedCats[c] === undefined) selectedCats[c] = true;
+      var label = document.createElement('label');
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = selectedCats[c];
+      cb.addEventListener('change', function () {
+        selectedCats[c] = cb.checked;
+        nextQuestion();
+      });
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(' ' + c));
+      elCats.appendChild(label);
+    })(cats[i]);
+  }
+}
+
+function pool() {
+  return QUESTIONS.filter(function (item) { return selectedCats[item.cat]; });
+}
+
+function pickRandom() {
+  var p = pool();
+  if (elOnlyUnsolved && elOnlyUnsolved.checked) {
+    p = p.filter(function (item) { return qStatus[QUESTIONS.indexOf(item)] !== 'ok'; });
+  }
+  if (p.length === 0) return null;
+  var avoid = recentQ.slice(-AVOID);
+  var candidates = p.filter(function (item) { return avoid.indexOf(item) === -1; });
+  if (candidates.length === 0) candidates = p;   // 풀이 작으면 회피 불가, 전체에서 선택
+  return candidates[Math.floor(Math.random() * candidates.length)];
+}
+
+function renderStats() {
+  var windows = [8, 16, 32, 64];
+  elStats.innerHTML = '';
+  for (var i = 0; i < windows.length; i++) {
+    var n = windows[i];
+    var recent = answerLog.slice(-n);
+    var correct = recent.filter(function (x) { return x; }).length;
+    var valStr = answerLog.length ? Math.round(correct / n * 100) + '%' : '--';
+    var subStr = correct + '/' + n;
+    var div = document.createElement('div');
+    div.className = 'stat';
+    div.innerHTML = '<div class="stat-label">최근 ' + n + '</div>' +
+                    '<div class="stat-val">' + valStr + '</div>' +
+                    '<div class="stat-sub">' + subStr + '</div>';
+    elStats.appendChild(div);
+  }
+}
+
+function renderTiles() {
+  elTiles.innerHTML = '';
+  for (var i = 0; i < QUESTIONS.length; i++) {
+    if (!selectedCats[QUESTIONS[i].cat]) continue;
+    var t = document.createElement('span');
+    t.className = 'tile';
+    var st = qStatus[i];
+    if (st === 'ok') t.classList.add('ok');
+    else if (st === 'no') t.classList.add('no');
+    elTiles.appendChild(t);
+  }
+}
+
+function nextQuestion() {
+  answered = false;
+  pickedPos = null;
+  chatError = null;
+  current = pickRandom();
+  if (current) {
+    recentQ.push(current);
+    if (recentQ.length > AVOID) recentQ.shift();
+  }
+
+  elVerdict.textContent = '';
+  elVerdict.className = 'verdict';
+  elExplain.style.display = 'none';
+  elChoices.innerHTML = '';
+  renderTiles();
+  renderChat();
+
+  if (!current) {
+    elQcat.textContent = '';
+    var emptyMsg = (pool().length === 0)
+      ? '계열을 하나 이상 선택하세요.'
+      : '선택한 계열에서 안 푼/틀린 문제가 없습니다.';
+    elQuestion.innerHTML = '<span class="empty">' + emptyMsg + '</span>';
+    elNext.disabled = true;
+    return;
+  }
+
+  elNext.disabled = false;
+  elQcat.textContent = '[' + current.cat + ']';
+  elQuestion.textContent = current.q;
+  elExplain.textContent = current.explain || '';
+
+  var labels = ['1', '2', '3', '4', '5'];
+  currentOrder = shuffledIndices(current.choices.length);  // 풀 때마다 선지 순서 셔플
+  for (var i = 0; i < currentOrder.length; i++) {
+    (function (d) {
+      var origIdx = currentOrder[d];
+      var btn = document.createElement('button');
+      btn.className = 'choice';
+      btn.innerHTML = '<span class="mark">' + labels[d] + '.</span>' + escapeHtml(current.choices[origIdx]);
+      btn.addEventListener('click', function () { select(d); });
+      elChoices.appendChild(btn);
+    })(i);
+  }
+}
+
+function select(d) {
+  if (answered) return;
+  answered = true;
+  pickedPos = d;
+  var btns = elChoices.querySelectorAll('.choice');
+  var correctPos = currentOrder.indexOf(current.answer);  // 정답의 셔플된 표시위치
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].disabled = true;
+    if (i === correctPos) btns[i].classList.add('correct');
+  }
+
+  var ok = (currentOrder[d] === current.answer);
+  qStatus[QUESTIONS.indexOf(current)] = ok ? 'ok' : 'no';
+  if (ok) {
+    elVerdict.textContent = '정답';
+    elVerdict.className = 'verdict ok';
+  } else {
+    btns[d].classList.add('wrong');
+    elVerdict.textContent = '오답 (정답: ' + (correctPos + 1) + '번)';
+    elVerdict.className = 'verdict no';
+    if (current.explain) elExplain.style.display = 'block';
+  }
+
+  answerLog.push(ok);
+  renderStats();
+  renderTiles();
+  saveProgress();
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// 0..n-1 인덱스를 Fisher-Yates로 섞은 배열 반환
+function shuffledIndices(n) {
+  var arr = [];
+  for (var i = 0; i < n; i++) arr.push(i);
+  for (var i = n - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return arr;
+}
+
+document.getElementById('checkAll').addEventListener('click', function () {
+  var cats = getCategories();
+  for (var i = 0; i < cats.length; i++) selectedCats[cats[i]] = true;
+  buildCats(); nextQuestion();
+});
+document.getElementById('uncheckAll').addEventListener('click', function () {
+  var cats = getCategories();
+  for (var i = 0; i < cats.length; i++) selectedCats[cats[i]] = false;
+  buildCats(); nextQuestion();
+});
+elNext.addEventListener('click', nextQuestion);
+elOnlyUnsolved.addEventListener('change', nextQuestion);
+elReset.addEventListener('click', function () {
+  if (!confirm('풀이 기록과 통계, AI 대화 기록을 모두 초기화할까요?')) return;
+  answerLog = [];
+  qStatus = {};
+  recentQ = [];
+  chatLog = {};
+  try { localStorage.removeItem(STORE_KEY); } catch (e) {}
+  try { localStorage.removeItem(CHAT_STORE_KEY); } catch (e) {}
+  renderStats();
+  nextQuestion();
+});
+
+elChatSend.addEventListener('click', sendChat);
+elChatText.addEventListener('keydown', function (e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
+});
+elChatClear.addEventListener('click', function () {
+  if (!current) return;
+  if (!confirm('이 문제의 대화 기록을 지울까요?')) return;
+  delete chatLog[qid(current)];
+  saveChat();
+  chatError = null;
+  renderChat();
+});
+
+loadProgress();
+loadChat();
+buildCats();
+renderStats();
+nextQuestion();
+</script>
+
+</body>
+</html>

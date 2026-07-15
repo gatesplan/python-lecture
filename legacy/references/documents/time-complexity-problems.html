@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시간복잡도 분석 문제</title>
+    <style>
+        /* A4 프린트용 스타일 */
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            line-height: 1.6;
+            color: #000;
+            background: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 0 10px 0;
+            page-break-after: avoid;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .instructions {
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .problem {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+
+        .problem-header {
+            margin-bottom: 12px;
+        }
+
+        .problem-number {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .code-block {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 12px;
+            margin: 10px 0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.4;
+            white-space: pre;
+            page-break-inside: avoid;
+        }
+
+        .answer-box {
+            margin-top: 10px;
+            padding: 8px;
+            border: 1px solid #999;
+            min-height: 30px;
+            background: white;
+        }
+
+        .answer-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        @media print {
+            body {
+                font-size: 12px;
+                padding: 0;
+            }
+
+            .problem {
+                page-break-inside: avoid;
+            }
+
+            .code-block {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>시간복잡도 분석 문제</h1>
+        <div class="subtitle">다음 코드들의 시간복잡도를 Big-O 표기법으로 나타내시오.</div>
+
+        <div class="instructions">
+            <strong>지시사항:</strong><br>
+            • 각 코드의 시간복잡도를 Big-O 표기법으로 작성하시오. (예: O(n), O(n²), O(log n))<br>
+            • 입력 크기 n이 충분히 클 때를 기준으로 분석하시오.<br>
+            • 최악의 경우(Worst Case)를 기준으로 하시오.
+        </div>
+
+        <!-- 문제 1 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 1.</span> 다음 함수의 시간복잡도를 구하시오.
+            </div>
+            <div class="code-block">def find_max(arr):
+    max_val = arr[0]
+    for i in range(1, len(arr)):
+        if arr[i] > max_val:
+            max_val = arr[i]
+    return max_val</div>
+            <div class="answer-label">답:</div>
+            <div class="answer-box"></div>
+        </div>
+
+        <!-- 문제 2 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 2.</span> 다음 함수의 시간복잡도를 구하시오.
+            </div>
+            <div class="code-block">def process_data(n):
+    for i in range(n):
+        for j in range(100):
+            print(i, j)</div>
+            <div class="answer-label">답:</div>
+            <div class="answer-box"></div>
+        </div>
+
+        <!-- 문제 3 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 3.</span> 다음 함수의 시간복잡도를 구하시오.
+            </div>
+            <div class="code-block">def print_pairs(arr):
+    for i in range(len(arr)):
+        for j in range(len(arr)):
+            print(arr[i], arr[j])</div>
+            <div class="answer-label">답:</div>
+            <div class="answer-box"></div>
+        </div>
+
+        <!-- 문제 4 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 4.</span> 다음 함수의 시간복잡도를 구하시오.
+            </div>
+            <div class="code-block">def triangle_sum(n):
+    total = 0
+    for i in range(n):
+        for j in range(i + 1):
+            total += 1
+    return total</div>
+            <div class="answer-label">답:</div>
+            <div class="answer-box"></div>
+        </div>
+
+        <!-- 문제 5 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 5.</span> 다음 함수의 시간복잡도를 구하시오.
+            </div>
+            <div class="code-block">def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1</div>
+            <div class="answer-label">답:</div>
+            <div class="answer-box"></div>
+        </div>
+
+        <!-- 문제 6 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 6.</span> 다음 함수의 시간복잡도를 구하시오.
+            </div>
+            <div class="code-block">def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True</div>
+            <div class="answer-label">답:</div>
+            <div class="answer-box"></div>
+        </div>
+
+        <!-- 문제 7 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 7.</span> 다음 함수의 시간복잡도를 구하시오.
+            </div>
+            <div class="code-block">def count_primes(n):
+    count = 0
+    for i in range(2, n + 1):
+        is_prime = True
+        for j in range(2, i):
+            if i % j == 0:
+                is_prime = False
+                break
+        if is_prime:
+            count += 1
+    return count</div>
+            <div class="answer-label">답:</div>
+            <div class="answer-box"></div>
+        </div>
+
+        <!-- 문제 8 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 8.</span> 다음 재귀 함수의 시간복잡도를 구하시오.
+            </div>
+            <div class="code-block">def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)</div>
+            <div class="answer-label">답:</div>
+            <div class="answer-box"></div>
+        </div>
+
+        <!-- 문제 9 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 9.</span> 다음 재귀 함수의 시간복잡도를 구하시오.
+            </div>
+            <div class="code-block">def tree_traversal(n):
+    if n <= 0:
+        return
+    tree_traversal(n // 2)
+    tree_traversal(n // 2)</div>
+            <div class="answer-label">답:</div>
+            <div class="answer-box"></div>
+        </div>
+
+        <!-- 문제 10 -->
+        <div class="problem">
+            <div class="problem-header">
+                <span class="problem-number">문제 10.</span> 다음 재귀 함수의 시간복잡도를 구하시오.
+            </div>
+            <div class="code-block">def all_subsets(arr, index=0):
+    if index == len(arr):
+        return [[]]
+
+    without = all_subsets(arr, index + 1)
+    with_elem = []
+    for subset in without:
+        with_elem.append([arr[index]] + subset)
+
+    return without + with_elem</div>
+            <div class="answer-label">답:</div>
+            <div class="answer-box"></div>
+        </div>
+
+    </div>
+</body>
+</html>

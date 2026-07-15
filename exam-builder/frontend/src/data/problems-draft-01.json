@@ -1,0 +1,404 @@
+[
+  {
+    "id": "fb-01",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "print(1, 2, 3, sep=[[]])" },
+      { "type": "output-sample", "content": "1-2-3" }
+    ],
+    "answer": { "type": "value", "value": "\"-\"" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "print의 sep 파라미터는 출력값 사이에 삽입되는 구분자이다." },
+          { "type": "text", "content": "1, 2, 3 사이에 '-'가 삽입되어 1-2-3이 출력된다." },
+          { "type": "text", "content": "정답: \"-\"" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-02",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "for i in range(1, 4):\n    print(i, end=[[]])" },
+      { "type": "output-sample", "content": "1*2*3*" }
+    ],
+    "answer": { "type": "value", "value": "\"*\"" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "print의 end 파라미터는 출력 끝에 붙는 문자이다. 기본값은 줄바꿈(\\n)." },
+          { "type": "text", "content": "end=\"*\"로 설정하면 각 출력 뒤에 *가 붙는다." },
+          { "type": "text", "content": "i=1: 1*, i=2: 2*, i=3: 3* -> 1*2*3*" },
+          { "type": "text", "content": "정답: \"*\"" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-03",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "for i in range([[]], 8):\n    print(i, end=\" \")" },
+      { "type": "output-sample", "content": "3 4 5 6 7 " }
+    ],
+    "answer": { "type": "value", "value": "3" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "range(start, stop)에서 start는 시작값이다." },
+          { "type": "text", "content": "출력의 첫 값이 3이므로 start=3." },
+          { "type": "text", "content": "range(3, 8) = [3, 4, 5, 6, 7]" },
+          { "type": "text", "content": "정답: 3" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-04",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "s = 0\nfor i in range(0, 10, [[]]):\n    s = s + i\nprint(s)" },
+      { "type": "output-sample", "content": "20" }
+    ],
+    "answer": { "type": "value", "value": "2" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "range(0, 10, step)에서 step=2이면 0, 2, 4, 6, 8." },
+          { "type": "text", "content": "s = 0+2+4+6+8 = 20" },
+          { "type": "text", "content": "정답: 2" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-05",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "for i in range(1, 11):\n    if i % [[]] == 0:\n        print(i, end=\" \")" },
+      { "type": "output-sample", "content": "3 6 9 " }
+    ],
+    "answer": { "type": "value", "value": "3" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "출력된 3, 6, 9는 모두 3의 배수이다." },
+          { "type": "text", "content": "i % 3 == 0 이면 i는 3의 배수." },
+          { "type": "text", "content": "정답: 3" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-06",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "s = 0\nfor i in range(1, 6):\n    s = s + [[]]\nprint(s)" },
+      { "type": "output-sample", "content": "15" }
+    ],
+    "answer": { "type": "value", "value": "i" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "range(1, 6) = [1, 2, 3, 4, 5]" },
+          { "type": "text", "content": "s = 0+1+2+3+4+5 = 15" },
+          { "type": "text", "content": "빈칸에 i를 넣으면 매 반복마다 i를 누적한다." },
+          { "type": "text", "content": "정답: i" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-07",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "a = []\nfor i in range(5):\n    a.append([[]])\nprint(a)" },
+      { "type": "output-sample", "content": "[0, 2, 4, 6, 8]" }
+    ],
+    "answer": { "type": "value", "value": "i * 2" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "range(5) = [0, 1, 2, 3, 4]" },
+          { "type": "text", "content": "출력 [0, 2, 4, 6, 8]은 각 i에 2를 곱한 값이다." },
+          { "type": "text", "content": "i=0: 0, i=1: 2, i=2: 4, i=3: 6, i=4: 8" },
+          { "type": "text", "content": "정답: i * 2" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-08",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "n = 5\nx = 1\nwhile n > 0:\n    x = x * [[]]\n    n = n - 1\nprint(x)" },
+      { "type": "output-sample", "content": "32" }
+    ],
+    "answer": { "type": "value", "value": "2" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "while 루프가 5회 반복되며 x에 빈칸 값을 곱한다." },
+          { "type": "text", "content": "x = 1 * ?^5 = 32, 2^5 = 32이므로 빈칸은 2." },
+          { "type": "text", "content": "정답: 2" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-09",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "for i in range(1, 5):\n    print([[]] * i)" },
+      { "type": "output-sample", "content": "#\n##\n###\n####" }
+    ],
+    "answer": { "type": "value", "value": "\"#\"" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "문자열 * 정수 = 문자열 반복." },
+          { "type": "text", "content": "\"#\" * 1 = \"#\", \"#\" * 2 = \"##\", ..." },
+          { "type": "text", "content": "정답: \"#\"" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-10",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "d = {\"a\": 10, \"b\": 20, \"c\": 30}\nprint(d.get([[]], 0))" },
+      { "type": "output-sample", "content": "20" }
+    ],
+    "answer": { "type": "value", "value": "\"b\"" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "d.get(key, default)는 key가 있으면 해당 값, 없으면 default를 반환한다." },
+          { "type": "text", "content": "d[\"b\"] = 20이므로 d.get(\"b\", 0) = 20." },
+          { "type": "text", "content": "정답: \"b\"" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-11",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "t = (10, 20, 30, 40, 50)\ni = [[]]\nprint(t[i])" },
+      { "type": "output-sample", "content": "30" }
+    ],
+    "answer": { "type": "value", "value": "2" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "튜플의 인덱스는 0부터 시작한다." },
+          { "type": "text", "content": "t[0]=10, t[1]=20, t[2]=30." },
+          { "type": "text", "content": "정답: 2" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-12",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "x = 10\ns = 0\nwhile x > 0:\n    s = s + x\n    x = x - [[]]\nprint(s)" },
+      { "type": "output-sample", "content": "30" }
+    ],
+    "answer": { "type": "value", "value": "2" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "x가 2씩 감소: 10, 8, 6, 4, 2, 0(종료)." },
+          { "type": "text", "content": "s = 10+8+6+4+2 = 30" },
+          { "type": "text", "content": "정답: 2" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-13",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸에 들어갈 내용을 쓰시오." },
+      { "type": "code", "language": "python", "content": "for i in range(1, 4):\n    for j in range(1, [[]] + 1):\n        print(j, end=\" \")\n    print()" },
+      { "type": "output-sample", "content": "1 \n1 2 \n1 2 3 " }
+    ],
+    "answer": { "type": "value", "value": "i" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "i=1: range(1, 2) -> j=1 출력. i=2: range(1, 3) -> j=1,2 출력. i=3: range(1, 4) -> j=1,2,3 출력." },
+          { "type": "text", "content": "내부 range의 stop이 i+1이 되어야 i개의 숫자가 출력된다." },
+          { "type": "text", "content": "정답: i" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-14",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "for i in range([[]], [[]]):\n    print(i, end=\" \")" },
+      { "type": "output-sample", "content": "3 4 5 6 " }
+    ],
+    "answer": { "type": "value", "value": "3, 7" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "range(start, stop)에서 start는 첫 출력값, stop은 마지막 출력값+1." },
+          { "type": "text", "content": "첫 값 3 -> start=3, 마지막 값 6 -> stop=7." },
+          { "type": "text", "content": "정답: 3, 7" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-15",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "s = 0\nfor i in range(1, 11):\n    if i % 2 == [[]]:\n        s = s + [[]]\nprint(s)" },
+      { "type": "output-sample", "content": "25" }
+    ],
+    "answer": { "type": "value", "value": "1, i" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "1~10에서 홀수: 1, 3, 5, 7, 9. 합=25." },
+          { "type": "text", "content": "i % 2 == 1이면 홀수, s에 i를 누적한다." },
+          { "type": "text", "content": "정답: 1, i" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-16",
+    "type": "short",
+    "content": [
+      { "type": "text", "content": "다음 코드의 실행 결과가 <출력>과 같을 때 빈칸을 차례대로 채우시오." },
+      { "type": "code", "language": "python", "content": "for i in range(1, 4):\n    print(i, i * 10, sep=[[]], end=[[]])" },
+      { "type": "output-sample", "content": "1:10 2:20 3:30 " }
+    ],
+    "answer": { "type": "value", "value": "\":\", \" \"" },
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "i=1: print(1, 10, sep=\":\", end=\" \") -> \"1:10 \"" },
+          { "type": "text", "content": "i=2: \"2:20 \", i=3: \"3:30 \"" },
+          { "type": "text", "content": "sep은 값 사이 구분자(:), end는 출력 끝 문자(공백)." },
+          { "type": "text", "content": "정답: \":\", \" \"" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-17",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 1부터 10까지의 수 중 3의 배수의 합을 구하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "s = 0\nfor i in range(1, 11):\n[[[2]]]\nprint(s)" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "3의 배수 판별: i % 3 == 0" },
+          { "type": "text", "content": "해당하는 i를 s에 누적: s = s + i" },
+          { "type": "code", "language": "python", "content": "    if i % 3 == 0:\n        s = s + i" },
+          { "type": "text", "content": "3+6+9 = 18 출력" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-18",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 x가 1부터 시작하여 2배씩 증가하다가 처음으로 100을 넘는 값을 출력하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "x = 1\n[[[3]]]\nprint(x)" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "x <= 100인 동안 반복하며 2를 곱한다." },
+          { "type": "code", "language": "python", "content": "while x <= 100:\n    x = x * 2" },
+          { "type": "text", "content": "x: 1, 2, 4, 8, 16, 32, 64, 128. 128 > 100이므로 128 출력." }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-19",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 리스트 a에서 5보다 큰 수의 개수를 구하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "a = [3, 7, 2, 8, 5, 1, 9, 4]\nc = 0\nfor i in range(8):\n[[[2]]]\nprint(c)" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "a[i] > 5인 경우 카운터 c를 1 증가시킨다." },
+          { "type": "code", "language": "python", "content": "    if a[i] > 5:\n        c = c + 1" },
+          { "type": "text", "content": "5보다 큰 수: 7, 8, 9 -> c = 3 출력" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fb-20",
+    "type": "explain",
+    "content": [
+      { "type": "text", "content": "다음 코드의 빈칸을 채워 리스트 a에서 홀수만 골라 리스트 b에 저장하는 프로그램을 완성하시오." },
+      { "type": "code", "language": "python", "content": "a = [1, 2, 3, 4, 5, 6, 7, 8]\nb = []\nfor i in range(8):\n[[[3]]]\nprint(b)" },
+      { "type": "answer-box", "lines": 4 }
+    ],
+    "explain": [
+      {
+        "type": "process-box", "title": "풀이",
+        "content": [
+          { "type": "text", "content": "a[i] % 2 == 1이면 홀수이므로 b에 추가한다." },
+          { "type": "code", "language": "python", "content": "    if a[i] % 2 == 1:\n        b.append(a[i])" },
+          { "type": "text", "content": "b = [1, 3, 5, 7] 출력" }
+        ]
+      }
+    ]
+  }
+]

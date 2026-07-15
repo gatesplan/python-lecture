@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CNSH-122 기말고사 예상문제 - Level 3a (2025-11-15 분할)
+
+  Level 3-1, 3-2: 이진 트리 순회 기초
+  총 21개 문제
+
+  사용법: ?config=config-cnsh-122-1115-3a
+-->
+<exercise>
+  <title>CNSH-122 기말고사 예상문제 - Level 3a (트리 순회 기초)</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <!-- Level 3a: 이진 트리 순회 기초 -->
+    <section title="Level 3-1. 트리 순회 기초" file="problems-cnsh122-08-tree-traversal.xml" count="12"/>
+    <section title="Level 3-2. 레벨 순서 순회 (BFS)" file="problems-cnsh122-09-tree-levelorder.xml" count="9"/>
+  </sections>
+</exercise>

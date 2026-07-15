@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CNSH-122 기말고사 예상문제 - Level 6 (2025-11-15 분할)
+
+  Level 6: 시간복잡도 분석
+  총 26개 문제
+
+  사용법: ?config=config-cnsh-122-1115-6
+-->
+<exercise>
+  <title>CNSH-122 기말고사 예상문제 - Level 6 (시간복잡도 분석)</title>
+  <settings>
+    <showSolutions>true</showSolutions>
+  </settings>
+  <sections>
+    <!-- Level 6: 시간복잡도 분석 -->
+    <section title="Level 6-1. 시간복잡도 분석" file="problems-cnsh122-18-complexity.xml" count="14"/>
+    <section title="Level 6-2. 정렬 알고리즘 복잡도" file="problems-cnsh122-19-sorting-complexity.xml" count="12"/>
+  </sections>
+</exercise>

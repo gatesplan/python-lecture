@@ -1,0 +1,99 @@
+[
+ {
+  "id": "ml-knn-n01",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "아래 산점도에서 새 점(빨간 별, ?)은 두 클래스 무리 사이 경계 부근에 있다."},
+   {"type": "image", "src": "/images/knn-n1.png", "alt": "경계에 놓인 새 점", "width": 82, "align": "center"},
+   {"type": "text", "content": "이 새 점의 분류가 다른 점들보다 불확실한 이유를 쓰고, k를 너무 작게(k=1) 잡을 때와 적절히 키울 때의 차이를 서술하시오."},
+   {"type": "answer-box", "lines": 6}
+  ],
+  "answer": {"type": "value", "value": "새 점이 두 무리의 경계 부근에 있어, 가까운 이웃에 두 클래스가 섞여 있을 수 있어 어느 쪽으로도 단정하기 어렵다. k=1은 가장 가까운 한 점에만 의존해 그 점의 클래스에 따라 결과가 쉽게 흔들린다(불안정). k를 적당히 키우면 주변 여러 점의 다수결로 결정하므로 더 안정적으로 분류된다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "경계 부근이라 가까운 이웃에 두 클래스가 섞여 분류가 모호하다."},
+    {"type": "text", "content": "k=1: 가장 가까운 한 점에 좌우됨 -> 불안정/노이즈에 민감."},
+    {"type": "text", "content": "k를 키우면 주변 다수결로 더 안정적으로 분류."}
+  ]}]
+ },
+ {
+  "id": "ml-knn-n02",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "두 특성 annual_income(0~1000)과 rating(0~10)으로 k-NN 분류를 하려고 한다. 아래 산점도와 코드를 보시오."},
+   {"type": "image", "src": "/images/knn-n2.png", "alt": "축 범위가 크게 다른 산점도", "width": 84, "align": "center"},
+   {"type": "code", "language": "python", "content": "from sklearn.neighbors import KNeighborsClassifier\nmodel = KNeighborsClassifier(n_neighbors=3)\nmodel.fit(X, y)   # X의 두 특성: annual_income(0~1000), rating(0~10)\nprint(model.predict([[500, 5.2]]))"},
+   {"type": "text", "content": "두 특성의 값 범위가 크게 다른 상태로 k-NN을 적용하면 어떤 문제가 생기는지와 그 해결 방법을 서술하시오."},
+   {"type": "answer-box", "lines": 6}
+  ],
+  "answer": {"type": "value", "value": "k-NN은 거리로 이웃을 찾는데, 값의 범위가 큰 annual_income(0~1000)이 거리를 거의 결정해버려 범위가 작은 rating(0~10)은 사실상 무시된다. 두 특성을 같은 기준으로 맞추는 표준화(스케일링, 예: StandardScaler)를 적용해 각 특성이 거리에 공평하게 반영되도록 해야 한다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "거리 계산에서 범위가 큰 특성(income)이 지배 -> 작은 특성(rating)이 무시됨."},
+    {"type": "text", "content": "해결: 표준화/정규화(스케일링)로 두 특성 범위를 맞춤."},
+    {"type": "text", "content": "스케일링 후 각 특성이 거리에 공평하게 기여."}
+  ]}]
+ },
+ {
+  "id": "ml-knn-n03",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "class A가 16개, class B가 5개인 불균형 데이터다. 새 점(?)은 B 무리에 가깝다."},
+   {"type": "image", "src": "/images/knn-n3.png", "alt": "불균형 데이터 산점도", "width": 82, "align": "center"},
+   {"type": "text", "content": "k를 아주 크게(예: k=15) 잡으면 새 점이 어떤 클래스로 분류될지 예상하고, 그 이유를 서술하시오."},
+   {"type": "answer-box", "lines": 6}
+  ],
+  "answer": {"type": "value", "value": "A로 분류될 가능성이 크다. k를 크게 잡으면 멀리 있는 점까지 이웃에 포함되는데, 전체에 A가 훨씬 많아(16 대 5) 다수결이 A로 쏠리기 때문이다. 그래서 새 점이 실제로는 B 무리에 가까운데도 A로 잘못 분류될 수 있다. 데이터가 불균형할 때 너무 큰 k는 다수 클래스로 쏠리는 위험이 있다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "큰 k -> 멀리 있는 점까지 이웃에 포함."},
+    {"type": "text", "content": "전체에 A가 많아 다수결이 A로 쏠림 -> B 근처인데도 A로 오분류."},
+    {"type": "text", "content": "불균형 데이터에서 과도하게 큰 k의 위험."}
+  ]}]
+ },
+ {
+  "id": "ml-knn-n04",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "아래 그림에서 새 점(?)으로부터 가장 가까운 이웃 4개가 class A 2개, class B 2개로 같은 거리에 있다."},
+   {"type": "image", "src": "/images/knn-n4.png", "alt": "동점 상황 산점도", "width": 82, "align": "center"},
+   {"type": "text", "content": "k=4로 분류하면 어떤 문제가 생기는지, 그리고 이 문제를 어떻게 해결할 수 있는지 서술하시오."},
+   {"type": "answer-box", "lines": 5}
+  ],
+  "answer": {"type": "value", "value": "가장 가까운 4개가 A 2개, B 2개로 2:2 동점이라 다수결로 클래스를 정할 수 없다. k를 홀수(예: 3 또는 5)로 바꾸면 두 클래스의 표 합이 홀수가 되어 같아질 수 없으므로 동점이 사라지고 분류가 결정된다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "A 2 : B 2 동점 -> 다수결 불가."},
+    {"type": "text", "content": "짝수 k(특히 클래스 2개)에서 동점이 생길 수 있음."},
+    {"type": "text", "content": "해결: k를 홀수로 설정."}
+  ]}]
+ },
+ {
+  "id": "ml-knn-n05",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "세 클래스(A, B, C)의 데이터가 있고 새 점(?)을 분류하려고 한다."},
+   {"type": "image", "src": "/images/knn-n5.png", "alt": "세 클래스 산점도", "width": 82, "align": "center"},
+   {"type": "text", "content": "k=3으로 분류할 때 클래스를 정하는 방법을 설명하고, 그림을 근거로 새 점이 어느 클래스로 분류될지 쓰시오."},
+   {"type": "answer-box", "lines": 5}
+  ],
+  "answer": {"type": "value", "value": "새 점에서 가장 가까운 이웃 3개를 찾아 그 클래스를 다수결로 정한다. 새 점은 class B 무리에 가장 가까우므로 가까운 3개가 대부분 B여서 B로 분류된다. 클래스가 3개여도 다수결 방식은 동일하다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "가장 가까운 k(=3)개 이웃의 다수결로 결정."},
+    {"type": "text", "content": "새 점은 B 무리에 가장 가까움 -> B로 분류."},
+    {"type": "text", "content": "클래스가 여러 개여도 다수결 원리는 같다."}
+  ]}]
+ },
+ {
+  "id": "ml-knn-n06",
+  "type": "explain",
+  "content": [
+   {"type": "text", "content": "새 점(?)이 두 무리의 정확히 중간(대칭 위치)에 있다."},
+   {"type": "image", "src": "/images/knn-n6.png", "alt": "두 무리 중앙의 새 점", "width": 82, "align": "center"},
+   {"type": "text", "content": "이 위치에서 k=1로 분류할 때의 문제와, 이런 애매한 위치에서 k-NN 분류가 갖는 한계를 서술하시오."},
+   {"type": "answer-box", "lines": 6}
+  ],
+  "answer": {"type": "value", "value": "정중앙이라 두 무리까지의 거리가 거의 같아서, 가장 가까운 한 점(k=1)이 어느 무리의 점이냐에 따라 결과가 쉽게 뒤바뀐다(불안정). 이렇게 경계의 애매한 위치에서는 k를 키워도 양쪽 무리가 비슷하게 이웃에 포함되어 어느 쪽이라고 확신하기 어렵다. 즉 k-NN은 경계 부근의 점을 안정적으로 분류하기 어렵다."},
+  "explain": [{"type": "process-box", "title": "채점 포인트", "content": [
+    {"type": "text", "content": "두 무리까지 거리가 비슷 -> k=1은 한 점에 좌우되어 불안정."},
+    {"type": "text", "content": "k를 키워도 양쪽이 비슷하게 포함되어 확신 낮음."},
+    {"type": "text", "content": "경계 부근 점은 k-NN으로 안정적 분류가 어렵다."}
+  ]}]
+ }
+]
