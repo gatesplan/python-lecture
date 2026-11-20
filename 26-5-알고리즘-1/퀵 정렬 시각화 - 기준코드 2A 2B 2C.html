@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>퀵 정렬 시각화 (기준 코드 2A, 2B, 2C)</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
+    margin: 0;
+    padding: 22px;
+    background: #f4f6f8;
+    color: #1e2429;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { font-size: 13px; color: #5c6b78; margin: 0 0 16px; }
+
+  .panel {
+    background: #fff;
+    border: 1px solid #dde3e8;
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+
+  .opts { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; font-size: 13px; }
+  .opts label { cursor: pointer; }
+  .opts .grp { display: flex; gap: 9px; align-items: center; }
+  .opts .grp > b { font-weight: normal; color: #5c6b78; }
+  select, button {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 5px 11px;
+    border: 1px solid #c3ccd4;
+    border-radius: 4px;
+    background: #fff;
+    color: #1e2429;
+    cursor: pointer;
+  }
+  button:hover { background: #eef2f5; }
+  button:disabled { color: #aab4bd; cursor: default; background: #fff; }
+  button.main { background: #2f6fb5; border-color: #2f6fb5; color: #fff; min-width: 72px; }
+  button.main:hover { background: #275f9c; }
+
+  /* 2단 배치 */
+  .cols { display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+  .colL { flex: 0 0 392px; }
+  .colR { flex: 1 1 620px; min-width: 620px; }
+
+  /* 코드 */
+  #code {
+    font-family: Consolas, "D2Coding", monospace;
+    font-size: 12.5px;
+    line-height: 20px;
+    white-space: pre;
+  }
+  #code .ln { display: flex; border-left: 3px solid transparent; }
+  #code .ln .g {
+    flex: 0 0 30px;
+    text-align: right;
+    padding-right: 9px;
+    color: #b3bcc4;
+    user-select: none;
+  }
+  #code .ln.hit { background: #fff3d0; border-left-color: #e0a92e; }
+  #code .ln.hit .g { color: #a9801f; }
+  #code .ln.fn { color: #5c6b78; }
+
+  /* 무대 */
+  #stage { position: relative; margin: 4px 0 0; }
+  .bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    transition: transform .3s cubic-bezier(.4,.1,.2,1), opacity .2s;
+  }
+  .bar .num { font-size: 12px; font-weight: bold; margin-bottom: 3px; color: #3d4a55; }
+  .bar .col {
+    width: 100%;
+    background: #6b9bd2;
+    border: 1px solid #4d80ba;
+    border-radius: 2px 2px 0 0;
+    transition: background .2s, border-color .2s;
+  }
+  .bar.pivot .col { background: #e0736c; border-color: #c8524a; }
+  .bar.pivot .num { color: #c8524a; }
+  .bar.fixed .col { background: #8fbf8a; border-color: #6da868; }
+  .bar.fixed .num { color: #4f7d4a; }
+  .bar.out { opacity: .26; }
+
+  #axis { position: relative; height: 20px; border-top: 2px solid #cfd7de; }
+  #axis .slot {
+    position: absolute; top: 2px; width: 40px;
+    text-align: center; font-size: 11px; color: #8b97a2;
+  }
+  #cursors { position: relative; height: 24px; }
+  .cur {
+    position: absolute; top: 0; width: 40px;
+    text-align: center; font-size: 14px; font-weight: bold;
+    transition: transform .3s cubic-bezier(.4,.1,.2,1), opacity .2s;
+  }
+  .cur.hide { opacity: 0; }
+  #curI { color: #2f6fb5; }
+  #curJ { color: #2f8f5b; }
+  #curP { color: #c8524a; }
+
+  #note {
+    margin-top: 10px;
+    padding: 9px 12px;
+    background: #eef3f8;
+    border-left: 3px solid #2f6fb5;
+    font-size: 13.5px;
+    min-height: 38px;
+    line-height: 1.5;
+  }
+
+  /* 변수 */
+  #vars { display: flex; gap: 7px; margin-top: 9px; flex-wrap: wrap; }
+  #vars .v {
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    border: 1px solid #dde3e8;
+    border-radius: 4px;
+    padding: 4px 10px;
+    background: #fafbfc;
+    color: #5c6b78;
+  }
+  #vars .v b { color: #1e2429; font-weight: bold; }
+  #vars .v.chg { background: #fff3d0; border-color: #e0a92e; }
+
+  .ctrl { display: flex; gap: 7px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
+  .ctrl .step { margin-left: auto; font-size: 13px; color: #5c6b78; }
+  input[type=range] { vertical-align: middle; }
+  #scrub { width: 100%; margin-top: 10px; }
+
+  .legend { display: flex; gap: 16px; font-size: 12px; color: #5c6b78; margin-top: 11px; flex-wrap: wrap; }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .sw { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+
+  .code { font-family: Consolas, monospace; font-size: 13px; }
+  table { border-collapse: collapse; font-size: 13px; width: 100%; }
+  th, td { border: 1px solid #dde3e8; padding: 7px 10px; text-align: left; }
+  th { background: #f0f4f7; font-weight: normal; color: #5c6b78; }
+  h2 { font-size: 15px; margin: 0 0 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>퀵 정렬 시각화 (기준 코드 2A, 2B, 2C)</h1>
+  <p class="sub">코드를 한 줄씩 실행하면서 그 줄이 무엇을 바꾸는지 본다.</p>
+
+  <div class="panel">
+    <div class="opts">
+      <div class="grp">
+        <b>분할 방식</b>
+        <label><input type="radio" name="mode" value="hoare" checked> 2A 양쪽 커서</label>
+        <label><input type="radio" name="mode" value="mid"> 2B 가운데 피벗</label>
+        <label><input type="radio" name="mode" value="lomuto"> 2C 한쪽 커서</label>
+      </div>
+      <div class="grp">
+        <b>입력</b>
+        <select id="preset">
+          <option value="random">무작위</option>
+          <option value="sorted">이미 정렬</option>
+          <option value="reverse">역순</option>
+          <option value="dup">같은 값 섞임</option>
+        </select>
+      </div>
+      <div class="grp">
+        <b>개수</b>
+        <select id="size">
+          <option>6</option>
+          <option selected>8</option>
+          <option>10</option>
+          <option>12</option>
+        </select>
+      </div>
+      <button id="btnNew">새로 만들기</button>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="colL">
+      <div class="panel">
+        <div id="code"></div>
+      </div>
+    </div>
+
+    <div class="colR">
+      <div class="panel">
+        <div id="stage"></div>
+        <div id="axis"></div>
+        <div id="cursors">
+          <div class="cur" id="curI">i</div>
+          <div class="cur" id="curJ">j</div>
+          <div class="cur" id="curP">p</div>
+        </div>
+
+        <div id="note"></div>
+        <div id="vars"></div>
+
+        <input type="range" id="scrub" min="0" max="0" value="0">
+
+        <div class="ctrl">
+          <button id="btnFirst">처음</button>
+          <button id="btnPrev">이전</button>
+          <button id="btnPlay" class="main">재생</button>
+          <button id="btnNext">다음</button>
+          <label style="font-size:13px; color:#5c6b78; margin-left:10px;">
+            속도 <input type="range" id="speed" min="1" max="10" value="7" style="width:110px">
+          </label>
+          <span class="step" id="stepInfo"></span>
+        </div>
+
+        <div class="legend">
+          <span><i class="sw" style="background:#6b9bd2"></i> 일반</span>
+          <span><i class="sw" style="background:#e0736c"></i> 피벗</span>
+          <span><i class="sw" style="background:#8fbf8a"></i> 자리 확정</span>
+          <span><i class="sw" style="background:#c9d2d9"></i> 현재 구간 밖</span>
+          <span><b style="color:#2f6fb5">i</b> 왼쪽 커서</span>
+          <span><b style="color:#2f8f5b">j</b> 오른쪽 커서</span>
+          <span><b style="color:#c8524a">p</b> 피벗 값이 있는 자리</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>세 기준 코드의 분할 방식</h2>
+    <table>
+      <tr>
+        <th style="width:110px"></th>
+        <th>2A 양쪽 커서</th>
+        <th>2B 가운데 피벗</th>
+        <th>2C 한쪽 커서</th>
+      </tr>
+      <tr>
+        <td>피벗</td>
+        <td class="code">A[hi]</td>
+        <td class="code">A[(lo + hi) // 2]</td>
+        <td class="code">A[hi]</td>
+      </tr>
+      <tr>
+        <td>커서</td>
+        <td><span class="code">i</span>는 lo에서 오른쪽으로, <span class="code">j</span>는 hi-1에서 왼쪽으로</td>
+        <td><span class="code">i</span>는 lo에서 오른쪽으로, <span class="code">j</span>는 hi에서 왼쪽으로</td>
+        <td><span class="code">i</span>, <span class="code">j</span> 모두 lo에서 오른쪽으로</td>
+      </tr>
+      <tr>
+        <td>멈추는 곳</td>
+        <td><span class="code">i</span>는 피벗 이상인 값, <span class="code">j</span>는 피벗 이하인 값</td>
+        <td><span class="code">i</span>는 피벗 이상인 값, <span class="code">j</span>는 피벗 이하인 값</td>
+        <td><span class="code">j</span>는 안 멈추고 끝까지 훑는다</td>
+      </tr>
+      <tr>
+        <td>교환 시점</td>
+        <td>두 커서가 모두 멈췄고 <span class="code">i &lt; j</span>일 때</td>
+        <td>두 커서가 모두 멈췄고 <span class="code">i &lt;= j</span>일 때</td>
+        <td><span class="code">A[j] &lt; p</span>일 때마다</td>
+      </tr>
+      <tr>
+        <td>끝낸 뒤</td>
+        <td><span class="code">A[i]</span>와 피벗을 교환한다. 피벗 자리 <span class="code">i</span>가 확정되고, <span class="code">lo ~ m - 1</span>, <span class="code">m + 1 ~ hi</span>로 재귀한다.</td>
+        <td>피벗을 따로 옮기지 않는다. 커서가 엇갈린 뒤 <span class="code">lo ~ j</span>, <span class="code">i ~ hi</span>로 재귀한다.</td>
+        <td><span class="code">A[i]</span>와 피벗을 교환한다. 피벗 자리 <span class="code">i</span>가 확정되고, <span class="code">lo ~ m - 1</span>, <span class="code">m + 1 ~ hi</span>로 재귀한다.</td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var SLOT = 48;
+  var UNIT = 15;
+
+  var SRC = {
+    hoare: [
+      "def partition(A, lo, hi):",               //  1
+      "    p = A[hi]",                           //  2
+      "    i = lo",                              //  3
+      "    j = hi - 1",                          //  4
+      "",                                        //  5
+      "    while True:",                         //  6
+      "        while i <= j and A[i] < p:",      //  7
+      "            i += 1",                      //  8
+      "        while i <= j and A[j] > p:",      //  9
+      "            j -= 1",                      // 10
+      "",                                        // 11
+      "        if i >= j:",                      // 12
+      "            break",                       // 13
+      "",                                        // 14
+      "        A[i], A[j] = A[j], A[i]",         // 15
+      "        i += 1",                          // 16
+      "        j -= 1",                          // 17
+      "",                                        // 18
+      "    A[i], A[hi] = A[hi], A[i]",           // 19
+      "    return i",                            // 20
+      "",                                        // 21
+      "",                                        // 22
+      "def quick_sort(A, lo, hi):",              // 23
+      "    if lo >= hi:",                        // 24
+      "        return",                          // 25
+      "",                                        // 26
+      "    m = partition(A, lo, hi)",            // 27
+      "    quick_sort(A, lo, m - 1)",            // 28
+      "    quick_sort(A, m + 1, hi)"             // 29
+    ],
+    lomuto: [
+      "def partition2(A, lo, hi):",              //  1
+      "    p = A[hi]",                           //  2
+      "    i = lo",                              //  3
+      "",                                        //  4
+      "    for j in range(lo, hi):",             //  5
+      "        if A[j] < p:",                    //  6
+      "            A[i], A[j] = A[j], A[i]",     //  7
+      "            i += 1",                      //  8
+      "",                                        //  9
+      "    A[i], A[hi] = A[hi], A[i]",           // 10
+      "    return i",                            // 11
+      "",                                        // 12
+      "",                                        // 13
+      "def quick_sort2(A, lo, hi):",             // 14
+      "    if lo >= hi:",                        // 15
+      "        return",                          // 16
+      "",                                        // 17
+      "    m = partition2(A, lo, hi)",           // 18
+      "    quick_sort2(A, lo, m - 1)",           // 19
+      "    quick_sort2(A, m + 1, hi)"            // 20
+    ],
+    mid: [
+      "def quick_sort(A, lo, hi):",              //  1
+      "    if lo >= hi:",                        //  2
+      "        return",                          //  3
+      "",                                        //  4
+      "    p = A[(lo + hi) // 2]",               //  5
+      "    i = lo",                              //  6
+      "    j = hi",                              //  7
+      "",                                        //  8
+      "    while i <= j:",                       //  9
+      "        while A[i] < p:",                 // 10
+      "            i += 1",                      // 11
+      "        while A[j] > p:",                 // 12
+      "            j -= 1",                      // 13
+      "        if i <= j:",                      // 14
+      "            A[i], A[j] = A[j], A[i]",     // 15
+      "            i += 1",                      // 16
+      "            j -= 1",                      // 17
+      "",                                        // 18
+      "    quick_sort(A, lo, j)",                // 19
+      "    quick_sort(A, i, hi)"                 // 20
+    ]
+  };
+
+  var stage   = document.getElementById("stage");
+  var axis    = document.getElementById("axis");
+  var codeBox = document.getElementById("code");
+  var curI    = document.getElementById("curI");
+  var curJ    = document.getElementById("curJ");
+  var curP    = document.getElementById("curP");
+  var noteEl  = document.getElementById("note");
+  var varsEl  = document.getElementById("vars");
+  var stepEl  = document.getElementById("stepInfo");
+  var scrub   = document.getElementById("scrub");
+
+  var btnFirst = document.getElementById("btnFirst");
+  var btnPrev  = document.getElementById("btnPrev");
+  var btnPlay  = document.getElementById("btnPlay");
+  var btnNext  = document.getElementById("btnNext");
+  var btnNew   = document.getElementById("btnNew");
+  var speedEl  = document.getElementById("speed");
+
+  var nodes = {};
+  var lineEls = [];
+  var frames = [];
+  var at = 0;
+  var timer = null;
+
+  // ---------------------------------------------------------------- 입력
+  function makeItems() {
+    var n = parseInt(document.getElementById("size").value, 10);
+    var kind = document.getElementById("preset").value;
+    var vals = [];
+    var k;
+
+    if (kind === "sorted") {
+      for (k = 0; k < n; k++) { vals.push(k + 2); }
+    } else if (kind === "reverse") {
+      for (k = 0; k < n; k++) { vals.push(n + 1 - k); }
+    } else if (kind === "dup") {
+      var pool = [4, 8, 4, 11, 8, 4, 11, 8, 4, 11, 8, 4];
+      for (k = 0; k < n; k++) { vals.push(pool[k % pool.length]); }
+      shuffle(vals);
+    } else {
+      for (k = 0; k < n; k++) { vals.push(k + 2); }
+      shuffle(vals);
+    }
+
+    return vals.map(function (v, idx) { return { id: idx, val: v }; });
+  }
+
+  function shuffle(a) {
+    for (var k = a.length - 1; k > 0; k--) {
+      var r = Math.floor(Math.random() * (k + 1));
+      var t = a[k]; a[k] = a[r]; a[r] = t;
+    }
+  }
+
+  // ---------------------------------------------------------------- 장면 기록
+  function record(items, mode) {
+    var a = items.map(function (e) { return { id: e.id, val: e.val }; });
+    var out = [];
+    var fixed = [];
+    var V = { p: null, i: null, j: null, lo: null, hi: null, m: null };
+    var prevV = {};
+
+    function snap(line, note, view) {
+      var changed = [];
+      ["p", "i", "j", "lo", "hi", "m"].forEach(function (k) {
+        if (V[k] !== prevV[k]) { changed.push(k); }
+      });
+      prevV = { p: V.p, i: V.i, j: V.j, lo: V.lo, hi: V.hi, m: V.m };
+
+      out.push({
+        ids: a.map(function (e) { return e.id; }),
+        lo: view.lo, hi: view.hi,
+        i: (view.i === undefined ? -1 : view.i),
+        j: (view.j === undefined ? -1 : view.j),
+        pivot: (view.pivot === undefined ? -1 : view.pivot),
+        fixed: fixed.slice(),
+        line: line,
+        vars: { p: V.p, i: V.i, j: V.j, lo: V.lo, hi: V.hi, m: V.m },
+        changed: changed,
+        note: note
+      });
+    }
+
+    function swap(x, y) { var t = a[x]; a[x] = a[y]; a[y] = t; }
+
+    // -------------------------------------------------- 양쪽 커서
+    function partHoare(lo, hi) {
+      var view = { lo: lo, hi: hi, pivot: hi };
+      var p = a[hi].val;
+
+      V.p = p;
+      snap(2, "피벗을 구간의 오른쪽 끝 값으로 정한다.   p = A[" + hi + "] = " + p,
+           { lo: lo, hi: hi, pivot: hi });
+
+      var i = lo;
+      V.i = i;
+      snap(3, "왼쪽 커서를 구간 시작으로 놓는다.   i = " + i,
+           { lo: lo, hi: hi, i: i, pivot: hi });
+
+      var j = hi - 1;
+      V.j = j;
+      snap(4, "오른쪽 커서를 피벗 바로 왼쪽에 놓는다.   j = " + j,
+           { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+
+      while (true) {
+        // i 밀기
+        while (true) {
+          var okI = (i <= j && a[i].val < p);
+          snap(7, okI
+                ? "i <= j 이고 A[" + i + "] = " + a[i].val + " 이 피벗 " + p + " 보다 작다. 조건 참이므로 i를 민다."
+                : (i > j
+                   ? "i > j 이므로 조건 거짓. i 밀기를 멈춘다."
+                   : "A[" + i + "] = " + a[i].val + " 이 피벗 " + p + " 이상이다. 조건 거짓이므로 여기서 멈춘다."),
+               { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+          if (!okI) { break; }
+          i++;
+          V.i = i;
+          snap(8, "i를 한 칸 오른쪽으로.   i = " + i,
+               { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+        }
+
+        // j 밀기
+        while (true) {
+          var okJ = (i <= j && a[j].val > p);
+          snap(9, okJ
+                ? "i <= j 이고 A[" + j + "] = " + a[j].val + " 이 피벗 " + p + " 보다 크다. 조건 참이므로 j를 민다."
+                : (i > j
+                   ? "i > j 이므로 조건 거짓. j 밀기를 멈춘다."
+                   : "A[" + j + "] = " + a[j].val + " 이 피벗 " + p + " 이하다. 조건 거짓이므로 여기서 멈춘다."),
+               { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+          if (!okJ) { break; }
+          j--;
+          V.j = j;
+          snap(10, "j를 한 칸 왼쪽으로.   j = " + j,
+               { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+        }
+
+        var stop = (i >= j);
+        snap(12, "i = " + i + ", j = " + j + " 이므로 i >= j 는 " + (stop ? "참" : "거짓") + ".",
+             { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+
+        if (stop) {
+          snap(13, "반복을 빠져나간다. 더 맞바꿀 짝이 없다.",
+               { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+          break;
+        }
+
+        var vi = a[i].val, vj = a[j].val;
+        swap(i, j);
+        snap(15, "왼쪽에 큰 값, 오른쪽에 작은 값이 있으므로 맞바꾼다.   A[" + i + "] = " + vi + "  <->  A[" + j + "] = " + vj,
+             { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+
+        i++;
+        V.i = i;
+        snap(16, "맞바꾼 자리는 끝났으므로 i를 한 칸 민다.   i = " + i,
+             { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+
+        j--;
+        V.j = j;
+        snap(17, "j도 한 칸 민다.   j = " + j,
+             { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+      }
+
+      swap(i, hi);
+      fixed.push(i);
+      snap(19, "피벗을 A[" + i + "] 자리로 옮긴다. 왼쪽은 전부 피벗 이하, 오른쪽은 전부 피벗 이상이다.",
+           { lo: lo, hi: hi, i: i, j: j, pivot: i });
+
+      snap(20, "피벗이 놓인 자리 " + i + " 를 돌려준다. 이 칸은 확정이다.",
+           { lo: lo, hi: hi, i: i, j: j, pivot: i });
+
+      V.p = null; V.i = null; V.j = null;
+      return i;
+    }
+
+    // -------------------------------------------------- 한쪽 커서
+    function partLomuto(lo, hi) {
+      var p = a[hi].val;
+
+      V.p = p;
+      snap(2, "피벗을 구간의 오른쪽 끝 값으로 정한다.   p = A[" + hi + "] = " + p,
+           { lo: lo, hi: hi, pivot: hi });
+
+      var i = lo;
+      V.i = i;
+      snap(3, "i는 피벗보다 작은 값이 채워질 다음 자리다.   i = " + i,
+           { lo: lo, hi: hi, i: i, pivot: hi });
+
+      for (var j = lo; j < hi; j++) {
+        V.j = j;
+        snap(5, "j를 한 칸 옮긴다.   j = " + j,
+             { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+
+        var v = a[j].val;
+        var small = (v < p);
+        snap(6, "A[" + j + "] = " + v + " 이 피벗 " + p + " 보다 작은가? " + (small ? "예." : "아니오. 아무것도 하지 않고 다음 j로."),
+             { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+
+        if (small) {
+          var vi = a[i].val;
+          swap(i, j);
+          snap(7, (i === j)
+                ? "i와 j가 같은 자리라 맞바꿔도 그대로다.   A[" + j + "] = " + v
+                : "작은 값을 왼쪽 덩어리로 보낸다.   A[" + i + "] = " + vi + "  <->  A[" + j + "] = " + v,
+               { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+
+          i++;
+          V.i = i;
+          snap(8, "작은 값이 하나 늘었으므로 i를 한 칸 민다.   i = " + i,
+               { lo: lo, hi: hi, i: i, j: j, pivot: hi });
+        }
+      }
+
+      V.j = null;
+      swap(i, hi);
+      fixed.push(i);
+      snap(10, "훑기가 끝났다. 피벗을 A[" + i + "] 자리로 옮긴다.",
+           { lo: lo, hi: hi, i: i, pivot: i });
+
+      snap(11, "피벗이 놓인 자리 " + i + " 를 돌려준다. 이 칸은 확정이다.",
+           { lo: lo, hi: hi, i: i, pivot: i });
+
+      V.p = null; V.i = null;
+      return i;
+    }
+
+    // -------------------------------------------------- 2B 가운데 피벗 (분할이 함수 안에)
+    function quickMid(lo, hi) {
+      V.lo = lo; V.hi = hi; V.m = null; V.p = null; V.i = null; V.j = null;
+
+      var done = (lo >= hi);
+      snap(2, "구간 " + lo + ".." + hi + " 를 정렬한다. lo >= hi 인가? " + (done ? "예." : "아니오."),
+           { lo: lo, hi: hi });
+      if (done) {
+        if (lo === hi && fixed.indexOf(lo) < 0) { fixed.push(lo); }
+        snap(3, (lo === hi)
+              ? "칸이 하나뿐인 구간이다. A[" + lo + "] 는 이미 제자리다. 돌아간다."
+              : "빈 구간이다. 할 일이 없다. 돌아간다.",
+             { lo: lo, hi: hi });
+        return;
+      }
+
+      var mid = Math.floor((lo + hi) / 2);
+      var pid = a[mid].id, p = a[mid].val;
+      var i, j;
+      function pv() { for (var k = 0; k < a.length; k++) { if (a[k].id === pid) { return k; } } return -1; }
+      function vw() { return { lo: lo, hi: hi, i: i, j: j, pivot: pv() }; }
+
+      V.p = p;
+      snap(5, "피벗을 가운데 자리 값으로 정한다.   p = A[(" + lo + " + " + hi + ") // 2] = A[" + mid + "] = " + p,
+           { lo: lo, hi: hi, pivot: pv() });
+      i = lo; V.i = i;
+      snap(6, "왼쪽 커서를 구간 시작에 놓는다.   i = " + i, { lo: lo, hi: hi, i: i, pivot: pv() });
+      j = hi; V.j = j;
+      snap(7, "오른쪽 커서를 구간 끝에 놓는다.   j = " + j, vw());
+
+      while (true) {
+        var go = (i <= j);
+        snap(9, "i = " + i + ", j = " + j + " 이므로 i <= j 는 " + (go ? "참. 반복한다." : "거짓. 반복을 끝낸다."), vw());
+        if (!go) { break; }
+
+        while (true) {
+          var okI = (a[i].val < p);
+          snap(10, okI
+                ? "A[" + i + "] = " + a[i].val + " 이 피벗 " + p + " 보다 작다. 조건 참이므로 i를 민다."
+                : "A[" + i + "] = " + a[i].val + " 이 피벗 " + p + " 이상이다. 조건 거짓이므로 여기서 멈춘다.", vw());
+          if (!okI) { break; }
+          i++; V.i = i;
+          snap(11, "i를 한 칸 오른쪽으로.   i = " + i, vw());
+        }
+        while (true) {
+          var okJ = (a[j].val > p);
+          snap(12, okJ
+                ? "A[" + j + "] = " + a[j].val + " 이 피벗 " + p + " 보다 크다. 조건 참이므로 j를 민다."
+                : "A[" + j + "] = " + a[j].val + " 이 피벗 " + p + " 이하다. 조건 거짓이므로 여기서 멈춘다.", vw());
+          if (!okJ) { break; }
+          j--; V.j = j;
+          snap(13, "j를 한 칸 왼쪽으로.   j = " + j, vw());
+        }
+
+        var sw = (i <= j);
+        snap(14, "i = " + i + ", j = " + j + " 이므로 i <= j 는 " + (sw ? "참." : "거짓. 맞바꾸지 않는다."), vw());
+        if (sw) {
+          var vi = a[i].val, vj = a[j].val;
+          swap(i, j);
+          snap(15, (i === j)
+                ? "i와 j가 같은 자리라 맞바꿔도 그대로다.   A[" + i + "] = " + vi
+                : "왼쪽에 큰 값, 오른쪽에 작은 값이 있으므로 맞바꾼다.   A[" + i + "] = " + vi + "  <->  A[" + j + "] = " + vj, vw());
+          i++; V.i = i;
+          snap(16, "맞바꾼 자리는 끝났으므로 i를 한 칸 민다.   i = " + i, vw());
+          j--; V.j = j;
+          snap(17, "j도 한 칸 민다.   j = " + j, vw());
+        }
+      }
+
+      var fin = [];
+      for (var k = j + 1; k < i; k++) { if (k >= lo && k <= hi && fixed.indexOf(k) < 0) { fixed.push(k); fin.push(k); } }
+      V.p = null;
+      snap(19, "커서가 엇갈렸다(j = " + j + ", i = " + i + "). 이 구간의 " + lo + ".." + j + " 은 모두 피벗 이하, " + i + ".." + hi + " 은 모두 피벗 이상이다. "
+            + (fin.length ? "가운데 낀 " + fin.join(", ") + "번 자리는 확정이다. " : "")
+            + "왼쪽 구간 " + lo + ".." + j + " 로 들어간다.",
+           { lo: lo, hi: hi, i: i, j: j });
+      quickMid(lo, j);
+
+      V.lo = lo; V.hi = hi; V.p = null; V.i = i; V.j = j;
+      snap(20, "오른쪽 구간 " + i + ".." + hi + " 로 들어간다.", { lo: lo, hi: hi, i: i, j: j });
+      quickMid(i, hi);
+    }
+
+    if (mode === "mid") {
+      snap(0, "시작. quick_sort(A, 0, " + (a.length - 1) + ") 를 부른다.", { lo: 0, hi: a.length - 1 });
+      quickMid(0, a.length - 1);
+      for (var q = 0; q < a.length; q++) { if (fixed.indexOf(q) < 0) { fixed.push(q); } }
+      V.p = null; V.i = null; V.j = null; V.lo = null; V.hi = null; V.m = null;
+      snap(0, "모든 칸이 확정됐다. 정렬 완료.", { lo: 0, hi: -1 });
+      return out;
+    }
+
+    // -------------------------------------------------- 재귀
+    var isH = (mode !== "lomuto");
+    var part   = isH ? partHoare : partLomuto;
+    var LN_IF  = isH ? 24 : 15;
+    var LN_RET = isH ? 25 : 16;
+    var LN_M   = isH ? 27 : 18;
+    var LN_L   = isH ? 28 : 19;
+    var LN_R   = isH ? 29 : 20;
+
+    function quick(lo, hi) {
+      V.lo = lo; V.hi = hi; V.m = null;
+
+      var done = (lo >= hi);
+      snap(LN_IF, "구간 " + lo + ".." + hi + " 를 정렬한다. lo >= hi 인가? " + (done ? "예." : "아니오."),
+           { lo: lo, hi: hi });
+
+      if (done) {
+        if (lo === hi && fixed.indexOf(lo) < 0) { fixed.push(lo); }
+        snap(LN_RET, (lo === hi)
+              ? "칸이 하나뿐인 구간이다. A[" + lo + "] 는 이미 제자리다. 돌아간다."
+              : "빈 구간이다. 할 일이 없다. 돌아간다.",
+             { lo: lo, hi: hi });
+        return;
+      }
+
+      snap(LN_M, "이 구간을 분할한다.", { lo: lo, hi: hi });
+
+      var m = part(lo, hi);
+
+      V.lo = lo; V.hi = hi; V.m = m;
+      snap(LN_M, "분할이 끝났다. 피벗이 " + m + "번 자리에 확정됐다.   m = " + m,
+           { lo: lo, hi: hi, pivot: m });
+
+      snap(LN_L, "피벗 왼쪽 구간 " + lo + ".." + (m - 1) + " 로 들어간다.",
+           { lo: lo, hi: hi, pivot: m });
+      quick(lo, m - 1);
+
+      V.lo = lo; V.hi = hi; V.m = m;
+      snap(LN_R, "피벗 오른쪽 구간 " + (m + 1) + ".." + hi + " 로 들어간다.",
+           { lo: lo, hi: hi, pivot: m });
+      quick(m + 1, hi);
+
+      V.lo = lo; V.hi = hi; V.m = m;
+    }
+
+    snap(0, "시작. " + (isH ? "quick_sort" : "quick_sort2") + "(A, 0, " + (a.length - 1) + ") 를 부른다.",
+         { lo: 0, hi: a.length - 1 });
+
+    quick(0, a.length - 1);
+
+    V.p = null; V.i = null; V.j = null; V.lo = null; V.hi = null; V.m = null;
+    snap(0, "모든 칸이 확정됐다. 정렬 완료.", { lo: 0, hi: -1 });
+
+    return out;
+  }
+
+  // ---------------------------------------------------------------- 그리기
+  function buildCode(mode) {
+    var src = SRC[mode];
+    codeBox.innerHTML = "";
+    lineEls = [];
+
+    src.forEach(function (text, idx) {
+      var row = document.createElement("div");
+      row.className = "ln" + (text.indexOf("def ") === 0 ? " fn" : "");
+
+      var g = document.createElement("span");
+      g.className = "g";
+      g.textContent = (idx + 1);
+
+      var t = document.createElement("span");
+      t.textContent = text === "" ? " " : text;
+
+      row.appendChild(g);
+      row.appendChild(t);
+      codeBox.appendChild(row);
+      lineEls.push(row);
+    });
+  }
+
+  function buildStage(items) {
+    stage.innerHTML = "";
+    axis.innerHTML = "";
+    nodes = {};
+
+    var maxV = 0;
+    items.forEach(function (e) { if (e.val > maxV) { maxV = e.val; } });
+    stage.style.height = (maxV * UNIT + 26) + "px";
+    stage.style.width = (items.length * SLOT) + "px";
+    axis.style.width = stage.style.width;
+
+    items.forEach(function (e, idx) {
+      var bar = document.createElement("div");
+      bar.className = "bar";
+      bar.style.transform = "translateX(" + (idx * SLOT) + "px)";
+
+      var num = document.createElement("div");
+      num.className = "num";
+      num.textContent = e.val;
+
+      var col = document.createElement("div");
+      col.className = "col";
+      col.style.height = (e.val * UNIT) + "px";
+
+      bar.appendChild(num);
+      bar.appendChild(col);
+      stage.appendChild(bar);
+      nodes[e.id] = bar;
+
+      var slot = document.createElement("div");
+      slot.className = "slot";
+      slot.style.left = (idx * SLOT) + "px";
+      slot.textContent = idx;
+      axis.appendChild(slot);
+    });
+  }
+
+  function place(el, pos, n) {
+    if (pos < 0 || pos >= n) {
+      if (el.className.indexOf("hide") < 0) { el.className += " hide"; }
+      return;
+    }
+    el.className = el.className.replace(/ hide/g, "");
+    el.style.transform = "translateX(" + (pos * SLOT) + "px)";
+  }
+
+  function draw(f) {
+    var n = f.ids.length;
+    var live = (f.hi >= f.lo);
+
+    f.ids.forEach(function (id, pos) {
+      var el = nodes[id];
+      var cls = "bar";
+      if (f.fixed.indexOf(pos) >= 0) { cls += " fixed"; }
+      if (pos === f.pivot) { cls += " pivot"; }
+      if (live && (pos < f.lo || pos > f.hi) && f.fixed.indexOf(pos) < 0) { cls += " out"; }
+      el.className = cls;
+      el.style.transform = "translateX(" + (pos * SLOT) + "px)";
+    });
+
+    place(curI, f.i, n);
+    place(curJ, f.j, n);
+    place(curP, f.pivot, n);
+
+    lineEls.forEach(function (el, idx) {
+      if (idx + 1 === f.line) {
+        if (el.className.indexOf("hit") < 0) { el.className += " hit"; }
+      } else {
+        el.className = el.className.replace(/ hit/g, "");
+      }
+    });
+
+    noteEl.textContent = f.note;
+
+    varsEl.innerHTML = "";
+    [["lo", f.vars.lo], ["hi", f.vars.hi], ["p", f.vars.p],
+     ["i", f.vars.i], ["j", f.vars.j], ["m", f.vars.m]].forEach(function (kv) {
+      var d = document.createElement("div");
+      d.className = "v" + (f.changed.indexOf(kv[0]) >= 0 && kv[1] !== null ? " chg" : "");
+      d.innerHTML = kv[0] + " = <b>" + (kv[1] === null ? "-" : kv[1]) + "</b>";
+      varsEl.appendChild(d);
+    });
+
+    stepEl.textContent = "단계 " + (at + 1) + " / " + frames.length;
+    scrub.value = at;
+
+    btnPrev.disabled = (at === 0);
+    btnFirst.disabled = (at === 0);
+    btnNext.disabled = (at === frames.length - 1);
+  }
+
+  // ---------------------------------------------------------------- 제어
+  function go(k) {
+    at = Math.max(0, Math.min(frames.length - 1, k));
+    draw(frames[at]);
+    if (at === frames.length - 1) { stop(); }
+  }
+
+  function delay() { return 1150 - parseInt(speedEl.value, 10) * 100; }
+
+  function play() {
+    if (at === frames.length - 1) { go(0); }
+    stop();
+    btnPlay.textContent = "정지";
+    timer = setInterval(function () { go(at + 1); }, delay());
+  }
+
+  function stop() {
+    if (timer) { clearInterval(timer); timer = null; }
+    btnPlay.textContent = "재생";
+  }
+
+  function reset(autoplay) {
+    stop();
+    var items = makeItems();
+    var mode = document.querySelector("input[name=mode]:checked").value;
+
+    buildCode(mode);
+    buildStage(items);
+    frames = record(items, mode);
+
+    scrub.min = 0;
+    scrub.max = frames.length - 1;
+    at = 0;
+    draw(frames[0]);
+    if (autoplay) { setTimeout(play, 400); }
+  }
+
+  btnPlay.addEventListener("click", function () { if (timer) { stop(); } else { play(); } });
+  btnNext.addEventListener("click", function () { stop(); go(at + 1); });
+  btnPrev.addEventListener("click", function () { stop(); go(at - 1); });
+  btnFirst.addEventListener("click", function () { stop(); go(0); });
+  btnNew.addEventListener("click", function () { reset(true); });
+
+  scrub.addEventListener("input", function () { stop(); go(parseInt(scrub.value, 10)); });
+  speedEl.addEventListener("input", function () { if (timer) { play(); } });
+
+  Array.prototype.forEach.call(document.querySelectorAll("input[name=mode]"), function (r) {
+    r.addEventListener("change", function () { reset(true); });
+  });
+  document.getElementById("preset").addEventListener("change", function () { reset(true); });
+  document.getElementById("size").addEventListener("change", function () { reset(true); });
+
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "ArrowRight") { stop(); go(at + 1); }
+    else if (ev.key === "ArrowLeft") { stop(); go(at - 1); }
+    else if (ev.key === " ") { ev.preventDefault(); if (timer) { stop(); } else { play(); } }
+  });
+
+  reset(true);
+})();
+</script>
+</body>
+</html>

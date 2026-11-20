@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>시험대비 - 트리와 그래프 3세트</title>
+<style>
+@page { size: A4; margin: 15mm; }
+body {
+    font-family: 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1cm;
+}
+h1 { font-size: 16pt; border-bottom: 2px solid #000; padding-bottom: 8px; margin: 0 0 6px; }
+.intro { font-size: 10pt; color: #333; margin: 0 0 10px; }
+h2 { font-size: 13pt; margin: 1.5em 0 0.2em; border-bottom: 1px solid #999; padding-bottom: 3px; }
+.sec-desc { font-size: 10pt; color: #333; margin: 0.2em 0 0.6em; }
+.problem { margin: 0 0 26px; page-break-inside: avoid; break-inside: avoid; }
+.problem-number { font-weight: bold; font-size: 11pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; }
+.stmt { margin: 4px 0 6px; }
+.code-block {
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    margin: 6px 0;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.subq { font-size: 10.5pt; margin: 10px 0 2px; }
+.answer-space { border: 1px solid #ccc; margin: 4px 0 0; background: #fff;
+                page-break-inside: avoid; break-inside: avoid; }
+.answer-space.sm { height: 50px; }
+.answer-space.lg { height: 130px; }
+.answers { page-break-before: always; break-before: page; }
+.a-item { margin: 0 0 14px; page-break-inside: avoid; break-inside: avoid; }
+.a-num { font-weight: bold; }
+.a-body { font-size: 10pt; margin: 2px 0 0; }
+.a-out { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; white-space: pre; background: #f8f8f8; border: 1px solid #ddd; padding: 4px 8px; margin: 2px 0; }
+@media print { body { max-width: none; margin: 0; padding: 0; } }
+.page-break { break-before: page; page-break-before: always; }
+</style>
+</head>
+<body>
+<h1>시험대비 - 트리와 그래프 3세트</h1>
+<p class="intro">리스트로 저장한 트리는 루트가 인덱스 1이고 0은 빈 칸이다. 차수는 자식 노드의 수, 높이는 루트에서 가장 먼 노드까지의 링크 수이다.</p>
+<div class="problem" id="p1">
+<div class="problem-number">1</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">tree = [0, &#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;, &#x27;D&#x27;, &#x27;E&#x27;]
+
+for i in [1, 3, 5]:
+    p = tree[i // 2]
+    l = tree[i * 2] if i * 2 &lt; len(tree) else &#x27;없음&#x27;
+    print(i, p, l)</div>
+<div class="answer-space" style="height: 82px"></div>
+</div>
+<div class="problem" id="p2">
+<div class="problem-number">2</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">a = [&#x27;A&#x27;]
+a.append([&#x27;B&#x27;, &#x27;C&#x27;])
+b = [&#x27;A&#x27;]
+b.extend([&#x27;B&#x27;, &#x27;C&#x27;])
+c = [&#x27;A&#x27;]
+c.extend(&#x27;BC&#x27;)
+d = [&#x27;A&#x27;]
+d += &#x27;DE&#x27;
+print(a, len(a))
+print(b, len(b))
+print(c, len(c))
+print(d, len(d))
+e = [&#x27;A&#x27;]
+e.append(&#x27;DE&#x27;)
+print(e, len(e))</div>
+<div class="answer-space" style="height: 130px"></div>
+</div>
+<div class="page-break"></div>
+<div class="problem" id="p3">
+<div class="problem-number">3</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">bst = [0] * 40
+
+def insert(idx, num):
+    if bst[idx] == 0:
+        bst[idx] = num
+    elif num &lt; bst[idx]:
+        insert(idx * 2, num)
+    else:
+        insert(idx * 2 + 1, num)
+
+for x in [1, 2, 3, 4, 5]:
+    insert(1, x)
+
+for i in range(len(bst)):
+    if bst[i] != 0:
+        print(i, bst[i])</div>
+<div class="answer-space" style="height: 126px"></div>
+</div>
+<div class="problem" id="p4">
+<div class="problem-number">4</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">matrix = [[0] * 3 for _ in range(3)]
+
+for row in matrix:
+    row = [1] * 3
+print(matrix)
+
+for row in matrix:
+    row[0] = 1
+print(matrix)</div>
+<div class="answer-space" style="height: 60px"></div>
+</div>
+<div class="page-break"></div>
+<div class="problem" id="p5">
+<div class="problem-number">5</div>
+<div class="stmt">다음 코드에 대하여 물음에 답하시오.</div>
+<div class="code-block">graph = {
+    1: [2, 3, 4],
+    2: [1, 5, 6],
+    3: [1],
+    4: [1],
+    5: [2, 7],
+    6: [2],
+    7: [5]
+}
+order = [1]
+for v in order:
+    for w in graph[v]:
+        if w not in order:
+            order.append(w)
+print(order)</div>
+<div class="subq">(1) 실행 결과를 쓰시오.<br>(2) 출력된 순서는 DFS, BFS 중 어느 탐색 순서와 같은지 쓰시오.</div>
+<div class="answer-space" style="height: 60px"></div>
+</div>
+<div class="page-break"></div>
+<div class="problem" id="p6">
+<div class="problem-number">6</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">m = [
+    [0, 1, 1, 0, 0],
+    [1, 0, 0, 1, 0],
+    [1, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0]
+]
+
+def min_distance(start, target):
+    distance = [-1] * len(m)
+    queue = [start]
+    distance[start] = 0
+    while queue:
+        cur = queue.pop(0)
+        if cur == target:
+            return distance[cur]
+        for nxt in range(len(m)):
+            if m[cur][nxt] == 1 and distance[nxt] == -1:
+                distance[nxt] = distance[cur] + 1
+                queue.append(nxt)
+    return -1
+
+print(min_distance(0, 3))
+print(min_distance(3, 2))
+print(min_distance(0, 4))
+print(min_distance(4, 4))</div>
+<div class="answer-space" style="height: 104px"></div>
+</div>
+<div class="problem" id="p7">
+<div class="problem-number">7</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">adj = {&#x27;A&#x27;: [&#x27;B&#x27;], &#x27;B&#x27;: [&#x27;C&#x27;], &#x27;C&#x27;: []}
+
+for k in adj:
+    for w in adj[k]:
+        adj[w].append(k)
+print(adj)</div>
+<div class="answer-space" style="height: 50px"></div>
+</div>
+<div class="page-break"></div>
+<div class="problem" id="p8">
+<div class="problem-number">8</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">graph = {1: [2, 3], 2: [1, 4], 3: [1], 4: [2]}
+
+def dfs(v, visited=[]):
+    visited.append(v)
+    for w in graph[v]:
+        if w not in visited:
+            dfs(w)
+    return visited
+
+print(dfs(1))
+print(dfs(4))</div>
+<div class="answer-space" style="height: 60px"></div>
+</div>
+<div class="problem" id="p9">
+<div class="problem-number">9</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">graph = {1: [2, 3], 2: [1, 3, 4], 3: [1, 2, 4], 4: [2, 3]}
+
+def count(v, visited, undo):
+    if v == 4:
+        return 1
+    visited[v] = True
+    total = 0
+    for w in graph[v]:
+        if not visited[w]:
+            total += count(w, visited, undo)
+    if undo:
+        visited[v] = False
+    return total
+
+print(count(1, {v: False for v in graph}, True))    # (가)
+print(count(1, {v: False for v in graph}, False))   # (나)</div>
+<div class="answer-space" style="height: 60px"></div>
+</div>
+</body>
+</html>

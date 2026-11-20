@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>시험대비 - 재귀 빈칸 채우기</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>시험대비 - 재귀 빈칸 채우기</h1><p class="intro">밑줄 칸에 들어갈 코드를 쓴다. 밑줄 길이는 들어갈 코드의 글자 수와 같다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 factorial(n)은 n!을 돌려주는 재귀 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def factorial(n):
+    if <span class="b" style="width:6ch"><i>가</i></span>:
+        return <span class="b" style="width:1ch"><i>나</i></span>
+    return <span class="b" style="width:20ch"><i>다</i></span>
+
+
+print(factorial(5))</div>
+<p class="out-label">실행 결과</p><div class="out">120</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 power(base, exp)는 base의 exp제곱을 돌려주는 재귀 함수이다. 빈칸 (가), (나)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def power(base, exp):
+    if <span class="b" style="width:8ch"><i>가</i></span>:
+        return 1
+    return <span class="b" style="width:27ch"><i>나</i></span>
+
+
+print(power(2, 10), power(3, 0))</div>
+<p class="out-label">실행 결과</p><div class="out">1024 1</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 list_sum(arr, n)은 arr의 앞에서부터 n개 값의 합을 돌려주는 재귀 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def list_sum(arr, n):
+    if n == 0:
+        return <span class="b" style="width:1ch"><i>가</i></span>
+    return <span class="b" style="width:10ch"><i>나</i></span> + list_sum(arr, <span class="b" style="width:5ch"><i>다</i></span>)
+
+
+print(list_sum([1, 2, 3, 4], 4))
+print(list_sum([1, 2, 3, 4], 2))</div>
+<p class="out-label">실행 결과</p><div class="out">10
+3</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 list_sum(arr, i)는 arr의 인덱스 i부터 끝까지 값의 합을 돌려주는 재귀 함수이다. 맨 앞 값과 나머지의 합을 더한다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def list_sum(arr, i):
+    if <span class="b" style="width:13ch"><i>가</i></span>:
+        return 0
+    return <span class="b" style="width:6ch"><i>나</i></span> + list_sum(arr, <span class="b" style="width:5ch"><i>다</i></span>)
+
+
+print(list_sum([1, 2, 3, 4], 0))
+print(list_sum([1, 2, 3, 4], 2))</div>
+<p class="out-label">실행 결과</p><div class="out">10
+7</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 list_max(arr, n)은 arr의 앞에서부터 n개 값 중 최댓값을 돌려주는 재귀 함수이다. 앞의 n - 1개 중 최댓값 m을 먼저 구하고, n번째 값과 비교한다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def list_max(arr, n):
+    if n == 1:
+        return <span class="b" style="width:6ch"><i>가</i></span>
+    m = <span class="b" style="width:20ch"><i>나</i></span>
+    if <span class="b" style="width:14ch"><i>다</i></span>:
+        return arr[n - 1]
+    else:
+        return m
+
+
+print(list_max([3, 1, 4, 1, 5], 5))
+print(list_max([3, 1, 4, 1, 5], 2))</div>
+<p class="out-label">실행 결과</p><div class="out">5
+3</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">6<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 fib(n)은 피보나치 수열의 n번째 값을 돌려주는 재귀 함수이다. fib(0) = 0이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def fib(n):
+    if n == 0:
+        return 0
+    if <span class="b" style="width:6ch"><i>가</i></span>:
+        return <span class="b" style="width:1ch"><i>나</i></span>
+    return <span class="b" style="width:23ch"><i>다</i></span>
+
+
+print(fib(8))</div>
+<p class="out-label">실행 결과</p><div class="out">21</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">7<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">계단을 한 번에 1칸 또는 2칸씩 오른다. 다음 stairs(n)은 n칸을 오르는 방법의 수를 돌려주는 재귀 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def stairs(n):
+    if n == 1:
+        return <span class="b" style="width:1ch"><i>가</i></span>
+    if n == 2:
+        return <span class="b" style="width:1ch"><i>나</i></span>
+    return <span class="b" style="width:29ch"><i>다</i></span>
+
+
+print(stairs(5))</div>
+<p class="out-label">실행 결과</p><div class="out">8</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">8<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 comb(n, r)은 서로 다른 n개에서 r개를 고르는 방법의 수(nCr)를 돌려주는 재귀 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def comb(n, r):
+    if <span class="b" style="width:16ch"><i>가</i></span>:
+        return 1
+    return <span class="b" style="width:18ch"><i>나</i></span> + <span class="b" style="width:14ch"><i>다</i></span>
+
+
+print(comb(5, 2))</div>
+<p class="out-label">실행 결과</p><div class="out">10</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">9<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 gcd(a, b)는 유클리드 호제법으로 a와 b의 최대공약수를 돌려주는 재귀 함수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def gcd(a, b):
+    if <span class="b" style="width:6ch"><i>가</i></span>:
+        return <span class="b" style="width:1ch"><i>나</i></span>
+    return gcd(<span class="b" style="width:1ch"><i>다</i></span>, <span class="b" style="width:5ch"><i>라</i></span>)
+
+
+print(gcd(24, 36))</div>
+<p class="out-label">실행 결과</p><div class="out">12</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">10<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 power(base, exp)는 지수를 절반으로 줄여 재귀 호출하는 거듭제곱 함수이다. 지수가 절반인 거듭제곱을 한 번만 구해 half에 두고, half를 두 번 곱해 쓴다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def power(base, exp):
+    if exp == 0:
+        return 1
+    half = <span class="b" style="width:21ch"><i>가</i></span>
+    if <span class="b" style="width:12ch"><i>나</i></span>:
+        return <span class="b" style="width:11ch"><i>다</i></span>
+    else:
+        return <span class="b" style="width:18ch"><i>라</i></span>
+
+
+print(power(2, 10), power(2, 5), power(3, 0))</div>
+<p class="out-label">실행 결과</p><div class="out">1024 32 1</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div></body></html>

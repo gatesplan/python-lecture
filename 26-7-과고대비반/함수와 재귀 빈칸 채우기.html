@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>함수와 재귀 빈칸 채우기</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>함수와 재귀 빈칸 채우기</h1><p class="intro">밑줄 칸에 들어갈 코드를 쓴다. 밑줄 길이는 들어갈 코드의 글자 수와 같다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 my_min(lst)는 리스트 lst에서 가장 작은 값을 돌려주는 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def my_min(lst):
+    m = <span class="b" style="width:6ch"><i>가</i></span>
+    for x in lst:
+        if <span class="b" style="width:5ch"><i>나</i></span>:
+            m = x
+    <span class="b" style="width:8ch"><i>다</i></span>
+
+
+print(my_min([3, 7, 2, 9, 4]))
+print(my_min([-5, -2, -8]))</div>
+<p class="out-label">실행 결과</p><div class="out">2
+-8</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 repeat(word, n)은 문자열 word를 n번 이어 붙인 문자열을 돌려주는 함수이다. n을 주지 않으면 2번 이어 붙인다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def repeat(word, <span class="b" style="width:3ch"><i>가</i></span>):
+    result = ''
+    for i in range(<span class="b" style="width:1ch"><i>나</i></span>):
+        <span class="b" style="width:14ch"><i>다</i></span>
+    return result
+
+
+print(repeat('ab'))
+print(repeat('ab', 3))</div>
+<p class="out-label">실행 결과</p><div class="out">abab
+ababab</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 count_divisors(n)은 n의 약수의 개수를 돌려주는 함수이다. is_prime(n)은 count_divisors를 호출해서, n이 소수이면 True, 아니면 False를 돌려준다. 소수는 약수가 2개인 수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def count_divisors(n):
+    cnt = 0
+    for i in range(1, <span class="b" style="width:5ch"><i>가</i></span>):
+        if <span class="b" style="width:10ch"><i>나</i></span>:
+            cnt += 1
+    return cnt
+
+
+def is_prime(n):
+    return <span class="b" style="width:22ch"><i>다</i></span>
+
+
+print(count_divisors(12))
+print(is_prime(7), is_prime(12), is_prime(1))</div>
+<p class="out-label">실행 결과</p><div class="out">6
+True False False</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 deposit(money)는 호출될 때마다 전역변수 balance에 money를 더하는 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">balance = 0
+
+
+def deposit(money):
+    <span class="b" style="width:14ch"><i>가</i></span>
+    <span class="b" style="width:16ch"><i>나</i></span>
+
+
+deposit(3000)
+deposit(500)
+deposit(1200)
+print(<span class="b" style="width:7ch"><i>다</i></span>)</div>
+<p class="out-label">실행 결과</p><div class="out">4700</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 double_all(lst)는 받은 리스트의 모든 값을 2배로 바꾸는 함수이다. 값을 돌려주지 않고, 받은 리스트 자체를 바꾼다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def double_all(lst):
+    for i in range(<span class="b" style="width:8ch"><i>가</i></span>):
+        <span class="b" style="width:6ch"><i>나</i></span> = <span class="b" style="width:10ch"><i>다</i></span>
+
+
+data = [1, 5, 3]
+double_all(<span class="b" style="width:4ch"><i>라</i></span>)
+print(data)</div>
+<p class="out-label">실행 결과</p><div class="out">[2, 10, 6]</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">6<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 sum_to(n)은 1부터 n까지의 합을 돌려주는 재귀 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def sum_to(n):
+    if <span class="b" style="width:6ch"><i>가</i></span>:
+        return <span class="b" style="width:1ch"><i>나</i></span>
+    return <span class="b" style="width:17ch"><i>다</i></span>
+
+
+print(sum_to(10))
+print(sum_to(1))</div>
+<p class="out-label">실행 결과</p><div class="out">55
+1</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">7<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 countdown(n)은 n부터 1까지의 정수를 한 줄에 하나씩 출력하는 재귀 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def countdown(n):
+    if <span class="b" style="width:6ch"><i>가</i></span>:
+        return
+    <span class="b" style="width:8ch"><i>나</i></span>
+    <span class="b" style="width:16ch"><i>다</i></span>
+
+
+countdown(3)</div>
+<p class="out-label">실행 결과</p><div class="out">3
+2
+1</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">8<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 count_up(n)은 1부터 n까지의 정수를 한 줄에 하나씩 출력하는 재귀 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def count_up(n):
+    if n == 0:
+        <span class="b" style="width:6ch"><i>가</i></span>
+    <span class="b" style="width:15ch"><i>나</i></span>
+    <span class="b" style="width:8ch"><i>다</i></span>
+
+
+count_up(3)</div>
+<p class="out-label">실행 결과</p><div class="out">1
+2
+3</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">9<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 digit_sum(n)은 0 이상의 정수 n의 각 자리 숫자의 합을 돌려주는 재귀 함수이다. 예를 들어 digit_sum(1234)는 1 + 2 + 3 + 4인 10을 돌려준다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def digit_sum(n):
+    if <span class="b" style="width:6ch"><i>가</i></span>:
+        return <span class="b" style="width:1ch"><i>나</i></span>
+    return <span class="b" style="width:6ch"><i>다</i></span> + digit_sum(<span class="b" style="width:7ch"><i>라</i></span>)
+
+
+print(digit_sum(1234))
+print(digit_sum(7))</div>
+<p class="out-label">실행 결과</p><div class="out">10
+7</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">10<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 count_zero(lst, n)은 lst의 앞에서부터 n개 값 중 0의 개수를 돌려주는 재귀 함수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def count_zero(lst, n):
+    if n == 0:
+        return <span class="b" style="width:1ch"><i>가</i></span>
+    if <span class="b" style="width:15ch"><i>나</i></span>:
+        return <span class="b" style="width:26ch"><i>다</i></span>
+    else:
+        return <span class="b" style="width:22ch"><i>라</i></span>
+
+
+print(count_zero([0, 1, 0, 2, 0], 5))
+print(count_zero([0, 1, 0, 2, 0], 2))</div>
+<p class="out-label">실행 결과</p><div class="out">3
+1</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div></body></html>

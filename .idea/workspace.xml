@@ -5,355 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e551840b-8e31-46e1-9bea-af6fae0cef5d" name="변경" comment="..">
-      <change afterPath="$PROJECT_DIR$/26-2-정보수업준비/260516/더러운소리내지마.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/26-2-정보수업준비/260530/test.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/26-2-정보수업준비/260530/더러운소리내지마.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/미분류백업/14. class.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/연습용.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.claude/agents/probmaker-class-extendfunctionality.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.claude/agents/probmaker-class-makeitwork.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.claude/agents/probmaker-class-whatwillhappen.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.claude/commands/make-config.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.claude/commands/make-practice.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.claude/template-config.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.claude/template-problems.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/python-lecture.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python-lecture.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CLAUDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/CLAUDE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/EXAM-PLAN.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/PROBLEM-CREATION-RULES.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/PROBLEM-NEW-TYPES.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/PROBLEM-REVIEW-CHECKLIST.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/PROBLEM-REVIEW-REPORT.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/lectures/CNSH - Backtracking 이해.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/lectures/Python Apprentice Lecture 4 - Recursive Hanoi Tower.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/lectures/Python Apprentice Lecture 5 - BTree Traversing.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/lectures/Python Apprentice Lecture 6 - Time Complexity and Big-O Notation.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/config-cnsh122-1102.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-01-basic-recursion.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-02-divisors.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-03-isprime.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-04-countprimes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-05-gcd.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-06-coprime-lcm.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-07-fibonacci.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-08-tree-traversal.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-09-tree-levelorder.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-10-tree-lca.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-11-tree-properties.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-12-combination.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-13-subset-sum.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-14-partition.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-15-coin-change.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-16-hamiltonian.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-17-backtracking-misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-18-complexity.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-19-sorting-complexity.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-countprimes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-findcoprime.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-gcd.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-isprime.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-recursive-select3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/problem-xmls/problems-cnsh122-stairdown.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/01-number-addition-permutation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/02-fibonacci-path-count.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/03-count-primes-basic.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/04-count-primes-optimized.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/05-check-coprime-simple.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/06-count-coprimes-euclidean.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/07-max-sum-divisible-by-3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/08-count-sum-divisible-by-3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/09-partition-count-branch-and-bound.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/10-subset-sum-count.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/11-coin-change-backtracking.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/12-coin-change-greedy.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/13-sum-of-divisors.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/14-hamiltonian-path-detailed.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/1413-LJ-075.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/1413-LJ-076.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/1413-LJ-077-refactored.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/25-CNSH-122/sample-codes/1413-LJ-077.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNSH Exercises/250907 - Stack, Maze, DFS/250907 Stack, Maze Solver, etcs.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auxiliaries/재귀함수 실행순서 가이드.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/bracket_correction.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/bracket_validation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/class-8puzzle.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/class-distance.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/class-movie.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/class-student.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/for-agent-specialwork.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-8puzzle-moveup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-adjlist.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-adjmatrix.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-countdown.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-evensum.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-factorial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-gcd.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-globalvar.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-hamiltonian-traverse.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-makestack.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-minmax.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-countdown.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-factorial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-gcd.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-lcm-global.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-numtriangle.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-permutation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-stars.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-startriangle.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-recursive-sum.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-sum-using-global.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/func-while-gcd.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/lib-use-queue.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/sample-69.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/sample-70.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-121/sample-71.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-sample/1413-LJ-075.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-sample/1413-LJ-076.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-sample/1413-LJ-077-refactored.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/cnsh-sample/1413-LJ-077.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/decimal_to_binary.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/dfs_stack.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/infix_to_postfix.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/maze_solver.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/maze_to_graph.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/postfix_calculator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/recursive_hanoi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/stack_base.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/codes/stack_sort.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/exam-builder/frontend/src/data/problems-cnsh-26-1-2-01.json" beforeDir="false" afterPath="$PROJECT_DIR$/exam-builder/frontend/src/data/problems-cnsh-26-1-2-01.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-apprentice/Python Apprentice Lecture 1 - Stack and Postfix Notation.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-apprentice/Python Apprentice Lecture 2 - DFS and Stack.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-apprentice/Python Apprentice Lecture 3 - Maze Pathfinding with Stack.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-apprentice/Python Apprentice Lecture 4 - Recursive Hanoi Tower.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-apprentice/Python Apprentice Lecture 5 - BTree Traversing.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-apprentice/Python Apprentice Lecture 6 - Time Complexity and Big-O Notation.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-apprentice/callstack_visualizer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture 10 - Functions.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture 11 - Function Design and Implementation.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture 3 - List and its builtin.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture 4 - IO.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture 5 - Conditional Statements.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture 6 - for loop.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture 7 - Tuple.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture 8 - While.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture 9 - List Comprehension.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture N - Class Declaration.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture N2 - Composite Pattern.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture N3 - Factory Pattern.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture N4 - Builder Pattern.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture N5 - Chain of Command Pattern.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture N6 - Strategy Pattern.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/Python Basic Lecture N7 - Event Emitter (Observer) Pattern.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/basic learning step.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-25121-0823-recursive-1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-25121-0823-recursive-2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-25121-0823-recursive-3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-25121-recursive.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-algorithm-special.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-cnsh-122-1109.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-cnsh121-0914.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-cnsh121-0921.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-cnsh121-exam.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-cnsh121-solutions.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-cnsh121.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-cnsh122-1102.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-digitbinchange.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-if-practice-1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-if-practice-2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-if-practice-3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-if-practice-4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-koi.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-lecture10-random.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-lecture10.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-lecture2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-lecture3-8.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-lecture7-1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-lecture7-2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-lecture7-expert.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-lecture8-1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-lecture8-2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-lecture9-listcomp-with-sol.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-lecture9-listcomp.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-lectureN-class-basic.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-midterm-lecture-1to8-nosolution.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-midterm-lecture-1to8.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-recursion-mixed.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-recursive-combination.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-recursive-hanoi.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-stack.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-temp.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/config-udf-globalvariable-1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/practice-recursive-combination.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/practice-recursive-hanoi.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/practice-statement.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/practice-udf-globalvariable-basic.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/practice-udf-globalvariable-caution.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-bookpublish-extendfunctionality.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-bookpublish-makeitwork.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-bookpublish-whatwillhappen.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-bookrent-extendfunctionality.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-bookrent-makeitwork.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-bookrent-whatwillhappen.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-8puzzle-moveup.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-8puzzle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-adjlist.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-adjmatrix.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-countdown.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-distance.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-evensum.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-factorial.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-gcd.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-globalvar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-hamiltonian-traverse.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-makestack.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-minmax.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-movie.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-recursive-countdown.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-recursive-factorial.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-recursive-gcd.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-recursive-lcm-global.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-recursive-numtriangle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-recursive-permutation.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-recursive-stars.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-recursive-startriangle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-recursive-sum.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-sample-69.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-sample-70.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-sample-71.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-student.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-sum-using-global.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-use-queue.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh121-while-gcd.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-01-basic-recursion.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-02-divisors.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-03-isprime.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-04-countprimes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-05-gcd.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-06-coprime-lcm.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-07-fibonacci.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-08-tree-traversal.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-09-tree-levelorder.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-10-tree-lca.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-11-tree-properties.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-12-combination.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-13-subset-sum.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-14-partition.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-15-coin-change.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-16-hamiltonian.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-17-backtracking-misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-18-complexity.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-19-sorting-complexity.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-countprimes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-findcoprime.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-gcd.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-isprime.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-recursive-select3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-cnsh122-stairdown.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-digitbinchange.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-distance-extendfunctionality.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-distance-makeitwork.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-distance-whatwillhappen.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-if-andornot.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-if-ifelifelse.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-if-ifelse.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-if-nested.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-if-simple.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-koi-practice-1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-koi-practice-2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture1-print-end.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture1-print-sep.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture1-print.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture10-function-args.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture10-function-def.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture10-function-defaults.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture10-function-params-fixed.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture10-function-params.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture10-function-types.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture2-format.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture2-fstring.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture2-string-slicing.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture2-string-stepslicing.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture2-strmethod-capitalize.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture2-strmethod-lower.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture2-strmethod-replace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture2-strmethod-strip.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture2-strmethod-upper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture3-list-additem.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture3-list-declaration.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture3-list-makefromstring.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture3-list-others.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture3-list-removeitem.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture5-if-andornot.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture5-if-basic.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture5-if-ifelifelse.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture5-if-ifelse.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture5-if-nested.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture6-for-basic.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture6-for-break-continue.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture6-for-enumerate-zip.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture6-for-enumerate.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture6-for-range.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture6-for-zip.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture7-builtin-tuple.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture7-tuple-declaration.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture7-tuple-method.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture7-tuple-unpacking.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture8-while-break.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture8-while-breakcontinue.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture8-while-makeitsafe.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture9-convert-for-listcomp-basic.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture9-listcomp-basic.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture9-listcomp-if.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lecture9-listcomp-ifelse.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-lectureN-class-basic.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-movieticket-extendfunctionality.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-movieticket-makeitwork.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-movieticket-whatwillhappen.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-recursion-25121-func2rcur.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-recursion-25121-rcur2func.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-recursive-25121-basic.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-recursive-apprentice.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-recursive-expert.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-recursive-master.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-recursive-master1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-recursive-master2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-scoremean-extendfunctionality.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-scoremean-makeitwork.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-scoremean-whatwillhappen.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/problems-stack-iterremove.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/template-config.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/problem-xmls/template-problems.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/start.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-basic/problem-renderer/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-ml/ML 1. 선형회귀.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-ml/ML 2. 다항회귀.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-ml/ML 3. 다양한 함수로의 회귀식 만들기.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-ml/ML 4. 서포트 벡터 머신_ SVM.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-ml/ML 5. 전처리와 KNN.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-ml/ML 6. 의사결정트리, 랜덤포레스트와 앙상블 기법.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-ml/ML 7. 비지도학습 - KMean, DBSCAN.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-ml/ML 8. 뉴럴네트워크.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-ml/clean_titanic.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-ml/preprocessed_titanic.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-ml/titanic_decision_tree" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lecture-ml/titanic_tree.dot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cpml-template.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/과제모음/CNSH - Backtracking 이해.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/과제모음/CNSH - 해밀토니안 경로 단계별 학습.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/과제모음/cnsh121-0914-1.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/과제모음/cnsh121-0914-2.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/과제모음/cnsh121-0914-3.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/과제모음/내신대비 1주차 연습문제 - 재귀함수1.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/과제모음/내신대비 1주차 연습문제 - 재귀함수2.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/수행평가_대비_학습자료.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/26-5-알고리즘-1/2. 자료구조 - 스택과 큐 - 연습문제.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/26-5-알고리즘-1/2. 자료구조 - 스택과 큐 - 연습문제.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -366,7 +19,7 @@
     </persistenceIdMap>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="593" />
+    <option name="cachedIndexableFilesCount" value="604" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -403,61 +56,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0053930324730533" />
-      <entry key="MS500" value="1.5354937862531344" />
-      <entry key="S2" value="3.5616458645747544" />
-      <entry key="S5" value="6.617960352612059" />
-      <entry key="S10" value="9.858593684851128" />
-      <entry key="S30" value="17.798508187725645" />
-      <entry key="S60" value="25.53865325621067" />
-      <entry key="M2" value="35.644367742400576" />
-      <entry key="M5" value="61.67151140863193" />
-      <entry key="M10" value="103.49607296780626" />
-      <entry key="M15" value="143.83440999320462" />
-      <entry key="M30" value="266.63653663236335" />
-      <entry key="H1" value="470.78150412254075" />
-      <entry key="H2" value="694.0758086491053" />
-      <entry key="H4" value="867.6394866882309" />
-      <entry key="D1" value="1060.7249037836632" />
-      <entry key="W1" value="1099.379876033415" />
+      <entry key="MS100" value="1.0233570195099209" />
+      <entry key="MS500" value="1.4717191254483133" />
+      <entry key="S2" value="1.8296370087802365" />
+      <entry key="S5" value="1.9878952804876895" />
+      <entry key="S10" value="2.2086462470459556" />
+      <entry key="S30" value="2.613728280420916" />
+      <entry key="S60" value="2.7850974569521476" />
+      <entry key="M2" value="2.915412107514901" />
+      <entry key="M5" value="5.912141796349241" />
+      <entry key="M10" value="23.6209375867778" />
+      <entry key="M15" value="48.3079623413147" />
+      <entry key="M30" value="123.40436276688054" />
+      <entry key="H1" value="278.09979625809814" />
+      <entry key="H2" value="620.4381364032711" />
+      <entry key="H4" value="1116.5469235816117" />
+      <entry key="D1" value="2018.4061421418967" />
+      <entry key="W1" value="2253.6663792095974" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="3.1723979557314964E-145" />
-      <entry key="S5" value="1.5869201130492885E-58" />
-      <entry key="S10" value="1.2597301746998599E-29" />
-      <entry key="S30" value="2.326859034437927E-10" />
-      <entry key="S60" value="1.533026041109414E-5" />
-      <entry key="M2" value="0.004182035374634502" />
-      <entry key="M5" value="0.14667347055299337" />
-      <entry key="M10" value="0.535798945812533" />
-      <entry key="M15" value="0.8643439757146315" />
-      <entry key="M30" value="1.497117959499001" />
-      <entry key="H1" value="2.0687280564413975" />
-      <entry key="H2" value="2.4743588639205445" />
-      <entry key="H4" value="2.7196730661157567" />
-      <entry key="D1" value="2.950596800626845" />
-      <entry key="W1" value="2.9928731555759422" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="1.7504001553127384E-215" />
+      <entry key="S30" value="3.6936291603899764E-72" />
+      <entry key="S60" value="2.671926569385308E-36" />
+      <entry key="M2" value="2.301525967650998E-18" />
+      <entry key="M5" value="1.3334045370787912E-7" />
+      <entry key="M10" value="5.163309407536001E-4" />
+      <entry key="M15" value="0.008116057074037118" />
+      <entry key="M30" value="0.1329781560618549" />
+      <entry key="H1" value="0.667448477669497" />
+      <entry key="H2" value="1.89880868742194" />
+      <entry key="H4" value="3.526858137419558" />
+      <entry key="D1" value="6.2170986026705535" />
+      <entry key="W1" value="6.881692731192158" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.021403522840605278" />
-      <entry key="MS500" value="0.8278873059955602" />
-      <entry key="S2" value="3.2179762493284327" />
-      <entry key="S5" value="6.401609230784445" />
-      <entry key="S10" value="9.699601947364334" />
-      <entry key="S30" value="17.690749051517482" />
-      <entry key="S60" value="25.455178088360203" />
-      <entry key="M2" value="35.58469841291911" />
-      <entry key="M5" value="61.764842655587074" />
-      <entry key="M10" value="103.9816350210918" />
-      <entry key="M15" value="144.64995038752963" />
-      <entry key="M30" value="268.0878259748341" />
-      <entry key="H1" value="472.81143911279077" />
-      <entry key="H2" value="696.5226392675743" />
-      <entry key="H4" value="870.3423339718051" />
-      <entry key="D1" value="1063.6721391623767" />
-      <entry key="W1" value="1102.3722531994013" />
+      <entry key="MS100" value="0.041877585033282094" />
+      <entry key="MS500" value="0.7880236935014062" />
+      <entry key="S2" value="1.5676717106264397" />
+      <entry key="S5" value="1.8722897747618978" />
+      <entry key="S10" value="2.1485317976755236" />
+      <entry key="S30" value="2.5929815904446722" />
+      <entry key="S60" value="2.7746101987041207" />
+      <entry key="M2" value="2.910132578321795" />
+      <entry key="M5" value="5.909717277706727" />
+      <entry key="M10" value="23.618947595626814" />
+      <entry key="M15" value="48.31278698652667" />
+      <entry key="M30" value="123.53226539740851" />
+      <entry key="H1" value="278.7594116526975" />
+      <entry key="H2" value="622.3250664649414" />
+      <entry key="H4" value="1120.061265921389" />
+      <entry key="D1" value="2024.6190260458827" />
+      <entry key="W1" value="2260.5473883918194" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -577,6 +230,14 @@
       <workItem from="1780916933352" duration="31000" />
       <workItem from="1783707111470" duration="3280000" />
       <workItem from="1783730135168" duration="6640000" />
+      <workItem from="1784095768068" duration="3782000" />
+      <workItem from="1784335151847" duration="8035000" />
+      <workItem from="1784607936556" duration="29000" />
+      <workItem from="1784912159828" duration="5661000" />
+      <workItem from="1784939655805" duration="5581000" />
+      <workItem from="1784970535326" duration="12000" />
+      <workItem from="1786149019667" duration="8048000" />
+      <workItem from="1786704288790" duration="5343000" />
     </task>
     <task id="LOCAL-00001" summary="..">
       <option name="closed" value="true" />

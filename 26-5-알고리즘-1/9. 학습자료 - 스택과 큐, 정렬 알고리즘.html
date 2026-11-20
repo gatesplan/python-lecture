@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>9. 학습자료 - 스택과 큐, 정렬 알고리즘</title>
+<style>
+@page { size: A4; margin: 15mm; }
+body {
+    font-family: 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1cm;
+}
+h1 { font-size: 16pt; border-bottom: 2px solid #000; padding-bottom: 8px; margin: 0 0 6px; }
+.intro { font-size: 10pt; color: #333; margin: 0 0 10px; }
+h2 { font-size: 13pt; margin: 1.6em 0 0.3em; border-bottom: 1px solid #666; padding-bottom: 4px; }
+h3 { font-size: 11.5pt; margin: 1.1em 0 0.3em; }
+p { margin: 0.4em 0; }
+
+/* 제목이 페이지 맨 아래에 홀로 남지 않게 한다 */
+h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid-page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+h1 + .intro, h2 + p, h2 + ul, h2 + table, h2 + div, h2 + h3,
+h3 + p, h3 + ul, h3 + table, h3 + div {
+    page-break-before: avoid;
+    break-before: avoid-page;
+}
+/* 제목 바로 뒤 한 문단만으로 끊기지 않게, 그 다음 블록까지 붙인다 */
+h2 + p, h3 + p, .intro {
+    page-break-after: avoid;
+    break-after: avoid-page;
+}
+ul { margin: 0.4em 0; padding-left: 1.4em; }
+li { margin: 0.15em 0; }
+.toc { border: 1px solid #ccc; background: #fafafa; padding: 8px 12px; font-size: 10pt; margin: 10px 0 0; }
+.toc ol { margin: 0.2em 0; padding-left: 1.4em; }
+.code-block {
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    margin: 6px 0;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.note {
+    border-left: 3px solid #888;
+    background: #f4f4f4;
+    padding: 6px 10px;
+    margin: 8px 0;
+    font-size: 10pt;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.note .label { font-weight: bold; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 9.5pt;
+        page-break-inside: avoid; break-inside: avoid; }
+th, td { border: 1px solid #aaa; padding: 4px 7px; text-align: left; vertical-align: top; }
+th { background: #eee; font-weight: bold; }
+td.mono, th.mono { font-family: Consolas, 'Courier New', monospace; }
+.section { page-break-inside: auto; }
+.unit { page-break-inside: avoid; break-inside: avoid; }
+.problem { margin: 0 0 16px; page-break-inside: avoid; break-inside: avoid; }
+.problem-number { font-weight: bold; font-size: 11pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; }
+.stmt { margin: 4px 0 6px; }
+.answers { page-break-before: always; break-before: page; }
+.a-item { margin: 0 0 12px; page-break-inside: avoid; break-inside: avoid; }
+.a-num { font-weight: bold; }
+.a-body { font-size: 10pt; margin: 2px 0 0; }
+@media print { body { max-width: none; margin: 0; padding: 0; } }
+</style>
+</head>
+<body>
+
+<h1>9. 학습자료 - 스택과 큐, 정렬 알고리즘</h1>
+<p class="intro">자료구조 두 가지와 정렬 알고리즘 다섯 가지를 정리한다. 코드는 클래스를 쓰지 않고, 변수 이름은 교과서와 시험 문제에서 쓰는 짧은 형태를 그대로 따른다. 정렬은 전부 같은 리스트 [3, 6, 5, 8, 2]로 추적한다.</p>
+
+<div class="toc">
+<ol>
+<li>스택</li>
+<li>큐</li>
+<li>버블 정렬</li>
+<li>선택 정렬</li>
+<li>삽입 정렬</li>
+<li>병합 정렬</li>
+<li>퀵 정렬</li>
+<li>전체 비교</li>
+<li>확인 문제 (스택, 큐, 버블, 선택, 삽입)</li>
+<li>확인 문제 정답</li>
+</ol>
+</div>
+
+
+<h2>1. 스택</h2>
+
+<p>나중에 넣은 것이 먼저 나오는 구조다. 넣고 빼는 곳이 한쪽 끝뿐이다. 이 성질을 후입선출(LIFO, Last In First Out)이라고 부른다.</p>
+
+<h3>리스트로 바로 쓰기</h3>
+<p>파이썬에서는 스택을 위해 따로 만들 것이 없다. 리스트가 이미 스택이다.</p>
+
+<div class="code-block">S = []
+
+S.append(10)
+S.append(20)
+S.append(30)
+print(S)          # [10, 20, 30]
+
+print(S.pop())    # 30
+print(S[-1])      # 20
+print(len(S))     # 2</div>
+
+<table>
+<tr><th>연산</th><th class="mono">코드</th><th>뜻</th></tr>
+<tr><td>push</td><td class="mono">S.append(x)</td><td>맨 뒤에 넣는다</td></tr>
+<tr><td>pop</td><td class="mono">S.pop()</td><td>맨 뒤에서 빼서 돌려준다</td></tr>
+<tr><td>top (peek)</td><td class="mono">S[-1]</td><td>맨 뒤를 보기만 한다. 빼지 않는다</td></tr>
+<tr><td>empty</td><td class="mono">len(S) == 0</td><td>비었는지 확인한다</td></tr>
+<tr><td>size</td><td class="mono">len(S)</td><td>들어 있는 개수</td></tr>
+</table>
+
+<h3>동작 추적</h3>
+<table>
+<tr><th>실행한 줄</th><th class="mono">S</th><th>반환값</th></tr>
+<tr><td class="mono">S = []</td><td class="mono">[]</td><td>-</td></tr>
+<tr><td class="mono">S.append(10)</td><td class="mono">[10]</td><td>-</td></tr>
+<tr><td class="mono">S.append(20)</td><td class="mono">[10, 20]</td><td>-</td></tr>
+<tr><td class="mono">S.append(30)</td><td class="mono">[10, 20, 30]</td><td>-</td></tr>
+<tr><td class="mono">S.pop()</td><td class="mono">[10, 20]</td><td class="mono">30</td></tr>
+<tr><td class="mono">S[-1]</td><td class="mono">[10, 20]</td><td class="mono">20</td></tr>
+<tr><td class="mono">S.append(40)</td><td class="mono">[10, 20, 40]</td><td>-</td></tr>
+<tr><td class="mono">S.pop()</td><td class="mono">[10, 20]</td><td class="mono">40</td></tr>
+</table>
+
+<h3>함수로 이름을 붙인 형태</h3>
+<p>append와 pop을 그대로 써도 되지만, 시험 문제에서는 아래처럼 함수 이름을 붙인 형태가 자주 나온다. 하는 일은 위와 똑같다.</p>
+
+<div class="code-block">S = []
+
+def push(x):
+    S.append(x)
+
+def pop():
+    return S.pop()
+
+def top():
+    return S[-1]
+
+def empty():
+    return len(S) == 0</div>
+
+<div class="note">
+<span class="label">주의.</span> 비어 있는 스택에서 pop()이나 S[-1]을 하면 IndexError가 난다. 그래서 반복문 조건에 <span class="mono">while len(S) &gt; 0:</span> 또는 <span class="mono">while S:</span> 를 먼저 두는 경우가 많다.
+</div>
+
+<p>스택이 쓰이는 곳: 괄호 짝 검사, 십진수를 이진수로 바꾸기, 깊이우선탐색(DFS), 함수 호출 기록.</p>
+
+
+<h2>2. 큐</h2>
+
+<p>먼저 넣은 것이 먼저 나오는 구조다. 넣는 곳과 빼는 곳이 반대쪽이다. 이 성질을 선입선출(FIFO, First In First Out)이라고 부른다.</p>
+
+<h3>리스트로 바로 쓰기</h3>
+
+<div class="code-block">Q = []
+
+Q.append(10)
+Q.append(20)
+Q.append(30)
+print(Q)          # [10, 20, 30]
+
+print(Q.pop(0))   # 10
+print(Q[0])       # 20
+print(len(Q))     # 2</div>
+
+<table>
+<tr><th>연산</th><th class="mono">코드</th><th>뜻</th></tr>
+<tr><td>enqueue</td><td class="mono">Q.append(x)</td><td>맨 뒤에 넣는다</td></tr>
+<tr><td>dequeue</td><td class="mono">Q.pop(0)</td><td>맨 앞에서 빼서 돌려준다</td></tr>
+<tr><td>front</td><td class="mono">Q[0]</td><td>맨 앞을 보기만 한다</td></tr>
+<tr><td>empty</td><td class="mono">len(Q) == 0</td><td>비었는지 확인한다</td></tr>
+</table>
+
+<h3>동작 추적</h3>
+<table>
+<tr><th>실행한 줄</th><th class="mono">Q</th><th>반환값</th></tr>
+<tr><td class="mono">Q = []</td><td class="mono">[]</td><td>-</td></tr>
+<tr><td class="mono">Q.append(10)</td><td class="mono">[10]</td><td>-</td></tr>
+<tr><td class="mono">Q.append(20)</td><td class="mono">[10, 20]</td><td>-</td></tr>
+<tr><td class="mono">Q.append(30)</td><td class="mono">[10, 20, 30]</td><td>-</td></tr>
+<tr><td class="mono">Q.pop(0)</td><td class="mono">[20, 30]</td><td class="mono">10</td></tr>
+<tr><td class="mono">Q[0]</td><td class="mono">[20, 30]</td><td class="mono">20</td></tr>
+<tr><td class="mono">Q.append(40)</td><td class="mono">[20, 30, 40]</td><td>-</td></tr>
+<tr><td class="mono">Q.pop(0)</td><td class="mono">[30, 40]</td><td class="mono">20</td></tr>
+</table>
+
+<h3>스택과 큐의 차이</h3>
+<p>같은 순서로 10, 20, 30을 넣고 하나를 뺐을 때 나오는 값이 다르다.</p>
+
+<table>
+<tr><th></th><th>스택</th><th>큐</th></tr>
+<tr><td>넣기</td><td class="mono">S.append(x)</td><td class="mono">Q.append(x)</td></tr>
+<tr><td>빼기</td><td class="mono">S.pop()</td><td class="mono">Q.pop(0)</td></tr>
+<tr><td>10, 20, 30 넣고 한 번 빼면</td><td class="mono">30</td><td class="mono">10</td></tr>
+<tr><td>순서 성질</td><td>후입선출 (LIFO)</td><td>선입선출 (FIFO)</td></tr>
+<tr><td>쓰이는 탐색</td><td>깊이우선탐색 (DFS)</td><td>너비우선탐색 (BFS)</td></tr>
+</table>
+
+<div class="note">
+<span class="label">주의.</span> <span class="mono">Q.pop(0)</span>은 맨 앞을 빼낸 뒤 남은 원소를 전부 한 칸씩 앞으로 옮긴다. 원소가 많으면 그만큼 느려진다. 개수가 적은 수업용 코드에서는 문제되지 않지만, 성질 자체는 알아 두어야 한다.
+</div>
+
+<h2>3. 버블 정렬</h2>
+
+<p>이웃한 두 개를 비교해서 순서가 틀렸으면 자리를 바꾼다. 이것을 왼쪽 끝부터 오른쪽 끝까지 한 번 훑으면, 가장 큰 값이 맨 뒤로 밀려나 확정된다. 이 훑기를 반복한다.</p>
+
+<div class="code-block">def f(A):
+    n = len(A)
+    for i in range(n):
+        for j in range(n-i-1):
+            if A[j] &gt; A[j+1]:
+                A[j], A[j+1] = A[j+1], A[j]
+
+A = [3, 6, 5, 8, 2]
+f(A)
+print(A)      # [2, 3, 5, 6, 8]</div>
+
+<h3>코드 읽기</h3>
+<ul>
+<li><span class="mono">i</span> - 몇 번째 훑기인지. 훑기 한 번을 흔히 "패스"라고 부른다.</li>
+<li><span class="mono">j</span> - 지금 비교하는 왼쪽 원소의 위치. 오른쪽은 항상 <span class="mono">j+1</span>이다.</li>
+<li><span class="mono">range(n-i-1)</span> - 뒤쪽 i개는 이미 확정됐으므로 볼 필요가 없다. 그래서 훑는 범위가 매번 하나씩 줄어든다. <span class="mono">-1</span>이 붙는 이유는 <span class="mono">A[j+1]</span>을 읽어야 해서, j가 마지막 칸까지 가면 안 되기 때문이다.</li>
+<li><span class="mono">A[j], A[j+1] = A[j+1], A[j]</span> - 두 값을 맞바꾸는 문장이다. 임시 변수 없이 한 줄로 쓴다.</li>
+</ul>
+
+<h3>동작 추적</h3>
+<p>훑기 한 번이 끝날 때마다 오른쪽 끝에서부터 값이 하나씩 확정된다. 확정된 부분에 밑줄을 그어 표시했다.</p>
+
+<table>
+<tr><th class="mono">i</th><th>훑기가 끝난 뒤 A</th><th>확정된 값</th></tr>
+<tr><td class="mono">시작</td><td class="mono">[3, 6, 5, 8, 2]</td><td>-</td></tr>
+<tr><td class="mono">0</td><td class="mono">[3, 5, 6, 2, <u>8</u>]</td><td class="mono">8</td></tr>
+<tr><td class="mono">1</td><td class="mono">[3, 5, 2, <u>6, 8</u>]</td><td class="mono">6</td></tr>
+<tr><td class="mono">2</td><td class="mono">[3, 2, <u>5, 6, 8</u>]</td><td class="mono">5</td></tr>
+<tr><td class="mono">3</td><td class="mono">[2, <u>3, 5, 6, 8</u>]</td><td class="mono">3</td></tr>
+<tr><td class="mono">4</td><td class="mono">[<u>2, 3, 5, 6, 8</u>]</td><td>비교 없음</td></tr>
+</table>
+
+<p>i=0 한 번을 더 자세히 보면 다음과 같다.</p>
+
+<table>
+<tr><th class="mono">j</th><th>비교</th><th>바꾸는가</th><th>A</th></tr>
+<tr><td class="mono">0</td><td class="mono">3 &gt; 6 ?</td><td>아니오</td><td class="mono">[3, 6, 5, 8, 2]</td></tr>
+<tr><td class="mono">1</td><td class="mono">6 &gt; 5 ?</td><td>예</td><td class="mono">[3, 5, 6, 8, 2]</td></tr>
+<tr><td class="mono">2</td><td class="mono">6 &gt; 8 ?</td><td>아니오</td><td class="mono">[3, 5, 6, 8, 2]</td></tr>
+<tr><td class="mono">3</td><td class="mono">8 &gt; 2 ?</td><td>예</td><td class="mono">[3, 5, 6, 2, 8]</td></tr>
+</table>
+
+<h3>횟수와 복잡도</h3>
+<p>이 예에서 비교는 4+3+2+1+0 = 10회, 자리 바꾸기는 5회 일어났다. 일반적으로 비교 횟수는 n(n-1)/2 이므로 시간복잡도는 O(n^2)이다.</p>
+
+<div class="note">
+<span class="label">최선의 경우.</span> 위 코드는 입력이 이미 정렬돼 있어도 비교 횟수가 줄지 않는다. 훑는 동안 한 번도 바꾸지 않았다면 이미 정렬된 것이므로, 아래처럼 조기 종료를 넣으면 최선의 경우가 O(n)이 된다.
+<div class="code-block">def f(A):
+    n = len(A)
+    for i in range(n):
+        c = False
+        for j in range(n-i-1):
+            if A[j] &gt; A[j+1]:
+                A[j], A[j+1] = A[j+1], A[j]
+                c = True
+        if not c:
+            break</div>
+</div>
+
+
+<h2>4. 선택 정렬</h2>
+
+<p>아직 정렬되지 않은 부분에서 가장 작은 값을 찾아, 그 부분의 맨 앞과 자리를 바꾼다. 이것을 앞에서부터 반복한다.</p>
+
+<div class="code-block">def f(A):
+    n = len(A)
+    for i in range(n-1):
+        m = i
+        for j in range(i+1, n):
+            if A[j] &lt; A[m]:
+                m = j
+        A[i], A[m] = A[m], A[i]
+
+A = [3, 6, 5, 8, 2]
+f(A)
+print(A)      # [2, 3, 5, 6, 8]</div>
+
+<h3>코드 읽기</h3>
+<ul>
+<li><span class="mono">i</span> - 지금 값을 확정하려는 자리.</li>
+<li><span class="mono">m</span> - 지금까지 찾은 최솟값의 <em>위치</em>다. 값이 아니라 인덱스를 기억한다는 점이 중요하다. 자리를 바꾸려면 위치를 알아야 하기 때문이다.</li>
+<li><span class="mono">m = i</span> - 일단 맨 앞이 최솟값이라고 가정하고 시작한다.</li>
+<li><span class="mono">range(i+1, n)</span> - i 자리 다음부터 끝까지 훑으며 더 작은 값이 있는지 본다.</li>
+<li><span class="mono">range(n-1)</span> - 마지막 하나는 남은 것이 그것뿐이라 저절로 제자리다. 그래서 n-1번만 돈다.</li>
+</ul>
+
+<h3>동작 추적</h3>
+<table>
+<tr><th class="mono">i</th><th>훑는 범위</th><th>찾은 최솟값 (위치 m)</th><th>바꾼 뒤 A</th></tr>
+<tr><td class="mono">시작</td><td>-</td><td>-</td><td class="mono">[3, 6, 5, 8, 2]</td></tr>
+<tr><td class="mono">0</td><td class="mono">A[1]~A[4]</td><td class="mono">2 (m=4)</td><td class="mono">[<u>2</u>, 6, 5, 8, 3]</td></tr>
+<tr><td class="mono">1</td><td class="mono">A[2]~A[4]</td><td class="mono">3 (m=4)</td><td class="mono">[<u>2, 3</u>, 5, 8, 6]</td></tr>
+<tr><td class="mono">2</td><td class="mono">A[3]~A[4]</td><td class="mono">5 (m=2)</td><td class="mono">[<u>2, 3, 5</u>, 8, 6]</td></tr>
+<tr><td class="mono">3</td><td class="mono">A[4]</td><td class="mono">6 (m=4)</td><td class="mono">[<u>2, 3, 5, 6</u>, 8]</td></tr>
+</table>
+
+<p>i=2일 때는 m이 2로 나와 자기 자신과 바꾸게 된다. 즉 아무 변화가 없는 교환도 그대로 실행된다.</p>
+
+<h3>횟수와 복잡도</h3>
+<p>비교는 버블 정렬과 똑같이 10회지만, 자리 바꾸기는 4회뿐이다. 훑기 한 번에 교환이 딱 한 번만 일어나기 때문이다.</p>
+<p>시간복잡도는 최선, 평균, 최악이 모두 O(n^2)이다. 이미 정렬된 리스트가 들어와도 최솟값을 찾으려면 남은 원소를 전부 확인해야 하므로 비교 횟수가 줄어들 여지가 없다.</p>
+
+
+<h2>5. 삽입 정렬</h2>
+
+<p>앞부분은 이미 정렬돼 있다고 보고, 그 다음 값 하나를 앞부분의 알맞은 자리에 끼워 넣는다. 끼워 넣을 자리를 만들기 위해, 더 큰 값들을 뒤로 한 칸씩 민다.</p>
+
+<div class="code-block">def f(A):
+    n = len(A)
+    for i in range(1, n):
+        k = A[i]
+        j = i - 1
+        while j &gt;= 0 and A[j] &gt; k:
+            A[j+1] = A[j]
+            j -= 1
+        A[j+1] = k
+
+A = [3, 6, 5, 8, 2]
+f(A)
+print(A)      # [2, 3, 5, 6, 8]</div>
+
+<h3>코드 읽기</h3>
+<ul>
+<li><span class="mono">k</span> - 지금 끼워 넣으려는 값. 뒤로 미는 작업 때문에 원래 자리가 덮어써지므로, 미리 따로 보관해 둔다.</li>
+<li><span class="mono">j</span> - 앞부분을 뒤에서부터 거슬러 보는 위치.</li>
+<li><span class="mono">while j &gt;= 0 and A[j] &gt; k</span> - 조건이 두 개다. 앞쪽 끝을 넘어가지 않아야 하고(<span class="mono">j &gt;= 0</span>), 그 값이 k보다 커야(<span class="mono">A[j] &gt; k</span>) 뒤로 민다.</li>
+<li><span class="mono">A[j+1] = k</span> - 반복이 끝난 지점의 바로 뒤가 k의 자리다. while이 끝났다는 것은 A[j]가 k보다 작거나 같다는 뜻이므로, k는 그 다음 칸에 들어간다.</li>
+<li><span class="mono">range(1, n)</span> - i가 1부터 시작한다. 원소가 하나뿐인 앞부분(A[0])은 이미 정렬된 상태로 볼 수 있기 때문이다.</li>
+</ul>
+
+<h3>동작 추적</h3>
+<p>밑줄 부분이 정렬이 끝난 앞부분이다.</p>
+
+<table>
+<tr><th class="mono">i</th><th class="mono">k</th><th>미는 횟수</th><th>끼워 넣은 뒤 A</th></tr>
+<tr><td class="mono">시작</td><td>-</td><td>-</td><td class="mono">[<u>3</u>, 6, 5, 8, 2]</td></tr>
+<tr><td class="mono">1</td><td class="mono">6</td><td>0</td><td class="mono">[<u>3, 6</u>, 5, 8, 2]</td></tr>
+<tr><td class="mono">2</td><td class="mono">5</td><td>1</td><td class="mono">[<u>3, 5, 6</u>, 8, 2]</td></tr>
+<tr><td class="mono">3</td><td class="mono">8</td><td>0</td><td class="mono">[<u>3, 5, 6, 8</u>, 2]</td></tr>
+<tr><td class="mono">4</td><td class="mono">2</td><td>4</td><td class="mono">[<u>2, 3, 5, 6, 8</u>]</td></tr>
+</table>
+
+<p>i=4일 때를 자세히 보면 다음과 같다. k=2를 뽑아 두고, 8, 6, 5, 3을 차례로 한 칸씩 뒤로 민 뒤 맨 앞에 2를 넣는다.</p>
+
+<table>
+<tr><th class="mono">j</th><th class="mono">A[j] &gt; 2 ?</th><th>동작</th><th>A (k=2는 따로 보관)</th></tr>
+<tr><td class="mono">3</td><td class="mono">8 &gt; 2 예</td><td class="mono">A[4] = A[3]</td><td class="mono">[3, 5, 6, 8, 8]</td></tr>
+<tr><td class="mono">2</td><td class="mono">6 &gt; 2 예</td><td class="mono">A[3] = A[2]</td><td class="mono">[3, 5, 6, 6, 8]</td></tr>
+<tr><td class="mono">1</td><td class="mono">5 &gt; 2 예</td><td class="mono">A[2] = A[1]</td><td class="mono">[3, 5, 5, 6, 8]</td></tr>
+<tr><td class="mono">0</td><td class="mono">3 &gt; 2 예</td><td class="mono">A[1] = A[0]</td><td class="mono">[3, 3, 5, 6, 8]</td></tr>
+<tr><td class="mono">-1</td><td>j &gt;= 0 이 거짓, 종료</td><td class="mono">A[0] = 2</td><td class="mono">[2, 3, 5, 6, 8]</td></tr>
+</table>
+
+<h3>복잡도</h3>
+<ul>
+<li>최선 O(n) - 이미 정렬된 리스트가 들어오면 <span class="mono">A[j] &gt; k</span>가 매번 처음부터 거짓이라 while 안으로 한 번도 들어가지 않는다. 바깥 for만 n-1번 돈다.</li>
+<li>최악 O(n^2) - 역순으로 정렬된 리스트가 들어오면 매번 앞부분 전체를 밀어야 한다.</li>
+<li>평균 O(n^2)</li>
+</ul>
+<p>거의 정렬된 리스트에서는 기초 정렬 세 가지 중 가장 빠르다.</p>
+
+
+<h2>6. 병합 정렬</h2>
+
+<p>리스트를 반으로 나눈다. 각각을 같은 방법으로 정렬한다. 정렬이 끝난 두 리스트를 하나로 합친다. 자기 자신을 다시 부르는 재귀 구조다.</p>
+
+<div class="code-block">def f(A):
+    if len(A) &lt;= 1:
+        return A
+
+    m = len(A) // 2
+    L = f(A[:m])
+    R = f(A[m:])
+
+    return merge(L, R)
+
+
+def merge(L, R):
+    res = []
+    i = j = 0
+    while i &lt; len(L) and j &lt; len(R):
+        if L[i] &lt;= R[j]:
+            res.append(L[i])
+            i += 1
+        else:
+            res.append(R[j])
+            j += 1
+    res.extend(L[i:])
+    res.extend(R[j:])
+    return res
+
+
+print(f([3, 6, 5, 8, 2]))     # [2, 3, 5, 6, 8]</div>
+
+<h3>코드 읽기</h3>
+<ul>
+<li><span class="mono">if len(A) &lt;= 1: return A</span> - 재귀의 종료 조건이다. 원소가 하나이거나 없으면 더 나눌 것도 없고 이미 정렬된 상태다.</li>
+<li><span class="mono">m = len(A) // 2</span> - 가운데 위치. <span class="mono">A[:m]</span>이 앞쪽, <span class="mono">A[m:]</span>이 뒤쪽이다.</li>
+<li><span class="mono">merge(L, R)</span> - 정렬된 두 리스트를 합치는 함수. L과 R 각각 맨 앞부터 보면서 작은 쪽을 꺼내 res에 붙인다.</li>
+<li><span class="mono">i</span>, <span class="mono">j</span> - L과 R에서 지금 보고 있는 위치.</li>
+<li><span class="mono">res.extend(L[i:])</span> - 한쪽이 먼저 바닥나면 다른 쪽에 남은 것은 이미 정렬돼 있으므로 그대로 뒤에 붙인다. 둘 중 한쪽은 항상 빈 리스트라 두 줄 다 써도 문제없다.</li>
+<li>이 코드는 원래 리스트 A를 바꾸지 않는다. 새 리스트를 만들어 돌려준다. 그래서 <span class="mono">f(A)</span>만 부르지 말고 결과를 받아 써야 한다.</li>
+</ul>
+
+<h3>동작 추적</h3>
+<p>나누는 과정과 합치는 과정이다. 안쪽으로 들어갈수록 들여쓰기가 깊어진다.</p>
+
+<div class="code-block">나누기
+[3, 6, 5, 8, 2]
+    [3, 6]
+        [3]
+        [6]
+    [5, 8, 2]
+        [5]
+        [8, 2]
+            [8]
+            [2]
+
+합치기 (안쪽에서 바깥쪽 순서로)
+merge([3], [6])          = [3, 6]
+merge([8], [2])          = [2, 8]
+merge([5], [2, 8])       = [2, 5, 8]
+merge([3, 6], [2, 5, 8]) = [2, 3, 5, 6, 8]</div>
+
+<p>마지막 merge를 한 걸음씩 보면 다음과 같다. L = [3, 6], R = [2, 5, 8]이다.</p>
+
+<table>
+<tr><th class="mono">i</th><th class="mono">j</th><th>비교</th><th>꺼낸 값</th><th class="mono">res</th></tr>
+<tr><td class="mono">0</td><td class="mono">0</td><td class="mono">3 &lt;= 2 ?  아니오</td><td class="mono">R[0]=2</td><td class="mono">[2]</td></tr>
+<tr><td class="mono">0</td><td class="mono">1</td><td class="mono">3 &lt;= 5 ?  예</td><td class="mono">L[0]=3</td><td class="mono">[2, 3]</td></tr>
+<tr><td class="mono">1</td><td class="mono">1</td><td class="mono">6 &lt;= 5 ?  아니오</td><td class="mono">R[1]=5</td><td class="mono">[2, 3, 5]</td></tr>
+<tr><td class="mono">1</td><td class="mono">2</td><td class="mono">6 &lt;= 8 ?  예</td><td class="mono">L[1]=6</td><td class="mono">[2, 3, 5, 6]</td></tr>
+<tr><td class="mono">2</td><td class="mono">2</td><td>L이 바닥남, while 종료</td><td class="mono">R[2:] 붙임</td><td class="mono">[2, 3, 5, 6, 8]</td></tr>
+</table>
+
+<h3>복잡도</h3>
+<p>반으로 나누는 깊이가 log n이고, 각 깊이마다 전체 n개를 훑어 합친다. 따라서 O(n log n)이다. 최선, 평균, 최악이 모두 같다. 입력이 어떤 상태든 나누는 방식이 항상 절반으로 똑같기 때문이다.</p>
+<p>대신 합칠 때 새 리스트 res를 만들기 때문에 추가 메모리가 필요하다. 기초 정렬 세 가지는 원래 리스트 안에서 자리만 바꾸므로 추가 메모리가 거의 들지 않는다.</p>
+
+
+<h2>7. 퀵 정렬</h2>
+
+<p>기준값을 하나 정한다. 기준값보다 작은 것, 같은 것, 큰 것으로 나눈다. 작은 쪽과 큰 쪽을 각각 같은 방법으로 정렬한 뒤 순서대로 이어 붙인다. 이것도 재귀 구조다.</p>
+
+<div class="code-block">def f(A):
+    if len(A) &lt;= 1:
+        return A
+
+    p = A[len(A)//2]
+    L = [x for x in A if x &lt; p]
+    M = [x for x in A if x == p]
+    R = [x for x in A if x &gt; p]
+
+    return f(L) + M + f(R)
+
+
+print(f([3, 6, 5, 8, 2]))     # [2, 3, 5, 6, 8]</div>
+
+<h3>코드 읽기</h3>
+<ul>
+<li><span class="mono">p</span> - 기준값(피벗). 여기서는 가운데 자리의 값을 쓴다. 첫 원소나 마지막 원소를 쓰는 교과서도 있다.</li>
+<li><span class="mono">L</span>, <span class="mono">M</span>, <span class="mono">R</span> - 기준값보다 작은 것, 같은 것, 큰 것을 모은 리스트. 리스트 컴프리헨션으로 한 줄씩 만든다.</li>
+<li><span class="mono">M</span>을 따로 두는 이유 - 기준값과 같은 값이 여러 개 있을 수 있다. 이것들은 이미 제자리가 정해졌으므로 다시 정렬할 필요가 없다.</li>
+<li><span class="mono">f(L) + M + f(R)</span> - 작은 쪽, 기준값, 큰 쪽 순서로 이어 붙이면 전체가 정렬된다.</li>
+<li>병합 정렬과 마찬가지로 원래 리스트를 바꾸지 않고 새 리스트를 돌려준다.</li>
+</ul>
+
+<h3>동작 추적</h3>
+<div class="code-block">f([3, 6, 5, 8, 2])
+    p = 5   L = [3, 2]   M = [5]   R = [6, 8]
+
+    f([3, 2])
+        p = 2   L = []   M = [2]   R = [3]
+        f([]) -> []      f([3]) -> [3]
+        결과: [] + [2] + [3] = [2, 3]
+
+    f([6, 8])
+        p = 8   L = [6]   M = [8]   R = []
+        f([6]) -> [6]    f([]) -> []
+        결과: [6] + [8] + [] = [6, 8]
+
+    결과: [2, 3] + [5] + [6, 8] = [2, 3, 5, 6, 8]</div>
+
+<h3>복잡도</h3>
+<ul>
+<li>평균 O(n log n) - 기준값이 대체로 가운데쯤 값이면 리스트가 매번 절반씩 줄어든다.</li>
+<li>최악 O(n^2) - 기준값이 매번 가장 작은 값 또는 가장 큰 값으로 잡히는 경우다. 그러면 한쪽이 비고 다른 쪽만 하나 줄어들어, 나누는 깊이가 n이 된다.</li>
+</ul>
+
+<div class="note">
+<span class="label">최악이 언제 생기나.</span> 기준값을 첫 원소로 잡는 코드에 이미 정렬된 리스트를 넣으면 매번 최솟값이 기준값이 되어 최악이 된다. 위 코드처럼 가운데 값을 쓰면 이 경우는 피할 수 있지만, 다른 입력에서 최악이 생길 수 있다는 점은 같다.
+</div>
+
+<p>최악이 O(n^2)인데도 실제로 널리 쓰이는 이유는, 평균적으로 빠르고 병합 정렬과 달리 별도의 큰 보조 리스트를 쓰지 않는 구현이 가능하기 때문이다.</p>
+
+
+<h2>8. 전체 비교</h2>
+
+<table>
+<tr><th>정렬</th><th>최선</th><th>평균</th><th>최악</th><th>추가 메모리</th><th>재귀</th></tr>
+<tr><td>버블</td><td>O(n^2)<br>(조기 종료 시 O(n))</td><td>O(n^2)</td><td>O(n^2)</td><td>거의 없음</td><td>아니오</td></tr>
+<tr><td>선택</td><td>O(n^2)</td><td>O(n^2)</td><td>O(n^2)</td><td>거의 없음</td><td>아니오</td></tr>
+<tr><td>삽입</td><td>O(n)</td><td>O(n^2)</td><td>O(n^2)</td><td>거의 없음</td><td>아니오</td></tr>
+<tr><td>병합</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>필요함</td><td>예</td></tr>
+<tr><td>퀵</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n^2)</td><td>구현에 따라</td><td>예</td></tr>
+</table>
+
+<h3>[3, 6, 5, 8, 2]에서 실제로 센 횟수</h3>
+<table>
+<tr><th>정렬</th><th>비교 횟수</th><th>자리 바꾸기 / 옮기기</th></tr>
+<tr><td>버블</td><td>10</td><td>자리 바꾸기 5회</td></tr>
+<tr><td>선택</td><td>10</td><td>자리 바꾸기 4회</td></tr>
+<tr><td>삽입</td><td>8</td><td>뒤로 밀기 5회</td></tr>
+</table>
+<p>비교 횟수가 같아도 실제 데이터를 옮기는 양은 다르다. 선택 정렬은 훑기 한 번에 교환이 한 번뿐이라, 옮기는 비용이 큰 상황에서 유리하다.</p>
+
+<h3>같은 값의 순서가 유지되는가</h3>
+<p>값이 같은 원소가 둘 있을 때, 정렬한 뒤에도 원래 앞뒤 순서가 그대로 남는 정렬을 안정 정렬이라고 한다. 예를 들어 이름과 점수를 함께 정렬할 때, 점수가 같은 사람들의 원래 순서를 지키고 싶다면 안정 정렬이 필요하다.</p>
+
+<table>
+<tr><th>정렬</th><th>안정</th><th>이유</th></tr>
+<tr><td>버블</td><td>예</td><td>조건이 <span class="mono">A[j] &gt; A[j+1]</span>이라 같으면 바꾸지 않는다</td></tr>
+<tr><td>선택</td><td>아니오</td><td>멀리 떨어진 두 자리를 바로 맞바꾸면서 사이에 있던 같은 값의 순서가 흐트러진다</td></tr>
+<tr><td>삽입</td><td>예</td><td>조건이 <span class="mono">A[j] &gt; k</span>라 같으면 더 밀지 않고 뒤에 놓는다</td></tr>
+<tr><td>병합</td><td>예</td><td>merge 조건이 <span class="mono">L[i] &lt;= R[j]</span>라 같으면 앞쪽 L을 먼저 꺼낸다</td></tr>
+<tr><td>퀵</td><td>구현에 따라</td><td>위 코드는 순서가 유지되지만, 리스트 안에서 자리를 맞바꾸는 방식의 퀵 정렬은 유지되지 않는다</td></tr>
+</table>
+
+<div class="note">
+<span class="label">정리.</span> 버블, 선택, 삽입은 반복문 두 겹으로 만들며 O(n^2)이다. 병합과 퀵은 재귀로 리스트를 나누어 O(n log n)에 가깝다. 파이썬에서 실제로 정렬할 때는 <span class="mono">A.sort()</span>나 <span class="mono">sorted(A)</span>를 쓰면 되지만, 이 다섯 가지를 직접 만들어 보는 이유는 같은 문제를 푸는 방법이 여러 가지이고 그 효율이 서로 다르다는 것을 확인하기 위해서다.
+</div>
+
+
+<h2>9. 확인 문제</h2>
+<p class="intro">스택, 큐, 버블 정렬, 선택 정렬, 삽입 정렬 범위다. 병합 정렬과 퀵 정렬은 문제에서 빠진다. 정답은 뒷장에 모아 두었다.</p>
+
+<h3>스택</h3>
+
+<div class="problem">
+<div class="problem-number">1-1 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">각 print의 출력을 순서대로 적어라.</div>
+<div class="code-block">S = []
+S.append(1)
+S.append(2)
+S.append(3)
+
+print(S.pop())    # (1)
+print(S.pop())    # (2)
+print(S[-1])      # (3)
+print(len(S))     # (4)</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">1-2 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">무엇이 출력되는가. 그리고 이 코드가 하는 일을 한 문장으로 쓰라.</div>
+<div class="code-block">S = []
+for ch in "STACK":
+    S.append(ch)
+
+out = ""
+while len(S) &gt; 0:
+    out += S.pop()
+
+print(out)</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">1-3 <span class="kind">[비교 - 실행 순서]</span></div>
+<div class="stmt">S가 빈 리스트일 때 (A)와 (B)는 각각 어떻게 되는가. 정상 출력인지 에러인지 답하고 이유를 쓰라.</div>
+<div class="code-block">S = []
+
+# (A)
+print(len(S) == 0 or S.pop() != '(')
+
+# (B)
+print(S.pop() != '(' or len(S) == 0)</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">1-4 <span class="kind">[빈칸]</span></div>
+<div class="stmt">1부터 4까지 차례로 스택에 넣으면서, 스택 맨 위 값이 goal의 현재 순서와 맞을 때마다 꺼내 출력하는 코드다. while 조건의 빈칸을 채워라. 출력은 2 1 3 4 가 되어야 한다.</div>
+<div class="code-block">S = []
+goal = [2, 1, 3, 4]
+now = 0
+
+for i in range(1, 5):
+    S.append(i)
+    while len(S) &gt; 0 and ____:
+        print(S.pop())
+        now += 1</div>
+</div>
+
+<h3>큐</h3>
+
+<div class="problem">
+<div class="problem-number">2-1 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">각 print의 출력을 순서대로 적어라.</div>
+<div class="code-block">Q = []
+for x in [10, 20, 30]:
+    Q.append(x)
+
+print(Q.pop(0))   # (1)
+Q.append(40)
+print(Q.pop(0))   # (2)
+print(Q)          # (3)</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">2-2 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">무엇이 출력되는가. <span class="mono">Q.append(Q.pop(0))</span> 한 줄이 하는 일을 설명하라.</div>
+<div class="code-block">Q = [1, 2, 3, 4]
+Q.append(Q.pop(0))
+Q.append(Q.pop(0))
+print(Q)</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">2-3 <span class="kind">[비교]</span></div>
+<div class="stmt">같은 값을 같은 순서로 넣었다. (1)과 (2)의 출력은 각각 무엇인가. 왜 다른지 이유를 쓰라.</div>
+<div class="code-block">S = []
+for x in [1, 2, 3]:
+    S.append(x)
+print(S.pop())     # (1)
+
+Q = []
+for x in [1, 2, 3]:
+    Q.append(x)
+print(Q.pop(0))    # (2)</div>
+</div>
+
+<h3>버블 정렬</h3>
+
+<div class="problem">
+<div class="problem-number">3-1 <span class="kind">[빈칸]</span></div>
+<div class="stmt">오름차순 버블 정렬이다. 빈칸 세 곳을 채워라.</div>
+<div class="code-block">def f(A):
+    n = len(A)
+    for i in range(n):
+        for j in range( (가) ):
+            if (나) :
+                (다)
+
+A = [4, 1, 3, 2]
+f(A)
+print(A)      # [1, 2, 3, 4]</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">3-2 <span class="kind">[상태 추적]</span></div>
+<div class="stmt">A = [4, 1, 3, 2]에 버블 정렬을 적용할 때, 바깥 반복 i = 0, 1, 2가 각각 끝난 시점의 A를 적어라.</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">3-3 <span class="kind">[서술]</span></div>
+<div class="stmt">안쪽 반복이 <span class="mono">range(n-i-1)</span>인 이유를 설명하라. 특히 <span class="mono">-i</span>가 붙는 이유와 <span class="mono">-1</span>이 붙는 이유를 나누어 쓰라.</div>
+</div>
+
+<h3>선택 정렬</h3>
+
+<div class="problem">
+<div class="problem-number">4-1 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">다음 코드의 출력을 적어라. 리스트 전체가 아니라 print가 찍는 것만 답한다.</div>
+<div class="code-block">A = [5, 2, 8, 1]
+n = len(A)
+
+for i in range(n-1):
+    m = i
+    for j in range(i+1, n):
+        if A[j] &lt; A[m]:
+            m = j
+    A[i], A[m] = A[m], A[i]
+    print(A[i], end=' ')
+
+print()</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">4-2 <span class="kind">[빈칸]</span></div>
+<div class="stmt">오름차순 선택 정렬이다. 빈칸 세 곳을 채워라.</div>
+<div class="code-block">def f(A):
+    n = len(A)
+    for i in range(n-1):
+        m = (가)
+        for j in range(i+1, n):
+            if (나) :
+                m = j
+        (다)</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">4-3 <span class="kind">[서술]</span></div>
+<div class="stmt">선택 정렬은 이미 정렬된 리스트를 넣어도 비교 횟수가 줄지 않는다. 이유를 설명하라.</div>
+</div>
+
+<h3>삽입 정렬</h3>
+
+<div class="problem">
+<div class="problem-number">5-1 <span class="kind">[빈칸]</span></div>
+<div class="stmt">오름차순 삽입 정렬이다. 빈칸 세 곳을 채워라.</div>
+<div class="code-block">def f(A):
+    n = len(A)
+    for i in range(1, n):
+        k = (가)
+        j = i - 1
+        while (나) :
+            A[j+1] = A[j]
+            j -= 1
+        (다)</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">5-2 <span class="kind">[상태 추적]</span></div>
+<div class="stmt">A = [4, 1, 3, 2]에 삽입 정렬을 적용할 때, i = 1, 2, 3이 각각 끝난 시점의 A를 적어라.</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">5-3 <span class="kind">[서술]</span></div>
+<div class="stmt">삽입 정렬은 최선의 경우 O(n)이다. 어떤 입력일 때 최선이 되는지, 그때 코드가 어떻게 동작하는지 설명하라. 또 최악은 어떤 입력일 때인지도 쓰라.</div>
+</div>
+
+
+<div class="answers">
+<h2>10. 확인 문제 정답</h2>
+
+<div class="a-item">
+<span class="a-num">1-1</span>
+<div class="a-body">(1) 3 &nbsp; (2) 2 &nbsp; (3) 1 &nbsp; (4) 1<br>
+나중에 넣은 3, 2가 먼저 나온다. 남은 것은 1 하나이고, S[-1]은 빼지 않고 보기만 하므로 개수는 1 그대로다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">1-2</span>
+<div class="a-body">KCATS<br>
+넣은 순서의 반대로 나오므로, 전부 넣었다가 전부 빼면 문자열이 뒤집힌다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">1-3</span>
+<div class="a-body">(A) True 가 출력된다. or는 왼쪽이 참이면 오른쪽을 실행하지 않는다. <span class="mono">len(S) == 0</span>이 참이라 <span class="mono">S.pop()</span>은 아예 실행되지 않는다.<br>
+(B) IndexError가 난다. 왼쪽의 <span class="mono">S.pop()</span>을 먼저 실행하는데 스택이 비어 있기 때문이다.<br>
+그래서 스택을 다루는 조건문에서는 비었는지 확인하는 쪽을 항상 먼저 쓴다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">1-4</span>
+<div class="a-body"><span class="mono">S[-1] == goal[now]</span><br>
+스택 맨 위 값이 지금 필요한 순서의 값과 같으면 꺼낸다. 출력은 2, 1, 3, 4 순서이고 끝나면 스택은 비어 있다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">2-1</span>
+<div class="a-body">(1) 10 &nbsp; (2) 20 &nbsp; (3) [30, 40]<br>
+앞에서부터 나가고 뒤에 붙는다. 10이 나간 뒤 40이 뒤에 붙고, 그다음 20이 나간다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">2-2</span>
+<div class="a-body">[3, 4, 1, 2]<br>
+<span class="mono">Q.pop(0)</span>으로 맨 앞을 빼서 그 값을 <span class="mono">Q.append</span>로 맨 뒤에 붙인다. 즉 맨 앞 원소를 맨 뒤로 보낸다. 1이 뒤로 가고, 이어서 2가 뒤로 간다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">2-3</span>
+<div class="a-body">(1) 3 &nbsp; (2) 1<br>
+스택은 <span class="mono">pop()</span>으로 맨 뒤를 빼서 마지막에 넣은 3이 나오고, 큐는 <span class="mono">pop(0)</span>으로 맨 앞을 빼서 처음에 넣은 1이 나온다. 넣는 코드는 같고 빼는 위치만 다르다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">3-1</span>
+<div class="a-body">(가) <span class="mono">n-i-1</span> &nbsp; (나) <span class="mono">A[j] &gt; A[j+1]</span> &nbsp; (다) <span class="mono">A[j], A[j+1] = A[j+1], A[j]</span></div>
+</div>
+
+<div class="a-item">
+<span class="a-num">3-2</span>
+<div class="a-body">i=0 끝: [1, 3, 2, 4] &nbsp;/&nbsp; i=1 끝: [1, 2, 3, 4] &nbsp;/&nbsp; i=2 끝: [1, 2, 3, 4]<br>
+i=0에서 가장 큰 4가 맨 뒤로 확정된다. i=1에서 3이 확정되고, 이 시점에 이미 정렬이 끝난다. i=2는 비교만 하고 바꾸지 않는다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">3-3</span>
+<div class="a-body"><span class="mono">-i</span>: 훑기를 i번 마쳤으면 뒤쪽 i개는 이미 큰 값들로 확정돼 있다. 다시 볼 필요가 없으므로 범위를 그만큼 줄인다.<br>
+<span class="mono">-1</span>: 안쪽에서 <span class="mono">A[j+1]</span>을 읽는다. j가 마지막 칸까지 가면 <span class="mono">A[j+1]</span>이 범위를 벗어나므로 한 칸 앞에서 멈춰야 한다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">4-1</span>
+<div class="a-body"><span class="mono">1 2 5</span><br>
+바깥 반복이 <span class="mono">range(n-1)</span>이라 i는 0, 1, 2까지만 돈다. 각 단계에서 확정된 값 1, 2, 5가 순서대로 출력된다. 마지막 8은 저절로 제자리가 되지만 print를 거치지 않으므로 출력되지 않는다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">4-2</span>
+<div class="a-body">(가) <span class="mono">i</span> &nbsp; (나) <span class="mono">A[j] &lt; A[m]</span> &nbsp; (다) <span class="mono">A[i], A[m] = A[m], A[i]</span><br>
+(가)는 일단 맨 앞자리를 최솟값 위치로 가정하고 시작한다는 뜻이다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">4-3</span>
+<div class="a-body">남은 부분에서 가장 작은 값을 찾으려면, 그 부분의 원소를 하나도 빠뜨리지 않고 전부 확인해야 한다. 리스트가 이미 정렬돼 있는지 여부는 다 확인해 보기 전에는 알 수 없다. 그래서 비교 횟수는 입력 상태와 무관하게 항상 n(n-1)/2로 같고, 최선과 최악이 모두 O(n^2)이다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">5-1</span>
+<div class="a-body">(가) <span class="mono">A[i]</span> &nbsp; (나) <span class="mono">j &gt;= 0 and A[j] &gt; k</span> &nbsp; (다) <span class="mono">A[j+1] = k</span><br>
+(가)에서 값을 미리 빼 두지 않으면, 뒤로 미는 과정에서 그 자리가 덮어써져 값을 잃는다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">5-2</span>
+<div class="a-body">i=1 끝: [1, 4, 3, 2] &nbsp;/&nbsp; i=2 끝: [1, 3, 4, 2] &nbsp;/&nbsp; i=3 끝: [1, 2, 3, 4]<br>
+i=3에서는 k=2를 두고 4와 3을 뒤로 민 뒤, 1보다는 크므로 그 다음 칸에 2를 넣는다.</div>
+</div>
+
+<div class="a-item">
+<span class="a-num">5-3</span>
+<div class="a-body">최선은 입력이 이미 오름차순으로 정렬돼 있을 때다. 이때 <span class="mono">A[j] &gt; k</span>가 매번 처음부터 거짓이라 while 안으로 한 번도 들어가지 않는다. 각 i마다 비교를 한 번씩만 하고 바깥 for만 n-1번 돌아 O(n)이 된다.<br>
+최악은 입력이 내림차순일 때다. 끼워 넣을 값이 매번 앞부분 전체보다 작아서 앞부분을 전부 뒤로 밀어야 하고, 미는 횟수가 1 + 2 + ... + (n-1)이 되어 O(n^2)이 된다.</div>
+</div>
+
+</div>
+
+</body>
+</html>

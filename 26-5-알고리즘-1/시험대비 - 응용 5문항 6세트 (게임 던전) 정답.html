@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>시험대비 - 응용 5문항 6세트 (게임 던전) 정답</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>시험대비 - 응용 5문항 6세트 (게임 던전) 정답</h1><p class="intro">밑줄 칸에 들어갈 코드를 쓴다. 밑줄 길이는 들어갈 코드의 글자 수와 같다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 dungeon은 던전의 방 1 ~ 6번과 방 사이의 문을 인접 리스트로 나타낸 것이다. 다음 explore(start)는 start번 방에서 가까운 방부터 차례로 들르는 너비 우선 탐색(BFS) 함수이고, 들른 순서를 리스트로 돌려준다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">from collections import deque
+
+dungeon = {
+    1: [2, 3],
+    2: [1, 4, 5],
+    3: [1, 6],
+    4: [2],
+    5: [2, 6],
+    6: [3, 5]
+}
+
+def explore(start):
+    visited = {room: False for room in dungeon}
+    queue = deque([start])
+    <span class="a"><i>가</i>visited[start] = True</span>
+    result = []
+    while queue:
+        v = queue.popleft()
+        result.append(v)
+        for nxt in dungeon[v]:
+            if <span class="a"><i>나</i>not visited[nxt]</span>:
+                <span class="a"><i>다</i>visited[nxt] = True</span>
+                <span class="a"><i>라</i>queue.append(nxt)</span>
+    return result
+
+
+print(explore(1), explore(5))</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6] [5, 2, 6, 1, 4, 3]</div><div class="answers"><span class="lab">(가)</span><span>visited[start] = True</span><span class="lab">(나)</span><span>not visited[nxt]</span><span class="lab">(다)</span><span>visited[nxt] = True</span><span class="lab">(라)</span><span>queue.append(nxt)</span></div><p class="note">인접 리스트의 BFS(큐)이다. (나)는 visited[nxt] == False도 정답이다. (다)와 (라)는 서로 바꿔 써도 정답이다.</p></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 S에는 플레이어들의 점수가 들어 있다. 다음 rank_sort(S)는 점수가 높은 것부터 놓이도록 정렬하는 삽입 정렬 함수이다. i번째 점수 k를 앞부분의 알맞은 자리에 끼워 넣는다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def rank_sort(S):
+    for i in range(1, len(S)):
+        k = S[i]
+        j = i - 1
+        while j &gt;= 0 and <span class="a"><i>가</i>S[j] &lt; k</span>:
+            S[j + 1] = S[j]
+            <span class="a"><i>나</i>j -= 1</span>
+        <span class="a"><i>다</i>S[j + 1] = k</span>
+
+
+S = [320, 510, 150, 480, 700]
+rank_sort(S)
+print(S)</div>
+<p class="out-label">실행 결과</p><div class="out">[700, 510, 480, 320, 150]</div><div class="answers"><span class="lab">(가)</span><span>S[j] &lt; k</span><span class="lab">(나)</span><span>j -= 1</span><span class="lab">(다)</span><span>S[j + 1] = k</span></div><p class="note">내림차순 삽입 정렬이다. 오름차순에서는 k보다 큰 값을 뒤로 밀지만, 여기서는 k보다 작은 값을 뒤로 민다. (가)는 k &gt; S[j]도 정답이다. (나)는 j = j - 1도 정답이다.</p></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 skill은 스킬 트리를 이진 트리로 저장한 것이다. 루트는 1번 칸이고, idx번 칸의 부모는 idx // 2번 칸이다. 어떤 스킬을 배우려면 그 스킬의 부모 스킬을 먼저 배워야 한다. 다음 need(idx)는 idx번 칸의 스킬부터 루트까지 거슬러 올라가며 만나는 스킬을 차례로 리스트에 담아 돌려주는 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">skill = [0, '기본기', '검술', '마법', '베기', '찌르기', '불', '얼음']
+
+def need(idx):
+    path = []
+    while <span class="a"><i>가</i>idx &gt;= 1</span>:
+        path.append(<span class="a"><i>나</i>skill[idx]</span>)
+        idx = <span class="a"><i>다</i>idx // 2</span>
+    return path
+
+
+print(need(5))
+print(need(7))
+print(need(1))</div>
+<p class="out-label">실행 결과</p><div class="out">['찌르기', '검술', '기본기']
+['얼음', '마법', '기본기']
+['기본기']</div><div class="answers"><span class="lab">(가)</span><span>idx &gt;= 1</span><span class="lab">(나)</span><span>skill[idx]</span><span class="lab">(다)</span><span>idx // 2</span></div><p class="note">리스트로 저장한 이진 트리에서 부모의 위치는 idx // 2이다. 루트(1번)의 부모 위치는 0이 되어 반복이 끝난다. (가)는 idx &gt; 0, idx != 0도 정답이다.</p></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">던전의 계단을 한 번에 1칸 또는 3칸씩 오른다. 다음 climb(n)은 n칸을 오르는 방법의 수를 구하는 함수이다. 한 번 구한 값은 딕셔너리 memo에 저장해 두고 다시 쓴다(메모이제이션). 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">memo = {}
+
+def climb(n):
+    if n &lt; 3:
+        return 1
+    if <span class="a"><i>가</i>n in memo</span>:
+        return <span class="a"><i>나</i>memo[n]</span>
+    memo[n] = <span class="a"><i>다</i>climb(n - 1) + climb(n - 3)</span>
+    return memo[n]
+
+
+print(climb(3), climb(5), climb(40))</div>
+<p class="out-label">실행 결과</p><div class="out">2 4 2670964</div><div class="answers"><span class="lab">(가)</span><span>n in memo</span><span class="lab">(나)</span><span>memo[n]</span><span class="lab">(다)</span><span>climb(n - 1) + climb(n - 3)</span></div><p class="note">마지막에 1칸을 오르는 경우와 3칸을 오르는 경우로 나누면 climb(n) = climb(n - 1) + climb(n - 3)이다. n이 3보다 작으면 1칸씩 오르는 방법 1가지뿐이다. 5칸은 1+1+1+1+1, 1+1+3, 1+3+1, 3+1+1의 4가지이다. (다)는 더하는 순서를 바꿔 써도 정답이다.</p></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">무기를 한 번 강화할 때마다 공격력이 base배가 된다. 공격력 1인 무기를 exp번 강화하면 공격력은 base의 exp제곱이다. 다음 attack(base, exp)는 지수를 절반으로 줄여 재귀 호출하는 방법으로 이 값을 구하는 함수이다. 지수가 절반인 값을 한 번만 구해 half에 두고 쓴다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def attack(base, exp):
+    if exp == 0:
+        return <span class="a"><i>가</i>1</span>
+    half = <span class="a"><i>나</i>attack(base, exp // 2)</span>
+    if exp % 2 == 0:
+        return <span class="a"><i>다</i>half * half</span>
+    else:
+        return <span class="a"><i>라</i>half * half * base</span>
+
+
+print(attack(2, 10), attack(3, 5), attack(5, 0))</div>
+<p class="out-label">실행 결과</p><div class="out">1024 243 1</div><div class="answers"><span class="lab">(가)</span><span>1</span><span class="lab">(나)</span><span>attack(base, exp // 2)</span><span class="lab">(다)</span><span>half * half</span><span class="lab">(라)</span><span>half * half * base</span></div><p class="note">지수를 반으로 줄이는 거듭제곱(분할정복)이다. exp가 홀수이면 exp // 2가 내림되므로 base를 한 번 더 곱한다. (다)는 half ** 2도 정답이다. (라)는 곱하는 순서를 바꿔 써도 정답이다.</p></div></body></html>

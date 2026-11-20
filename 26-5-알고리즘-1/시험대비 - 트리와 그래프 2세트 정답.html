@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>시험대비 - 트리와 그래프 2세트 정답</title>
+<style>
+@page { size: A4; margin: 15mm; }
+body {
+    font-family: 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1cm;
+}
+h1 { font-size: 16pt; border-bottom: 2px solid #000; padding-bottom: 8px; margin: 0 0 6px; }
+.intro { font-size: 10pt; color: #333; margin: 0 0 10px; }
+h2 { font-size: 13pt; margin: 1.5em 0 0.2em; border-bottom: 1px solid #999; padding-bottom: 3px; }
+.sec-desc { font-size: 10pt; color: #333; margin: 0.2em 0 0.6em; }
+.problem { margin: 0 0 26px; page-break-inside: avoid; break-inside: avoid; }
+.problem-number { font-weight: bold; font-size: 11pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; }
+.stmt { margin: 4px 0 6px; }
+.code-block {
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    margin: 6px 0;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.subq { font-size: 10.5pt; margin: 10px 0 2px; }
+.answer-space { border: 1px solid #ccc; margin: 4px 0 0; background: #fff;
+                page-break-inside: avoid; break-inside: avoid; }
+.answer-space.sm { height: 50px; }
+.answer-space.lg { height: 130px; }
+.answers { page-break-before: always; break-before: page; }
+.a-item { margin: 0 0 14px; page-break-inside: avoid; break-inside: avoid; }
+.a-num { font-weight: bold; }
+.a-body { font-size: 10pt; margin: 2px 0 0; }
+.a-out { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; white-space: pre; background: #f8f8f8; border: 1px solid #ddd; padding: 4px 8px; margin: 2px 0; }
+@media print { body { max-width: none; margin: 0; padding: 0; } }
+.page-break { break-before: page; page-break-before: always; }
+</style>
+</head>
+<body>
+<h1>시험대비 - 트리와 그래프 2세트 정답</h1>
+<div class="a-item"><div class="a-num">1</div><div class="a-out">(1) 7
+(2) 14
+(3) 링크 10개, 1의 개수 20</div><div class="a-body">(가)는 링크 하나에 1 한 칸, (나)는 링크 하나에 [i][j], [j][i] 두 칸. 완전 그래프 링크 수는 5 x 4 / 2 = 10.</div></div>
+<div class="a-item"><div class="a-num">2</div><div class="a-out">[[0, 1, 0], [0, 0, 0], [0, 0, 0]]
+[[0, 1, 0], [0, 1, 0], [0, 1, 0]]</div><div class="a-body">[[0] * n] * n 은 같은 행 리스트 하나를 n번 담는다. 한 칸을 바꾸면 모든 행이 바뀐다.</div></div>
+<div class="a-item"><div class="a-num">3</div><div class="a-out">[3, 1, 4, 0, 1, 0, 5]
+[3, 1, 4, 0, 1, 0, 5]</div><div class="a-body">두 번째 1은 1 &lt; 1 이 거짓이라 오른쪽(인덱스 5)으로 간다. 0은 인덱스 4에 들어가지만 0이 빈 칸 표시라 들어간 흔적이 없다.</div></div>
+<div class="a-item"><div class="a-num">4</div><div class="a-out">{&#x27;A&#x27;: [&#x27;B&#x27;, &#x27;A&#x27;], &#x27;B&#x27;: [&#x27;B&#x27;, &#x27;A&#x27;], &#x27;C&#x27;: [&#x27;B&#x27;, &#x27;A&#x27;]}</div><div class="a-body">세 키가 리스트 empty 하나를 같이 가리킨다. 학교 코드 {node: [] for node in nodes} 는 키마다 새 리스트를 만든다.</div></div>
+<div class="a-item"><div class="a-num">5</div><div class="a-out">[4, 5, 8]</div><div class="a-body">0번 칸 2를 지우면 4가 0번 칸으로 당겨지고, 다음에 1번 칸(5)을 읽어서 4는 검사되지 않는다. 6을 지운 뒤에도 8을 건너뛴다.</div></div>
+<div class="a-item"><div class="a-num">6</div><div class="a-out">1 4 3 2 6 5 7 
+(2) 다르다</div><div class="a-body">스택으로 바뀌어 뒤에 넣은 4부터 꺼낸다. 넣을 때 방문 표시를 하므로 재귀 DFS와 순서가 다르다.</div></div>
+<div class="a-item"><div class="a-num">7</div><div class="a-out">[1, 2, 3, 10, 20, 30]
+[1, 2, 3, 10, 20, 30, 100, 200, 300]</div><div class="a-body">A = A + [...] 는 새 리스트를 만들어 이름 A를 옮긴다. for는 처음 리스트 [1, 2, 3]을 계속 읽으므로 세 번 돈다. A += [...] 는 처음 리스트 자체에 붙이므로 붙은 10, 20, 30도 읽고 100, 200, 300을 붙인 뒤 끝난다.</div></div>
+<div class="a-item"><div class="a-num">8</div><div class="a-out">False
+True
+False</div><div class="a-body">3에 도착한 호출은 True를 돌려주지만 dfs_check(nxt) 줄이 그 값을 버린다. 첫 호출에서 바로 끝나는 (0, 0)만 True. 0과 연결된 3도, 연결 안 된 4도 결과가 같다.</div></div>
+<div class="a-item"><div class="a-num">9</div><div class="a-out">6
+[[], [], [], [], [], []]</div><div class="a-body">res에는 리스트 path 하나가 6번 들어간다. 끝에 path는 모두 pop되어 빈 리스트이므로 6개가 모두 []로 보인다. 그 순간의 내용을 남기려면 res.append(path[:]).</div></div>
+</body>
+</html>

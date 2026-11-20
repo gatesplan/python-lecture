@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>7. 알고리즘 - 깊이우선탐색과 너비우선탐색</title>
+<style>
+@page { size: A4; margin: 15mm; }
+body {
+    font-family: 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1cm;
+}
+h1 { font-size: 16pt; border-bottom: 2px solid #000; padding-bottom: 8px; margin: 0 0 6px; }
+.intro { font-size: 10pt; color: #333; margin: 0 0 10px; }
+h2 { font-size: 13pt; margin: 1.5em 0 0.2em; border-bottom: 1px solid #999; padding-bottom: 3px; }
+.sec-desc { font-size: 10pt; color: #333; margin: 0.2em 0 0.6em; }
+.problem { margin: 0 0 26px; page-break-inside: avoid; break-inside: avoid; }
+.problem-number { font-weight: bold; font-size: 11pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; }
+.stmt { margin: 4px 0 6px; }
+.code-block {
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    margin: 6px 0;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.subq { font-size: 10.5pt; margin: 10px 0 2px; }
+.answer-space { border: 1px solid #ccc; margin: 4px 0 0; background: #fff;
+                page-break-inside: avoid; break-inside: avoid; }
+.answer-space.sm { height: 50px; }
+.answer-space.lg { height: 130px; }
+.answers { page-break-before: always; break-before: page; }
+.a-item { margin: 0 0 14px; page-break-inside: avoid; break-inside: avoid; }
+.a-num { font-weight: bold; }
+.a-body { font-size: 10pt; margin: 2px 0 0; }
+@media print { body { max-width: none; margin: 0; padding: 0; } }
+</style>
+</head>
+<body>
+<h1>7. 알고리즘 - 깊이우선탐색과 너비우선탐색</h1>
+<p class="intro">모든 문제는 1번 단원의 graph 딕셔너리를 사용한다. 정답은 뒷장에 모아 정리.</p>
+<h2>1. 그래프를 딕셔너리로 표현하기</h2>
+<p class="sec-desc">정점을 키, 그 정점의 이웃 목록을 값으로 하는 딕셔너리로 적는다. 아래 그래프를 이 시험지 전체에서 사용한다.</p>
+<div class="code-block">    0 --- 1 --- 3
+    |     |
+    2     4
+     \   /
+       5
+
+graph = {
+    0: [1, 2],
+    1: [0, 3, 4],
+    2: [0, 5],
+    3: [1],
+    4: [1, 5],
+    5: [2, 4],
+}</div>
+<div class="problem">
+<div class="problem-number">1-1 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">아래 코드의 출력을 예측하라.</div>
+<div class="code-block">print(graph[1])
+print(len(graph[3]))
+print(graph[5][0])
+print(len(graph))</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">1-2 <span class="kind">[빈칸 - 차수 세기]</span></div>
+<div class="stmt">각 정점에 연결된 간선 수(차수)를 출력하는 코드다. 두 곳을 채워라. (0-&gt;2, 1-&gt;3, 2-&gt;2, 3-&gt;1, 4-&gt;2, 5-&gt;2)</div>
+<div class="code-block">for v in ____:
+    print(v, &quot;번 정점의 차수:&quot;, ____)</div>
+<div class="answer-space sm"></div>
+</div>
+<h2>2. 깊이우선탐색 (DFS) - 재귀</h2>
+<p class="sec-desc">갈 수 있는 데까지 깊이 들어갔다가 막히면 되돌아온다. 재귀의 호출 스택을 그대로 쓴다. 방문한 정점은 리스트 visited에 순서대로 쌓는다.</p>
+<div class="problem">
+<div class="problem-number">2-1 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">0번에서 DFS를 시작하면 visited는 어떤 순서가 될까?</div>
+<div class="code-block">visited = []
+
+def dfs(v):
+    visited.append(v)
+    for nxt in graph[v]:
+        if nxt not in visited:
+            dfs(nxt)
+
+dfs(0)
+print(visited)</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">2-2 <span class="kind">[빈칸 - 방문 표시]</span></div>
+<div class="stmt">두 곳을 채워라. 이게 빠지면 무한 재귀에 빠진다.</div>
+<div class="code-block">visited = []
+
+def dfs(v):
+    ____
+    for nxt in graph[v]:
+        if ____:
+            dfs(nxt)</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">2-3 <span class="kind">[디버깅 - 무한 재귀]</span></div>
+<div class="stmt">아래 코드는 멈추지 않는다(RecursionError). 이유를 쓰고 고쳐라.</div>
+<div class="code-block">visited = []
+
+def dfs(v):
+    print(v, end=&quot; &quot;)
+    for nxt in graph[v]:
+        if nxt not in visited:
+            dfs(nxt)</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">2-4 <span class="kind">[전체 작성]</span></div>
+<div class="stmt">0번에서 출발해 도달할 수 있는 정점의 개수를 세어 반환하는 함수를 작성하라. (답은 6)</div>
+<div class="code-block">visited = []
+
+def dfs(v):
+    pass</div>
+<div class="answer-space lg"></div>
+</div>
+<h2>3. 깊이우선탐색 - 스택 (반복)</h2>
+<p class="sec-desc">재귀가 자동으로 써 주던 호출 스택을 리스트로 직접 만들면 재귀 없이 DFS를 할 수 있다.</p>
+<div class="problem">
+<div class="problem-number">3-1 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">스택 버전의 방문 순서를 예측하라. 재귀 버전(2-1)과 같은가?</div>
+<div class="code-block">visited = []
+stack = [0]
+while stack:
+    v = stack.pop()
+    if v in visited:
+        continue
+    visited.append(v)
+    for nxt in graph[v]:
+        if nxt not in visited:
+            stack.append(nxt)
+
+print(visited)</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">3-2 <span class="kind">[빈칸 - 스택 연산]</span></div>
+<div class="stmt">두 곳을 채워라. 스택은 어느 쪽에서 넣고 꺼내는가?</div>
+<div class="code-block">visited = []
+stack = [0]
+while stack:
+    v = stack.____()
+    if v in visited:
+        continue
+    visited.append(v)
+    for nxt in graph[v]:
+        if nxt not in visited:
+            stack.____(nxt)</div>
+<div class="answer-space sm"></div>
+</div>
+<h2>4. 너비우선탐색 (BFS) - 큐</h2>
+<p class="sec-desc">스택을 큐로 바꾸기만 하면 BFS가 된다. 가까운 곳부터 한 겹씩 넓혀 나간다.</p>
+<div class="problem">
+<div class="problem-number">4-1 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">0번에서 BFS를 시작하면 visited는 어떤 순서가 될까?</div>
+<div class="code-block">visited = [0]
+queue = [0]
+while queue:
+    v = queue.pop(0)
+    for nxt in graph[v]:
+        if nxt not in visited:
+            visited.append(nxt)
+            queue.append(nxt)
+
+print(visited)</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">4-2 <span class="kind">[빈칸 - 큐 연산]</span></div>
+<div class="stmt">DFS 스택 버전과 딱 한 군데만 다르다. 두 빈칸을 채워라.</div>
+<div class="code-block">visited = [0]
+queue = [0]
+while queue:
+    v = queue.____
+    for nxt in graph[v]:
+        if nxt not in visited:
+            ____
+            queue.append(nxt)</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">4-3 <span class="kind">[트레이싱 - 큐 상태]</span></div>
+<div class="stmt">매 반복마다 찍히는 큐의 내용을 순서대로 모두 적어라.</div>
+<div class="code-block">visited = [0]
+queue = [0]
+while queue:
+    print(&quot;큐:&quot;, queue)
+    v = queue.pop(0)
+    for nxt in graph[v]:
+        if nxt not in visited:
+            visited.append(nxt)
+            queue.append(nxt)</div>
+<div class="answer-space lg"></div>
+</div>
+<h2>5. BFS로 최단 거리 구하기</h2>
+<p class="sec-desc">BFS는 가까운 것부터 방문하므로 처음 도달했을 때가 곧 최단 거리다. visited 리스트 대신 거리 딕셔너리 dist를 쓴다. 딕셔너리에 in을 쓰면 키가 있는지를 확인한다.</p>
+<div class="problem">
+<div class="problem-number">5-1 <span class="kind">[빈칸 - 거리 갱신]</span></div>
+<div class="stmt">두 곳을 채워라. (결과는 {0: 0, 1: 1, 2: 1, 3: 2, 4: 2, 5: 2})</div>
+<div class="code-block">dist = {0: 0}
+queue = [0]
+while queue:
+    v = queue.pop(0)
+    for nxt in graph[v]:
+        if ____:
+            dist[nxt] = ____
+            queue.append(nxt)
+
+print(dist)</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">5-2 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">시작점을 3번으로 바꾸면 dist는 어떻게 될까? 키가 찍히는 순서까지 적어라.</div>
+<div class="code-block">dist = {3: 0}
+queue = [3]
+while queue:
+    v = queue.pop(0)
+    for nxt in graph[v]:
+        if nxt not in dist:
+            dist[nxt] = dist[v] + 1
+            queue.append(nxt)
+
+print(dist)</div>
+<div class="answer-space sm"></div>
+</div>
+<h2>6. 격자 탐색 (섬 세기)</h2>
+<p class="sec-desc">2차원 리스트도 그래프다. 각 칸이 정점, 상하좌우 인접 칸이 이웃이다. 이웃이 좌표 계산으로 바로 나오므로 graph 딕셔너리를 따로 만들지 않는다. 범위 검사는 반드시 한다.</p>
+<div class="code-block">grid = [[1,1,0,0],
+        [1,0,0,1],
+        [0,0,1,1],
+        [0,0,1,0]]
+H, W = len(grid), len(grid[0])
+dr = [-1, 1, 0, 0]     # 위, 아래
+dc = [0, 0, -1, 1]     # 왼쪽, 오른쪽</div>
+<div class="problem">
+<div class="problem-number">6-1 <span class="kind">[빈칸 - 범위 검사]</span></div>
+<div class="stmt">좌표 (r, c)가 격자 안에 있는지 판정하는 조건을 채워라.</div>
+<div class="code-block">def inside(r, c):
+    return ____
+
+# inside(0,0), inside(3,3)  -&gt; True True
+# inside(-1,0), inside(0,4) -&gt; False False</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">6-2 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">(0,0)에서 DFS로 이어진 1을 모두 2로 바꾼다. 실행 후 격자를 적어라.</div>
+<div class="code-block">def paint(r, c):
+    grid[r][c] = 2
+    for d in range(4):
+        nr, nc = r + dr[d], c + dc[d]
+        if 0 &lt;= nr &lt; H and 0 &lt;= nc &lt; W and grid[nr][nc] == 1:
+            paint(nr, nc)
+
+paint(0, 0)
+for row in grid:
+    print(row)</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">6-3 <span class="kind">[전체 작성 - 섬 개수]</span></div>
+<div class="stmt">1로 이루어진 덩어리(섬)가 몇 개인지 세어라. 아래 paint를 이용해 이중 for문을 작성하면 된다. (답은 2)</div>
+<div class="code-block">def paint(r, c):
+    grid[r][c] = 0
+    for d in range(4):
+        nr, nc = r + dr[d], c + dc[d]
+        if 0 &lt;= nr &lt; H and 0 &lt;= nc &lt; W and grid[nr][nc] == 1:
+            paint(nr, nc)
+
+count = 0
+# 여기를 채우세요
+
+print(count)</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">6-4 <span class="kind">[응용 - BFS 최단 이동]</span></div>
+<div class="stmt">0이 길, 1이 벽인 미로에서 (0,0)부터 (3,3)까지 최소 몇 칸 움직여야 하는지 BFS로 구하라. 거리는 좌표를 키로 하는 딕셔너리에 담는다. (시작 칸을 1로 세면 답은 7)</div>
+<div class="code-block">maze = [[0,0,1,0],
+        [1,0,1,0],
+        [0,0,0,0],
+        [0,1,1,0]]
+H, W = len(maze), len(maze[0])
+dist = {(0, 0): 1}
+
+# 여기를 채우세요
+
+print(dist[(3, 3)])</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="answers">
+<h1>정답</h1>
+<h2>1. 그래프를 딕셔너리로 표현하기</h2>
+<div class="a-item">
+<span class="a-num">1-1</span> <span class="kind">[출력 예측]</span>
+<div class="a-body">출력: [0, 3, 4] / 1 / 2 / 6<div class="code-block">graph[1]      -&gt; 1번의 이웃 목록        -&gt; [0, 3, 4]
+len(graph[3]) -&gt; 3번의 이웃은 [1] 하나    -&gt; 1
+graph[5][0]   -&gt; [2,4]의 0번째           -&gt; 2
+len(graph)    -&gt; 키 개수 = 정점 수        -&gt; 6
+
+len(graph)는 간선 수가 아니라 정점 수다.</div></div>
+</div>
+<div class="a-item">
+<span class="a-num">1-2</span> <span class="kind">[빈칸 - 차수 세기]</span>
+<div class="a-body">graph / len(graph[v])  - 딕셔너리를 그냥 돌면 키가 나온다(graph.keys()와 같다).<div class="code-block">for v in graph:
+    print(v, &quot;번 정점의 차수:&quot;, len(graph[v]))</div></div>
+</div>
+<h2>2. 깊이우선탐색 (DFS) - 재귀</h2>
+<div class="a-item">
+<span class="a-num">2-1</span> <span class="kind">[출력 예측]</span>
+<div class="a-body">[0, 1, 3, 4, 5, 2]<div class="code-block">dfs(0) -&gt; 이웃 1로
+  dfs(1) -&gt; 0은 방문함, 3으로
+    dfs(3) -&gt; 이웃 1 방문함, 끝
+  복귀 -&gt; 4로
+    dfs(4) -&gt; 5로
+      dfs(5) -&gt; 2로
+        dfs(2) -&gt; 0,5 모두 방문함, 끝
+복귀 -&gt; 0의 남은 이웃 2도 방문함, 끝</div></div>
+</div>
+<div class="a-item">
+<span class="a-num">2-2</span> <span class="kind">[빈칸 - 방문 표시]</span>
+<div class="a-body">visited.append(v) / nxt not in visited<div class="code-block">def dfs(v):
+    visited.append(v)
+    for nxt in graph[v]:
+        if nxt not in visited:
+            dfs(nxt)</div></div>
+</div>
+<div class="a-item">
+<span class="a-num">2-3</span> <span class="kind">[디버깅 - 무한 재귀]</span>
+<div class="a-body">visited.append(v) 가 빠졌다. 방문 표시를 안 하면 visited가 계속 비어 있어 0 -&gt; 1 -&gt; 0 -&gt; 1 ... 을 영원히 반복한다.<div class="code-block">def dfs(v):
+    visited.append(v)
+    print(v, end=&quot; &quot;)
+    for nxt in graph[v]:
+        if nxt not in visited:
+            dfs(nxt)</div></div>
+</div>
+<div class="a-item">
+<span class="a-num">2-4</span> <span class="kind">[전체 작성]</span>
+<div class="a-body">자기 자신 1개에 이웃 쪽에서 센 개수를 더한다. len(visited)를 재도 같은 값이 나온다.<div class="code-block">def dfs(v):
+    visited.append(v)
+    count = 1
+    for nxt in graph[v]:
+        if nxt not in visited:
+            count = count + dfs(nxt)
+    return count
+
+print(dfs(0))   # 6</div></div>
+</div>
+<h2>3. 깊이우선탐색 - 스택 (반복)</h2>
+<div class="a-item">
+<span class="a-num">3-1</span> <span class="kind">[출력 예측]</span>
+<div class="a-body">[0, 2, 5, 4, 1, 3] (재귀 버전과 순서가 다르지만 둘 다 정상적인 DFS다)<div class="code-block">stack=[0]    pop 0 -&gt; 방문 0, 1,2 push -&gt; [1,2]
+stack=[1,2]  pop 2 -&gt; 방문 2, 5 push   -&gt; [1,5]
+stack=[1,5]  pop 5 -&gt; 방문 5, 4 push   -&gt; [1,4]
+stack=[1,4]  pop 4 -&gt; 방문 4, 1 push   -&gt; [1,1]
+stack=[1,1]  pop 1 -&gt; 방문 1, 3 push   -&gt; [1,3]
+stack=[1,3]  pop 3 -&gt; 방문 3           -&gt; [1]
+stack=[1]    pop 1 -&gt; 이미 방문, 건너뜀 -&gt; []
+
+스택에 같은 번호가 중복으로 들어갈 수 있어서 꺼낸 뒤 걸러준다.</div></div>
+</div>
+<div class="a-item">
+<span class="a-num">3-2</span> <span class="kind">[빈칸 - 스택 연산]</span>
+<div class="a-body">pop() / append()  - 스택은 맨 뒤에서 넣고 맨 뒤에서 꺼낸다(LIFO).<div class="code-block">    v = stack.pop()
+    ...
+            stack.append(nxt)</div></div>
+</div>
+<h2>4. 너비우선탐색 (BFS) - 큐</h2>
+<div class="a-item">
+<span class="a-num">4-1</span> <span class="kind">[출력 예측]</span>
+<div class="a-body">[0, 1, 2, 3, 4, 5] - 거리 0(0), 거리 1(1,2), 거리 2(3,4,5) 순서로 나온다.<div class="code-block">queue=[0]      pop 0 -&gt; 1,2 넣음 -&gt; [1,2]
+queue=[1,2]    pop 1 -&gt; 3,4 넣음 -&gt; [2,3,4]
+queue=[2,3,4]  pop 2 -&gt; 5 넣음   -&gt; [3,4,5]
+queue=[3,4,5]  pop 3            -&gt; [4,5]
+queue=[4,5]    pop 4            -&gt; [5]
+queue=[5]      pop 5            -&gt; []</div></div>
+</div>
+<div class="a-item">
+<span class="a-num">4-2</span> <span class="kind">[빈칸 - 큐 연산]</span>
+<div class="a-body">pop(0) / visited.append(nxt)  - 큐는 맨 앞에서 꺼낸다(FIFO). 넣을 때 바로 방문 표시해야 같은 정점이 큐에 두 번 들어가지 않는다.<div class="code-block">    v = queue.pop(0)
+    ...
+            visited.append(nxt)
+            queue.append(nxt)</div></div>
+</div>
+<div class="a-item">
+<span class="a-num">4-3</span> <span class="kind">[트레이싱 - 큐 상태]</span>
+<div class="a-body">큐 길이가 늘었다 줄어든다. 늘어난 만큼이 그 층에 있는 정점 수다.<div class="code-block">큐: [0]
+큐: [1, 2]
+큐: [2, 3, 4]
+큐: [3, 4, 5]
+큐: [4, 5]
+큐: [5]</div></div>
+</div>
+<h2>5. BFS로 최단 거리 구하기</h2>
+<div class="a-item">
+<span class="a-num">5-1</span> <span class="kind">[빈칸 - 거리 갱신]</span>
+<div class="a-body">nxt not in dist / dist[v] + 1  - 키가 없으면 아직 방문 전이라는 뜻이다.<div class="code-block">        if nxt not in dist:
+            dist[nxt] = dist[v] + 1
+            queue.append(nxt)
+
+# {0: 0, 1: 1, 2: 1, 3: 2, 4: 2, 5: 2}</div></div>
+</div>
+<div class="a-item">
+<span class="a-num">5-2</span> <span class="kind">[출력 예측]</span>
+<div class="a-body">{3: 0, 1: 1, 0: 2, 4: 2, 2: 3, 5: 3} - 딕셔너리는 넣은 순서대로 출력되므로 키가 정렬되어 나오지 않고 BFS 방문 순서인 3,1,0,4,2,5 로 나온다.<div class="code-block">3 -&gt; 1     : 거리 1
+1 -&gt; 0, 4  : 거리 2
+0 -&gt; 2     : 거리 3
+4 -&gt; 5     : 거리 3
+
+5로 가는 길은 3-1-4-5(3칸)와 3-1-0-2-5(4칸). BFS는 짧은 쪽 3을 준다.</div></div>
+</div>
+<h2>6. 격자 탐색 (섬 세기)</h2>
+<div class="a-item">
+<span class="a-num">6-1</span> <span class="kind">[빈칸 - 범위 검사]</span>
+<div class="a-body">0 &lt;= r &lt; H and 0 &lt;= c &lt; W<div class="code-block">def inside(r, c):
+    return 0 &lt;= r &lt; H and 0 &lt;= c &lt; W</div></div>
+</div>
+<div class="a-item">
+<span class="a-num">6-2</span> <span class="kind">[출력 예측]</span>
+<div class="a-body">(0,0)과 이어진 것은 (0,1), (1,0) 세 칸뿐이다. 오른쪽 아래 덩어리는 대각선으로만 닿아 있어 상하좌우 기준으로는 이어져 있지 않다.<div class="code-block">[2, 2, 0, 0]
+[2, 0, 0, 1]
+[0, 0, 1, 1]
+[0, 0, 1, 0]</div></div>
+</div>
+<div class="a-item">
+<span class="a-num">6-3</span> <span class="kind">[전체 작성 - 섬 개수]</span>
+<div class="a-body">모든 칸을 훑다가 아직 1인 칸을 만나면 거기서 DFS로 덩어리 전체를 지우고 횟수를 센다.<div class="code-block">count = 0
+for r in range(H):
+    for c in range(W):
+        if grid[r][c] == 1:
+            paint(r, c)
+            count = count + 1
+
+print(count)   # 2</div></div>
+</div>
+<div class="a-item">
+<span class="a-num">6-4</span> <span class="kind">[응용 - BFS 최단 이동]</span>
+<div class="a-body">dist[(3, 3)] = 7<div class="code-block">dr = [-1, 1, 0, 0]
+dc = [0, 0, -1, 1]
+
+queue = [(0, 0)]
+while queue:
+    r, c = queue.pop(0)
+    for d in range(4):
+        nr, nc = r + dr[d], c + dc[d]
+        if 0 &lt;= nr &lt; H and 0 &lt;= nc &lt; W:
+            if maze[nr][nc] == 0 and (nr, nc) not in dist:
+                dist[(nr, nc)] = dist[(r, c)] + 1
+                queue.append((nr, nc))
+
+# 격자 모양으로 본 거리 (못 가는 칸은 -1)
+# [1, 2, -1, 8]
+# [-1, 3, -1, 7]
+# [5, 4, 5, 6]
+# [6, -1, -1, 7]</div></div>
+</div>
+</div>
+</body>
+</html>

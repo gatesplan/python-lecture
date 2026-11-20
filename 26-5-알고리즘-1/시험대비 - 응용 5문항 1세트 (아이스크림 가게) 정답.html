@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>시험대비 - 응용 5문항 1세트 (아이스크림 가게) 정답</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>시험대비 - 응용 5문항 1세트 (아이스크림 가게) 정답</h1><p class="intro">밑줄 칸에 들어갈 코드를 쓴다. 밑줄 길이는 들어갈 코드의 글자 수와 같다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">아이스크림 가게에 계산대가 두 개 있다. 각 계산대에는 주문 번호가 작은 순서대로 쌓여 있다. 다음 merge(L, R)은 두 계산대의 주문 번호를 번호가 작은 순서대로 한 줄로 합쳐 돌려주는 함수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def merge(L, R):
+    res = []
+    i = j = 0
+    while <span class="a"><i>가</i>i &lt; len(L) and j &lt; len(R)</span>:
+        if <span class="a"><i>나</i>L[i] &lt;= R[j]</span>:
+            res.append(L[i])
+            i += 1
+        else:
+            res.append(R[j])
+            j += 1
+    return res + <span class="a"><i>다</i>L[i:]</span> + <span class="a"><i>라</i>R[j:]</span>
+
+
+counter1 = [3, 4, 9, 12]
+counter2 = [1, 6, 7, 10, 15]
+print(merge(counter1, counter2))</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 3, 4, 6, 7, 9, 10, 12, 15]</div><div class="answers"><span class="lab">(가)</span><span>i &lt; len(L) and j &lt; len(R)</span><span class="lab">(나)</span><span>L[i] &lt;= R[j]</span><span class="lab">(다)</span><span>L[i:]</span><span class="lab">(라)</span><span>R[j:]</span></div><p class="note">병합(합병) 정렬의 merge이다. (나)는 L[i] &lt; R[j]도 정답이다. (다)와 (라)는 서로 바꿔 써도 정답이다. while이 끝나면 둘 중 하나는 빈 리스트이기 때문이다.</p></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">메뉴판에는 아이스크림 가격이 싼 것부터 적혀 있다. 다음 find(prices, target)은 가격이 target인 메뉴의 위치를 이진 탐색으로 찾아, 위치와 가격을 비교한 횟수 cnt를 함께 돌려주는 함수이다. 그 가격의 메뉴가 없으면 위치는 -1이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def find(prices, target):
+    low = 0
+    high = len(prices) - 1
+    cnt = 0
+    while <span class="a"><i>가</i>low &lt;= high</span>:
+        mid = (low + high) // 2
+        cnt += 1
+        if prices[mid] == target:
+            return mid, cnt
+        elif prices[mid] &lt; target:
+            <span class="a"><i>나</i>low = mid + 1</span>
+        else:
+            <span class="a"><i>다</i>high = mid - 1</span>
+    return -1, cnt
+
+
+prices = [1500, 2000, 2500, 3000, 3500, 4000, 4500]
+print(find(prices, 4000))
+print(find(prices, 1800))</div>
+<p class="out-label">실행 결과</p><div class="out">(5, 2)
+(-1, 3)</div><div class="answers"><span class="lab">(가)</span><span>low &lt;= high</span><span class="lab">(나)</span><span>low = mid + 1</span><span class="lab">(다)</span><span>high = mid - 1</span></div><p class="note">반복으로 쓴 이진 탐색이다. (가)는 high &gt;= low도 정답이다. (나)를 low = mid, (다)를 high = mid로 쓰면 구간이 줄지 않는 경우가 생겨 끝나지 않는다.</p></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 town은 동네 지도를 인접 리스트로 나타낸 것이다. 배달원은 한 번에 이웃한 장소로 한 칸 이동한다. 다음 min_moves(start, goal)은 start에서 goal까지 가는 데 필요한 최소 이동 횟수를 너비 우선 탐색(BFS)으로 구하는 함수이다. dist에는 각 장소까지의 이동 횟수를 저장하고, 갈 수 없으면 -1을 돌려준다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">from collections import deque
+
+town = {
+    '가게': ['공원', '학교'],
+    '공원': ['가게', '서점'],
+    '학교': ['가게', '서점'],
+    '서점': ['공원', '학교', '집'],
+    '집': ['서점'],
+    '창고': []
+}
+
+def min_moves(start, goal):
+    dist = {start: 0}
+    queue = deque([start])
+    while queue:
+        cur = <span class="a"><i>가</i>queue.popleft()</span>
+        if cur == goal:
+            return dist[cur]
+        for nxt in town[cur]:
+            if <span class="a"><i>나</i>nxt not in dist</span>:
+                dist[nxt] = <span class="a"><i>다</i>dist[cur] + 1</span>
+                queue.append(nxt)
+    return -1
+
+
+print(min_moves('가게', '집'))
+print(min_moves('가게', '창고'))</div>
+<p class="out-label">실행 결과</p><div class="out">3
+-1</div><div class="answers"><span class="lab">(가)</span><span>queue.popleft()</span><span class="lab">(나)</span><span>nxt not in dist</span><span class="lab">(다)</span><span>dist[cur] + 1</span></div><p class="note">BFS로 구하는 최단 칸 수이다. dist에 들어 있는 장소는 이미 방문한 장소이므로 dist가 방문 기록 역할도 한다. (가)를 queue.pop()으로 쓰면 스택처럼 꺼내게 되어 최소 이동 횟수가 보장되지 않는다.</p></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">컵에 아이스크림을 n스쿱 담는다. 한 번에 1스쿱, 2스쿱 또는 3스쿱을 담을 수 있고, 담는 순서가 다르면 다른 방법이다. 다음 scoops(n)은 n스쿱을 담는 방법의 수를 상향식(표)으로 구하는 함수이다. d[i]는 i스쿱을 담는 방법의 수이고 n은 3 이상이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def scoops(n):
+    d = [0] * (n + 1)
+    d[1] = 1
+    d[2] = <span class="a"><i>가</i>2</span>
+    d[3] = <span class="a"><i>나</i>4</span>
+    for i in range(4, n + 1):
+        d[i] = <span class="a"><i>다</i>d[i - 1] + d[i - 2] + d[i - 3]</span>
+    return d[n]
+
+
+print(scoops(4), scoops(6))</div>
+<p class="out-label">실행 결과</p><div class="out">7 24</div><div class="answers"><span class="lab">(가)</span><span>2</span><span class="lab">(나)</span><span>4</span><span class="lab">(다)</span><span>d[i - 1] + d[i - 2] + d[i - 3]</span></div><p class="note">계단 오르기와 같은 구조의 점화식이다. 마지막에 1스쿱, 2스쿱, 3스쿱을 담는 경우로 나누면 d[i] = d[i - 1] + d[i - 2] + d[i - 3]이다. 2스쿱은 1+1, 2의 2가지, 3스쿱은 1+1+1, 1+2, 2+1, 3의 4가지이다. (다)는 더하는 순서를 바꿔 써도 정답이다.</p></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 sales에는 아이스크림 맛별 하루 판매량이 들어 있다. 다음 top3(A)는 선택 정렬을 세 바퀴만 돌려 가장 큰 값 3개를 큰 순서대로 앞의 세 자리에 놓고, 그 3개를 돌려주는 함수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def top3(A):
+    n = len(A)
+    for i in range(<span class="a"><i>가</i>3</span>):
+        m = i
+        for j in range(i + 1, n):
+            if <span class="a"><i>나</i>A[j] &gt; A[m]</span>:
+                m = j
+        <span class="a"><i>다</i>A[i], A[m] = A[m], A[i]</span>
+    return <span class="a"><i>라</i>A[:3]</span>
+
+
+sales = [12, 30, 7, 25, 18, 41]
+print(top3(sales))
+print(sales)</div>
+<p class="out-label">실행 결과</p><div class="out">[41, 30, 25]
+[41, 30, 25, 7, 18, 12]</div><div class="answers"><span class="lab">(가)</span><span>3</span><span class="lab">(나)</span><span>A[j] &gt; A[m]</span><span class="lab">(다)</span><span>A[i], A[m] = A[m], A[i]</span><span class="lab">(라)</span><span>A[:3]</span></div><p class="note">내림차순 선택 정렬을 세 바퀴에서 멈춘 것이다. 뒤의 세 자리는 정렬되지 않은 채로 남는다. (나)는 A[m] &lt; A[j]도 정답이다. (라)는 A[0:3]도 정답이다.</p></div></body></html>

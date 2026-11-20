@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>시험대비 - 퀵 정렬 빈칸 채우기 정답</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>시험대비 - 퀵 정렬 빈칸 채우기 정답</h1><p class="intro">밑줄 칸에 들어갈 코드를 쓴다. 밑줄 길이는 들어갈 코드의 글자 수와 같다. ...은 문제와 관계없어 내용을 생략한 부분이다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음은 퀵 정렬 코드이다. partition(A, lo, hi)는 구간 lo ~ hi를 피벗보다 작은 쪽과 큰 쪽으로 나누고, 피벗이 놓인 자리를 돌려주는 함수이며 내용은 생략했다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def partition(A, lo, hi):
+    ...
+
+
+def quick_sort(A, lo, hi):
+    if <span class="a"><i>가</i>lo &gt;= hi</span>:
+        return
+
+    m = partition(A, lo, hi)
+    quick_sort(A, lo, <span class="a"><i>나</i>m - 1</span>)
+    quick_sort(A, <span class="a"><i>다</i>m + 1</span>, hi)
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+quick_sort(A, 0, len(A) - 1)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>lo &gt;= hi</span><span class="lab">(나)</span><span>m - 1</span><span class="lab">(다)</span><span>m + 1</span></div></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 partition 함수는 구간의 오른쪽 끝 값을 피벗으로 잡고, 왼쪽 커서 i와 오른쪽 커서 j를 양쪽에서 움직여 반대편에 있어야 할 두 값을 맞바꾼다. 빈칸 (가), (나), (다)에 들어갈 조건을 쓰시오. quick_sort의 내용은 생략했다.</div>
+<div class="code-block">def partition(A, lo, hi):
+    p = A[hi]
+    i = lo
+    j = hi - 1
+
+    while True:
+        while <span class="a"><i>가</i>i &lt;= j and A[i] &lt; p</span>:
+            i += 1
+        while <span class="a"><i>나</i>i &lt;= j and A[j] &gt; p</span>:
+            j -= 1
+
+        if <span class="a"><i>다</i>i &gt;= j</span>:
+            break
+
+        A[i], A[j] = A[j], A[i]
+        i += 1
+        j -= 1
+
+    A[i], A[hi] = A[hi], A[i]
+    return i
+
+
+def quick_sort(A, lo, hi):
+    ...
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+quick_sort(A, 0, len(A) - 1)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>i &lt;= j and A[i] &lt; p</span><span class="lab">(나)</span><span>i &lt;= j and A[j] &gt; p</span><span class="lab">(다)</span><span>i &gt;= j</span></div></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 partition 함수에서 피벗은 구간의 오른쪽 끝 값이고, 분할이 끝나면 피벗을 경계 자리로 옮긴 뒤 그 자리를 돌려준다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오. quick_sort의 내용은 생략했다.</div>
+<div class="code-block">def partition(A, lo, hi):
+    p = <span class="a"><i>가</i>A[hi]</span>
+    i = lo
+    j = <span class="a"><i>나</i>hi - 1</span>
+
+    while True:
+        while i &lt;= j and A[i] &lt; p:
+            i += 1
+        while i &lt;= j and A[j] &gt; p:
+            j -= 1
+
+        if i &gt;= j:
+            break
+
+        A[i], A[j] = A[j], A[i]
+        i += 1
+        j -= 1
+
+    <span class="a"><i>다</i>A[i], A[hi] = A[hi], A[i]</span>
+    return <span class="a"><i>라</i>i</span>
+
+
+def quick_sort(A, lo, hi):
+    ...
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+quick_sort(A, 0, len(A) - 1)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>A[hi]</span><span class="lab">(나)</span><span>hi - 1</span><span class="lab">(다)</span><span>A[i], A[hi] = A[hi], A[i]</span><span class="lab">(라)</span><span>i</span></div></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 퀵 정렬 코드의 실행 결과가 아래와 같이 내림차순이 되도록 빈칸 (가), (나)에 들어갈 조건을 쓰시오. quick_sort의 내용은 생략했다.</div>
+<div class="code-block">def partition(A, lo, hi):
+    p = A[hi]
+    i = lo
+    j = hi - 1
+
+    while True:
+        while i &lt;= j and <span class="a"><i>가</i>A[i] &gt; p</span>:
+            i += 1
+        while i &lt;= j and <span class="a"><i>나</i>A[j] &lt; p</span>:
+            j -= 1
+
+        if i &gt;= j:
+            break
+
+        A[i], A[j] = A[j], A[i]
+        i += 1
+        j -= 1
+
+    A[i], A[hi] = A[hi], A[i]
+    return i
+
+
+def quick_sort(A, lo, hi):
+    ...
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+quick_sort(A, 0, len(A) - 1)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[8, 7, 6, 5, 4, 3, 2, 1]</div><div class="answers"><span class="lab">(가)</span><span>A[i] &gt; p</span><span class="lab">(나)</span><span>A[j] &lt; p</span></div></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음은 가운데 자리 값을 피벗으로 잡고, 분할 과정을 quick_sort 안에서 처리하는 퀵 정렬 코드이다. 빈칸 (가) ~ (마)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def quick_sort(A, lo, hi):
+    if lo &gt;= hi:
+        return
+
+    p = <span class="a"><i>가</i>A[(lo + hi) // 2]</span>
+    i = lo
+    j = hi
+
+    while <span class="a"><i>나</i>i &lt;= j</span>:
+        while <span class="a"><i>다</i>A[i] &lt; p</span>:
+            i += 1
+        while <span class="a"><i>라</i>A[j] &gt; p</span>:
+            j -= 1
+        if <span class="a"><i>마</i>i &lt;= j</span>:
+            A[i], A[j] = A[j], A[i]
+            i += 1
+            j -= 1
+
+    quick_sort(A, lo, j)
+    quick_sort(A, i, hi)
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+quick_sort(A, 0, len(A) - 1)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>A[(lo + hi) // 2]</span><span class="lab">(나)</span><span>i &lt;= j</span><span class="lab">(다)</span><span>A[i] &lt; p</span><span class="lab">(라)</span><span>A[j] &gt; p</span><span class="lab">(마)</span><span>i &lt;= j</span></div></div><div class="page"><div class="problem-number">6<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 퀵 정렬 코드는 커서 i와 j가 엇갈릴 때까지 값을 맞바꾼 뒤, 피벗 자리를 따로 정하지 않고 두 구간으로 나누어 재귀 호출한다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def quick_sort(A, lo, hi):
+    if lo &gt;= hi:
+        return
+
+    p = A[(lo + hi) // 2]
+    i = lo
+    j = hi
+
+    while i &lt;= j:
+        while A[i] &lt; p:
+            i += 1
+        while A[j] &gt; p:
+            j -= 1
+        if i &lt;= j:
+            <span class="a"><i>가</i>A[i], A[j] = A[j], A[i]</span>
+            i += 1
+            j -= 1
+
+    quick_sort(A, <span class="a"><i>나</i>lo, j</span>)
+    quick_sort(A, <span class="a"><i>다</i>i, hi</span>)
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+quick_sort(A, 0, len(A) - 1)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>A[i], A[j] = A[j], A[i]</span><span class="lab">(나)</span><span>lo, j</span><span class="lab">(다)</span><span>i, hi</span></div></div><div class="page"><div class="problem-number">7<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 퀵 정렬 코드의 실행 결과가 아래와 같이 내림차순이 되도록 빈칸 (가), (나)에 들어갈 조건을 쓰시오.</div>
+<div class="code-block">def quick_sort(A, lo, hi):
+    if lo &gt;= hi:
+        return
+
+    p = A[(lo + hi) // 2]
+    i = lo
+    j = hi
+
+    while i &lt;= j:
+        while <span class="a"><i>가</i>A[i] &gt; p</span>:
+            i += 1
+        while <span class="a"><i>나</i>A[j] &lt; p</span>:
+            j -= 1
+        if i &lt;= j:
+            A[i], A[j] = A[j], A[i]
+            i += 1
+            j -= 1
+
+    quick_sort(A, lo, j)
+    quick_sort(A, i, hi)
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+quick_sort(A, 0, len(A) - 1)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[8, 7, 6, 5, 4, 3, 2, 1]</div><div class="answers"><span class="lab">(가)</span><span>A[i] &gt; p</span><span class="lab">(나)</span><span>A[j] &lt; p</span></div></div><div class="page"><div class="problem-number">8<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 partition2 함수는 j로 구간을 왼쪽부터 끝까지 훑으면서 피벗보다 작은 값을 i 자리로 보낸다. i는 작은 값이 채워질 다음 자리이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오. quick_sort2의 내용은 생략했다.</div>
+<div class="code-block">def partition2(A, lo, hi):
+    p = A[hi]
+    i = lo
+
+    for j in <span class="a"><i>가</i>range(lo, hi)</span>:
+        if <span class="a"><i>나</i>A[j] &lt; p</span>:
+            A[i], A[j] = A[j], A[i]
+            i += 1
+
+    <span class="a"><i>다</i>A[i], A[hi] = A[hi], A[i]</span>
+    return i
+
+
+def quick_sort2(A, lo, hi):
+    ...
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+quick_sort2(A, 0, len(A) - 1)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>range(lo, hi)</span><span class="lab">(나)</span><span>A[j] &lt; p</span><span class="lab">(다)</span><span>A[i], A[hi] = A[hi], A[i]</span></div></div><div class="page"><div class="problem-number">9<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 퀵 정렬 코드의 실행 결과가 아래와 같이 내림차순이 되도록 빈칸 (가)에 들어갈 조건을 쓰시오. quick_sort2의 내용은 생략했다.</div>
+<div class="code-block">def partition2(A, lo, hi):
+    p = A[hi]
+    i = lo
+
+    for j in range(lo, hi):
+        if <span class="a"><i>가</i>A[j] &gt; p</span>:
+            A[i], A[j] = A[j], A[i]
+            i += 1
+
+    A[i], A[hi] = A[hi], A[i]
+    return i
+
+
+def quick_sort2(A, lo, hi):
+    ...
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+quick_sort2(A, 0, len(A) - 1)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[8, 7, 6, 5, 4, 3, 2, 1]</div><div class="answers"><span class="lab">(가)</span><span>A[j] &gt; p</span></div></div><div class="page"><div class="problem-number">10<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 퀵 정렬 코드는 재귀 호출 대신 정렬할 구간 (lo, hi)를 스택에 넣고 하나씩 꺼내 분할한다. partition2의 내용은 생략했다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def partition2(A, lo, hi):
+    ...
+
+
+def quick_sort2(A):
+    stack = [(0, len(A) - 1)]
+    while <span class="a"><i>가</i>len(stack) &gt; 0</span>:
+        lo, hi = stack.pop()
+        if <span class="a"><i>나</i>lo &gt;= hi</span>:
+            continue
+
+        m = partition2(A, lo, hi)
+        stack.append(<span class="a"><i>다</i>(lo, m - 1)</span>)
+        stack.append(<span class="a"><i>라</i>(m + 1, hi)</span>)
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+quick_sort2(A)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>len(stack) &gt; 0</span><span class="lab">(나)</span><span>lo &gt;= hi</span><span class="lab">(다)</span><span>(lo, m - 1)</span><span class="lab">(라)</span><span>(m + 1, hi)</span></div></div></body></html>

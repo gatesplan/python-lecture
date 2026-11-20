@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>시험대비 - 병합(합병) 정렬 빈칸 채우기 정답</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>시험대비 - 병합(합병) 정렬 빈칸 채우기 정답</h1><p class="intro">밑줄 칸에 들어갈 코드를 쓴다. 밑줄 길이는 들어갈 코드의 글자 수와 같다. ...은 문제와 관계없어 내용을 생략한 부분이다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음은 리스트를 반으로 나누어 각각 정렬한 뒤 합치는 병합(합병) 정렬 코드이다. merge(L, R)은 정렬된 두 리스트 L, R을 합쳐 정렬된 리스트를 돌려주는 함수이며 내용은 생략했다. 빈칸 (가), (나)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def merge_sort(A):
+    if len(A) &lt;= 1:
+        return A
+
+    m = len(A) // 2
+    L = <span class="a"><i>가</i>merge_sort(A[:m])</span>
+    R = <span class="a"><i>나</i>merge_sort(A[m:])</span>
+
+    return merge(L, R)
+
+
+def merge(L, R):
+    ...
+
+
+print(merge_sort([5, 3, 8, 4, 2, 7, 1, 6]))</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>merge_sort(A[:m])</span><span class="lab">(나)</span><span>merge_sort(A[m:])</span></div></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 병합(합병) 정렬 코드에서 (가)는 더 나눌 필요가 없는 경우의 조건이고, (나)는 리스트를 반으로 나눌 위치이다. 빈칸 (가), (나)에 들어갈 코드를 쓰시오. merge(L, R)의 내용은 생략했다.</div>
+<div class="code-block">def merge_sort(A):
+    if <span class="a"><i>가</i>len(A) &lt;= 1</span>:
+        return A
+
+    m = <span class="a"><i>나</i>len(A) // 2</span>
+    L = merge_sort(A[:m])
+    R = merge_sort(A[m:])
+
+    return merge(L, R)
+
+
+def merge(L, R):
+    ...
+
+
+print(merge_sort([5, 3, 8, 4, 2, 7, 1, 6]))</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>len(A) &lt;= 1</span><span class="lab">(나)</span><span>len(A) // 2</span></div></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음은 병합(합병) 정렬에서 오름차순으로 정렬된 두 리스트 L, R을 합쳐 정렬된 리스트 res를 돌려주는 merge 함수이다. 빈칸 (가), (나)에 들어갈 조건을 쓰시오. merge_sort의 내용은 생략했다.</div>
+<div class="code-block">def merge_sort(A):
+    ...
+
+
+def merge(L, R):
+    res = []
+    i = j = 0
+    while <span class="a"><i>가</i>i &lt; len(L) and j &lt; len(R)</span>:
+        if <span class="a"><i>나</i>L[i] &lt;= R[j]</span>:
+            res.append(L[i])
+            i += 1
+        else:
+            res.append(R[j])
+            j += 1
+    res.extend(L[i:])
+    res.extend(R[j:])
+    return res
+
+
+print(merge_sort([5, 3, 8, 4, 2, 7, 1, 6]))</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>i &lt; len(L) and j &lt; len(R)</span><span class="lab">(나)</span><span>L[i] &lt;= R[j]</span></div></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 merge 함수에서 while 반복이 끝나면 L과 R 중 한쪽에 아직 넣지 않은 값이 남아 있다. 남은 값을 res 뒤에 붙이도록 빈칸 (가), (나)를 채우시오. merge_sort의 내용은 생략했다.</div>
+<div class="code-block">def merge_sort(A):
+    ...
+
+
+def merge(L, R):
+    res = []
+    i = j = 0
+    while i &lt; len(L) and j &lt; len(R):
+        if L[i] &lt;= R[j]:
+            res.append(L[i])
+            i += 1
+        else:
+            res.append(R[j])
+            j += 1
+    res.extend(<span class="a"><i>가</i>L[i:]</span>)
+    res.extend(<span class="a"><i>나</i>R[j:]</span>)
+    return res
+
+
+print(merge_sort([5, 3, 8, 4, 2, 7, 1, 6]))</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>L[i:]</span><span class="lab">(나)</span><span>R[j:]</span></div></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 병합(합병) 정렬 코드의 실행 결과가 아래와 같이 내림차순이 되도록 빈칸 (가)에 들어갈 조건을 쓰시오. merge_sort의 내용은 생략했다.</div>
+<div class="code-block">def merge_sort(A):
+    ...
+
+
+def merge(L, R):
+    res = []
+    i = j = 0
+    while i &lt; len(L) and j &lt; len(R):
+        if <span class="a"><i>가</i>L[i] &gt;= R[j]</span>:
+            res.append(L[i])
+            i += 1
+        else:
+            res.append(R[j])
+            j += 1
+    res.extend(L[i:])
+    res.extend(R[j:])
+    return res
+
+
+print(merge_sort([5, 3, 8, 4, 2, 7, 1, 6]))</div>
+<p class="out-label">실행 결과</p><div class="out">[8, 7, 6, 5, 4, 3, 2, 1]</div><div class="answers"><span class="lab">(가)</span><span>L[i] &gt;= R[j]</span></div><p class="note">L[i] &gt; R[j]도 내림차순 정렬 결과는 같다. 같은 값이 있을 때 L 쪽을 먼저 꺼내는 것은 &gt;= 이다.</p></div><div class="page"><div class="problem-number">6<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 merge 함수는 인덱스를 쓰지 않고 두 리스트의 맨 앞 값을 비교해 pop(0)으로 꺼낸다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오. merge_sort의 내용은 생략했다.</div>
+<div class="code-block">def merge_sort(A):
+    ...
+
+
+def merge(L, R):
+    res = []
+    while <span class="a"><i>가</i>len(L) &gt; 0 and len(R) &gt; 0</span>:
+        if <span class="a"><i>나</i>L[0] &lt;= R[0]</span>:
+            res.append(L.pop(0))
+        else:
+            res.append(R.pop(0))
+    return <span class="a"><i>다</i>res + L + R</span>
+
+
+print(merge_sort([5, 3, 8, 4, 2, 7, 1, 6]))</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>len(L) &gt; 0 and len(R) &gt; 0</span><span class="lab">(나)</span><span>L[0] &lt;= R[0]</span><span class="lab">(다)</span><span>res + L + R</span></div></div><div class="page"><div class="problem-number">7<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음은 리스트 A의 구간 lo ~ hi(양 끝 포함)를 새 리스트를 만들지 않고 제자리에서 정렬하는 병합(합병) 정렬 코드이다. merge(A, lo, mid, hi)는 정렬된 두 구간 lo ~ mid와 mid + 1 ~ hi를 합치는 함수이며 내용은 생략했다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def merge_sort(A, lo, hi):
+    if <span class="a"><i>가</i>lo &gt;= hi</span>:
+        return
+
+    mid = <span class="a"><i>나</i>(lo + hi) // 2</span>
+    merge_sort(A, lo, mid)
+    merge_sort(A, <span class="a"><i>다</i>mid + 1</span>, hi)
+
+    merge(A, lo, mid, hi)
+
+
+def merge(A, lo, mid, hi):
+    ...
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+merge_sort(A, 0, len(A) - 1)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>lo &gt;= hi</span><span class="lab">(나)</span><span>(lo + hi) // 2</span><span class="lab">(다)</span><span>mid + 1</span></div></div><div class="page"><div class="problem-number">8<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 merge 함수는 정렬된 두 구간 lo ~ mid와 mid + 1 ~ hi를 tmp에 합친 뒤 A의 같은 구간에 다시 쓴다. 빈칸 (가) ~ (마)에 들어갈 코드를 쓰시오. merge_sort의 내용은 생략했다.</div>
+<div class="code-block">def merge_sort(A, lo, hi):
+    ...
+
+
+def merge(A, lo, mid, hi):
+    tmp = []
+    i = lo
+    j = mid + 1
+    while <span class="a"><i>가</i>i &lt;= mid and j &lt;= hi</span>:
+        if <span class="a"><i>나</i>A[i] &lt;= A[j]</span>:
+            tmp.append(A[i])
+            i += 1
+        else:
+            tmp.append(A[j])
+            j += 1
+    while <span class="a"><i>다</i>i &lt;= mid</span>:
+        tmp.append(A[i])
+        i += 1
+    while <span class="a"><i>라</i>j &lt;= hi</span>:
+        tmp.append(A[j])
+        j += 1
+    for k in range(len(tmp)):
+        A[<span class="a"><i>마</i>lo + k</span>] = tmp[k]
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+merge_sort(A, 0, len(A) - 1)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>i &lt;= mid and j &lt;= hi</span><span class="lab">(나)</span><span>A[i] &lt;= A[j]</span><span class="lab">(다)</span><span>i &lt;= mid</span><span class="lab">(라)</span><span>j &lt;= hi</span><span class="lab">(마)</span><span>lo + k</span></div></div><div class="page"><div class="problem-number">9<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 병합(합병) 정렬 코드의 실행 결과가 아래와 같이 내림차순이 되도록 빈칸 (가)에 들어갈 조건을 쓰시오. merge_sort의 내용은 생략했다.</div>
+<div class="code-block">def merge_sort(A, lo, hi):
+    ...
+
+
+def merge(A, lo, mid, hi):
+    tmp = []
+    i = lo
+    j = mid + 1
+    while i &lt;= mid and j &lt;= hi:
+        if <span class="a"><i>가</i>A[i] &gt;= A[j]</span>:
+            tmp.append(A[i])
+            i += 1
+        else:
+            tmp.append(A[j])
+            j += 1
+    while i &lt;= mid:
+        tmp.append(A[i])
+        i += 1
+    while j &lt;= hi:
+        tmp.append(A[j])
+        j += 1
+    for k in range(len(tmp)):
+        A[lo + k] = tmp[k]
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+merge_sort(A, 0, len(A) - 1)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[8, 7, 6, 5, 4, 3, 2, 1]</div><div class="answers"><span class="lab">(가)</span><span>A[i] &gt;= A[j]</span></div><p class="note">A[i] &gt; A[j]도 내림차순 정렬 결과는 같다. 같은 값이 있을 때 앞 구간 쪽을 먼저 꺼내는 것은 &gt;= 이다.</p></div><div class="page"><div class="problem-number">10<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 병합(합병) 정렬 코드에서 hi는 구간의 마지막 인덱스가 아니라 그 다음 자리이다. 즉 구간은 lo ~ hi - 1이고, 처음 호출은 merge_sort(A, 0, len(A))이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def merge_sort(A, lo, hi):
+    if <span class="a"><i>가</i>hi - lo &lt;= 1</span>:
+        return
+
+    mid = (lo + hi) // 2
+    merge_sort(A, lo, mid)
+    <span class="a"><i>나</i>merge_sort(A, mid, hi)</span>
+
+    merge(A, lo, mid, hi)
+
+
+def merge(A, lo, mid, hi):
+    tmp = []
+    i = lo
+    j = mid
+    while <span class="a"><i>다</i>i &lt; mid and j &lt; hi</span>:
+        if A[i] &lt;= A[j]:
+            tmp.append(A[i])
+            i += 1
+        else:
+            tmp.append(A[j])
+            j += 1
+    while i &lt; mid:
+        tmp.append(A[i])
+        i += 1
+    while j &lt; hi:
+        tmp.append(A[j])
+        j += 1
+    for k in range(len(tmp)):
+        A[lo + k] = tmp[k]
+
+
+A = [5, 3, 8, 4, 2, 7, 1, 6]
+merge_sort(A, 0, len(A))
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 3, 4, 5, 6, 7, 8]</div><div class="answers"><span class="lab">(가)</span><span>hi - lo &lt;= 1</span><span class="lab">(나)</span><span>merge_sort(A, mid, hi)</span><span class="lab">(다)</span><span>i &lt; mid and j &lt; hi</span></div></div></body></html>

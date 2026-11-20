@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>시험대비 - 트리와 그래프 빈칸 채우기</title>
+<style>
+@page { size: A4; margin: 15mm; }
+body {
+  font-family: 'Malgun Gothic', sans-serif;
+  line-height: 1.6;
+  font-size: 11pt;
+  color: #000;
+  background: #fff;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1cm;
+}
+h1 { font-size: 16pt; border-bottom: 2px solid #000; padding-bottom: 8px; margin: 0 0 6px; }
+.intro { font-size: 10pt; color: #333; margin: 0 0 10px; }
+h2 { font-size: 13pt; margin: 1.5em 0 0.2em; border-bottom: 1px solid #999; padding-bottom: 3px; }
+.problem { margin: 0 0 26px; page-break-inside: avoid; break-inside: avoid; }
+.problem-number { font-weight: bold; font-size: 11pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; }
+.stmt { margin: 4px 0 6px; }
+.stmt ul { margin: 2px 0; padding-left: 22px; }
+.code-block {
+  background: #fff;
+  border: 1px solid #999;
+  padding: 8px 10px;
+  margin: 6px 0;
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 9.5pt;
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.b {
+  display: inline-block;
+  height: 1.7em;
+  vertical-align: middle;
+  background: #fff1b8;
+  border: 1px solid #c99a00;
+  position: relative;
+}
+.bb {
+  display: block;
+  background: #fff1b8;
+  border: 1px solid #c99a00;
+  position: relative;
+  margin: 2px 0;
+}
+.b i, .bb i {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  font-style: normal;
+  font-family: 'Malgun Gothic', sans-serif;
+  font-size: 7pt;
+  line-height: 1;
+  color: #8a6a00;
+}
+.answer-space { background: #fff1b8; border: 1px solid #c99a00; margin: 4px 0 0; }
+.subq { font-size: 10.5pt; margin: 10px 0 2px; }
+@media print { body { max-width: none; margin: 0; padding: 0; } }
+</style>
+</head>
+<body>
+<h1>시험대비 - 트리와 그래프 빈칸 채우기</h1>
+<p class="intro">빈칸 채우기는 네모 칸에 들어갈 코드를 쓴다. 코드 작성은 네모 칸에 여러 줄의 코드를 쓴다. 리스트로 저장한 트리는 루트가 인덱스 1이고 0은 빈 칸이다.</p>
+
+<div class="problem">
+<h2>트리</h2>
+<div class="problem-number">1 <span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트로 저장한 이진 트리에서 인덱스 idx 노드의 부모, 왼쪽 자식, 오른쪽 자식을 출력하는 코드이다.</div>
+<div class="code-block"># 리스트로 이진 트리 표현 (인덱스 0은 비워둠)
+tree = [0, 10, 20, 30, 40, 50, 60, 70]
+
+def find_family(idx):
+    print(f"현재 노드: {tree[idx]}")
+
+    # 1. 부모 노드 구하기
+    parent_idx = <span class="b" style="width: 16ch"><i>가</i></span>
+    parent_val = tree[parent_idx] if parent_idx &gt;= 1 else "없음"
+
+    # 2. 왼쪽 자식 구하기
+    left_idx = <span class="b" style="width: 16ch"><i>나</i></span>
+    left_val = tree[left_idx] if <span class="b" style="width: 22ch"><i>다</i></span> and tree[left_idx] != 0 else "없음"
+
+    # 3. 오른쪽 자식 구하기
+    right_idx = <span class="b" style="width: 16ch"><i>라</i></span>
+    right_val = tree[right_idx] if right_idx &lt; len(tree) and tree[right_idx] != 0 else "없음"
+
+    print(f"부모 노드: {parent_val}")
+    print(f"왼쪽 자식: {left_val}")
+    print(f"오른쪽 자식: {right_val}")
+
+find_family(2)</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">2 <span class="kind">코드 작성</span></div>
+<div class="stmt">1번의 find_family에서 parent_val, left_val, right_val을 구하는 부분을 작성하시오. 부모나 자식이 없으면 "없음"으로 한다.</div>
+<div class="code-block">tree = [0, 10, 20, 30, 40, 50, 60, 70]
+
+def find_family(idx):
+    print(f"현재 노드: {tree[idx]}")
+<span class="bb" style="height: 12em; margin-left: 4ch"></span>
+    print(f"부모 노드: {parent_val}")
+    print(f"왼쪽 자식: {left_val}")
+    print(f"오른쪽 자식: {right_val}")
+
+find_family(5)
+# 현재 노드: 50
+# 부모 노드: 20
+# 왼쪽 자식: 없음
+# 오른쪽 자식: 없음</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">3 <span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트로 저장한 이진 탐색 트리(BST)에 값을 넣는 재귀 함수이다.</div>
+<div class="code-block"># bst 배열 초기화 (0은 빈 노드를 의미)
+bst = [0] * 30
+
+# BST 데이터 삽입 함수 (재귀)
+def insert(idx, num):
+    if <span class="b" style="width: 18ch"><i>가</i></span>:
+        bst[idx] = num                         # 비어있는 노드이므로 데이터 저장
+    elif num &lt; bst[idx]:
+        <span class="b" style="width: 30ch"><i>나</i></span>  # 부모보다 작으면 왼쪽 서브트리로
+    else:
+        <span class="b" style="width: 30ch"><i>다</i></span>  # 부모보다 크면 오른쪽 서브트리로
+
+data = [10, 5, 15, 3, 7]
+for x in data:
+    insert(1, x)
+
+print("생성된 BST 배열 일부:", bst[1:8])   # [10, 5, 15, 3, 7, 0, 0]</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">4 <span class="kind">코드 작성</span></div>
+<div class="stmt">3번의 insert 함수를 작성하시오. 칸이 비어 있으면 값을 저장하고, 작으면 왼쪽 자식으로, 크거나 같으면 오른쪽 자식으로 재귀 호출한다.</div>
+<div class="code-block">bst = [0] * 30
+
+def insert(idx, num):
+<span class="bb" style="height: 9em; margin-left: 4ch"></span>
+for x in [8, 3, 10, 1, 6]:
+    insert(1, x)
+
+print(bst[1:8])   # [8, 3, 10, 1, 6, 0, 0]</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">5 <span class="kind">빈칸 채우기</span></div>
+<div class="stmt">3번에서 만든 bst에서 값을 찾는 재귀 함수이다. 찾으면 True, 없으면 False를 반환한다.</div>
+<div class="code-block"># BST 데이터 탐색 함수 (재귀)
+def search(idx, num, cnt):
+    if <span class="b" style="width: 34ch"><i>가</i></span>:
+        print(f"{num}을(를) 찾을 수 없습니다. (비교 횟수: {cnt}회)")
+        return False
+    elif bst[idx] == num:
+        print(f"{num}을(를) {cnt}번 비교 후 인덱스 {idx}에서 찾았습니다")
+        return True
+    elif num &lt; bst[idx]:
+        <span class="b" style="width: 40ch"><i>나</i></span>  # 왼쪽으로 이동
+    else:
+        <span class="b" style="width: 40ch"><i>다</i></span>  # 오른쪽으로 이동
+
+print(search(1, 7, 1))    # True
+print(search(1, 12, 1))   # False</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">6 <span class="kind">코드 작성</span></div>
+<div class="stmt">4번에서 만든 bst에서 num을 찾는 재귀 함수 search(idx, num)를 작성하시오. 찾으면 True, 범위를 벗어나거나 빈 칸에 도달하면 False를 반환한다.</div>
+<div class="code-block">def search(idx, num):
+<span class="bb" style="height: 11em; margin-left: 4ch"></span>
+print(search(1, 6))   # True
+print(search(1, 7))   # False</div>
+</div>
+
+<div class="problem">
+<h2>그래프의 표현</h2>
+<div class="problem-number">7 <span class="kind">빈칸 채우기</span></div>
+<div class="stmt">무방향 그래프를 인접 행렬로 만드는 코드이다.</div>
+<div class="code-block"># 노드 A, B, C, D (인덱스 0, 1, 2, 3)
+# 간선 정보: A-B, A-C, B-D
+nodes = ['A', 'B', 'C', 'D']
+n = len(nodes)
+
+# 0으로 채운 n x n 2차원 리스트
+adj_matrix = <span class="b" style="width: 32ch"><i>가</i></span>
+
+# A-B 연결 (무방향이므로 양쪽에 1 표시)
+adj_matrix[0][1] = 1; adj_matrix[1][0] = 1
+# A-C 연결
+adj_matrix[0][2] = 1; <span class="b" style="width: 22ch"><i>나</i></span>
+# B-D 연결
+<span class="b" style="width: 22ch"><i>다</i></span>; <span class="b" style="width: 22ch"><i>라</i></span>
+
+for row in adj_matrix:
+    print(row)</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">8 <span class="kind">코드 작성</span></div>
+<div class="stmt">다음 그래프를 인접 행렬로 표현하고 출력하는 코드를 완성하시오.
+<ul>
+<li>노드 목록: ['A', 'B', 'C', 'D', 'E'] (인덱스: 0, 1, 2, 3, 4)</li>
+<li>간선 정보: A - B, A - C, B - D, C - E, D - E</li>
+</ul></div>
+<div class="code-block"># 그래프의 인접행렬 구현 문제 풀이 해보기
+
+nodes = ['A', 'B', 'C', 'D', 'E']
+n = len(nodes)
+<span class="bb" style="height: 12em"></span></div>
+</div>
+
+<div class="problem">
+<div class="problem-number">9 <span class="kind">빈칸 채우기</span></div>
+<div class="stmt">7번과 같은 그래프를 인접 리스트로 만드는 코드이다.</div>
+<div class="code-block">nodes = ['A', 'B', 'C', 'D']
+# 간선 정보: A-B, A-C, B-D
+
+# 노드마다 빈 리스트 만들기
+adj_list = <span class="b" style="width: 32ch"><i>가</i></span>
+
+adj_list['A'].extend(['B', 'C'])
+adj_list['B'].extend(<span class="b" style="width: 14ch"><i>나</i></span>)
+adj_list['C'].append(<span class="b" style="width: 8ch"><i>다</i></span>)
+adj_list['D'].append(<span class="b" style="width: 8ch"><i>라</i></span>)
+
+for k, v in adj_list.items():
+    print(f"{k}: {v}")</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">10 <span class="kind">코드 작성</span></div>
+<div class="stmt">다음과 같이 연결된 그래프를 인접 리스트로 표현하는 코드를 완성하시오.
+<ul>
+<li>노드 목록: ['A', 'B', 'C', 'D', 'E']</li>
+<li>간선 정보 (양방향 연결): A - B, A - D, B - C, B - E, C - D</li>
+<li>힌트: 노드 A에는 (B, D), 노드 B에는 (A, C, E)가 연결됩니다.</li>
+</ul></div>
+<div class="code-block"># 그래프의 인접 리스트 구현 문제 풀이 해보기
+<span class="bb" style="height: 12em"></span></div>
+</div>
+
+<div class="problem">
+<div class="problem-number">11 <span class="kind">빈칸 채우기</span></div>
+<div class="stmt">무방향 그래프의 인접 리스트를 읽어 인접 행렬 matrix의 올바른 위치에 1을 채우는 코드이다. node_map은 노드 이름을 인덱스로 바꾼다.</div>
+<div class="code-block">nodes = ['A', 'B', 'C', 'D']
+node_map = {'A': 0, 'B': 1, 'C': 2, 'D': 3}
+adj_list = {'A': ['B', 'C'], 'B': ['A', 'D'], 'C': ['A'], 'D': ['B']}
+
+n = len(nodes)
+matrix = [[0] * n for _ in range(n)]
+
+for src, neighbors in adj_list.items():
+    for neighbor in <span class="b" style="width: 14ch"><i>가</i></span>:
+        matrix[<span class="b" style="width: 16ch"><i>나</i></span>][<span class="b" style="width: 20ch"><i>다</i></span>] = 1
+
+print("--- 인접 행렬 ---")
+for row in matrix:
+    print(row)</div>
+</div>
+
+<div class="problem">
+<h2>그래프 탐색</h2>
+<div class="problem-number">12</div>
+<div class="stmt">다음 트리를 탐색한 순서를 쓰시오. 번호가 작은 노드를 먼저 방문한다.</div>
+<div class="code-block" style="line-height: 1.4">        (1)
+      /  |  \
+     (2) (3) (4)
+     / \
+    (5) (6)
+     |
+    (7)</div>
+<div class="subq">(1) DFS (깊이 우선 탐색) 결과</div>
+<div class="answer-space" style="height: 36px"></div>
+<div class="subq">(2) BFS (너비 우선 탐색) 결과</div>
+<div class="answer-space" style="height: 36px"></div>
+</div>
+
+<div class="problem">
+<div class="problem-number">13 <span class="kind">빈칸 채우기</span></div>
+<div class="stmt">12번의 트리를 인접 리스트로 저장하고 재귀 함수로 DFS를 하는 코드이다.</div>
+<div class="code-block"># 그래프 생성 (인접 리스트 구조)
+graph = {
+    1: [2, 3, 4],
+    2: [1, 5, 6],
+    3: [1],
+    4: [1],
+    5: [2, 7],
+    6: [2],
+    7: [5]
+}
+
+# DFS 구현 (재귀 함수)
+def dfs(graph, v, visited, result):
+    <span class="b" style="width: 22ch"><i>가</i></span>      # 방문 표시
+    <span class="b" style="width: 22ch"><i>나</i></span>      # 방문 순서에 추가
+    for neighbor in sorted(graph[v]):
+        if <span class="b" style="width: 24ch"><i>다</i></span>:
+            <span class="b" style="width: 40ch"><i>라</i></span>
+
+visited_dfs = {node: False for node in graph}
+dfs_result = []
+dfs(graph, 1, visited_dfs, dfs_result)
+print(f"DFS 탐색 순서: {' -&gt; '.join(map(str, dfs_result))}")</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">14 <span class="kind">코드 작성</span></div>
+<div class="stmt">13번의 dfs 함수를 작성하시오. 방문한 노드는 visited에 True로 표시하고 result에 추가한다. 이웃은 번호가 작은 것부터 방문한다.</div>
+<div class="code-block">def dfs(graph, v, visited, result):
+<span class="bb" style="height: 8em; margin-left: 4ch"></span>
+visited_dfs = {node: False for node in graph}
+dfs_result = []
+dfs(graph, 1, visited_dfs, dfs_result)
+print(dfs_result)</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">15 <span class="kind">빈칸 채우기</span></div>
+<div class="stmt">13번의 graph를 큐로 BFS 하는 코드이다.</div>
+<div class="code-block">from collections import deque
+
+# BFS 구현 (큐 활용)
+def bfs(graph, start):
+    visited = {node: False for node in graph}
+    queue = <span class="b" style="width: 18ch"><i>가</i></span>
+    visited[start] = True
+    result = []
+
+    while queue:
+        v = <span class="b" style="width: 18ch"><i>나</i></span>
+        result.append(v)
+        for neighbor in sorted(graph[v]):
+            if not visited[neighbor]:
+                <span class="b" style="width: 26ch"><i>다</i></span>
+                <span class="b" style="width: 26ch"><i>라</i></span>
+    return result
+
+bfs_result = bfs(graph, 1)
+print(f"BFS 탐색 순서: {' -&gt; '.join(map(str, bfs_result))}")</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">16 <span class="kind">코드 작성</span></div>
+<div class="stmt">15번의 bfs 함수를 작성하시오. deque를 큐로 쓰고, 큐에 넣을 때 방문 표시를 한다. 이웃은 번호가 작은 것부터 넣는다. 방문 순서를 담은 리스트를 반환한다.</div>
+<div class="code-block">from collections import deque
+
+def bfs(graph, start):
+<span class="bb" style="height: 14em; margin-left: 4ch"></span>
+print(bfs(graph, 1))</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">17 <span class="kind">빈칸 채우기</span></div>
+<div class="stmt">친구 연결 상태가 인접 행렬로 주어진다. start에서 출발하여 target을 방문할 수 있으면 True, 방문할 수 없으면 False를 반환하는 함수를 DFS로 완성하시오.</div>
+<div class="code-block"># 0: A, 1: B, 2: C, 3: D, 4: E (E는 고립된 섬)
+graph_matrix = [
+    [0, 1, 1, 0, 0], # A-B, A-C
+    [1, 0, 0, 1, 0], # B-A, B-D
+    [1, 0, 0, 0, 0], # C-A
+    [0, 1, 0, 0, 0], # D-B
+    [0, 0, 0, 0, 0]  # E (연결 안 됨)
+]
+
+def is_connected(start, target):
+    visited = [0] * len(graph_matrix)
+
+    def dfs_check(cur):
+        visited[cur] = 1
+        if <span class="b" style="width: 18ch"><i>가</i></span>:
+            return True
+        for next_node in range(len(graph_matrix)):
+            if graph_matrix[cur][next_node] == 1 and <span class="b" style="width: 24ch"><i>나</i></span>:
+                if <span class="b" style="width: 22ch"><i>다</i></span>:
+                    <span class="b" style="width: 16ch"><i>라</i></span>
+        return False
+
+    return dfs_check(start)
+
+print("A와 D 연결 여부:", is_connected(0, 3)) # Expected: True
+print("A와 E 연결 여부:", is_connected(0, 4)) # Expected: False</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">18 <span class="kind">빈칸 채우기</span></div>
+<div class="stmt">17번의 graph_matrix를 지하철역 연결망으로 보고, BFS로 출발역에서 목적지역까지 거쳐가는 최소 역의 개수(거리)를 구하는 함수를 완성하시오. 도달할 수 없으면 -1을 반환한다.</div>
+<div class="code-block">def min_distance(start, target):
+    n = len(graph_matrix)
+    distance = [-1] * n  # 방문 안 함은 -1로 초기화
+
+    queue = [start]
+    distance[start] = 0  # 자기 자신까지의 거리는 0
+
+    while queue:
+        cur = <span class="b" style="width: 18ch"><i>가</i></span>
+        if cur == target:
+            return <span class="b" style="width: 18ch"><i>나</i></span>
+        for next_node in range(n):
+            if graph_matrix[cur][next_node] == 1 and <span class="b" style="width: 26ch"><i>다</i></span>:
+                distance[next_node] = <span class="b" style="width: 22ch"><i>라</i></span>
+                <span class="b" style="width: 26ch"><i>마</i></span>
+
+    return -1 # 연결되지 않은 경우 -&gt; 즉 도달할 수 없는 경우
+
+print("A(0번)에서 D(3번)까지 최단 거리:", min_distance(0, 3), "칸") # Expected: 2 (A-&gt;B-&gt;D)
+print("A(0번)에서 E(4번)까지 최단 거리:", min_distance(0, 4))         # Expected: -1</div>
+</div>
+
+<div class="problem">
+<h2>빅O 표기법</h2>
+<div class="stmt" style="font-size: 10pt; color: #333">빅O 표기법은 입력 크기 n이 커질 때 실행 횟수가 늘어나는 정도를 나타낸다. 상수배와 낮은 차수의 항은 버린다.</div>
+<div class="problem-number">19</div>
+<div class="stmt">다음 코드의 시간 복잡도를 빅O 표기법으로 쓰시오. lst의 길이는 n이다.</div>
+<div class="code-block"># (1)
+x = lst[0] + lst[-1]
+
+# (2)
+total = 0
+for i in range(n):
+    total += lst[i]
+
+# (3)
+for i in range(n):
+    for j in range(n):
+        print(i, j)
+
+# (4)
+for i in range(n):
+    print(i)
+for j in range(n):
+    print(j)
+
+# (5)
+while n &gt; 1:
+    n = n // 2</div>
+<div class="subq">(1) <span class="b" style="width: 12ch"></span> &nbsp; (2) <span class="b" style="width: 12ch"></span> &nbsp; (3) <span class="b" style="width: 12ch"></span> &nbsp; (4) <span class="b" style="width: 12ch"></span> &nbsp; (5) <span class="b" style="width: 12ch"></span></div>
+</div>
+
+<div class="problem">
+<div class="problem-number">20</div>
+<div class="stmt">다음 연산의 시간 복잡도를 빅O 표기법으로 쓰시오. 리스트 lst, 덱 dq, 집합 s에는 n개의 값이 들어 있다.</div>
+<div class="subq">(1) x in lst &nbsp;<span class="b" style="width: 12ch"></span></div>
+<div class="subq">(2) x in s &nbsp;<span class="b" style="width: 12ch"></span></div>
+<div class="subq">(3) lst.pop(0) &nbsp;<span class="b" style="width: 12ch"></span></div>
+<div class="subq">(4) dq.popleft() &nbsp;<span class="b" style="width: 12ch"></span></div>
+<div class="subq">(5) 노드가 n개인 그래프를 인접 행렬로 저장할 때 필요한 칸의 수 &nbsp;<span class="b" style="width: 12ch"></span></div>
+</div>
+
+<div class="problem">
+<h2>탐욕 알고리즘</h2>
+<div class="stmt" style="font-size: 10pt; color: #333">탐욕 알고리즘은 매 단계에서 지금 가장 좋아 보이는 것을 고르는 방법이다.</div>
+<div class="problem-number">21 <span class="kind">빈칸 채우기</span></div>
+<div class="stmt">거스름돈 money를 500원, 100원, 50원, 10원 동전으로 줄 때 동전 개수의 최솟값을 구하는 코드이다. 큰 동전부터 최대한 많이 사용한다.</div>
+<div class="code-block"># 거스름돈 문제 (탐욕 알고리즘)
+money = 1260
+coins = [500, 100, 50, 10]   # 큰 동전부터
+count = 0
+
+for coin in coins:
+    count += <span class="b" style="width: 16ch"><i>가</i></span>   # 이 동전을 최대한 많이 사용
+    money = <span class="b" style="width: 16ch"><i>나</i></span>    # 남은 금액
+
+print(count)   # 6</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">22 <span class="kind">코드 작성</span></div>
+<div class="stmt">21번과 같은 방법으로 동전 개수를 반환하는 함수 change(money, coins)를 작성하시오. coins에는 큰 동전부터 들어 있다.</div>
+<div class="code-block">def change(money, coins):
+<span class="bb" style="height: 8em; margin-left: 4ch"></span>
+print(change(3760, [500, 100, 50, 10]))   # 11
+print(change(770, [500, 100, 50, 10]))    # 6</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">23 <span class="kind">빈칸 채우기</span></div>
+<div class="stmt">회의 시간이 (끝나는 시간, 시작 시간)으로 주어진다. 한 회의실에서 겹치지 않게 열 수 있는 회의의 최대 개수를 구하는 코드이다. 끝나는 시간이 빠른 회의부터 고르고, 앞 회의가 끝나는 시간과 다음 회의의 시작 시간은 같아도 된다.</div>
+<div class="code-block"># (끝나는 시간, 시작 시간)
+meetings = [(4, 1), (5, 3), (6, 0), (7, 5), (9, 3), (9, 5),
+            (10, 6), (11, 8), (12, 8), (13, 2), (14, 12)]
+meetings.sort()   # 끝나는 시간이 빠른 순서로 정렬
+
+count = 0
+end_time = 0      # 마지막으로 고른 회의가 끝나는 시간
+
+for end, start in meetings:
+    if <span class="b" style="width: 20ch"><i>가</i></span>:
+        <span class="b" style="width: 16ch"><i>나</i></span>
+        <span class="b" style="width: 16ch"><i>다</i></span>
+
+print(count)   # 4</div>
+</div>
+
+<div class="problem">
+<div class="problem-number">24</div>
+<div class="stmt">21번 코드에서 money와 coins만 다음과 같이 바꾸었다. 물음에 답하시오.</div>
+<div class="code-block">money = 6
+coins = [4, 3, 1]</div>
+<div class="subq">(1) 실행 결과를 쓰시오.</div>
+<div class="answer-space" style="height: 36px"></div>
+<div class="subq">(2) 6원을 4원, 3원, 1원 동전으로 줄 때 실제 최소 동전 개수와 그때 쓰는 동전을 쓰시오.</div>
+<div class="answer-space" style="height: 36px"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>1차원 리스트 이진 트리 - 인덱스의 2진수가 곧 경로</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
+    margin: 0;
+    padding: 22px;
+    background: #f4f6f8;
+    color: #1e2429;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { font-size: 13px; color: #5c6b78; margin: 0 0 16px; }
+
+  .panel {
+    background: #fff;
+    border: 1px solid #dde3e8;
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .panel > h2 {
+    font-size: 13px;
+    font-weight: normal;
+    color: #5c6b78;
+    margin: 0 0 10px;
+  }
+
+  .opts { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; font-size: 13px; }
+  .opts .grp { display: flex; gap: 9px; align-items: center; }
+  .opts .grp > b { font-weight: normal; color: #5c6b78; }
+  select, button, input[type=number] {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 5px 11px;
+    border: 1px solid #c3ccd4;
+    border-radius: 4px;
+    background: #fff;
+    color: #1e2429;
+    cursor: pointer;
+  }
+  input[type=number] { width: 72px; cursor: text; }
+  button:hover { background: #eef2f5; }
+  button:disabled { color: #aab4bd; cursor: default; background: #fff; }
+  button.main { background: #2f6fb5; border-color: #2f6fb5; color: #fff; }
+  button.main:hover { background: #2a63a2; }
+  button.main:disabled { background: #a9c2de; border-color: #a9c2de; color: #fff; }
+
+  /* 2진수 띠 */
+  .bitrow { display: flex; gap: 10px; align-items: flex-start; }
+  .bitcell { text-align: center; }
+  .bitbox {
+    width: 74px; height: 74px;
+    line-height: 74px;
+    font-size: 34px;
+    font-family: Consolas, "D2Coding", monospace;
+    border: 2px solid #c3ccd4;
+    border-radius: 6px;
+    background: #fff;
+    color: #8894a0;
+  }
+  .bitbox.done { background: #dbe9f7; border-color: #7aa7d4; color: #1e2429; }
+  .bitbox.now  { background: #2f6fb5; border-color: #2f6fb5; color: #fff; }
+  .bitlabel { font-size: 12px; color: #8894a0; margin-top: 6px; }
+  .bitcell.done .bitlabel, .bitcell.now .bitlabel { color: #2f6fb5; }
+
+  .eq {
+    font-size: 20px;
+    font-family: Consolas, "D2Coding", monospace;
+    color: #5c6b78;
+    margin-right: 14px;
+    align-self: center;
+  }
+
+  /* 설명 줄 */
+  .caption {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: #f7f9fb;
+    border-left: 3px solid #2f6fb5;
+    font-size: 14px;
+    min-height: 40px;
+  }
+  .caption code {
+    font-family: Consolas, "D2Coding", monospace;
+    background: #e8eef4;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* 인덱스 띠 */
+  .idxrow { display: flex; gap: 4px; }
+  .idxcell {
+    flex: 1;
+    height: 46px;
+    line-height: 44px;
+    text-align: center;
+    font-size: 15px;
+    font-family: Consolas, "D2Coding", monospace;
+    border: 1px solid #c3ccd4;
+    border-radius: 4px;
+    background: #fff;
+    color: #8894a0;
+  }
+  .idxcell.done { background: #dbe9f7; border-color: #7aa7d4; color: #1e2429; }
+  .idxcell.now  { background: #2f6fb5; border-color: #2f6fb5; color: #fff; font-weight: bold; }
+
+  svg { display: block; width: 100%; height: auto; }
+  .hint { font-size: 12px; color: #8894a0; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>1차원 리스트 이진 트리 - 인덱스의 2진수가 곧 경로</h1>
+  <p class="sub">루트를 1번에 두면, 인덱스를 2진수로 쓴 것이 루트에서 그 자리까지 가는 길이 된다.
+  맨 앞의 1은 루트, 그 뒤로 0은 왼쪽, 1은 오른쪽이다.</p>
+
+  <div class="panel">
+    <div class="opts">
+      <div class="grp">
+        <b>번호</b>
+        <input type="number" id="num" min="1" max="15" value="13">
+        <button id="rand">무작위</button>
+      </div>
+      <div class="grp">
+        <button id="first">처음</button>
+        <button id="prev">이전</button>
+        <button id="next">다음</button>
+        <button class="main" id="play">재생</button>
+      </div>
+      <div class="grp">
+        <b>속도</b>
+        <select id="speed">
+          <option value="1400">느리게</option>
+          <option value="900" selected>보통</option>
+          <option value="500">빠르게</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>1. 번호를 2진수로 쓴다</h2>
+    <div class="bitrow" id="bitrow"></div>
+    <div class="caption" id="caption"></div>
+  </div>
+
+  <div class="panel">
+    <h2>2. 비트를 따라 트리를 내려간다</h2>
+    <svg id="tree" viewBox="0 0 1100 470" preserveAspectRatio="xMidYMid meet"></svg>
+  </div>
+
+  <div class="panel">
+    <h2>3. 1차원 리스트에서의 자리</h2>
+    <div class="idxrow" id="idxrow"></div>
+    <p class="hint">좌우 화살표로 한 단계씩, 스페이스로 재생과 정지.</p>
+  </div>
+
+</div>
+
+<script>
+var DEPTH = 4;            // 층 수 (0층 ~ 3층)
+var MAXN = 15;            // 노드 1번 ~ 15번
+var W = 1100;             // svg 좌표계 가로
+var BW = 62, BH = 44;     // 노드 상자 크기
+
+var num = 13;
+var step = 0;             // 지금 읽고 있는 비트 번호 (0부터)
+var timer = null;
+
+function bitsOf(n) {
+  return n.toString(2).split('');
+}
+
+// 각 비트를 읽은 직후의 인덱스. path[k] 는 bits[k] 까지 읽었을 때의 자리.
+function pathOf(n) {
+  var b = bitsOf(n);
+  var p = [1];
+  var i = 1;
+  for (var k = 1; k < b.length; k++) {
+    i = i * 2 + (b[k] === '1' ? 1 : 0);
+    p.push(i);
+  }
+  return p;
+}
+
+function depthOf(i) {
+  var d = 0;
+  while (i >= Math.pow(2, d + 1)) d++;
+  return d;
+}
+
+function xOf(i) {
+  var d = depthOf(i);
+  var cnt = Math.pow(2, d);
+  var pos = i - cnt;                       // 그 층에서 몇 번째인지
+  return W * (pos + 0.5) / cnt;
+}
+
+function yOf(i) {
+  return 52 + depthOf(i) * 118;
+}
+
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+/* ---------- 그리기 ---------- */
+
+function drawBits() {
+  var b = bitsOf(num);
+  var p = pathOf(num);
+  var html = '<span class="eq">' + num + ' =</span>';
+
+  for (var k = 0; k < b.length; k++) {
+    var state = k < step ? 'done' : (k === step ? 'now' : '');
+    var label;
+    if (k === 0) label = '루트';
+    else label = (b[k] === '1' ? '오른쪽' : '왼쪽') + ' ' + p[k] + '번';
+
+    html += '<div class="bitcell ' + state + '">'
+          +   '<div class="bitbox ' + state + '">' + b[k] + '</div>'
+          +   '<div class="bitlabel">' + label + '</div>'
+          + '</div>';
+  }
+  document.getElementById('bitrow').innerHTML = html;
+}
+
+function drawTree() {
+  var p = pathOf(num);
+  var seen = p.slice(0, step + 1);          // 지금까지 지나온 자리
+  var cur = seen[seen.length - 1];
+  var s = '';
+
+  // 간선 먼저 (노드 아래에 깔리도록)
+  for (var i = 2; i <= MAXN; i++) {
+    var par = Math.floor(i / 2);
+    var onPath = seen.indexOf(i) !== -1 && seen.indexOf(par) !== -1;
+    s += '<line x1="' + xOf(par) + '" y1="' + (yOf(par) + BH / 2) + '"'
+       + ' x2="' + xOf(i) + '" y2="' + (yOf(i) - BH / 2) + '"'
+       + ' stroke="' + (onPath ? '#2f6fb5' : '#ccd4da') + '"'
+       + ' stroke-width="' + (onPath ? 3.5 : 1.5) + '" />';
+  }
+
+  for (var i = 1; i <= MAXN; i++) {
+    var isCur = (i === cur);
+    var isSeen = seen.indexOf(i) !== -1;
+    var fill = isCur ? '#2f6fb5' : (isSeen ? '#dbe9f7' : '#ffffff');
+    var stroke = isCur ? '#2f6fb5' : (isSeen ? '#7aa7d4' : '#c3ccd4');
+    var tcol = isCur ? '#ffffff' : '#1e2429';
+    var bcol = isCur ? '#cfe0f2' : '#8894a0';
+
+    s += '<g>'
+       +   '<rect x="' + (xOf(i) - BW / 2) + '" y="' + (yOf(i) - BH / 2) + '"'
+       +   ' width="' + BW + '" height="' + BH + '" rx="6"'
+       +   ' fill="' + fill + '" stroke="' + stroke + '" stroke-width="2" />'
+       +   '<text x="' + xOf(i) + '" y="' + (yOf(i) - 2) + '" text-anchor="middle"'
+       +   ' font-family="Consolas, monospace" font-size="16" font-weight="bold"'
+       +   ' fill="' + tcol + '">' + i + '</text>'
+       +   '<text x="' + xOf(i) + '" y="' + (yOf(i) + 14) + '" text-anchor="middle"'
+       +   ' font-family="Consolas, monospace" font-size="11"'
+       +   ' fill="' + bcol + '">' + i.toString(2) + '</text>'
+       + '</g>';
+  }
+
+  document.getElementById('tree').innerHTML = s;
+}
+
+function drawIdx() {
+  var p = pathOf(num);
+  var seen = p.slice(0, step + 1);
+  var cur = seen[seen.length - 1];
+  var s = '';
+
+  for (var i = 1; i <= MAXN; i++) {
+    var cls = (i === cur) ? 'now' : (seen.indexOf(i) !== -1 ? 'done' : '');
+    s += '<div class="idxcell ' + cls + '">' + i + '</div>';
+  }
+  document.getElementById('idxrow').innerHTML = s;
+}
+
+function drawCaption() {
+  var b = bitsOf(num);
+  var p = pathOf(num);
+  var t;
+
+  if (step === 0) {
+    t = '맨 앞의 <code>1</code> 은 루트다. <code>1</code>번에서 출발한다.';
+  } else {
+    var side = (b[step] === '1') ? '오른쪽' : '왼쪽';
+    var form = (b[step] === '1')
+      ? p[step - 1] + ' * 2 + 1 = ' + p[step]
+      : p[step - 1] + ' * 2 = ' + p[step];
+    t = '<code>' + b[step] + '</code> 이므로 <b>' + side + '</b>으로 간다. '
+      + '<code>' + form + '</code>';
+    if (step === b.length - 1) {
+      t += ' &nbsp; 도착. <b>' + num + '</b>번 자리다.';
+    }
+  }
+  document.getElementById('caption').innerHTML = t;
+}
+
+function render() {
+  drawBits();
+  drawTree();
+  drawIdx();
+  drawCaption();
+
+  var last = bitsOf(num).length - 1;
+  document.getElementById('first').disabled = (step === 0);
+  document.getElementById('prev').disabled = (step === 0);
+  document.getElementById('next').disabled = (step === last);
+  document.getElementById('play').textContent = timer ? '정지' : '재생';
+}
+
+/* ---------- 조작 ---------- */
+
+function setNum(n) {
+  n = Math.max(1, Math.min(MAXN, Math.floor(n) || 1));
+  num = n;
+  document.getElementById('num').value = n;
+  step = 0;
+  stop();
+  render();
+}
+
+function go(d) {
+  var last = bitsOf(num).length - 1;
+  var t = step + d;
+  if (t < 0 || t > last) return false;
+  step = t;
+  render();
+  return true;
+}
+
+function stop() {
+  if (timer) { clearInterval(timer); timer = null; }
+}
+
+function play() {
+  if (timer) { stop(); render(); return; }
+
+  var last = bitsOf(num).length - 1;
+  if (step === last) step = 0;               // 끝에서 누르면 처음부터
+
+  var ms = parseInt(document.getElementById('speed').value, 10);
+  timer = setInterval(function () {
+    if (!go(1)) { stop(); render(); }
+  }, ms);
+  render();
+}
+
+document.getElementById('num').addEventListener('input', function () {
+  setNum(this.value);
+});
+document.getElementById('rand').addEventListener('click', function () {
+  setNum(Math.floor(Math.random() * MAXN) + 1);
+});
+document.getElementById('first').addEventListener('click', function () {
+  stop(); step = 0; render();
+});
+document.getElementById('prev').addEventListener('click', function () {
+  stop(); go(-1);
+});
+document.getElementById('next').addEventListener('click', function () {
+  stop(); go(1);
+});
+document.getElementById('play').addEventListener('click', play);
+document.getElementById('speed').addEventListener('change', function () {
+  if (timer) { stop(); play(); }
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key === 'ArrowRight') { stop(); go(1); e.preventDefault(); }
+  else if (e.key === 'ArrowLeft') { stop(); go(-1); e.preventDefault(); }
+  else if (e.key === ' ') { play(); e.preventDefault(); }
+});
+
+render();
+</script>
+</body>
+</html>

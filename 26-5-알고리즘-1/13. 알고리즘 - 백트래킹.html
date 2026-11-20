@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>백트래킹 시각화</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
+    margin: 0;
+    padding: 22px;
+    background: #f4f6f8;
+    color: #1e2429;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { font-size: 13px; color: #5c6b78; margin: 0 0 16px; line-height: 1.5; }
+
+  .panel {
+    background: #fff;
+    border: 1px solid #dde3e8;
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .panel > h2 {
+    font-size: 13px;
+    font-weight: normal;
+    color: #5c6b78;
+    margin: 0 0 10px;
+  }
+
+  .opts { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; font-size: 13px; }
+  .opts .grp { display: flex; gap: 9px; align-items: center; }
+  .opts .grp > b { font-weight: normal; color: #5c6b78; }
+  select, button {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 5px 11px;
+    border: 1px solid #c3ccd4;
+    border-radius: 4px;
+    background: #fff;
+    color: #1e2429;
+    cursor: pointer;
+  }
+  button:hover { background: #eef2f5; }
+  button:disabled { color: #aab4bd; cursor: default; background: #fff; }
+  button.main { background: #2e9e4f; border-color: #2e9e4f; color: #fff; min-width: 64px; }
+  button.main:hover { background: #278a44; }
+  .stepno { font-size: 13px; color: #5c6b78; font-family: Consolas, monospace; }
+  #scrub { width: 100%; margin-top: 12px; }
+
+  .cols { display: flex; gap: 12px; align-items: flex-start; }
+  .left { flex: 1; min-width: 0; }
+  .right { width: 440px; flex-shrink: 0; }
+  @media (max-width: 960px) {
+    .cols { flex-direction: column; }
+    .right { width: 100%; }
+  }
+
+  #visual { overflow-x: auto; }
+  svg { display: block; }
+
+  .caption {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #f7f9fb;
+    border-left: 3px solid #2e9e4f;
+    font-size: 14px;
+    min-height: 44px;
+    line-height: 1.55;
+  }
+  code, .mono { font-family: Consolas, "D2Coding", monospace; }
+  .caption code {
+    background: #e8eef4;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: #5c6b78; margin-top: 10px; }
+  .legend .sw {
+    display: inline-block; width: 16px; height: 14px; vertical-align: -2px;
+    margin-right: 5px; border: 2px solid #c3ccd4; border-radius: 3px; background: #fff;
+  }
+
+  /* 코드 */
+  #code {
+    font-family: Consolas, "D2Coding", monospace;
+    font-size: 12.5px;
+    line-height: 20px;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  #code .ln { display: flex; border-left: 3px solid transparent; }
+  #code .ln .g {
+    flex: 0 0 28px;
+    text-align: right;
+    padding-right: 9px;
+    color: #b3bcc4;
+    user-select: none;
+  }
+  #code .ln.hit { background: #fff3d0; border-left-color: #e0a92e; }
+  #code .ln.hit .g { color: #a9801f; }
+
+  .expr {
+    margin-top: 10px;
+    padding: 8px 10px;
+    background: #f7f9fb;
+    border-radius: 4px;
+    font-family: Consolas, "D2Coding", monospace;
+    font-size: 13px;
+    min-height: 54px;
+    white-space: pre-wrap;
+    color: #1e2429;
+  }
+  .expr .dim { color: #8894a0; }
+  .yes { color: #217a3b; font-weight: bold; }
+  .no  { color: #c0392b; font-weight: bold; }
+
+  /* 호출 스택 */
+  .frame {
+    display: flex; justify-content: space-between; gap: 10px;
+    font-family: Consolas, "D2Coding", monospace; font-size: 13px;
+    padding: 6px 10px; margin-top: 4px;
+    border: 1px solid #dde3e8; border-radius: 4px; background: #fafbfc; color: #5c6b78;
+  }
+  .frame.top { border-color: #1e2429; background: #fff; color: #1e2429; font-weight: bold; }
+  .frame .loop { color: #2f6fb5; white-space: nowrap; }
+  .frame .loop.chg { background: #fff3d0; border-radius: 3px; padding: 0 4px; }
+  .frame.empty { border-style: dashed; color: #aab4bd; font-weight: normal; justify-content: center; }
+  .vars { display: flex; gap: 7px; flex-wrap: wrap; }
+  .vars .v {
+    font-family: Consolas, monospace; font-size: 13px;
+    border: 1px solid #dde3e8; border-radius: 4px; padding: 4px 10px;
+    background: #fafbfc; color: #5c6b78;
+  }
+  .vars .v b { color: #1e2429; }
+  .vars .v.chg { background: #fff3d0; border-color: #e0a92e; }
+
+  /* 리스트 칸 */
+  .listrow { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; min-height: 42px; }
+  .listrow .br { font-family: Consolas, monospace; font-size: 22px; color: #8894a0; }
+  .listrow .nm { font-family: Consolas, monospace; font-size: 13px; color: #5c6b78; margin-right: 4px; }
+  .cell { text-align: center; }
+  .cell .box {
+    min-width: 40px; height: 40px; line-height: 38px; padding: 0 6px;
+    font-family: Consolas, monospace; font-size: 16px; font-weight: bold;
+    border: 1px solid #217a3b; border-radius: 4px; background: #2e9e4f; color: #fff;
+  }
+  .cell .idx { font-size: 11px; color: #8894a0; margin-top: 2px; font-family: Consolas, monospace; }
+  .cell.stale .box { background: #fff; color: #b3bcc4; border: 1px dashed #c3ccd4; }
+  .cell.f .box { background: #fff; color: #8894a0; border-color: #c3ccd4; font-size: 13px; }
+  .cell.new .box { box-shadow: 0 0 0 3px #f2c14e; }
+
+  .outbox { display: flex; flex-wrap: wrap; gap: 5px; min-height: 30px; }
+  .outbox .o {
+    font-family: Consolas, monospace; font-size: 13px;
+    padding: 3px 8px; border: 1px solid #c3ccd4; border-radius: 4px; background: #fafbfc;
+  }
+  .outbox .o.new { background: #fff3d0; border-color: #e0a92e; }
+
+  /* 이중 for문 표 */
+  table.grid { border-collapse: collapse; margin: 6px 0 0; }
+  table.grid th {
+    font-family: Consolas, monospace; font-size: 13px; font-weight: normal; color: #5c6b78;
+    padding: 4px 8px;
+  }
+  table.grid td {
+    width: 64px; height: 56px; text-align: center;
+    font-family: Consolas, monospace; font-size: 17px; font-weight: bold;
+    border: 1px solid #dde3e8; background: #fff;
+  }
+  table.grid td.ex { background: repeating-linear-gradient(45deg, #f1f3f5, #f1f3f5 6px, #e6eaee 6px, #e6eaee 12px); }
+  table.grid td.row { background: #eef6ff; }
+  table.grid td.done { background: #2e9e4f; color: #fff; }
+  table.grid td.skip { color: #c0392b; }
+  table.grid td.cur { box-shadow: inset 0 0 0 4px #e08a00; }
+  table.grid tr.currow th.rh { color: #1e2429; font-weight: bold; }
+  table.grid th.ch.cur { color: #1e2429; font-weight: bold; }
+
+  /* N퀸 판 */
+  table.board { border-collapse: collapse; margin: 6px 0 0; }
+  table.board th { font-family: Consolas, monospace; font-size: 12px; font-weight: normal; color: #8894a0; padding: 3px 6px; }
+  table.board td {
+    width: 58px; height: 58px; text-align: center;
+    font-family: Consolas, monospace; font-size: 24px; font-weight: bold;
+    border: 1px solid #c3ccd4;
+  }
+  table.board td.lt { background: #f7f4ec; }
+  table.board td.dk { background: #e4ddcc; }
+  table.board td.line { background: #f7d4cf; }
+  table.board td.q { color: #1e2429; }
+  table.board td.cand { box-shadow: inset 0 0 0 4px #e08a00; color: #e08a00; }
+  table.board td.cmp { box-shadow: inset 0 0 0 4px #2f6fb5; }
+  table.board td.bad { background: #e8796e; color: #fff; }
+
+  .hint { font-size: 12px; color: #8894a0; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1 id="title"></h1>
+  <p class="sub" id="sub"></p>
+
+  <div class="panel">
+    <div class="opts">
+      <div class="grp">
+        <b>화면</b>
+        <select id="scrsel">
+          <option value="loop2">1절 - 이중 for문으로 2개 고르기</option>
+          <option value="rec">3, 5, 7절 - 재귀로 r개 고르기</option>
+          <option value="sub">8, 9절 - 부분집합과 가지치기</option>
+          <option value="graph">11절 - 그래프 위의 경로</option>
+          <option value="queen">12절 - N퀸</option>
+        </select>
+      </div>
+      <div class="grp" id="o-kind"><b>코드</b><select id="kind"></select></div>
+      <div class="grp" id="o-r"><b>r</b><select id="rsel"><option value="2">2</option><option value="3" selected>3</option></select></div>
+      <div class="grp" id="o-start"><b>시작</b><select id="start"></select></div>
+      <div class="grp" id="o-target"><b>도착</b><select id="target"></select></div>
+      <div class="grp" id="o-n"><b>N</b><select id="nsel"><option value="4" selected>4</option><option value="5">5</option></select></div>
+    </div>
+    <div class="opts" style="margin-top:12px">
+      <div class="grp">
+        <button id="first">처음</button>
+        <button id="prev">이전</button>
+        <button id="next">다음</button>
+        <button class="main" id="play">재생</button>
+      </div>
+      <div class="grp">
+        <b>속도</b>
+        <select id="speed">
+          <option value="1600">느리게</option>
+          <option value="1000" selected>보통</option>
+          <option value="550">빠르게</option>
+          <option value="220">아주 빠르게</option>
+          <option value="70">가장 빠르게</option>
+        </select>
+      </div>
+      <div class="grp"><span class="stepno" id="stepno"></span></div>
+    </div>
+    <input type="range" id="scrub" min="0" max="0" value="0">
+  </div>
+
+  <div class="cols">
+    <div class="left">
+      <div class="panel">
+        <h2 id="vtitle"></h2>
+        <div id="visual"></div>
+        <div class="caption" id="caption"></div>
+        <div class="legend" id="legend"></div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="panel">
+        <h2>코드 - 지금 실행하는 줄</h2>
+        <div id="code"></div>
+        <div class="expr" id="expr"></div>
+      </div>
+      <div class="panel">
+        <h2 id="stitle"></h2>
+        <div id="stack"></div>
+      </div>
+      <div class="panel" id="p-state">
+        <h2 id="sttitle"></h2>
+        <div id="state"></div>
+      </div>
+      <div class="panel">
+        <h2>출력</h2>
+        <div class="outbox" id="out"></div>
+        <p class="hint">좌우 화살표로 한 단계씩, 스페이스로 재생과 정지.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ================================================================
+   장면 만들기 (DOM 을 쓰지 않는다)
+   ================================================================ */
+
+var A4 = ['a', 'b', 'c', 'd'];
+var B4 = [2, 3, 5, 7];
+var T10 = 10;
+
+function yesno(b) { return b ? '<span class="yes">True</span>' : '<span class="no">False</span>'; }
+function pyList(a) { return '[' + a.join(', ') + ']'; }
+function pyStrList(a) { return '[' + a.map(function (x) { return "'" + x + "'"; }).join(', ') + ']'; }
+function q(s) { return "'" + s + "'"; }
+
+/* ---------- 공통 기록기 ---------- */
+
+function makeRec() {
+  var R = { F: [], stack: [], out: [], nodes: [], state: null, extra: null };
+
+  R.snap = function (line, cap, expr, more) {
+    var top = R.stack.length ? R.stack[R.stack.length - 1] : null;
+    var f = {
+      t: R.F.length,
+      line: line,
+      cap: cap,
+      expr: expr || '',
+      stack: R.stack.map(function (s) { return { call: s.call, loop: s.loop, chg: s.chg }; }),
+      out: R.out.slice(),
+      cur: top ? top.nid : null,
+      state: R.state ? R.state() : null
+    };
+    if (more) { for (var k in more) { f[k] = more[k]; } }
+    R.stack.forEach(function (s) { s.chg = false; });
+    R.F.push(f);
+    return f;
+  };
+
+  // tree 가 true 이면 트리에 노드를 만든다
+  R.enter = function (call, parent, label, depth, tree) {
+    var nid = null;
+    if (tree) {
+      nid = R.nodes.length;
+      R.nodes.push({ id: nid, parent: parent, label: label, depth: depth,
+                     born: R.F.length, died: null, printed: null, dead: null,
+                     pruned: null, miss: null, under: '' });
+    }
+    R.stack.push({ call: call, loop: '', chg: false, nid: nid });
+    return nid;
+  };
+
+  R.leave = function (nid) {
+    if (nid !== null && nid !== undefined) { R.nodes[nid].died = R.F.length; }
+    R.stack.pop();
+  };
+
+  R.setLoop = function (txt) {
+    var top = R.stack[R.stack.length - 1];
+    top.loop = txt;
+    top.chg = true;
+  };
+
+  R.tree = function () {
+    var nodes = R.nodes;
+    var kids = {};
+    nodes.forEach(function (n) { kids[n.id] = []; });
+    nodes.forEach(function (n) { if (n.parent !== null) { kids[n.parent].push(n.id); } });
+    var x = 0;
+    var maxD = 0;
+    function place(id) {
+      var ch = kids[id];
+      if (nodes[id].depth > maxD) { maxD = nodes[id].depth; }
+      if (ch.length === 0) {
+        nodes[id].x = x;
+        x += 1;
+      } else {
+        ch.forEach(place);
+        nodes[id].x = (nodes[ch[0]].x + nodes[ch[ch.length - 1]].x) / 2;
+      }
+    }
+    if (nodes.length) { place(0); }
+    return { nodes: nodes, leaves: x, maxDepth: maxD };
+  };
+
+  return R;
+}
+
+/* ---------- 1절: 이중 for문 ---------- */
+
+var SRC_LOOP = {
+  perm_rep: ["out = []", "for i in range(n):", "    for j in range(n):",
+             "        out.append(A[i] + A[j])", "print(len(out), out)"],
+  perm:     ["out = []", "for i in range(n):", "    for j in range(n):", "        if j != i:",
+             "            out.append(A[i] + A[j])", "print(len(out), out)"],
+  comb:     ["out = []", "for i in range(n):", "    for j in range(i + 1, n):",
+             "        out.append(A[i] + A[j])", "print(len(out), out)"],
+  comb_rep: ["out = []", "for i in range(n):", "    for j in range(i, n):",
+             "        out.append(A[i] + A[j])", "print(len(out), out)"]
+};
+
+function loopLo(kind, i) {
+  if (kind === 'comb') { return i + 1; }
+  if (kind === 'comb_rep') { return i; }
+  return 0;
+}
+
+function buildLoop2(kind) {
+  var F = [];
+  var out = [];
+  var done = [];
+  var skip = [];
+  var I = null, J = null, pI = null, pJ = null;
+  var hasIf = (kind === 'perm');
+  var L = { init: 1, fi: 2, fj: 3, cond: 4, app: hasIf ? 5 : 4, prt: hasIf ? 6 : 5 };
+
+  function snap(line, cap, expr, more) {
+    var chg = [];
+    if (I !== pI) { chg.push('i'); }
+    if (J !== pJ) { chg.push('j'); }
+    pI = I; pJ = J;
+    var f = { t: F.length, line: line, cap: cap, expr: expr || '', vars: { i: I, j: J }, chg: chg,
+              out: out.slice(), done: done.slice(), skip: skip.slice(),
+              cur: (I !== null && J !== null) ? [I, J] : null, row: I };
+    if (more) { for (var k in more) { f[k] = more[k]; } }
+    F.push(f);
+  }
+
+  snap(L.init, '<code>out</code>을 빈 리스트로 만든다. 고른 것을 여기에 모은다.', 'out = []');
+  for (var i = 0; i < 4; i++) {
+    I = i; J = null;
+    var lo = loopLo(kind, i);
+    var js = [];
+    for (var j = lo; j < 4; j++) { js.push(j); }
+    var rtxt = (kind === 'comb') ? 'range(i + 1, n) = range(' + lo + ', 4)'
+             : (kind === 'comb_rep') ? 'range(i, n) = range(' + lo + ', 4)'
+             : 'range(n) = range(0, 4)';
+    snap(L.fi, '바깥 반복 <b>i = ' + i + '</b>. 첫 번째로 ' + A4[i] + '를 고른다. 표의 ' + i + '행이다.',
+         'for i in range(n)\ni = ' + i);
+    if (js.length === 0) {
+      snap(L.fj, '안쪽 범위 <code>' + rtxt.split(' = ')[1] + '</code>가 비어 있다. 이 행에서는 고를 칸이 없다.',
+           rtxt + '\n-> 비어 있다');
+      continue;
+    }
+    for (var p = 0; p < js.length; p++) {
+      J = js[p];
+      snap(L.fj, '안쪽 반복 <b>j = ' + J + '</b>. 두 번째로 ' + A4[J] + '를 본다. (' + i + ', ' + J + ') 칸이다.',
+           rtxt + ' -> ' + pyList(js) + '\nj = ' + J);
+      if (hasIf) {
+        var ok = (J !== i);
+        if (!ok) { skip.push([i, J]); }
+        snap(L.cond, ok ? 'j와 i가 다르다. 고른다.'
+                        : 'j와 i가 같다. 같은 번호를 두 번 고르지 않으므로 건너뛴다.',
+             '<span class="dim">if j != i:</span>\n' + J + ' != ' + i + '\n-> ' + yesno(ok));
+        if (!ok) { continue; }
+      }
+      out.push(A4[i] + A4[J]);
+      done.push([i, J]);
+      snap(L.app, '<code>' + A4[i] + A4[J] + '</code>를 <code>out</code>에 넣는다.',
+           'out.append(A[i] + A[j])\n-> out.append(' + q(A4[i] + A4[J]) + ')', { outNew: true });
+    }
+  }
+  I = null; J = null;
+  snap(L.prt, '반복이 끝났다. 모두 <b>' + out.length + '</b>개.',
+       'print(len(out), out)\n-> ' + out.length + ' ' + pyStrList(out));
+  return { frames: F };
+}
+
+/* ---------- 3, 5, 7절: 재귀로 r개 고르기 ---------- */
+
+var SRC_REC = {
+  comb: ["def comb(d, prev, s):",
+         "    if d == r:",
+         "        print(s, end=' ')",
+         "        return",
+         "    for i in range(prev + 1, n):",
+         "        comb(d + 1, i, s + A[i])",
+         "",
+         "comb(0, -1, '')"],
+  comb_rep: ["def comb_rep(d, prev, s):",
+             "    if d == r:",
+             "        print(s, end=' ')",
+             "        return",
+             "    for i in range(prev, n):",
+             "        comb_rep(d + 1, i, s + A[i])",
+             "",
+             "comb_rep(0, 0, '')"],
+  perm_rep: ["def perm_rep(d, s):",
+             "    if d == r:",
+             "        print(s, end=' ')",
+             "        return",
+             "    for i in range(n):",
+             "        perm_rep(d + 1, s + A[i])",
+             "",
+             "perm_rep(0, '')"],
+  comb_pick: ["pick = [0] * r",
+              "",
+              "def comb_pick(d, prev):",
+              "    if d == r:",
+              "        print(pick, end=' ')",
+              "        return",
+              "    for i in range(prev + 1, n):",
+              "        pick[d] = i",
+              "        comb_pick(d + 1, i)",
+              "",
+              "comb_pick(0, -1)"],
+  comb_path: ["path = []",
+              "",
+              "def comb_path(prev):",
+              "    if len(path) == r:",
+              "        print(path, end=' ')",
+              "        return",
+              "    for i in range(prev + 1, n):",
+              "        path.append(i)",
+              "        comb_path(i)",
+              "        path.pop()",
+              "",
+              "comb_path(-1)"],
+  perm: ["path = []",
+         "",
+         "def perm():",
+         "    if len(path) == r:",
+         "        print(path, end=' ')",
+         "        return",
+         "    for i in range(n):",
+         "        if i in path:",
+         "            continue",
+         "        path.append(i)",
+         "        perm()",
+         "        path.pop()",
+         "",
+         "perm()"],
+  perm_used: ["path = []",
+              "used = [False] * n",
+              "",
+              "def perm_used():",
+              "    if len(path) == r:",
+              "        print(path, end=' ')",
+              "        return",
+              "    for i in range(n):",
+              "        if used[i]:",
+              "            continue",
+              "        used[i] = True",
+              "        path.append(i)",
+              "        perm_used()",
+              "        path.pop()",
+              "        used[i] = False",
+              "",
+              "perm_used()"]
+};
+
+var REC_LINES = {
+  comb:      { top: 8, end: 2, prt: 3, ret: 4, loop: 5, call: 6 },
+  comb_rep:  { top: 8, end: 2, prt: 3, ret: 4, loop: 5, call: 6 },
+  perm_rep:  { top: 8, end: 2, prt: 3, ret: 4, loop: 5, call: 6 },
+  comb_pick: { init: [1], top: 11, end: 4, prt: 5, ret: 6, loop: 7, rec: 8, call: 9 },
+  comb_path: { init: [1], top: 12, end: 4, prt: 5, ret: 6, loop: 7, rec: 8, call: 9, undo: 10 },
+  perm:      { init: [1], top: 14, end: 4, prt: 5, ret: 6, loop: 7, chk: 8, cont: 9, rec: 10, call: 11, undo: 12 },
+  perm_used: { init: [1, 2], top: 17, end: 5, prt: 6, ret: 7, loop: 8, chk: 9, cont: 10, mark: 11,
+               rec: 12, call: 13, undo: 14, unmark: 15 }
+};
+
+function buildRec(kind, r) {
+  var R = makeRec();
+  var L = REC_LINES[kind];
+  var isS = (kind === 'comb' || kind === 'comb_rep' || kind === 'perm_rep');
+  var usePath = (kind === 'comb_path' || kind === 'perm' || kind === 'perm_used');
+  var pick = [];
+  for (var z = 0; z < r; z++) { pick.push(0); }
+  var path = [];
+  var used = [false, false, false, false];
+  var liveP = 0;        // pick 에서 지금 경로가 쓰고 있는 칸 수
+  R.state = function () { return { pick: pick.slice(), path: path.slice(), used: used.slice(), live: liveP }; };
+
+  function callText(d, prev, s) {
+    if (kind === 'comb' || kind === 'comb_rep') { return kind + '(' + d + ', ' + prev + ', ' + q(s) + ')'; }
+    if (kind === 'perm_rep') { return 'perm_rep(' + d + ', ' + q(s) + ')'; }
+    if (kind === 'comb_pick') { return 'comb_pick(' + d + ', ' + prev + ')'; }
+    if (kind === 'comb_path') { return 'comb_path(' + prev + ')'; }
+    return kind + '()';
+  }
+  function callSrc() {
+    if (kind === 'comb') { return 'comb(d + 1, i, s + A[i])'; }
+    if (kind === 'comb_rep') { return 'comb_rep(d + 1, i, s + A[i])'; }
+    if (kind === 'perm_rep') { return 'perm_rep(d + 1, s + A[i])'; }
+    if (kind === 'comb_pick') { return 'comb_pick(d + 1, i)'; }
+    if (kind === 'comb_path') { return 'comb_path(i)'; }
+    return kind + '()';
+  }
+  function loText(prev) {
+    if (kind === 'comb' || kind === 'comb_pick' || kind === 'comb_path') { return prev + 1; }
+    if (kind === 'comb_rep') { return prev; }
+    return 0;
+  }
+  function rangeText(lo, prev) {
+    if (kind === 'comb' || kind === 'comb_pick' || kind === 'comb_path') {
+      return 'range(prev + 1, n) = range(' + lo + ', 4)';
+    }
+    if (kind === 'comb_rep') { return 'range(prev, n) = range(' + lo + ', 4)'; }
+    return 'range(n) = range(0, 4)';
+  }
+  function item(i) { return isS ? A4[i] : String(i); }
+
+  function rcall(d, prev, s, parent, label) {
+    var nid = R.enter(callText(d, prev, s), parent, label, d, true);
+    liveP = d;
+    var isEnd = (d === r);
+    var endExpr = usePath
+      ? '<span class="dim">if len(path) == r:</span>\nlen(' + pyList(path) + ') == ' + r + '\n' + d + ' == ' + r + '\n-> ' + yesno(isEnd)
+      : '<span class="dim">if d == r:</span>\n' + d + ' == ' + r + '\n-> ' + yesno(isEnd);
+    R.snap(L.end, isEnd ? '<b>' + r + '</b>개를 다 골랐다.'
+                        : '<code>' + callText(d, prev, s) + '</code> 가 시작됐다. 지금까지 <b>' + d
+                          + '</b>개를 골랐다. 아직 다 고르지 않았다.', endExpr);
+    if (isEnd) {
+      var txt = isS ? s : (kind === 'comb_pick' ? pyList(pick) : pyList(path));
+      R.out.push(txt);
+      R.nodes[nid].printed = R.F.length;
+      R.nodes[nid].under = txt;
+      R.snap(L.prt, '<code>' + txt + '</code>를 출력한다.',
+             (isS ? "print(s, end=' ')" : (kind === 'comb_pick' ? "print(pick, end=' ')" : "print(path, end=' ')"))
+             + '\n-> ' + txt, { outNew: true });
+      R.snap(L.ret, '이 호출이 끝난다. 부른 곳으로 돌아간다.', 'return');
+      R.leave(nid);
+      return;
+    }
+
+    var lo = loText(prev);
+    var list = [];
+    for (var i = lo; i < 4; i++) { list.push(i); }
+    var rtxt = rangeText(lo, prev);
+    if (list.length === 0) {
+      R.nodes[nid].dead = R.F.length;
+      R.setLoop('후보 없음');
+      R.snap(L.loop, '후보 범위 <code>' + rtxt.split(' = ')[1] + '</code>가 비어 있다. '
+             + '고를 것이 없으므로 아무것도 하지 않고 끝난다.', rtxt + '\n-> 비어 있다. 반복하지 않는다');
+      R.leave(nid);
+      return;
+    }
+
+    for (var p = 0; p < list.length; p++) {
+      var iv = list[p];
+      liveP = d;
+      R.setLoop('i = ' + iv);
+      R.snap(L.loop, '이 자리의 후보는 <code>' + pyList(list) + '</code>. 이번 후보는 <b>i = ' + iv + '</b>'
+             + (isS ? ' (' + A4[iv] + ')' : '') + '.', rtxt + ' -> ' + pyList(list) + '\ni = ' + iv);
+
+      if (kind === 'perm') {
+        var inPath = path.indexOf(iv) >= 0;
+        R.snap(L.chk, inPath ? iv + '는 앞의 자리에서 이미 골랐다.' : iv + '는 아직 고르지 않았다.',
+               '<span class="dim">if i in path:</span>\n' + iv + ' in ' + pyList(path) + '\n-> ' + yesno(inPath));
+        if (inPath) {
+          R.snap(L.cont, '건너뛰고 다음 후보로 간다.', 'continue');
+          continue;
+        }
+      }
+      if (kind === 'perm_used') {
+        var u = used[iv];
+        R.snap(L.chk, u ? 'used[' + iv + ']가 True다. 앞의 자리에서 이미 골랐다.' : 'used[' + iv + ']가 False다. 아직 고르지 않았다.',
+               '<span class="dim">if used[i]:</span>\nused[' + iv + '] -> ' + yesno(u), { hiUsed: iv });
+        if (u) {
+          R.snap(L.cont, '건너뛰고 다음 후보로 간다.', 'continue', { hiUsed: iv });
+          continue;
+        }
+        used[iv] = true;
+        R.snap(L.mark, '표에 ' + iv + '를 골랐다고 적는다.', 'used[' + iv + '] = True', { hiUsed: iv });
+      }
+      if (kind === 'comb_pick') {
+        pick[d] = iv;
+        liveP = d + 1;
+        R.snap(L.rec, '<code>pick[' + d + ']</code> 칸에 ' + iv + '를 적는다. 전에 있던 값은 덮어쓴다.',
+               'pick[d] = i\n-> pick[' + d + '] = ' + iv, { hiPick: d });
+      }
+      if (usePath) {
+        path.push(iv);
+        R.snap(L.rec, '<code>path</code> 끝에 ' + iv + '를 붙인다.', 'path.append(' + iv + ')\n-> path = ' + pyList(path),
+               { hiPath: path.length - 1 });
+      }
+
+      var ns = isS ? s + A4[iv] : '';
+      var child = callText(d + 1, iv, ns);
+      R.snap(L.call, '다음 자리로 들어간다. <code>' + child + '</code>',
+             callSrc() + '\n-> ' + child);
+      rcall(d + 1, iv, ns, nid, item(iv));
+      liveP = (kind === 'comb_pick') ? d + 1 : d;
+      R.snap(L.call, '<code>' + child + '</code> 가 끝나서 돌아왔다.'
+             + (L.undo ? ' 들어가기 전에 붙인 ' + iv + '를 치운다.' : ' 이 호출의 for가 다음 후보로 넘어간다.'),
+             '<span class="dim">' + callSrc() + '  # 끝남</span>');
+      if (L.undo) {
+        path.pop();
+        R.snap(L.undo, '<code>path</code>에서 ' + iv + '를 뺀다. 들어가기 전 상태로 돌아왔다.',
+               'path.pop()\n-> path = ' + pyList(path));
+      }
+      if (kind === 'perm_used') {
+        used[iv] = false;
+        R.snap(L.unmark, '표에서도 ' + iv + '를 지운다. path와 used가 다시 맞는다.', 'used[' + iv + '] = False',
+               { hiUsed: iv });
+      }
+    }
+    liveP = d;
+    R.setLoop('반복 끝');
+    R.snap(L.loop, '후보를 다 봤다. for가 끝나서 이 호출도 끝난다.', rtxt + '\n-> 남은 후보가 없다');
+    R.leave(nid);
+  }
+
+  if (L.init) {
+    if (kind === 'comb_pick') { R.snap(1, '자리마다 고른 번호를 적을 칸 ' + r + '개를 만든다.', 'pick = [0] * r\n-> ' + pyList(pick)); }
+    else {
+      R.snap(1, '고른 번호를 담을 빈 리스트를 만든다.', 'path = []');
+      if (kind === 'perm_used') { R.snap(2, '번호마다 골랐는지 적을 표를 만든다.', 'used = [False] * n'); }
+    }
+  }
+  var prev0 = (kind === 'comb_rep') ? 0 : -1;
+  R.snap(L.top, '첫 호출. <code>' + callText(0, prev0, '') + '</code>', callText(0, prev0, ''));
+  rcall(0, prev0, '', null, '');
+  R.snap(L.top, '첫 호출이 끝났다. 모두 <b>' + R.out.length + '</b>개를 출력했다.', '');
+  return { frames: R.F, tree: R.tree() };
+}
+
+/* ---------- 8, 9절: 부분집합과 가지치기 ---------- */
+
+var SRC_SUB = {
+  sub: ["path = []",
+        "",
+        "def sub(k):",
+        "    if k == m:",
+        "        print(path, end=' ')",
+        "        return",
+        "    sub(k + 1)",
+        "    path.append(B[k])",
+        "    sub(k + 1)",
+        "    path.pop()",
+        "",
+        "sub(0)"],
+  sub_sum: ["T = 10",
+            "cnt = 0",
+            "",
+            "def sub_sum(k, s):",
+            "    global cnt",
+            "    if s > T:",
+            "        return",
+            "    if k == m:",
+            "        if s == T:",
+            "            cnt += 1",
+            "        return",
+            "    sub_sum(k + 1, s)",
+            "    sub_sum(k + 1, s + B[k])",
+            "",
+            "sub_sum(0, 0)",
+            "print(cnt)"]
+};
+
+function buildSub(kind) {
+  var R = makeRec();
+  var path = [];
+  var cnt = 0;
+  R.state = function () { return { path: path.slice(), cnt: cnt }; };
+
+  function sub(k, parent, label) {
+    var nid = R.enter('sub(' + k + ')', parent, label, k, true);
+    var isEnd = (k === 4);
+    R.snap(4, isEnd ? '네 원소를 모두 정했다.' : '<code>sub(' + k + ')</code> 가 시작됐다. 이번에 정할 원소는 <b>B[' + k + '] = ' + B4[k] + '</b>.',
+           '<span class="dim">if k == m:</span>\n' + k + ' == 4\n-> ' + yesno(isEnd));
+    if (isEnd) {
+      var txt = pyList(path);
+      R.out.push(txt);
+      R.nodes[nid].printed = R.F.length;
+      R.nodes[nid].under = txt;
+      R.snap(5, '<code>' + txt + '</code>를 출력한다.', "print(path, end=' ')\n-> " + txt, { outNew: true });
+      R.snap(6, '이 호출이 끝난다. 부른 곳으로 돌아간다.', 'return');
+      R.leave(nid);
+      return;
+    }
+    R.setLoop(B4[k] + ' 넣지 않음');
+    R.snap(7, B4[k] + '를 넣지 않고 다음 원소로 간다.', 'sub(k + 1)\n-> sub(' + (k + 1) + ')');
+    sub(k + 1, nid, '-');
+    R.snap(7, '<code>sub(' + (k + 1) + ')</code> 가 끝나서 돌아왔다. 이번에는 ' + B4[k] + '를 넣어 본다.',
+           '<span class="dim">sub(k + 1)  # 끝남</span>');
+    path.push(B4[k]);
+    R.setLoop(B4[k] + ' 넣음');
+    R.snap(8, '<code>path</code>에 ' + B4[k] + '를 붙인다.', 'path.append(B[k])\n-> path = ' + pyList(path),
+           { hiPath: path.length - 1 });
+    R.snap(9, B4[k] + '를 넣은 채로 다음 원소로 간다.', 'sub(k + 1)\n-> sub(' + (k + 1) + ')');
+    sub(k + 1, nid, String(B4[k]));
+    R.snap(9, '<code>sub(' + (k + 1) + ')</code> 가 끝나서 돌아왔다.', '<span class="dim">sub(k + 1)  # 끝남</span>');
+    path.pop();
+    R.snap(10, '<code>path</code>에서 ' + B4[k] + '를 뺀다. 이 호출이 끝난다.', 'path.pop()\n-> path = ' + pyList(path));
+    R.leave(nid);
+  }
+
+  function ss(k, s, parent, label) {
+    var nid = R.enter('sub_sum(' + k + ', ' + s + ')', parent, label, k, true);
+    var over = (s > T10);
+    R.snap(6, over ? '합 <b>' + s + '</b>가 10을 넘었다.'
+                   : '<code>sub_sum(' + k + ', ' + s + ')</code> 가 시작됐다. 합 ' + s + '는 10을 넘지 않았다.',
+           '<span class="dim">if s > T:</span>\n' + s + ' > 10\n-> ' + yesno(over));
+    if (over) {
+      R.nodes[nid].pruned = R.F.length;
+      R.nodes[nid].under = 's=' + s;
+      R.snap(7, '더 넣어도 합이 줄지 않는다. 아래로 들어가지 않고 돌아간다. (가지치기)', 'return');
+      R.leave(nid);
+      return;
+    }
+    var isEnd = (k === 4);
+    R.snap(8, isEnd ? '네 원소를 모두 정했다.' : '이번에 정할 원소는 <b>B[' + k + '] = ' + B4[k] + '</b>.',
+           '<span class="dim">if k == m:</span>\n' + k + ' == 4\n-> ' + yesno(isEnd));
+    if (isEnd) {
+      var hit = (s === T10);
+      R.snap(9, hit ? '합이 정확히 10이다.' : '합이 ' + s + '이다. 10이 아니다.',
+             '<span class="dim">if s == T:</span>\n' + s + ' == 10\n-> ' + yesno(hit));
+      R.nodes[nid].under = 's=' + s;
+      if (hit) {
+        cnt += 1;
+        R.nodes[nid].printed = R.F.length;
+        R.snap(10, '<code>cnt</code>를 1 늘린다.', 'cnt += 1\n-> cnt = ' + cnt, { hiCnt: true });
+      } else {
+        R.nodes[nid].miss = R.F.length;
+      }
+      R.snap(11, '이 호출이 끝난다. 부른 곳으로 돌아간다.', 'return');
+      R.leave(nid);
+      return;
+    }
+    R.setLoop(B4[k] + ' 넣지 않음');
+    R.snap(12, B4[k] + '를 넣지 않고 다음 원소로 간다.', 'sub_sum(k + 1, s)\n-> sub_sum(' + (k + 1) + ', ' + s + ')');
+    ss(k + 1, s, nid, '-');
+    R.snap(12, '<code>sub_sum(' + (k + 1) + ', ' + s + ')</code> 가 끝나서 돌아왔다. 이번에는 ' + B4[k] + '를 넣는다.',
+           '<span class="dim">sub_sum(k + 1, s)  # 끝남</span>');
+    R.setLoop(B4[k] + ' 넣음');
+    R.snap(13, B4[k] + '를 넣어 합을 ' + (s + B4[k]) + '로 만들고 다음 원소로 간다.',
+           'sub_sum(k + 1, s + B[k])\n-> sub_sum(' + (k + 1) + ', ' + (s + B4[k]) + ')');
+    ss(k + 1, s + B4[k], nid, String(B4[k]));
+    R.snap(13, '<code>sub_sum(' + (k + 1) + ', ' + (s + B4[k]) + ')</code> 가 끝나서 돌아왔다. 이 호출도 끝난다.',
+           '<span class="dim">sub_sum(k + 1, s + B[k])  # 끝남</span>');
+    R.leave(nid);
+  }
+
+  if (kind === 'sub') {
+    R.snap(1, '넣은 원소를 담을 빈 리스트를 만든다.', 'path = []');
+    R.snap(12, '첫 호출. 0번 원소부터 정한다.', 'sub(0)');
+    sub(0, null, '');
+    R.snap(12, '첫 호출이 끝났다. 부분집합 <b>' + R.out.length + '</b>개를 출력했다.', '');
+  } else {
+    R.snap(1, '목표 합은 10.', 'T = 10');
+    R.snap(2, '합이 10인 경우를 셀 변수.', 'cnt = 0', { hiCnt: true });
+    R.snap(15, '첫 호출. 0번 원소부터, 합 0에서 시작한다.', 'sub_sum(0, 0)');
+    ss(0, 0, null, '');
+    R.out.push(String(cnt));
+    R.snap(16, '첫 호출이 끝났다. 합이 10인 경우는 <b>' + cnt + '</b>가지.', 'print(cnt)\n-> ' + cnt, { outNew: true });
+  }
+  return { frames: R.F, tree: R.tree() };
+}
+
+/* ---------- 11절: 그래프 위의 경로 ---------- */
+
+var G7 = {
+  adj: { A: ['B', 'C'], B: ['A', 'D'], C: ['A', 'D'], D: ['B', 'C', 'E'], E: ['D'], F: ['G'], G: ['F'] },
+  pos: { A: [230, 60], B: [110, 175], C: [350, 175], D: [230, 290], E: [230, 405], F: [520, 115], G: [520, 265] }
+};
+var G5KEYS = ['A', 'B', 'C', 'D', 'E'];
+
+var SRC_GRAPH = {
+  dfs_rec: ["def dfs_rec(g, v, visited):",
+            "    visited.append(v)",
+            "    for nxt in g[v]:",
+            "        if nxt not in visited:",
+            "            dfs_rec(g, nxt, visited)",
+            "    return visited",
+            "",
+            "print(dfs_rec(graph, START, []))"],
+  all_paths: ["def all_paths(g, v, target, path):",
+              "    path.append(v)",
+              "    if v == target:",
+              "        print(path)",
+              "    else:",
+              "        for nxt in g[v]:",
+              "            if nxt not in path:",
+              "                all_paths(g, nxt, target, path)",
+              "    path.pop()",
+              "",
+              "all_paths(graph, START, TARGET, [])"],
+  ham: ["def ham(g, v, path):",
+        "    path.append(v)",
+        "    if len(path) == len(g):",
+        "        print(path)",
+        "    else:",
+        "        for nxt in g[v]:",
+        "            if nxt not in path:",
+        "                ham(g, nxt, path)",
+        "    path.pop()",
+        "",
+        "for v in g5:",
+        "    ham(g5, v, [])"]
+};
+
+function srcGraph(kind, start, target) {
+  return SRC_GRAPH[kind].map(function (s) {
+    return s.replace('START', q(start)).replace('TARGET', q(target));
+  });
+}
+
+function buildGraph(kind, start, target) {
+  var R = makeRec();
+  var adj = G7.adj;
+  var visited = [];
+  var path = [];
+  var chain = [];      // 지금 들어와 있는 호출들의 노드
+  var tree = [];       // 한 번이라도 지나간 간선
+  R.state = function () { return { visited: visited.slice(), path: path.slice(), chain: chain.slice(), tree: tree.map(function (e) { return e.slice(); }) }; };
+
+  function dfs(v) {
+    R.enter('dfs_rec(g, ' + q(v) + ', visited)', null, '', 0, false);
+    chain.push(v);
+    visited.push(v);
+    R.snap(2, '<b>' + v + '</b>에 들어왔다. <code>visited</code>에 넣는다.', 'visited.append(' + q(v) + ')',
+           { node: v, newly: v });
+    var nb = adj[v];
+    for (var p = 0; p < nb.length; p++) {
+      var w = nb[p];
+      R.setLoop('nxt = ' + q(w));
+      R.snap(3, v + '의 이웃 <code>' + pyStrList(nb) + '</code> 중 <b>' + w + '</b>를 본다.',
+             'for nxt in g[' + q(v) + '] -> ' + pyStrList(nb) + '\nnxt = ' + q(w), { node: v, check: w });
+      var inV = visited.indexOf(w) >= 0;
+      R.snap(4, inV ? w + '는 이미 방문했다. 건너뛴다.' : w + '는 아직 방문하지 않았다.',
+             '<span class="dim">if nxt not in visited:</span>\n' + q(w) + ' not in ' + pyStrList(visited) + '\n-> ' + yesno(!inV),
+             { node: v, check: w });
+      if (!inV) {
+        R.snap(5, '<b>' + w + '</b>로 들어간다.', 'dfs_rec(g, ' + q(w) + ', visited)', { node: v, check: w });
+        tree.push([v, w]);
+        dfs(w);
+        R.snap(5, w + '에서 돌아왔다. ' + v + '의 남은 이웃을 이어서 본다.', '<span class="dim">dfs_rec(g, nxt, visited)  # 끝남</span>',
+               { node: v });
+      }
+    }
+    R.setLoop('반복 끝');
+    R.snap(6, v + '의 이웃을 다 봤다. 돌아간다. visited 에서 빼지 않는다.', 'return visited', { node: v });
+    chain.pop();
+    R.leave(null);
+  }
+
+  function walk(v, isHam) {
+    var nm = isHam ? 'ham' : 'all_paths';
+    R.enter(isHam ? 'ham(g, ' + q(v) + ', path)' : 'all_paths(g, ' + q(v) + ', ' + q(target) + ', path)', null, '', 0, false);
+    chain.push(v);
+    path.push(v);
+    R.snap(2, '<b>' + v + '</b>에 들어왔다. <code>path</code>에 넣는다.', 'path.append(' + q(v) + ')\n-> path = ' + pyStrList(path),
+           { node: v, newly: v });
+    var hit = isHam ? (path.length === 5) : (v === target);
+    var cexpr = isHam
+      ? '<span class="dim">if len(path) == len(g):</span>\n' + path.length + ' == 5\n-> ' + yesno(hit)
+      : '<span class="dim">if v == target:</span>\n' + q(v) + ' == ' + q(target) + '\n-> ' + yesno(hit);
+    R.snap(3, hit ? (isHam ? '다섯 노드를 모두 지났다.' : '도착점 ' + target + '에 닿았다.')
+                  : (isHam ? '아직 ' + path.length + '개만 지났다.' : v + '는 도착점이 아니다.'),
+           cexpr, { node: v });
+    if (hit) {
+      R.out.push(pyStrList(path));
+      R.snap(4, '경로 <code>' + pyStrList(path) + '</code>를 출력한다.', 'print(path)\n-> ' + pyStrList(path),
+             { node: v, outNew: true });
+    } else {
+      var nb = adj[v];
+      for (var p = 0; p < nb.length; p++) {
+        var w = nb[p];
+        R.setLoop('nxt = ' + q(w));
+        R.snap(6, v + '의 이웃 <code>' + pyStrList(nb) + '</code> 중 <b>' + w + '</b>를 본다.',
+               'for nxt in g[' + q(v) + '] -> ' + pyStrList(nb) + '\nnxt = ' + q(w), { node: v, check: w });
+        var inP = path.indexOf(w) >= 0;
+        R.snap(7, inP ? w + '는 지금 경로에 있다. 건너뛴다.' : w + '는 지금 경로에 없다.',
+               '<span class="dim">if nxt not in path:</span>\n' + q(w) + ' not in ' + pyStrList(path) + '\n-> ' + yesno(!inP),
+               { node: v, check: w });
+        if (!inP) {
+          R.snap(8, '<b>' + w + '</b>로 들어간다.', nm + '(g, ' + q(w) + (isHam ? '' : ', ' + q(target)) + ', path)',
+                 { node: v, check: w });
+          var known = false;
+          tree.forEach(function (e) { if ((e[0] === v && e[1] === w) || (e[0] === w && e[1] === v)) { known = true; } });
+          if (!known) { tree.push([v, w]); }
+          walk(w, isHam);
+          R.snap(8, w + '에서 돌아왔다. ' + v + '의 남은 이웃을 이어서 본다.',
+                 '<span class="dim">' + nm + '(g, nxt, ...)  # 끝남</span>', { node: v });
+        }
+      }
+      R.setLoop('반복 끝');
+    }
+    path.pop();
+    R.snap(9, '<code>path</code>에서 ' + v + '를 뺀다. 다른 경로로 ' + v + '에 다시 올 수 있다. 이 호출이 끝난다.',
+           'path.pop()\n-> path = ' + pyStrList(path), { node: v, popped: v });
+    chain.pop();
+    R.leave(null);
+  }
+
+  if (kind === 'dfs_rec') {
+    R.snap(8, '<b>' + start + '</b>에서 시작한다.', 'dfs_rec(graph, ' + q(start) + ', [])');
+    dfs(start);
+    R.out.push(pyStrList(visited));
+    R.snap(8, '탐색 끝. 갈 수 있는 노드를 방문한 순서대로 출력한다.', 'print(...)\n-> ' + pyStrList(visited), { outNew: true });
+  } else if (kind === 'all_paths') {
+    R.snap(11, '<b>' + start + '</b>에서 <b>' + target + '</b>까지 가는 경로를 모두 찾는다.',
+           'all_paths(graph, ' + q(start) + ', ' + q(target) + ', [])');
+    walk(start, false);
+    R.snap(11, '첫 호출이 끝났다. 경로 <b>' + R.out.length + '</b>개를 출력했다.', '');
+  } else {
+    for (var s = 0; s < G5KEYS.length; s++) {
+      var v0 = G5KEYS[s];
+      R.snap(11, '시작 노드 <b>v = ' + v0 + '</b>.', 'for v in g5\nv = ' + q(v0));
+      R.snap(12, v0 + '에서 시작하는 해밀토니안 경로를 찾는다.', 'ham(g5, ' + q(v0) + ', [])');
+      walk(v0, true);
+    }
+    R.snap(11, '시작 노드를 다 봤다. 해밀토니안 경로 <b>' + R.out.length + '</b>개.', '');
+  }
+  return { frames: R.F };
+}
+
+/* ---------- 12절: N퀸 ---------- */
+
+function srcQueen(N) {
+  return ["N = " + N,
+          "col = [0] * N",
+          "",
+          "def safe(r, c):",
+          "    for pr in range(r):",
+          "        pc = col[pr]",
+          "        if pc == c:",
+          "            return False",
+          "        if pr - pc == r - c:",
+          "            return False",
+          "        if pr + pc == r + c:",
+          "            return False",
+          "    return True",
+          "",
+          "def queen(r):",
+          "    if r == N:",
+          "        print(col)",
+          "        return",
+          "    for c in range(N):",
+          "        if safe(r, c):",
+          "            col[r] = c",
+          "            queen(r + 1)",
+          "",
+          "queen(0)"];
+}
+
+function buildQueen(N) {
+  var R = makeRec();
+  var col = [];
+  for (var z = 0; z < N; z++) { col.push(0); }
+  var live = 0;
+  R.state = function () { return { col: col.slice(), live: live }; };
+
+  function safe(r, c) {
+    R.enter('safe(' + r + ', ' + c + ')', null, '', 0, false);
+    if (r === 0) {
+      R.setLoop('pr 없음');
+      R.snap(5, '위쪽 행이 없다. 비교할 퀸이 없다.', 'range(r) = range(0)\n-> 비어 있다', { cand: [r, c] });
+      R.snap(13, '부딪치는 퀸이 없다.', 'return True', { cand: [r, c] });
+      R.leave(null);
+      return true;
+    }
+    for (var pr = 0; pr < r; pr++) {
+      var pc = col[pr];
+      R.setLoop('pr = ' + pr);
+      R.snap(5, pr + '행의 퀸과 비교한다.', 'for pr in range(r) -> ' + pyList(range0(r)) + '\npr = ' + pr,
+             { cand: [r, c], cmp: [pr, pc] });
+      R.setLoop('pr = ' + pr + ', pc = ' + pc);
+      R.snap(6, pr + '행의 퀸은 ' + pc + '열에 있다.', 'pc = col[pr]\n-> pc = col[' + pr + '] = ' + pc,
+             { cand: [r, c], cmp: [pr, pc], hiCol: pr });
+      var t1 = (pc === c);
+      R.snap(7, t1 ? '같은 열이다.' : '열이 다르다.', '<span class="dim">if pc == c:</span>\n' + pc + ' == ' + c + '\n-> ' + yesno(t1),
+             { cand: [r, c], cmp: [pr, pc], bad: t1 ? 'col' : null });
+      if (t1) {
+        R.snap(8, '같은 열에 퀸이 있어 놓을 수 없다.', 'return False', { cand: [r, c], cmp: [pr, pc], bad: 'col' });
+        R.leave(null);
+        return false;
+      }
+      var t2 = (pr - pc === r - c);
+      R.snap(9, t2 ? '행 - 열이 같다. 같은 대각선이다.' : '행 - 열이 다르다.',
+             '<span class="dim">if pr - pc == r - c:</span>\n' + (pr - pc) + ' == ' + (r - c) + '\n-> ' + yesno(t2),
+             { cand: [r, c], cmp: [pr, pc], bad: t2 ? 'diag' : null });
+      if (t2) {
+        R.snap(10, '같은 대각선에 퀸이 있어 놓을 수 없다.', 'return False', { cand: [r, c], cmp: [pr, pc], bad: 'diag' });
+        R.leave(null);
+        return false;
+      }
+      var t3 = (pr + pc === r + c);
+      R.snap(11, t3 ? '행 + 열이 같다. 같은 반대 대각선이다.' : '행 + 열이 다르다.',
+             '<span class="dim">if pr + pc == r + c:</span>\n' + (pr + pc) + ' == ' + (r + c) + '\n-> ' + yesno(t3),
+             { cand: [r, c], cmp: [pr, pc], bad: t3 ? 'anti' : null });
+      if (t3) {
+        R.snap(12, '같은 반대 대각선에 퀸이 있어 놓을 수 없다.', 'return False', { cand: [r, c], cmp: [pr, pc], bad: 'anti' });
+        R.leave(null);
+        return false;
+      }
+    }
+    R.setLoop('반복 끝');
+    R.snap(13, '위쪽 퀸 모두와 부딪치지 않는다.', 'return True', { cand: [r, c] });
+    R.leave(null);
+    return true;
+  }
+
+  function queen(r) {
+    R.enter('queen(' + r + ')', null, '', 0, false);
+    live = r;
+    var isEnd = (r === N);
+    R.snap(16, isEnd ? N + '개 행에 모두 놓았다.' : '<code>queen(' + r + ')</code> 가 시작됐다. <b>' + r + '</b>행에 놓을 열을 찾는다.',
+           '<span class="dim">if r == N:</span>\n' + r + ' == ' + N + '\n-> ' + yesno(isEnd));
+    if (isEnd) {
+      R.out.push(pyList(col));
+      R.snap(17, '<code>' + pyList(col) + '</code>를 출력한다.', 'print(col)\n-> ' + pyList(col), { outNew: true });
+      R.snap(18, '이 호출이 끝난다. 부른 곳으로 돌아간다.', 'return');
+      R.leave(null);
+      return;
+    }
+    for (var c = 0; c < N; c++) {
+      live = r;
+      R.setLoop('c = ' + c);
+      R.snap(19, r + '행의 후보 <b>c = ' + c + '</b>.', 'for c in range(N)\nc = ' + c, { cand: [r, c] });
+      R.snap(20, '(' + r + ', ' + c + ')에 놓아도 되는지 <code>safe</code>로 확인한다.', 'safe(r, c)\n-> safe(' + r + ', ' + c + ')',
+             { cand: [r, c] });
+      var ok = safe(r, c);
+      R.snap(20, ok ? '놓을 수 있다.' : '놓을 수 없다. 다음 열로 간다.',
+             '<span class="dim">if safe(r, c):</span>\n-> ' + yesno(ok), { cand: [r, c] });
+      if (ok) {
+        col[r] = c;
+        live = r + 1;
+        R.snap(21, '<code>col[' + r + ']</code>에 ' + c + '를 적는다. 전에 있던 값은 덮어쓴다.',
+               'col[r] = c\n-> col[' + r + '] = ' + c, { hiCol: r });
+        R.snap(22, '다음 행으로 들어간다.', 'queen(r + 1)\n-> queen(' + (r + 1) + ')');
+        queen(r + 1);
+        live = r + 1;
+        R.snap(22, '<code>queen(' + (r + 1) + ')</code> 가 끝나서 돌아왔다. ' + r + '행의 다음 열을 본다.',
+               '<span class="dim">queen(r + 1)  # 끝남</span>');
+      }
+    }
+    live = r;
+    R.setLoop('반복 끝');
+    R.snap(19, r + '행의 열을 다 봤다. 이 호출이 끝난다.', 'for c in range(N)\n-> 남은 열이 없다');
+    R.leave(null);
+  }
+
+  R.snap(1, N + ' x ' + N + ' 판.', 'N = ' + N);
+  R.snap(2, '행마다 퀸의 열을 적을 칸을 만든다.', 'col = [0] * N\n-> ' + pyList(col));
+  R.snap(24, '첫 호출. 0행부터 놓는다.', 'queen(0)');
+  queen(0);
+  R.snap(24, '첫 호출이 끝났다. 해 <b>' + R.out.length + '</b>개.', '');
+  return { frames: R.F };
+}
+
+function range0(n) { var a = []; for (var i = 0; i < n; i++) { a.push(i); } return a; }
+
+/* ================================================================
+   화면 정의
+   ================================================================ */
+
+var SCREENS = {
+  loop2: {
+    title: '1절 - 이중 for문으로 2개 고르기',
+    sub: '바깥 반복의 i가 행, 안쪽 반복의 j가 열이다. 안쪽 범위를 바꾸면 표에서 고르는 칸의 모양이 바뀐다.',
+    kinds: [['perm_rep', '중복순열'], ['perm', '순열'], ['comb', '조합'], ['comb_rep', '중복조합']],
+    def: 'comb'
+  },
+  rec: {
+    title: '3, 5, 7절 - 재귀로 r개 고르기',
+    sub: '호출 하나가 for문 한 겹이다. 호출마다 자기 변수(d, prev, s, i)가 따로 있다. 호출이 끝나면 부른 호출의 for가 다음 후보로 넘어간다. 왼쪽 트리는 호출이 생기는 대로 그린다.',
+    kinds: [['comb', 'comb - 조합 (3-1)'], ['comb_rep', 'comb_rep - 중복조합 (3-2)'], ['perm_rep', 'perm_rep - 중복순열 (3-2)'],
+            ['comb_pick', 'comb_pick - 덮어쓰기 (5-1)'], ['comb_path', 'comb_path - append, pop (5-2)'],
+            ['perm', 'perm - 순열, i in path (7-1)'], ['perm_used', 'perm_used - 순열, used 표 (7-2)']],
+    def: 'comb'
+  },
+  sub: {
+    title: '8, 9절 - 부분집합과 가지치기',
+    sub: 'B = [2, 3, 5, 7]. 원소마다 넣지 않는 쪽을 먼저, 넣는 쪽을 나중에 들어간다. sub_sum 은 합이 10을 넘으면 더 들어가지 않는다.',
+    kinds: [['sub', 'sub - 부분집합 (8)'], ['sub_sum', 'sub_sum - 합이 넘으면 중단 (9-1)']],
+    def: 'sub'
+  },
+  graph: {
+    title: '11절 - 그래프 위의 경로',
+    sub: 'dfs_rec 는 방문 표시를 지우지 않는다. all_paths, ham 은 나갈 때 path 에서 뺀다. 그래서 다른 경로로 같은 노드에 다시 들어갈 수 있다.',
+    kinds: [['dfs_rec', 'dfs_rec - 12번 DFS'], ['all_paths', 'all_paths - 모든 경로 (11-1)'], ['ham', 'ham - 해밀토니안 경로 (11-2)']],
+    def: 'all_paths'
+  },
+  queen: {
+    title: '12절 - N퀸',
+    sub: '행 = 자리, 열 = 후보. safe 가 위쪽 행의 퀸과 하나씩 비교한다. col[r] = c 는 덮어쓰기라 치우지 않는다.',
+    kinds: [['queen', 'queen (12-2)']],
+    def: 'queen'
+  }
+};
+
+/* ================================================================
+   화면 그리기 (브라우저에서만)
+   ================================================================ */
+
+if (typeof document !== 'undefined') {
+
+  var scr = 'loop2';
+  var kind = 'comb';
+  var rr = 3;
+  var gstart = 'A';
+  var gtarget = 'E';
+  var nq = 4;
+
+  var built = null;
+  var frames = [];
+  var src = [];
+  var step = 0;
+  var timer = null;
+  var lineEls = [];
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function show(id, on) { $(id).style.display = on ? '' : 'none'; }
+
+  function fillKinds() {
+    var sc = SCREENS[scr];
+    $('kind').innerHTML = sc.kinds.map(function (k) {
+      return '<option value="' + k[0] + '">' + k[1] + '</option>';
+    }).join('');
+    kind = sc.def;
+    $('kind').value = kind;
+  }
+
+  function fillNodes() {
+    var keys = Object.keys(G7.adj);
+    $('start').innerHTML = keys.map(function (k) { return '<option value="' + k + '">' + k + '</option>'; }).join('');
+    $('target').innerHTML = keys.map(function (k) { return '<option value="' + k + '">' + k + '</option>'; }).join('');
+    $('start').value = gstart;
+    $('target').value = gtarget;
+  }
+
+  function syncOpts() {
+    show('o-kind', SCREENS[scr].kinds.length > 1);
+    show('o-r', scr === 'rec');
+    show('o-start', scr === 'graph' && kind !== 'ham');
+    show('o-target', scr === 'graph' && kind === 'all_paths');
+    show('o-n', scr === 'queen');
+  }
+
+  function rebuild() {
+    stop();
+    syncOpts();
+    if (scr === 'loop2') { built = buildLoop2(kind); src = SRC_LOOP[kind]; }
+    else if (scr === 'rec') { built = buildRec(kind, rr); src = SRC_REC[kind]; }
+    else if (scr === 'sub') { built = buildSub(kind); src = SRC_SUB[kind]; }
+    else if (scr === 'graph') { built = buildGraph(kind, gstart, gtarget); src = srcGraph(kind, gstart, gtarget); }
+    else { built = buildQueen(nq); src = srcQueen(nq); }
+    frames = built.frames;
+    $('title').textContent = '백트래킹 시각화 - ' + SCREENS[scr].title;
+    $('sub').textContent = SCREENS[scr].sub;
+    buildCode();
+    $('scrub').max = frames.length - 1;
+    step = 0;
+    render();
+  }
+
+  function buildCode() {
+    var box = $('code');
+    box.innerHTML = '';
+    lineEls = [];
+    src.forEach(function (text, idx) {
+      var row = document.createElement('div');
+      row.className = 'ln';
+      var g = document.createElement('span');
+      g.className = 'g';
+      g.textContent = idx + 1;
+      var t = document.createElement('span');
+      t.textContent = text === '' ? ' ' : text;
+      row.appendChild(g);
+      row.appendChild(t);
+      box.appendChild(row);
+      lineEls.push(row);
+    });
+  }
+
+  /* ---------- 오른쪽 패널 ---------- */
+
+  function drawCodeHit(f) {
+    lineEls.forEach(function (el, idx) {
+      el.className = (idx + 1 === f.line) ? 'ln hit' : 'ln';
+    });
+    var hit = lineEls[f.line - 1];
+    if (hit && hit.scrollIntoView && $('code').scrollHeight > $('code').clientHeight) {
+      hit.scrollIntoView({ block: 'nearest' });
+    }
+    $('expr').innerHTML = f.expr || '';
+  }
+
+  function drawStack(f) {
+    if (scr === 'loop2') {
+      $('stitle').textContent = '변수';
+      var h = '<div class="vars">';
+      ['i', 'j'].forEach(function (k) {
+        var v = f.vars[k];
+        h += '<div class="v' + (f.chg.indexOf(k) >= 0 && v !== null ? ' chg' : '') + '">' + k + ' = <b>'
+           + (v === null ? '-' : v) + '</b></div>';
+      });
+      h += '</div>';
+      $('stack').innerHTML = h;
+      return;
+    }
+    $('stitle').textContent = '호출 스택 - 맨 위가 지금 실행 중. 오른쪽은 그 호출의 반복 변수';
+    var rows = f.stack.slice().reverse();
+    if (rows.length === 0) {
+      $('stack').innerHTML = '<div class="frame empty">실행 중인 호출 없음</div>';
+      return;
+    }
+    $('stack').innerHTML = rows.map(function (s, idx) {
+      return '<div class="frame' + (idx === 0 ? ' top' : '') + '"><span>' + esc(s.call) + '</span>'
+           + '<span class="loop' + (s.chg ? ' chg' : '') + '">' + esc(s.loop) + '</span></div>';
+    }).join('');
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function cellsHtml(name, arr, opt) {
+    opt = opt || {};
+    var h = '<div class="listrow"><span class="nm">' + name + ' =</span><span class="br">[</span>';
+    arr.forEach(function (v, idx) {
+      var cls = 'cell';
+      if (opt.stale && opt.stale(idx)) { cls += ' stale'; }
+      if (opt.isF && opt.isF(v)) { cls += ' f'; }
+      if (opt.hi === idx) { cls += ' new'; }
+      h += '<div class="' + cls + '"><div class="box">' + opt.fmt(v) + '</div><div class="idx">' + idx + '</div></div>';
+    });
+    h += '<span class="br">]</span></div>';
+    return h;
+  }
+
+  function drawState(f) {
+    var st = f.state;
+    var on = true;
+    var title = '';
+    var h = '';
+    var id = function (v) { return v; };
+    if (scr === 'loop2') {
+      on = false;
+    } else if (scr === 'rec') {
+      if (kind === 'comb_pick') {
+        title = 'pick - 자리마다 고른 번호. 흐린 칸은 지금 경로가 쓰지 않는 칸 (다음에 덮어쓴다)';
+        h = cellsHtml('pick', st.pick, { fmt: id, hi: f.hiPick, stale: function (i) { return i >= st.live; } });
+      } else if (kind === 'comb_path' || kind === 'perm') {
+        title = 'path - 고른 번호를 고른 순서대로. 모든 호출이 이 리스트 하나를 같이 쓴다';
+        h = cellsHtml('path', st.path, { fmt: id, hi: f.hiPath });
+      } else if (kind === 'perm_used') {
+        title = 'path 와 used - 같이 넣고 같이 뺀다';
+        h = cellsHtml('path', st.path, { fmt: id, hi: f.hiPath })
+          + cellsHtml('used', st.used, { fmt: function (v) { return v ? 'True' : 'False'; },
+                                         isF: function (v) { return !v; }, hi: f.hiUsed });
+      } else {
+        on = false;
+      }
+    } else if (scr === 'sub') {
+      if (kind === 'sub') {
+        title = 'path - 넣은 원소';
+        h = cellsHtml('path', st.path, { fmt: id, hi: f.hiPath });
+      } else {
+        title = 'cnt - 합이 10인 경우의 수';
+        h = '<div class="vars"><div class="v' + (f.hiCnt ? ' chg' : '') + '">cnt = <b>' + st.cnt + '</b></div></div>';
+      }
+    } else if (scr === 'graph') {
+      if (kind === 'dfs_rec') {
+        title = 'visited - 방문한 순서대로. 빼지 않는다';
+        h = cellsHtml('visited', st.visited, { fmt: q, hi: f.newly ? st.visited.length - 1 : null });
+      } else {
+        title = 'path - 지금 경로. 나갈 때 뺀다';
+        h = cellsHtml('path', st.path, { fmt: q, hi: f.newly ? st.path.length - 1 : null });
+      }
+    } else {
+      title = 'col - 행마다 놓은 퀸의 열. 흐린 칸은 아직 놓지 않았거나 다음에 덮어쓸 칸';
+      h = cellsHtml('col', st.col, { fmt: id, hi: f.hiCol, stale: function (i) { return i >= st.live; } });
+    }
+    show('p-state', on);
+    $('sttitle').textContent = title;
+    $('state').innerHTML = h;
+  }
+
+  function drawOut(f) {
+    var n = f.out.length;
+    $('out').innerHTML = f.out.map(function (s, idx) {
+      return '<span class="o' + (f.outNew && idx === n - 1 ? ' new' : '') + '">' + esc(s) + '</span>';
+    }).join('');
+  }
+
+  /* ---------- 왼쪽: 이중 for문 표 ---------- */
+
+  function drawGrid(f) {
+    var inDone = function (i, j) { return f.done.some(function (c) { return c[0] === i && c[1] === j; }); };
+    var inSkip = function (i, j) { return f.skip.some(function (c) { return c[0] === i && c[1] === j; }); };
+    var h = '<table class="grid"><tr><th></th>';
+    for (var j = 0; j < 4; j++) {
+      h += '<th class="ch' + (f.cur && f.cur[1] === j ? ' cur' : '') + '">j = ' + j + '<br>' + A4[j] + '</th>';
+    }
+    h += '</tr>';
+    for (var i = 0; i < 4; i++) {
+      h += '<tr class="' + (f.row === i ? 'currow' : '') + '"><th class="rh">i = ' + i + ' &nbsp;' + A4[i] + '</th>';
+      for (j = 0; j < 4; j++) {
+        var cls = [];
+        var txt = '';
+        if (j < loopLo(kind, i)) { cls.push('ex'); }
+        else if (f.row === i) { cls.push('row'); }
+        if (inDone(i, j)) { cls.push('done'); txt = A4[i] + A4[j]; }
+        if (inSkip(i, j)) { cls.push('skip'); txt = 'X'; }
+        if (f.cur && f.cur[0] === i && f.cur[1] === j) { cls.push('cur'); }
+        h += '<td class="' + cls.join(' ') + '">' + txt + '</td>';
+      }
+      h += '</tr>';
+    }
+    h += '</table>';
+    $('visual').innerHTML = h;
+  }
+
+  /* ---------- 왼쪽: 호출 트리 ---------- */
+
+  function drawTree(f) {
+    var T = built.tree;
+    var t = f.t;
+    var lab = 0;
+    T.nodes.forEach(function (nd) { if (nd.under.length > lab) { lab = nd.under.length; } });
+    var want = Math.max(40, lab * 7.5 + 10);                       // 글자가 옆으로 들어가는 간격
+    var gx = Math.min(want, Math.max(22, Math.floor(720 / Math.max(1, T.leaves))));
+    var rot = gx < want;                                            // 안 들어가면 글자를 세운다
+    var small = gx < 30;
+    var gy = 70;
+    var rad = small ? 10 : 15;
+    var fs = small ? 11 : 15;
+    var padX = 30;
+    var W = Math.max(560, T.leaves * gx + padX * 2);
+    var H = (T.maxDepth + 1) * gy + 50 + (rot ? lab * 6.5 : 0);
+    var X = function (nd) { return padX + nd.x * gx + gx / 2; };
+    var Y = function (nd) { return 28 + nd.depth * gy; };
+    var alive = function (nd) { return nd.born <= t && (nd.died === null || nd.died > t); };
+    var s = '';
+
+    T.nodes.forEach(function (nd) {
+      if (nd.parent === null || nd.born > t) { return; }
+      var p = T.nodes[nd.parent];
+      var on = alive(nd);
+      s += '<line x1="' + X(p) + '" y1="' + Y(p) + '" x2="' + X(nd) + '" y2="' + Y(nd) + '" stroke="'
+         + (on ? '#217a3b' : '#c3ccd4') + '" stroke-width="' + (on ? 4 : 1.6) + '" />';
+    });
+
+    T.nodes.forEach(function (nd) {
+      if (nd.born > t) { return; }
+      var on = alive(nd);
+      var isCur = (f.cur === nd.id);
+      var fill = '#ffffff', stroke = '#aab4bd', tcol = '#1e2429', sw = 2, dash = '';
+      if (nd.printed !== null && nd.printed <= t) { fill = '#c9f0b0'; stroke = '#7cc254'; }
+      if (nd.miss !== null && nd.miss <= t) { fill = '#eef2f5'; stroke = '#aab4bd'; }
+      if (nd.dead !== null && nd.dead <= t) { fill = '#eef2f5'; stroke = '#aab4bd'; dash = ' stroke-dasharray="4 3"'; }
+      if (nd.pruned !== null && nd.pruned <= t) { fill = '#f7d4cf'; stroke = '#c0392b'; tcol = '#c0392b'; }
+      if (on) { fill = '#2e9e4f'; stroke = '#217a3b'; tcol = '#ffffff'; }
+      if (isCur) { stroke = '#1e2429'; sw = 4; }
+      s += '<circle cx="' + X(nd) + '" cy="' + Y(nd) + '" r="' + rad + '" fill="' + fill + '" stroke="' + stroke
+         + '" stroke-width="' + sw + '"' + dash + ' />';
+      var lab = nd.parent === null ? '' : nd.label;
+      s += '<text x="' + X(nd) + '" y="' + (Y(nd) + fs * 0.36) + '" text-anchor="middle" font-family="Consolas, monospace"'
+         + ' font-size="' + fs + '" font-weight="bold" fill="' + tcol + '">' + esc(lab) + '</text>';
+      var showUnder = nd.under && ((nd.printed !== null && nd.printed <= t) || (nd.pruned !== null && nd.pruned <= t)
+                      || (nd.miss !== null && nd.miss <= t));
+      if (showUnder) {
+        var uc = (nd.pruned !== null && nd.pruned <= t) ? '#c0392b' : ((nd.miss !== null && nd.miss <= t) ? '#8894a0' : '#217a3b');
+        var uy = Y(nd) + rad + (rot ? 6 : 14);
+        s += '<text x="' + (rot ? X(nd) - 3 : X(nd)) + '" y="' + uy + '" text-anchor="' + (rot ? 'start' : 'middle')
+           + '" font-family="Consolas, monospace" font-size="' + (small ? 10 : 11) + '" fill="' + uc + '"'
+           + (rot ? ' transform="rotate(90 ' + X(nd) + ' ' + uy + ')"' : '') + '>' + esc(nd.under) + '</text>';
+      }
+    });
+    if (T.nodes.length && T.nodes[0].born <= t) {
+      var root = T.nodes[0];
+      s += '<text x="' + (X(root) + rad + 8) + '" y="' + (Y(root) + 5) + '" font-size="12" fill="#5c6b78">첫 호출</text>';
+    }
+    $('visual').innerHTML = '<svg width="' + W + '" height="' + H + '">' + s + '</svg>';
+  }
+
+  /* ---------- 왼쪽: 그래프 ---------- */
+
+  function onChain(chain, a, b) {
+    for (var i = 0; i + 1 < chain.length; i++) {
+      if ((chain[i] === a && chain[i + 1] === b) || (chain[i] === b && chain[i + 1] === a)) { return true; }
+    }
+    return false;
+  }
+
+  function drawGraphSvg(f) {
+    var st = f.state;
+    var keys = (kind === 'ham') ? G5KEYS : Object.keys(G7.adj);
+    var BW = 58, BH = 46;
+    var s = '';
+    var curNode = st.chain.length ? st.chain[st.chain.length - 1] : null;
+    var marked = (kind === 'dfs_rec') ? st.visited : st.path;
+
+    Object.keys(G7.adj).forEach(function (a) {
+      G7.adj[a].forEach(function (b) {
+        if (a >= b) { return; }
+        var hidden = (kind === 'ham') && (G5KEYS.indexOf(a) < 0 || G5KEYS.indexOf(b) < 0);
+        var col = hidden ? '#eef2f5' : '#ccd4da', w = 2;
+        st.tree.forEach(function (e) {
+          if ((e[0] === a && e[1] === b) || (e[0] === b && e[1] === a)) { col = '#b8dfc2'; w = 3; }
+        });
+        if (onChain(st.chain, a, b)) { col = '#217a3b'; w = 6; }
+        if (f.check && curNode && ((curNode === a && f.check === b) || (curNode === b && f.check === a))) { col = '#e08a00'; w = 5; }
+        s += '<line x1="' + G7.pos[a][0] + '" y1="' + G7.pos[a][1] + '" x2="' + G7.pos[b][0] + '" y2="' + G7.pos[b][1]
+           + '" stroke="' + col + '" stroke-width="' + w + '" />';
+      });
+    });
+
+    Object.keys(G7.adj).forEach(function (k) {
+      var x = G7.pos[k][0], y = G7.pos[k][1];
+      var hidden = keys.indexOf(k) < 0;
+      var isMarked = marked.indexOf(k) >= 0;
+      var fill = isMarked ? '#2e9e4f' : '#ffffff';
+      var stroke = isMarked ? '#217a3b' : '#c3ccd4';
+      var tcol = isMarked ? '#ffffff' : '#1e2429';
+      var sw = 2;
+      if (hidden) { fill = '#f7f9fb'; stroke = '#e2e7eb'; tcol = '#c3ccd4'; }
+      if (kind === 'all_paths' && k === gtarget && !isMarked) { stroke = '#2f6fb5'; sw = 3; }
+      if (curNode === k) { stroke = '#1e2429'; sw = 5; }
+      if (f.check === k) { stroke = '#e08a00'; sw = 5; }
+      s += '<rect x="' + (x - BW / 2) + '" y="' + (y - BH / 2) + '" width="' + BW + '" height="' + BH + '" rx="6" fill="'
+         + fill + '" stroke="' + stroke + '" stroke-width="' + sw + '" />'
+         + '<text x="' + x + '" y="' + (y + 7) + '" text-anchor="middle" font-family="Consolas, monospace" font-size="21"'
+         + ' font-weight="bold" fill="' + tcol + '">' + k + '</text>';
+    });
+    $('visual').innerHTML = '<svg width="640" height="460" viewBox="0 0 640 460">' + s + '</svg>';
+  }
+
+  /* ---------- 왼쪽: N퀸 판 ---------- */
+
+  function drawBoard(f) {
+    var st = f.state;
+    var N = st.col.length;
+    var lineCells = {};
+    if (f.bad && f.cand && f.cmp) {
+      var r0 = f.cmp[0], c0 = f.cmp[1], r1 = f.cand[0], c1 = f.cand[1];
+      var dr = (r1 > r0) ? 1 : (r1 < r0 ? -1 : 0);
+      var dc = (c1 > c0) ? 1 : (c1 < c0 ? -1 : 0);
+      var rr0 = r0, cc0 = c0;
+      while (true) {
+        lineCells[rr0 + ',' + cc0] = true;
+        if (rr0 === r1 && cc0 === c1) { break; }
+        rr0 += dr; cc0 += dc;
+      }
+    }
+    var h = '<table class="board"><tr><th></th>';
+    for (var c = 0; c < N; c++) { h += '<th>' + c + '열</th>'; }
+    h += '</tr>';
+    for (var r = 0; r < N; r++) {
+      h += '<tr><th>' + r + '행</th>';
+      for (c = 0; c < N; c++) {
+        var cls = [((r + c) % 2 === 0) ? 'lt' : 'dk'];
+        var txt = '';
+        var isQ = (r < st.live && st.col[r] === c);
+        if (lineCells[r + ',' + c]) { cls.push('line'); }
+        if (isQ) { cls.push('q'); txt = 'Q'; }
+        var isCand = f.cand && f.cand[0] === r && f.cand[1] === c && !isQ;
+        if (isCand) { cls.push('cand'); txt = '?'; }
+        if (f.cmp && f.cmp[0] === r && f.cmp[1] === c) { cls.push('cmp'); }
+        if (f.bad && ((f.cmp && f.cmp[0] === r && f.cmp[1] === c) || isCand)) { cls.push('bad'); }
+        h += '<td class="' + cls.join(' ') + '">' + txt + '</td>';
+      }
+      h += '</tr>';
+    }
+    h += '</table>';
+    $('visual').innerHTML = h;
+  }
+
+  /* ---------- 범례 ---------- */
+
+  function sw(style, text) {
+    return '<span><span class="sw" style="' + style + '"></span>' + text + '</span>';
+  }
+
+  function legendHtml() {
+    if (scr === 'loop2') {
+      return sw('background:#2e9e4f;border-color:#217a3b', '고른 칸')
+           + sw('border-color:#e08a00;border-width:3px', '지금 보는 칸 (i, j)')
+           + sw('background:#eef6ff', '지금 행에서 안쪽 반복이 도는 칸')
+           + sw('background:#e6eaee', '안쪽 범위 밖 (보지 않는 칸)')
+           + '<span><b style="color:#c0392b">X</b> 보았지만 조건에 걸려 건너뛴 칸</span>';
+    }
+    if (scr === 'rec' || scr === 'sub') {
+      var h = sw('background:#2e9e4f;border-color:#217a3b;border-radius:50%', '실행 중인 호출 (스택에 있다)')
+            + sw('border-color:#1e2429;border-width:3px;border-radius:50%', '지금 실행 중')
+            + sw('background:#c9f0b0;border-color:#7cc254;border-radius:50%', scr === 'sub' && kind === 'sub_sum' ? '합이 10' : '출력한 호출')
+            + sw('border-color:#aab4bd;border-radius:50%', '끝난 호출');
+      if (scr === 'rec') { h += sw('background:#eef2f5;border-style:dashed;border-radius:50%', '후보가 없어 바로 끝난 호출'); }
+      if (scr === 'sub') { h += '<span>노드 글자: <b>-</b> 넣지 않음, 숫자는 넣은 값</span>'; }
+      if (scr === 'sub' && kind === 'sub_sum') {
+        h += sw('background:#f7d4cf;border-color:#c0392b;border-radius:50%', '합이 10을 넘어 가지치기')
+           + sw('background:#eef2f5;border-color:#aab4bd;border-radius:50%', '끝까지 갔지만 합이 10이 아님');
+      }
+      return h;
+    }
+    if (scr === 'graph') {
+      return sw('background:#2e9e4f;border-color:#217a3b', kind === 'dfs_rec' ? 'visited 에 있는 노드' : 'path 에 있는 노드')
+           + sw('border-color:#1e2429;border-width:3px', '지금 노드')
+           + sw('border-color:#e08a00;border-width:3px', '지금 확인 중인 이웃')
+           + sw('background:#217a3b;border-color:#217a3b;height:6px', '지금 들어와 있는 길')
+           + sw('background:#b8dfc2;border-color:#b8dfc2;height:6px', '한 번이라도 지나간 길')
+           + (kind === 'all_paths' ? sw('border-color:#2f6fb5;border-width:3px', '도착점') : '');
+    }
+    return '<span><b>Q</b> 놓은 퀸</span>'
+         + sw('border-color:#e08a00;border-width:3px', '지금 놓아 보려는 칸 (?)')
+         + sw('border-color:#2f6fb5;border-width:3px', '비교 중인 위쪽 퀸')
+         + sw('background:#e8796e;border-color:#e8796e', '부딪친다')
+         + sw('background:#f7d4cf;border-color:#f7d4cf', '부딪치는 줄');
+  }
+
+  function vtitle() {
+    if (scr === 'loop2') { return 'n x n 표 - 행 i, 열 j'; }
+    if (scr === 'rec' || scr === 'sub') { return '호출 트리 - 동그라미 하나가 호출 하나. 글자는 그 호출로 들어가며 고른 것'; }
+    if (scr === 'graph') { return kind === 'ham' ? 'g5 - F, G 는 뺐다' : '12번 그래프'; }
+    return nq + ' x ' + nq + ' 판';
+  }
+
+  /* ---------- 전체 ---------- */
+
+  function render() {
+    var f = frames[step];
+    if (scr === 'loop2') { drawGrid(f); }
+    else if (scr === 'rec' || scr === 'sub') { drawTree(f); }
+    else if (scr === 'graph') { drawGraphSvg(f); }
+    else { drawBoard(f); }
+    drawCodeHit(f);
+    drawStack(f);
+    drawState(f);
+    drawOut(f);
+    $('caption').innerHTML = f.cap;
+    $('legend').innerHTML = legendHtml();
+    $('vtitle').textContent = vtitle();
+    $('stepno').textContent = (step + 1) + ' / ' + frames.length;
+    $('scrub').value = step;
+    var last = frames.length - 1;
+    $('first').disabled = (step === 0);
+    $('prev').disabled = (step === 0);
+    $('next').disabled = (step === last);
+    $('play').textContent = timer ? '정지' : '재생';
+  }
+
+  function go(d) {
+    var t = step + d;
+    if (t < 0 || t > frames.length - 1) { return false; }
+    step = t;
+    render();
+    return true;
+  }
+
+  function stop() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+
+  function play() {
+    if (timer) { stop(); render(); return; }
+    if (step === frames.length - 1) { step = 0; }
+    var ms = parseInt($('speed').value, 10);
+    timer = setInterval(function () {
+      if (!go(1)) { stop(); render(); }
+    }, ms);
+    render();
+  }
+
+  $('scrsel').addEventListener('change', function () { scr = this.value; fillKinds(); rebuild(); });
+  $('kind').addEventListener('change', function () { kind = this.value; rebuild(); });
+  $('rsel').addEventListener('change', function () { rr = parseInt(this.value, 10); rebuild(); });
+  $('start').addEventListener('change', function () { gstart = this.value; rebuild(); });
+  $('target').addEventListener('change', function () { gtarget = this.value; rebuild(); });
+  $('nsel').addEventListener('change', function () { nq = parseInt(this.value, 10); rebuild(); });
+  $('first').addEventListener('click', function () { stop(); step = 0; render(); });
+  $('prev').addEventListener('click', function () { stop(); go(-1); });
+  $('next').addEventListener('click', function () { stop(); go(1); });
+  $('play').addEventListener('click', play);
+  $('scrub').addEventListener('input', function () { stop(); step = parseInt(this.value, 10); render(); });
+  $('speed').addEventListener('change', function () { if (timer) { stop(); play(); } });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') { return; }
+    if (e.key === 'ArrowRight') { stop(); go(1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { stop(); go(-1); e.preventDefault(); }
+    else if (e.key === ' ') { play(); e.preventDefault(); }
+  });
+
+  fillKinds();
+  fillNodes();
+  rebuild();
+}
+</script>
+</body>
+</html>

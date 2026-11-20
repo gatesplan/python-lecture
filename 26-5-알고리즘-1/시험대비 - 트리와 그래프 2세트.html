@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>시험대비 - 트리와 그래프 2세트</title>
+<style>
+@page { size: A4; margin: 15mm; }
+body {
+    font-family: 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1cm;
+}
+h1 { font-size: 16pt; border-bottom: 2px solid #000; padding-bottom: 8px; margin: 0 0 6px; }
+.intro { font-size: 10pt; color: #333; margin: 0 0 10px; }
+h2 { font-size: 13pt; margin: 1.5em 0 0.2em; border-bottom: 1px solid #999; padding-bottom: 3px; }
+.sec-desc { font-size: 10pt; color: #333; margin: 0.2em 0 0.6em; }
+.problem { margin: 0 0 26px; page-break-inside: avoid; break-inside: avoid; }
+.problem-number { font-weight: bold; font-size: 11pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; }
+.stmt { margin: 4px 0 6px; }
+.code-block {
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    margin: 6px 0;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.subq { font-size: 10.5pt; margin: 10px 0 2px; }
+.answer-space { border: 1px solid #ccc; margin: 4px 0 0; background: #fff;
+                page-break-inside: avoid; break-inside: avoid; }
+.answer-space.sm { height: 50px; }
+.answer-space.lg { height: 130px; }
+.answers { page-break-before: always; break-before: page; }
+.a-item { margin: 0 0 14px; page-break-inside: avoid; break-inside: avoid; }
+.a-num { font-weight: bold; }
+.a-body { font-size: 10pt; margin: 2px 0 0; }
+.a-out { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; white-space: pre; background: #f8f8f8; border: 1px solid #ddd; padding: 4px 8px; margin: 2px 0; }
+@media print { body { max-width: none; margin: 0; padding: 0; } }
+.page-break { break-before: page; page-break-before: always; }
+</style>
+</head>
+<body>
+<h1>시험대비 - 트리와 그래프 2세트</h1>
+<p class="intro">리스트로 저장한 트리는 루트가 인덱스 1이고 0은 빈 칸이다. 차수는 자식 노드의 수, 높이는 루트에서 가장 먼 노드까지의 링크 수이다.</p>
+<div class="problem" id="p1">
+<div class="problem-number">1</div>
+<div class="stmt">다음 트리를 인접 행렬로 나타내려고 한다. (가)는 부모 -&gt; 자식 칸에만 1을 넣고, (나)는 연결된 두 노드의 양쪽 칸에 모두 1을 넣는다. 물음에 답하시오.</div>
+<div class="code-block">        A
+      / | \
+     B  C  D
+     |    / \
+     E   F   G
+         |
+         H</div>
+<div class="subq">(1) (가)에 들어 있는 1의 개수를 구하시오.<br>(2) (나)에 들어 있는 1의 개수를 구하시오.<br>(3) 노드가 5개인 무방향 완전 그래프의 링크 수와, 그 인접 행렬에 들어 있는 1의 개수를 구하시오.</div>
+<div class="answer-space" style="height: 82px"></div>
+</div>
+<div class="problem" id="p2">
+<div class="problem-number">2</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">n = 3
+m1 = [[0] * n for _ in range(n)]
+m2 = [[0] * n] * n
+
+m1[0][1] = 1
+m2[0][1] = 1
+print(m1)
+print(m2)</div>
+<div class="answer-space" style="height: 60px"></div>
+</div>
+<div class="page-break"></div>
+<div class="problem" id="p3">
+<div class="problem-number">3</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">bst = [0] * 16
+
+def insert(idx, num):
+    if bst[idx] == 0:
+        bst[idx] = num
+    elif num &lt; bst[idx]:
+        insert(idx * 2, num)
+    else:
+        insert(idx * 2 + 1, num)
+
+for x in [3, 1, 4, 1, 5]:
+    insert(1, x)
+print(bst[1:8])
+
+insert(1, 0)
+print(bst[1:8])</div>
+<div class="answer-space" style="height: 60px"></div>
+</div>
+<div class="problem" id="p4">
+<div class="problem-number">4</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">nodes = [&#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;]
+empty = []
+adj = {}
+for v in nodes:
+    adj[v] = empty
+
+adj[&#x27;A&#x27;].append(&#x27;B&#x27;)
+adj[&#x27;B&#x27;].append(&#x27;A&#x27;)
+print(adj)</div>
+<div class="answer-space" style="height: 50px"></div>
+</div>
+<div class="page-break"></div>
+<div class="problem" id="p5">
+<div class="problem-number">5</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">A = [2, 4, 5, 6, 8]
+for x in A:
+    if x % 2 == 0:
+        A.remove(x)
+print(A)</div>
+<div class="answer-space" style="height: 50px"></div>
+</div>
+<div class="problem" id="p6">
+<div class="problem-number">6</div>
+<div class="stmt">다음 코드에 대하여 물음에 답하시오.</div>
+<div class="code-block">graph = {
+    1: [2, 3, 4],
+    2: [1, 5, 6],
+    3: [1],
+    4: [1],
+    5: [2, 7],
+    6: [2],
+    7: [5]
+}
+queue = [1]
+visited = [1]
+while queue:
+    v = queue.pop()
+    print(v, end=&#x27; &#x27;)
+    for w in graph[v]:
+        if w not in visited:
+            visited.append(w)
+            queue.append(w)
+print()</div>
+<div class="subq">(1) 실행 결과를 쓰시오.<br>(2) 출력된 순서가 같은 그래프를 재귀 DFS로 탐색한 순서 1 2 5 7 6 3 4와 같은지 쓰시오.</div>
+<div class="answer-space" style="height: 60px"></div>
+</div>
+<div class="page-break"></div>
+<div class="problem" id="p7">
+<div class="problem-number">7</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block"># (가)
+A = [1, 2, 3]
+for x in A:
+    if x &lt; 100:
+        A = A + [x * 10]
+print(A)
+
+# (나)
+A = [1, 2, 3]
+for x in A:
+    if x &lt; 100:
+        A += [x * 10]
+print(A)</div>
+<div class="answer-space" style="height: 60px"></div>
+</div>
+<div class="page-break"></div>
+<div class="problem" id="p8">
+<div class="problem-number">8</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">m = [
+    [0, 1, 1, 0, 0],
+    [1, 0, 0, 1, 0],
+    [1, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0]
+]
+
+def is_connected(start, target):
+    visited = [0] * len(m)
+
+    def dfs_check(cur):
+        visited[cur] = 1
+        if cur == target:
+            return True
+        for nxt in range(len(m)):
+            if m[cur][nxt] == 1 and visited[nxt] == 0:
+                dfs_check(nxt)
+        return False
+
+    return dfs_check(start)
+
+print(is_connected(0, 3))
+print(is_connected(0, 0))
+print(is_connected(0, 4))</div>
+<div class="answer-space" style="height: 82px"></div>
+</div>
+<div class="page-break"></div>
+<div class="problem" id="p9">
+<div class="problem-number">9</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">res = []
+
+def f(path):
+    if len(path) == 2:
+        res.append(path)
+        return
+    for x in [1, 2, 3]:
+        if x not in path:
+            path.append(x)
+            f(path)
+            path.pop()
+
+f([])
+print(len(res))
+print(res)</div>
+<div class="answer-space" style="height: 60px"></div>
+</div>
+</body>
+</html>

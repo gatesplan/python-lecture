@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>그래프 탐색 시각화 - DFS / BFS</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
+    margin: 0;
+    padding: 22px;
+    background: #f4f6f8;
+    color: #1e2429;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { font-size: 13px; color: #5c6b78; margin: 0 0 16px; }
+
+  .panel {
+    background: #fff;
+    border: 1px solid #dde3e8;
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .panel > h2 {
+    font-size: 13px;
+    font-weight: normal;
+    color: #5c6b78;
+    margin: 0 0 10px;
+  }
+
+  .opts { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; font-size: 13px; }
+  .opts .grp { display: flex; gap: 9px; align-items: center; }
+  .opts .grp > b { font-weight: normal; color: #5c6b78; }
+  select, button {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 5px 11px;
+    border: 1px solid #c3ccd4;
+    border-radius: 4px;
+    background: #fff;
+    color: #1e2429;
+    cursor: pointer;
+  }
+  button:hover { background: #eef2f5; }
+  button:disabled { color: #aab4bd; cursor: default; background: #fff; }
+  button.main { background: #2e9e4f; border-color: #2e9e4f; color: #fff; }
+  button.main:hover { background: #278a44; }
+  .stepno { font-size: 13px; color: #5c6b78; font-family: Consolas, monospace; }
+
+  .cols { display: flex; gap: 12px; align-items: flex-start; }
+  .left { flex: 1; min-width: 0; }
+  .right { width: 400px; flex-shrink: 0; }
+  @media (max-width: 900px) {
+    .cols { flex-direction: column; }
+    .right { width: 100%; }
+  }
+
+  svg { display: block; width: 100%; height: auto; }
+
+  .caption {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #f7f9fb;
+    border-left: 3px solid #2e9e4f;
+    font-size: 14px;
+    min-height: 44px;
+  }
+  code, .mono { font-family: Consolas, "D2Coding", monospace; }
+  .caption code {
+    background: #e8eef4;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: #5c6b78; margin-top: 10px; }
+  .legend span.box {
+    display: inline-block; width: 16px; height: 14px; vertical-align: -2px;
+    margin-right: 5px; border: 2px solid #c3ccd4; border-radius: 3px; background: #fff;
+  }
+  .legend .b-vis  { background: #2e9e4f !important; border-color: #217a3b !important; }
+  .legend .b-cand { background: #c9f0b0 !important; border-color: #7cc254 !important; }
+  .legend .b-cur  { background: #2e9e4f !important; border-color: #1e2429 !important; }
+  .legend .b-chk  { border-color: #e08a00 !important; }
+  .legend .b-q    { background: #2e9e4f !important; border-color: #2f6fb5 !important; }
+
+  /* visited 리스트 */
+  .listrow { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; min-height: 42px; }
+  .listrow .br { font-family: Consolas, monospace; font-size: 22px; color: #8894a0; }
+  .lcell {
+    width: 40px; height: 40px; line-height: 38px; text-align: center;
+    font-family: Consolas, monospace; font-size: 17px; font-weight: bold;
+    border: 1px solid #217a3b; border-radius: 4px;
+    background: #2e9e4f; color: #fff;
+  }
+  .lcell.new { box-shadow: 0 0 0 3px #f2c14e; }
+
+  /* 큐 */
+  .qcell {
+    width: 40px; height: 40px; line-height: 38px; text-align: center;
+    font-family: Consolas, monospace; font-size: 17px; font-weight: bold;
+    border: 1px solid #245a94; border-radius: 4px;
+    background: #2f6fb5; color: #fff;
+  }
+  .qcell.new { box-shadow: 0 0 0 3px #f2c14e; }
+  .qcell.out {
+    background: #fff; color: #2f6fb5; border: 2px dashed #2f6fb5; line-height: 36px;
+  }
+  .qends { display: flex; justify-content: space-between; font-size: 11px; color: #8894a0; margin-top: 4px; }
+
+  /* visited 딕셔너리 */
+  .dictrow { display: flex; gap: 4px; }
+  .dcell { flex: 1; text-align: center; }
+  .dkey {
+    font-family: Consolas, monospace; font-size: 15px; font-weight: bold;
+    padding: 5px 0; border: 1px solid #c3ccd4; border-bottom: none;
+    border-radius: 4px 4px 0 0; background: #eef2f5;
+  }
+  .dval {
+    font-family: Consolas, monospace; font-size: 12px;
+    padding: 8px 0; border: 1px solid #c3ccd4;
+    border-radius: 0 0 4px 4px; background: #fff; color: #8894a0;
+  }
+  .dval.t { background: #2e9e4f; border-color: #217a3b; color: #fff; font-weight: bold; }
+  .dcell.new .dkey, .dcell.new .dval { box-shadow: 0 0 0 3px #f2c14e; }
+  .dcell.chk .dkey { border-color: #e08a00; background: #fdebc8; }
+  .dcell.chk .dval { border-color: #e08a00; }
+
+  .expr {
+    margin-top: 10px;
+    padding: 8px 10px;
+    background: #f7f9fb;
+    border-radius: 4px;
+    font-family: Consolas, "D2Coding", monospace;
+    font-size: 13px;
+    min-height: 54px;
+    white-space: pre;
+    color: #1e2429;
+  }
+  .expr .dim { color: #8894a0; }
+  .expr .yes { color: #217a3b; font-weight: bold; }
+  .expr .no  { color: #c0392b; font-weight: bold; }
+
+  .hint { font-size: 12px; color: #8894a0; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1 id="title"></h1>
+  <p class="sub" id="sub"></p>
+
+  <div class="panel">
+    <div class="opts">
+      <div class="grp">
+        <b>탐색</b>
+        <select id="msel">
+          <option value="dfs">DFS (깊이 우선)</option>
+          <option value="bfs">BFS (너비 우선)</option>
+        </select>
+      </div>
+      <div class="grp">
+        <b>그래프</b>
+        <select id="gsel">
+          <option value="school">학교 그래프 (사이클 없음)</option>
+          <option value="cycle">사이클이 있는 그래프</option>
+        </select>
+      </div>
+      <div class="grp">
+        <b>시작</b>
+        <select id="ssel"></select>
+      </div>
+      <div class="grp">
+        <button id="first">처음</button>
+        <button id="prev">이전</button>
+        <button id="next">다음</button>
+        <button class="main" id="play">재생</button>
+      </div>
+      <div class="grp">
+        <b>속도</b>
+        <select id="speed">
+          <option value="1800">느리게</option>
+          <option value="1100" selected>보통</option>
+          <option value="600">빠르게</option>
+        </select>
+      </div>
+      <div class="grp"><span class="stepno" id="stepno"></span></div>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="left">
+      <div class="panel">
+        <h2>그래프</h2>
+        <svg id="graph" viewBox="0 0 640 470" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="caption" id="caption"></div>
+        <div class="legend">
+          <span><span class="box"></span>방문 안 함</span>
+          <span><span class="box b-vis"></span>방문함</span>
+          <span><span class="box b-cand"></span>현재 노드의 방문 안 한 이웃</span>
+          <span><span class="box b-cur"></span>현재 노드 (굵은 테두리)</span>
+          <span><span class="box b-chk"></span>지금 확인 중인 이웃</span>
+          <span id="lgq"><span class="box b-q"></span>큐에 들어 있는 노드 (파란 테두리)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="panel">
+        <h2>visited 리스트 - 방문한 순서대로 쌓는다</h2>
+        <div class="listrow" id="vlist"></div>
+        <div class="expr" id="exprL"></div>
+      </div>
+
+      <div class="panel">
+        <h2>visited 딕셔너리 - 노드마다 True / False (학교 코드 방식)</h2>
+        <div class="dictrow" id="vdict"></div>
+        <div class="expr" id="exprD"></div>
+      </div>
+
+      <div class="panel" id="qpanel">
+        <h2>큐 - 앞에서 꺼내고 뒤에 넣는다</h2>
+        <div class="listrow" id="queue"></div>
+        <div class="qends"><span>앞 pop(0)</span><span>뒤 append</span></div>
+        <div class="expr" id="exprQ" style="min-height:34px"></div>
+      </div>
+
+      <div class="panel">
+        <h2>인접 리스트</h2>
+        <div class="expr" id="adj" style="margin-top:0"></div>
+        <p class="hint">좌우 화살표로 한 단계씩, 스페이스로 재생과 정지.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var GRAPHS = {
+  school: {
+    adj: { 1: [2, 3, 4], 2: [1, 5, 6], 3: [1], 4: [1], 5: [2, 7], 6: [2], 7: [5] },
+    pos: { 1: [320, 55], 2: [140, 175], 3: [320, 175], 4: [500, 175],
+           5: [70, 295], 6: [210, 295], 7: [70, 415] }
+  },
+  cycle: {
+    adj: { 1: [2, 3], 2: [1, 4, 5], 3: [1, 4], 4: [2, 3, 6], 5: [2, 6], 6: [4, 5, 7], 7: [6] },
+    pos: { 1: [320, 55], 2: [170, 165], 3: [470, 165], 4: [320, 275],
+           5: [90, 300], 6: [240, 410], 7: [450, 410] }
+  }
+};
+
+var BW = 58, BH = 46;      // 노드 상자 크기
+
+var mode = 'dfs';
+var gname = 'school';
+var start = 1;
+var frames = [];
+var step = 0;
+var timer = null;
+
+function keysOf(adj) {
+  return Object.keys(adj).map(Number).sort(function (a, b) { return a - b; });
+}
+
+/* ---------- DFS 를 미리 돌려 장면을 만든다 ---------- */
+
+function buildDFS(adj, s) {
+  var out = [];
+  var order = [];
+  var vis = {};
+  var path = [];
+  var tree = [];
+  keysOf(adj).forEach(function (k) { vis[k] = false; });
+
+  function snap(o) {
+    var v = {};
+    for (var k in vis) v[k] = vis[k];
+    o.order = order.slice();
+    o.vis = v;
+    o.path = path.slice();
+    o.tree = tree.map(function (e) { return e.slice(); });
+    out.push(o);
+  }
+
+  function dfs(v) {
+    vis[v] = true;
+    order.push(v);
+    path.push(v);
+    snap({ cur: v, newly: v,
+           cap: '<b>' + v + '</b>번에 들어왔다. 방문 표시를 하고, 이웃 <code>[' + adj[v].join(', ')
+              + ']</code> 을 앞에서부터 본다.' });
+
+    adj[v].forEach(function (w) {
+      if (vis[w]) {
+        snap({ cur: v, check: w, res: false,
+               cap: '<b>' + v + '</b>의 이웃 <b>' + w + '</b>: 이미 방문했다. 건너뛴다.' });
+      } else {
+        snap({ cur: v, check: w, res: true,
+               cap: '<b>' + v + '</b>의 이웃 <b>' + w + '</b>: 아직 방문 안 했다. <b>' + w + '</b>번으로 들어간다.' });
+        tree.push([v, w]);
+        dfs(w);
+        snap({ cur: v, back: w,
+               cap: '<b>' + w + '</b>의 이웃을 다 봤다. 더 갈 곳이 없어 <b>' + v
+                  + '</b>번으로 되돌아왔다. 남은 이웃을 이어서 본다.' });
+      }
+    });
+
+    path.pop();
+  }
+
+  snap({ cur: null, cap: '<b>' + s + '</b>번에서 출발한다. 아직 아무 곳도 방문하지 않았다.' });
+  dfs(s);
+  snap({ cur: null, end: true,
+         cap: '<b>' + s + '</b>의 이웃을 다 봤다. 탐색 끝. 방문 순서는 <code>['
+            + order.join(', ') + ']</code>' });
+  return out;
+}
+
+/* ---------- BFS 를 미리 돌려 장면을 만든다 ---------- */
+
+function buildBFS(adj, s) {
+  var out = [];
+  var order = [];
+  var vis = {};
+  var tree = [];
+  var queue = [];
+  keysOf(adj).forEach(function (k) { vis[k] = false; });
+
+  function snap(o) {
+    var v = {};
+    for (var k in vis) v[k] = vis[k];
+    o.order = order.slice();
+    o.vis = v;
+    o.path = [];
+    o.tree = tree.map(function (e) { return e.slice(); });
+    o.queue = queue.slice();
+    o.yes = '큐에 넣는다';
+    out.push(o);
+  }
+
+  snap({ cur: null, cap: '<b>' + s + '</b>번에서 출발한다. 아직 아무 곳도 방문하지 않았다.' });
+
+  vis[s] = true;
+  order.push(s);
+  queue.push(s);
+  snap({ cur: null, newly: s, qexpr: 'queue.append(' + s + ')',
+         cap: '시작 노드 <b>' + s + '</b>번에 방문 표시를 하고 큐에 넣는다.' });
+
+  while (queue.length > 0) {
+    var v = queue.shift();
+    snap({ cur: v, popped: v, qexpr: 'v = queue.pop(0)   # ' + v,
+           cap: '큐의 맨 앞에서 <b>' + v + '</b>번을 꺼냈다. 이웃 <code>[' + adj[v].join(', ')
+              + ']</code> 을 앞에서부터 본다.' });
+
+    adj[v].forEach(function (w) {
+      if (vis[w]) {
+        snap({ cur: v, check: w, res: false,
+               cap: '<b>' + v + '</b>의 이웃 <b>' + w + '</b>: 이미 방문했다. 건너뛴다.' });
+      } else {
+        snap({ cur: v, check: w, res: true,
+               cap: '<b>' + v + '</b>의 이웃 <b>' + w + '</b>: 아직 방문 안 했다.' });
+        vis[w] = true;
+        order.push(w);
+        queue.push(w);
+        tree.push([v, w]);
+        snap({ cur: v, newly: w, qexpr: 'queue.append(' + w + ')',
+               cap: '<b>' + w + '</b>번에 방문 표시를 하고 큐의 맨 뒤에 넣었다. 들어가지는 않고 <b>'
+                  + v + '</b>의 남은 이웃을 이어서 본다.' });
+      }
+    });
+  }
+
+  snap({ cur: null, end: true,
+         cap: '큐가 비었다. 탐색 끝. 방문 순서는 <code>[' + order.join(', ') + ']</code>' });
+  return out;
+}
+
+/* ---------- 그리기 ---------- */
+
+function hasEdge(list, a, b) {
+  for (var i = 0; i < list.length; i++) {
+    if ((list[i][0] === a && list[i][1] === b) || (list[i][0] === b && list[i][1] === a)) return true;
+  }
+  return false;
+}
+
+function onPath(path, a, b) {
+  for (var i = 0; i + 1 < path.length; i++) {
+    if ((path[i] === a && path[i + 1] === b) || (path[i] === b && path[i + 1] === a)) return true;
+  }
+  return false;
+}
+
+function drawGraph(f) {
+  var G = GRAPHS[gname];
+  var ks = keysOf(G.adj);
+  var s = '';
+
+  // 간선 먼저
+  ks.forEach(function (a) {
+    G.adj[a].forEach(function (b) {
+      if (a >= b) return;
+      var col = '#ccd4da', w = 2;
+      if (hasEdge(f.tree, a, b)) { col = '#8fcf9f'; w = 3; }          // 지나간 적 있는 길
+      if (onPath(f.path, a, b)) { col = '#217a3b'; w = 5; }           // 지금 들어와 있는 길
+      if (f.check != null && ((f.cur === a && f.check === b) || (f.cur === b && f.check === a))) {
+        col = '#e08a00'; w = 4;
+      }
+      s += '<line x1="' + G.pos[a][0] + '" y1="' + G.pos[a][1] + '" x2="' + G.pos[b][0]
+         + '" y2="' + G.pos[b][1] + '" stroke="' + col + '" stroke-width="' + w + '" />';
+    });
+  });
+
+  ks.forEach(function (k) {
+    var x = G.pos[k][0], y = G.pos[k][1];
+    var isCur = (f.cur === k);
+    var isVis = f.vis[k];
+    var isCand = (f.cur != null) && !isVis && G.adj[f.cur].indexOf(k) !== -1;
+    var isChk = (f.check === k);
+
+    var fill = isVis ? '#2e9e4f' : (isCand ? '#c9f0b0' : '#ffffff');
+    var stroke = isVis ? '#217a3b' : (isCand ? '#7cc254' : '#c3ccd4');
+    var sw = 2;
+    if (f.queue && f.queue.indexOf(k) !== -1) { stroke = '#2f6fb5'; sw = 4; }
+    if (isCur) { stroke = '#1e2429'; sw = 5; }
+    if (isChk) { stroke = '#e08a00'; sw = 5; }
+    var tcol = isVis ? '#ffffff' : '#1e2429';
+
+    s += '<rect x="' + (x - BW / 2) + '" y="' + (y - BH / 2) + '" width="' + BW + '" height="' + BH
+       + '" rx="6" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + sw + '" />'
+       + '<text x="' + x + '" y="' + (y + 7) + '" text-anchor="middle" font-family="Consolas, monospace"'
+       + ' font-size="21" font-weight="bold" fill="' + tcol + '">' + k + '</text>';
+  });
+
+  document.getElementById('graph').innerHTML = s;
+}
+
+function drawList(f) {
+  var h = '<span class="mono" style="color:#5c6b78">visited =</span><span class="br">[</span>';
+  f.order.forEach(function (v) {
+    h += '<div class="lcell' + (f.newly === v ? ' new' : '') + '">' + v + '</div>';
+  });
+  h += '<span class="br">]</span>';
+  document.getElementById('vlist').innerHTML = h;
+
+  var e = '';
+  if (f.newly != null) {
+    e = 'visited.append(' + f.newly + ')';
+  } else if (f.check != null) {
+    var before = '[' + f.order.join(', ') + ']';
+    e = '<span class="dim">if ' + f.check + ' not in visited:</span>\n'
+      + f.check + ' not in ' + before + '\n'
+      + '-> <span class="' + (f.res ? 'yes' : 'no') + '">' + (f.res ? 'True' : 'False') + '</span>'
+      + (f.res ? '  (' + (f.yes || '들어간다') + ')' : '  (건너뛴다)');
+  }
+  document.getElementById('exprL').innerHTML = e;
+}
+
+function drawDict(f) {
+  var ks = keysOf(GRAPHS[gname].adj);
+  var h = '';
+  ks.forEach(function (k) {
+    var cls = 'dcell' + (f.newly === k ? ' new' : '') + (f.check === k ? ' chk' : '');
+    h += '<div class="' + cls + '"><div class="dkey">' + k + '</div>'
+       + '<div class="dval' + (f.vis[k] ? ' t' : '') + '">' + (f.vis[k] ? 'True' : 'False') + '</div></div>';
+  });
+  document.getElementById('vdict').innerHTML = h;
+
+  var e = '';
+  if (f.newly != null) {
+    e = 'visited[' + f.newly + '] = True';
+  } else if (f.check != null) {
+    e = '<span class="dim">if not visited[' + f.check + ']:</span>\n'
+      + 'not ' + (f.vis[f.check] ? 'True' : 'False') + '\n'
+      + '-> <span class="' + (f.res ? 'yes' : 'no') + '">' + (f.res ? 'True' : 'False') + '</span>'
+      + (f.res ? '  (' + (f.yes || '들어간다') + ')' : '  (건너뛴다)');
+  }
+  document.getElementById('exprD').innerHTML = e;
+}
+
+function drawQueue(f) {
+  document.getElementById('qpanel').style.display = (mode === 'bfs') ? '' : 'none';
+  document.getElementById('lgq').style.display = (mode === 'bfs') ? '' : 'none';
+  if (mode !== 'bfs') return;
+
+  var h = '';
+  if (f.popped != null) {
+    h += '<div class="qcell out">' + f.popped + '</div>'
+       + '<span class="mono" style="color:#8894a0">&lt;-</span>';
+  }
+  h += '<span class="mono" style="color:#5c6b78">queue =</span><span class="br">[</span>';
+  (f.queue || []).forEach(function (v) {
+    h += '<div class="qcell' + (f.newly === v ? ' new' : '') + '">' + v + '</div>';
+  });
+  h += '<span class="br">]</span>';
+  document.getElementById('queue').innerHTML = h;
+  document.getElementById('exprQ').innerHTML = f.qexpr || '';
+}
+
+function drawAdj(f) {
+  var adj = GRAPHS[gname].adj;
+  var lines = keysOf(adj).map(function (k) {
+    var row = k + ': [' + adj[k].join(', ') + ']';
+    if (f.cur === k) return '<b style="color:#217a3b">' + row + '   &lt;- 현재</b>';
+    return '<span class="dim">' + row + '</span>';
+  });
+  document.getElementById('adj').innerHTML = lines.join('\n');
+}
+
+function render() {
+  var f = frames[step];
+  drawGraph(f);
+  drawList(f);
+  drawDict(f);
+  drawQueue(f);
+  drawAdj(f);
+  document.getElementById('caption').innerHTML = f.cap;
+  document.getElementById('stepno').textContent = (step + 1) + ' / ' + frames.length;
+
+  var last = frames.length - 1;
+  document.getElementById('first').disabled = (step === 0);
+  document.getElementById('prev').disabled = (step === 0);
+  document.getElementById('next').disabled = (step === last);
+  document.getElementById('play').textContent = timer ? '정지' : '재생';
+}
+
+/* ---------- 조작 ---------- */
+
+function reset() {
+  stop();
+  frames = (mode === 'bfs' ? buildBFS : buildDFS)(GRAPHS[gname].adj, start);
+  document.getElementById('title').textContent = (mode === 'bfs')
+    ? '그래프 탐색 시각화 - BFS (너비 우선 탐색)'
+    : '그래프 탐색 시각화 - DFS (깊이 우선 탐색)';
+  document.getElementById('sub').textContent = (mode === 'bfs')
+    ? '꺼낸 노드의 방문 안 한 이웃을 전부 큐 뒤에 넣고, 큐 앞에서 다음 노드를 꺼낸다. 그래서 시작 노드에서 가까운 순서로 방문한다. 이웃은 번호가 작은 것부터 본다.'
+    : '한 방향으로 갈 수 있는 데까지 들어가고, 더 갈 곳이 없으면 왔던 길로 되돌아가 남은 이웃을 본다. 이웃은 번호가 작은 것부터 본다.';
+  step = 0;
+  render();
+}
+
+function fillStart() {
+  var sel = document.getElementById('ssel');
+  sel.innerHTML = keysOf(GRAPHS[gname].adj).map(function (k) {
+    return '<option value="' + k + '">' + k + '번</option>';
+  }).join('');
+  start = 1;
+  sel.value = '1';
+}
+
+function go(d) {
+  var t = step + d;
+  if (t < 0 || t > frames.length - 1) return false;
+  step = t;
+  render();
+  return true;
+}
+
+function stop() {
+  if (timer) { clearInterval(timer); timer = null; }
+}
+
+function play() {
+  if (timer) { stop(); render(); return; }
+  if (step === frames.length - 1) step = 0;      // 끝에서 누르면 처음부터
+
+  var ms = parseInt(document.getElementById('speed').value, 10);
+  timer = setInterval(function () {
+    if (!go(1)) { stop(); render(); }
+  }, ms);
+  render();
+}
+
+document.getElementById('msel').addEventListener('change', function () {
+  mode = this.value;
+  reset();
+});
+document.getElementById('gsel').addEventListener('change', function () {
+  gname = this.value;
+  fillStart();
+  reset();
+});
+document.getElementById('ssel').addEventListener('change', function () {
+  start = parseInt(this.value, 10);
+  reset();
+});
+document.getElementById('first').addEventListener('click', function () { stop(); step = 0; render(); });
+document.getElementById('prev').addEventListener('click', function () { stop(); go(-1); });
+document.getElementById('next').addEventListener('click', function () { stop(); go(1); });
+document.getElementById('play').addEventListener('click', play);
+document.getElementById('speed').addEventListener('change', function () {
+  if (timer) { stop(); play(); }
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.target.tagName === 'SELECT') return;
+  if (e.key === 'ArrowRight') { stop(); go(1); e.preventDefault(); }
+  else if (e.key === 'ArrowLeft') { stop(); go(-1); e.preventDefault(); }
+  else if (e.key === ' ') { play(); e.preventDefault(); }
+});
+
+fillStart();
+reset();
+</script>
+</body>
+</html>

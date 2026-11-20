@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>시험대비 - 이진 탐색과 동적계획법 빈칸 채우기 정답</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>시험대비 - 이진 탐색과 동적계획법 빈칸 채우기 정답</h1><p class="intro">밑줄 칸에 들어갈 코드를 쓴다. 밑줄 길이는 들어갈 코드의 글자 수와 같다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 binary_search(arr, target, low, high)는 정렬된 리스트 arr의 구간 low ~ high에서 target의 위치를 재귀로 찾는 이진 탐색 함수이다. target이 없으면 -1을 돌려준다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def binary_search(arr, target, low, high):
+    if <span class="a"><i>가</i>low &gt; high</span>:
+        return -1
+    mid = <span class="a"><i>나</i>(low + high) // 2</span>
+
+    if arr[mid] == target:
+        return mid
+    elif arr[mid] &gt; target:
+        return binary_search(arr, target, <span class="a"><i>다</i>low, mid - 1</span>)
+    else:
+        return binary_search(arr, target, <span class="a"><i>라</i>mid + 1, high</span>)
+
+
+data = [2, 5, 6, 8, 9, 11, 15, 18, 19, 22, 24, 25]
+print(binary_search(data, 15, 0, len(data) - 1))
+print(binary_search(data, 7, 0, len(data) - 1))</div>
+<p class="out-label">실행 결과</p><div class="out">6
+-1</div><div class="answers"><span class="lab">(가)</span><span>low &gt; high</span><span class="lab">(나)</span><span>(low + high) // 2</span><span class="lab">(다)</span><span>low, mid - 1</span><span class="lab">(라)</span><span>mid + 1, high</span></div><p class="note">(가)는 high &lt; low도 정답이다.</p></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 binary_search(arr, target)는 재귀 호출 대신 while로 탐색 구간 low ~ high를 좁혀 가는 이진 탐색 함수이다. target이 없으면 -1을 돌려준다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def binary_search(arr, target):
+    low = 0
+    high = <span class="a"><i>가</i>len(arr) - 1</span>
+    while <span class="a"><i>나</i>low &lt;= high</span>:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] &gt; target:
+            <span class="a"><i>다</i>high = mid - 1</span>
+        else:
+            <span class="a"><i>라</i>low = mid + 1</span>
+    return -1
+
+
+data = [2, 5, 6, 8, 9, 11, 15, 18, 19, 22, 24, 25]
+print(binary_search(data, 15))
+print(binary_search(data, 7))</div>
+<p class="out-label">실행 결과</p><div class="out">6
+-1</div><div class="answers"><span class="lab">(가)</span><span>len(arr) - 1</span><span class="lab">(나)</span><span>low &lt;= high</span><span class="lab">(다)</span><span>high = mid - 1</span><span class="lab">(라)</span><span>low = mid + 1</span></div><p class="note">(나)는 high &gt;= low도 정답이다.</p></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 이진 탐색 코드에서 리스트 data는 큰 값부터 정렬되어 있다. target이 없으면 -1을 돌려준다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def binary_search(arr, target, low, high):
+    if low &gt; high:
+        return -1
+    mid = (low + high) // 2
+
+    if arr[mid] == target:
+        return mid
+    elif <span class="a"><i>가</i>arr[mid] &lt; target</span>:
+        return binary_search(arr, target, <span class="a"><i>나</i>low, mid - 1</span>)
+    else:
+        return binary_search(arr, target, <span class="a"><i>다</i>mid + 1, high</span>)
+
+
+data = [25, 24, 22, 19, 18, 15, 11, 9, 8, 6, 5, 2]
+print(binary_search(data, 15, 0, len(data) - 1))
+print(binary_search(data, 7, 0, len(data) - 1))</div>
+<p class="out-label">실행 결과</p><div class="out">5
+-1</div><div class="answers"><span class="lab">(가)</span><span>arr[mid] &lt; target</span><span class="lab">(나)</span><span>low, mid - 1</span><span class="lab">(다)</span><span>mid + 1, high</span></div><p class="note">(가)를 arr[mid] &gt; target으로 쓰면 (나)와 (다)를 서로 바꿔 써야 한다.</p></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 binary_search(arr, target)는 low, high 대신 리스트의 절반을 잘라 넘기는 이진 탐색 함수이다. target이 있으면 True, 없으면 False를 돌려준다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def binary_search(arr, target):
+    if <span class="a"><i>가</i>len(arr) == 0</span>:
+        return False
+    mid = len(arr) // 2
+
+    if arr[mid] == target:
+        return True
+    elif arr[mid] &gt; target:
+        return binary_search(<span class="a"><i>나</i>arr[:mid]</span>, target)
+    else:
+        return binary_search(<span class="a"><i>다</i>arr[mid + 1:]</span>, target)
+
+
+data = [2, 5, 6, 8, 9, 11, 15, 18, 19, 22, 24, 25]
+print(binary_search(data, 15))
+print(binary_search(data, 7))</div>
+<p class="out-label">실행 결과</p><div class="out">True
+False</div><div class="answers"><span class="lab">(가)</span><span>len(arr) == 0</span><span class="lab">(나)</span><span>arr[:mid]</span><span class="lab">(다)</span><span>arr[mid + 1:]</span></div><p class="note">(가)는 not arr, len(arr) &lt; 1도 정답이다. (다)를 arr[mid:]로 쓰면 원소가 1개인 리스트에서 같은 리스트로 계속 호출하게 되어 끝나지 않는다.</p></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 fib_memo(n)은 한 번 구한 피보나치 값을 딕셔너리 memo에 저장해 두고 다시 쓰는 하향식(메모이제이션) 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">memo = {}
+
+def fib_memo(n):
+    if n &lt;= 1:
+        return n
+    if <span class="a"><i>가</i>n in memo</span>:
+        return <span class="a"><i>나</i>memo[n]</span>
+    <span class="a"><i>다</i>memo[n] = fib_memo(n - 1) + fib_memo(n - 2)</span>
+    return memo[n]
+
+
+print(fib_memo(40))</div>
+<p class="out-label">실행 결과</p><div class="out">102334155</div><div class="answers"><span class="lab">(가)</span><span>n in memo</span><span class="lab">(나)</span><span>memo[n]</span><span class="lab">(다)</span><span>memo[n] = fib_memo(n - 1) + fib_memo(n - 2)</span></div><p class="note">(다)는 더하는 순서를 바꿔 써도 정답이다. memo[n]에 저장하지 않으면 다음 줄 return memo[n]에서 KeyError가 난다.</p></div><div class="page"><div class="problem-number">6<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 fib_table(n)은 리스트 d의 d[i]에 i번째 피보나치 값을 작은 i부터 채워 나가는 상향식(표) 함수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def fib_table(n):
+    if n &lt;= 1:
+        return n
+    d = <span class="a"><i>가</i>[0] * (n + 1)</span>
+    d[1] = 1
+    for i in <span class="a"><i>나</i>range(2, n + 1)</span>:
+        d[i] = <span class="a"><i>다</i>d[i - 1] + d[i - 2]</span>
+    return <span class="a"><i>라</i>d[n]</span>
+
+
+print(fib_table(40))</div>
+<p class="out-label">실행 결과</p><div class="out">102334155</div><div class="answers"><span class="lab">(가)</span><span>[0] * (n + 1)</span><span class="lab">(나)</span><span>range(2, n + 1)</span><span class="lab">(다)</span><span>d[i - 1] + d[i - 2]</span><span class="lab">(라)</span><span>d[n]</span></div><p class="note">(다)는 d[i - 2] + d[i - 1]도 정답이다. (라)는 d[-1]도 정답이다.</p></div><div class="page"><div class="problem-number">7<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 fib_memo(n, memo)는 메모 딕셔너리를 전역 변수로 두지 않고 매개변수 memo로 넘기는 하향식(메모이제이션) 함수이다. 빈칸 (가), (나)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def fib_memo(n, memo):
+    if n &lt;= 1:
+        return n
+    if n in memo:
+        return memo[n]
+    memo[n] = <span class="a"><i>가</i>fib_memo(n - 1, memo) + fib_memo(n - 2, memo)</span>
+    return memo[n]
+
+
+print(fib_memo(40, <span class="a"><i>나</i>{}</span>))</div>
+<p class="out-label">실행 결과</p><div class="out">102334155</div><div class="answers"><span class="lab">(가)</span><span>fib_memo(n - 1, memo) + fib_memo(n - 2, memo)</span><span class="lab">(나)</span><span>{}</span></div><p class="note">(가)는 더하는 순서를 바꿔 써도 정답이다. (나)는 dict()도 정답이다.</p></div><div class="page"><div class="problem-number">8<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 comb_memo(n, r)은 한 번 구한 nCr 값을 (n, r) 튜플을 키로 하는 딕셔너리 cmemo에 저장해 두고 다시 쓰는 하향식(메모이제이션) 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">cmemo = {}
+
+def comb_memo(n, r):
+    if r == 0 or r == n:
+        return 1
+    if <span class="a"><i>가</i>(n, r) in cmemo</span>:
+        return cmemo[(n, r)]
+    cmemo[(n, r)] = <span class="a"><i>나</i>comb_memo(n - 1, r - 1) + comb_memo(n - 1, r)</span>
+    return <span class="a"><i>다</i>cmemo[(n, r)]</span>
+
+
+print(comb_memo(5, 2), comb_memo(30, 15))</div>
+<p class="out-label">실행 결과</p><div class="out">10 155117520</div><div class="answers"><span class="lab">(가)</span><span>(n, r) in cmemo</span><span class="lab">(나)</span><span>comb_memo(n - 1, r - 1) + comb_memo(n - 1, r)</span><span class="lab">(다)</span><span>cmemo[(n, r)]</span></div><p class="note">(나)는 두 호출의 순서를 바꿔 써도 정답이다.</p></div><div class="page"><div class="problem-number">9<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 comb_table(n, r)은 2차원 리스트 d의 d[i][j]에 iCj 값을 i가 작은 행부터 채워 나가는 상향식(표) 함수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def comb_table(n, r):
+    d = [[0] * (n + 1) for _ in range(n + 1)]
+    for i in range(n + 1):
+        for j in <span class="a"><i>가</i>range(i + 1)</span>:
+            if <span class="a"><i>나</i>j == 0 or j == i</span>:
+                d[i][j] = 1
+            else:
+                d[i][j] = <span class="a"><i>다</i>d[i - 1][j - 1] + d[i - 1][j]</span>
+    return <span class="a"><i>라</i>d[n][r]</span>
+
+
+print(comb_table(5, 2), comb_table(30, 15))</div>
+<p class="out-label">실행 결과</p><div class="out">10 155117520</div><div class="answers"><span class="lab">(가)</span><span>range(i + 1)</span><span class="lab">(나)</span><span>j == 0 or j == i</span><span class="lab">(다)</span><span>d[i - 1][j - 1] + d[i - 1][j]</span><span class="lab">(라)</span><span>d[n][r]</span></div><p class="note">(가)는 range(0, i + 1)도 정답이다. (나)는 j == i or j == 0도 정답이다. (다)는 두 항의 순서를 바꿔 써도 정답이다.</p></div><div class="page"><div class="problem-number">10<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 comb_table(n, r)은 d[i][j]에 iCj 값을 채우는 상향식(표) 함수이다. 각 행의 양 끝을 먼저 1로 채운 뒤, 안쪽 칸만 위 행의 두 칸의 합으로 채운다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def comb_table(n, r):
+    d = [[0] * (n + 1) for _ in range(n + 1)]
+    for i in range(n + 1):
+        <span class="a"><i>가</i>d[i][0]</span> = 1
+        <span class="a"><i>나</i>d[i][i]</span> = 1
+    for i in range(2, n + 1):
+        for j in <span class="a"><i>다</i>range(1, i)</span>:
+            d[i][j] = d[i - 1][j - 1] + d[i - 1][j]
+    return d[n][r]
+
+
+print(comb_table(5, 2), comb_table(30, 15))</div>
+<p class="out-label">실행 결과</p><div class="out">10 155117520</div><div class="answers"><span class="lab">(가)</span><span>d[i][0]</span><span class="lab">(나)</span><span>d[i][i]</span><span class="lab">(다)</span><span>range(1, i)</span></div><p class="note">(가)와 (나)는 서로 바꿔 써도 정답이다.</p></div></body></html>

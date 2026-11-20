@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>13-1. 중첩 for문에서 재귀까지</title>
+<style>
+body { font-family: "Malgun Gothic", sans-serif; color: #111; background: #fff;
+       max-width: 860px; margin: 0 auto; padding: 16px; line-height: 1.6; font-size: 15px; }
+h1 { font-size: 22px; }
+h2 { font-size: 19px; margin-top: 40px; border-bottom: 1px solid #999; padding-bottom: 4px; }
+h3 { font-size: 16px; margin-top: 24px; }
+pre { font-family: Consolas, "D2Coding", monospace; font-size: 14px; padding: 8px 10px;
+      margin: 6px 0; overflow-x: auto; }
+pre.code { background: #f4f4f4; border: 1px solid #ccc; }
+pre.out { border: 1px solid #ccc; white-space: pre-wrap; word-break: break-all; }
+.lbl { font-size: 13px; color: #555; margin-top: 6px; }
+code { font-family: Consolas, "D2Coding", monospace; font-size: 14px; background: #f4f4f4; padding: 0 3px; }
+table { border-collapse: collapse; margin: 12px 0; font-size: 14px; display: block; overflow-x: auto; }
+th, td { border: 1px solid #999; padding: 4px 8px; text-align: left; vertical-align: top; }
+th { background: #eee; font-weight: normal; }
+.prob { margin-top: 28px; }
+details { margin-top: 8px; }
+summary { cursor: pointer; color: #333; }
+.o { color: #e67700; font-weight: bold; }
+.p { color: #8e44ad; font-weight: bold; }
+svg .o { fill: #e67700; }
+svg .p { fill: #8e44ad; }
+svg.cube { display: block; max-width: 100%; height: auto; margin: 6px 0; font-family: Consolas, "D2Coding", monospace; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>13-1. 중첩 for문에서 재귀까지</h1>
+<p>이중 for문으로 표의 칸을 골라 찍는다. 같은 방법으로 2개, 3개를 고르는 경우를 만든다. 마지막에 5개를 늘어놓는 코드를 5중 for문과 재귀 함수로 각각 쓴다.</p>
+<p>표의 행 번호는 <code>i</code>, 열 번호는 <code>j</code>다. 칸 하나는 <code>print(i, j, end='\t')</code>로 찍는다.</p>
+<h2>1. 표의 칸 찍기 - 이중 for문</h2>
+<pre class="code">
+n = 4
+for i in range(n):
+    for j in range(n):
+        print(i, j, end='\t')
+    print()</pre><div class="lbl">출력</div><pre class="out">
+<span class="o">0</span> <span class="p">0</span>	<span class="o">0</span> <span class="p">1</span>	<span class="o">0</span> <span class="p">2</span>	<span class="o">0</span> <span class="p">3</span>	
+<span class="o">1</span> <span class="p">0</span>	<span class="o">1</span> <span class="p">1</span>	<span class="o">1</span> <span class="p">2</span>	<span class="o">1</span> <span class="p">3</span>	
+<span class="o">2</span> <span class="p">0</span>	<span class="o">2</span> <span class="p">1</span>	<span class="o">2</span> <span class="p">2</span>	<span class="o">2</span> <span class="p">3</span>	
+<span class="o">3</span> <span class="p">0</span>	<span class="o">3</span> <span class="p">1</span>	<span class="o">3</span> <span class="p">2</span>	<span class="o">3</span> <span class="p">3</span>	</pre>
+<ul><li>바깥 for의 <code>i</code>가 행 번호, 안쪽 for의 <code>j</code>가 열 번호다.</li><li>안쪽 for가 한 번 끝나면 <code>print()</code>로 줄을 바꾼다. 찍힌 한 줄이 표의 한 행이다.</li></ul>
+<h3>1-1. 하삼각 - j &lt;= i</h3>
+<p>행 <code>i</code>에서 열 0부터 열 <code>i</code>까지 찍는다.</p>
+<pre class="code">
+for i in range(n):
+    for j in range(i + 1):
+        print(i, j, end='\t')
+    print()</pre><div class="lbl">출력 : 행마다 시작은 그대로, 한 칸씩 늦게 끝난다</div><pre class="out">
+<span class="o">0</span> <span class="p">0</span>	
+<span class="o">1</span> <span class="p">0</span>	<span class="o">1</span> <span class="p">1</span>	
+<span class="o">2</span> <span class="p">0</span>	<span class="o">2</span> <span class="p">1</span>	<span class="o">2</span> <span class="p">2</span>	
+<span class="o">3</span> <span class="p">0</span>	<span class="o">3</span> <span class="p">1</span>	<span class="o">3</span> <span class="p">2</span>	<span class="o">3</span> <span class="p">3</span>	</pre>
+<h3>1-2. 상삼각 - j &gt;= i</h3>
+<p>행 <code>i</code>에서 열 <code>i</code>부터 끝까지 찍는다. 그 앞의 열 0부터 열 <code>i - 1</code>까지는 빈 문자열과 탭을 찍어 자리를 맞춘다.</p>
+<pre class="code">
+for i in range(n):
+    for j in range(i):
+        print('', end='\t')
+    for j in range(i, n):
+        print(i, j, end='\t')
+    print()</pre><div class="lbl">출력 : 행마다 한 칸씩 늦게 시작하고, 끝은 그대로</div><pre class="out">
+<span class="o">0</span> <span class="p">0</span>	<span class="o">0</span> <span class="p">1</span>	<span class="o">0</span> <span class="p">2</span>	<span class="o">0</span> <span class="p">3</span>	
+	<span class="o">1</span> <span class="p">1</span>	<span class="o">1</span> <span class="p">2</span>	<span class="o">1</span> <span class="p">3</span>	
+		<span class="o">2</span> <span class="p">2</span>	<span class="o">2</span> <span class="p">3</span>	
+			<span class="o">3</span> <span class="p">3</span>	</pre>
+<p>빈칸을 찍는 for를 지우면 모든 줄이 왼쪽에 붙어 찍힌다.</p>
+<h3>1-3. 좌상삼각 - i + j &lt;= n - 1</h3>
+<p>행 <code>i</code>에서 열 0부터 <code>n - i</code>개를 찍는다. 아래 행으로 갈수록 하나씩 줄어든다.</p>
+<pre class="code">
+for i in range(n):
+    for j in range(n - i):
+        print(i, j, end='\t')
+    print()</pre><div class="lbl">출력 : 행마다 시작은 그대로, 한 칸씩 빨리 끝난다</div><pre class="out">
+<span class="o">0</span> <span class="p">0</span>	<span class="o">0</span> <span class="p">1</span>	<span class="o">0</span> <span class="p">2</span>	<span class="o">0</span> <span class="p">3</span>	
+<span class="o">1</span> <span class="p">0</span>	<span class="o">1</span> <span class="p">1</span>	<span class="o">1</span> <span class="p">2</span>	
+<span class="o">2</span> <span class="p">0</span>	<span class="o">2</span> <span class="p">1</span>	
+<span class="o">3</span> <span class="p">0</span>	</pre>
+<h3>1-4. 우하삼각 - i + j &gt;= n - 1</h3>
+<p>행 <code>i</code>에서 열 <code>n - 1 - i</code>부터 끝까지 찍는다. 그 앞은 빈칸으로 채운다.</p>
+<pre class="code">
+for i in range(n):
+    for j in range(n - 1 - i):
+        print('', end='\t')
+    for j in range(n - 1 - i, n):
+        print(i, j, end='\t')
+    print()</pre><div class="lbl">출력 : 행마다 한 칸씩 빨리 시작하고, 끝은 그대로</div><pre class="out">
+			<span class="o">0</span> <span class="p">3</span>	
+		<span class="o">1</span> <span class="p">2</span>	<span class="o">1</span> <span class="p">3</span>	
+	<span class="o">2</span> <span class="p">1</span>	<span class="o">2</span> <span class="p">2</span>	<span class="o">2</span> <span class="p">3</span>	
+<span class="o">3</span> <span class="p">0</span>	<span class="o">3</span> <span class="p">1</span>	<span class="o">3</span> <span class="p">2</span>	<span class="o">3</span> <span class="p">3</span>	</pre>
+<p>네 코드 모두 바깥 for는 <code>for i in range(n)</code>로 같다. 안쪽 for의 범위만 다르고, 그 범위를 바깥 변수 <code>i</code>가 정한다.</p>
+<h2>2. 바깥 for와 안쪽 for 바꾸기</h2>
+<p>바깥 for를 열 번호 <code>j</code>, 안쪽 for를 행 번호 <code>i</code>로 쓴다.</p>
+<pre class="code">
+for j in range(n):
+    for i in range(n):
+        print(i, j, end='\t')
+    print()</pre><div class="lbl">출력</div><pre class="out">
+<span class="p">0</span> <span class="o">0</span>	<span class="p">1</span> <span class="o">0</span>	<span class="p">2</span> <span class="o">0</span>	<span class="p">3</span> <span class="o">0</span>	
+<span class="p">0</span> <span class="o">1</span>	<span class="p">1</span> <span class="o">1</span>	<span class="p">2</span> <span class="o">1</span>	<span class="p">3</span> <span class="o">1</span>	
+<span class="p">0</span> <span class="o">2</span>	<span class="p">1</span> <span class="o">2</span>	<span class="p">2</span> <span class="o">2</span>	<span class="p">3</span> <span class="o">2</span>	
+<span class="p">0</span> <span class="o">3</span>	<span class="p">1</span> <span class="o">3</span>	<span class="p">2</span> <span class="o">3</span>	<span class="p">3</span> <span class="o">3</span>	</pre>
+<ul><li>찍힌 한 줄이 표의 한 열이다.</li><li>찍힌 모양은 1절 표의 행과 열을 바꾼 모양이다. 1절의 첫 줄은 <code>0 0, 0 1, 0 2, 0 3</code>, 여기의 첫 줄은 <code>0 0, 1 0, 2 0, 3 0</code>이다.</li></ul>
+<p>하삼각의 칸(<code>j &lt;= i</code>)을 이 순서로 찍는다. 열 <code>j</code>에서 행 <code>j</code>부터 끝까지가 하삼각의 칸이다. 앞은 빈칸으로 채운다.</p>
+<pre class="code">
+for j in range(n):
+    for i in range(j):
+        print('', end='\t')
+    for i in range(j, n):
+        print(i, j, end='\t')
+    print()</pre><div class="lbl">출력 : 줄마다 한 칸씩 늦게 시작하고, 끝은 그대로</div><pre class="out">
+<span class="p">0</span> <span class="o">0</span>	<span class="p">1</span> <span class="o">0</span>	<span class="p">2</span> <span class="o">0</span>	<span class="p">3</span> <span class="o">0</span>	
+	<span class="p">1</span> <span class="o">1</span>	<span class="p">2</span> <span class="o">1</span>	<span class="p">3</span> <span class="o">1</span>	
+		<span class="p">2</span> <span class="o">2</span>	<span class="p">3</span> <span class="o">2</span>	
+			<span class="p">3</span> <span class="o">3</span>	</pre>
+<p>1-1과 같은 10칸을 찍는다. 찍는 순서가 열 단위로 바뀌어서, 찍힌 모양은 상삼각이다.</p>
+<h2>3. 2개 고르기 - 이중 for문</h2>
+<p><code>A = ['a', 'b', 'c', 'd']</code>에서 2개를 골라 고른 순서대로 붙인다. <code>i</code>는 첫 번째로 고른 번호, <code>j</code>는 두 번째로 고른 번호다. 1절 표의 칸 <code>(i, j)</code> 하나가 <code>A[i] + A[j]</code> 하나다.</p>
+<h3>3-1. 중복순열 - 표 전체</h3>
+<p>같은 것을 또 고를 수 있고, 고른 순서가 다르면 다른 경우다.</p>
+<pre class="code">
+A = ['a', 'b', 'c', 'd']
+n = len(A)
+for i in range(n):
+    for j in range(n):
+        print(A[i] + A[j], end='\t')
+    print()</pre><div class="lbl">출력</div><pre class="out">
+<span class="o">a</span><span class="p">a</span>	<span class="o">a</span><span class="p">b</span>	<span class="o">a</span><span class="p">c</span>	<span class="o">a</span><span class="p">d</span>	
+<span class="o">b</span><span class="p">a</span>	<span class="o">b</span><span class="p">b</span>	<span class="o">b</span><span class="p">c</span>	<span class="o">b</span><span class="p">d</span>	
+<span class="o">c</span><span class="p">a</span>	<span class="o">c</span><span class="p">b</span>	<span class="o">c</span><span class="p">c</span>	<span class="o">c</span><span class="p">d</span>	
+<span class="o">d</span><span class="p">a</span>	<span class="o">d</span><span class="p">b</span>	<span class="o">d</span><span class="p">c</span>	<span class="o">d</span><span class="p">d</span>	</pre>
+<h3>3-2. 순열 - 대각선을 뺀 표</h3>
+<p>같은 것을 또 고를 수 없다. <code>j == i</code>인 대각선 칸은 빈칸으로 찍는다.</p>
+<pre class="code">
+for i in range(n):
+    for j in range(n):
+        if j != i:
+            print(A[i] + A[j], end='\t')
+        else:
+            print('', end='\t')
+    print()</pre><div class="lbl">출력</div><pre class="out">
+	<span class="o">a</span><span class="p">b</span>	<span class="o">a</span><span class="p">c</span>	<span class="o">a</span><span class="p">d</span>	
+<span class="o">b</span><span class="p">a</span>		<span class="o">b</span><span class="p">c</span>	<span class="o">b</span><span class="p">d</span>	
+<span class="o">c</span><span class="p">a</span>	<span class="o">c</span><span class="p">b</span>		<span class="o">c</span><span class="p">d</span>	
+<span class="o">d</span><span class="p">a</span>	<span class="o">d</span><span class="p">b</span>	<span class="o">d</span><span class="p">c</span>		</pre>
+<h3>3-3. 조합 - 대각선 위쪽</h3>
+<p>고른 순서를 따지지 않는다. <code>ab</code>와 <code>ba</code>는 같은 경우다. 표에서 <code>(0, 1)</code>과 <code>(1, 0)</code> 중 대각선 위쪽인 <code>(0, 1)</code>만 남긴다. 1-2 상삼각에서 대각선을 뺀 것이다.</p>
+<pre class="code">
+for i in range(n):
+    for j in range(i + 1):
+        print('', end='\t')
+    for j in range(i + 1, n):
+        print(A[i] + A[j], end='\t')
+    print()</pre><div class="lbl">출력</div><pre class="out">
+	<span class="o">a</span><span class="p">b</span>	<span class="o">a</span><span class="p">c</span>	<span class="o">a</span><span class="p">d</span>	
+		<span class="o">b</span><span class="p">c</span>	<span class="o">b</span><span class="p">d</span>	
+			<span class="o">c</span><span class="p">d</span>	
+				</pre>
+<h3>3-4. 중복조합 - 대각선을 포함한 위쪽</h3>
+<p>고른 순서를 따지지 않고, 같은 것을 또 고를 수 있다. 1-2 상삼각과 같은 칸이다.</p>
+<pre class="code">
+for i in range(n):
+    for j in range(i):
+        print('', end='\t')
+    for j in range(i, n):
+        print(A[i] + A[j], end='\t')
+    print()</pre><div class="lbl">출력</div><pre class="out">
+<span class="o">a</span><span class="p">a</span>	<span class="o">a</span><span class="p">b</span>	<span class="o">a</span><span class="p">c</span>	<span class="o">a</span><span class="p">d</span>	
+	<span class="o">b</span><span class="p">b</span>	<span class="o">b</span><span class="p">c</span>	<span class="o">b</span><span class="p">d</span>	
+		<span class="o">c</span><span class="p">c</span>	<span class="o">c</span><span class="p">d</span>	
+			<span class="o">d</span><span class="p">d</span>	</pre>
+<table><tr><th>고르기</th><th>순서를 따짐</th><th>같은 것을 또 고름</th><th>표에서 고르는 칸</th><th>안쪽 for</th><th>개수</th></tr><tr><td>중복순열</td><td>O</td><td>O</td><td>전체</td><td><code>range(n)</code></td><td><sub>4</sub>&Pi;<sub>2</sub> = 4 x 4 = 16</td></tr><tr><td>순열</td><td>O</td><td>X</td><td>대각선을 뺀 전체</td><td><code>range(n)</code> 중 <code>j != i</code></td><td><sub>4</sub>P<sub>2</sub> = 4 x 3 = 12</td></tr><tr><td>조합</td><td>X</td><td>X</td><td>대각선 위쪽</td><td><code>range(i + 1, n)</code></td><td><sub>4</sub>C<sub>2</sub> = 12 / 2 = 6</td></tr><tr><td>중복조합</td><td>X</td><td>O</td><td>대각선을 포함한 위쪽</td><td><code>range(i, n)</code></td><td><sub>4</sub>H<sub>2</sub> = <sub>5</sub>C<sub>2</sub> = 10</td></tr></table>
+<h2>4. 3개 고르기 - 삼중 for문</h2>
+<p><code>k</code>는 세 번째로 고른 번호다. 만든 것을 리스트 <code>out</code>에 모아 개수와 함께 찍는다.</p>
+<h3>4-1. 중복순열</h3>
+<pre class="code">
+out = []
+for i in range(n):
+    for j in range(n):
+        for k in range(n):
+            out.append(A[i] + A[j] + A[k])
+print(len(out))
+print(out)</pre><div class="lbl">출력</div><pre class="out">
+64
+['aaa', 'aab', 'aac', 'aad', 'aba', 'abb', 'abc', 'abd', 'aca', 'acb', 'acc', 'acd', 'ada', 'adb', 'adc', 'add', 'baa', 'bab', 'bac', 'bad', 'bba', 'bbb', 'bbc', 'bbd', 'bca', 'bcb', 'bcc', 'bcd', 'bda', 'bdb', 'bdc', 'bdd', 'caa', 'cab', 'cac', 'cad', 'cba', 'cbb', 'cbc', 'cbd', 'cca', 'ccb', 'ccc', 'ccd', 'cda', 'cdb', 'cdc', 'cdd', 'daa', 'dab', 'dac', 'dad', 'dba', 'dbb', 'dbc', 'dbd', 'dca', 'dcb', 'dcc', 'dcd', 'dda', 'ddb', 'ddc', 'ddd']</pre>
+<div class="lbl">배치 : 판 하나가 i 하나, 판 안에서 행은 j, 열은 k</div><svg class="cube" width="835" height="479" viewBox="0 0 835 479"><line x1="20" y1="334" x2="581" y2="10" stroke="#999" stroke-width="1"/><line x1="20" y1="430" x2="581" y2="106" stroke="#999" stroke-width="1"/><line x1="220" y1="430" x2="781" y2="106" stroke="#999" stroke-width="1"/><rect x="581" y="10" width="200" height="96" fill="#fff" stroke="#555"/><line x1="581" y1="34" x2="781" y2="34" stroke="#bbb" stroke-width="1"/><line x1="581" y1="58" x2="781" y2="58" stroke="#bbb" stroke-width="1"/><line x1="581" y1="82" x2="781" y2="82" stroke="#bbb" stroke-width="1"/><line x1="631" y1="10" x2="631" y2="106" stroke="#bbb" stroke-width="1"/><line x1="681" y1="10" x2="681" y2="106" stroke="#bbb" stroke-width="1"/><line x1="731" y1="10" x2="731" y2="106" stroke="#bbb" stroke-width="1"/><rect x="581" y="10" width="200" height="96" fill="none" stroke="#555"/><text x="606.0" y="27.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">a</tspan>a</text><text x="656.0" y="27.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">a</tspan>b</text><text x="706.0" y="27.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">a</tspan>c</text><text x="756.0" y="27.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">a</tspan>d</text><text x="606.0" y="51.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">b</tspan>a</text><text x="656.0" y="51.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">b</tspan>b</text><text x="706.0" y="51.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">b</tspan>c</text><text x="756.0" y="51.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">b</tspan>d</text><text x="606.0" y="75.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">c</tspan>a</text><text x="656.0" y="75.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">c</tspan>b</text><text x="706.0" y="75.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">c</tspan>c</text><text x="756.0" y="75.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">c</tspan>d</text><text x="606.0" y="99.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">d</tspan>a</text><text x="656.0" y="99.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">d</tspan>b</text><text x="706.0" y="99.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">d</tspan>c</text><text x="756.0" y="99.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">d</tspan>d</text><rect x="394" y="118" width="200" height="96" fill="#fff" stroke="#555"/><line x1="394" y1="142" x2="594" y2="142" stroke="#bbb" stroke-width="1"/><line x1="394" y1="166" x2="594" y2="166" stroke="#bbb" stroke-width="1"/><line x1="394" y1="190" x2="594" y2="190" stroke="#bbb" stroke-width="1"/><line x1="444" y1="118" x2="444" y2="214" stroke="#bbb" stroke-width="1"/><line x1="494" y1="118" x2="494" y2="214" stroke="#bbb" stroke-width="1"/><line x1="544" y1="118" x2="544" y2="214" stroke="#bbb" stroke-width="1"/><rect x="394" y="118" width="200" height="96" fill="none" stroke="#555"/><text x="419.0" y="135.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">a</tspan>a</text><text x="469.0" y="135.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">a</tspan>b</text><text x="519.0" y="135.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">a</tspan>c</text><text x="569.0" y="135.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">a</tspan>d</text><text x="419.0" y="159.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">b</tspan>a</text><text x="469.0" y="159.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">b</tspan>b</text><text x="519.0" y="159.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">b</tspan>c</text><text x="569.0" y="159.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">b</tspan>d</text><text x="419.0" y="183.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">c</tspan>a</text><text x="469.0" y="183.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">c</tspan>b</text><text x="519.0" y="183.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">c</tspan>c</text><text x="569.0" y="183.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">c</tspan>d</text><text x="419.0" y="207.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">d</tspan>a</text><text x="469.0" y="207.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">d</tspan>b</text><text x="519.0" y="207.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">d</tspan>c</text><text x="569.0" y="207.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">d</tspan>d</text><rect x="207" y="226" width="200" height="96" fill="#fff" stroke="#555"/><line x1="207" y1="250" x2="407" y2="250" stroke="#bbb" stroke-width="1"/><line x1="207" y1="274" x2="407" y2="274" stroke="#bbb" stroke-width="1"/><line x1="207" y1="298" x2="407" y2="298" stroke="#bbb" stroke-width="1"/><line x1="257" y1="226" x2="257" y2="322" stroke="#bbb" stroke-width="1"/><line x1="307" y1="226" x2="307" y2="322" stroke="#bbb" stroke-width="1"/><line x1="357" y1="226" x2="357" y2="322" stroke="#bbb" stroke-width="1"/><rect x="207" y="226" width="200" height="96" fill="none" stroke="#555"/><text x="232.0" y="243.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">a</tspan>a</text><text x="282.0" y="243.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">a</tspan>b</text><text x="332.0" y="243.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">a</tspan>c</text><text x="382.0" y="243.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">a</tspan>d</text><text x="232.0" y="267.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">b</tspan>a</text><text x="282.0" y="267.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">b</tspan>b</text><text x="332.0" y="267.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">b</tspan>c</text><text x="382.0" y="267.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">b</tspan>d</text><text x="232.0" y="291.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">c</tspan>a</text><text x="282.0" y="291.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">c</tspan>b</text><text x="332.0" y="291.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">c</tspan>c</text><text x="382.0" y="291.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">c</tspan>d</text><text x="232.0" y="315.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">d</tspan>a</text><text x="282.0" y="315.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">d</tspan>b</text><text x="332.0" y="315.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">d</tspan>c</text><text x="382.0" y="315.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">d</tspan>d</text><rect x="20" y="334" width="200" height="96" fill="#fff" stroke="#555"/><line x1="20" y1="358" x2="220" y2="358" stroke="#bbb" stroke-width="1"/><line x1="20" y1="382" x2="220" y2="382" stroke="#bbb" stroke-width="1"/><line x1="20" y1="406" x2="220" y2="406" stroke="#bbb" stroke-width="1"/><line x1="70" y1="334" x2="70" y2="430" stroke="#bbb" stroke-width="1"/><line x1="120" y1="334" x2="120" y2="430" stroke="#bbb" stroke-width="1"/><line x1="170" y1="334" x2="170" y2="430" stroke="#bbb" stroke-width="1"/><rect x="20" y="334" width="200" height="96" fill="none" stroke="#555"/><text x="45.0" y="351.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">a</tspan>a</text><text x="95.0" y="351.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">a</tspan>b</text><text x="145.0" y="351.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">a</tspan>c</text><text x="195.0" y="351.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">a</tspan>d</text><text x="45.0" y="375.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">b</tspan>a</text><text x="95.0" y="375.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">b</tspan>b</text><text x="145.0" y="375.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">b</tspan>c</text><text x="195.0" y="375.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">b</tspan>d</text><text x="45.0" y="399.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">c</tspan>a</text><text x="95.0" y="399.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">c</tspan>b</text><text x="145.0" y="399.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">c</tspan>c</text><text x="195.0" y="399.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">c</tspan>d</text><text x="45.0" y="423.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">d</tspan>a</text><text x="95.0" y="423.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">d</tspan>b</text><text x="145.0" y="423.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">d</tspan>c</text><text x="195.0" y="423.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">d</tspan>d</text><line x1="220" y1="334" x2="781" y2="10" stroke="#999" stroke-width="1"/><line x1="203.0" y1="460.6" x2="816.0" y2="106.6" stroke="#555" stroke-width="1.5"/><polygon points="824.6,101.6 818.5,110.9 813.5,102.3" fill="#555"/><text x="240.0" y="469.6" text-anchor="middle">i = 0</text><text x="427.0" y="361.6" text-anchor="middle">i = 1</text><text x="614.0" y="253.6" text-anchor="middle">i = 2</text><text x="801.0" y="145.6" text-anchor="middle">i = 3</text></svg>
+<h3>4-2. 순열</h3>
+<pre class="code">
+out = []
+for i in range(n):
+    for j in range(n):
+        if j != i:
+            for k in range(n):
+                if k != i and k != j:
+                    out.append(A[i] + A[j] + A[k])
+print(len(out))
+print(out)</pre><div class="lbl">출력</div><pre class="out">
+24
+['abc', 'abd', 'acb', 'acd', 'adb', 'adc', 'bac', 'bad', 'bca', 'bcd', 'bda', 'bdc', 'cab', 'cad', 'cba', 'cbd', 'cda', 'cdb', 'dab', 'dac', 'dba', 'dbc', 'dca', 'dcb']</pre>
+<div class="lbl">배치 : 판 하나가 i 하나, 판 안에서 행은 j, 열은 k</div><svg class="cube" width="835" height="479" viewBox="0 0 835 479"><line x1="20" y1="334" x2="581" y2="10" stroke="#999" stroke-width="1"/><line x1="20" y1="430" x2="581" y2="106" stroke="#999" stroke-width="1"/><line x1="220" y1="430" x2="781" y2="106" stroke="#999" stroke-width="1"/><rect x="581" y="10" width="200" height="96" fill="#fff" stroke="#555"/><rect x="731" y="10" width="50" height="24" fill="#f8c8d8"/><rect x="731" y="34" width="50" height="24" fill="#f8c8d8"/><rect x="731" y="58" width="50" height="24" fill="#f8c8d8"/><rect x="581" y="82" width="50" height="24" fill="#f8c8d8"/><rect x="631" y="82" width="50" height="24" fill="#f8c8d8"/><rect x="681" y="82" width="50" height="24" fill="#f8c8d8"/><rect x="731" y="82" width="50" height="24" fill="#f8c8d8"/><line x1="581" y1="34" x2="781" y2="34" stroke="#bbb" stroke-width="1"/><line x1="581" y1="58" x2="781" y2="58" stroke="#bbb" stroke-width="1"/><line x1="581" y1="82" x2="781" y2="82" stroke="#bbb" stroke-width="1"/><line x1="631" y1="10" x2="631" y2="106" stroke="#bbb" stroke-width="1"/><line x1="681" y1="10" x2="681" y2="106" stroke="#bbb" stroke-width="1"/><line x1="731" y1="10" x2="731" y2="106" stroke="#bbb" stroke-width="1"/><rect x="581" y="10" width="200" height="96" fill="none" stroke="#555"/><text x="656.0" y="27.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">a</tspan>b</text><text x="706.0" y="27.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">a</tspan>c</text><text x="606.0" y="51.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">b</tspan>a</text><text x="706.0" y="51.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">b</tspan>c</text><text x="606.0" y="75.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">c</tspan>a</text><text x="656.0" y="75.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">c</tspan>b</text><rect x="394" y="118" width="200" height="96" fill="#fff" stroke="#555"/><rect x="494" y="118" width="50" height="24" fill="#f8c8d8"/><rect x="494" y="142" width="50" height="24" fill="#f8c8d8"/><rect x="394" y="166" width="50" height="24" fill="#f8c8d8"/><rect x="444" y="166" width="50" height="24" fill="#f8c8d8"/><rect x="494" y="166" width="50" height="24" fill="#f8c8d8"/><rect x="544" y="166" width="50" height="24" fill="#f8c8d8"/><rect x="494" y="190" width="50" height="24" fill="#f8c8d8"/><line x1="394" y1="142" x2="594" y2="142" stroke="#bbb" stroke-width="1"/><line x1="394" y1="166" x2="594" y2="166" stroke="#bbb" stroke-width="1"/><line x1="394" y1="190" x2="594" y2="190" stroke="#bbb" stroke-width="1"/><line x1="444" y1="118" x2="444" y2="214" stroke="#bbb" stroke-width="1"/><line x1="494" y1="118" x2="494" y2="214" stroke="#bbb" stroke-width="1"/><line x1="544" y1="118" x2="544" y2="214" stroke="#bbb" stroke-width="1"/><rect x="394" y="118" width="200" height="96" fill="none" stroke="#555"/><text x="469.0" y="135.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">a</tspan>b</text><text x="569.0" y="135.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">a</tspan>d</text><text x="419.0" y="159.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">b</tspan>a</text><text x="569.0" y="159.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">b</tspan>d</text><text x="419.0" y="207.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">d</tspan>a</text><text x="469.0" y="207.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">d</tspan>b</text><rect x="207" y="226" width="200" height="96" fill="#fff" stroke="#555"/><rect x="257" y="226" width="50" height="24" fill="#f8c8d8"/><rect x="207" y="250" width="50" height="24" fill="#f8c8d8"/><rect x="257" y="250" width="50" height="24" fill="#f8c8d8"/><rect x="307" y="250" width="50" height="24" fill="#f8c8d8"/><rect x="357" y="250" width="50" height="24" fill="#f8c8d8"/><rect x="257" y="274" width="50" height="24" fill="#f8c8d8"/><rect x="257" y="298" width="50" height="24" fill="#f8c8d8"/><line x1="207" y1="250" x2="407" y2="250" stroke="#bbb" stroke-width="1"/><line x1="207" y1="274" x2="407" y2="274" stroke="#bbb" stroke-width="1"/><line x1="207" y1="298" x2="407" y2="298" stroke="#bbb" stroke-width="1"/><line x1="257" y1="226" x2="257" y2="322" stroke="#bbb" stroke-width="1"/><line x1="307" y1="226" x2="307" y2="322" stroke="#bbb" stroke-width="1"/><line x1="357" y1="226" x2="357" y2="322" stroke="#bbb" stroke-width="1"/><rect x="207" y="226" width="200" height="96" fill="none" stroke="#555"/><text x="332.0" y="243.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">a</tspan>c</text><text x="382.0" y="243.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">a</tspan>d</text><text x="232.0" y="291.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">c</tspan>a</text><text x="382.0" y="291.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">c</tspan>d</text><text x="232.0" y="315.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">d</tspan>a</text><text x="332.0" y="315.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">d</tspan>c</text><rect x="20" y="334" width="200" height="96" fill="#fff" stroke="#555"/><rect x="20" y="334" width="50" height="24" fill="#f8c8d8"/><rect x="70" y="334" width="50" height="24" fill="#f8c8d8"/><rect x="120" y="334" width="50" height="24" fill="#f8c8d8"/><rect x="170" y="334" width="50" height="24" fill="#f8c8d8"/><rect x="20" y="358" width="50" height="24" fill="#f8c8d8"/><rect x="20" y="382" width="50" height="24" fill="#f8c8d8"/><rect x="20" y="406" width="50" height="24" fill="#f8c8d8"/><line x1="20" y1="358" x2="220" y2="358" stroke="#bbb" stroke-width="1"/><line x1="20" y1="382" x2="220" y2="382" stroke="#bbb" stroke-width="1"/><line x1="20" y1="406" x2="220" y2="406" stroke="#bbb" stroke-width="1"/><line x1="70" y1="334" x2="70" y2="430" stroke="#bbb" stroke-width="1"/><line x1="120" y1="334" x2="120" y2="430" stroke="#bbb" stroke-width="1"/><line x1="170" y1="334" x2="170" y2="430" stroke="#bbb" stroke-width="1"/><rect x="20" y="334" width="200" height="96" fill="none" stroke="#555"/><text x="145.0" y="375.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">b</tspan>c</text><text x="195.0" y="375.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">b</tspan>d</text><text x="95.0" y="399.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">c</tspan>b</text><text x="195.0" y="399.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">c</tspan>d</text><text x="95.0" y="423.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">d</tspan>b</text><text x="145.0" y="423.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">d</tspan>c</text><line x1="220" y1="334" x2="781" y2="10" stroke="#999" stroke-width="1"/><line x1="203.0" y1="460.6" x2="816.0" y2="106.6" stroke="#555" stroke-width="1.5"/><polygon points="824.6,101.6 818.5,110.9 813.5,102.3" fill="#555"/><text x="240.0" y="469.6" text-anchor="middle">i = 0</text><text x="427.0" y="361.6" text-anchor="middle">i = 1</text><text x="614.0" y="253.6" text-anchor="middle">i = 2</text><text x="801.0" y="145.6" text-anchor="middle">i = 3</text></svg>
+<h3>4-3. 조합</h3>
+<pre class="code">
+out = []
+for i in range(n):
+    for j in range(i + 1, n):
+        for k in range(j + 1, n):
+            out.append(A[i] + A[j] + A[k])
+print(len(out))
+print(out)</pre><div class="lbl">출력</div><pre class="out">
+4
+['abc', 'abd', 'acd', 'bcd']</pre>
+<div class="lbl">배치 : 판 하나가 i 하나, 판 안에서 행은 j, 열은 k</div><svg class="cube" width="835" height="479" viewBox="0 0 835 479"><line x1="20" y1="334" x2="581" y2="10" stroke="#999" stroke-width="1"/><line x1="20" y1="430" x2="581" y2="106" stroke="#999" stroke-width="1"/><line x1="220" y1="430" x2="781" y2="106" stroke="#999" stroke-width="1"/><rect x="581" y="10" width="200" height="96" fill="#fff" stroke="#555"/><rect x="581" y="10" width="50" height="24" fill="#f8c8d8"/><rect x="631" y="10" width="50" height="24" fill="#f8c8d8"/><rect x="681" y="10" width="50" height="24" fill="#f8c8d8"/><rect x="731" y="10" width="50" height="24" fill="#f8c8d8"/><rect x="581" y="34" width="50" height="24" fill="#f8c8d8"/><rect x="631" y="34" width="50" height="24" fill="#f8c8d8"/><rect x="681" y="34" width="50" height="24" fill="#f8c8d8"/><rect x="731" y="34" width="50" height="24" fill="#f8c8d8"/><rect x="581" y="58" width="50" height="24" fill="#f8c8d8"/><rect x="631" y="58" width="50" height="24" fill="#f8c8d8"/><rect x="681" y="58" width="50" height="24" fill="#f8c8d8"/><rect x="731" y="58" width="50" height="24" fill="#f8c8d8"/><rect x="581" y="82" width="50" height="24" fill="#f8c8d8"/><rect x="631" y="82" width="50" height="24" fill="#f8c8d8"/><rect x="681" y="82" width="50" height="24" fill="#f8c8d8"/><rect x="731" y="82" width="50" height="24" fill="#f8c8d8"/><line x1="581" y1="34" x2="781" y2="34" stroke="#bbb" stroke-width="1"/><line x1="581" y1="58" x2="781" y2="58" stroke="#bbb" stroke-width="1"/><line x1="581" y1="82" x2="781" y2="82" stroke="#bbb" stroke-width="1"/><line x1="631" y1="10" x2="631" y2="106" stroke="#bbb" stroke-width="1"/><line x1="681" y1="10" x2="681" y2="106" stroke="#bbb" stroke-width="1"/><line x1="731" y1="10" x2="731" y2="106" stroke="#bbb" stroke-width="1"/><rect x="581" y="10" width="200" height="96" fill="none" stroke="#555"/><rect x="394" y="118" width="200" height="96" fill="#fff" stroke="#555"/><rect x="394" y="118" width="50" height="24" fill="#f8c8d8"/><rect x="444" y="118" width="50" height="24" fill="#f8c8d8"/><rect x="494" y="118" width="50" height="24" fill="#f8c8d8"/><rect x="544" y="118" width="50" height="24" fill="#f8c8d8"/><rect x="394" y="142" width="50" height="24" fill="#f8c8d8"/><rect x="444" y="142" width="50" height="24" fill="#f8c8d8"/><rect x="494" y="142" width="50" height="24" fill="#f8c8d8"/><rect x="544" y="142" width="50" height="24" fill="#f8c8d8"/><rect x="394" y="166" width="50" height="24" fill="#f8c8d8"/><rect x="444" y="166" width="50" height="24" fill="#f8c8d8"/><rect x="494" y="166" width="50" height="24" fill="#f8c8d8"/><rect x="544" y="166" width="50" height="24" fill="#f8c8d8"/><rect x="394" y="190" width="50" height="24" fill="#f8c8d8"/><rect x="444" y="190" width="50" height="24" fill="#f8c8d8"/><rect x="494" y="190" width="50" height="24" fill="#f8c8d8"/><rect x="544" y="190" width="50" height="24" fill="#f8c8d8"/><line x1="394" y1="142" x2="594" y2="142" stroke="#bbb" stroke-width="1"/><line x1="394" y1="166" x2="594" y2="166" stroke="#bbb" stroke-width="1"/><line x1="394" y1="190" x2="594" y2="190" stroke="#bbb" stroke-width="1"/><line x1="444" y1="118" x2="444" y2="214" stroke="#bbb" stroke-width="1"/><line x1="494" y1="118" x2="494" y2="214" stroke="#bbb" stroke-width="1"/><line x1="544" y1="118" x2="544" y2="214" stroke="#bbb" stroke-width="1"/><rect x="394" y="118" width="200" height="96" fill="none" stroke="#555"/><rect x="207" y="226" width="200" height="96" fill="#fff" stroke="#555"/><rect x="207" y="226" width="50" height="24" fill="#f8c8d8"/><rect x="257" y="226" width="50" height="24" fill="#f8c8d8"/><rect x="307" y="226" width="50" height="24" fill="#f8c8d8"/><rect x="357" y="226" width="50" height="24" fill="#f8c8d8"/><rect x="207" y="250" width="50" height="24" fill="#f8c8d8"/><rect x="257" y="250" width="50" height="24" fill="#f8c8d8"/><rect x="307" y="250" width="50" height="24" fill="#f8c8d8"/><rect x="357" y="250" width="50" height="24" fill="#f8c8d8"/><rect x="207" y="274" width="50" height="24" fill="#f8c8d8"/><rect x="257" y="274" width="50" height="24" fill="#f8c8d8"/><rect x="307" y="274" width="50" height="24" fill="#f8c8d8"/><rect x="207" y="298" width="50" height="24" fill="#f8c8d8"/><rect x="257" y="298" width="50" height="24" fill="#f8c8d8"/><rect x="307" y="298" width="50" height="24" fill="#f8c8d8"/><line x1="207" y1="250" x2="407" y2="250" stroke="#bbb" stroke-width="1"/><line x1="207" y1="274" x2="407" y2="274" stroke="#bbb" stroke-width="1"/><line x1="207" y1="298" x2="407" y2="298" stroke="#bbb" stroke-width="1"/><line x1="257" y1="226" x2="257" y2="322" stroke="#bbb" stroke-width="1"/><line x1="307" y1="226" x2="307" y2="322" stroke="#bbb" stroke-width="1"/><line x1="357" y1="226" x2="357" y2="322" stroke="#bbb" stroke-width="1"/><rect x="207" y="226" width="200" height="96" fill="none" stroke="#555"/><text x="382.0" y="291.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">c</tspan>d</text><rect x="20" y="334" width="200" height="96" fill="#fff" stroke="#555"/><rect x="20" y="334" width="50" height="24" fill="#f8c8d8"/><rect x="70" y="334" width="50" height="24" fill="#f8c8d8"/><rect x="120" y="334" width="50" height="24" fill="#f8c8d8"/><rect x="170" y="334" width="50" height="24" fill="#f8c8d8"/><rect x="20" y="358" width="50" height="24" fill="#f8c8d8"/><rect x="70" y="358" width="50" height="24" fill="#f8c8d8"/><rect x="20" y="382" width="50" height="24" fill="#f8c8d8"/><rect x="70" y="382" width="50" height="24" fill="#f8c8d8"/><rect x="20" y="406" width="50" height="24" fill="#f8c8d8"/><rect x="70" y="406" width="50" height="24" fill="#f8c8d8"/><line x1="20" y1="358" x2="220" y2="358" stroke="#bbb" stroke-width="1"/><line x1="20" y1="382" x2="220" y2="382" stroke="#bbb" stroke-width="1"/><line x1="20" y1="406" x2="220" y2="406" stroke="#bbb" stroke-width="1"/><line x1="70" y1="334" x2="70" y2="430" stroke="#bbb" stroke-width="1"/><line x1="120" y1="334" x2="120" y2="430" stroke="#bbb" stroke-width="1"/><line x1="170" y1="334" x2="170" y2="430" stroke="#bbb" stroke-width="1"/><rect x="20" y="334" width="200" height="96" fill="none" stroke="#555"/><text x="145.0" y="375.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">b</tspan>c</text><text x="195.0" y="375.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">b</tspan>d</text><text x="195.0" y="399.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">c</tspan>d</text><line x1="220" y1="334" x2="781" y2="10" stroke="#999" stroke-width="1"/><line x1="203.0" y1="460.6" x2="816.0" y2="106.6" stroke="#555" stroke-width="1.5"/><polygon points="824.6,101.6 818.5,110.9 813.5,102.3" fill="#555"/><text x="240.0" y="469.6" text-anchor="middle">i = 0</text><text x="427.0" y="361.6" text-anchor="middle">i = 1</text><text x="614.0" y="253.6" text-anchor="middle">i = 2</text><text x="801.0" y="145.6" text-anchor="middle">i = 3</text></svg>
+<h3>4-4. 중복조합</h3>
+<pre class="code">
+out = []
+for i in range(n):
+    for j in range(i, n):
+        for k in range(j, n):
+            out.append(A[i] + A[j] + A[k])
+print(len(out))
+print(out)</pre><div class="lbl">출력</div><pre class="out">
+20
+['aaa', 'aab', 'aac', 'aad', 'abb', 'abc', 'abd', 'acc', 'acd', 'add', 'bbb', 'bbc', 'bbd', 'bcc', 'bcd', 'bdd', 'ccc', 'ccd', 'cdd', 'ddd']</pre>
+<div class="lbl">배치 : 판 하나가 i 하나, 판 안에서 행은 j, 열은 k</div><svg class="cube" width="835" height="479" viewBox="0 0 835 479"><line x1="20" y1="334" x2="581" y2="10" stroke="#999" stroke-width="1"/><line x1="20" y1="430" x2="581" y2="106" stroke="#999" stroke-width="1"/><line x1="220" y1="430" x2="781" y2="106" stroke="#999" stroke-width="1"/><rect x="581" y="10" width="200" height="96" fill="#fff" stroke="#555"/><rect x="581" y="10" width="50" height="24" fill="#f8c8d8"/><rect x="631" y="10" width="50" height="24" fill="#f8c8d8"/><rect x="681" y="10" width="50" height="24" fill="#f8c8d8"/><rect x="731" y="10" width="50" height="24" fill="#f8c8d8"/><rect x="581" y="34" width="50" height="24" fill="#f8c8d8"/><rect x="631" y="34" width="50" height="24" fill="#f8c8d8"/><rect x="681" y="34" width="50" height="24" fill="#f8c8d8"/><rect x="731" y="34" width="50" height="24" fill="#f8c8d8"/><rect x="581" y="58" width="50" height="24" fill="#f8c8d8"/><rect x="631" y="58" width="50" height="24" fill="#f8c8d8"/><rect x="681" y="58" width="50" height="24" fill="#f8c8d8"/><rect x="731" y="58" width="50" height="24" fill="#f8c8d8"/><rect x="581" y="82" width="50" height="24" fill="#f8c8d8"/><rect x="631" y="82" width="50" height="24" fill="#f8c8d8"/><rect x="681" y="82" width="50" height="24" fill="#f8c8d8"/><line x1="581" y1="34" x2="781" y2="34" stroke="#bbb" stroke-width="1"/><line x1="581" y1="58" x2="781" y2="58" stroke="#bbb" stroke-width="1"/><line x1="581" y1="82" x2="781" y2="82" stroke="#bbb" stroke-width="1"/><line x1="631" y1="10" x2="631" y2="106" stroke="#bbb" stroke-width="1"/><line x1="681" y1="10" x2="681" y2="106" stroke="#bbb" stroke-width="1"/><line x1="731" y1="10" x2="731" y2="106" stroke="#bbb" stroke-width="1"/><rect x="581" y="10" width="200" height="96" fill="none" stroke="#555"/><text x="756.0" y="99.0" text-anchor="middle"><tspan class="o">d</tspan><tspan class="p">d</tspan>d</text><rect x="394" y="118" width="200" height="96" fill="#fff" stroke="#555"/><rect x="394" y="118" width="50" height="24" fill="#f8c8d8"/><rect x="444" y="118" width="50" height="24" fill="#f8c8d8"/><rect x="494" y="118" width="50" height="24" fill="#f8c8d8"/><rect x="544" y="118" width="50" height="24" fill="#f8c8d8"/><rect x="394" y="142" width="50" height="24" fill="#f8c8d8"/><rect x="444" y="142" width="50" height="24" fill="#f8c8d8"/><rect x="494" y="142" width="50" height="24" fill="#f8c8d8"/><rect x="544" y="142" width="50" height="24" fill="#f8c8d8"/><rect x="394" y="166" width="50" height="24" fill="#f8c8d8"/><rect x="444" y="166" width="50" height="24" fill="#f8c8d8"/><rect x="394" y="190" width="50" height="24" fill="#f8c8d8"/><rect x="444" y="190" width="50" height="24" fill="#f8c8d8"/><line x1="394" y1="142" x2="594" y2="142" stroke="#bbb" stroke-width="1"/><line x1="394" y1="166" x2="594" y2="166" stroke="#bbb" stroke-width="1"/><line x1="394" y1="190" x2="594" y2="190" stroke="#bbb" stroke-width="1"/><line x1="444" y1="118" x2="444" y2="214" stroke="#bbb" stroke-width="1"/><line x1="494" y1="118" x2="494" y2="214" stroke="#bbb" stroke-width="1"/><line x1="544" y1="118" x2="544" y2="214" stroke="#bbb" stroke-width="1"/><rect x="394" y="118" width="200" height="96" fill="none" stroke="#555"/><text x="519.0" y="183.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">c</tspan>c</text><text x="569.0" y="183.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">c</tspan>d</text><text x="569.0" y="207.0" text-anchor="middle"><tspan class="o">c</tspan><tspan class="p">d</tspan>d</text><rect x="207" y="226" width="200" height="96" fill="#fff" stroke="#555"/><rect x="207" y="226" width="50" height="24" fill="#f8c8d8"/><rect x="257" y="226" width="50" height="24" fill="#f8c8d8"/><rect x="307" y="226" width="50" height="24" fill="#f8c8d8"/><rect x="357" y="226" width="50" height="24" fill="#f8c8d8"/><rect x="207" y="250" width="50" height="24" fill="#f8c8d8"/><rect x="207" y="274" width="50" height="24" fill="#f8c8d8"/><rect x="207" y="298" width="50" height="24" fill="#f8c8d8"/><line x1="207" y1="250" x2="407" y2="250" stroke="#bbb" stroke-width="1"/><line x1="207" y1="274" x2="407" y2="274" stroke="#bbb" stroke-width="1"/><line x1="207" y1="298" x2="407" y2="298" stroke="#bbb" stroke-width="1"/><line x1="257" y1="226" x2="257" y2="322" stroke="#bbb" stroke-width="1"/><line x1="307" y1="226" x2="307" y2="322" stroke="#bbb" stroke-width="1"/><line x1="357" y1="226" x2="357" y2="322" stroke="#bbb" stroke-width="1"/><rect x="207" y="226" width="200" height="96" fill="none" stroke="#555"/><text x="282.0" y="267.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">b</tspan>b</text><text x="332.0" y="267.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">b</tspan>c</text><text x="382.0" y="267.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">b</tspan>d</text><text x="332.0" y="291.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">c</tspan>c</text><text x="382.0" y="291.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">c</tspan>d</text><text x="382.0" y="315.0" text-anchor="middle"><tspan class="o">b</tspan><tspan class="p">d</tspan>d</text><rect x="20" y="334" width="200" height="96" fill="#fff" stroke="#555"/><line x1="20" y1="358" x2="220" y2="358" stroke="#bbb" stroke-width="1"/><line x1="20" y1="382" x2="220" y2="382" stroke="#bbb" stroke-width="1"/><line x1="20" y1="406" x2="220" y2="406" stroke="#bbb" stroke-width="1"/><line x1="70" y1="334" x2="70" y2="430" stroke="#bbb" stroke-width="1"/><line x1="120" y1="334" x2="120" y2="430" stroke="#bbb" stroke-width="1"/><line x1="170" y1="334" x2="170" y2="430" stroke="#bbb" stroke-width="1"/><rect x="20" y="334" width="200" height="96" fill="none" stroke="#555"/><text x="45.0" y="351.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">a</tspan>a</text><text x="95.0" y="351.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">a</tspan>b</text><text x="145.0" y="351.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">a</tspan>c</text><text x="195.0" y="351.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">a</tspan>d</text><text x="95.0" y="375.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">b</tspan>b</text><text x="145.0" y="375.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">b</tspan>c</text><text x="195.0" y="375.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">b</tspan>d</text><text x="145.0" y="399.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">c</tspan>c</text><text x="195.0" y="399.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">c</tspan>d</text><text x="195.0" y="423.0" text-anchor="middle"><tspan class="o">a</tspan><tspan class="p">d</tspan>d</text><line x1="220" y1="334" x2="781" y2="10" stroke="#999" stroke-width="1"/><line x1="203.0" y1="460.6" x2="816.0" y2="106.6" stroke="#555" stroke-width="1.5"/><polygon points="824.6,101.6 818.5,110.9 813.5,102.3" fill="#555"/><text x="240.0" y="469.6" text-anchor="middle">i = 0</text><text x="427.0" y="361.6" text-anchor="middle">i = 1</text><text x="614.0" y="253.6" text-anchor="middle">i = 2</text><text x="801.0" y="145.6" text-anchor="middle">i = 3</text></svg>
+<table><tr><th>고르기</th><th>두 번째 for</th><th>세 번째 for</th><th>개수</th></tr><tr><td>중복순열</td><td><code>range(n)</code></td><td><code>range(n)</code></td><td><sub>4</sub>&Pi;<sub>3</sub> = 64</td></tr><tr><td>순열</td><td><code>range(n)</code> 중 <code>j != i</code></td><td><code>range(n)</code> 중 <code>k != i and k != j</code></td><td><sub>4</sub>P<sub>3</sub> = 24</td></tr><tr><td>조합</td><td><code>range(i + 1, n)</code></td><td><code>range(j + 1, n)</code></td><td><sub>4</sub>C<sub>3</sub> = 4</td></tr><tr><td>중복조합</td><td><code>range(i, n)</code></td><td><code>range(j, n)</code></td><td><sub>4</sub>H<sub>3</sub> = <sub>6</sub>C<sub>3</sub> = 20</td></tr></table>
+<ul><li>조합, 중복조합: 안쪽 for의 시작 번호를 바로 바깥 for의 변수가 정한다. <code>j</code>는 <code>i</code>, <code>k</code>는 <code>j</code>로 정한다.</li><li>순열: 조건에 바깥 for의 변수가 모두 들어간다. <code>k</code>는 <code>i</code>, <code>j</code> 둘 다와 달라야 한다. for가 한 겹 늘 때마다 조건에 들어가는 변수가 하나씩 는다.</li></ul>
+<h2>5. 5개 늘어놓기 - 5중 for문과 재귀 함수</h2>
+<p><code>A = ['a', 'b', 'c', 'd', 'e']</code>의 5개를 한 번씩 모두 써서 늘어놓는 경우(<sub>5</sub>P<sub>5</sub> = 120)를 만든다. 첫 번째 자리부터 다섯 번째 자리까지 차례로 하나씩 정한다.</p>
+<h3>5-1. 5중 for문</h3>
+<pre class="code">
+A = ['a', 'b', 'c', 'd', 'e']
+n = len(A)
+
+out1 = []
+for i in range(n):
+    for j in range(n):
+        if j != i:
+            for k in range(n):
+                if k != i and k != j:
+                    for l in range(n):
+                        if l != i and l != j and l != k:
+                            for m in range(n):
+                                if m != i and m != j and m != k and m != l:
+                                    out1.append(A[i] + A[j] + A[k] + A[l] + A[m])
+print(len(out1))
+print(out1[:8])</pre><div class="lbl">출력</div><pre class="out">
+120
+['abcde', 'abced', 'abdce', 'abdec', 'abecd', 'abedc', 'acbde', 'acbed']</pre>
+<h3>5-2. 재귀 함수</h3>
+<pre class="code">
+r = 5
+out2 = []
+
+
+def perm(path, s):            # path : 앞의 자리들에서 고른 번호, s : 고른 것을 붙인 문자열
+    if len(path) == r:
+        out2.append(s)
+        return
+    for i in range(n):
+        if i not in path:
+            perm(path + [i], s + A[i])
+
+
+perm([], '')
+print(len(out2))
+print(out2[:8])
+print(out1 == out2)</pre><div class="lbl">출력</div><pre class="out">
+120
+['abcde', 'abced', 'abdce', 'abdec', 'abecd', 'abedc', 'acbde', 'acbed']
+True</pre>
+<p>두 코드는 같은 120개를 같은 순서로 만든다.</p>
+<p>고르는 개수를 3으로 바꾼다. 5중 for문은 for 두 겹을 지우고 조건과 <code>out1.append(...)</code>를 고쳐 써야 한다. 재귀 함수는 <code>r</code>만 바꾼다.</p>
+<pre class="code">
+r = 3
+out2 = []
+perm([], '')
+print(len(out2))
+print(out2[:8])</pre><div class="lbl">출력</div><pre class="out">
+60
+['abc', 'abd', 'abe', 'acb', 'acd', 'ace', 'adb', 'adc']</pre>
+<h3>확인할 것</h3>
+<ul><li>5중 for문의 <code>i</code>, <code>j</code>, <code>k</code>, <code>l</code>, <code>m</code>은 재귀 함수에서 어디에 들어 있는가.</li><li>5중 for문에서 한 겹 들어갈 때마다 길어지는 조건은 재귀 함수의 어느 줄인가.</li><li>5중 for문의 가장 안쪽 줄 <code>out1.append(...)</code>는 재귀 함수의 어느 줄인가.</li><li>재귀 함수에서 <code>perm</code>이 한 번 불릴 때 <code>for i in range(n)</code>는 몇 번째 자리를 정하는가.</li></ul>
+<h2>연습문제</h2>
+<p>1~4절 범위다. 정답은 문제마다 접혀 있다.</p>
+<div class="prob"><h3>1. [출력 예측]</h3><p>다음 코드의 출력을 쓰시오.</p><pre class="code">
+n = 3
+for i in range(n):
+    for j in range(n - i):
+        print(i, j, end='\t')
+    print()</pre><details><summary>정답</summary><div class="lbl">출력</div><pre class="out">
+<span class="o">0</span> <span class="p">0</span>	<span class="o">0</span> <span class="p">1</span>	<span class="o">0</span> <span class="p">2</span>	
+<span class="o">1</span> <span class="p">0</span>	<span class="o">1</span> <span class="p">1</span>	
+<span class="o">2</span> <span class="p">0</span>	</pre></details></div>
+<div class="prob"><h3>2. [코드 작성]</h3><p><code>n = 5</code>일 때 우하삼각의 칸을 아래와 같이 찍는 코드를 쓰시오. 앞은 빈칸으로 자리를 맞춘다.</p><div class="lbl">출력</div><pre class="out">
+				<span class="o">0</span> <span class="p">4</span>	
+			<span class="o">1</span> <span class="p">3</span>	<span class="o">1</span> <span class="p">4</span>	
+		<span class="o">2</span> <span class="p">2</span>	<span class="o">2</span> <span class="p">3</span>	<span class="o">2</span> <span class="p">4</span>	
+	<span class="o">3</span> <span class="p">1</span>	<span class="o">3</span> <span class="p">2</span>	<span class="o">3</span> <span class="p">3</span>	<span class="o">3</span> <span class="p">4</span>	
+<span class="o">4</span> <span class="p">0</span>	<span class="o">4</span> <span class="p">1</span>	<span class="o">4</span> <span class="p">2</span>	<span class="o">4</span> <span class="p">3</span>	<span class="o">4</span> <span class="p">4</span>	</pre><details><summary>정답</summary><pre class="code">
+n = 5
+for i in range(n):
+    for j in range(n - 1 - i):
+        print('', end='\t')
+    for j in range(n - 1 - i, n):
+        print(i, j, end='\t')
+    print()</pre><div class="lbl">출력</div><pre class="out">
+				<span class="o">0</span> <span class="p">4</span>	
+			<span class="o">1</span> <span class="p">3</span>	<span class="o">1</span> <span class="p">4</span>	
+		<span class="o">2</span> <span class="p">2</span>	<span class="o">2</span> <span class="p">3</span>	<span class="o">2</span> <span class="p">4</span>	
+	<span class="o">3</span> <span class="p">1</span>	<span class="o">3</span> <span class="p">2</span>	<span class="o">3</span> <span class="p">3</span>	<span class="o">3</span> <span class="p">4</span>	
+<span class="o">4</span> <span class="p">0</span>	<span class="o">4</span> <span class="p">1</span>	<span class="o">4</span> <span class="p">2</span>	<span class="o">4</span> <span class="p">3</span>	<span class="o">4</span> <span class="p">4</span>	</pre></details></div>
+<div class="prob"><h3>3. [코드 작성]</h3><p><code>n = 4</code>일 때 대각선을 뺀 하삼각(<code>j &lt; i</code>)의 칸을 아래와 같이 찍는 코드를 쓰시오. 첫 줄은 빈 줄이다.</p><div class="lbl">출력</div><pre class="out">
+
+<span class="o">1</span> <span class="p">0</span>	
+<span class="o">2</span> <span class="p">0</span>	<span class="o">2</span> <span class="p">1</span>	
+<span class="o">3</span> <span class="p">0</span>	<span class="o">3</span> <span class="p">1</span>	<span class="o">3</span> <span class="p">2</span>	</pre><details><summary>정답</summary><pre class="code">
+n = 4
+for i in range(n):
+    for j in range(i):
+        print(i, j, end='\t')
+    print()</pre><div class="lbl">출력</div><pre class="out">
+
+<span class="o">1</span> <span class="p">0</span>	
+<span class="o">2</span> <span class="p">0</span>	<span class="o">2</span> <span class="p">1</span>	
+<span class="o">3</span> <span class="p">0</span>	<span class="o">3</span> <span class="p">1</span>	<span class="o">3</span> <span class="p">2</span>	</pre></details></div>
+<div class="prob"><h3>4. [출력 예측]</h3><p>다음 코드의 출력을 쓰시오. 찍힌 칸은 1절의 네 모양 중 어느 모양의 칸인지, 찍힌 모양은 어느 모양인지 쓰시오.</p><pre class="code">
+n = 3
+for j in range(n):
+    for i in range(j + 1):
+        print(i, j, end='\t')
+    print()</pre><details><summary>정답</summary><div class="lbl">출력</div><pre class="out">
+<span class="p">0</span> <span class="o">0</span>	
+<span class="p">0</span> <span class="o">1</span>	<span class="p">1</span> <span class="o">1</span>	
+<span class="p">0</span> <span class="o">2</span>	<span class="p">1</span> <span class="o">2</span>	<span class="p">2</span> <span class="o">2</span>	</pre><p>찍힌 칸은 상삼각(<code>j &gt;= i</code>)의 칸이다. 바깥 for가 열 번호라서 찍힌 모양은 하삼각이다.</p></details></div>
+<div class="prob"><h3>5. [코드 작성]</h3><p><code>n = 4</code>일 때 우하삼각의 칸을 바깥 for를 열 번호 <code>j</code>, 안쪽 for를 행 번호 <code>i</code>로 하여 아래와 같이 찍는 코드를 쓰시오.</p><div class="lbl">출력</div><pre class="out">
+			<span class="p">3</span> <span class="o">0</span>	
+		<span class="p">2</span> <span class="o">1</span>	<span class="p">3</span> <span class="o">1</span>	
+	<span class="p">1</span> <span class="o">2</span>	<span class="p">2</span> <span class="o">2</span>	<span class="p">3</span> <span class="o">2</span>	
+<span class="p">0</span> <span class="o">3</span>	<span class="p">1</span> <span class="o">3</span>	<span class="p">2</span> <span class="o">3</span>	<span class="p">3</span> <span class="o">3</span>	</pre><details><summary>정답</summary><pre class="code">
+n = 4
+for j in range(n):
+    for i in range(n - 1 - j):
+        print('', end='\t')
+    for i in range(n - 1 - j, n):
+        print(i, j, end='\t')
+    print()</pre><div class="lbl">출력</div><pre class="out">
+			<span class="p">3</span> <span class="o">0</span>	
+		<span class="p">2</span> <span class="o">1</span>	<span class="p">3</span> <span class="o">1</span>	
+	<span class="p">1</span> <span class="o">2</span>	<span class="p">2</span> <span class="o">2</span>	<span class="p">3</span> <span class="o">2</span>	
+<span class="p">0</span> <span class="o">3</span>	<span class="p">1</span> <span class="o">3</span>	<span class="p">2</span> <span class="o">3</span>	<span class="p">3</span> <span class="o">3</span>	</pre></details></div>
+<div class="prob"><h3>6. [코드 작성]</h3><p>주사위 두 개를 차례로 던진다. 첫째 눈과 둘째 눈의 합이 7인 경우의 첫째 눈과 둘째 눈을 모두 찍는 코드를 쓰시오. <code>dice = [1, 2, 3, 4, 5, 6]</code>을 쓴다.</p><details><summary>정답</summary><pre class="code">
+dice = [1, 2, 3, 4, 5, 6]
+n = len(dice)
+for i in range(n):
+    for j in range(n):
+        if dice[i] + dice[j] == 7:
+            print(dice[i], dice[j], end='\t')</pre><div class="lbl">출력</div><pre class="out">
+<span class="o">1</span> <span class="p">6</span>	<span class="o">2</span> <span class="p">5</span>	<span class="o">3</span> <span class="p">4</span>	<span class="o">4</span> <span class="p">3</span>	<span class="o">5</span> <span class="p">2</span>	<span class="o">6</span> <span class="p">1</span>	</pre><p>같은 눈이 또 나올 수 있고 첫째와 둘째를 구분하므로 표 전체(중복순열)에서 조건에 맞는 칸을 고른다.</p></details></div>
+<div class="prob"><h3>7. [코드 작성]</h3><p><code>P = ['가', '나', '다', '라', '마']</code> 5명 중 대표 2명을 뽑는 경우를 모두 찍고, 마지막 줄에 개수를 찍는 코드를 쓰시오.</p><details><summary>정답</summary><pre class="code">
+P = ['가', '나', '다', '라', '마']
+n = len(P)
+cnt = 0
+for i in range(n):
+    for j in range(i + 1, n):
+        print(P[i] + P[j], end='\t')
+        cnt += 1
+print()
+print(cnt)</pre><div class="lbl">출력</div><pre class="out">
+<span class="o">가</span><span class="p">나</span>	<span class="o">가</span><span class="p">다</span>	<span class="o">가</span><span class="p">라</span>	<span class="o">가</span><span class="p">마</span>	<span class="o">나</span><span class="p">다</span>	<span class="o">나</span><span class="p">라</span>	<span class="o">나</span><span class="p">마</span>	<span class="o">다</span><span class="p">라</span>	<span class="o">다</span><span class="p">마</span>	<span class="o">라</span><span class="p">마</span>	
+10</pre><p>뽑힌 두 명의 순서를 따지지 않으므로 조합이다. <sub>5</sub>C<sub>2</sub> = 10</p></details></div>
+<div class="prob"><h3>8. [코드 작성]</h3><p>숫자 카드 <code>cards = [1, 2, 3, 4]</code>에서 3장을 골라 세 자리 수를 만든다. 한 카드는 한 번만 쓴다. 만들 수 있는 수를 모두 찍고, 마지막 줄에 개수를 찍는 코드를 쓰시오.</p><details><summary>정답</summary><pre class="code">
+cards = [1, 2, 3, 4]
+n = len(cards)
+cnt = 0
+for i in range(n):
+    for j in range(n):
+        if j != i:
+            for k in range(n):
+                if k != i and k != j:
+                    print(cards[i] * 100 + cards[j] * 10 + cards[k], end=' ')
+                    cnt += 1
+print()
+print(cnt)</pre><div class="lbl">출력</div><pre class="out">
+123 124 132 134 142 143 213 214 231 234 241 243 312 314 321 324 341 342 412 413 421 423 431 432
+24</pre><p>카드의 자리가 바뀌면 다른 수이고 같은 카드를 두 번 쓰지 않으므로 순열이다. <sub>4</sub>P<sub>3</sub> = 24</p></details></div>
+<div class="prob"><h3>9. [오류 분석]</h3><p>4-2 순열 코드의 조건 <code>k != i and k != j</code>를 <code>k != j</code>로 잘못 썼다. 출력되는 개수를 쓰고, 순열이 아닌 것이 섞여 나오는 이유를 예를 하나 들어 쓰시오.</p><pre class="code">
+A = ['a', 'b', 'c', 'd']
+n = len(A)
+out = []
+for i in range(n):
+    for j in range(n):
+        if j != i:
+            for k in range(n):
+                if k != j:
+                    out.append(A[i] + A[j] + A[k])
+print(len(out))
+print(out[:9])</pre><details><summary>정답</summary><div class="lbl">출력</div><pre class="out">
+36
+['aba', 'abc', 'abd', 'aca', 'acb', 'acd', 'ada', 'adb', 'adc']</pre><p>36개. <code>k</code>가 <code>i</code>와 같아도 걸러지지 않는다. 예: <code>i = 0, j = 1, k = 0</code>이면 <code>aba</code>가 나온다. <code>(i, j)</code>는 12가지, 그 각각에 <code>k</code>가 <code>j</code>만 피해 3가지라 12 x 3 = 36이다.</p></details></div>
+<div class="prob"><h3>10. [코드 작성]</h3><p><code>A = ['a', 'b', 'c']</code>에서 3개를 고른다. 같은 것을 또 고를 수 있고 고른 순서는 따지지 않는다. 만들 수 있는 것을 리스트에 모아 개수와 함께 찍는 코드를 쓰시오.</p><details><summary>정답</summary><pre class="code">
+A = ['a', 'b', 'c']
+n = len(A)
+out = []
+for i in range(n):
+    for j in range(i, n):
+        for k in range(j, n):
+            out.append(A[i] + A[j] + A[k])
+print(len(out))
+print(out)</pre><div class="lbl">출력</div><pre class="out">
+10
+['aaa', 'aab', 'aac', 'abb', 'abc', 'acc', 'bbb', 'bbc', 'bcc', 'ccc']</pre><p>중복조합이다. <sub>3</sub>H<sub>3</sub> = <sub>5</sub>C<sub>3</sub> = 10</p></details></div>
+</body>
+</html>

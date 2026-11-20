@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>시험대비 - 기초 정렬과 빅O 빈칸 채우기 정답</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>시험대비 - 기초 정렬과 빅O 빈칸 채우기 정답</h1><p class="intro">밑줄 칸에 들어갈 코드나 시간 복잡도를 쓴다. 밑줄 길이는 들어갈 글자 수와 같다. ...은 문제와 관계없어 내용을 생략한 부분이다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 bubble_sort는 이웃한 두 값을 비교해 앞의 값이 크면 맞바꾸는 버블 정렬 함수이다. 한 바퀴를 돌 때마다 남은 값 중 가장 큰 값이 끝 자리로 간다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def bubble_sort(A):
+    n = len(A)
+    for i in range(n):
+        for j in <span class="a"><i>가</i>range(n - i - 1)</span>:
+            if <span class="a"><i>나</i>A[j] &gt; A[j + 1]</span>:
+                <span class="a"><i>다</i>A[j], A[j + 1] = A[j + 1], A[j]</span>
+
+
+A = [3, 6, 5, 8, 2]
+bubble_sort(A)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[2, 3, 5, 6, 8]</div><div class="answers"><span class="lab">(가)</span><span>range(n - i - 1)</span><span class="lab">(나)</span><span>A[j] &gt; A[j + 1]</span><span class="lab">(다)</span><span>A[j], A[j + 1] = A[j + 1], A[j]</span></div><p class="note">(가)는 range(0, n - i - 1), range(n - 1 - i)도 정답이다. (나)는 A[j + 1] &lt; A[j]도 정답이다.</p></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 bubble_sort는 한 바퀴 동안 교환이 한 번도 없으면 이미 정렬된 것으로 보고 반복을 끝내는 버블 정렬 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def bubble_sort(A):
+    n = len(A)
+    for i in range(n):
+        <span class="a"><i>가</i>swapped = False</span>
+        for j in range(n - i - 1):
+            if A[j] &gt; A[j + 1]:
+                A[j], A[j + 1] = A[j + 1], A[j]
+                <span class="a"><i>나</i>swapped = True</span>
+        if <span class="a"><i>다</i>not swapped</span>:
+            break
+
+
+A = [3, 6, 5, 8, 2]
+bubble_sort(A)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[2, 3, 5, 6, 8]</div><div class="answers"><span class="lab">(가)</span><span>swapped = False</span><span class="lab">(나)</span><span>swapped = True</span><span class="lab">(다)</span><span>not swapped</span></div><p class="note">(다)는 swapped == False도 정답이다.</p></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 selection_sort는 아직 정렬되지 않은 구간 i ~ n - 1에서 가장 작은 값의 위치 m을 찾아 i 자리 값과 맞바꾸는 선택 정렬 함수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def selection_sort(A):
+    n = len(A)
+    for i in range(n - 1):
+        m = <span class="a"><i>가</i>i</span>
+        for j in <span class="a"><i>나</i>range(i + 1, n)</span>:
+            if <span class="a"><i>다</i>A[j] &lt; A[m]</span>:
+                m = j
+        <span class="a"><i>라</i>A[i], A[m] = A[m], A[i]</span>
+
+
+A = [3, 6, 5, 8, 2]
+selection_sort(A)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[2, 3, 5, 6, 8]</div><div class="answers"><span class="lab">(가)</span><span>i</span><span class="lab">(나)</span><span>range(i + 1, n)</span><span class="lab">(다)</span><span>A[j] &lt; A[m]</span><span class="lab">(라)</span><span>A[i], A[m] = A[m], A[i]</span></div><p class="note">(나)는 range(i, n)도 정답이다. (다)는 A[m] &gt; A[j]도 정답이다. A[j] &lt;= A[m]으로 써도 정렬 결과는 같다. (라)는 A[m], A[i] = A[i], A[m]도 정답이다.</p></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 selection_sort는 구간 0 ~ i에서 가장 큰 값의 위치 m을 찾아 끝 자리 i의 값과 맞바꾸는 선택 정렬 함수이다. 끝 자리부터 확정된다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def selection_sort(A):
+    n = len(A)
+    for i in range(n - 1, 0, -1):
+        m = 0
+        for j in <span class="a"><i>가</i>range(1, i + 1)</span>:
+            if <span class="a"><i>나</i>A[j] &gt; A[m]</span>:
+                m = j
+        <span class="a"><i>다</i>A[i], A[m] = A[m], A[i]</span>
+
+
+A = [3, 6, 5, 8, 2]
+selection_sort(A)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[2, 3, 5, 6, 8]</div><div class="answers"><span class="lab">(가)</span><span>range(1, i + 1)</span><span class="lab">(나)</span><span>A[j] &gt; A[m]</span><span class="lab">(다)</span><span>A[i], A[m] = A[m], A[i]</span></div><p class="note">(가)는 range(i + 1)도 정답이다. (나)는 A[m] &lt; A[j]도 정답이다.</p></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 insertion_sort는 앞부분 0 ~ i - 1이 정렬되어 있다고 보고, i번째 값 k를 앞부분의 알맞은 자리에 끼워 넣는 삽입 정렬 함수이다. k보다 큰 값은 뒤로 한 칸씩 민다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def insertion_sort(A):
+    n = len(A)
+    for i in range(1, n):
+        k = <span class="a"><i>가</i>A[i]</span>
+        j = i - 1
+        while <span class="a"><i>나</i>j &gt;= 0 and A[j] &gt; k</span>:
+            <span class="a"><i>다</i>A[j + 1] = A[j]</span>
+            j -= 1
+        <span class="a"><i>라</i>A[j + 1] = k</span>
+
+
+A = [3, 6, 5, 8, 2]
+insertion_sort(A)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[2, 3, 5, 6, 8]</div><div class="answers"><span class="lab">(가)</span><span>A[i]</span><span class="lab">(나)</span><span>j &gt;= 0 and A[j] &gt; k</span><span class="lab">(다)</span><span>A[j + 1] = A[j]</span><span class="lab">(라)</span><span>A[j + 1] = k</span></div><p class="note">(나)는 j &gt; -1 and A[j] &gt; k도 정답이다.</p></div><div class="page"><div class="problem-number">6<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 insertion_sort는 값을 k에 따로 빼 두지 않고, 앞의 값과 맞바꾸며 제자리를 찾아가는 삽입 정렬 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def insertion_sort(A):
+    n = len(A)
+    for i in range(1, n):
+        j = i
+        while <span class="a"><i>가</i>j &gt; 0 and A[j - 1] &gt; A[j]</span>:
+            <span class="a"><i>나</i>A[j - 1], A[j] = A[j], A[j - 1]</span>
+            <span class="a"><i>다</i>j -= 1</span>
+
+
+A = [3, 6, 5, 8, 2]
+insertion_sort(A)
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[2, 3, 5, 6, 8]</div><div class="answers"><span class="lab">(가)</span><span>j &gt; 0 and A[j - 1] &gt; A[j]</span><span class="lab">(나)</span><span>A[j - 1], A[j] = A[j], A[j - 1]</span><span class="lab">(다)</span><span>j -= 1</span></div><p class="note">(가)는 j &gt;= 1 and A[j - 1] &gt; A[j]도 정답이다. (다)는 j = j - 1도 정답이다.</p></div><div class="page"><div class="problem-number">7<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 insertion_sort(A, n)은 앞의 n - 1개를 재귀 호출로 먼저 정렬한 뒤, n번째 값을 그 안의 제자리에 끼우는 삽입 정렬 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def insertion_sort(A, n):
+    if n &lt;= 1:
+        return
+    <span class="a"><i>가</i>insertion_sort(A, n - 1)</span>
+    k = <span class="a"><i>나</i>A[n - 1]</span>
+    j = <span class="a"><i>다</i>n - 2</span>
+    while j &gt;= 0 and A[j] &gt; k:
+        A[j + 1] = A[j]
+        j -= 1
+    A[j + 1] = k
+
+
+A = [3, 6, 5, 8, 2]
+insertion_sort(A, len(A))
+print(A)</div>
+<p class="out-label">실행 결과</p><div class="out">[2, 3, 5, 6, 8]</div><div class="answers"><span class="lab">(가)</span><span>insertion_sort(A, n - 1)</span><span class="lab">(나)</span><span>A[n - 1]</span><span class="lab">(다)</span><span>n - 2</span></div></div><div class="page"><div class="problem-number">8<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 insertion_count는 5번의 삽입 정렬에서 값을 뒤로 민 횟수 cnt를 세어 돌려준다. 길이 n인 리스트를 넣는다. 빈칸 (가)에는 역순 리스트에서 민 횟수를 n으로 나타낸 식을 쓰고, (나), (다)에는 각 입력에서 삽입 정렬의 시간 복잡도를 빅O 표기법으로 쓰시오.</div>
+<div class="code-block">def insertion_count(A):
+    cnt = 0
+    for i in range(1, len(A)):
+        k = A[i]
+        j = i - 1
+        while j &gt;= 0 and A[j] &gt; k:
+            A[j + 1] = A[j]
+            j -= 1
+            cnt += 1
+        A[j + 1] = k
+    return cnt
+
+
+n = 100
+print(insertion_count(list(range(n))))
+print(insertion_count(list(range(n, 0, -1))) == <span class="a"><i>가</i>n * (n - 1) // 2</span>)
+
+# 이미 정렬된 리스트를 넣을 때의 시간 복잡도: <span class="a"><i>나</i>O(n)</span>
+# 역순으로 정렬된 리스트를 넣을 때의 시간 복잡도: <span class="a"><i>다</i>O(n^2)</span></div>
+<p class="out-label">실행 결과</p><div class="out">0
+True</div><div class="answers"><span class="lab">(가)</span><span>n * (n - 1) // 2</span><span class="lab">(나)</span><span>O(n)</span><span class="lab">(다)</span><span>O(n^2)</span></div><p class="note">(가)는 1 + 2 + ... + (n - 1)이다. (n - 1) * n // 2, n * (n - 1) / 2도 정답이다. (나)에서 민 횟수는 0이지만 바깥 for는 n - 1번 돌기 때문에 O(n)이다.</p></div><div class="page"><div class="problem-number">9<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 코드는 길이 n인 이미 정렬된 리스트 A를 여러 정렬 함수에 넣는다. 각 함수의 내용은 1번, 2번, 3번 문제의 코드와 슬라이스로 나누는 병합(합병) 정렬 코드이며 생략했다. 빈칸 (가) ~ (라)에 들어갈 시간 복잡도를 빅O 표기법으로 쓰시오.</div>
+<div class="code-block">def bubble_sort(A):        # 1번 코드
+    ...
+
+def bubble_sort2(A):       # 2번 코드 (교환이 없으면 멈춤)
+    ...
+
+def selection_sort(A):     # 3번 코드
+    ...
+
+def merge_sort(A):         # 슬라이스로 나누는 병합(합병) 정렬
+    ...
+
+
+A = list(range(1000))      # 이미 정렬된 리스트, n = 1000
+
+bubble_sort(A)             # <span class="a"><i>가</i>O(n^2)</span>
+bubble_sort2(A)            # <span class="a"><i>나</i>O(n)</span>
+selection_sort(A)          # <span class="a"><i>다</i>O(n^2)</span>
+merge_sort(A)              # <span class="a"><i>라</i>O(n log n)</span></div>
+<div class="answers"><span class="lab">(가)</span><span>O(n^2)</span><span class="lab">(나)</span><span>O(n)</span><span class="lab">(다)</span><span>O(n^2)</span><span class="lab">(라)</span><span>O(n log n)</span></div><p class="note">(가) 1번 코드는 교환이 없어도 비교를 n(n - 1)/2번 한다. (나) 첫 바퀴에서 비교 n - 1번을 하고 교환이 없어 멈춘다. (다) 선택 정렬은 최솟값을 찾으려고 남은 값을 모두 확인하므로 입력과 관계없이 O(n^2)이다. (라) 병합(합병) 정렬은 입력과 관계없이 O(n log n)이다.</p></div><div class="page"><div class="problem-number">10<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음은 앞 단원에서 다룬 재귀 피보나치 fib, 상향식(표) 피보나치 fib_table, 재귀 이진 탐색 binary_search이다. binary_search의 내용은 생략했다. 빈칸 (가), (나), (다)에 들어갈 시간 복잡도를 빅O 표기법으로 쓰시오. n은 fib, fib_table에서는 매개변수 n이고, binary_search에서는 리스트 arr의 길이이다.</div>
+<div class="code-block">def fib(n):
+    if n &lt;= 1:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+
+def fib_table(n):
+    if n &lt;= 1:
+        return n
+    d = [0] * (n + 1)
+    d[1] = 1
+    for i in range(2, n + 1):
+        d[i] = d[i - 1] + d[i - 2]
+    return d[n]
+
+
+def binary_search(arr, target, low, high):   # 재귀 이진 탐색
+    ...
+
+
+print(fib(20), fib_table(20))
+
+# fib(n)의 시간 복잡도: <span class="a"><i>가</i>O(2^n)</span>
+# fib_table(n)의 시간 복잡도: <span class="a"><i>나</i>O(n)</span>
+# binary_search의 시간 복잡도: <span class="a"><i>다</i>O(log n)</span></div>
+<p class="out-label">실행 결과</p><div class="out">6765 6765</div><div class="answers"><span class="lab">(가)</span><span>O(2^n)</span><span class="lab">(나)</span><span>O(n)</span><span class="lab">(다)</span><span>O(log n)</span></div><p class="note">(가) fib(n)은 호출 한 번이 두 번의 호출로 갈라지고, 이것이 깊이 n까지 이어진다. (나) 같은 점화식을 표의 칸을 한 번씩 채워 계산한다. 메모이제이션 fib_memo도 O(n)이다. (다) 호출할 때마다 탐색 구간이 절반으로 줄어든다.</p></div></body></html>

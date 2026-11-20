@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>6. 심화 - 프로그래머가 만나는 것들</title>
+<style>
+@page { size: A4; margin: 15mm; }
+body {
+    font-family: 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1cm;
+}
+h1 { font-size: 16pt; border-bottom: 2px solid #000; padding-bottom: 8px; margin: 0 0 6px; }
+.intro { font-size: 10pt; color: #333; margin: 0 0 10px; }
+h2 { font-size: 13pt; margin: 1.5em 0 0.2em; border-bottom: 1px solid #999; padding-bottom: 3px; }
+.sec-desc { font-size: 10pt; color: #333; margin: 0.2em 0 0.6em; }
+.problem { margin: 0 0 26px; page-break-inside: avoid; break-inside: avoid; }
+.problem-number { font-weight: bold; font-size: 11pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; }
+.stmt { margin: 4px 0 6px; }
+.code-block {
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    margin: 6px 0;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.subq { font-size: 10.5pt; margin: 10px 0 2px; }
+.answer-space { border: 1px solid #ccc; margin: 4px 0 0; background: #fff;
+                page-break-inside: avoid; break-inside: avoid; }
+.answer-space.sm { height: 50px; }
+.answer-space.lg { height: 130px; }
+.answers { page-break-before: always; break-before: page; }
+.a-item { margin: 0 0 14px; page-break-inside: avoid; break-inside: avoid; }
+.a-num { font-weight: bold; }
+.a-body { font-size: 10pt; margin: 2px 0 0; }
+@media print { body { max-width: none; margin: 0; padding: 0; } }
+</style>
+</head>
+<body>
+<h1>6. 심화 - 프로그래머가 만나는 것들</h1>
+<p class="intro">알고리즘 교재에는 없지만 코드를 실제로 굴리면 반드시 만나는 것들. 실행 전에 먼저 예측해서 적고, 정답은 뒷장에서 확인.</p>
+<h2>1. 수의 표현과 함정</h2>
+<p class="sec-desc">컴퓨터는 0.1을 정확히 저장하지 못한다. IEEE 754 부동소수점의 성질이다.</p>
+<div class="problem">
+<div class="problem-number">1-1 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">셋 다 예측하라. 버그가 아니다.</div>
+<div class="code-block">print(0.1 + 0.2)          # (1)
+print(0.1 + 0.2 == 0.3)   # (2)
+print(0.1 + 0.2 - 0.3)    # (3)</div>
+<div class="subq">(1)~(3)을 적어라.</div>
+<div class="answer-space sm"></div>
+<div class="subq">왜 이런 일이 생기는지 설명하라.</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">1-2 <span class="kind">[출력 예측 - 오차 누적]</span></div>
+<div class="stmt">0.1을 열 번 더하면 1.0인가?</div>
+<div class="code-block">s = 0.0
+for _ in range(10):
+    s = s + 0.1
+print(s)          # (1)
+print(s == 1.0)   # (2)
+print(s &lt; 1.0)    # (3)</div>
+<div class="subq">(1)~(3)을 적어라.</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">1-3 <span class="kind">[출력 예측 - 덧셈 순서]</span></div>
+<div class="stmt">수학과 다른 지점이다.</div>
+<div class="code-block">print(0.1 + 0.2 + 0.3)                        # (1)
+print(0.3 + 0.2 + 0.1)                        # (2)
+print((0.1 + 0.2) + 0.3 == 0.1 + (0.2 + 0.3)) # (3)</div>
+<div class="subq">(1)~(3)을 적고, 여기서 얻을 교훈을 쓰라.</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">1-4 <span class="kind">[서술]</span></div>
+<div class="stmt">실수를 == 로 비교하면 안 된다면, 대신 어떻게 비교해야 하나? 세 가지를 쓰라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">1-5 <span class="kind">[출력 예측 - 큰 수]</span></div>
+<div class="stmt">정수와 실수의 차이를 본다.</div>
+<div class="code-block">print(2 ** 100)           # (1)
+print(1e16 + 1 == 1e16)   # (2)
+print(1e16 + 2 == 1e16)   # (3)</div>
+<div class="subq">(1)~(3)을 적어라.</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">1-6 <span class="kind">[출력 예측 - 음수 나눗셈]</span></div>
+<div class="stmt">언어마다 다른 지점이다.</div>
+<div class="code-block">print(7 // 2, 7 % 2)      # (1)
+print(-7 // 2, -7 % 2)    # (2)
+print(7 // -2, 7 % -2)    # (3)
+print(int(-3.7))          # (4)</div>
+<div class="subq">(1)~(4)를 적어라.</div>
+<div class="answer-space sm"></div>
+<div class="subq">C/Java와 무엇이 다른지, 파이썬 방식의 장점은 무엇인지 쓰라.</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">1-7 <span class="kind">[출력 예측 - round]</span></div>
+<div class="stmt">학교에서 배운 반올림과 다르다.</div>
+<div class="code-block">print(round(0.5), round(1.5), round(2.5), round(3.5))   # (1)
+print(round(2.675, 2))                                  # (2)</div>
+<div class="subq">(1), (2)를 적고 각각의 이유를 쓰라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">1-8 <span class="kind">[출력 예측 - 비트 연산]</span></div>
+<div class="stmt">a = 13(1101), b = 5(0101) 일 때.</div>
+<div class="code-block">a, b = 13, 5
+
+print(a &amp; b)              # (1)
+print(a | b)              # (2)
+print(a ^ b)              # (3)
+print(a &lt;&lt; 1, a &gt;&gt; 1)     # (4)</div>
+<div class="subq">(1)~(4)를 적어라.</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">1-9 <span class="kind">[서술 - 관용구]</span></div>
+<div class="stmt">아래 각각이 무엇을 하는 코드인지 쓰라.</div>
+<div class="code-block">n &amp; 1
+n &gt;&gt; 1
+1 &lt;&lt; k</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">1-10 <span class="kind">[출력 예측 - XOR의 성질]</span></div>
+<div class="stmt">XOR의 핵심 성질을 확인한다.</div>
+<div class="code-block">print(5 ^ 5)         # (1)
+print(5 ^ 0)         # (2)
+print(5 ^ 3 ^ 5)     # (3)</div>
+<div class="subq">(1)~(3)을 적고 성질을 한 문장으로 정리하라.</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">1-11 <span class="kind">[전체 작성]</span></div>
+<div class="stmt">모든 수가 정확히 두 번씩 나오는데 하나만 한 번 나온다. 그 수를 찾아라. 추가 메모리를 쓰지 말 것.</div>
+<div class="code-block">arr = [4, 1, 2, 1, 2, 7, 4]
+# 답: 7</div>
+<div class="subq">코드를 작성하고, 딕셔너리로 세는 방법과 비교해 무엇이 나은지 쓰라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">1-12 <span class="kind">[출력 예측 - 플래그]</span></div>
+<div class="stmt">여러 개의 on/off를 정수 하나에 담는다. 리눅스 파일 권한이 이 방식이다.</div>
+<div class="code-block">READ  = 1 &lt;&lt; 0   # 1
+WRITE = 1 &lt;&lt; 1   # 2
+EXEC  = 1 &lt;&lt; 2   # 4
+
+perm = READ | WRITE
+print(perm)                    # (1)
+print(perm &amp; READ != 0)        # (2)
+print(perm &amp; EXEC != 0)        # (3)
+perm = perm &amp; ~WRITE
+print(perm &amp; WRITE != 0)       # (4)</div>
+<div class="subq">(1)~(4)를 적어라.</div>
+<div class="answer-space sm"></div>
+</div>
+<h2>2. 참조 / 복사 / 해시</h2>
+<p class="sec-desc">a = b 가 무슨 일을 하는지 정확히 아는 것. 여기서 나는 버그는 에러가 안 나서 제일 찾기 어렵다.</p>
+<div class="problem">
+<div class="problem-number">2-1 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">변수는 상자가 아니라 이름표다.</div>
+<div class="code-block">a = [1, 2, 3]
+b = a
+b.append(4)
+
+print(a)          # (1)
+print(b)          # (2)
+print(a is b)     # (3)</div>
+<div class="subq">(1)~(3)을 적어라.</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">2-2 <span class="kind">[출력 예측 - 세 경우의 차이]</span></div>
+<div class="stmt">특히 (3)에 주의하라.</div>
+<div class="code-block">x = 10
+y = x
+y = y + 1
+print(x, y)       # (1)
+
+a = [1]
+b = a
+b = b + [2]
+print(a, b)       # (2)
+
+c = [1]
+d = c
+d += [2]
+print(c, d)       # (3)</div>
+<div class="subq">(1)~(3)을 적고, (2)와 (3)이 왜 다른지 쓰라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">2-3 <span class="kind">[출력 예측 - 얕은 복사]</span></div>
+<div class="stmt">복사했다고 믿었는데 아니다.</div>
+<div class="code-block">grid = [[1, 2], [3, 4]]
+copied = grid[:]
+
+copied[0][0] = 99
+
+print(grid)       # (1)
+print(copied)     # (2)</div>
+<div class="subq">(1), (2)를 적고 이유를 쓰라.</div>
+<div class="answer-space sm"></div>
+<div class="subq">안쪽까지 완전히 복사하려면 어떻게 해야 하나?</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">2-4 <span class="kind">[출력 예측 - 2차원 배열 만들기]</span></div>
+<div class="stmt">가장 유명한 함정이다.</div>
+<div class="code-block">g1 = [[0] * 3] * 3
+g1[0][0] = 1
+print(g1)         # (1)
+
+g2 = [[0] * 3 for _ in range(3)]
+g2[0][0] = 1
+print(g2)         # (2)</div>
+<div class="subq">(1), (2)를 적고 이유를 쓰라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">2-5 <span class="kind">[출력 예측 - 가변 기본 인자]</span></div>
+<div class="stmt">예측하기 어려운 함정이다.</div>
+<div class="code-block">def add(x, acc=[]):
+    acc.append(x)
+    return acc
+
+print(add(1))     # (1)
+print(add(2))     # (2)
+print(add(3))     # (3)</div>
+<div class="subq">(1)~(3)을 적고, 올바르게 고쳐 쓰라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">2-6 <span class="kind">[출력 예측 - 함수에 리스트를 넘기면]</span></div>
+<div class="stmt">세 함수의 차이는?</div>
+<div class="code-block">def f1(x):
+    x.append(9)
+
+def f2(x):
+    x = x + [9]
+
+def f3(x):
+    x = x[:]
+    x.append(9)
+    return x
+
+a = [1]; f1(a); print(a)          # (1)
+b = [1]; f2(b); print(b)          # (2)
+c = [1]; r = f3(c); print(c, r)   # (3)</div>
+<div class="subq">(1)~(3)을 적고, 세 방식의 차이를 정리하라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">2-7 <span class="kind">[서술]</span></div>
+<div class="stmt">리스트에서 값을 찾는 x in lst 는 O(n)인데 집합에서 x in st 는 평균 O(1)이다. 왜 그런지 설명하라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">2-8 <span class="kind">[출력 예측 - 딕셔너리 키]</span></div>
+<div class="stmt">아무거나 키로 쓸 수는 없다.</div>
+<div class="code-block">d = {}
+d[(1, 2)] = &quot;튜플&quot;
+d[&quot;문자열&quot;] = &quot;문자열&quot;
+d[3] = &quot;숫자&quot;
+print(len(d))       # (1)
+
+d[[1, 2]] = &quot;리스트&quot;  # (2)</div>
+<div class="subq">(1)의 출력과 (2)에서 벌어지는 일을 적고, 그 이유를 쓰라.</div>
+<div class="answer-space lg"></div>
+</div>
+<h2>3. 문자열과 인코딩</h2>
+<p class="sec-desc">한국에서 프로그래밍하면 반드시 겪는다. 파일을 열었는데 한글이 깨져 나오는 그것.</p>
+<div class="problem">
+<div class="problem-number">3-1 <span class="kind">[출력 예측]</span></div>
+<div class="stmt">같은 문자열인데 세 값이 다르다.</div>
+<div class="code-block">s = &quot;한글&quot;
+
+print(len(s))                  # (1)
+print(len(s.encode(&quot;utf-8&quot;)))  # (2)
+print(len(s.encode(&quot;cp949&quot;)))  # (3)
+print(type(s.encode()))        # (4)</div>
+<div class="subq">(1)~(4)를 적고 UTF-8과 CP949의 차이를 쓰라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">3-2 <span class="kind">[출력 예측 - 영어와 한글]</span></div>
+<div class="stmt">UTF-8은 글자마다 바이트 수가 다르다.</div>
+<div class="code-block">print(len(&quot;abc&quot;), len(&quot;abc&quot;.encode(&quot;utf-8&quot;)))    # (1)
+print(&quot;abc&quot;.encode(&quot;utf-8&quot;))                     # (2)</div>
+<div class="subq">(1), (2)를 적고, 왜 영어권 개발자가 만든 코드가 한국에서 터지는지 쓰라.</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">3-3 <span class="kind">[서술 - 깨짐 진단]</span></div>
+<div class="stmt">깨진 모양만 보고 어느 방향으로 잘못됐는지 진단할 수 있다. 아래 두 경우를 설명하라.</div>
+<div class="code-block">(A) 한자와 이상한 한글이 섞여 나온다
+(B) 물음표나 네모만 잔뜩 나온다</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">3-4 <span class="kind">[서술 - open의 함정]</span></div>
+<div class="stmt">open()에 encoding을 지정하지 않으면 무슨 일이 생기나? 왜 위험한가?</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">3-5 <span class="kind">[출력 예측 - 개행 문자]</span></div>
+<div class="stmt">윈도우와 리눅스가 다른 지점이다.</div>
+<div class="code-block">s = &quot;a\nb&quot;
+print(len(s))                 # (1)
+
+w = &quot;a\r\nb&quot;
+print(len(w))                 # (2)
+print(repr(w.splitlines()))   # (3)
+print(repr(w.strip()))        # (4)</div>
+<div class="subq">(1)~(4)를 적고, 파일을 줄 단위로 읽을 때 왜 strip()을 붙이는지 쓰라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">3-6 <span class="kind">[출력 예측 - 문자 코드]</span></div>
+<div class="stmt">ord와 chr.</div>
+<div class="code-block">print(ord(&#x27;A&#x27;), ord(&#x27;a&#x27;), ord(&#x27;0&#x27;))   # (1)
+print(chr(65), chr(97))               # (2)
+print(ord(&#x27;가&#x27;), ord(&#x27;힣&#x27;))            # (3)
+print(chr(ord(&#x27;A&#x27;) + 2))              # (4)</div>
+<div class="subq">(1)~(4)를 적어라.</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">3-7 <span class="kind">[서술 - 문자열 이어붙이기]</span></div>
+<div class="stmt">반복문 안에서 s = &quot;a&quot; + s 를 n번 하면 총 시간복잡도는? 왜 그런가? 대안은?</div>
+<div class="answer-space lg"></div>
+</div>
+<h2>4. 지연평가와 정렬</h2>
+<p class="sec-desc">다 만들어놓고 쓰는 것과 필요할 때 하나씩 만드는 것의 차이.</p>
+<div class="problem">
+<div class="problem-number">4-1 <span class="kind">[출력 예측 - range는 리스트가 아니다]</span></div>
+<div class="stmt">메모리 크기에 주목하라.</div>
+<div class="code-block">import sys
+
+r = range(5)
+print(r)                                  # (1)
+print(list(r))                            # (2)
+print(sys.getsizeof(range(1000000)))      # (3)
+print(sys.getsizeof(list(range(1000000))))# (4) 대략</div>
+<div class="subq">(1)~(4)를 적고, (3)이 그렇게 작은 이유를 쓰라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">4-2 <span class="kind">[출력 예측 - 대괄호 하나 차이]</span></div>
+<div class="stmt">두 줄의 차이는?</div>
+<div class="code-block">import sys
+
+lst = [x * x for x in range(100000)]
+gen = (x * x for x in range(100000))
+
+print(type(gen))                # (1)
+print(sys.getsizeof(lst))       # (2) 대략
+print(sys.getsizeof(gen))       # (3)
+print(sum(lst) == sum(gen))     # (4)</div>
+<div class="subq">(1)~(4)를 적고, 언제 (...)를 쓰면 좋은지 쓰라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">4-3 <span class="kind">[출력 예측 - 한 번만 쓸 수 있다]</span></div>
+<div class="stmt">두 번째 호출에 주의하라.</div>
+<div class="code-block">gen = (x for x in range(3))
+print(list(gen))     # (1)
+print(list(gen))     # (2)
+
+z = zip([1, 2], [3, 4])
+print(list(z))       # (3)
+print(list(z))       # (4)</div>
+<div class="subq">(1)~(4)를 적고 대처법을 쓰라.</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">4-4 <span class="kind">[출력 예측 - yield]</span></div>
+<div class="stmt">출력 순서에 특히 주의하라.</div>
+<div class="code-block">def gen():
+    print(&quot;  A 실행&quot;)
+    yield 1
+    print(&quot;  B 실행&quot;)
+    yield 2
+    print(&quot;  C 실행&quot;)
+
+it = gen()
+print(&quot;함수를 부른 직후&quot;)
+print(next(it))
+print(next(it))</div>
+<div class="subq">화면에 찍히는 것을 순서대로 모두 적어라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">4-5 <span class="kind">[출력 예측 - 정렬 기준]</span></div>
+<div class="stmt">w = [&#x27;banana&#x27;, &#x27;apple&#x27;, &#x27;Cherry&#x27;, &#x27;date&#x27;] 일 때.</div>
+<div class="code-block">w = [&#x27;banana&#x27;, &#x27;apple&#x27;, &#x27;Cherry&#x27;, &#x27;date&#x27;]
+
+print(sorted(w))                # (1)
+print(sorted(w, key=str.lower)) # (2)
+print(sorted(w, key=len))       # (3)</div>
+<div class="subq">(1)~(3)을 적어라.</div>
+<div class="answer-space sm"></div>
+<div class="subq">(1)에서 Cherry가 맨 앞인 이유를 쓰라.</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="problem">
+<div class="problem-number">4-6 <span class="kind">[서술 - 안정 정렬]</span></div>
+<div class="stmt">4-5의 (3)에서 길이가 같은 banana와 Cherry 중 banana가 앞에 나온다. 왜인가? 이 성질의 이름과 활용법을 쓰라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">4-7 <span class="kind">[전체 작성 - 다중 기준 정렬]</span></div>
+<div class="stmt">점수 내림차순, 점수가 같으면 이름 오름차순으로 정렬하라.</div>
+<div class="code-block">data = [(&#x27;kim&#x27;, 90), (&#x27;lee&#x27;, 85), (&#x27;park&#x27;, 90), (&#x27;choi&#x27;, 85)]
+# 목표: [(&#x27;kim&#x27;, 90), (&#x27;park&#x27;, 90), (&#x27;choi&#x27;, 85), (&#x27;lee&#x27;, 85)]</div>
+<div class="subq">두 가지 방법으로 작성하라.</div>
+<div class="answer-space lg"></div>
+</div>
+<div class="problem">
+<div class="problem-number">4-8 <span class="kind">[출력 예측 - key는 몇 번 호출되나]</span></div>
+<div class="stmt">원소가 7개일 때 key 함수는 몇 번 불릴까?</div>
+<div class="code-block">count = 0
+def k(x):
+    global count
+    count += 1
+    return len(x)
+
+w = [&#x27;aaa&#x27;, &#x27;b&#x27;, &#x27;cc&#x27;, &#x27;dddd&#x27;, &#x27;e&#x27;, &#x27;ff&#x27;, &#x27;ggg&#x27;]
+sorted(w, key=k)
+print(count)</div>
+<div class="subq">호출 횟수를 적고 이유를 쓰라.</div>
+<div class="answer-space sm"></div>
+</div>
+<div class="answers">
+<h1>정답</h1>
+<h2>1. 수의 표현과 함정</h2>
+<div class="a-item">
+<span class="a-num">1-1</span> <span class="kind">[출력 예측]</span>
+<div class="a-body">(1) 0.30000000000000004  (2) False  (3) 5.551115123125783e-17</div>
+<div class="a-body">10진법으로 1/3을 정확히 못 쓰는 것과 같다. 0.1은 2진법에서 끝나지 않는 소수(0.0001100110011...)라 64비트 안에서 잘린다. 실제 저장된 값은 0.1보다 아주 조금 크다.</div>
+<div class="a-body">파이썬만 그런 것이 아니다. C, Java, JavaScript, 엑셀 전부 같다. print(0.1)이 0.1로 보이는 건 보기 좋게 반올림해서 보여주기 때문이고, 저장된 값과 보이는 값은 다르다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">1-2</span> <span class="kind">[출력 예측 - 오차 누적]</span>
+<div class="a-body">(1) 0.9999999999999999  (2) False  (3) True</div>
+<div class="a-body">오차가 누적된다. 걸프전 당시 패트리엇 미사일 시스템이 0.1초 단위로 시간을 누적하다 100시간 뒤 0.34초까지 벌어져 요격에 실패한 사고가 같은 원리다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">1-3</span> <span class="kind">[출력 예측 - 덧셈 순서]</span>
+<div class="a-body">(1) 0.6000000000000001  (2) 0.6  (3) False</div>
+<div class="a-body">부동소수점 덧셈은 결합법칙이 성립하지 않는다. 크기가 다른 수를 많이 더할 때는 작은 것부터 더하는 편이 오차가 적다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">1-4</span> <span class="kind">[서술]</span>
+<div class="a-body">(1) 오차 허용 범위를 두고 비교: abs(a - b) &lt; 1e-9</div>
+<div class="a-body">(2) math.isclose(a, b) - 상대오차까지 고려해준다.</div>
+<div class="a-body">(3) 애초에 실수를 쓰지 않는다. 돈은 원 단위 정수로, 시간은 밀리초 정수로 다룬다. 이것이 가장 확실하다. 파이썬에는 decimal.Decimal도 있다(단, Decimal(&quot;0.1&quot;) 처럼 문자열로 넣어야 한다. Decimal(0.1)은 이미 오차가 들어간 값이 들어온다).</div>
+</div>
+<div class="a-item">
+<span class="a-num">1-5</span> <span class="kind">[출력 예측 - 큰 수]</span>
+<div class="a-body">(1) 1267650600228229401496703205376  (2) True  (3) False</div>
+<div class="a-body">파이썬 int는 크기 제한이 없다. 반면 float는 유효숫자가 약 15~16자리라 1e16 근처에서는 1을 더해도 값이 안 바뀐다. 표현 가능한 값 사이 간격이 이미 1보다 크기 때문이다.</div>
+<div class="a-body">int가 무제한인 것은 파이썬이 특이한 것이다. C/C++/Java에서는 int가 32비트, long이 64비트라 2**31, 2**63을 넘으면 오버플로우로 음수가 된다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">1-6</span> <span class="kind">[출력 예측 - 음수 나눗셈]</span>
+<div class="a-body">(1) 3 1  (2) -4 1  (3) -4 -1  (4) -3</div>
+<div class="a-body">파이썬 // 는 버림(floor)이라 -3.5를 버리면 -4다. % 의 부호는 오른쪽 피연산자를 따라 -7 % 2 는 양수 1이다. 반면 int(-3.7)은 0 쪽으로 잘라서 -3이다.</div>
+<div class="a-body">C/C++/Java는 -7 / 2 == -3, -7 % 2 == -1 로 파이썬과 반대다. 다른 언어 코드를 옮겨올 때 음수가 섞이면 조용히 틀린다. 파이썬 방식의 장점은 arr[i % len(arr)]가 i가 음수여도 항상 유효한 인덱스가 되는 것이다(원형 배열).</div>
+</div>
+<div class="a-item">
+<span class="a-num">1-7</span> <span class="kind">[출력 예측 - round]</span>
+<div class="a-body">(1) 0 2 2 4 - 은행가 반올림(banker&#x27;s rounding). 정확히 .5일 때 가까운 짝수 쪽으로 간다. 항상 올리면 많은 값을 더할 때 합계가 커지는 편향이 생기기 때문이다.</div>
+<div class="a-body">(2) 2.67 - 1-1과 같은 이유다. 2.675가 실제로는 2.67499999...로 저장돼 있어 내림된다.</div>
+<div class="a-body">돈 계산에서 무조건 올림이 필요하면 math.ceil이나 Decimal의 quantize를 쓴다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">1-8</span> <span class="kind">[출력 예측 - 비트 연산]</span>
+<div class="a-body">(1) 5  (2) 13  (3) 8  (4) 26 6</div>
+<div class="a-body">&amp; 는 둘 다 1일 때만 1, | 는 하나라도 1이면 1, ^ 는 서로 다를 때만 1. &lt;&lt; 는 2배, &gt;&gt; 는 절반(버림).</div>
+</div>
+<div class="a-item">
+<span class="a-num">1-9</span> <span class="kind">[서술 - 관용구]</span>
+<div class="a-body">n &amp; 1 : 홀짝 판정. 마지막 비트가 1이면 홀수다. n % 2 와 같지만 더 빠르다.</div>
+<div class="a-body">n &gt;&gt; 1 : n // 2. 이진 탐색의 중간값 계산 등에 쓴다.</div>
+<div class="a-body">1 &lt;&lt; k : 2의 k제곱.</div>
+</div>
+<div class="a-item">
+<span class="a-num">1-10</span> <span class="kind">[출력 예측 - XOR의 성질]</span>
+<div class="a-body">(1) 0  (2) 5  (3) 3</div>
+<div class="a-body">같은 값을 두 번 XOR하면 사라진다: a ^ b ^ a == b. 순서도 상관없다(교환/결합법칙 성립).</div>
+</div>
+<div class="a-item">
+<span class="a-num">1-11</span> <span class="kind">[전체 작성]</span>
+<div class="a-body">정답<div class="code-block">r = 0
+for x in arr:
+    r ^= x
+print(r)   # 7</div></div>
+<div class="a-body">두 번 나온 수는 서로 상쇄되어 0이 되고 한 번 나온 수만 남는다. 딕셔너리로 세면 메모리가 O(n) 필요하지만 XOR은 변수 하나면 된다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">1-12</span> <span class="kind">[출력 예측 - 플래그]</span>
+<div class="a-body">(1) 3  (2) True  (3) False  (4) False</div>
+<div class="a-body">| 로 권한을 켜고, &amp; 로 검사하고, &amp; ~플래그 로 끈다. chmod 755의 7 = 111 = 읽기+쓰기+실행이 바로 이것이다.</div>
+</div>
+<h2>2. 참조 / 복사 / 해시</h2>
+<div class="a-item">
+<span class="a-num">2-1</span> <span class="kind">[출력 예측]</span>
+<div class="a-body">(1) [1, 2, 3, 4]  (2) [1, 2, 3, 4]  (3) True</div>
+<div class="a-body">b = a 는 값을 복사하는 게 아니라 같은 물건에 이름표를 하나 더 붙이는 것이다. is는 &#x27;같은 물건인가&#x27;(주소 비교), == 는 &#x27;내용이 같은가&#x27;다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">2-2</span> <span class="kind">[출력 예측 - 세 경우의 차이]</span>
+<div class="a-body">(1) 10 11  (2) [1] [1, 2]  (3) [1, 2] [1, 2]</div>
+<div class="a-body">b = b + [2] 는 새 리스트를 만들어 이름을 옮기지만, d += [2] 는 원본 리스트를 그 자리에서 늘린다(extend와 같다).</div>
+<div class="a-body">숫자/문자열/튜플은 불변(immutable)이라 항상 새 값이 만들어져 안전하다. 리스트/딕셔너리/집합은 가변(mutable)이라 원본이 바뀔 수 있다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">2-3</span> <span class="kind">[출력 예측 - 얕은 복사]</span>
+<div class="a-body">(1)과 (2) 모두 [[99, 2], [3, 4]]</div>
+<div class="a-body">grid[:] 는 바깥 리스트만 새로 만든다. 안쪽 리스트 2개는 여전히 공유한다. 이것이 얕은 복사(shallow copy)다.</div>
+<div class="a-body">copy.deepcopy(grid)를 쓴다. 2차원 리스트만 필요하면 [row[:] for row in grid] 로도 충분하고 더 빠르다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">2-4</span> <span class="kind">[출력 예측 - 2차원 배열 만들기]</span>
+<div class="a-body">(1) [[1, 0, 0], [1, 0, 0], [1, 0, 0]]   (2) [[1, 0, 0], [0, 0, 0], [0, 0, 0]]</div>
+<div class="a-body">[x] * 3 은 x를 3번 복사하는 게 아니라 x를 가리키는 참조를 3개 만든다. [[0]*3] * 3 은 같은 행 하나를 세 번 가리킨 것이다.</div>
+<div class="a-body">2차원 배열은 반드시 for로 만든다. DFS/BFS 방문 배열, 동적계획법 표에서 매번 나오는 실수다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">2-5</span> <span class="kind">[출력 예측 - 가변 기본 인자]</span>
+<div class="a-body">(1) [1]  (2) [1, 2]  (3) [1, 2, 3]</div>
+<div class="a-body">기본값 []는 함수를 정의할 때 딱 한 번 만들어져 계속 재사용된다. 호출할 때마다 새로 만들어지지 않는다.</div>
+<div class="a-body">고친 코드<div class="code-block">def add(x, acc=None):
+    if acc is None:
+        acc = []
+    acc.append(x)
+    return acc</div></div>
+<div class="a-body">기본값 자리에는 불변 객체만 둔다(숫자, 문자열, None, 튜플).</div>
+</div>
+<div class="a-item">
+<span class="a-num">2-6</span> <span class="kind">[출력 예측 - 함수에 리스트를 넘기면]</span>
+<div class="a-body">(1) [1, 9]  (2) [1]  (3) [1] [1, 9]</div>
+<div class="a-body">f1은 호출한 쪽의 리스트를 직접 바꾼다. f2는 함수 안에서 새 리스트를 만들어 지역 이름에 붙였을 뿐이라 밖에는 영향이 없다. f3은 먼저 복사한 뒤 작업해서 안전하다.</div>
+<div class="a-body">함수가 인자를 바꾸는지 아닌지는 이름이나 문서로 분명히 해야 한다. sort()(원본 변경) vs sorted()(새 객체) 구분이 이 원칙이다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">2-7</span> <span class="kind">[서술]</span>
+<div class="a-body">list의 in은 처음부터 끝까지 하나씩 비교한다.</div>
+<div class="a-body">set/dict는 해시 테이블을 쓴다. (1) 값을 hash()에 넣어 정수를 얻고 (2) 그 정수로 저장할 칸 번호를 계산하고(hash(x) % 칸수) (3) 찾을 때도 똑같이 계산해 한 번에 그 칸으로 간다.</div>
+<div class="a-body">칸 번호가 겹치는 것을 충돌(collision)이라 하며 파이썬은 옆 칸을 찾아가는 방식으로 처리한다. 충돌이 심하면 최악 O(n)이지만 실제로는 거의 O(1)이다.</div>
+<div class="a-body">무언가를 찾는 코드에서 리스트를 쓰고 있다면 set/dict를 쓸 수 있는지 먼저 본다. 알고리즘 문제 시간 초과의 절반이 이 이유다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">2-8</span> <span class="kind">[출력 예측 - 딕셔너리 키]</span>
+<div class="a-body">(1) 3   (2) TypeError: unhashable type: &#x27;list&#x27;</div>
+<div class="a-body">가변 객체는 딕셔너리 키가 될 수 없다. 키로 넣은 뒤 내용이 바뀌면 해시값이 달라져 다시는 그 칸을 찾을 수 없게 되기 때문이다.</div>
+<div class="a-body">키가 될 수 있는 것: 숫자, 문자열, 튜플(안에 리스트가 없어야 함), frozenset. 그래서 좌표를 키로 쓸 때 (x, y) 튜플을 쓴다. [x, y]는 안 된다.</div>
+</div>
+<h2>3. 문자열과 인코딩</h2>
+<div class="a-item">
+<span class="a-num">3-1</span> <span class="kind">[출력 예측]</span>
+<div class="a-body">(1) 2  (2) 6  (3) 4  (4) &lt;class &#x27;bytes&#x27;&gt;</div>
+<div class="a-body">UTF-8은 한글 한 자에 3바이트를 쓴다. 세계 표준이고 웹/리눅스/맥의 기본이다.</div>
+<div class="a-body">CP949(EUC-KR 확장)는 한글 한 자에 2바이트를 쓴다. 옛날 윈도우 한국어판의 기본이다.</div>
+<div class="a-body">파일과 네트워크는 바이트만 다룬다. 글자를 바이트로 바꾸는 규칙이 인코딩이고, encode()가 글자-&gt;바이트, decode()가 바이트-&gt;글자다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">3-2</span> <span class="kind">[출력 예측 - 영어와 한글]</span>
+<div class="a-body">(1) 3 3   (2) b&#x27;abc&#x27;</div>
+<div class="a-body">UTF-8은 ASCII를 1바이트로 쓰므로 영어만 있으면 글자 수 = 바이트 수다. 서유럽 문자는 2바이트, 한글/한자는 3바이트, 이모지는 4바이트다.</div>
+<div class="a-body">영어권에서는 글자 수와 바이트 수가 늘 같아 구분할 일이 없다. 그래서 둘을 섞어 쓴 코드가 한글에서 깨진다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">3-3</span> <span class="kind">[서술 - 깨짐 진단]</span>
+<div class="a-body">(A) UTF-8 파일을 CP949로 읽은 것. 한글 3바이트를 2바이트씩 잘라 읽어서 엉뚱한 글자가 만들어진다.</div>
+<div class="a-body">(B) CP949 파일을 UTF-8로 읽은 것. 2바이트가 UTF-8 규칙에 안 맞아 거의 다 버려지고 대체 문자(U+FFFD)로 바뀐다.</div>
+<div class="a-body">주의: errors=&quot;replace&quot;로 읽은 뒤에는 원래 바이트가 대체 문자로 바뀌어 사라지므로 되돌릴 수 없다. 바이트 원본을 다시 올바른 인코딩으로 읽어야 한다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">3-4</span> <span class="kind">[서술 - open의 함정]</span>
+<div class="a-body">파이썬이 운영체제 기본 인코딩을 쓴다. 윈도우 한국어판은 cp949, 리눅스/맥은 utf-8이다.</div>
+<div class="a-body">그래서 &#x27;내 컴퓨터에서는 되는데 서버에서 안 되는&#x27; 전형적인 사고가 난다.</div>
+<div class="a-body">규칙: open()에는 항상 encoding=을 명시한다. 새로 만드는 파일은 무조건 UTF-8을 쓰고, CP949는 옛날 파일을 읽을 때만 쓴다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">3-5</span> <span class="kind">[출력 예측 - 개행 문자]</span>
+<div class="a-body">(1) 3  (2) 4  (3) [&#x27;a&#x27;, &#x27;b&#x27;]  (4) &#x27;a\r\nb&#x27;</div>
+<div class="a-body">윈도우는 줄바꿈이 \r\n 2바이트, 리눅스/맥은 \n 1바이트다. git이 &#x27;LF will be replaced by CRLF&#x27; 경고를 띄우는 이유가 이것이다.</div>
+<div class="a-body">\r이 섞이면 line == &quot;END&quot; 비교가 조용히 실패한다(실제 값은 &quot;END\r&quot;). 그래서 줄을 읽으면 습관적으로 .strip()을 붙인다. repr()을 쓰면 눈에 안 보이는 문자를 볼 수 있다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">3-6</span> <span class="kind">[출력 예측 - 문자 코드]</span>
+<div class="a-body">(1) 65 97 48  (2) A a  (3) 44032 55203  (4) C</div>
+<div class="a-body">대문자와 소문자는 32 차이다. 완성형 한글은 가(44032)부터 힣(55203)까지 연속 배치돼 있어 chr(44032 + n)으로 순회할 수 있다. 카이사르 암호, 문자 개수 세기(ord(c) - ord(&#x27;a&#x27;)를 인덱스로) 등에 쓴다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">3-7</span> <span class="kind">[서술 - 문자열 이어붙이기]</span>
+<div class="a-body">O(n^2). 문자열은 불변이라 매번 길이 n+1짜리 새 문자열을 통째로 만들고 옛것을 버린다. 총 복사량이 1+2+...+n 이 된다.</div>
+<div class="a-body">대안: 리스트에 모아뒀다가 &quot;&quot;.join(parts) 를 쓴다. O(n)이다.</div>
+<div class="a-body">참고로 s = s + &quot;a&quot;(뒤에 붙이기)는 CPython이 &#x27;이 문자열을 나 말고 아무도 안 보고 있으면 제자리에서 늘린다&#x27;는 최적화를 넣어둬서 생각보다 빠르다. 하지만 조건이 하나만 어긋나도 최적화가 꺼지므로 기대지 말고 join을 쓴다.</div>
+</div>
+<h2>4. 지연평가와 정렬</h2>
+<div class="a-item">
+<span class="a-num">4-1</span> <span class="kind">[출력 예측 - range는 리스트가 아니다]</span>
+<div class="a-body">(1) range(0, 5)  (2) [0, 1, 2, 3, 4]  (3) 48  (4) 약 800만(8MB)</div>
+<div class="a-body">range는 백만 개를 만들어두지 않는다. 시작/끝/간격 세 숫자만 기억하고 필요할 때마다 다음 값을 계산한다. 그래서 크기가 48바이트로 고정이다.</div>
+<div class="a-body">이것이 지연평가(lazy evaluation)다. 파이썬 2의 range는 진짜 리스트를 만들었고 파이썬 3에서 바뀌었다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">4-2</span> <span class="kind">[출력 예측 - 대괄호 하나 차이]</span>
+<div class="a-body">(1) &lt;class &#x27;generator&#x27;&gt;  (2) 약 80만  (3) 104  (4) True</div>
+<div class="a-body">[]를 ()로 바꾸면 제너레이터가 된다. 결과는 같은데 메모리는 수천 배 차이다.</div>
+<div class="a-body">sum(), max(), any(), all()처럼 한 번 훑고 끝나는 함수에 넘길 때는 리스트를 만들 필요가 전혀 없다: sum(x*x for x in range(10**7))</div>
+</div>
+<div class="a-item">
+<span class="a-num">4-3</span> <span class="kind">[출력 예측 - 한 번만 쓸 수 있다]</span>
+<div class="a-body">(1) [0, 1, 2]  (2) []  (3) [(1, 3), (2, 4)]  (4) []</div>
+<div class="a-body">한 번 소진되면 비어버린다. 되감기가 없다. zip, map, filter, enumerate도 전부 같다(파이썬 3 기준).</div>
+<div class="a-body">두 번 써야 하면 리스트로 받아둔다: pairs = list(zip(a, b)). &#x27;분명 값이 있었는데 두 번째 반복문에서 아무것도 안 돌아간다&#x27;의 원인이 이것이다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">4-4</span> <span class="kind">[출력 예측 - yield]</span>
+<div class="a-body">함수를 부른 직후 / (공백)A 실행 / 1 / (공백)B 실행 / 2</div>
+<div class="a-body">gen()을 호출해도 함수 본문은 실행되지 않고 제너레이터 객체만 만들어진다. next()를 부를 때마다 yield까지 실행하고 그 자리에서 멈춰 있다가 다음 next()에서 이어서 간다.</div>
+<div class="a-body">return은 함수를 끝내지만 yield는 일시정지한다. 지역 변수가 그대로 살아있다. 그래서 while True 안에서 yield하는 무한 수열도 만들 수 있고, 10GB 로그 파일을 한 줄씩 처리할 수 있다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">4-5</span> <span class="kind">[출력 예측 - 정렬 기준]</span>
+<div class="a-body">(1) [&#x27;Cherry&#x27;, &#x27;apple&#x27;, &#x27;banana&#x27;, &#x27;date&#x27;]</div>
+<div class="a-body">(2) [&#x27;apple&#x27;, &#x27;banana&#x27;, &#x27;Cherry&#x27;, &#x27;date&#x27;]   (3) [&#x27;date&#x27;, &#x27;apple&#x27;, &#x27;banana&#x27;, &#x27;Cherry&#x27;]</div>
+<div class="a-body">문자열 비교는 코드번호 순이고 &#x27;C&#x27;(67) &lt; &#x27;a&#x27;(97)이라 대문자가 전부 소문자보다 앞선다. key=str.lower를 주면 비교할 때만 소문자로 바꿔 본다(원본은 안 바뀐다).</div>
+<div class="a-body">key는 &#x27;무엇을 기준으로 비교할지&#x27;를 정하는 함수다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">4-6</span> <span class="kind">[서술 - 안정 정렬]</span>
+<div class="a-body">원본에서 banana가 먼저 있었기 때문이다. 파이썬의 정렬은 안정(stable)해서 같은 값끼리는 원래 순서를 유지한다.</div>
+<div class="a-body">파이썬은 Timsort를 쓴다. 병합 정렬 기반이라 안정적이다. 퀵 정렬은 안정적이지 않아서 언어마다 정렬 결과가 다를 수 있다.</div>
+<div class="a-body">활용: 낮은 우선순위 기준으로 먼저 정렬하고 높은 우선순위로 나중에 정렬하면 다중 기준 정렬이 된다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">4-7</span> <span class="kind">[전체 작성 - 다중 기준 정렬]</span>
+<div class="a-body">방법 1 - 튜플 key<div class="code-block">print(sorted(data, key=lambda x: (-x[1], x[0])))</div></div>
+<div class="a-body">key에 튜플을 주면 앞에서부터 순서대로 비교한다. 숫자는 -를 붙여 방향을 뒤집을 수 있지만 문자열은 안 된다.</div>
+<div class="a-body">방법 2 - 안정 정렬 이용<div class="code-block">d = data[:]
+d.sort(key=lambda x: x[0])                # 2순위: 이름 오름차순
+d.sort(key=lambda x: x[1], reverse=True)  # 1순위: 점수 내림차순</div></div>
+<div class="a-body">방향이 섞여 있고 문자열이 끼어 있으면 낮은 우선순위부터 여러 번 정렬하는 방법을 쓴다.</div>
+</div>
+<div class="a-item">
+<span class="a-num">4-8</span> <span class="kind">[출력 예측 - key는 몇 번 호출되나]</span>
+<div class="a-body">7번. 원소 개수와 똑같다.</div>
+<div class="a-body">파이썬은 정렬 전에 key를 각 원소에 한 번씩만 적용해 결과를 따로 저장해두고 그 값으로 비교한다(decorate-sort-undecorate). 그래서 key에 무거운 계산을 넣어도 O(n)번만 실행된다. 비교할 때마다 계산했다면 O(n log n)번 불렸을 것이다.</div>
+</div>
+</div>
+</body>
+</html>

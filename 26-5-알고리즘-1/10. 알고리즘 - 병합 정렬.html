@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>병합 정렬 시각화</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
+    margin: 0;
+    padding: 22px;
+    background: #f4f6f8;
+    color: #1e2429;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { font-size: 13px; color: #5c6b78; margin: 0 0 16px; line-height: 1.6; }
+
+  .panel {
+    background: #fff;
+    border: 1px solid #dde3e8;
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+
+  .opts { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; font-size: 13px; }
+  .opts .grp { display: flex; gap: 9px; align-items: center; }
+  .opts .grp > b { font-weight: normal; color: #5c6b78; }
+  select, button {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 5px 11px;
+    border: 1px solid #c3ccd4;
+    border-radius: 4px;
+    background: #fff;
+    color: #1e2429;
+    cursor: pointer;
+  }
+  button:hover { background: #eef2f5; }
+  button:disabled { color: #aab4bd; cursor: default; background: #fff; }
+  button.main { background: #2f6fb5; border-color: #2f6fb5; color: #fff; min-width: 72px; }
+  button.main:hover { background: #275f9c; }
+
+  .cols { display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+  .colL { flex: 0 0 372px; }
+  .colR { flex: 1 1 640px; min-width: 640px; }
+
+  /* 코드 */
+  #code {
+    font-family: Consolas, "D2Coding", monospace;
+    font-size: 12.5px;
+    line-height: 20px;
+    white-space: pre;
+  }
+  #code .ln { display: flex; border-left: 3px solid transparent; }
+  #code .ln .g {
+    flex: 0 0 30px;
+    text-align: right;
+    padding-right: 9px;
+    color: #b3bcc4;
+    user-select: none;
+  }
+  #code .ln.hit { background: #fff3d0; border-left-color: #e0a92e; }
+  #code .ln.hit .g { color: #a9801f; }
+  #code .ln.fn { color: #5c6b78; }
+
+  /* 무대 */
+  #stage { position: relative; margin: 4px 0 0; }
+  .bar {
+    position: absolute;
+    top: 0; left: 0;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    transition: transform .32s cubic-bezier(.4,.1,.2,1), opacity .2s;
+  }
+  .bar .num { font-size: 12px; font-weight: bold; margin-bottom: 3px; color: #3d4a55; }
+  .bar .col {
+    width: 100%;
+    background: #9aa9b6;
+    border: 1px solid #7d8d9a;
+    border-radius: 2px 2px 0 0;
+    transition: background .2s, border-color .2s;
+  }
+  .bar.roleL .col { background: #4f86c6; border-color: #3a6ca8; }
+  .bar.roleL .num { color: #2f6fb5; }
+  .bar.roleR .col { background: #d99a4e; border-color: #bd7f36; }
+  .bar.roleR .num { color: #b3762c; }
+  .bar.roleRes .col { background: #7ab374; border-color: #5f9a59; }
+  .bar.roleRes .num { color: #4f8f49; }
+  .bar.done .col { background: #7ab374; border-color: #5f9a59; }
+  .bar.done .num { color: #4f8f49; }
+  .bar.out { opacity: .24; }
+
+  .axis { position: absolute; left: 0; }
+  .axis .slot {
+    position: absolute; top: 2px; width: 40px;
+    text-align: center; font-size: 11px; color: #8b97a2;
+  }
+  .rule { position: absolute; left: 0; border-top: 2px solid #cfd7de; }
+  .cur {
+    position: absolute; top: 0; width: 40px;
+    text-align: center; font-size: 13px; font-weight: bold;
+    transition: transform .32s cubic-bezier(.4,.1,.2,1), opacity .2s;
+  }
+  .cur.hide { opacity: 0; }
+  #curI { color: #2f6fb5; }
+  #curJ { color: #b3762c; }
+  #curK { color: #4f8f49; }
+  #split {
+    position: absolute;
+    width: 0; border-left: 2px dashed #c8524a;
+    transition: transform .32s cubic-bezier(.4,.1,.2,1), opacity .2s;
+  }
+  #split.hide { opacity: 0; }
+  .lanetag {
+    position: absolute; left: 0;
+    font-size: 12px; color: #8b97a2;
+  }
+
+  #note {
+    margin-top: 10px;
+    padding: 9px 12px;
+    background: #eef3f8;
+    border-left: 3px solid #2f6fb5;
+    font-size: 13.5px;
+    min-height: 38px;
+    line-height: 1.5;
+  }
+  #stack {
+    margin-top: 7px;
+    font-family: Consolas, monospace;
+    font-size: 12.5px;
+    color: #5c6b78;
+    min-height: 18px;
+  }
+
+  #vars { display: flex; gap: 7px; margin-top: 9px; flex-wrap: wrap; }
+  #vars .v {
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    border: 1px solid #dde3e8;
+    border-radius: 4px;
+    padding: 4px 10px;
+    background: #fafbfc;
+    color: #5c6b78;
+  }
+  #vars .v b { color: #1e2429; font-weight: bold; }
+  #vars .v.chg { background: #fff3d0; border-color: #e0a92e; }
+
+  .ctrl { display: flex; gap: 7px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
+  .ctrl .step { margin-left: auto; font-size: 13px; color: #5c6b78; }
+  #scrub { width: 100%; margin-top: 10px; }
+
+  .legend { display: flex; gap: 16px; font-size: 12px; color: #5c6b78; margin-top: 11px; flex-wrap: wrap; }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .sw { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+
+  .code { font-family: Consolas, monospace; font-size: 13px; }
+  table { border-collapse: collapse; font-size: 13px; width: 100%; }
+  th, td { border: 1px solid #dde3e8; padding: 7px 10px; text-align: left; }
+  th { background: #f0f4f7; font-weight: normal; color: #5c6b78; }
+  h2 { font-size: 15px; margin: 0 0 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>병합 정렬 시각화</h1>
+  <p class="sub">
+    코드를 한 줄씩 실행하면서 그 줄이 무엇을 바꾸는지 본다.<br>
+    코드는 슬라이스로 새 리스트를 만들지만, 그림에서는 각 조각을 원래 자리 범위에 그대로 두고 보여준다.
+    위쪽 줄이 리스트, 아래쪽 줄이 <span class="code">res</span>다.
+  </p>
+
+  <div class="panel">
+    <div class="opts">
+      <div class="grp">
+        <b>입력</b>
+        <select id="preset">
+          <option value="random">무작위</option>
+          <option value="sorted">이미 정렬</option>
+          <option value="reverse">역순</option>
+          <option value="dup">같은 값 섞임</option>
+        </select>
+      </div>
+      <div class="grp">
+        <b>개수</b>
+        <select id="size">
+          <option>4</option>
+          <option selected>6</option>
+          <option>8</option>
+          <option>10</option>
+        </select>
+      </div>
+      <button id="btnNew">새로 만들기</button>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="colL">
+      <div class="panel">
+        <div id="code"></div>
+      </div>
+    </div>
+
+    <div class="colR">
+      <div class="panel">
+        <div id="stage"></div>
+
+        <div id="note"></div>
+        <div id="stack"></div>
+        <div id="vars"></div>
+
+        <input type="range" id="scrub" min="0" max="0" value="0">
+
+        <div class="ctrl">
+          <button id="btnFirst">처음</button>
+          <button id="btnPrev">이전</button>
+          <button id="btnPlay" class="main">재생</button>
+          <button id="btnNext">다음</button>
+          <label style="font-size:13px; color:#5c6b78; margin-left:10px;">
+            속도 <input type="range" id="speed" min="1" max="10" value="7" style="width:110px">
+          </label>
+          <span class="step" id="stepInfo"></span>
+        </div>
+
+        <div class="legend">
+          <span><i class="sw" style="background:#4f86c6"></i> L (앞쪽 절반)</span>
+          <span><i class="sw" style="background:#d99a4e"></i> R (뒤쪽 절반)</span>
+          <span><i class="sw" style="background:#7ab374"></i> res / 정렬된 조각</span>
+          <span><i class="sw" style="background:#9aa9b6"></i> 대기</span>
+          <span><b style="color:#2f6fb5">i</b> L 커서</span>
+          <span><b style="color:#b3762c">j</b> R 커서</span>
+          <span><b style="color:#4f8f49">res</b> 다음에 붙을 자리</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>퀵 정렬과 비교</h2>
+    <table>
+      <tr>
+        <th style="width:120px"></th>
+        <th>병합 정렬</th>
+        <th>퀵 정렬</th>
+      </tr>
+      <tr>
+        <td>나누는 기준</td>
+        <td>자리 (가운데에서 절반)</td>
+        <td>값 (피벗보다 작은가, 큰가)</td>
+      </tr>
+      <tr>
+        <td>나눌 때 비용</td>
+        <td>거의 없음. 자르기만 한다</td>
+        <td>구간을 전부 훑어 비교해야 한다</td>
+      </tr>
+      <tr>
+        <td>합칠 때 비용</td>
+        <td>두 리스트를 훑으며 병합해야 한다</td>
+        <td>거의 없음. 이어 붙이기만 한다</td>
+      </tr>
+      <tr>
+        <td>최선 / 평균 / 최악</td>
+        <td>O(n log n) / O(n log n) / O(n log n)</td>
+        <td>O(n log n) / O(n log n) / O(n^2)</td>
+      </tr>
+      <tr>
+        <td>추가 메모리</td>
+        <td>필요하다. <span class="code">res</span>를 매번 새로 만든다</td>
+        <td>제자리 구현이면 거의 없다</td>
+      </tr>
+      <tr>
+        <td>안정 정렬</td>
+        <td>예. 조건이 <span class="code">L[i] &lt;= R[j]</span>라 같으면 L을 먼저 꺼낸다</td>
+        <td>구현에 따라 다르다</td>
+      </tr>
+    </table>
+    <p class="sub" style="margin:12px 0 0">
+      병합 정렬은 나누기가 쉽고 합치기가 어렵다. 퀵 정렬은 나누기가 어렵고 합치기가 쉽다. 정확히 반대다.
+    </p>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var SLOT = 48;
+  var UNIT = 11;
+  var AXIS = 24;
+  var GAP  = 14;
+
+  var SRC = [
+    "def f(A):",                                //  1
+    "    if len(A) <= 1:",                      //  2
+    "        return A",                         //  3
+    "",                                         //  4
+    "    m = len(A) // 2",                      //  5
+    "    L = f(A[:m])",                         //  6
+    "    R = f(A[m:])",                         //  7
+    "",                                         //  8
+    "    return merge(L, R)",                   //  9
+    "",                                         // 10
+    "",                                         // 11
+    "def merge(L, R):",                         // 12
+    "    res = []",                             // 13
+    "    i = j = 0",                            // 14
+    "    while i < len(L) and j < len(R):",     // 15
+    "        if L[i] <= R[j]:",                 // 16
+    "            res.append(L[i])",             // 17
+    "            i += 1",                       // 18
+    "        else:",                            // 19
+    "            res.append(R[j])",             // 20
+    "            j += 1",                       // 21
+    "",                                         // 22
+    "    res.extend(L[i:])",                    // 23
+    "    res.extend(R[j:])",                    // 24
+    "    return res"                            // 25
+  ];
+
+  var stage   = document.getElementById("stage");
+  var codeBox = document.getElementById("code");
+  var noteEl  = document.getElementById("note");
+  var stackEl = document.getElementById("stack");
+  var varsEl  = document.getElementById("vars");
+  var stepEl  = document.getElementById("stepInfo");
+  var scrub   = document.getElementById("scrub");
+
+  var btnFirst = document.getElementById("btnFirst");
+  var btnPrev  = document.getElementById("btnPrev");
+  var btnPlay  = document.getElementById("btnPlay");
+  var btnNext  = document.getElementById("btnNext");
+  var btnNew   = document.getElementById("btnNew");
+  var speedEl  = document.getElementById("speed");
+
+  var nodes = {};
+  var lineEls = [];
+  var frames = [];
+  var at = 0;
+  var timer = null;
+  var laneY = [0, 0];
+  var curI, curJ, curK, split;
+
+  // ---------------------------------------------------------------- 입력
+  function makeItems() {
+    var n = parseInt(document.getElementById("size").value, 10);
+    var kind = document.getElementById("preset").value;
+    var vals = [];
+    var k;
+
+    if (kind === "sorted") {
+      for (k = 0; k < n; k++) { vals.push(k + 2); }
+    } else if (kind === "reverse") {
+      for (k = 0; k < n; k++) { vals.push(n + 1 - k); }
+    } else if (kind === "dup") {
+      var pool = [4, 9, 4, 12, 9, 4, 12, 9, 4, 12];
+      for (k = 0; k < n; k++) { vals.push(pool[k % pool.length]); }
+      shuffle(vals);
+    } else {
+      for (k = 0; k < n; k++) { vals.push(k + 2); }
+      shuffle(vals);
+    }
+
+    return vals.map(function (v, idx) { return { id: idx, val: v }; });
+  }
+
+  function shuffle(a) {
+    for (var k = a.length - 1; k > 0; k--) {
+      var r = Math.floor(Math.random() * (k + 1));
+      var t = a[k]; a[k] = a[r]; a[r] = t;
+    }
+  }
+
+  // ---------------------------------------------------------------- 장면 기록
+  function record(items) {
+    var n = items.length;
+    var a = items.slice();                 // 자리 순서의 원소
+    var st = {};                           // id -> {lane, slot, role}
+    var out = [];
+    var stack = [];
+    var V = { lo: null, hi: null, m: null, i: null, j: null, nl: null, nr: null, nres: null };
+    var prevV = {};
+
+    items.forEach(function (e, idx) { st[e.id] = { lane: 0, slot: idx, role: "wait" }; });
+
+    function snap(line, note, view) {
+      view = view || {};
+      var changed = [];
+      ["lo", "hi", "m", "i", "j", "nl", "nr", "nres"].forEach(function (k) {
+        if (V[k] !== prevV[k]) { changed.push(k); }
+      });
+      prevV = { lo: V.lo, hi: V.hi, m: V.m, i: V.i, j: V.j, nl: V.nl, nr: V.nr, nres: V.nres };
+
+      out.push({
+        place: items.map(function (e) {
+          var s = st[e.id];
+          return { id: e.id, lane: s.lane, slot: s.slot, role: s.role };
+        }),
+        lo: (view.lo === undefined ? 0 : view.lo),
+        hi: (view.hi === undefined ? n - 1 : view.hi),
+        live: !!view.live,
+        mid: (view.mid === undefined ? -1 : view.mid),
+        i: (view.i === undefined ? -1 : view.i),
+        j: (view.j === undefined ? -1 : view.j),
+        k: (view.k === undefined ? -1 : view.k),
+        doneAll: !!view.doneAll,
+        line: line,
+        vars: { lo: V.lo, hi: V.hi, m: V.m, i: V.i, j: V.j, nl: V.nl, nr: V.nr, nres: V.nres },
+        changed: changed,
+        stack: stack.map(function (s) { return "f(" + s[0] + ".." + s[1] + ")"; }).join("  >  "),
+        note: note
+      });
+    }
+
+    function setRole(from, to, role) {
+      for (var k = from; k <= to; k++) { st[a[k].id].role = role; }
+    }
+
+    // -------------------------------------------------- merge
+    function merge(lo, mid, hi) {
+      var LN = mid - lo;
+      var RN = hi - mid + 1;
+      var res = [];
+      var view = { lo: lo, hi: hi, live: true, mid: mid };
+
+      V.nl = LN; V.nr = RN; V.nres = 0; V.i = null; V.j = null;
+      snap(13, "res는 빈 리스트로 시작한다. L은 자리 " + lo + ".." + (mid - 1) +
+               ", R은 자리 " + mid + ".." + hi + ".",
+           { lo: lo, hi: hi, live: true, mid: mid, k: lo });
+
+      var i = 0, j = 0;
+      V.i = 0; V.j = 0;
+      snap(14, "두 커서 모두 각자 리스트의 맨 앞을 가리킨다.   i = 0, j = 0",
+           { lo: lo, hi: hi, live: true, mid: mid, i: lo, j: mid, k: lo });
+
+      while (true) {
+        var cond = (i < LN && j < RN);
+        var why;
+        if (cond) {
+          why = "양쪽 다 아직 남았다. 반복을 계속한다.";
+        } else if (i >= LN) {
+          why = "L에 남은 값이 없다. 반복을 끝낸다.";
+        } else {
+          why = "R에 남은 값이 없다. 반복을 끝낸다.";
+        }
+        snap(15, "i < len(L) and j < len(R) 조건 검사. " + why,
+             { lo: lo, hi: hi, live: true, mid: mid, i: lo + i, j: mid + j, k: lo + res.length });
+
+        if (!cond) { break; }
+
+        var lv = a[lo + i].val;
+        var rv = a[mid + j].val;
+        var takeL = (lv <= rv);
+        snap(16, "두 리스트의 맨 앞을 비교한다. L[" + i + "] 값 " + lv +
+                 ", R[" + j + "] 값 " + rv + ". L[i] <= R[j] 는 " + (takeL ? "참." : "거짓."),
+             { lo: lo, hi: hi, live: true, mid: mid, i: lo + i, j: mid + j, k: lo + res.length });
+
+        if (takeL) {
+          var eL = a[lo + i];
+          st[eL.id] = { lane: 1, slot: lo + res.length, role: "res" };
+          res.push(eL);
+          V.nres = res.length;
+          snap(17, "L 쪽이 작거나 같다. L[" + i + "] 자리의 값을 res로 내려보낸다.   값 = " + lv,
+               { lo: lo, hi: hi, live: true, mid: mid, i: lo + i, j: mid + j, k: lo + res.length });
+
+          i++;
+          V.i = i;
+          snap(18, "L에서 하나 꺼냈으므로 i를 한 칸 민다.   i = " + i,
+               { lo: lo, hi: hi, live: true, mid: mid, i: lo + i, j: mid + j, k: lo + res.length });
+        } else {
+          snap(19, "L 쪽이 더 크다. else 로 간다.",
+               { lo: lo, hi: hi, live: true, mid: mid, i: lo + i, j: mid + j, k: lo + res.length });
+
+          var eR = a[mid + j];
+          st[eR.id] = { lane: 1, slot: lo + res.length, role: "res" };
+          res.push(eR);
+          V.nres = res.length;
+          snap(20, "R 쪽이 더 작다. R[" + j + "] 자리의 값을 res로 내려보낸다.   값 = " + rv,
+               { lo: lo, hi: hi, live: true, mid: mid, i: lo + i, j: mid + j, k: lo + res.length });
+
+          j++;
+          V.j = j;
+          snap(21, "R에서 하나 꺼냈으므로 j를 한 칸 민다.   j = " + j,
+               { lo: lo, hi: hi, live: true, mid: mid, i: lo + i, j: mid + j, k: lo + res.length });
+        }
+      }
+
+      // L 나머지
+      var restL = LN - i;
+      for (var x = i; x < LN; x++) {
+        var e1 = a[lo + x];
+        st[e1.id] = { lane: 1, slot: lo + res.length, role: "res" };
+        res.push(e1);
+      }
+      V.nres = res.length;
+      snap(23, restL === 0
+            ? "L에 남은 값이 없다. 붙일 것이 없다."
+            : "L에 남은 " + restL + "개를 res 뒤에 그대로 붙인다. 이미 정렬돼 있으므로 비교할 필요가 없다.",
+           { lo: lo, hi: hi, live: true, mid: mid, k: lo + res.length });
+
+      // R 나머지
+      var restR = RN - j;
+      for (var y = j; y < RN; y++) {
+        var e2 = a[mid + y];
+        st[e2.id] = { lane: 1, slot: lo + res.length, role: "res" };
+        res.push(e2);
+      }
+      V.nres = res.length;
+      snap(24, restR === 0
+            ? "R에 남은 값이 없다. 붙일 것이 없다."
+            : "R에 남은 " + restR + "개를 res 뒤에 그대로 붙인다.",
+           { lo: lo, hi: hi, live: true, mid: mid, k: lo + res.length });
+
+      // 되돌려 놓기
+      for (var t = 0; t < res.length; t++) {
+        a[lo + t] = res[t];
+        st[res[t].id] = { lane: 0, slot: lo + t, role: "sorted" };
+      }
+      V.i = null; V.j = null; V.nl = null; V.nr = null;
+      snap(25, "합쳐진 res를 돌려준다. 자리 " + lo + ".." + hi + " 가 정렬됐다.",
+           { lo: lo, hi: hi, live: true, mid: -1 });
+
+      V.nres = null;
+    }
+
+    // -------------------------------------------------- f
+    function f(lo, hi) {
+      var len = hi - lo + 1;
+      stack.push([lo, hi]);
+
+      V.lo = lo; V.hi = hi; V.m = null;
+      snap(2, "구간 자리 " + lo + ".." + hi + " (" + len + "칸). len(A) <= 1 인가? " +
+              (len <= 1 ? "예." : "아니오."),
+           { lo: lo, hi: hi, live: true });
+
+      if (len <= 1) {
+        if (len === 1) { st[a[lo].id].role = "sorted"; }
+        snap(3, len === 1
+              ? "칸이 하나뿐이다. 이미 정렬된 것으로 보고 그대로 돌려준다."
+              : "빈 구간이다. 그대로 돌려준다.",
+             { lo: lo, hi: hi, live: true });
+        stack.pop();
+        return;
+      }
+
+      var m = Math.floor(len / 2);
+      var mid = lo + m;
+
+      V.m = m;
+      snap(5, "m = " + m + ". 앞 " + m + "칸과 뒤 " + (len - m) +
+              "칸으로 자른다. 앞 조각은 자리 " + lo + ".." + (mid - 1) +
+              ", 뒤 조각은 자리 " + mid + ".." + hi + ".",
+           { lo: lo, hi: hi, live: true, mid: mid });
+
+      setRole(lo, mid - 1, "L");
+      setRole(mid, hi, "R");
+      snap(6, "앞쪽 절반부터 정렬한다. 여기서 f 가 자기 자신을 부른다.",
+           { lo: lo, hi: hi, live: true, mid: mid });
+
+      f(lo, mid - 1);
+
+      V.lo = lo; V.hi = hi; V.m = m;
+      setRole(lo, mid - 1, "L");
+      setRole(mid, hi, "R");
+      snap(6, "앞쪽 절반 정렬 끝. L = 자리 " + lo + ".." + (mid - 1) + " 의 정렬된 조각.",
+           { lo: lo, hi: hi, live: true, mid: mid });
+
+      snap(7, "이제 뒤쪽 절반도 같은 방법으로 정렬한다.",
+           { lo: lo, hi: hi, live: true, mid: mid });
+
+      f(mid, hi);
+
+      V.lo = lo; V.hi = hi; V.m = m;
+      setRole(lo, mid - 1, "L");
+      setRole(mid, hi, "R");
+      snap(7, "뒤쪽 절반 정렬 끝. R = 자리 " + mid + ".." + hi + " 의 정렬된 조각.",
+           { lo: lo, hi: hi, live: true, mid: mid });
+
+      snap(9, "정렬된 두 조각 L 과 R 을 합친다. merge 를 부른다.",
+           { lo: lo, hi: hi, live: true, mid: mid });
+
+      merge(lo, mid, hi);
+
+      V.lo = lo; V.hi = hi; V.m = m;
+      stack.pop();
+    }
+
+    snap(0, "시작. f(A) 를 부른다. A 는 " + n + "칸.", { lo: 0, hi: n - 1 });
+    f(0, n - 1);
+
+    V.lo = null; V.hi = null; V.m = null;
+    items.forEach(function (e) { st[e.id].role = "sorted"; });
+    snap(0, "정렬 완료.", { lo: 0, hi: n - 1, doneAll: true });
+
+    return out;
+  }
+
+  // ---------------------------------------------------------------- 그리기
+  function buildCode() {
+    codeBox.innerHTML = "";
+    lineEls = [];
+
+    SRC.forEach(function (text, idx) {
+      var row = document.createElement("div");
+      row.className = "ln" + (text.indexOf("def ") === 0 ? " fn" : "");
+
+      var g = document.createElement("span");
+      g.className = "g";
+      g.textContent = (idx + 1);
+
+      var t = document.createElement("span");
+      t.textContent = text === "" ? " " : text;
+
+      row.appendChild(g);
+      row.appendChild(t);
+      codeBox.appendChild(row);
+      lineEls.push(row);
+    });
+  }
+
+  function buildStage(items) {
+    stage.innerHTML = "";
+    nodes = {};
+
+    var n = items.length;
+    var maxV = 0;
+    items.forEach(function (e) { if (e.val > maxV) { maxV = e.val; } });
+
+    var laneH = maxV * UNIT + 20;
+    laneY = [0, laneH + AXIS + GAP];
+
+    var w = n * SLOT;
+    stage.style.width = w + "px";
+    stage.style.height = (laneY[1] + laneH + AXIS) + "px";
+
+    // 막대
+    items.forEach(function (e) {
+      var bar = document.createElement("div");
+      bar.className = "bar";
+      bar.style.height = laneH + "px";
+
+      var num = document.createElement("div");
+      num.className = "num";
+      num.textContent = e.val;
+
+      var col = document.createElement("div");
+      col.className = "col";
+      col.style.height = (e.val * UNIT) + "px";
+
+      bar.appendChild(num);
+      bar.appendChild(col);
+      stage.appendChild(bar);
+      nodes[e.id] = bar;
+    });
+
+    // 눈금 두 줄
+    [0, 1].forEach(function (lane) {
+      var rule = document.createElement("div");
+      rule.className = "rule";
+      rule.style.top = (laneY[lane] + laneH) + "px";
+      rule.style.width = w + "px";
+      stage.appendChild(rule);
+
+      var ax = document.createElement("div");
+      ax.className = "axis";
+      ax.style.top = (laneY[lane] + laneH) + "px";
+      ax.style.width = w + "px";
+      ax.style.height = AXIS + "px";
+      for (var k = 0; k < n; k++) {
+        var s = document.createElement("div");
+        s.className = "slot";
+        s.style.left = (k * SLOT) + "px";
+        s.textContent = k;
+        ax.appendChild(s);
+      }
+      stage.appendChild(ax);
+
+      var tag = document.createElement("div");
+      tag.className = "lanetag";
+      tag.style.top = (laneY[lane] + 2) + "px";
+      tag.style.left = (w + 10) + "px";
+      tag.textContent = (lane === 0 ? "리스트" : "res");
+      stage.appendChild(tag);
+    });
+
+    // 커서
+    curI = document.createElement("div"); curI.className = "cur"; curI.id = "curI"; curI.textContent = "i";
+    curJ = document.createElement("div"); curJ.className = "cur"; curJ.id = "curJ"; curJ.textContent = "j";
+    curK = document.createElement("div"); curK.className = "cur"; curK.id = "curK"; curK.textContent = "^";
+    curI.style.top = (laneY[0] + laneH + 2) + "px";
+    curJ.style.top = (laneY[0] + laneH + 2) + "px";
+    curK.style.top = (laneY[1] + laneH + 2) + "px";
+    stage.appendChild(curI);
+    stage.appendChild(curJ);
+    stage.appendChild(curK);
+
+    // 분할선
+    split = document.createElement("div");
+    split.id = "split";
+    split.style.top = "0px";
+    split.style.height = (laneH + 6) + "px";
+    stage.appendChild(split);
+  }
+
+  function place(el, pos, n) {
+    if (pos < 0 || pos > n) {
+      if (el.className.indexOf("hide") < 0) { el.className += " hide"; }
+      return;
+    }
+    el.className = el.className.replace(/ hide/g, "");
+    el.style.transform = "translateX(" + (pos * SLOT) + "px)";
+  }
+
+  function draw(f) {
+    var n = f.place.length;
+
+    f.place.forEach(function (p) {
+      var el = nodes[p.id];
+      var cls = "bar";
+      if (f.doneAll || p.role === "sorted") { cls += " done"; }
+      else if (p.role === "L") { cls += " roleL"; }
+      else if (p.role === "R") { cls += " roleR"; }
+      else if (p.role === "res") { cls += " roleRes"; }
+      if (f.live && p.lane === 0 && (p.slot < f.lo || p.slot > f.hi)) { cls += " out"; }
+      el.className = cls;
+      el.style.transform = "translate(" + (p.slot * SLOT) + "px," + laneY[p.lane] + "px)";
+    });
+
+    place(curI, f.i, n - 1);
+    place(curJ, f.j, n - 1);
+    place(curK, f.k, n - 1);
+
+    if (f.mid >= 0) {
+      split.className = "";
+      split.style.transform = "translateX(" + (f.mid * SLOT - 1) + "px)";
+    } else {
+      split.className = "hide";
+    }
+
+    lineEls.forEach(function (el, idx) {
+      if (idx + 1 === f.line) {
+        if (el.className.indexOf("hit") < 0) { el.className += " hit"; }
+      } else {
+        el.className = el.className.replace(/ hit/g, "");
+      }
+    });
+
+    noteEl.textContent = f.note;
+    stackEl.textContent = f.stack ? ("호출 스택:  " + f.stack) : "";
+
+    varsEl.innerHTML = "";
+    [["자리", (f.vars.lo === null ? null : f.vars.lo + ".." + f.vars.hi)],
+     ["m", f.vars.m], ["i", f.vars.i], ["j", f.vars.j],
+     ["len(L)", f.vars.nl], ["len(R)", f.vars.nr], ["len(res)", f.vars.nres]
+    ].forEach(function (kv, idx) {
+      var keys = ["lo", "m", "i", "j", "nl", "nr", "nres"];
+      var d = document.createElement("div");
+      d.className = "v" + (f.changed.indexOf(keys[idx]) >= 0 && kv[1] !== null ? " chg" : "");
+      d.innerHTML = kv[0] + " = <b>" + (kv[1] === null ? "-" : kv[1]) + "</b>";
+      varsEl.appendChild(d);
+    });
+
+    stepEl.textContent = "단계 " + (at + 1) + " / " + frames.length;
+    scrub.value = at;
+
+    btnPrev.disabled = (at === 0);
+    btnFirst.disabled = (at === 0);
+    btnNext.disabled = (at === frames.length - 1);
+  }
+
+  // ---------------------------------------------------------------- 제어
+  function go(k) {
+    at = Math.max(0, Math.min(frames.length - 1, k));
+    draw(frames[at]);
+    if (at === frames.length - 1) { stop(); }
+  }
+
+  function delay() { return 1150 - parseInt(speedEl.value, 10) * 100; }
+
+  function play() {
+    if (at === frames.length - 1) { go(0); }
+    stop();
+    btnPlay.textContent = "정지";
+    timer = setInterval(function () { go(at + 1); }, delay());
+  }
+
+  function stop() {
+    if (timer) { clearInterval(timer); timer = null; }
+    btnPlay.textContent = "재생";
+  }
+
+  function reset(autoplay) {
+    stop();
+    var items = makeItems();
+
+    buildCode();
+    buildStage(items);
+    frames = record(items);
+
+    scrub.min = 0;
+    scrub.max = frames.length - 1;
+    at = 0;
+    draw(frames[0]);
+    if (autoplay) { setTimeout(play, 400); }
+  }
+
+  btnPlay.addEventListener("click", function () { if (timer) { stop(); } else { play(); } });
+  btnNext.addEventListener("click", function () { stop(); go(at + 1); });
+  btnPrev.addEventListener("click", function () { stop(); go(at - 1); });
+  btnFirst.addEventListener("click", function () { stop(); go(0); });
+  btnNew.addEventListener("click", function () { reset(true); });
+
+  scrub.addEventListener("input", function () { stop(); go(parseInt(scrub.value, 10)); });
+  speedEl.addEventListener("input", function () { if (timer) { play(); } });
+
+  document.getElementById("preset").addEventListener("change", function () { reset(true); });
+  document.getElementById("size").addEventListener("change", function () { reset(true); });
+
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "ArrowRight") { stop(); go(at + 1); }
+    else if (ev.key === "ArrowLeft") { stop(); go(at - 1); }
+    else if (ev.key === " ") { ev.preventDefault(); if (timer) { stop(); } else { play(); } }
+  });
+
+  reset(true);
+})();
+</script>
+</body>
+</html>

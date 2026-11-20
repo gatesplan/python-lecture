@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>시험대비 - 트리와 그래프 빈칸 채우기 정답</title>
+<style>
+@page { size: A4; margin: 15mm; }
+body {
+  font-family: 'Malgun Gothic', sans-serif;
+  line-height: 1.6;
+  font-size: 11pt;
+  color: #000;
+  background: #fff;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1cm;
+}
+h1 { font-size: 16pt; border-bottom: 2px solid #000; padding-bottom: 8px; margin: 0 0 6px; }
+.a-item { margin: 0 0 14px; page-break-inside: avoid; break-inside: avoid; }
+.a-num { font-weight: bold; }
+.a-label { font-size: 9.5pt; color: #333; margin: 4px 0 0; }
+.a-body { font-size: 10pt; margin: 2px 0 0; }
+.a-code, .a-out { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; white-space: pre; padding: 4px 8px; margin: 2px 0; }
+.a-code { background: #fff1b8; border: 1px solid #c99a00; }
+.a-out { background: #f8f8f8; border: 1px solid #ddd; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@media print { body { max-width: none; margin: 0; padding: 0; } }
+</style>
+</head>
+<body>
+<h1>시험대비 - 트리와 그래프 빈칸 채우기 정답</h1>
+
+<div class="a-item"><div class="a-num">1</div>
+<div class="a-code">(가) idx // 2
+(나) idx * 2
+(다) left_idx &lt; len(tree)
+(라) idx * 2 + 1</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">현재 노드: 20
+부모 노드: 10
+왼쪽 자식: 40
+오른쪽 자식: 50</div>
+<div class="a-body">(다)를 먼저 검사해야 리스트 범위를 벗어난 인덱스로 tree[left_idx]를 읽지 않는다.</div></div>
+
+<div class="a-item"><div class="a-num">2</div>
+<div class="a-code">    parent_idx = idx // 2
+    parent_val = tree[parent_idx] if parent_idx &gt;= 1 else "없음"
+
+    left_idx = idx * 2
+    left_val = tree[left_idx] if left_idx &lt; len(tree) and tree[left_idx] != 0 else "없음"
+
+    right_idx = idx * 2 + 1
+    right_val = tree[right_idx] if right_idx &lt; len(tree) and tree[right_idx] != 0 else "없음"</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">현재 노드: 50
+부모 노드: 20
+왼쪽 자식: 없음
+오른쪽 자식: 없음</div>
+<div class="a-body">인덱스 5의 자식 인덱스는 10, 11이고 len(tree)는 8이라 둘 다 없음이다.</div></div>
+
+<div class="a-item"><div class="a-num">3</div>
+<div class="a-code">(가) bst[idx] == 0
+(나) insert(idx * 2, num)
+(다) insert(idx * 2 + 1, num)</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">생성된 BST 배열 일부: [10, 5, 15, 3, 7, 0, 0]</div>
+</div>
+
+<div class="a-item"><div class="a-num">4</div>
+<div class="a-code">def insert(idx, num):
+    if bst[idx] == 0:
+        bst[idx] = num
+    elif num &lt; bst[idx]:
+        insert(idx * 2, num)
+    else:
+        insert(idx * 2 + 1, num)</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">[8, 3, 10, 1, 6, 0, 0]</div>
+</div>
+
+<div class="a-item"><div class="a-num">5</div>
+<div class="a-code">(가) idx &gt;= len(bst) or bst[idx] == 0
+(나) return search(idx * 2, num, cnt + 1)
+(다) return search(idx * 2 + 1, num, cnt + 1)</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">7을(를) 3번 비교 후 인덱스 5에서 찾았습니다
+True
+12을(를) 찾을 수 없습니다. (비교 횟수: 3회)
+False</div>
+<div class="a-body">(나), (다)에 return이 없으면 아래에서 돌아온 True, False가 버려지고 함수 끝까지 가서 None이 된다.</div></div>
+
+<div class="a-item"><div class="a-num">6</div>
+<div class="a-code">def search(idx, num):
+    if idx &gt;= len(bst) or bst[idx] == 0:
+        return False
+    elif bst[idx] == num:
+        return True
+    elif num &lt; bst[idx]:
+        return search(idx * 2, num)
+    else:
+        return search(idx * 2 + 1, num)</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">True
+False</div>
+<div class="a-body">7은 8에서 왼쪽, 3에서 오른쪽으로 가서 6이 있는 인덱스 5에 온다. 6보다 크므로 인덱스 11로 가고, 빈 칸이라 False.</div></div>
+
+<div class="a-item"><div class="a-num">7</div>
+<div class="a-code">(가) [[0] * n for _ in range(n)]
+(나) adj_matrix[2][0] = 1
+(다) adj_matrix[1][3] = 1
+(라) adj_matrix[3][1] = 1</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">[0, 1, 1, 0]
+[1, 0, 0, 1]
+[1, 0, 0, 0]
+[0, 1, 0, 0]</div>
+<div class="a-body">(다)와 (라)는 순서가 바뀌어도 된다.</div></div>
+
+<div class="a-item"><div class="a-num">8</div>
+<div class="a-code">adj_matrix = [[0] * n for _ in range(n)]
+
+adj_matrix[0][1] = 1; adj_matrix[1][0] = 1   # A-B
+adj_matrix[0][2] = 1; adj_matrix[2][0] = 1   # A-C
+adj_matrix[1][3] = 1; adj_matrix[3][1] = 1   # B-D
+adj_matrix[2][4] = 1; adj_matrix[4][2] = 1   # C-E
+adj_matrix[3][4] = 1; adj_matrix[4][3] = 1   # D-E
+
+for row in adj_matrix:
+    print(row)</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">[0, 1, 1, 0, 0]
+[1, 0, 0, 1, 0]
+[1, 0, 0, 0, 1]
+[0, 1, 0, 0, 1]
+[0, 0, 1, 1, 0]</div>
+</div>
+
+<div class="a-item"><div class="a-num">9</div>
+<div class="a-code">(가) {node: [] for node in nodes}
+(나) ['A', 'D']
+(다) 'A'
+(라) 'B'</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">A: ['B', 'C']
+B: ['A', 'D']
+C: ['A']
+D: ['B']</div>
+</div>
+
+<div class="a-item"><div class="a-num">10</div>
+<div class="a-code">nodes = ['A', 'B', 'C', 'D', 'E']
+adj_list = {node: [] for node in nodes}
+
+adj_list['A'].extend(['B', 'D'])
+adj_list['B'].extend(['A', 'C', 'E'])
+adj_list['C'].extend(['B', 'D'])
+adj_list['D'].extend(['A', 'C'])
+adj_list['E'].append('B')
+
+for k, v in adj_list.items():
+    print(f"{k}: {v}")</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">A: ['B', 'D']
+B: ['A', 'C', 'E']
+C: ['B', 'D']
+D: ['A', 'C']
+E: ['B']</div>
+</div>
+
+<div class="a-item"><div class="a-num">11</div>
+<div class="a-code">(가) neighbors
+(나) node_map[src]
+(다) node_map[neighbor]</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">--- 인접 행렬 ---
+[0, 1, 1, 0]
+[1, 0, 0, 1]
+[1, 0, 0, 0]
+[0, 1, 0, 0]</div>
+<div class="a-body">무방향 그래프의 인접 리스트에는 B가 A의 목록에, A가 B의 목록에 모두 있으므로 한 방향만 채워도 양쪽 칸이 1이 된다.</div></div>
+
+<div class="a-item"><div class="a-num">12</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">(1) DFS: 1 2 5 7 6 3 4
+(2) BFS: 1 2 3 4 5 6 7</div>
+</div>
+
+<div class="a-item"><div class="a-num">13</div>
+<div class="a-code">(가) visited[v] = True
+(나) result.append(v)
+(다) not visited[neighbor]
+(라) dfs(graph, neighbor, visited, result)</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">DFS 탐색 순서: 1 -&gt; 2 -&gt; 5 -&gt; 7 -&gt; 6 -&gt; 3 -&gt; 4</div>
+</div>
+
+<div class="a-item"><div class="a-num">14</div>
+<div class="a-code">def dfs(graph, v, visited, result):
+    visited[v] = True
+    result.append(v)
+    for neighbor in sorted(graph[v]):
+        if not visited[neighbor]:
+            dfs(graph, neighbor, visited, result)</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">[1, 2, 5, 7, 6, 3, 4]</div>
+</div>
+
+<div class="a-item"><div class="a-num">15</div>
+<div class="a-code">(가) deque([start])
+(나) queue.popleft()
+(다) visited[neighbor] = True
+(라) queue.append(neighbor)</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">BFS 탐색 순서: 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; 7</div>
+<div class="a-body">큐에 넣을 때 방문 표시를 해야 같은 노드가 큐에 두 번 들어가지 않는다. (다)와 (라)는 순서가 바뀌어도 된다.</div></div>
+
+<div class="a-item"><div class="a-num">16</div>
+<div class="a-code">def bfs(graph, start):
+    visited = {node: False for node in graph}
+    queue = deque([start])
+    visited[start] = True
+    result = []
+
+    while queue:
+        v = queue.popleft()
+        result.append(v)
+        for neighbor in sorted(graph[v]):
+            if not visited[neighbor]:
+                visited[neighbor] = True
+                queue.append(neighbor)
+    return result</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">[1, 2, 3, 4, 5, 6, 7]</div>
+</div>
+
+<div class="a-item"><div class="a-num">17</div>
+<div class="a-code">(가) cur == target
+(나) visited[next_node] == 0
+(다) dfs_check(next_node)
+(라) return True</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">A와 D 연결 여부: True
+A와 E 연결 여부: False</div>
+<div class="a-body">dfs_check(next_node)가 True를 돌려주면 그 자리에서 return True로 위로 전달해야 한다. 호출만 하고 결과를 버리면 D에 도달해도 마지막 return False가 반환된다.</div></div>
+
+<div class="a-item"><div class="a-num">18</div>
+<div class="a-code">(가) queue.pop(0)
+(나) distance[cur]
+(다) distance[next_node] == -1
+(라) distance[cur] + 1
+(마) queue.append(next_node)</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">A(0번)에서 D(3번)까지 최단 거리: 2 칸
+A(0번)에서 E(4번)까지 최단 거리: -1</div>
+<div class="a-body">distance가 -1이면 아직 방문하지 않은 노드이다. 방문 체크와 거리 기록을 distance 하나로 한다.</div></div>
+
+<div class="a-item"><div class="a-num">19</div>
+<div class="a-out">(1) O(1)
+(2) O(n)
+(3) O(n^2)
+(4) O(n)
+(5) O(log n)</div>
+<div class="a-body">(4)는 n번 반복이 두 번이라 2n번이지만 상수배를 버려 O(n). (5)는 n이 매번 절반이 되어 약 log2 n번 반복한다.</div></div>
+
+<div class="a-item"><div class="a-num">20</div>
+<div class="a-out">(1) O(n)
+(2) O(1)
+(3) O(n)
+(4) O(1)
+(5) O(1)</div>
+<div class="a-body">lst의 in은 앞에서부터 하나씩 비교한다. pop(0)은 뒤의 값들을 한 칸씩 앞으로 당긴다. 그래서 BFS의 큐로 리스트 대신 deque를 쓴다. s의 in은 평균 O(1)이다. (5)의 칸 수는 n * n을 한 번 계산하면 되므로 n과 관계없이 O(1)이다.</div></div>
+
+<div class="a-item"><div class="a-num">21</div>
+<div class="a-code">(가) money // coin
+(나) money % coin</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">6</div>
+<div class="a-body">500원 2개, 100원 2개, 50원 1개, 10원 1개.</div></div>
+
+<div class="a-item"><div class="a-num">22</div>
+<div class="a-code">def change(money, coins):
+    count = 0
+    for coin in coins:
+        count += money // coin
+        money = money % coin
+    return count</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">11
+6</div>
+</div>
+
+<div class="a-item"><div class="a-num">23</div>
+<div class="a-code">(가) start &gt;= end_time
+(나) count += 1
+(다) end_time = end</div>
+<div class="a-label">실행 결과</div>
+<div class="a-out">4</div>
+<div class="a-body">고른 회의는 (1, 4), (5, 7), (8, 11), (12, 14). 튜플을 (끝, 시작) 순서로 저장해서 sort()만으로 끝나는 시간순 정렬이 된다. (나)와 (다)는 순서가 바뀌어도 된다.</div></div>
+
+<div class="a-item"><div class="a-num">24</div>
+<div class="a-out">(1) 3
+(2) 2개, 3원 + 3원</div>
+<div class="a-body">탐욕 방법은 4원을 먼저 1개 쓰고 남은 2원을 1원 2개로 준다. 큰 동전이 작은 동전의 배수가 아니면 탐욕 방법이 최솟값을 보장하지 않는다. 500, 100, 50, 10원은 큰 동전이 작은 동전의 배수라 21번의 방법이 최솟값이다.</div></div>
+
+</body>
+</html>

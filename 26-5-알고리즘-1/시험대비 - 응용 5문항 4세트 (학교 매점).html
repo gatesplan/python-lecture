@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>시험대비 - 응용 5문항 4세트 (학교 매점)</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>시험대비 - 응용 5문항 4세트 (학교 매점)</h1><p class="intro">밑줄 칸에 들어갈 코드를 쓴다. 밑줄 길이는 들어갈 코드의 글자 수와 같다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">매점에서 거스름돈 money원을 동전으로 거슬러 준다. 리스트 coins에는 동전의 금액이 큰 것부터 들어 있다. 다음 change(money, coins)는 큰 동전부터 줄 수 있는 만큼 주는 방법(탐욕)으로 거슬러 줄 때 동전의 개수를 돌려주는 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def change(money, coins):
+    count = 0
+    for c in coins:
+        count += <span class="b" style="width:10ch"><i>가</i></span>
+        <span class="b" style="width:10ch"><i>나</i></span>
+    return <span class="b" style="width:5ch"><i>다</i></span>
+
+
+print(change(1260, [500, 100, 50, 10]))
+print(change(780, [500, 100, 50, 10]))</div>
+<p class="out-label">실행 결과</p><div class="out">6
+7</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">매점 앞에 선 학생들을 키가 작은 순서대로 다시 세운다. 다음 line_up(H)는 이웃한 두 학생을 비교해 앞 학생이 더 크면 자리를 바꾸는 버블 정렬 함수이다. 한 바퀴 동안 자리를 한 번도 바꾸지 않았으면 반복을 끝내고, 돈 바퀴 수 rounds를 돌려준다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def line_up(H):
+    n = len(H)
+    rounds = 0
+    for i in range(n):
+        swapped = False
+        rounds += 1
+        for j in range(<span class="b" style="width:9ch"><i>가</i></span>):
+            if <span class="b" style="width:15ch"><i>나</i></span>:
+                H[j], H[j + 1] = H[j + 1], H[j]
+                <span class="b" style="width:14ch"><i>다</i></span>
+        if not swapped:
+            <span class="b" style="width:5ch"><i>라</i></span>
+    return rounds
+
+
+H = [158, 162, 171, 165, 175]
+print(line_up(H), H)</div>
+<p class="out-label">실행 결과</p><div class="out">2 [158, 162, 165, 171, 175]</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 price에 들어 있는 과자 가격을 퀵 정렬로 싼 것부터 정렬한다. partition(A, lo, hi)는 마지막 값을 기준으로 구간 lo ~ hi를 나누는 함수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def partition(A, lo, hi):
+    p = A[hi]
+    i = lo
+    for j in range(lo, hi):
+        if A[j] &lt; p:
+            A[i], A[j] = A[j], A[i]
+            i += 1
+    A[i], A[hi] = A[hi], A[i]
+    return <span class="b" style="width:1ch"><i>가</i></span>
+
+
+def quick_sort(A, lo, hi):
+    if <span class="b" style="width:8ch"><i>나</i></span>:
+        return
+    m = partition(A, lo, hi)
+    quick_sort(A, <span class="b" style="width:9ch"><i>다</i></span>)
+    quick_sort(A, <span class="b" style="width:9ch"><i>라</i></span>)
+
+
+price = [1200, 800, 1500, 500, 1000, 700]
+quick_sort(price, 0, len(price) - 1)
+print(price)</div>
+<p class="out-label">실행 결과</p><div class="out">[500, 700, 800, 1000, 1200, 1500]</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">매점의 과자 n종류 중에서 r종류를 골라 세트로 판다. 다음 snack_set(n, r)은 고르는 방법의 수(nCr)를 상향식(표)으로 구하는 함수이다. d[i][j]는 i종류 중 j종류를 고르는 방법의 수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def snack_set(n, r):
+    d = [[0] * (n + 1) for _ in range(n + 1)]
+    for i in range(n + 1):
+        for j in range(i + 1):
+            if <span class="b" style="width:16ch"><i>가</i></span>:
+                d[i][j] = 1
+            else:
+                d[i][j] = <span class="b" style="width:29ch"><i>나</i></span>
+    return <span class="b" style="width:7ch"><i>다</i></span>
+
+
+print(snack_set(5, 2), snack_set(10, 3))</div>
+<p class="out-label">실행 결과</p><div class="out">10 120</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 stock에는 과자별 재고 개수가 들어 있다. 다음 total(stock, n)은 앞에서부터 n종류의 재고 합계를 돌려주는 재귀 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def total(stock, n):
+    if <span class="b" style="width:6ch"><i>가</i></span>:
+        return 0
+    return <span class="b" style="width:12ch"><i>나</i></span> + total(stock, <span class="b" style="width:5ch"><i>다</i></span>)
+
+
+stock = [12, 5, 30, 8, 20]
+print(total(stock, 5))
+print(total(stock, 2))</div>
+<p class="out-label">실행 결과</p><div class="out">75
+17</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div></body></html>

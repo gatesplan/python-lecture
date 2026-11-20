@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>시험대비 - 응용 5문항 5세트 (지하철 노선도)</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>시험대비 - 응용 5문항 5세트 (지하철 노선도)</h1><p class="intro">밑줄 칸에 들어갈 코드를 쓴다. 밑줄 길이는 들어갈 코드의 글자 수와 같다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 line은 지하철역 0 ~ 5번 사이의 선로를 인접 행렬로 나타낸 것이다. line[a][b]가 1이면 a번 역과 b번 역이 선로로 바로 이어져 있다. 다음 min_stops(start, target)은 start번 역에서 target번 역까지 가장 적게 이동하는 정거장 수를 너비 우선 탐색(BFS)으로 구하는 함수이다. 갈 수 없으면 -1을 돌려준다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">line = [
+    [0, 1, 1, 0, 0, 0],
+    [1, 0, 0, 1, 0, 0],
+    [1, 0, 0, 1, 0, 0],
+    [0, 1, 1, 0, 1, 0],
+    [0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0]
+]
+
+def min_stops(start, target):
+    n = len(line)
+    dist = [-1] * n
+    queue = [start]
+    dist[start] = 0
+    while queue:
+        cur = <span class="b" style="width:12ch"><i>가</i></span>
+        if cur == target:
+            return dist[cur]
+        for nxt in range(n):
+            if line[cur][nxt] == 1 and <span class="b" style="width:15ch"><i>나</i></span>:
+                <span class="b" style="width:25ch"><i>다</i></span>
+                <span class="b" style="width:17ch"><i>라</i></span>
+    return -1
+
+
+print(min_stops(0, 4), min_stops(0, 5))</div>
+<p class="out-label">실행 결과</p><div class="out">3 -1</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 subway는 지하철 노선도를 인접 리스트로 나타낸 것이다. 다음 dfs(v, visited, result)는 v역에서 출발해 갈 수 있는 역을 깊이 우선 탐색(DFS)으로 들르면서, 들른 순서대로 result에 넣는 함수이다. 이웃한 역은 이름의 가나다순으로 먼저 들른다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">subway = {
+    '중앙': ['강변', '시장'],
+    '강변': ['중앙', '숲길'],
+    '시장': ['중앙', '숲길'],
+    '숲길': ['강변', '시장', '항구'],
+    '항구': ['숲길'],
+    '공항': []
+}
+
+def dfs(v, visited, result):
+    visited[v] = True
+    <span class="b" style="width:16ch"><i>가</i></span>
+    for nxt in sorted(subway[v]):
+        if <span class="b" style="width:16ch"><i>나</i></span>:
+            <span class="b" style="width:25ch"><i>다</i></span>
+
+
+visited = {s: False for s in subway}
+result = []
+dfs('중앙', visited, result)
+print(result)</div>
+<p class="out-label">실행 결과</p><div class="out">['중앙', '강변', '숲길', '시장', '항구']</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 L과 R에는 두 노선의 열차가 역에 도착하는 시각(분)이 이른 순서대로 들어 있다. 다음 merge(L, R)은 두 시간표를 도착 시각이 이른 순서대로 하나로 합쳐 돌려주는 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def merge(L, R):
+    res = []
+    i = j = 0
+    while i &lt; len(L) and j &lt; len(R):
+        if L[i] &lt;= R[j]:
+            <span class="b" style="width:16ch"><i>가</i></span>
+            i += 1
+        else:
+            <span class="b" style="width:16ch"><i>나</i></span>
+            <span class="b" style="width:6ch"><i>다</i></span>
+    return res + L[i:] + R[j:]
+
+
+line1 = [5, 20, 35, 50]
+line2 = [12, 27, 30, 42, 57]
+print(merge(line1, line2))</div>
+<p class="out-label">실행 결과</p><div class="out">[5, 12, 20, 27, 30, 35, 42, 50, 57]</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 nums에는 역 번호가 작은 순서대로 들어 있다. 다음 find(nums, target)은 역 번호 target의 위치를 while로 구간 low ~ high를 좁혀 가며 찾는 이진 탐색 함수이다. 없으면 -1을 돌려준다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def find(nums, target):
+    low = 0
+    high = <span class="b" style="width:13ch"><i>가</i></span>
+    while low &lt;= high:
+        mid = <span class="b" style="width:17ch"><i>나</i></span>
+        if nums[mid] == target:
+            return <span class="b" style="width:3ch"><i>다</i></span>
+        elif nums[mid] &gt; target:
+            <span class="b" style="width:14ch"><i>라</i></span>
+        else:
+            low = mid + 1
+    return -1
+
+
+nums = [201, 205, 210, 214, 219, 223, 228, 232, 240]
+print(find(nums, 223))
+print(find(nums, 230))</div>
+<p class="out-label">실행 결과</p><div class="out">5
+-1</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">일반 열차는 한 번에 1개 역을, 급행 열차는 한 번에 2개 역을 이동한다. 두 열차를 갈아타며 출발역에서 n번째 역까지 가는 방법의 수를 구한다. 다음 ways(n)은 이 값을 상향식(표)으로 구하는 함수이다. d[i]는 i번째 역까지 가는 방법의 수이고 n은 1 이상이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def ways(n):
+    d = [0] * (n + 1)
+    d[0] = 1
+    d[1] = <span class="b" style="width:1ch"><i>가</i></span>
+    for i in <span class="b" style="width:15ch"><i>나</i></span>:
+        d[i] = <span class="b" style="width:19ch"><i>다</i></span>
+    return d[n]
+
+
+print(ways(3), ways(10))</div>
+<p class="out-label">실행 결과</p><div class="out">3 89</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span></div></div></body></html>

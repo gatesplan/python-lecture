@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>시험대비 - 응용 5문항 2세트 (도서관) 정답</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>시험대비 - 응용 5문항 2세트 (도서관) 정답</h1><p class="intro">밑줄 칸에 들어갈 코드를 쓴다. 밑줄 길이는 들어갈 코드의 글자 수와 같다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">도서관 서가 shelf에는 책 번호가 작은 순서대로 꽂혀 있다. 다음 put_back(shelf, book)은 반납된 책 book을 서가의 맨 뒤에 놓은 다음, book보다 번호가 큰 책을 뒤로 한 칸씩 밀고 알맞은 자리에 꽂는 함수이다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def put_back(shelf, book):
+    shelf.append(book)
+    j = len(shelf) - 2
+    while <span class="a"><i>가</i>j &gt;= 0 and shelf[j] &gt; book</span>:
+        <span class="a"><i>나</i>shelf[j + 1] = shelf[j]</span>
+        j -= 1
+    <span class="a"><i>다</i>shelf[j + 1] = book</span>
+
+
+shelf = [110, 230, 340, 410, 580]
+put_back(shelf, 300)
+print(shelf)
+put_back(shelf, 50)
+print(shelf)</div>
+<p class="out-label">실행 결과</p><div class="out">[110, 230, 300, 340, 410, 580]
+[50, 110, 230, 300, 340, 410, 580]</div><div class="answers"><span class="lab">(가)</span><span>j &gt;= 0 and shelf[j] &gt; book</span><span class="lab">(나)</span><span>shelf[j + 1] = shelf[j]</span><span class="lab">(다)</span><span>shelf[j + 1] = book</span></div><p class="note">삽입 정렬에서 값 하나를 끼워 넣는 부분이다. (가)는 j &gt; -1 and shelf[j] &gt; book도 정답이다. (가)에서 j &gt;= 0을 빼면 book이 가장 작을 때 j가 -1이 되어 shelf[-1], 곧 맨 뒤 값과 비교하게 된다.</p></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 bst에는 책 번호가 이진 탐색 트리로 저장되어 있다. 루트는 1번 칸이고, idx번 칸의 왼쪽 자식은 idx * 2번 칸, 오른쪽 자식은 idx * 2 + 1번 칸이다. 0은 빈 칸이다. 다음 find(idx, num)은 번호가 num인 책이 들어 있는 칸의 번호를 돌려주고, 없으면 -1을 돌려주는 함수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">bst = [0] * 16
+for i, v in [(1, 500), (2, 300), (3, 800), (4, 100), (5, 400), (6, 700)]:
+    bst[i] = v
+
+def find(idx, num):
+    if idx &gt;= len(bst) or <span class="a"><i>가</i>bst[idx] == 0</span>:
+        return -1
+    elif bst[idx] == num:
+        return <span class="a"><i>나</i>idx</span>
+    elif num &lt; bst[idx]:
+        return find(<span class="a"><i>다</i>idx * 2</span>, num)
+    else:
+        return find(<span class="a"><i>라</i>idx * 2 + 1</span>, num)
+
+
+print(find(1, 400), find(1, 600))</div>
+<p class="out-label">실행 결과</p><div class="out">5 -1</div><div class="answers"><span class="lab">(가)</span><span>bst[idx] == 0</span><span class="lab">(나)</span><span>idx</span><span class="lab">(다)</span><span>idx * 2</span><span class="lab">(라)</span><span>idx * 2 + 1</span></div><p class="note">이진 탐색 트리의 탐색이다. (다)는 2 * idx, (라)는 2 * idx + 1도 정답이다. 600은 500, 800, 700과 차례로 비교한 뒤 빈 칸(12번)에 도착해 -1이 된다.</p></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 register(idx, num)은 새로 들어온 책의 번호 num을 이진 탐색 트리 bst에 넣는 함수이다. 루트는 1번 칸이고 0은 빈 칸이다. 지금 칸의 번호보다 작으면 왼쪽 자식으로, 그렇지 않으면 오른쪽 자식으로 내려간다. 빈칸 (가), (나), (다)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">bst = [0] * 16
+
+def register(idx, num):
+    if <span class="a"><i>가</i>bst[idx] == 0</span>:
+        <span class="a"><i>나</i>bst[idx] = num</span>
+    elif <span class="a"><i>다</i>num &lt; bst[idx]</span>:
+        register(idx * 2, num)
+    else:
+        register(idx * 2 + 1, num)
+
+
+for x in [500, 300, 800, 100, 400, 700]:
+    register(1, x)
+print(bst[1:8])</div>
+<p class="out-label">실행 결과</p><div class="out">[500, 300, 800, 100, 400, 700, 0]</div><div class="answers"><span class="lab">(가)</span><span>bst[idx] == 0</span><span class="lab">(나)</span><span>bst[idx] = num</span><span class="lab">(다)</span><span>num &lt; bst[idx]</span></div><p class="note">이진 탐색 트리의 삽입이다. (다)는 bst[idx] &gt; num도 정답이다. 실행 결과는 앞 문제의 트리와 같다.</p></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 hall은 도서관의 방과 방 사이 통로를 인접 리스트로 나타낸 것이다. 다음 can_go(cur, goal, visited)는 cur에서 통로를 따라 goal까지 갈 수 있으면 True, 없으면 False를 돌려주는 깊이 우선 탐색(DFS) 함수이다. visited는 이미 들른 방의 리스트이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">hall = {
+    '입구': ['열람실', '어린이실'],
+    '열람실': ['입구', '서고'],
+    '어린이실': ['입구'],
+    '서고': ['열람실'],
+    '보존실': ['수리실'],
+    '수리실': ['보존실']
+}
+
+def can_go(cur, goal, visited):
+    visited.append(cur)
+    if cur == goal:
+        return True
+    for nxt in hall[cur]:
+        if <span class="a"><i>가</i>nxt not in visited</span>:
+            if <span class="a"><i>나</i>can_go(nxt, goal, visited)</span>:
+                return <span class="a"><i>다</i>True</span>
+    return <span class="a"><i>라</i>False</span>
+
+
+print(can_go('입구', '서고', []))
+print(can_go('입구', '수리실', []))</div>
+<p class="out-label">실행 결과</p><div class="out">True
+False</div><div class="answers"><span class="lab">(가)</span><span>nxt not in visited</span><span class="lab">(나)</span><span>can_go(nxt, goal, visited)</span><span class="lab">(다)</span><span>True</span><span class="lab">(라)</span><span>False</span></div><p class="note">DFS로 확인하는 연결 여부이다. 학교 코드는 visited를 0과 1의 리스트로 두지만 여기서는 들른 방의 이름을 모은 리스트로 두었다. (나)에서 재귀 호출의 결과가 True일 때만 True를 돌려준다. return can_go(nxt, goal, visited)로 쓰면 첫 이웃에서 못 찾았을 때 다른 이웃을 보지 않고 끝난다.</p></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">추천 도서 n권 중에서 r권을 골라 전시한다. 다음 pick(n, r)은 고르는 방법의 수(nCr)를 구하는 함수이다. 한 번 구한 값은 (n, r) 튜플을 키로 하는 딕셔너리 memo에 저장해 두고 다시 쓴다(메모이제이션). 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">memo = {}
+
+def pick(n, r):
+    if <span class="a"><i>가</i>r == 0 or r == n</span>:
+        return 1
+    if <span class="a"><i>나</i>(n, r) in memo</span>:
+        return <span class="a"><i>다</i>memo[(n, r)]</span>
+    memo[(n, r)] = <span class="a"><i>라</i>pick(n - 1, r - 1) + pick(n - 1, r)</span>
+    return memo[(n, r)]
+
+
+print(pick(5, 2), pick(30, 15))</div>
+<p class="out-label">실행 결과</p><div class="out">10 155117520</div><div class="answers"><span class="lab">(가)</span><span>r == 0 or r == n</span><span class="lab">(나)</span><span>(n, r) in memo</span><span class="lab">(다)</span><span>memo[(n, r)]</span><span class="lab">(라)</span><span>pick(n - 1, r - 1) + pick(n - 1, r)</span></div><p class="note">조합의 점화식 nCr = (n-1)C(r-1) + (n-1)Cr에 메모이제이션을 붙인 것이다. (가)는 r == n or r == 0도 정답이다. (라)는 두 호출의 순서를 바꿔 써도 정답이다.</p></div></body></html>
