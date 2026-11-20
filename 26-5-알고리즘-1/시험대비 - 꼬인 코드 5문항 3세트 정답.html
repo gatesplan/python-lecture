@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>시험대비 - 꼬인 코드 5문항 3세트 정답</title>
+<style>
+@page { size: A4; margin: 15mm; }
+body {
+    font-family: 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1cm;
+}
+h1 { font-size: 16pt; border-bottom: 2px solid #000; padding-bottom: 8px; margin: 0 0 6px; }
+.intro { font-size: 10pt; color: #333; margin: 0 0 10px; }
+h2 { font-size: 13pt; margin: 1.5em 0 0.2em; border-bottom: 1px solid #999; padding-bottom: 3px; }
+.sec-desc { font-size: 10pt; color: #333; margin: 0.2em 0 0.6em; }
+.problem { margin: 0 0 26px; page-break-inside: avoid; break-inside: avoid; }
+.problem-number { font-weight: bold; font-size: 11pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; }
+.stmt { margin: 4px 0 6px; }
+.code-block {
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    margin: 6px 0;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.subq { font-size: 10.5pt; margin: 10px 0 2px; }
+.answer-space { border: 1px solid #ccc; margin: 4px 0 0; background: #fff;
+                page-break-inside: avoid; break-inside: avoid; }
+.answer-space.sm { height: 50px; }
+.answer-space.lg { height: 130px; }
+.answers { page-break-before: always; break-before: page; }
+.a-item { margin: 0 0 14px; page-break-inside: avoid; break-inside: avoid; }
+.a-num { font-weight: bold; }
+.a-body { font-size: 10pt; margin: 2px 0 0; }
+.a-out { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; white-space: pre; background: #f8f8f8; border: 1px solid #ddd; padding: 4px 8px; margin: 2px 0; }
+@media print { body { max-width: none; margin: 0; padding: 0; } }
+.page-break { break-before: page; page-break-before: always; }
+</style>
+</head>
+<body>
+<h1>시험대비 - 꼬인 코드 5문항 3세트 정답</h1>
+<div class="a-item"><div class="a-num">1</div><div class="a-out">[1, 2, 3] [3, 1, 3, 2, 1]
+1</div><div class="a-body">p보다 작은 값과 큰 값만 골라 담으므로 p와 같은 값은 어느 쪽에도 들어가지 않고, [p]로 하나만 남는다. 그래서 같은 값이 사라진다. 새 리스트를 만들어 돌려주는 방식이라 원래의 A는 바뀌지 않는다. 고치려면 한쪽을 A[1:]에서 고르고 조건을 x &lt;= p 또는 x &gt;= p로 쓴다.</div></div>
+<div class="a-item"><div class="a-num">2</div><div class="a-out">{1: [2], 2: [1], 3: [1]}
+{1: [2], 2: [1], 3: [], 4: [1]}
+True False</div><div class="a-body">copy()는 딕셔너리만 새로 만들고 값인 리스트는 같은 것을 가리킨다(얕은 복사). g2[1].remove(3)은 함께 쓰는 리스트를 고치므로 graph에서도 3이 빠진다. g2[3] = []와 g2[4] = [1]은 g2의 칸에 새 리스트를 넣는 것이라 graph에는 영향이 없다.</div></div>
+<div class="a-item"><div class="a-num">3</div><div class="a-out">10 [1, 2, 3, 4]
+10 []
+0 []</div><div class="a-body">pop()은 넘겨받은 리스트 자체에서 값을 꺼내므로, 합을 구하고 나면 리스트가 빈다. 첫 줄은 복사본 data[:]를 넘겨서 data가 그대로이다. 둘째 줄은 total(data)가 먼저 실행되어 data를 비운 다음에 data가 출력되므로 10 []이다. 셋째 줄은 빈 리스트의 합이라 0이다.</div></div>
+<div class="a-item"><div class="a-num">4</div><div class="a-out">3 -1 -1
+5 -1
+4 0</div><div class="a-body">이진 탐색은 가운데 값과 비교해 한쪽 절반을 버린다. 정렬되어 있지 않으면 버린 쪽에 답이 있을 수 있다. 4는 처음 가운데에 있어서, 8은 오른쪽 절반의 가운데에 있어서 우연히 찾는다. 7은 처음에 4 &lt; 7이라 오른쪽으로 가는데 실제로는 0번 칸에 있다. 오류는 나지 않고 -1이 나온다. sorted(data)는 새 리스트를 만들 뿐 data를 바꾸지 않는다.</div></div>
+<div class="a-item"><div class="a-num">5</div><div class="a-out">8 25
+8 50</div><div class="a-body">memo = {}가 함수 안에 있어 호출할 때마다 빈 딕셔너리를 새로 만든다. 저장해 둔 값을 다시 쓰는 일이 한 번도 없으므로 메모이제이션이 없는 재귀와 호출 횟수가 같다. fib(6)의 호출 횟수는 25번이다. cnt는 전역 변수라 둘째 줄에서 25번이 더해져 50이 된다.</div></div>
+</body>
+</html>

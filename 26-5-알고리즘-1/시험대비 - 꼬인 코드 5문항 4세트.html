@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>시험대비 - 꼬인 코드 5문항 4세트</title>
+<style>
+@page { size: A4; margin: 15mm; }
+body {
+    font-family: 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1cm;
+}
+h1 { font-size: 16pt; border-bottom: 2px solid #000; padding-bottom: 8px; margin: 0 0 6px; }
+.intro { font-size: 10pt; color: #333; margin: 0 0 10px; }
+h2 { font-size: 13pt; margin: 1.5em 0 0.2em; border-bottom: 1px solid #999; padding-bottom: 3px; }
+.sec-desc { font-size: 10pt; color: #333; margin: 0.2em 0 0.6em; }
+.problem { margin: 0 0 26px; page-break-inside: avoid; break-inside: avoid; }
+.problem-number { font-weight: bold; font-size: 11pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; }
+.stmt { margin: 4px 0 6px; }
+.code-block {
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    margin: 6px 0;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.subq { font-size: 10.5pt; margin: 10px 0 2px; }
+.answer-space { border: 1px solid #ccc; margin: 4px 0 0; background: #fff;
+                page-break-inside: avoid; break-inside: avoid; }
+.answer-space.sm { height: 50px; }
+.answer-space.lg { height: 130px; }
+.answers { page-break-before: always; break-before: page; }
+.a-item { margin: 0 0 14px; page-break-inside: avoid; break-inside: avoid; }
+.a-num { font-weight: bold; }
+.a-body { font-size: 10pt; margin: 2px 0 0; }
+.a-out { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; white-space: pre; background: #f8f8f8; border: 1px solid #ddd; padding: 4px 8px; margin: 2px 0; }
+@media print { body { max-width: none; margin: 0; padding: 0; } }
+.page-break { break-before: page; page-break-before: always; }
+</style>
+</head>
+<body>
+<h1>시험대비 - 꼬인 코드 5문항 4세트</h1>
+<p class="intro">화면에 출력되는 그대로 쓴다.</p>
+<div class="problem" id="p1">
+<div class="problem-number">1</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">A = [3, 1, 4, 1, 5, 2]
+res = []
+for x in A:
+    m = min(A)
+    res.append(m)
+    A.remove(m)
+print(res, A)</div>
+<div class="answer-space" style="height: 60px"></div>
+</div>
+<div class="problem" id="p2">
+<div class="problem-number">2</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">graph = {1: [2, 3], 2: [1, 4], 3: [1, 4], 4: [2, 3, 5], 5: [4]}
+
+def bfs(start):
+    visited = []
+    queue = [start]
+    while queue:
+        v = queue.pop(0)
+        visited.append(v)
+        for w in graph[v]:
+            if w not in visited:
+                queue.append(w)
+    return visited
+
+print(bfs(1))</div>
+<div class="answer-space" style="height: 60px"></div>
+</div>
+<div class="problem" id="p3">
+<div class="problem-number">3</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">cnt = 0
+
+def power(b, e):
+    global cnt
+    cnt += 1
+    if e == 0:
+        return 1
+    return power(b, e // 2) * power(b, e // 2) * [1, b][e % 2]
+
+print(power(2, 5), cnt)
+cnt = 0
+print(power(3, 8), cnt)</div>
+<div class="answer-space" style="height: 82px"></div>
+</div>
+<div class="problem" id="p4">
+<div class="problem-number">4</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">def stairs(n):
+    d = [0] * n + [1]
+    for i in range(n):
+        d[i] = d[i - 1] + d[i - 2]
+    return d
+
+print(stairs(5))
+print(stairs(1), stairs(2))</div>
+<div class="answer-space" style="height: 82px"></div>
+</div>
+<div class="problem" id="p5">
+<div class="problem-number">5</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">tree = [0, 5, 3, 5, 1, 4, 5, 9]
+
+def parent(x):
+    return tree[tree.index(x) // 2]
+
+print(parent(4), parent(9), parent(3))
+print(parent(5), parent(1), parent(0))</div>
+<div class="answer-space" style="height: 82px"></div>
+</div>
+</body>
+</html>

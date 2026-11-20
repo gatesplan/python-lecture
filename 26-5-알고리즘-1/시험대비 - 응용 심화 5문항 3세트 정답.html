@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>시험대비 - 응용 심화 5문항 3세트 정답</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>시험대비 - 응용 심화 5문항 3세트 정답</h1><p class="intro">밑줄 칸에 들어갈 코드를 쓴다. 밑줄 길이는 들어갈 코드의 글자 수와 같다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 rec에는 멀리뛰기 기록(cm)이 들어 있다. 다음 quick_sort(A, lo, hi)는 구간의 가운데 값 p를 기준으로, 기록이 큰 것부터 놓이도록 정렬하는 퀵 정렬 함수이다. i는 왼쪽에서부터 p보다 큰 값을 지나치고, j는 오른쪽에서부터 p보다 작은 값을 지나친 다음, 멈춘 자리의 두 값을 서로 바꾼다. 빈칸 (가) ~ (마)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def quick_sort(A, lo, hi):
+    if lo &gt;= hi:
+        return
+    p = <span class="a"><i>가</i>A[(lo + hi) // 2]</span>
+    i = lo
+    j = hi
+    while i &lt;= j:
+        while <span class="a"><i>나</i>A[i] &gt; p</span>:
+            i += 1
+        while <span class="a"><i>다</i>A[j] &lt; p</span>:
+            j -= 1
+        if i &lt;= j:
+            A[i], A[j] = A[j], A[i]
+            i += 1
+            j -= 1
+    quick_sort(A, <span class="a"><i>라</i>lo, j</span>)
+    quick_sort(A, <span class="a"><i>마</i>i, hi</span>)
+
+
+rec = [412, 388, 455, 430, 397, 461, 420]
+quick_sort(rec, 0, len(rec) - 1)
+print(rec)</div>
+<p class="out-label">실행 결과</p><div class="out">[461, 455, 430, 420, 412, 397, 388]</div><div class="answers"><span class="lab">(가)</span><span>A[(lo + hi) // 2]</span><span class="lab">(나)</span><span>A[i] &gt; p</span><span class="lab">(다)</span><span>A[j] &lt; p</span><span class="lab">(라)</span><span>lo, j</span><span class="lab">(마)</span><span>i, hi</span></div><p class="note">가운데 값을 기준으로 하는 퀵 정렬을 내림차순으로 바꾼 것이다. 오름차순에서는 (나)가 A[i] &lt; p, (다)가 A[j] &gt; p이고, 내림차순에서는 부등호의 방향이 반대이다. while이 끝나면 j는 i보다 앞에 있고, lo ~ j에는 p 이상인 값, i ~ hi에는 p 이하인 값이 모여 있다. 그래서 두 구간을 따로 정렬한다. (나)는 p &lt; A[i], (다)는 p &gt; A[j]도 정답이다. (라)와 (마)는 서로 바꿔 써도 정답이다.</p></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 web은 웹 페이지 1 ~ 6번과 페이지 사이의 링크를 인접 리스트로 나타낸 것이다. 다음 crawl(start)는 start번 페이지에서 링크를 따라 갈 수 있는 페이지를 깊이 우선 탐색(DFS)으로 들르고, 들른 순서를 리스트로 돌려주는 함수이다. 재귀 대신 스택을 쓴다. 번호가 작은 페이지를 먼저 들르도록 이웃한 페이지를 번호가 큰 것부터 스택에 넣고, 스택에서 꺼낼 때 방문 표시를 한다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">web = {
+    1: [2, 3],
+    2: [1, 4, 5],
+    3: [1, 5],
+    4: [2],
+    5: [2, 3, 6],
+    6: [5]
+}
+
+def crawl(start):
+    visited = {page: False for page in web}
+    stack = [start]
+    result = []
+    while len(stack) &gt; 0:
+        v = <span class="a"><i>가</i>stack.pop()</span>
+        if <span class="a"><i>나</i>visited[v]</span>:
+            continue
+        visited[v] = True
+        result.append(v)
+        for nxt in sorted(web[v], <span class="a"><i>다</i>reverse=True</span>):
+            if not visited[nxt]:
+                <span class="a"><i>라</i>stack.append(nxt)</span>
+    return result
+
+
+print(crawl(1), crawl(4))</div>
+<p class="out-label">실행 결과</p><div class="out">[1, 2, 4, 5, 3, 6] [4, 2, 1, 3, 5, 6]</div><div class="answers"><span class="lab">(가)</span><span>stack.pop()</span><span class="lab">(나)</span><span>visited[v]</span><span class="lab">(다)</span><span>reverse=True</span><span class="lab">(라)</span><span>stack.append(nxt)</span></div><p class="note">스택으로 쓴 DFS이다. 스택은 나중에 넣은 것이 먼저 나오므로, 번호가 큰 이웃부터 넣어야 번호가 작은 이웃이 먼저 나온다. 같은 페이지가 스택에 여러 번 들어갈 수 있어서, 꺼냈을 때 이미 들른 페이지이면 (나)에서 건너뛴다. (가)를 stack.pop(0)으로 쓰면 먼저 넣은 것이 먼저 나와 깊이 우선 순서가 되지 않는다. 실행 결과는 재귀로 쓴 DFS와 같다. 비슷한 문제: 백준 1260 DFS와 BFS.</p></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 buses에는 버스 노선별 배차 간격(분)이 들어 있다. 모든 노선의 버스가 동시에 출발한 뒤 처음으로 다시 동시에 출발할 때까지 걸리는 시간은 배차 간격들의 최소공배수이다. gcd(a, b)는 유클리드 호제법으로 최대공약수를 구하는 재귀 함수이다. 다음 lcm_all(arr, n)은 arr의 앞에서부터 n개 값의 최소공배수를 구하는 재귀 함수이다. 두 수의 최소공배수는 두 수의 곱을 두 수의 최대공약수로 나눈 값이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def gcd(a, b):
+    if b == 0:
+        return a
+    return <span class="a"><i>가</i>gcd(b, a % b)</span>
+
+
+def lcm_all(arr, n):
+    if n == 1:
+        return <span class="a"><i>나</i>arr[0]</span>
+    prev = <span class="a"><i>다</i>lcm_all(arr, n - 1)</span>
+    return prev * arr[n - 1] // <span class="a"><i>라</i>gcd(prev, arr[n - 1])</span>
+
+
+buses = [4, 6, 10]
+print(lcm_all(buses, 3), lcm_all(buses, 2), lcm_all([12, 18, 8, 9], 4))</div>
+<p class="out-label">실행 결과</p><div class="out">60 12 72</div><div class="answers"><span class="lab">(가)</span><span>gcd(b, a % b)</span><span class="lab">(나)</span><span>arr[0]</span><span class="lab">(다)</span><span>lcm_all(arr, n - 1)</span><span class="lab">(라)</span><span>gcd(prev, arr[n - 1])</span></div><p class="note">재귀 두 개를 함께 쓴다. gcd는 유클리드 호제법이고, lcm_all은 리스트의 합을 재귀로 구할 때와 같은 구조이다. 앞의 n개의 최소공배수는 앞의 n - 1개의 최소공배수 prev와 n번째 값 arr[n - 1]의 최소공배수이다. 4와 6의 최소공배수는 12이고, 12와 10의 최소공배수는 12 × 10 // 2 = 60이다. (라)는 gcd(arr[n - 1], prev)도 정답이다. 비슷한 문제: 백준 1934 최소공배수.</p></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 trees에는 나무의 높이가 들어 있다. 절단기의 높이를 h로 정하면 h보다 높은 나무는 h 위의 부분이 잘리고, 잘린 부분을 모두 가져간다. 다음 get(trees, h)는 높이 h로 자를 때 가져가는 나무 길이의 합을 구하는 함수이다. 다음 max_height(trees, need)는 나무를 need 이상 가져갈 수 있는 절단기 높이 가운데 가장 높은 값을 이진 탐색으로 구하는 함수이다. 절단기 높이는 0 이상의 정수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def get(trees, h):
+    total = 0
+    for t in trees:
+        if t &gt; h:
+            total += <span class="a"><i>가</i>t - h</span>
+    return total
+
+
+def max_height(trees, need):
+    lo = 0
+    hi = max(trees)
+    ans = 0
+    while lo &lt;= hi:
+        mid = (lo + hi) // 2
+        if <span class="a"><i>나</i>get(trees, mid) &gt;= need</span>:
+            ans = mid
+            <span class="a"><i>다</i>lo = mid + 1</span>
+        else:
+            <span class="a"><i>라</i>hi = mid - 1</span>
+    return ans
+
+
+trees = [19, 14, 10, 17]
+print(get(trees, 15), get(trees, 16))
+print(max_height(trees, 6), max_height(trees, 20))</div>
+<p class="out-label">실행 결과</p><div class="out">6 4
+15 10</div><div class="answers"><span class="lab">(가)</span><span>t - h</span><span class="lab">(나)</span><span>get(trees, mid) &gt;= need</span><span class="lab">(다)</span><span>lo = mid + 1</span><span class="lab">(라)</span><span>hi = mid - 1</span></div><p class="note">답이 될 수 있는 값의 범위를 이진 탐색으로 좁힌다. 리스트에서 값을 찾는 것이 아니라 절단기 높이 0 ~ max(trees) 가운데 조건에 맞는 가장 큰 값을 찾는다. 높이를 올릴수록 가져가는 양이 줄어든다. mid로 잘라 need 이상이면 mid는 답이 될 수 있으므로 ans에 적어 두고 더 높은 쪽을 살펴보고, 모자라면 더 낮은 쪽을 살펴본다. 높이 15로 자르면 4 + 2 = 6, 16으로 자르면 3 + 1 = 4이므로 6 이상 가져가려면 15가 가장 높다. 비슷한 문제: 백준 2805 나무 자르기.</p></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">money원을 가장 적은 개수의 동전으로 만든다. 리스트 coins에는 쓸 수 있는 동전의 금액이 들어 있고 1원 동전이 반드시 있다. 다음 min_coins(money, coins)는 필요한 동전 개수의 최솟값을 상향식(표)으로 구하는 함수이다. d[i]는 i원을 만드는 최소 개수이다. 1원 동전만 쓰면 i개이고, 마지막에 c원 동전을 쓴다면 d[i - c] + 1개이다. 이 가운데 가장 작은 값이 d[i]이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def min_coins(money, coins):
+    d = [0] * (money + 1)
+    for i in <span class="a"><i>가</i>range(1, money + 1)</span>:
+        d[i] = i
+        for c in coins:
+            if <span class="a"><i>나</i>c &lt;= i</span>:
+                d[i] = <span class="a"><i>다</i>min(d[i], d[i - c] + 1)</span>
+    return <span class="a"><i>라</i>d[money]</span>
+
+
+print(min_coins(6, [4, 3, 1]), min_coins(15, [12, 5, 1]))
+print(min_coins(1260, [500, 100, 50, 10, 1]))</div>
+<p class="out-label">실행 결과</p><div class="out">2 3
+6</div><div class="answers"><span class="lab">(가)</span><span>range(1, money + 1)</span><span class="lab">(나)</span><span>c &lt;= i</span><span class="lab">(다)</span><span>min(d[i], d[i - c] + 1)</span><span class="lab">(라)</span><span>d[money]</span></div><p class="note">동적계획법 상향식(표)이다. 6원을 4원, 3원, 1원 동전으로 만들 때 큰 동전부터 쓰는 방법(탐욕)은 4 + 1 + 1의 3개이지만 최소는 3 + 3의 2개이다. 15원도 탐욕은 12 + 1 + 1 + 1의 4개이고 최소는 5 + 5 + 5의 3개이다. 500, 100, 50, 10원처럼 큰 동전이 작은 동전의 배수이면 탐욕과 결과가 같다. (나)를 c &lt; i로 쓰면 c원 동전 하나로 딱 맞는 경우를 놓친다. (나)는 i &gt;= c도 정답이다. 비슷한 문제: 백준 2294 동전 2.</p></div></body></html>

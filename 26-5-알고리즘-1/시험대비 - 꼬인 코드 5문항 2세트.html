@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>시험대비 - 꼬인 코드 5문항 2세트</title>
+<style>
+@page { size: A4; margin: 15mm; }
+body {
+    font-family: 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1cm;
+}
+h1 { font-size: 16pt; border-bottom: 2px solid #000; padding-bottom: 8px; margin: 0 0 6px; }
+.intro { font-size: 10pt; color: #333; margin: 0 0 10px; }
+h2 { font-size: 13pt; margin: 1.5em 0 0.2em; border-bottom: 1px solid #999; padding-bottom: 3px; }
+.sec-desc { font-size: 10pt; color: #333; margin: 0.2em 0 0.6em; }
+.problem { margin: 0 0 26px; page-break-inside: avoid; break-inside: avoid; }
+.problem-number { font-weight: bold; font-size: 11pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; }
+.stmt { margin: 4px 0 6px; }
+.code-block {
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    margin: 6px 0;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.subq { font-size: 10.5pt; margin: 10px 0 2px; }
+.answer-space { border: 1px solid #ccc; margin: 4px 0 0; background: #fff;
+                page-break-inside: avoid; break-inside: avoid; }
+.answer-space.sm { height: 50px; }
+.answer-space.lg { height: 130px; }
+.answers { page-break-before: always; break-before: page; }
+.a-item { margin: 0 0 14px; page-break-inside: avoid; break-inside: avoid; }
+.a-num { font-weight: bold; }
+.a-body { font-size: 10pt; margin: 2px 0 0; }
+.a-out { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; white-space: pre; background: #f8f8f8; border: 1px solid #ddd; padding: 4px 8px; margin: 2px 0; }
+@media print { body { max-width: none; margin: 0; padding: 0; } }
+.page-break { break-before: page; page-break-before: always; }
+</style>
+</head>
+<body>
+<h1>시험대비 - 꼬인 코드 5문항 2세트</h1>
+<p class="intro">화면에 출력되는 그대로 쓴다.</p>
+<div class="problem" id="p1">
+<div class="problem-number">1</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">def merge(L, R):
+    res = []
+    while L and R:
+        if L[0] &lt;= R[0]:
+            res.append(L.pop(0))
+        else:
+            res.append(R.pop(0))
+    return res + L + R
+
+
+def sort1(A):
+    if len(A) &gt; 1:
+        m = len(A) // 2
+        A = merge(sort1(A[:m]), sort1(A[m:]))
+    return A
+
+
+def sort2(A):
+    if len(A) &gt; 1:
+        m = len(A) // 2
+        A[:] = merge(sort2(A[:m]), sort2(A[m:]))
+    return A
+
+
+x = [3, 1, 2]
+y = [3, 1, 2]
+print(sort1(x), x)
+print(sort2(y), y)
+print(sort1(x) is x, sort2(y) is y)</div>
+<div class="answer-space" style="height: 104px"></div>
+</div>
+<div class="problem" id="p2">
+<div class="problem-number">2</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">m = [
+    [0, 1, 1, 0, 0],
+    [1, 0, 0, 1, 0],
+    [1, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0]
+]
+
+def min_distance(start, target):
+    visited = [0] * len(m)
+    visited[start] = 1
+    queue = [start]
+    while queue:
+        cur = queue.pop(0)
+        for nxt in range(len(m)):
+            if m[cur][nxt] and not visited[nxt]:
+                visited[nxt] = visited[cur] + 1
+                queue.append(nxt)
+    return visited[target] - 1, visited
+
+print(min_distance(0, 3))
+print(min_distance(3, 2))
+print(min_distance(0, 4))
+print(min_distance(4, 0))</div>
+<div class="answer-space" style="height: 126px"></div>
+</div>
+<div class="problem" id="p3">
+<div class="problem-number">3</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">bst = [0] * 16
+
+def insert(num):
+    idx = 1
+    while bst[idx]:
+        idx = idx * 2 + (num &gt; bst[idx])
+    bst[idx] = num
+
+for x in [8, 3, 10, 3, 9, 0]:
+    insert(x)
+print(bst[1:9])
+
+insert(1)
+print(bst[1:9])</div>
+<div class="answer-space" style="height: 82px"></div>
+</div>
+<div class="problem" id="p4">
+<div class="problem-number">4</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">def find(arr, target):
+    if not arr:
+        return -1
+    mid = len(arr) // 2
+    if arr[mid] == target:
+        return mid
+    if arr[mid] &gt; target:
+        return find(arr[:mid], target)
+    return find(arr[mid + 1:], target)
+
+data = [2, 5, 6, 8, 9, 11, 15]
+print(find(data, 8), find(data, 5), find(data, 11))
+print(find(data, 15), find(data, 7))</div>
+<div class="answer-space" style="height: 82px"></div>
+</div>
+<div class="problem" id="p5">
+<div class="problem-number">5</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">def comb(n, r):
+    d = [[1] * (n + 1)] * (n + 1)
+    for i in range(1, n + 1):
+        for j in range(1, i):
+            d[i][j] = d[i - 1][j - 1] + d[i - 1][j]
+    return d[n][r], d[0]
+
+print(comb(3, 1))
+print(comb(4, 2))</div>
+<div class="answer-space" style="height: 82px"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>시험대비 - 꼬인 코드 5문항 3세트</title>
+<style>
+@page { size: A4; margin: 15mm; }
+body {
+    font-family: 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1cm;
+}
+h1 { font-size: 16pt; border-bottom: 2px solid #000; padding-bottom: 8px; margin: 0 0 6px; }
+.intro { font-size: 10pt; color: #333; margin: 0 0 10px; }
+h2 { font-size: 13pt; margin: 1.5em 0 0.2em; border-bottom: 1px solid #999; padding-bottom: 3px; }
+.sec-desc { font-size: 10pt; color: #333; margin: 0.2em 0 0.6em; }
+.problem { margin: 0 0 26px; page-break-inside: avoid; break-inside: avoid; }
+.problem-number { font-weight: bold; font-size: 11pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; }
+.stmt { margin: 4px 0 6px; }
+.code-block {
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    margin: 6px 0;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.subq { font-size: 10.5pt; margin: 10px 0 2px; }
+.answer-space { border: 1px solid #ccc; margin: 4px 0 0; background: #fff;
+                page-break-inside: avoid; break-inside: avoid; }
+.answer-space.sm { height: 50px; }
+.answer-space.lg { height: 130px; }
+.answers { page-break-before: always; break-before: page; }
+.a-item { margin: 0 0 14px; page-break-inside: avoid; break-inside: avoid; }
+.a-num { font-weight: bold; }
+.a-body { font-size: 10pt; margin: 2px 0 0; }
+.a-out { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; white-space: pre; background: #f8f8f8; border: 1px solid #ddd; padding: 4px 8px; margin: 2px 0; }
+@media print { body { max-width: none; margin: 0; padding: 0; } }
+.page-break { break-before: page; page-break-before: always; }
+</style>
+</head>
+<body>
+<h1>시험대비 - 꼬인 코드 5문항 3세트</h1>
+<p class="intro">화면에 출력되는 그대로 쓴다.</p>
+<div class="problem" id="p1">
+<div class="problem-number">1</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">def quick(A):
+    if len(A) &lt;= 1:
+        return A
+    p = A[0]
+    return quick([x for x in A if x &lt; p]) + [p] + quick([x for x in A if x &gt; p])
+
+A = [3, 1, 3, 2, 1]
+print(quick(A), A)
+print(len(quick([5, 5, 5, 5])))</div>
+<div class="answer-space" style="height: 82px"></div>
+</div>
+<div class="problem" id="p2">
+<div class="problem-number">2</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">graph = {1: [2, 3], 2: [1], 3: [1]}
+
+g2 = graph.copy()
+g2[1].remove(3)
+g2[3] = []
+g2[4] = [1]
+
+print(graph)
+print(g2)
+print(graph[1] is g2[1], graph[3] is g2[3])</div>
+<div class="answer-space" style="height: 104px"></div>
+</div>
+<div class="problem" id="p3">
+<div class="problem-number">3</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">def total(arr):
+    if not arr:
+        return 0
+    return arr.pop() + total(arr)
+
+data = [1, 2, 3, 4]
+print(total(data[:]), data)
+print(total(data), data)
+print(total(data), data)</div>
+<div class="answer-space" style="height: 104px"></div>
+</div>
+<div class="problem" id="p4">
+<div class="problem-number">4</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">def find(arr, target):
+    low, high = 0, len(arr) - 1
+    while low &lt;= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        if arr[mid] &lt; target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+data = [7, 2, 9, 4, 1, 8, 5]
+print(find(data, 4), find(data, 7), find(data, 9))
+print(find(data, 8), find(data, 5))
+print(find(sorted(data), 7), data.index(7))</div>
+<div class="answer-space" style="height: 104px"></div>
+</div>
+<div class="problem" id="p5">
+<div class="problem-number">5</div>
+<div class="stmt">다음 코드의 실행 결과를 쓰시오.</div>
+<div class="code-block">cnt = 0
+
+def fib(n):
+    global cnt
+    cnt += 1
+    memo = {}
+    if n &lt;= 1:
+        return n
+    if n not in memo:
+        memo[n] = fib(n - 1) + fib(n - 2)
+    return memo[n]
+
+print(fib(6), cnt)
+print(fib(6), cnt)</div>
+<div class="answer-space" style="height: 82px"></div>
+</div>
+</body>
+</html>

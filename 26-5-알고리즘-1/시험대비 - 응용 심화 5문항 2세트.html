@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>시험대비 - 응용 심화 5문항 2세트</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>시험대비 - 응용 심화 5문항 2세트</h1><p class="intro">밑줄 칸에 들어갈 코드를 쓴다. 밑줄 길이는 들어갈 코드의 글자 수와 같다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 A에서 k번째로 작은 값을 정렬을 끝까지 하지 않고 찾는다. 가장 작은 값이 0번째이다. partition(A, lo, hi)는 구간의 마지막 값 p를 기준으로 구간 lo ~ hi를 나누고 p가 놓인 위치를 돌려주는 퀵 정렬의 분할 함수(한쪽 커서)이다. 다음 kth(A, lo, hi, k)는 p가 놓인 위치 m이 k이면 그 값을 돌려주고, 아니면 k가 들어 있는 쪽 구간만 다시 살펴보는 함수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def partition(A, lo, hi):
+    p = A[hi]
+    i = lo
+    for j in range(lo, hi):
+        if A[j] &lt; p:
+            A[i], A[j] = A[j], A[i]
+            i += 1
+    <span class="b" style="width:25ch"><i>가</i></span>
+    return i
+
+
+def kth(A, lo, hi, k):
+    m = partition(A, lo, hi)
+    if <span class="b" style="width:6ch"><i>나</i></span>:
+        return A[m]
+    elif k &lt; m:
+        return kth(A, <span class="b" style="width:9ch"><i>다</i></span>, k)
+    else:
+        return kth(A, <span class="b" style="width:9ch"><i>라</i></span>, k)
+
+
+score = [72, 95, 58, 81, 66, 90, 77]
+print(kth(score, 0, 6, 0), kth(score, 0, 6, 3), kth(score, 0, 6, 5))</div>
+<p class="out-label">실행 결과</p><div class="out">58 77 90</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 maze는 미로를 나타낸 것이다. 1은 지나갈 수 있는 칸, 0은 벽이다. 한 번에 위, 아래, 왼쪽, 오른쪽으로 이웃한 칸으로 한 칸 이동한다. 다음 escape()는 왼쪽 위 칸에서 오른쪽 아래 칸까지 갈 때 지나는 칸 수의 최솟값을 너비 우선 탐색(BFS)으로 구하는 함수이다. 출발 칸과 도착 칸도 센다. dist[r][c]는 r행 c열 칸까지 지나는 칸 수이고, 0이면 아직 들르지 않은 칸이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">from collections import deque
+
+maze = [
+    [1, 0, 1, 1, 1],
+    [1, 0, 1, 0, 1],
+    [1, 1, 1, 0, 1],
+    [0, 1, 0, 0, 1]
+]
+
+def escape():
+    n = len(maze)
+    m = len(maze[0])
+    dist = [[0] * m for _ in range(n)]
+    dist[0][0] = 1
+    queue = deque([(0, 0)])
+    while queue:
+        r, c = queue.popleft()
+        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nr = r + dr
+            nc = c + dc
+            if 0 &lt;= nr &lt; n and <span class="b" style="width:11ch"><i>가</i></span>:
+                if maze[nr][nc] == 1 and <span class="b" style="width:17ch"><i>나</i></span>:
+                    dist[nr][nc] = <span class="b" style="width:14ch"><i>다</i></span>
+                    <span class="b" style="width:22ch"><i>라</i></span>
+    return dist[n - 1][m - 1]
+
+
+print(escape())</div>
+<p class="out-label">실행 결과</p><div class="out">12</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 family는 가계도를 이진 트리로 저장한 것이다. 루트는 1번 칸이고, idx번 칸의 부모는 idx // 2번 칸이다. 두 사람의 촌수는 두 사람에게서 각각 부모 쪽으로 거슬러 올라가 처음 만나는 공통 조상까지 올라간 횟수의 합이다. 다음 chon(a, b)는 a번 칸과 b번 칸 사람의 공통 조상과 촌수를 돌려주는 함수이다. 칸 번호가 큰 쪽이 더 아래층이거나 같은 층에 있으므로, 번호가 큰 쪽을 부모로 올린다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">family = [0, '할아버지', '아버지', '삼촌', '나', '동생', '사촌']
+
+def chon(a, b):
+    cnt = 0
+    while <span class="b" style="width:6ch"><i>가</i></span>:
+        if <span class="b" style="width:5ch"><i>나</i></span>:
+            <span class="b" style="width:10ch"><i>다</i></span>
+        else:
+            <span class="b" style="width:10ch"><i>라</i></span>
+        cnt += 1
+    return family[a], cnt
+
+
+print(chon(4, 5), chon(4, 6))
+print(chon(4, 3), chon(2, 4))</div>
+<p class="out-label">실행 결과</p><div class="out">('아버지', 2) ('할아버지', 4)
+('할아버지', 3) ('아버지', 1)</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 cards에는 숫자 카드에 적힌 정수가 작은 순서대로 들어 있고, 같은 수가 여러 장 있을 수 있다. 다음 lower(A, target)은 target 이상인 값이 처음 나오는 위치를 이진 탐색으로 찾는 함수이다. 그런 값이 없으면 len(A)를 돌려준다. 다음 count(A, target)은 lower를 두 번 써서 target이 적힌 카드의 수를 구하는 함수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def lower(A, target):
+    lo = 0
+    hi = len(A)
+    while <span class="b" style="width:7ch"><i>가</i></span>:
+        mid = (lo + hi) // 2
+        if <span class="b" style="width:15ch"><i>나</i></span>:
+            lo = mid + 1
+        else:
+            <span class="b" style="width:8ch"><i>다</i></span>
+    return lo
+
+
+def count(A, target):
+    return <span class="b" style="width:20ch"><i>라</i></span> - lower(A, target)
+
+
+cards = [10, 10, 20, 20, 20, 30, 50, 50]
+print(lower(cards, 20), lower(cards, 40), lower(cards, 60))
+print(count(cards, 20), count(cards, 40))</div>
+<p class="out-label">실행 결과</p><div class="out">2 6 8
+3 0</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 tri는 정수 삼각형이다. 맨 위에서 출발해 한 줄씩 내려가며, 바로 아래 줄의 같은 위치 또는 오른쪽으로 한 칸 옆의 수로만 내려갈 수 있다. 다음 best(i, j)는 tri[i][j]에서 출발해 맨 아래 줄까지 내려갈 때 지나는 수의 합의 최댓값을 구하는 함수이다. 한 번 구한 값은 (i, j) 튜플을 키로 하는 딕셔너리 memo에 저장해 두고 다시 쓴다(메모이제이션). 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">tri = [
+    [6],
+    [2, 9],
+    [7, 1, 3],
+    [4, 8, 5, 2],
+    [3, 1, 9, 6, 7]
+]
+memo = {}
+
+def best(i, j):
+    if i == len(tri) - 1:
+        return <span class="b" style="width:9ch"><i>가</i></span>
+    if <span class="b" style="width:14ch"><i>나</i></span>:
+        return <span class="b" style="width:12ch"><i>다</i></span>
+    memo[(i, j)] = tri[i][j] + <span class="b" style="width:39ch"><i>라</i></span>
+    return memo[(i, j)]
+
+
+print(best(0, 0), best(3, 1), best(1, 1))</div>
+<p class="out-label">실행 결과</p><div class="out">33 17 27</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div></body></html>

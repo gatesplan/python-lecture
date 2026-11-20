@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>시험대비 - 꼬인 코드 5문항 4세트 정답</title>
+<style>
+@page { size: A4; margin: 15mm; }
+body {
+    font-family: 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1cm;
+}
+h1 { font-size: 16pt; border-bottom: 2px solid #000; padding-bottom: 8px; margin: 0 0 6px; }
+.intro { font-size: 10pt; color: #333; margin: 0 0 10px; }
+h2 { font-size: 13pt; margin: 1.5em 0 0.2em; border-bottom: 1px solid #999; padding-bottom: 3px; }
+.sec-desc { font-size: 10pt; color: #333; margin: 0.2em 0 0.6em; }
+.problem { margin: 0 0 26px; page-break-inside: avoid; break-inside: avoid; }
+.problem-number { font-weight: bold; font-size: 11pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; }
+.stmt { margin: 4px 0 6px; }
+.code-block {
+    background: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    margin: 6px 0;
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.subq { font-size: 10.5pt; margin: 10px 0 2px; }
+.answer-space { border: 1px solid #ccc; margin: 4px 0 0; background: #fff;
+                page-break-inside: avoid; break-inside: avoid; }
+.answer-space.sm { height: 50px; }
+.answer-space.lg { height: 130px; }
+.answers { page-break-before: always; break-before: page; }
+.a-item { margin: 0 0 14px; page-break-inside: avoid; break-inside: avoid; }
+.a-num { font-weight: bold; }
+.a-body { font-size: 10pt; margin: 2px 0 0; }
+.a-out { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; white-space: pre; background: #f8f8f8; border: 1px solid #ddd; padding: 4px 8px; margin: 2px 0; }
+@media print { body { max-width: none; margin: 0; padding: 0; } }
+.page-break { break-before: page; page-break-before: always; }
+</style>
+</head>
+<body>
+<h1>시험대비 - 꼬인 코드 5문항 4세트 정답</h1>
+<div class="a-item"><div class="a-num">1</div><div class="a-out">[1, 1, 2] [3, 4, 5]</div><div class="a-body">for는 0번, 1번, 2번 칸을 차례로 읽는데 한 바퀴마다 A가 한 칸씩 줄어든다. 세 바퀴를 돌면 A의 길이가 3이 되어 3번 칸이 없으므로 끝난다. 그래서 가장 작은 값 3개만 res로 옮겨진다. remove는 처음 나오는 값 하나만 지운다. 끝까지 옮기려면 while A:로 쓴다.</div></div>
+<div class="a-item"><div class="a-num">2</div><div class="a-out">[1, 2, 3, 4, 4, 5, 5]</div><div class="a-body">큐에 넣을 때가 아니라 꺼낼 때 방문 표시를 한다. 2를 꺼냈을 때 4는 아직 visited에 없어 큐에 들어가고, 3을 꺼냈을 때도 4가 visited에 없어 한 번 더 들어간다. 4가 두 번 꺼내지고, 그때마다 5를 넣어서 5도 두 번 나온다. 넣을 때 visited에 적으면 중복이 생기지 않는다.</div></div>
+<div class="a-item"><div class="a-num">3</div><div class="a-out">32 15
+6561 31</div><div class="a-body">[1, b][e % 2]는 e가 짝수이면 1, 홀수이면 b를 고른다. 지수를 반으로 줄였지만 같은 호출을 두 번 하므로 호출 횟수는 T(e) = 2 × T(e // 2) + 1이다. T(0) = 1, T(1) = 3, T(2) = 7, T(4) = 15이므로 T(5) = 15, T(8) = 31이다. 값을 한 번만 구해 변수에 두고 두 번 곱하면 e가 8일 때 5번이면 된다.</div></div>
+<div class="a-item"><div class="a-num">4</div><div class="a-out">[1, 2, 3, 5, 8, 1]
+[1, 1] [1, 2, 1]</div><div class="a-body">d[-1]은 맨 뒤 칸, d[-2]는 뒤에서 둘째 칸이다. 맨 뒤에 1을 붙여 두면 i가 0일 때 d[-1] + d[-2] = 1 + 0 = 1, i가 1일 때 d[0] + d[-1] = 1 + 1 = 2가 되어 시작값을 따로 넣지 않아도 1, 2, 3, 5, 8이 채워진다. 맨 뒤의 1은 답이 아니라 시작값 자리이다. n이 1이면 d[-2]가 d[0] 자신이고 아직 0이다.</div></div>
+<div class="a-item"><div class="a-num">5</div><div class="a-out">3 5 5
+0 3 0</div><div class="a-body">index(x)는 x가 처음 나오는 위치 하나만 돌려준다. 5는 1번, 3번, 6번 칸에 있지만 언제나 1번 칸으로 계산되어 부모 자리가 tree[0], 곧 0이 나온다. 3번 칸과 6번 칸의 5는 부모를 찾을 수 없다. parent(0)도 0번 칸을 찾아 0이 나온다. 값으로 위치를 찾는 방법은 같은 값이 없을 때만 맞는다.</div></div>
+</body>
+</html>

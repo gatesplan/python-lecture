@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>시험대비 - 응용 심화 5문항 1세트</title><style>
+@page { size: A4; margin: 15mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; font-size: 11pt; color: #000; background: #e9ebef; margin: 0; }
+.page { background: #fff; max-width: 210mm; min-height: 270mm; margin: 12px auto; padding: 14mm 15mm; break-after: page; page-break-after: always; }
+.page:last-child { break-after: auto; page-break-after: auto; }
+h1 { font-size: 15pt; border-bottom: 2px solid #000; padding-bottom: 6px; margin: 0 0 6px; }
+.intro { font-size: 9.5pt; color: #333; margin: 0 0 14px; }
+.problem-number { font-weight: bold; font-size: 12pt; }
+.kind { font-weight: normal; color: #555; font-size: 10pt; margin-left: 6px; }
+.stmt { margin: 6px 0 8px; }
+.code-block { border: 1px solid #999; padding: 8px 10px; margin: 6px 0; font-family: Consolas, 'D2Coding', 'Courier New', monospace; font-size: 9.5pt; line-height: 1.6; white-space: pre; overflow-x: auto; font-variant-ligatures: none; }
+.b { display: inline-block; height: 1.45em; vertical-align: bottom; border-bottom: 1.5px solid #000; position: relative; }
+.b i { position: absolute; top: 0.15em; left: 3px; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a i { position: absolute; top: -0.55em; left: 0; font-style: normal; font-family: 'Malgun Gothic', sans-serif; font-size: 7pt; line-height: 1; color: #444; }
+.a { position: relative; background: #dff3e4; border-bottom: 1.5px solid #1d7a3a; }
+.out-label { font-size: 9.5pt; color: #444; margin: 10px 0 2px; }
+.out { border: 1px dashed #999; padding: 4px 10px; font-family: Consolas, 'D2Coding', monospace; font-size: 10pt; white-space: pre; }
+.answers { margin-top: 16px; display: grid; grid-template-columns: max-content 1fr; gap: 6px 10px; align-items: end; }
+.answers .lab { font-weight: bold; }
+.answers .line { border-bottom: 1px solid #000; height: 1.8em; }
+.note { font-size: 9.5pt; color: #333; margin-top: 10px; }
+@media print { body { background: #fff; } .page { margin: 0; padding: 0; max-width: none; min-height: 0; box-shadow: none; } }
+</style></head><body><div class="page"><h1>시험대비 - 응용 심화 5문항 1세트</h1><p class="intro">밑줄 칸에 들어갈 코드를 쓴다. 밑줄 길이는 들어갈 코드의 글자 수와 같다.</p><div class="problem-number">1<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 members에는 동아리 회원의 (나이, 이름)이 가입한 순서대로 들어 있다. 다음 merge_sort(A)는 회원을 나이가 적은 순서대로 정렬해 새 리스트로 돌려주는 병합(합병) 정렬 함수이다. 나이가 같은 회원은 먼저 가입한 회원이 앞에 온다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def merge_sort(A):
+    if len(A) &lt;= 1:
+        return A
+    m = len(A) // 2
+    L = <span class="b" style="width:17ch"><i>가</i></span>
+    R = <span class="b" style="width:17ch"><i>나</i></span>
+    return merge(L, R)
+
+
+def merge(L, R):
+    res = []
+    i = j = 0
+    while i &lt; len(L) and j &lt; len(R):
+        if <span class="b" style="width:18ch"><i>다</i></span>:
+            res.append(L[i])
+            i += 1
+        else:
+            res.append(R[j])
+            j += 1
+    return res + <span class="b" style="width:13ch"><i>라</i></span>
+
+
+members = [(21, '하준'), (21, '도윤'), (20, '서아'), (21, '가은'), (20, '민재')]
+print(merge_sort(members))</div>
+<p class="out-label">실행 결과</p><div class="out">[(20, '서아'), (20, '민재'), (21, '하준'), (21, '도윤'), (21, '가은')]</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">2<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">다음 friend는 학생 1 ~ 7번의 친구 관계를 인접 리스트로 나타낸 것이다. 친구를 따라가서 닿을 수 있는 학생끼리는 같은 무리이다. 다음 dfs(v, visited)는 v번 학생에서 출발해 아직 들르지 않은 학생을 깊이 우선 탐색(DFS)으로 들르고, 들른 학생 수를 돌려주는 함수이다. 다음 groups()는 무리마다 학생 수를 구해 리스트로 돌려주는 함수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">friend = {
+    1: [2, 5],
+    2: [1, 5],
+    3: [4],
+    4: [3, 6],
+    5: [1, 2],
+    6: [4],
+    7: []
+}
+
+def dfs(v, visited):
+    <span class="b" style="width:17ch"><i>가</i></span>
+    size = 1
+    for nxt in friend[v]:
+        if not visited[nxt]:
+            <span class="b" style="width:25ch"><i>나</i></span>
+    return size
+
+
+def groups():
+    visited = {v: False for v in friend}
+    sizes = []
+    for v in friend:
+        if <span class="b" style="width:14ch"><i>다</i></span>:
+            sizes.append(<span class="b" style="width:15ch"><i>라</i></span>)
+    return sizes
+
+
+print(groups(), len(groups()))</div>
+<p class="out-label">실행 결과</p><div class="out">[3, 3, 1] 3</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">3<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">리스트 bst는 이진 탐색 트리를 저장한 것이다. 루트는 1번 칸이고, idx번 칸의 왼쪽 자식은 idx * 2번 칸, 오른쪽 자식은 idx * 2 + 1번 칸이다. 0은 빈 칸이다. 다음 insert(num)은 num을 재귀 없이 반복으로 넣고, 루트에서 그 자리까지 내려간 횟수를 돌려주는 함수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">bst = [0] * 64
+
+def insert(num):
+    idx = 1
+    depth = 0
+    while <span class="b" style="width:13ch"><i>가</i></span>:
+        if num &lt; bst[idx]:
+            <span class="b" style="width:13ch"><i>나</i></span>
+        else:
+            <span class="b" style="width:17ch"><i>다</i></span>
+        depth += 1
+    <span class="b" style="width:14ch"><i>라</i></span>
+    return depth
+
+
+for x in [50, 30, 70, 20, 40, 60, 35]:
+    print(insert(x), end=' ')
+print()
+print(bst[1:12])</div>
+<p class="out-label">실행 결과</p><div class="out">0 1 1 2 2 2 3 
+[50, 30, 70, 20, 40, 60, 0, 0, 0, 35, 0]</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">4<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">기둥 세 개 중 한 기둥에 크기가 서로 다른 원판 n개가 큰 것이 아래에 오도록 쌓여 있다. 원판은 한 번에 한 개씩 옮기고, 작은 원판 위에 큰 원판을 놓을 수 없다(하노이 탑). 다음 hanoi(n, a, b, c, moves)는 a 기둥의 원판 n개를 b 기둥을 거쳐 c 기둥으로 옮기는 과정을 (출발, 도착) 튜플로 moves에 차례로 넣는 함수이다. 위의 n - 1개를 b로 옮기고, 가장 큰 원판을 c로 옮긴 다음, b의 n - 1개를 c로 옮긴다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def hanoi(n, a, b, c, moves):
+    if <span class="b" style="width:6ch"><i>가</i></span>:
+        return
+    hanoi(n - 1, <span class="b" style="width:7ch"><i>나</i></span>, moves)
+    <span class="b" style="width:20ch"><i>다</i></span>
+    hanoi(n - 1, <span class="b" style="width:7ch"><i>라</i></span>, moves)
+
+
+moves = []
+hanoi(2, 'A', 'B', 'C', moves)
+print(moves)
+
+moves = []
+hanoi(5, 'A', 'B', 'C', moves)
+print(len(moves))</div>
+<p class="out-label">실행 결과</p><div class="out">[('A', 'B'), ('A', 'C'), ('B', 'C')]
+31</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div><div class="page"><div class="problem-number">5<span class="kind">빈칸 채우기</span></div>
+<div class="stmt">정수 n에 쓸 수 있는 연산은 세 가지이다. 1을 뺀다. 2로 나누어떨어지면 2로 나눈다. 3으로 나누어떨어지면 3으로 나눈다. 다음 make_one(n)은 n을 1로 만드는 데 필요한 연산 횟수의 최솟값을 상향식(표)으로 구하는 함수이다. d[i]는 i를 1로 만드는 최소 횟수이다. 빈칸 (가) ~ (라)에 들어갈 코드를 쓰시오.</div>
+<div class="code-block">def make_one(n):
+    d = [0] * (n + 1)
+    for i in <span class="b" style="width:15ch"><i>가</i></span>:
+        d[i] = <span class="b" style="width:12ch"><i>나</i></span>
+        if <span class="b" style="width:10ch"><i>다</i></span>:
+            d[i] = min(d[i], d[i // 2] + 1)
+        if i % 3 == 0:
+            d[i] = <span class="b" style="width:24ch"><i>라</i></span>
+    return d[n]
+
+
+print(make_one(2), make_one(10), make_one(27))</div>
+<p class="out-label">실행 결과</p><div class="out">1 3 3</div><div class="answers"><span class="lab">(가)</span><span class="line"></span><span class="lab">(나)</span><span class="line"></span><span class="lab">(다)</span><span class="line"></span><span class="lab">(라)</span><span class="line"></span></div></div></body></html>
